@@ -1,0 +1,317 @@
+@media (max-width: 1400px){
+    .DashCertificats {
+        min-height: 300px;
+    }
+    .DashCeriText {
+        font-size: 22px;;
+    }
+}
+@media (max-width: 1336px){
+    .HeaderSearchBox {
+        max-width: 250px !important;
+    }
+}
+@media (max-width: 1170px){
+    .DashCertificats {
+        min-height: 250px;
+    }
+    .DashCeriText {
+        font-size: 18px;
+        font-weight: bold;
+    }
+}
+@media (max-width: 1050px){
+    .LeftContol {
+        width: 50px;
+        max-width: 50px !important;
+        min-width: 50px;
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        z-index: 9999;
+    }
+    .LeftContol.OpenMenu {
+        width: 50px;
+        animation: OpenMenu 0.5s ease-in-out forwards;
+    }
+    @keyframes OpenMenu {
+        0%{
+            width: 50px;
+            max-width: 50px;
+            min-width: 50px;
+        }
+        100%{
+            width: 200px;
+            max-width: 200px;
+            min-width: 200px;
+        }
+    }
+    .LeftContol.CloseMenu {
+        width: 50px;
+        animation: CloseMenu 0.5s ease-in-out forwards;
+    }
+    @keyframes CloseMenu {
+        0%{
+            width: 200px;
+            max-width: 200px;
+            min-width: 200px;
+        }
+        100%{
+            width: 50px;
+            max-width: 50px;
+            min-width: 50px;
+        }
+    }
+    .LeftContol.OpenMenu .TGSNav a{
+        border-top-left-radius: 8px;
+        border-bottom-left-radius: 8px;
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+        font-size: unset;
+    }
+    .LeftContol.OpenMenu .TGSNav a{
+        font-size: 0px;
+        animation: menuFont 0.3s ease-in-out forwards;
+        animation-delay: 0.5s;
+    }
+    @keyframes menuFont {
+        0%{
+            font-size: 0px;
+        }
+        50%{
+            font-size: unset;
+        }
+        100%{
+            font-size: unset;
+        }
+    }
+    .LeftContol.OpenMenu .TGSNav a.NavSelected{
+        border-right: solid 4px #043B8B;
+    }
+    .PageContent {
+        width: 100% !important;
+        max-width: 100% !important;
+        flex-basis: 100% !important;
+        padding-left: 50px !important;   
+    }
+    .PageTitle Button {
+        display: block;
+        background: url(../assets/Icons/MenuIcon.svg) no-repeat center center transparent;
+        background-size: 22px;
+        width: 30px;
+        min-width: unset !important;
+        height: 30px;
+        padding: 0px;
+        margin-right: 10px;
+    }
+    .BrandLogo {
+        background-size: 40px;
+        height: 20px;
+        margin: 30px 0;
+    }
+    .BrandLogo {
+        background: url(../assets/TGS_Logo.svg) no-repeat center center transparent;
+        width: 100%;
+        height: 50px;
+        margin: 30px 0;
+    }
+    .LeftMenuCol {
+        width: 100%;
+        position: relative;
+        height: 96vh;
+    }
+    .CloseMenu .MenuCloseBtn {
+        right: -40px;
+        animation: btnMenuclose 0.5s ease-in-out forwards;
+    }
+    @keyframes btnMenuclose {
+        0%{
+            right:-40px;
+        }
+        100%{
+            right:0px;
+            opacity: 0;
+            
+        }
+    }
+    .MenuCloseBtn {
+        background: url(../assets/Icons/CloseMenuIcon.svg) no-repeat center center #2963AD !important;
+        background-size: 70% !important;
+        width: 40px;
+        min-width: 40px !important;
+        height: 40px;
+        margin: 0px !important;
+        padding: 0px !important;
+        position: absolute !important;
+        top: 0px;
+        right: -40px !important;
+        border-top-left-radius: 0px !important;
+        border-bottom-left-radius: 0px !important;
+        z-index: 99;
+    }
+    .TGSNav .MuiList-root {
+        padding: 0 10% 0 10%;
+    }
+    .OpenMenu .TGSNav .MuiList-root {
+        padding: 0 0% 0 10%;
+    }
+    .MenuCloseBtn {
+        opacity: 0;
+        right: 50px;
+    }
+    .OpenMenu .MenuCloseBtn {
+        opacity: 1;
+        
+    }
+    .TGSNav a {
+        width: 100%;
+        height: 40px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        align-content: center;
+        padding: 5px;
+        color: white;
+        text-decoration: none;
+        font-size: 0px;
+        overflow: hidden;
+    }
+    .TGSNav a.NavSelected {
+        width: 100%;
+        display: flex;
+        padding: 5px;
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        border-right: none;
+        border-bottom: solid 0px #043B8B;
+        background: #2f7bd4;
+    }
+    .TGSNav .DashIcon span.material-icons,
+    .TGSNav .RulesIcon span.material-icons,
+    .TGSNav .LocationIcon span.material-icons,
+    .TGSNav .SafetyIcon span.material-icons,
+    .TGSNav .NewsletterIcon span.material-icons,
+    .TGSNav .DepartmentIcon span.material-icons,
+    .TGSNav .CreatLinkIcon span.material-icons {
+        display: block;
+        margin: 0px;
+        width: 30px;
+        height: 30px;
+        background-size: 26px !important;
+    }
+    .TGSNav .NavSelected span.material-icons {
+        background-size: 22px !important;
+    }
+    .TGSNav .MuiButtonBase-root {
+        margin: 20px 0;
+    }
+    .LogoutBtn {
+        position: absolute !important;
+        bottom: 0px;
+        width: 80%;
+        height: 40px;
+        display: block;
+        min-width: 80% !important;
+        margin: 10% !important;
+        text-align: center;
+        background: url(../assets/Icons/LogoutIcon.svg) no-repeat center center #2f7bd4 !important;
+        color: white !important;
+        padding: 10px 0 !important;
+        border-radius: 10px;
+        font-size: 0px !important;
+    }
+    .PagesFrame {
+        width: 100%;
+        padding: 10px 20px;
+    }
+    .LoginText {
+        font-size: 35px;
+    }
+}
+@media (max-width: 900px){
+    .HeaderSearchBox {
+        max-width: 200px !important;
+        min-width: 200px !important;
+    }
+    .DashCertificatsBox {
+        width: 100%;
+        margin-bottom: 40px;
+    }
+    .DashCeriText {
+        padding: 15px 0 50px;
+    }
+    .FormTableArea .Cols4 {
+        width: 47%;
+    }
+}
+@media (max-width: 768px){
+    .Liq-Container {
+        min-width: 768px;
+        overflow-y: hidden;
+        overflow-x: hidden;
+    }
+    .PageTitle h1 #PageTitle {
+        font-size: 17px;
+    }
+    .LoginImageBG {
+        width: 100%;
+        height: 40vh;
+        background: url(../assets/loginBGlight.jpg) no-repeat center center;
+        background-size: 100%;
+    }
+    .LoginImage {
+        width: 100%;
+        height: 100%;
+        background: url(../assets/loginBG.jpg) no-repeat center center;
+        background-size: 100%;
+    }
+    .LoginLogo {
+        width: 100%;
+        height: 120px;
+        position: unset;
+        padding-top: 30px;
+        background: url(../assets/TGS_Logo.svg) no-repeat center bottom;
+        background-size: auto 70%;
+    }
+    .LoginText {
+        width: 100%;
+        text-align: center;
+        left: auto;
+        right: auto;
+        bottom: 5%;
+    }
+    .LoginFormPlace {
+        width: 100%;
+        height: 60vh;
+    }
+}
+@media (max-width: 410px){
+    .LoginFormPlace {
+        width: 100%;
+        height: 60vh;
+        padding: 0 10%;
+    }
+    .LoginCheckPlace {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        justify-items: center;
+        align-items: center;
+        align-content: center;
+    }
+    .LoginForget {
+        width: 100%;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: center;
+        justify-items: center;
+        align-content: center;
+        align-items: center;
+        text-align: center;
+        margin-top: 20px;
+    }
+    .FormTableArea .Cols4 {
+        width: 100%;
+    }
+}
