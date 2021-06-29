@@ -11,7 +11,6 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
-import { Link } from "react-router-dom";
 import PageHeader from "../../Components/PageHeader";
 import LeftControl from "../../Components/LeftControl";
 
@@ -128,7 +127,7 @@ const SafetyTestingEdit = () => {
             </Grid>
             
             <Grid xs={12} container className="FormTableArea mt20">
-                <Grid className="Cols4">
+                <Grid className="Cols4 mt30">
                   <Grid xs={12} container justify="space-between">
                     <Grid xs={12} sm={6} container alignContent="center" className="mbold">Crew Member:</Grid>
                     <Grid xs={12} sm={6}>
@@ -164,7 +163,7 @@ const SafetyTestingEdit = () => {
                     </Grid>
                   </Grid>
                 </Grid>
-                <Grid className="Cols4">
+                <Grid className="Cols4 mt30">
                   <Grid xs={12} container justify="space-between">
                     <Grid xs={12} sm={6} container alignContent="center" className="mbold">Crew Member:</Grid>
                     <Grid xs={12} sm={6}>
@@ -200,7 +199,7 @@ const SafetyTestingEdit = () => {
                     </Grid>
                   </Grid>
                 </Grid>
-                <Grid className="Cols4">
+                <Grid className="Cols4 mt30">
                   <Grid xs={12} container justify="space-between">
                     <Grid xs={12} sm={6} container alignContent="center" className="mbold">Crew Member:</Grid>
                     <Grid xs={12} sm={6}>
@@ -236,7 +235,7 @@ const SafetyTestingEdit = () => {
                     </Grid>
                   </Grid>
                 </Grid>
-                <Grid className="Cols4">
+                <Grid className="Cols4 mt30">
                   <Grid xs={12} container justify="space-between">
                     <Grid xs={12} sm={6} container alignContent="center" className="mbold">Crew Member:</Grid>
                     <Grid xs={12} sm={6}>

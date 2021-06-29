@@ -11,6 +11,7 @@ const Dashboard = () => {
     <Grid container xs={12} className="Liq-Container">
       <Grid xs={12} md={2} className="LeftContol" id="LeftContol">
         <LeftControl/>
+        {/* <Grid className="CloseOverlay"></Grid> */}
       </Grid>
       <Grid xs={12} md={10} container justify="center" className="PageContent">
         <Grid className="PagesFrame">
@@ -34,7 +35,7 @@ const Dashboard = () => {
                 <Grid className="DashSoftware DashSafeTrack">
                   <a href="#"></a>
                 </Grid>
-                <Grid className="DashSoftware DashBourque">
+                <Grid className="DashSoftware Cedar">
                   <a href="#"></a>
                 </Grid>
                 <Grid className="DashSoftware DashLocstatt">

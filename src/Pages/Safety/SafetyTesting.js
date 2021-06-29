@@ -123,11 +123,12 @@ export default function StickyHeadTable() {
               >
                 <Paper>
                   <TableContainer>
-                    <Table stickyHeader aria-label="sticky table">
+                    <Table aria-label="table">
                       <TableHead>
                         <TableRow>
                           {columns.map((column) => (
                             <TableCell
+                              className="bold f16"
                               key={column.id}
                               align={column.align}
                               style={{ minWidth: column.minWidth }}

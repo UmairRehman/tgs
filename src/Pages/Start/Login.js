@@ -1,7 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Grid,TextField,Checkbox,Button} from '@material-ui/core';
 import { Link } from "react-router-dom";
 const Login = () => {
+  
+  const gotoDashBoard = () => {
+    window.location = '/dashboard';
+  };
+
   return (
     <Grid container xs={12}>
       <Grid className="LoginImageBG">
@@ -31,7 +36,7 @@ const Login = () => {
                       </Grid>
                   </Grid>
                   <Grid xs={12} container justify="center" className="mt26">
-                      <Button className="LoginBtn">Login</Button>
+                      <Button className="LoginBtn"onClick={gotoDashBoard}>Login</Button>
                   </Grid>
               </Grid>
           </Grid>
