@@ -30,7 +30,9 @@ const LeftControl = () => {
             <Grid className="BrandLogo"></Grid>
             <Grid className="TGSNav">
               <List component="nav" aria-label="main mailbox folders">
-                <ListItem button className="DashIcon">
+
+                {/* Employee Nav */}
+                {/* <ListItem button className="DashIcon">
                   <Link to="/dashboard" className="Liq-NavLinks" className={pathname === '/dashboard' ? 'NavSelected' : ''}>
                     <Icon/>
                     Dashboard
@@ -43,59 +45,110 @@ const LeftControl = () => {
                     </Link>
                 </ListItem>
                 <ListItem button className="CreatLinkIcon">
-                  <Link to="/create-link" className="Liq-NavLinks" className={pathname === '/create-link' ? 'NavSelected' : ''}>
+                  <Link to="/create-ticket" className="Liq-NavLinks" className={pathname === '/create-ticket' ? 'NavSelected' : ''}>
                       <Icon/>
                       Create a ticket
                   </Link>
                 </ListItem>
-                <ListItem className="ContactsIcon">
-                  {/* <Link className="Liq-NavLinks" className={pathname === '/contacts' ? 'NavSelected' : ''}  onClick={SubMenuOpen}>
+                <ListItem className="DepartmentIcon">
+                  <Link to="/department" className="Liq-NavLinks" className={pathname === '/department' ? 'NavSelected' : ''}>
                       <Icon/>
-                      Contacts
-                  </Link> */}
-                  <Link to="/contacts" className="Liq-NavLinks" className={pathname === '/contacts' ? 'NavSelected' : ''}>
-                      <Icon/>
-                      Contacts
+                      Department
                   </Link>
-                  {/* <List component="nav" className="LeftSubMenu" id="SubMenu-Links">
-                    <ListItem>
-                      <Link to="/tgscrop" className="Liq-NavLinks" className={pathname === '/tgscrop' ? 'NavSelected' : ''}>
-                        TGS Corp
-                      </Link>
-                    </ListItem>
-                    <ListItem>
-                      <Link to="/human-resources" className="Liq-NavLinks" className={pathname === '/human-resources' ? 'NavSelected' : ''}>
-                        Human Resources
-                      </Link>
-                    </ListItem>
-                    <ListItem>
-                      <Link to="/operating" className="Liq-NavLinks" className={pathname === '/operating' ? 'NavSelected' : ''}>
-                        Operating
-                      </Link>
-                    </ListItem>
-                    <ListItem>
-                      <Link to="/safety" className="Liq-NavLinks" className={pathname === '/safety' ? 'NavSelected' : ''}>
-                        Safety
-                      </Link>
-                    </ListItem>
-                    <ListItem>
-                      <Link to="/track" className="Liq-NavLinks" className={pathname === '/track' ? 'NavSelected' : ''}>
-                        Track
-                      </Link>
-                    </ListItem>
-                    <ListItem>
-                      <Link to="/information-technology" className="Liq-NavLinks" className={pathname === '/information-technology' ? 'NavSelected' : ''}>
-                        Information Technology
-                      </Link>
-                    </ListItem>
-                  </List> */}
+                </ListItem> */}
+                {/* Employee Nav End */}
+
+
+
+                {/* HR Nav */}
+                 {/* <ListItem button className="NewHireIcon">
+                  <Link to="/new-hire-queue" className="Liq-NavLinks" className={pathname === '/new-hire-queue' ? 'NavSelected' : ''}>
+                      <Icon/>
+                      New Hire Queue
+                  </Link>
+                </ListItem>
+                <ListItem button className="AlertIcon">
+                  <Link to="/tickets-alerts" className="Liq-NavLinks" className={pathname === '/tickets-alerts' ? 'NavSelected' : ''}>
+                      <Icon/>
+                      Tickets and Alerts
+                  </Link>
+                </ListItem>
+                <ListItem button className="EmployeeIcon">
+                  <Link to="/employees" className="Liq-NavLinks" className={pathname === '/employees' ? 'NavSelected' : ''}>
+                      <Icon/>
+                      Employees
+                  </Link>
+                </ListItem>
+                <ListItem button className="CreatLinkIcon">
+                  <Link to="/create-ticket" className="Liq-NavLinks" className={pathname === '/create-ticket' ? 'NavSelected' : ''}>
+                      <Icon/>
+                      Create a ticket
+                  </Link>
+                </ListItem> */}
+                {/* HR Nav End */}
+                
+
+
+                {/* Applicant Nav */}
+                <ListItem button className="eApplicationIcon">
+                  <Link to="/application" className="Liq-NavLinks" className={pathname === '/application' ? 'NavSelected' : ''}>
+                      <Icon/>
+                      Employee Application
+                  </Link>
+                </ListItem>
+                <ListItem button className="eDocumentsIcon">
+                  <Link to="/documents" className="Liq-NavLinks" className={pathname === '/documents' ? 'NavSelected' : ''}>
+                      <Icon/>
+                      Employee Documents
+                  </Link>
+                </ListItem>
+                {/* Applicant Nav End */}
+
+                
+                
+                {/* Admin Nav */}
+                {/* <ListItem button className="EmployeeIcon">
+                  <Link to="/employees-profile" className="Liq-NavLinks" className={pathname === '/employees-profile' ? 'NavSelected' : ''}>
+                      <Icon/>
+                      Employees Profile
+                  </Link>
+                </ListItem> */}
+                {/* Admin Nav End */}
+
+
+
+                {/* Supper Admin */}
+                {/* <ListItem button className="NewHireIcon">
+                  <Link to="/new-hire-queue" className="Liq-NavLinks" className={pathname === '/new-hire-queue' ? 'NavSelected' : ''}>
+                      <Icon/>
+                      New Hire Queue
+                  </Link>
+                </ListItem>
+                <ListItem button className="AlertIcon">
+                  <Link to="/tickets-alerts" className="Liq-NavLinks" className={pathname === '/tickets-alerts' ? 'NavSelected' : ''}>
+                      <Icon/>
+                      Tickets and Alerts
+                  </Link>
+                </ListItem>
+                <ListItem button className="CreatLinkIcon">
+                  <Link to="/create-ticket" className="Liq-NavLinks" className={pathname === '/create-ticket' ? 'NavSelected' : ''}>
+                      <Icon/>
+                      Create a ticket
+                  </Link>
+                </ListItem>
+                <ListItem button className="EmployeeIcon">
+                  <Link to="/employees-profile" className="Liq-NavLinks" className={pathname === '/employees-profile' ? 'NavSelected' : ''}>
+                      <Icon/>
+                      Employees Profile
+                  </Link>
                 </ListItem>
                 <ListItem button className="MessageIcon">
                   <Link to="/broadcast-messages" className="Liq-NavLinks" className={pathname === '/broadcast-messages' ? 'NavSelected' : ''}>
                       <Icon/>
                       Broadcast Message
                   </Link>
-                </ListItem>
+                </ListItem> */}
+                {/* Supper Admin End */}
               </List>
             </Grid>
           </Grid>

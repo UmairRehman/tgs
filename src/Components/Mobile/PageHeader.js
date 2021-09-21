@@ -18,6 +18,7 @@ import {
   Checkbox
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import LeftControl from './LeftControl';
 
 const useStyles = makeStyles((theme) => ({
   Avatarlarge: {
@@ -26,16 +27,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const PageHeader = () => {
-  const classes = useStyles();
+  // Page Title
   useEffect(() => {
     let clone = document.querySelector('#PageTitle').cloneNode( true );
-    document.querySelector('h1').appendChild( clone );
+    document.querySelector('.PageTitle h1').appendChild( clone );
   },[]);
-  const MenuOpen = (event) => {
-    var element = document.getElementById("LeftContol");
-    element.classList.remove("CloseMenu");
-    var element = document.getElementById("LeftContol");
-    element.classList.add("OpenMenu");
+  
+  
+
+
+  const MenuOpenRes = (event) => {
+    var LeftCR = document.getElementById("LeftContolRes");
+    LeftCR.classList.remove("CloseMenuRes");
+    var LCR = document.getElementById("LeftContolRes");
+    LCR.classList.add("OpenMenuRes");
+    var BTage = document.getElementById("bodyTag");
+    BTage.classList.add("DeviceBody");
   };
   
   // Modal Profile Picture Changer
@@ -54,7 +61,6 @@ const PageHeader = () => {
 
 
 
-
    // For Modal
    const [aletopen, setAlertOpen] = React.useState(false);
   //  const //theme = useTheme();
@@ -69,13 +75,15 @@ const PageHeader = () => {
    };
   return (
     <Grid>
-      <Grid xs={12}>
+      <Grid id="LeftContolRes" className="LeftContolRes">
+        <LeftControl/>
+      </Grid>
+      <Grid xs={12}> 
         <Grid xs={12} className="PageHeader">
-          <Grid xs={3} className="PageTitle">
-            <Button onClick={MenuOpen}/>
-            <h1></h1>
+          <Grid xs={2}>
+            <Button id="DeviceNavIcon" onClick={MenuOpenRes}></Button>
           </Grid>
-          <Grid xs={9} container justify="flex-end" alignItems="center">
+          <Grid xs={10} container justify="flex-end">
             <Grid lg={12} container justify="flex-end">
               <Grid xs className="HeaderSearchBox">
                 <Button></Button>
@@ -89,7 +97,7 @@ const PageHeader = () => {
                         <Grid xs={12}>
                           <FormLabel>10:45 PM</FormLabel>
                           <Typography variant="h6" component="h6">
-                            Jessie John
+                            Jessie John Mobile
                           </Typography>
                           Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                         </Grid>
@@ -233,63 +241,13 @@ const PageHeader = () => {
                   </List>
                 </Grid>
               </Button>
-              <Button className="HeadUserFrame">
-                <Avatar alt="Angelina Jolie " src="/static/images/avatar/1.jpg"/>
-                Angelina Jolie
-                <IconButton edge="end" aria-label="comments">
-                  <ExpandMoreIcon />
-                </IconButton>
-                <Grid className="HeaderNotification">
-                    <List component="nav" aria-label="main mailbox folders" className="HeaderNoti">
-                      <ListItem className="ChangePictureIcon">
-                        <Grid onClick={PicturehandleClickOpen} className="ProfilePicChangeBtn">
-                          Change Picture
-                        </Grid>
-                      </ListItem>
-                      <ListItem className="LogOutIcon">
-                        <Link to="/">
-                          Logout
-                        </Link>
-                      </ListItem>
-                    </List>
-                  </Grid>
-              </Button>
             </Grid>
+          </Grid>
+          <Grid xs={12} className="PageTitle">
+            <h1></h1>
           </Grid>
         </Grid>
       </Grid>
-
-      {/* Picture Change Modal */}
-      <Dialog
-        fullScreen={fullScreen}
-        open={open}
-        onClose={PicturehandleClose}
-        className="ProfilePicChange"
-        aria-labelledby="responsive-dialog-title"
-      >
-        <Button autoFocus onClick={PicturehandleClose} className="ModalClose">
-        </Button>
-        <DialogContent>
-          <Grid xs={12} className="mbold f20">
-           Change Picture
-          </Grid>
-          <Grid xs={12} className="tcenter mt30">
-            Angelina, Keep your profile fresh!
-          </Grid>
-          <Grid xs={12} container justify="center" className="mt40">
-            <Avatar alt="Angelina Jolie " src="/static/images/avatar/1.jpg" className={classes.Avatarlarge}/>
-          </Grid>
-          <Grid xs={12} className="tcenter mt20">
-            Take or upload a photo
-          </Grid>
-          <Grid xs={12} className="ProfileUpdateBtn mt30">
-              <Button>Use Camera</Button>
-              <Button>Upload Photo</Button>
-          </Grid>
-        </DialogContent>
-      </Dialog>
-      {/* Picture Change Modal Close */}
-
 
        {/* Alert Modal */}
       <Dialog

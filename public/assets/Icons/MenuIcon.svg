@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="dashboard" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="-487 488 25 25" style="enable-background:new -487 488 25 25;" xml:space="preserve">
-<path d="M-467.1,496.2h-14.7c-0.6,0-1.1-0.5-1.1-1.1l0,0c0-0.6,0.5-1.1,1.1-1.1h14.7c0.6,0,1.1,0.5,1.1,1.1l0,0
-	C-466,495.7-466.5,496.2-467.1,496.2z"/>
-<path d="M-467.1,501.6h-14.7c-0.6,0-1.1-0.5-1.1-1.1l0,0c0-0.6,0.5-1.1,1.1-1.1h14.7c0.6,0,1.1,0.5,1.1,1.1l0,0
-	C-466,501.1-466.5,501.6-467.1,501.6z"/>
-<path d="M-467.1,507h-14.7c-0.6,0-1.1-0.5-1.1-1.1l0,0c0-0.6,0.5-1.1,1.1-1.1h14.7c0.6,0,1.1,0.5,1.1,1.1l0,0
-	C-466,506.5-466.5,507-467.1,507z"/>
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 25 25" style="enable-background:new 0 0 25 25;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#050505;stroke-width:1.5;stroke-linecap:round;}
+</style>
+<g id="Group_1937" transform="translate(-59.75 -67.75)">
+	<line id="Line_4" class="st0" x1="64.2" y1="73.8" x2="80.2" y2="73.8"/>
+	<line id="Line_5" class="st0" x1="64.2" y1="80.1" x2="80.3" y2="80.1"/>
+	<line id="Line_6" class="st0" x1="64.2" y1="86.8" x2="72.2" y2="86.8"/>
+</g>
 </svg>

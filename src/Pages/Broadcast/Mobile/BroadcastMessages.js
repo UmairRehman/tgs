@@ -19,11 +19,7 @@ import {
   TextareaAutosize
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import PageHeader from "../../Components/PageHeader";
-import LeftControl from "../../Components/LeftControl";
-// import MobileScreen from '../Broadcast/Mobile/BroadcastMessages';
-// import {isMobile} from 'react-device-detect';
+import PageHeader from "../../../Components/Mobile/PageHeader";
 
 const columns = [
   { id: "from", label: "From", minWidth: "200px", type: "value" },
@@ -33,7 +29,7 @@ const columns = [
   { id: "message", label: "Message", minWidth: 500, type: "value" }
 ];
 
-function createData( 
+function createData(
   from,
   to,
   date,
@@ -64,19 +60,6 @@ const rows = [
 ];
 
 
-
-const top100Films = [
-  { title: 'Liam Noah', name: 'Liam Noah' },
-  { title: 'Oliver William', name: 'Oliver William' },
-  { title: 'James Benjamin', name: 'James Benjamin' },
-  { title: 'Lucas Henry', name: 'Lucas Henry' },
-  { title: 'Alexander Mason', name: 'Alexander Mason' },
-  { title: 'Michael Ethan', name: 'Michael Ethan' },
-  { title: 'Daniel Jacob', name: 'Daniel Jacob' },
-];
-
-
-
 export default function BroadcastMessages() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -103,16 +86,9 @@ export default function BroadcastMessages() {
   const handleClose = () => {
     setOpen(false);
   };
-  // if(isMobile) {
-  //   return (
-  //       <MobileScreen />
-  //   )
-  // }
+
   return (
-    <Grid container xs={12} className="Liq-Container">
-      <Grid xs={12} md={2} className="LeftContol" id="LeftContol">
-        <LeftControl />
-      </Grid>
+    <Grid container xs={12} className="Liq-Container Device">
       <Grid xs={12} md={10} container justify="center" className="PageContent">
         <Grid className="PagesFrame">
           <PageHeader />
@@ -121,9 +97,11 @@ export default function BroadcastMessages() {
           <Grid xs={12} className="ContentPage">
             {/* TGS Softwares */}
             <Grid xs={12}>
-              <Link  onClick={handleClickOpen} className="LinkButton">
-                Send Broadcast Message
-              </Link>
+              <Grid xs={12}>
+                <Link  onClick={handleClickOpen} className="LinkButton">
+                  Send Broadcast Message
+                </Link>
+              </Grid>
               <Grid
                 xs={12}
                 container
@@ -210,24 +188,9 @@ export default function BroadcastMessages() {
         <Button autoFocus onClick={handleClose} className="ModalClose">
         </Button>
         <DialogContent>
-          <Grid xs={12} className="mbold MsgBrodAuto">
+          <Grid xs={12} className="mbold">
             <Grid xs={12} className="pl14">To</Grid>
-            {/* <TextField id="outlined-basic" label="Type Here" variant="outlined" className="w100p"/> */}
-            <Autocomplete
-              freeSolo
-              id="free-solo-2-demo"
-              disableClearable
-              options={top100Films.map((option) => option.title)}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="Search input"
-                  margin="normal"
-                  variant="outlined"
-                  InputProps={{ ...params.InputProps, type: 'search' }}
-                />
-              )}
-            />
+            <TextField id="outlined-basic" label="Type Here" variant="outlined" className="w100p"/>
           </Grid>
           <Grid xs={12} className="mbold mt30">
             <Grid xs={12} className="pl14">Subject</Grid>

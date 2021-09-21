@@ -1,0 +1,637 @@
+
+@media (max-device-width: 1600px) {
+    body {
+        box-sizing: border-box !important;
+    }
+    .Device .LeftContolRes {
+        display: flex !important;
+    }
+    .Device {
+        min-width: 280px !important;
+    }
+    .Device .PrivateSwitchBase-root-1 {
+        padding: 3px;
+    }
+    .Device .PageHeader {
+        padding: 0 0 7px 0;
+    }
+    .Device.LoginScreen {
+        width: 100%;
+        height: 100vh;
+        background: #2963AD;
+        color: white;
+        position: relative;
+        display: block;
+    }
+    .Device .LoginBtnGrid {
+        position: absolute;
+        bottom: 15vh;
+        left: 0px;
+    }
+    .Device .LoginBtnGrid button {
+        width: 80%;
+        max-width: 360px;
+        background: #2f7cd4 !important;
+    }
+    .Device .LoginBtn {
+        padding: 12px 10px;
+    }
+    .Device .FormField {
+        position: relative;
+    }
+    .Device .FormField .MuiInputBase-formControl {
+        background: #2f7cd4 !important;
+        border-radius: 8px;
+        padding: 8px 10px !important;
+        color: white !important;
+    }
+    .Device .FormField button {
+        position: absolute;
+        top: 28px;
+        right: 10px;
+        width: 40px;
+        min-width: 40px;
+        height: 40px;
+        padding: 0px;
+        background: url(../assets/LoginView.svg) no-repeat center center transparent;
+        background-size: 16px;
+        cursor: pointer;
+    }
+    .Device .LoginFormPlace {
+        width: 100%;
+    }
+    .Device .FormField input {
+        color: white !important;
+    }
+    .Device .MuiInput-underline:before {
+        border: none!important;
+    }
+    
+    .LoginForm .MuiInput-underline::after{
+        border-bottom: none !important;
+    }
+    .Device .LoginForm .FormField.em input {
+        padding-left: 30px;
+        background: url(../assets/LoginEmail.svg) no-repeat left center;
+        background-size: 20px;
+    }
+    .Device .LoginForm .FormField.pw input {
+        padding-left: 30px;
+        background: url(../assets/LoginPass.svg) no-repeat left center;
+        background-size: 20px;
+    }
+    .Device .PageContent {
+        padding-left: 0px !important;
+    }
+    .Liq-Container {
+        min-width: 100%;
+    }
+    .Device .LiqTables table {
+        min-width:1240px;
+        margin-bottom: 15px;
+    }
+    .Device .LinkButton {
+        width: 100%;
+        text-align: center;
+        display: block;
+    }
+    .Device .DeviceBtn .LinkButton {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: center;
+        padding: 15px 0px !important;
+    }
+    .Device .DeviceBtn .LinkButton .MuiButton-label {
+        width: auto;
+    }
+
+    .StikyTableNoteTable {
+        display: flex;
+        justify-content: center;
+    }
+    .StikyTableNote {
+        width: 170px;
+        height: 20px;
+        position: sticky;
+        left: 0px;
+        top: 00px;
+        z-index: 10;
+    }
+    .Device .LiqTables table tr td:first-child, .LiqTables table tr th:first-child {
+        border-top-left-radius: 8px;
+        border-bottom-left-radius: 8px;
+        padding-left: 16px;
+    }
+    #DeviceNavIcon {
+        background: url(../assets/Icons/MenuIcon.svg) no-repeat left center transparent;
+        background-size: 25px;
+        border: none;
+        width: 40px;
+        min-width: 40px;
+        height: 40px;
+        padding: 0px;
+        cursor: pointer;
+    }
+    .LeftContolRes {
+        width: 100%;
+        height: 100vh;
+        position: fixed;
+        top: 0px;
+        left: -100%;
+        z-index: 999;
+    }
+    .LeftContolRes .LeftMenuCol {
+        width: 200px;
+        height: 100vh;
+        background: #2963AD;
+        position: fixed;
+        top: 0px;
+        z-index: 9999;
+    }
+    .DeviceBody {
+        overflow: hidden;
+    }
+    .OpenMenuRes {
+        left: -100%;
+        animation: navOMR 0.5s ease-in-out forwards;
+    }
+    @keyframes navOMR {
+        0%{left: -100%;}
+        100%{left: 0%;}
+    }
+    .OpenMenuRes .DeviceNavClose {
+        opacity: 0;
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        animation: omr 0.3s ease-in-out forwards;
+    }
+    @keyframes omr {
+        0%{opacity: 0;}
+        100%{opacity: 1;}
+        100%{opacity: 1; left: 0%;}
+    }
+    .CloseMenuRes {
+        left: 0%;
+        animation: navCMR 0.5s ease-in-out forwards;
+    }
+    @keyframes navCMR {
+        0%{left: 0%;}
+        100%{left: -100%;}
+    }
+    .DeviceNavClose {
+        width: 100%;
+        height: 100vh;
+        background: url(../assets/navBG.png);
+    }
+    .CloseMenuRes .DeviceNavClose {
+        opacity: 1;
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        animation: cmr 0.3s ease-in-out forwards;
+    }
+    @keyframes cmr {
+        0%{opacity: 1;}
+        100%{opacity: 0;}
+        100%{opacity: 0; left: 100%;}
+    }
+    .Device .TGSNav .MuiList-root {
+        padding: 0 0% 0 5%;
+    }
+    .Device .TGSNav a {
+        font-size: 12px;
+    }
+    .Device .TGSNav a.NavSelected { 
+        border-radius: 0px;
+        border-top-left-radius: 8px;
+        border-bottom-left-radius: 8px;
+        border-right: solid 4px #043B8B;
+    }
+    .Device .TGSNav .DashIcon span.material-icons,
+    .Device .TGSNav .RulesIcon span.material-icons,
+    .Device .TGSNav .LocationIcon span.material-icons,
+    .Device .TGSNav .SafetyIcon span.material-icons,
+    .Device .TGSNav .NewsletterIcon span.material-icons,
+    .Device .TGSNav .DepartmentIcon span.material-icons,
+    .Device .TGSNav .CreatLinkIcon span.material-icons,
+    .Device .TGSNav .ContactsIcon span.material-icons{
+        margin-right: 10px;
+    }
+    .LogoutBtn {
+        background-image: unset !important;
+        background-color: #2f7bd4 !important;
+        font-size: 12px !important;
+        text-transform: capitalize !important;
+    }
+    .DevUserDetails {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 40px 0;
+    }
+    .DevUserDetails .DevUserImg {
+        width: 70px;
+        height: 70px;
+        border-radius: 10px;
+        overflow: hidden;
+    } 
+    .DevUserDetails img {
+        max-width: 100%;
+        min-width: 70px;
+        max-height: 100%;
+        min-height: 70px;
+    }
+    .DevUserDetails h1 {
+        width: 100%;
+        font-size: 18px;
+        font-weight: 400;
+        color: white !important;
+        text-align: center;
+        margin: 10px 0 0 0;
+    }
+    .DevUserDetails h6 {
+        width: 100%;
+        font-size: 11px;
+        font-weight: 400;
+        color: white !important;
+        text-align: center;
+        margin: 0px 0 0 0;
+    }
+    .Device .dateTimePickerFrame .DateTimeTables {
+        width: 48%;
+    }
+    .Device .PageTitle h1 {
+        margin: 16px 0 0;
+    }
+    .Device .fieldSubText h6 {
+        top: 58px;
+    }
+    .LinkButton {
+        padding: 15px 30px !important;
+    }
+    .Device .SafetyAddCrew {
+        display: flex;
+        flex-wrap: nowrap;
+    }
+    .Device .SafetyAddCrew .MuiFormControl-root{
+        max-width: 100%;
+        padding-right: 16px;
+    }
+    .Device .MuiAutocomplete-popupIndicator {
+        padding: 10px 0px !important;
+    }
+    .SafetyTestingEditList {
+        display: flex;
+        font-size: 12px;
+    }
+    .SafetyTestingEditList li {
+        display: block;
+        min-width: 25%;
+        text-align: center;
+    }
+    .SafetyTestingEditList .bold {
+        font-weight: 600 !important;
+    }
+    .SafetyTestingEditList li div:last-child {
+        background: white;
+        margin-top: 10px;
+        padding: 16px 0;
+    }
+    .SafetyTestingEditList li:first-child div {
+        border-top-left-radius: 8px;
+        border-bottom-left-radius: 8px;
+    }
+    .SafetyTestingEditList li:last-child div {
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+    }
+    .DeviceBDB{
+        border-bottom: dotted 1px #cccccc;
+        padding: 0 0 25px;
+    }
+    .FormSaveBtn {
+        width: 100%;
+        position: fixed;
+        bottom: 0px;
+        left: 0px;
+        z-index: 99;
+        /* padding: 5px 20px; */
+        background: white;
+        border-top: solid 1px #CCCCCC;
+    }
+    .FormSaveBtn .LinkButton {
+        border-radius: 0px !important;
+    }
+    .Device .MuiTablePagination-toolbar p.MuiTablePagination-caption:nth-child(2) {
+        display: none !important;
+    }
+    .Device .LiqTables .ImpretionRow .MuiTableRow-root {
+        background: transparent;
+    }
+    .Device .MuiTablePagination-toolbar {
+        padding: 0px !important;
+    }
+    .Device .MuiTablePagination-selectRoot {
+        margin-left: 0px;
+        margin-right: 12px;
+    }
+    .Device .MuiTablePagination-actions {
+        margin-left: 4px;
+    }
+    
+    .LiqTables .MuiDialog-container table tr td:last-child, .LiqTables .MuiDialog-container table tr th:last-child {
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+     }
+    .SafetyModal.LiqTables .MuiPaper-root .MuiTableCell-root {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .LiqTables .MuiDialogContent-root {
+        padding: 8px 0px 0 0 !important;
+    }
+    .ImpretionRow td {
+        padding: 0px !important;
+    }
+    .LiqTables table {
+        border-collapse: separate;
+        border-spacing: 0 5px;
+    }
+    .LiqTables .MuiDialogContent-root table {
+        border-collapse: separate;
+        border-spacing: 0 0px;
+    }
+    .LiqTables .MuiDialogContent-root table tr td {
+        border-bottom: solid 1px #CCCCCC !important;
+    }
+    .LiqTables .MuiDialogContent-root .MuiTableCell-root {
+        padding: 6px 30px !important;
+    }
+    .LiqTables .MuiDialogContent-root table td.EmptyTD {
+        border-bottom: none !important;
+        background: transparent!important;
+    }
+    .MuiDialog-paperFullScreen {
+        height: auto !important;
+    }
+    .SafetyModal .MuiDialog-paperWidthSm {
+        padding: 50px 0 0px 0;
+    }
+    .SafetyModal p {
+        margin-bottom: 0px;
+    }
+    .HeadEmail:hover:before, .HeadAlert:hover:before {
+        left: 15px;
+    }
+    
+    .Device .DashSaleforce a,
+    .Device .DashBI a,
+    .Device .DashAssetPro a,
+    .Device .DashSafeTrack a,
+    .Device .Cedar a,
+    .Device .DashLocstatt a {
+        background-size: 80%;
+    }
+    .Device .Dash-Tabs header .MuiTabs-scroller {
+        width: 100%;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: center;
+        justify-items: center;
+    }
+    .Device .Dash-TabsRows {
+        order: 1;
+    }
+    .Device .Dash-Tabs .MuiBox-root {
+        padding: 0px !important;
+    }
+    .Device .Dash-Tabs .TabBull {
+        width: 10px !important;
+        min-width: 10px !important;
+        max-width: 10px !important;
+        padding: 0px;
+        height: 10px !important;
+        min-height: 10px !important;
+        max-height: 10px !important;
+        margin: 5px;
+        background-color: #CCCCCC;
+        border-radius: 20px;
+    }
+    .Device .Dash-Tabs .Mui-selected {
+        background: #2963AD;
+        border: none !important;
+    }
+    .Device .Dash-Tabs .MuiAppBar-colorPrimary {
+        background-color: transparent !important;
+    }
+    .Device .Dash-Tabs .MuiPaper-elevation4 {
+        box-shadow: none !important;
+    }
+    .Device .Dash-Tabs header .MuiTabs-indicator {
+        background-color: transparent !important;
+    }
+    .Device .Dash-Tabs header .MuiTabs-root {
+        min-height: auto !important;
+    }
+    .Device .DashCertificatsBox {
+        height: 360px;
+    }
+    .Device .Dash-Table {
+        margin-top: 15px;
+    }
+    .Device .Dash-Tabs table {
+        min-width: 520px;
+        padding-bottom: 20px;
+    }
+    .Device .Dash-Tabs table th {
+        padding: 10px 0px !important;
+    }
+    .Device .Dash-Tabs table td:first-child {
+        border-radius: 8px !important;
+        padding: 20px 10px !important;
+        position: relative;
+        background: transparent !important;
+        color: #A8A8A8;
+    }
+    .Device .Dash-Tabs table td:first-child::after {
+        content: '.';
+        color: white;
+        padding: 20px 10px !important;
+        display: block;
+        width: 70%;
+        min-height: 5px;
+        background: white;
+        position: absolute;
+        z-index: -1;
+        top: 0px;
+        left: 0px;
+        border-radius: 8px;
+    }
+    .Device .Dash-Tabs .MuiPaper-root .MuiTableRow-root {
+        background-color: transparent !important;
+        background: transparent !important;
+    }
+    .Device .Dash-Tabs table td {
+        background: white;
+    }
+    .Device .Dash-Tabs table td:nth-child(2) {
+        border-top-left-radius: 8px;
+        border-bottom-left-radius: 8px;
+    }
+    .Device .Dash-Tabs table td:last-child {
+        color: #FF0000;
+    }
+    .Device .ContactTable table {
+        min-width: 450px;
+        margin-bottom: 15px;
+    }
+    
+    .DashAnalytics {
+        background-size: auto 60%;
+    }
+    .Device .LiqTables .MuiTableContainer-root::-webkit-scrollbar,
+    .Device .ContactTable .MuiTableContainer-root::-webkit-scrollbar {
+        width: 0.6em;
+        height: 4px;
+    }
+    .Device .LiqTables .MuiTableContainer-root::-webkit-scrollbar-track,
+    .Device .ContactTable .MuiTableContainer-root::-webkit-scrollbar-track {
+        background-color:rgb(255, 255, 255);
+    }
+    .Device .LiqTables .MuiTableContainer-root::-webkit-scrollbar-thumb,
+    .Device .ContactTable .MuiTableContainer-root::-webkit-scrollbar-thumb {
+        background-color: #2963AD;
+        outline: 0px solid rgb(255, 255, 255);
+        border-radius: 8px;
+    }
+    .HeaderNoti {
+        overflow-y: auto;
+    }
+    
+    .MuiTableCell-root {
+        padding: 12px 10px !important;
+        font-size: 0.875rem !important;
+        font-family: 'Poppins', sans-serif !important;
+    }
+
+}
+@media (max-device-width: 900px){
+    .DashCertificatsBox {
+        width: 100%;
+    }
+    .Mui-checked {
+        color: #FFFFFF !important;
+        /* background-color: white !important; */
+    }
+    .Device .DashCertificatsBox {
+        height: 300px;
+    }
+    .HeaderNotification {
+        left: -185px;
+    }
+    .LiqTables table tr td:first-child, .LiqTables table tr th:first-child {
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+    }
+    
+}
+@media (max-device-width: 450px){
+    .DashAnalytics {
+        background: url(../assets/latestAnalytics.png) no-repeat 90% 115px #FFFFFF;
+        background-size: 30%;
+    }
+    .Device .DashCertificatsBox {
+        height: 300px;
+    }
+    .DashCeriText {
+        font-size: 14px;
+    }
+}
+@media (max-device-width: 380px) {
+    .HeaderNotification {
+        top: 42px;
+    }
+    .HeadEmail:hover:before, .HeadAlert:hover:before {
+        left: 7px;
+        top: 27px;
+    }
+    .HeaderNotification {
+        left: -219px;
+    }
+    .HeadEmail .HeaderNotification {
+        left: -184px;
+    }
+    .Device .HeadEmail,
+    .Device .HeadAlert {
+        min-width: 30px !important;
+    }
+    .HeaderSearchBox {
+        width: 40%;
+        height: 32px;
+    }
+    .HeaderSearchBox button {
+        right: 3px;
+        top: 3px;
+    }
+    label.Mui-focused {
+        display: none;
+    }
+    #DeviceNavIcon {
+        width: 30px;
+        min-width: 30px;
+        height: 30px;
+    }
+    .HeaderSearchBox .MuiInputLabel-formControl {
+        top: -22px !important;
+    }
+    .HeaderSearchBox label {
+        padding: 2px 1px 0;
+    }
+    .Device .MuiAutocomplete-inputRoot[class*="MuiOutlinedInput-root"] {
+        padding: 8px 22px 8px 8px !important;
+    }
+    .Device .MuiAutocomplete-inputRoot .MuiAutocomplete-input {
+        width: 0;
+        min-width: 60px;
+    }
+    .Device .DeviceBtn .LinkButton {
+        padding: 15px 0px !important;
+        font-size: 11px;
+    }
+    
+}
+@media (max-device-width: 338px) {
+    .LinkButton {
+        font-size: 12px !important;
+    }
+    .Device .DeviceBtn .LinkButton {
+        font-size: 11px;
+        flex-wrap: wrap;
+    }
+    .Device .DeviceBtn .LinkButton span.MuiButton-label {
+        width: 100%;
+        display: block;
+        order: 2;
+    }
+}
+@media (max-device-width: 330px) {
+    .HeaderSearchBox {
+        max-width: 100% !important;
+        min-width: 150px !important;
+    }
+
+    .DashCeriText {
+        font-size: 12px;
+    }
+
+
+
+
+
+}
+@media (max-device-width: 305px) {
+    .HeaderSearchBox {
+        min-width: 130px !important;
+    }
+}

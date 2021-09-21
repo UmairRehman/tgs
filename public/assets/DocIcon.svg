@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20.332" height="26.692" viewBox="0 0 20.332 26.692">
+  <g id="google-docs" transform="translate(-61)">
+    <g id="Docs_3_" transform="translate(61)">
+      <g id="Group_2081" data-name="Group 2081">
+        <g id="Group_2080" data-name="Group 2080">
+          <g id="Group_2079" data-name="Group 2079">
+            <g id="Group_2078" data-name="Group 2078">
+              <path id="Path_1030" data-name="Path 1030" d="M81.332,7.038,75.858,5.474,74.294,0H63.346A2.346,2.346,0,0,0,61,2.346v22a2.346,2.346,0,0,0,2.346,2.346h15.64a2.346,2.346,0,0,0,2.346-2.346Z" transform="translate(-61)" fill="#2963ad"/>
+            </g>
+          </g>
+        </g>
+      </g>
+      <path id="Path_1032" data-name="Path 1032" d="M323.038,7.038h-5.474A1.569,1.569,0,0,1,316,5.474V0a.733.733,0,0,1,.547.235L322.8,6.491A.733.733,0,0,1,323.038,7.038Z" transform="translate(-302.706)" fill="#80aef8"/>
+      <g id="Group_2082" data-name="Group 2082" transform="translate(4.692 11)">
+        <path id="Path_1033" data-name="Path 1033" d="M161.166,212.564h-9.384a.782.782,0,1,1,0-1.564h9.384a.782.782,0,0,1,0,1.564Z" transform="translate(-151 -211)" fill="#fff5f5"/>
+      </g>
+      <g id="Group_2083" data-name="Group 2083" transform="translate(4.692 14.128)">
+        <path id="Path_1034" data-name="Path 1034" d="M161.166,272.564h-9.384a.782.782,0,1,1,0-1.564h9.384a.782.782,0,0,1,0,1.564Z" transform="translate(-151 -271)" fill="#fff5f5"/>
+      </g>
+      <g id="Group_2084" data-name="Group 2084" transform="translate(4.692 17.256)">
+        <path id="Path_1035" data-name="Path 1035" d="M161.166,332.564h-9.384a.782.782,0,1,1,0-1.564h9.384a.782.782,0,0,1,0,1.564Z" transform="translate(-151 -331)" fill="#fff5f5"/>
+      </g>
+      <g id="Group_2085" data-name="Group 2085" transform="translate(4.692 20.384)">
+        <path id="Path_1036" data-name="Path 1036" d="M158.038,392.564h-6.256a.782.782,0,0,1,0-1.564h6.256a.782.782,0,0,1,0,1.564Z" transform="translate(-151 -391)" fill="#fff5f5"/>
+      </g>
+    </g>
+    <g id="Docs_4_" transform="translate(71.166 11)">
+      <g id="Group_2090" data-name="Group 2090">
+        <g id="Group_2086" data-name="Group 2086" transform="translate(0 9.384)">
+          <path id="Path_1037" data-name="Path 1037" d="M256,392.564h1.564a.782.782,0,1,0,0-1.564H256Z" transform="translate(-256 -391)" fill="#e3e7ea"/>
+        </g>
+        <g id="Group_2087" data-name="Group 2087" transform="translate(0 6.256)">
+          <path id="Path_1038" data-name="Path 1038" d="M256,332.564h4.692a.782.782,0,0,0,0-1.564H256Z" transform="translate(-256 -331)" fill="#e3e7ea"/>
+        </g>
+        <g id="Group_2088" data-name="Group 2088" transform="translate(0 3.128)">
+          <path id="Path_1039" data-name="Path 1039" d="M256,272.564h4.692a.782.782,0,0,0,0-1.564H256Z" transform="translate(-256 -271)" fill="#e3e7ea"/>
+        </g>
+        <g id="Group_2089" data-name="Group 2089">
+          <path id="Path_1040" data-name="Path 1040" d="M256,212.564h4.692a.782.782,0,0,0,0-1.564H256Z" transform="translate(-256 -211)" fill="#e3e7ea"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
