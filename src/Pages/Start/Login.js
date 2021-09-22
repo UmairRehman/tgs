@@ -142,7 +142,7 @@ const Login = () => {
                   </Grid>
                   <Grid xs={12} container justify="center" className="mt20">
                       {/* <Link to="/application" className="ApplicantBtn">Submit Application & Create Account</Link> */}
-                      <a href="http://tgsapplicant.liquidtechnologies.pk/application" className="ApplicantBtn">Submit Application & Create Account</a>
+                      <a href="application" className="ApplicantBtn">Submit Application & Create Account</a>
                   </Grid>
               </Grid>
           </Grid>
