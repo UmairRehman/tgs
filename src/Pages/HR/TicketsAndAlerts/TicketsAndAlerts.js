@@ -23,6 +23,7 @@ const columns = [
   { id: "eid", label: "Employee ID", minWidth: 120, type: "value" },
   { id: "nm", label: "Name", minWidth: 155, type: "value" },
   { id: "ta", label: "Ticket / Alert", minWidth: 160, type: "value" },
+  { id: "ct", label: "Category", minWidth: 80, maxWidth: 100, type: "value" },
   { id: "ds", label: "Description", minWidth: 300, type: "value" },
   { id: "V", label: "View", minWidth: 50, type: "edit" },
   { id: "C", label: "Complete", minWidth: 50, type: "view" },
@@ -32,6 +33,7 @@ function createData(
   eid,
   nm,
   ta,
+  ct,
   ds,
   V,
   C
@@ -40,6 +42,7 @@ function createData(
     eid,
     nm,
     ta,
+    ct,
     ds,
     V,
     C
@@ -47,12 +50,12 @@ function createData(
 }
 
 const rows = [
-  createData("1234", "Ryan Westmeyer", "Ticket", "Need monitor cables for new docking"),
-  createData("324", "John Daniel", "Alert", "Terminated: AD Enabled"),
-  createData("554", "Paul Jason", "Ticket", "Requesting a second monitor, Current"),
-  createData("783", "Donald Jeff", "Alert", "Terminated: AD Enabled"),
-  createData("234", "William Anthony", "Alert", "Need monitor cables for new docking"),
-  createData("5433", "Mark Robert", "Ticket", "Requesting a second monitor, Current"),
+  createData("1234", "Ryan Westmeyer", "Ticket","IT", "Need monitor cables for new docking"),
+  createData("324", "John Daniel", "Alert","Management", "Terminated: AD Enabled"),
+  createData("554", "Paul Jason", "Ticket","IT", "Requesting a second monitor, Current"),
+  createData("783", "Donald Jeff", "Alert","Account", "Terminated: AD Enabled"),
+  createData("234", "William Anthony", "Alert","Management", "Need monitor cables for new docking"),
+  createData("5433", "Mark Robert", "Ticket","Account", "Requesting a second monitor, Current"),
 ];
 
 
