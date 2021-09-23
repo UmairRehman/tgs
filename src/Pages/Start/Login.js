@@ -23,17 +23,15 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 
-
-
-
-
-
-
 import { Link } from "react-router-dom";
 import MobileScreen from '../Start/Mobile/Login';
-import {isMobile} from 'react-device-detect';
+import { isMobile } from 'react-device-detect';
 
 
+import Services from '../../Services';
+
+
+const { api: { Interceptor: api, routes } } = Services;
 
 
 const useStyles = makeStyles((theme) => ({
@@ -53,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Login = () => {
-  
+
   const gotoDashBoard = () => {
     window.location = '/dashboard';
   };
@@ -82,70 +80,70 @@ const Login = () => {
 
 
 
-  if(isMobile) {
+  if (isMobile) {
     return (
-        <MobileScreen />
+      <MobileScreen />
     )
   }
   return (
     <Grid container xs={12}>
       <Grid className="LoginImageBG">
-          <Grid className="LoginImage">
-              <Grid className="LoginLogo"></Grid>
-              <Grid className="LoginText">
-                TGS Portal
-              </Grid>
+        <Grid className="LoginImage">
+          <Grid className="LoginLogo"></Grid>
+          <Grid className="LoginText">
+            TGS Portal
           </Grid>
+        </Grid>
       </Grid>
       <Grid className="LoginFormPlace">
-          <Grid className="LoginForm">
-              <Grid className="LoginTitle">Login</Grid>
-              <Grid className="FormFields">
-                  <TextField placeholder="Email / User ID" type="text"/>
-                  
-                  <FormControl className="LoginPwd">
-                    {/* <InputLabel htmlFor="standard-adornment-password">Password</InputLabel> */}
-                    <Input
-                    placeholder="Password"
-                      id="standard-adornment-password"
-                      type={values.showPassword ? 'text' : 'password'}
-                      value={values.password}
-                      onChange={handleChange('password')}
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton
-                            aria-label="toggle password visibility"
-                            onClick={handleClickShowPassword}
-                            onMouseDown={handleMouseDownPassword}
-                          >
-                            {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                          </IconButton>
-                        </InputAdornment>
-                      }
-                    />
-                  </FormControl>
+        <Grid className="LoginForm">
+          <Grid className="LoginTitle">Login</Grid>
+          <Grid className="FormFields">
+            <TextField placeholder="Email / User ID" type="text" />
 
-                  <Grid xs={12} container className="mt16">
-                      <Grid className="LoginCheckPlace">
-                        <Checkbox
-                        defaultChecked
-                        color="primary"
-                        inputProps={{ 'aria-label': 'secondary checkbox' }}
-                        />Remember me
-                      </Grid>
-                      <Grid className="LoginForget">
-                          <Link to="/dashboard">Forget Password</Link>
-                      </Grid>
-                  </Grid>
-                  <Grid xs={12} container justify="center" className="mt26">
-                      <Button className="LoginBtn" onClick={gotoDashBoard}>Login</Button>
-                  </Grid>
-                  <Grid xs={12} container justify="center" className="mt20">
-                      {/* <Link to="/application" className="ApplicantBtn">Submit Application & Create Account</Link> */}
-                      <a href="application" className="ApplicantBtn">Submit Application & Create Account</a>
-                  </Grid>
+            <FormControl className="LoginPwd">
+              {/* <InputLabel htmlFor="standard-adornment-password">Password</InputLabel> */}
+              <Input
+                placeholder="Password"
+                id="standard-adornment-password"
+                type={values.showPassword ? 'text' : 'password'}
+                value={values.password}
+                onChange={handleChange('password')}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                    >
+                      {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
+
+            <Grid xs={12} container className="mt16">
+              <Grid className="LoginCheckPlace">
+                <Checkbox
+                  defaultChecked
+                  color="primary"
+                  inputProps={{ 'aria-label': 'secondary checkbox' }}
+                />Remember me
               </Grid>
+              <Grid className="LoginForget">
+                <Link to="/dashboard">Forget Password</Link>
+              </Grid>
+            </Grid>
+            <Grid xs={12} container justify="center" className="mt26">
+              <Button className="LoginBtn" onClick={gotoDashBoard}>Login</Button>
+            </Grid>
+            <Grid xs={12} container justify="center" className="mt20">
+              {/* <Link to="/application" className="ApplicantBtn">Submit Application & Create Account</Link> */}
+              <a href="application" className="ApplicantBtn">Submit Application & Create Account</a>
+            </Grid>
           </Grid>
+        </Grid>
       </Grid>
     </Grid>
   );
