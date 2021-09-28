@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Grid,
   TextField,
@@ -6,10 +6,12 @@ import {
   Button,
   makeStyles,
   FormControl,
+  FormGroup,
   IconButton,
   Input,
   InputLabel,
-  InputAdornment
+  InputAdornment,
+  Snackbar,
 } from '@material-ui/core';
 
 // import FilledInput from '@material-ui/core/FilledInput';
@@ -52,19 +54,57 @@ const useStyles = makeStyles((theme) => ({
 
 const Login = () => {
 
-  const gotoDashBoard = () => {
-    window.location = '/dashboard';
-  };
+  const snackBarDefaultDuration = 2000;
 
+  const [isSnackBarOpen, triggerSnackBar] = useState(false);
+  const [snackBarMessage, setSnackBarMessage] = useState('');
 
   const classes = useStyles();
-  const [values, setValues] = React.useState({
+
+  const [values, setValues] = useState({
     amount: '',
     password: '',
     weight: '',
     weightRange: '',
     showPassword: false,
   });
+
+  /** Event listeners */
+  window.addEventListener('http-error-event', ($e) => {
+
+    const {
+      detail: { messageToShow }
+    } = $e;
+
+    setSnackBarMessage(messageToShow);
+
+    return triggerSnackBar(true);
+  });
+
+  const handleClose = (...args) => {
+    return triggerSnackBar(false);
+  }
+  /********************************************************************* */
+
+  const loginUser = async () => {
+    try {
+      const { password, email } = values;
+
+      const payload = { password, email };
+
+      const res = await api.post(
+        routes.employee.applicant_login,
+        payload
+      );
+
+      /** REPLACE - by router */
+      window.location = '/dashboard';
+
+    } catch (exc) {
+      console.log(exc);
+    }
+    // window.location = '/dashboard';
+  };
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
@@ -85,6 +125,7 @@ const Login = () => {
       <MobileScreen />
     )
   }
+
   return (
     <Grid container xs={12}>
       <Grid className="LoginImageBG">
@@ -99,9 +140,11 @@ const Login = () => {
         <Grid className="LoginForm">
           <Grid className="LoginTitle">Login</Grid>
           <Grid className="FormFields">
-            <TextField placeholder="Email / User ID" type="text" />
 
-            <FormControl className="LoginPwd">
+            <TextField placeholder="Email / User ID" type="text" onChange={handleChange('email')} />
+
+            <FormControl
+              className="LoginPwd">
               {/* <InputLabel htmlFor="standard-adornment-password">Password</InputLabel> */}
               <Input
                 placeholder="Password"
@@ -136,7 +179,14 @@ const Login = () => {
               </Grid>
             </Grid>
             <Grid xs={12} container justify="center" className="mt26">
-              <Button className="LoginBtn" onClick={gotoDashBoard}>Login</Button>
+              <Button className="LoginBtn" onClick={loginUser}>Login</Button>
+              <Snackbar
+                open={isSnackBarOpen}
+                autoHideDuration={snackBarDefaultDuration}
+                onClose={handleClose}
+                message={snackBarMessage}
+                action={'close'}
+              />
             </Grid>
             <Grid xs={12} container justify="center" className="mt20">
               {/* <Link to="/application" className="ApplicantBtn">Submit Application & Create Account</Link> */}
