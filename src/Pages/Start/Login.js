@@ -1,4 +1,12 @@
+/** Core Dependencies */
 import React, { useState } from 'react';
+
+import { Link } from "react-router-dom";
+
+import { isMobile } from 'react-device-detect';
+
+
+/** Third party dependencies */
 import {
   Grid,
   TextField,
@@ -14,6 +22,8 @@ import {
   Snackbar,
 } from '@material-ui/core';
 
+import CloseIcon from '@material-ui/icons/Close';
+
 // import FilledInput from '@material-ui/core/FilledInput';
 // import OutlinedInput from '@material-ui/core/OutlinedInput';
 // import InputLabel from '@material-ui/core/InputLabel';
@@ -22,18 +32,24 @@ import {
 // import FormControl from '@material-ui/core/FormControl';
 // import TextField from '@material-ui/core/TextField';
 import Visibility from '@material-ui/icons/Visibility';
+
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 
-import { Link } from "react-router-dom";
+/** Local Dependencies */
 import MobileScreen from '../Start/Mobile/Login';
-import { isMobile } from 'react-device-detect';
 
 
+/** Local Static Imports & Objects */
 import Services from '../../Services';
 
 
-const { api: { Interceptor: api, routes } } = Services;
+const {
+  api: {
+    Interceptor: api,
+    routes
+  }
+} = Services;
 
 
 const useStyles = makeStyles((theme) => ({
@@ -54,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Login = () => {
 
-  const snackBarDefaultDuration = 2000;
+  const snackBarDefaultDuration = 4000;
 
   const [isSnackBarOpen, triggerSnackBar] = useState(false);
   const [snackBarMessage, setSnackBarMessage] = useState('');
@@ -86,11 +102,29 @@ const Login = () => {
   }
   /********************************************************************* */
 
+  const snackBarAction = <React.Fragment>
+    <IconButton
+      size="small"
+      aria-label="close"
+      color="inherit"
+      onClick={handleClose}
+    >
+      <CloseIcon fontSize="small" />
+    </IconButton>
+  </React.Fragment>;
+
   const loginUser = async () => {
     try {
       const { password, email } = values;
 
       const payload = { password, email };
+
+      if (!password || !email) {
+        setSnackBarMessage('Please fill in credentials');
+
+        return triggerSnackBar(true);
+      }
+
 
       const res = await api.post(
         routes.employee.applicant_login,
@@ -185,7 +219,7 @@ const Login = () => {
                 autoHideDuration={snackBarDefaultDuration}
                 onClose={handleClose}
                 message={snackBarMessage}
-                action={'close'}
+                action={snackBarAction}
               />
             </Grid>
             <Grid xs={12} container justify="center" className="mt20">
