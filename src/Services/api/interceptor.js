@@ -1,6 +1,17 @@
+/** THIRD PARTY DEPENDENCIES */
 import axios from 'axios';
 
+/** LOCAL DEPENDENCIES */
+import { Imports } from '../../Imports';
+
 import { environment as env } from '../../Environments/environment';
+
+
+/** Extracting dependencies for use */
+const axiosInstance = axios.create();
+
+const { httpMessages } = Imports;
+
 
 const requestHandler = (request) => {
     const { url: apiToConsume } = request;
@@ -21,19 +32,37 @@ const responseHandler = (response) => {
 }
 
 const errorHandler = async (error) => {
-    throw new Error(error);
+    let {
+        response: {
+            data: { message },
+            data: detail
+        }
+    } = error;
+
+    const messageToShow = httpMessages[message];
+
+    detail = { ...detail, messageToShow };
+
+    const httpEvent = new CustomEvent(
+        'http-error-event',
+        { detail }
+    );
+
+    window.dispatchEvent(httpEvent);
+
+    throw error;
 }
 
-axios.interceptors.request
+axiosInstance.interceptors.request
     .use(
         requestHandler,
         errorHandler
     )
 
-axios.interceptors.response
+axiosInstance.interceptors.response
     .use(
         responseHandler,
         errorHandler
     );
 
-export const Interceptor = axios;
+export const Interceptor = axiosInstance;
