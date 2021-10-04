@@ -1,3 +1,6 @@
+/** Core Dependencies */
+import React, { useEffect, useState } from 'react';
+
 /** THIRD PARTY DEPENDENCIES */
 import axios from 'axios';
 
@@ -65,4 +68,4 @@ axiosInstance.interceptors.response
         errorHandler
     );
 
-export const Interceptor = axiosInstance;
+export const Interceptor = { axiosInstance };

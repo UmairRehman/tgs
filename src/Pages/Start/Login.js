@@ -1,5 +1,5 @@
 /** Core Dependencies */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Link } from "react-router-dom";
 
@@ -43,6 +43,8 @@ import MobileScreen from '../Start/Mobile/Login';
 /** Local Static Imports & Objects */
 import Services from '../../Services';
 
+import { Imports } from '../../Imports';
+
 
 const {
   api: {
@@ -50,6 +52,8 @@ const {
     routes
   }
 } = Services;
+
+console.log(Services);
 
 
 const useStyles = makeStyles((theme) => ({
@@ -74,6 +78,7 @@ const Login = () => {
 
   const [isSnackBarOpen, triggerSnackBar] = useState(false);
   const [snackBarMessage, setSnackBarMessage] = useState('');
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
 
   const classes = useStyles();
 
@@ -87,16 +92,19 @@ const Login = () => {
 
   /** Event listeners */
   window.addEventListener('http-error-event', ($e) => {
-
     const {
       detail: { messageToShow }
     } = $e;
 
-    setSnackBarMessage(messageToShow);
+    showSnackBar(messageToShow);
 
     return triggerSnackBar(true);
   });
 
+  /**
+   * @param  {...any} args - Arguments passed on snackbar close
+   * @returns {void}
+   */
   const handleClose = (...args) => {
     return triggerSnackBar(false);
   }
@@ -113,29 +121,72 @@ const Login = () => {
     </IconButton>
   </React.Fragment>;
 
+  /**
+   * Shows a snackbar / toast
+   * @param {string} message - String message to toast
+   * @returns {void}
+   */
+  const showSnackBar = (message) => {
+    setSnackBarMessage(message);
+
+    return triggerSnackBar(true);
+  }
+
+  /**
+   * @param {string} password - Password to validate 
+   * @returns {string|Error}
+   */
+  const validatePassword = async (password) => {
+    try {
+      return await Imports
+        .password
+        .validate(password);
+    } catch (exc) {
+      showSnackBar(exc.message);
+      throw exc;
+    }
+  }
+
   const loginUser = async () => {
     try {
+      setIsLoggingIn(true);
+
       const { password, email } = values;
 
       const payload = { password, email };
 
-      if (!password || !email) {
-        setSnackBarMessage('Please fill in credentials');
-
-        return triggerSnackBar(true);
+      if (!email) {
+        setIsLoggingIn(false);
+        return showSnackBar('Please enter email address');
       }
 
+      if (!password) {
+        setIsLoggingIn(false);
+        return showSnackBar('Please enter password');
+      }
+
+      const isValid = await validatePassword(password);
 
       const res = await api.post(
         routes.employee.applicant_login,
         payload
       );
 
+      window.removeEventListener('http-error-event', ($e) => { });
+
+      setIsLoggingIn(false);
+
       /** REPLACE - by router */
       window.location = '/dashboard';
 
+      return true;
+
     } catch (exc) {
+      setIsLoggingIn(false);
+
       console.log(exc);
+
+      return false;
     }
     // window.location = '/dashboard';
   };
@@ -213,7 +264,9 @@ const Login = () => {
               </Grid>
             </Grid>
             <Grid xs={12} container justify="center" className="mt26">
-              <Button className="LoginBtn" onClick={loginUser}>Login</Button>
+              <Button className="LoginBtn"
+                onClick={loginUser}
+                disabled={isLoggingIn}>Login</Button>
               <Snackbar
                 open={isSnackBarOpen}
                 autoHideDuration={snackBarDefaultDuration}
