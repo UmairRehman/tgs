@@ -50,11 +50,44 @@ const LeftControl = () => {
                       Create a ticket
                   </Link>
                 </ListItem>
-                <ListItem className="DepartmentIcon">
-                  <Link to="/department" className="Liq-NavLinks" className={pathname === '/department' ? 'NavSelected' : ''}>
+                <ListItem className={
+                  pathname === '/department' | 
+                  pathname === '/human-resources' | 
+                  pathname === '/operations' | 
+                  pathname === '/safety' | 
+                  pathname === '/information-technology' ?
+                  'DeptSelected DepartmentIcon' : 'DepartmentIcon'}>
+                  <Link to="/human-resources" className="Liq-NavLinks" className={
+                  pathname === '/department' | 
+                  pathname === '/human-resources' | 
+                  pathname === '/operations' | 
+                  pathname === '/safety' | 
+                  pathname === '/information-technology' ? 'NavSelected' : ''}>
                       <Icon/>
                       Department
                   </Link>
+                  <List component="nav" className="DeptFolder">
+                    <ListItem button>
+                      <Link to="/human-resources" className={pathname === '/human-resources' ? 'NavSubSelected' : ''}>
+                          Human Resources
+                      </Link>
+                    </ListItem>
+                    <ListItem button>
+                      <Link to="/operations" className={pathname === '/operations' ? 'NavSubSelected' : ''}>
+                      Operations
+                      </Link>
+                    </ListItem>
+                    <ListItem button>
+                      <Link to="/safety" className={pathname === '/safety' ? 'NavSubSelected' : ''}>
+                      Safety
+                      </Link>
+                    </ListItem>
+                    <ListItem button>
+                      <Link to="/information-technology" className={pathname === '/information-technology' ? 'NavSubSelected' : ''}>
+                      Information Technology
+                      </Link>
+                    </ListItem>
+                  </List>
                 </ListItem> */}
                 {/* Employee Nav End */}
 
@@ -108,11 +141,11 @@ const LeftControl = () => {
                 
                 {/* Admin Nav */}
                 {/* <ListItem button className="EmployeeIcon">
-                  <Link to="/employees-profile" className="Liq-NavLinks" className={pathname === '/employees-profile' ? 'NavSelected' : ''}>
-                      <Icon/>
-                      Employees Profile
-                  </Link>
-                </ListItem> */}
+                //   <Link to="/employees-profile" className="Liq-NavLinks" className={pathname === '/employees-profile' ? 'NavSelected' : ''}>
+                //       <Icon/>
+                //       Employees Profile
+                //   </Link>
+                // </ListItem> */}
                 {/* Admin Nav End */}
 
 

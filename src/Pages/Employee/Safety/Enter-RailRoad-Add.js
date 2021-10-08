@@ -90,28 +90,7 @@ const Railroad = () => {
                         Primary
                       </Grid>
                       <Grid xs={12} className="mt14">
-                        <Autocomplete
-                            multiple
-                            className="w100p"
-                            id="checkboxes-tags-demo"
-                            options={testingRules}
-                            disableCloseOnSelect
-                            getOptionLabel={(option) => option.title}
-                            renderOption={(option, { selected }) => (
-                              <React.Fragment>
-                                <Checkbox
-                                  icon={icon}
-                                  checkedIcon={checkedIcon}
-                                  style={{ marginRight: 8 }}
-                                  checked={selected}
-                                />
-                                {option.title}
-                              </React.Fragment>
-                            )}
-                            renderInput={(params) => (
-                              <TextField {...params} variant="outlined" placeholder="Primary" />
-                            )}
-                          />
+                        <TextField id="outlined-basic" label="Comment here" value="Angelina Jolie" disabled variant="outlined" className="w100p"/>
                       </Grid>
                     </Grid>
                   </Grid>
@@ -603,7 +582,7 @@ const Railroad = () => {
                 </Grid>
             </Grid>
             <Grid xs={12} container justify="flex-end" className="mt50">
-              <Link to="/safety-testing" className="LinkButtonBack mr10">Back</Link>
+              <Link to="/safety-testing" className="LinkButtonBack mr10">Close</Link>
               <Button className="LinkButton">Save</Button>
             </Grid>
           </Grid>
