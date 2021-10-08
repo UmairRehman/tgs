@@ -53,9 +53,6 @@ const {
   }
 } = Services;
 
-console.log(Services);
-
-
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -171,6 +168,8 @@ const Login = () => {
         routes.employee.applicant_login,
         payload
       );
+
+      localStorage.setItem('user_profile', JSON.stringify(res));
 
       window.removeEventListener('http-error-event', ($e) => { });
 

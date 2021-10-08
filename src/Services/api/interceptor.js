@@ -68,4 +68,46 @@ axiosInstance.interceptors.response
         errorHandler
     );
 
+/** Overwriting Post as a Repository for HTTP Interface */
+
+axiosInstance.postMethod = axiosInstance.post;
+axiosInstance.getMethod = axiosInstance.get;
+
+const HTTPClientFunctionsWrapper = async (method, ...args) => {
+    /** Not using a try-catch block deliberately to allow global handlers to manage
+     * it.
+     */
+    const [uri, ...rest] = args;
+    
+    const [payload] = rest;
+
+    const response = await axiosInstance[method](uri, payload);
+    
+    const { data: axiosObjectData } = response;
+    
+    const { data: endpointData } = axiosObjectData;
+    
+    localStorage.setItem(
+        `response-${uri}`,
+        JSON.stringify(endpointData)
+    );
+    
+    return endpointData;
+}
+
+const newPostMethod = HTTPClientFunctionsWrapper.bind(null, 'postMethod');
+const newGetMethod = HTTPClientFunctionsWrapper.bind(null, 'getMethod');
+
+Object.assign(
+    axiosInstance,
+    {
+        post: newPostMethod,
+        get: newGetMethod,
+    },
+)
+
+axiosInstance.post = newPostMethod;
+axiosInstance.post = newPostMethod;
+/** */
+
 export const Interceptor = { axiosInstance };
