@@ -270,6 +270,10 @@
 .LiqForms-Container .pageBreak {
     border-top: dotted 1px white;
 }
+.LiqForms-Container .pageBreak a {
+    text-decoration: none;
+    color: black;
+}
 .LiqForms-Container .Acknowledge {
     background: #2963AD;
     color: white;

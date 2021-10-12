@@ -50,7 +50,7 @@ const Safety = () => {
                 <Grid xs={6} className="mbold">
                 Safety
                 </Grid>
-                <Grid xs={6} container justify="flex-end">
+                {/* <Grid xs={6} container justify="flex-end">
                   <Button aria-controls="ContactSubMenu" className="MoreLinkIcon" aria-haspopup="true" onClick={handleClick}>
                   </Button>
                   <Menu
@@ -73,7 +73,7 @@ const Safety = () => {
                       <Link to="/information-technology">Information Technology</Link>
                     </MenuItem>
                   </Menu>
-                </Grid>
+                </Grid> */}
               </Grid>
               <Grid xs={12} className="mt14 ContactTable">
               <Paper>

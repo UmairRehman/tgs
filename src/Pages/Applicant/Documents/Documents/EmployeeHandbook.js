@@ -79,7 +79,7 @@ const EmployeeHandbook = () => {
                   WELCOME'NEW'EMPLOYEE<span></span>
                   </TableCell>
                   <TableCell className="w4">
-                  v
+                  <a href="#v">v</a>
                   </TableCell>
                 </TableRow> 
                 {/* -*- */}
@@ -88,7 +88,7 @@ const EmployeeHandbook = () => {
                   INTRODUCTORY STATEMENT<span></span>
                   </TableCell>
                   <TableCell className="w4">
-                  vi
+                  <a href="#vi">vi</a>
                   </TableCell>
                 </TableRow> 
                 {/* -*- */}
@@ -97,7 +97,7 @@ const EmployeeHandbook = () => {
                   CUSTOMER RELATIONS<span></span>
                   </TableCell>
                   <TableCell className="w4">
-                  vii
+                  <a href="#vii">vii</a>
                   </TableCell>
                 </TableRow> 
                 {/* -*- */}
@@ -106,7 +106,7 @@ const EmployeeHandbook = () => {
                   ENVIRONMENT, HEALTH AND SAFETY POLICY STATEMENT<span></span>
                   </TableCell>
                   <TableCell className="w4">
-                  viii
+                  <a href="#viii">viii</a>
                   </TableCell>
                 </TableRow> 
                 {/* -*- */}
@@ -115,7 +115,7 @@ const EmployeeHandbook = () => {
                   EMPLOYEE ACKNOWLEDGEMENT FORM<span></span>
                   </TableCell>
                   <TableCell className="w4">
-                  ix
+                  <a href="#ix">ix</a>
                   </TableCell>
                 </TableRow> 
                 {/* -*- */}
@@ -124,7 +124,7 @@ const EmployeeHandbook = () => {
                   CONFIDENTIALITY AGREEMENT<span></span>
                   </TableCell>
                   <TableCell className="w4">
-                  x
+                  <a href="#x">x</a>
                   </TableCell>
                 </TableRow> 
                 {/* -*- */}
@@ -133,7 +133,7 @@ const EmployeeHandbook = () => {
                   101 Nature of Employment<span></span>
                   </TableCell>
                   <TableCell className="w4">
-                  1
+                  <a href="#1">1</a>
                   </TableCell>
                 </TableRow> 
                 {/* -*- */}
@@ -142,7 +142,7 @@ const EmployeeHandbook = () => {
                   102 Employee Relations<span></span>
                   </TableCell>
                   <TableCell className="w4">
-                  1
+                  <a href="#1">1</a>
                   </TableCell>
                 </TableRow> 
                 {/* -*- */}
@@ -151,7 +151,7 @@ const EmployeeHandbook = () => {
                   103 Equal Employment Opportunity<span></span>
                   </TableCell>
                   <TableCell className="w4">
-                  2
+                  <a href="#2">2</a>
                   </TableCell>
                 </TableRow> 
                 {/* -*- */}
@@ -160,7 +160,7 @@ const EmployeeHandbook = () => {
                   104 Business Ethics and Conduct<span></span>
                   </TableCell>
                   <TableCell className="w4">
-                  2
+                  <a href="#2">2</a>
                   </TableCell>
                 </TableRow> 
                 {/* -*- */}
@@ -169,7 +169,7 @@ const EmployeeHandbook = () => {
                   105 Personal Relationships in the Workplace<span></span>
                   </TableCell>
                   <TableCell className="w4">
-                  3
+                  <a href="#3">3</a>
                   </TableCell>
                 </TableRow> 
                 {/* -*- */}
@@ -178,7 +178,7 @@ const EmployeeHandbook = () => {
                   106 Employee Medical Examinations<span></span>
                   </TableCell>
                   <TableCell className="w4">
-                  3
+                  <a href="#3">3</a>
                   </TableCell>
                 </TableRow> 
                 {/* -*- */}
@@ -187,7 +187,7 @@ const EmployeeHandbook = () => {
                   107 Immigration Law Compliance<span></span>
                   </TableCell>
                   <TableCell className="w4">
-                  4
+                  <a href="#4">4</a>
                   </TableCell>
                 </TableRow> 
                 {/* -*- */}
@@ -196,7 +196,7 @@ const EmployeeHandbook = () => {
                   108 Conflicts of Interest and Outside Employment<span></span>
                   </TableCell>
                   <TableCell className="w4">
-                  4
+                  <a href="#4">4</a>
                   </TableCell>
                 </TableRow> 
                 {/* -*- */}
@@ -205,7 +205,7 @@ const EmployeeHandbook = () => {
                   110 Outside Employment<span></span>
                   </TableCell>
                   <TableCell className="w4">
-                  6
+                  <a href="#6">6</a>
                   </TableCell>
                 </TableRow> 
                 {/* -*- */}
@@ -214,7 +214,7 @@ const EmployeeHandbook = () => {
                   112 NonZDisclosure<span></span>
                   </TableCell>
                   <TableCell className="w4">
-                  6
+                  <a href="#6">6</a>
                   </TableCell>
                 </TableRow> 
                 {/* -*- */}
@@ -223,7 +223,7 @@ const EmployeeHandbook = () => {
                   114 Disability Accommodation<span></span>
                   </TableCell>
                   <TableCell className="w4">
-                  7
+                  <a href="#7">7</a>
                   </TableCell>
                 </TableRow> 
                 {/* -*- */}
@@ -232,7 +232,7 @@ const EmployeeHandbook = () => {
                   201 Employment Categories<span></span>
                   </TableCell>
                   <TableCell className="w4">
-                  7
+                  <a href="#7">7</a>
                   </TableCell>
                 </TableRow> 
                 {/* -*- */}
@@ -241,7 +241,7 @@ const EmployeeHandbook = () => {
                   202 Access to Personnel Files'<span></span>
                   </TableCell>
                   <TableCell className="w4">
-                  8
+                  <a href="#8">8</a>
                   </TableCell>
                 </TableRow> 
                 {/* -*- */}
@@ -250,7 +250,7 @@ const EmployeeHandbook = () => {
                   203 Employment Reference Checks<span></span>
                   </TableCell>
                   <TableCell className="w4">
-                  9
+                  <a href="#9">9</a>
                   </TableCell>
                 </TableRow> 
                 {/* -*- */}
@@ -259,7 +259,7 @@ const EmployeeHandbook = () => {
                   204 Personnel Data Changes<span></span>
                   </TableCell>
                   <TableCell className="w4">
-                  9
+                  <a href="#9">9</a>
                   </TableCell>
                 </TableRow> 
                 {/* -*- */}
@@ -268,7 +268,7 @@ const EmployeeHandbook = () => {
                   205 Introductory Period<span></span>
                   </TableCell>
                   <TableCell className="w4">
-                  9
+                  <a href="#9">9</a>
                   </TableCell>
                 </TableRow> 
                 {/* -*- */}
@@ -277,7 +277,7 @@ const EmployeeHandbook = () => {
                   208 Employment Applications'<span></span>
                   </TableCell>
                   <TableCell className="w4">
-                  10
+                  <a href="#10">10</a>
                   </TableCell>
                 </TableRow> 
                 {/* -*- */}
@@ -286,7 +286,7 @@ const EmployeeHandbook = () => {
                   209 Performance Evaluation<span></span>
                   </TableCell>
                   <TableCell className="w4">
-                  10
+                  <a href="#10">10</a>
                   </TableCell>
                 </TableRow> 
                 {/* -*- */}
@@ -295,7 +295,7 @@ const EmployeeHandbook = () => {
                   212 Salary Administration<span></span>
                   </TableCell>
                   <TableCell className="w4">
-                  10
+                  <a href="#10">10</a>
                   </TableCell>
                 </TableRow>  
                 {/* -*- */}
@@ -304,7 +304,7 @@ const EmployeeHandbook = () => {
                   301 Employee Benefits<span></span>
                   </TableCell>
                   <TableCell className="w4">
-                  11
+                  <a href="#11">11</a>
                   </TableCell>
                 </TableRow>  
                 {/* -*- */}
@@ -313,7 +313,7 @@ const EmployeeHandbook = () => {
                   303 Vacation Benefits<span></span>
                   </TableCell>
                   <TableCell className="w4">
-                  12
+                  <a href="#12">12</a>
                   </TableCell>
                 </TableRow>  
                 {/* -*- */}
@@ -322,7 +322,7 @@ const EmployeeHandbook = () => {
                   305 Holidays<span></span>
                   </TableCell>
                   <TableCell className="w4">
-                  13
+                  <a href="#13">13</a>
                   </TableCell>
                 </TableRow>      
               </Table>
@@ -353,7 +353,7 @@ const EmployeeHandbook = () => {
                     306 Workers' Compensation Insurance<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    13
+                  <a href="#13">13</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -362,7 +362,7 @@ const EmployeeHandbook = () => {
                     307 Sick Leave Benefits<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    14
+                    <a href="#14">14</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -371,7 +371,7 @@ const EmployeeHandbook = () => {
                     308 Time Off to Vote<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    15
+                    <a href="#15">15</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -380,7 +380,7 @@ const EmployeeHandbook = () => {
                     309 Bereavement Leave<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    15
+                    <a href="#15">15</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -389,7 +389,7 @@ const EmployeeHandbook = () => {
                     311 Jury Duty<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    16
+                    <a href="#16">16</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -398,7 +398,7 @@ const EmployeeHandbook = () => {
                     312 Witness Duty<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    17
+                    <a href="#17">17</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -407,7 +407,7 @@ const EmployeeHandbook = () => {
                     313 Health Insurance<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    17
+                    <a href="#17">17</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -416,7 +416,7 @@ const EmployeeHandbook = () => {
                     316 Benefits Continuation (COBRA)<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    18
+                    <a href="#18">18</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -425,7 +425,7 @@ const EmployeeHandbook = () => {
                     317 Life Insurance<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    18
+                    <a href="#18">18</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -434,7 +434,7 @@ const EmployeeHandbook = () => {
                     320 401(k) Savings Plan<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    19
+                    <a href="#19">19</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -443,7 +443,7 @@ const EmployeeHandbook = () => {
                     401 Timekeeping<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    19
+                    <a href="#19">19</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -452,7 +452,7 @@ const EmployeeHandbook = () => {
                     403 Paydays<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    20
+                    <a href="#20">20</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -461,7 +461,7 @@ const EmployeeHandbook = () => {
                     405 Employment Termination<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    20
+                    <a href="#20">20</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -470,7 +470,7 @@ const EmployeeHandbook = () => {
                     409 Administrative Pay Corrections<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    21
+                    <a href="#21">21</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -479,7 +479,7 @@ const EmployeeHandbook = () => {
                     410 Pay Deductions<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    21
+                    <a href="#21">21</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -488,7 +488,7 @@ const EmployeeHandbook = () => {
                     501 Safety<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    21
+                    <a href="#21">21</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -497,7 +497,7 @@ const EmployeeHandbook = () => {
                     502 Work Schedules<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    22
+                    <a href="#22">22</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -506,7 +506,7 @@ const EmployeeHandbook = () => {
                     504 Use of Phone and Mail Systems<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    22
+                    <a href="#22">22</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -515,7 +515,7 @@ const EmployeeHandbook = () => {
                     505 Smoking<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    23
+                    <a href="#23">23</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -524,7 +524,7 @@ const EmployeeHandbook = () => {
                     506 Rest and Meal Periods<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    23
+                    <a href="#23">23</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -533,7 +533,7 @@ const EmployeeHandbook = () => {
                     507 Overtime<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    23
+                    <a href="#23">23</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -542,7 +542,7 @@ const EmployeeHandbook = () => {
                     508 Use of Equipment and Computer Systems<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    24
+                    <a href="#24">24</a>
                     </TableCell>
                   </TableRow>
                   <TableRow className="w100 row font12 pl30 pr30">
@@ -550,7 +550,7 @@ const EmployeeHandbook = () => {
                     Use of the Company Computer System<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    24
+                    <a href="#24">24</a>
                     </TableCell>
                   </TableRow>
                   <TableRow className="w100 row font12 pl30 pr30">
@@ -558,7 +558,7 @@ const EmployeeHandbook = () => {
                     Use of Company Vehicles and Equipment<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    24
+                    <a href="#24">24</a>
                     </TableCell>
                   </TableRow>
                   <TableRow className="w100 row font12 pl30 pr30">
@@ -566,7 +566,7 @@ const EmployeeHandbook = () => {
                     Telephone Use<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    25
+                    <a href="#25">25</a>
                     </TableCell>
                   </TableRow>
                   <TableRow className="w100 row font12 pl30 pr30">
@@ -574,7 +574,7 @@ const EmployeeHandbook = () => {
                     Consent to Search<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    25
+                    <a href="#25">25</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -583,7 +583,7 @@ const EmployeeHandbook = () => {
                     510 Emergency Closings<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    25
+                    <a href="#25">25</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -592,7 +592,7 @@ const EmployeeHandbook = () => {
                     512 Business Travel Expenses<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    25
+                    <a href="#25">25</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -601,7 +601,7 @@ const EmployeeHandbook = () => {
                     514 Visitors in the Workplace<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    26
+                    <a href="#26">26</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -610,7 +610,7 @@ const EmployeeHandbook = () => {
                     516 Computer and EZmail Usage<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    26
+                    <a href="#26">26</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -619,7 +619,7 @@ const EmployeeHandbook = () => {
                     517 Internet Usage<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    27
+                    <a href="#27">27</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -628,7 +628,7 @@ const EmployeeHandbook = () => {
                     518 Workplace Monitoring<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    29
+                    <a href="#29">29</a>
                     </TableCell>
                   </TableRow>     
                 </Table>
@@ -659,7 +659,7 @@ const EmployeeHandbook = () => {
                     522 Workplace Violence Prevention<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    29
+                    <a href="#29">29</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -668,7 +668,7 @@ const EmployeeHandbook = () => {
                     526 Cellular Phone and Handheld Radio Usage<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    30
+                    <a href="#30">30</a>
                     </TableCell>
                   </TableRow> 
                   {/* -*- */}
@@ -677,7 +677,7 @@ const EmployeeHandbook = () => {
                     602 Family and Medical Leave<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    31
+                    <a href="#31">31</a>
                     </TableCell>
                   </TableRow>
                   {/* ++++ */}
@@ -686,7 +686,7 @@ const EmployeeHandbook = () => {
                     Employee Eligibility Criteria<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    31
+                    <a href="#31">31</a>
                     </TableCell>
                   </TableRow>
                   {/* ++++ */}
@@ -695,7 +695,7 @@ const EmployeeHandbook = () => {
                     Events, Which May Entitle An Employee to FMLA Leave<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    31
+                    <a href="#31">31</a>
                     </TableCell>
                   </TableRow>
                   {/* ++++ */}
@@ -704,7 +704,7 @@ const EmployeeHandbook = () => {
                     The 12ZMonth Period<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    31
+                    <a href="#31">31</a>
                     </TableCell>
                   </TableRow>
                   {/* ++++ */}
@@ -713,7 +713,7 @@ const EmployeeHandbook = () => {
                     Limitations on FMLA Leave<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    32
+                    <a href="#32">32</a>
                     </TableCell>
                   </TableRow>
                   {/* ++++ */}
@@ -722,7 +722,7 @@ const EmployeeHandbook = () => {
                     Intermittent Or Reduced Work Schedule Leave<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    32
+                    <a href="#32">32</a>
                     </TableCell>
                   </TableRow>
                   {/* ++++ */}
@@ -731,7 +731,7 @@ const EmployeeHandbook = () => {
                     Requests for FMLA Leave<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    32
+                    <a href="#32">32</a>
                     </TableCell>
                   </TableRow>
                   {/* ++++ */}
@@ -740,7 +740,7 @@ const EmployeeHandbook = () => {
                     Required Documentation<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    33
+                    <a href="#33">33</a>
                     </TableCell>
                   </TableRow>
                   {/* ++++ */}
@@ -749,7 +749,7 @@ const EmployeeHandbook = () => {
                     Use of Paid and Unpaid Leave<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    33
+                    <a href="#33">33</a>
                     </TableCell>
                   </TableRow>
                   {/* ++++ */}
@@ -758,7 +758,7 @@ const EmployeeHandbook = () => {
                     Designation of Leave<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    34
+                    <a href="#34">34</a>
                     </TableCell>
                   </TableRow>
                   {/* ++++ */}
@@ -767,7 +767,7 @@ const EmployeeHandbook = () => {
                     Maintenance of Health Benefits<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    34
+                    <a href="#34">34</a>
                     </TableCell>
                   </TableRow>
                   {/* ++++ */}
@@ -776,7 +776,7 @@ const EmployeeHandbook = () => {
                     Return from FMLA Leave<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    34
+                    <a href="#34"></a>
                     </TableCell>
                   </TableRow>
                   {/* ++++ */}
@@ -785,7 +785,7 @@ const EmployeeHandbook = () => {
                     Limitations on Reinstatement<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    34
+                    <a href="#34">34</a>
                     </TableCell>
                   </TableRow>
                   {/* ++++ */}
@@ -794,7 +794,7 @@ const EmployeeHandbook = () => {
                     Failure To Return To Work Following FMLA Leave<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    35
+                    <a href="#35">35</a>
                     </TableCell>
                   </TableRow>
                   {/* ++++ */}
@@ -803,7 +803,7 @@ const EmployeeHandbook = () => {
                     Additional Information<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    35
+                    <a href="#35">35</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -812,7 +812,7 @@ const EmployeeHandbook = () => {
                     603 Personal Leave<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    35
+                    <a href="#35">35</a>
                     </TableCell>
                   </TableRow>
                   {/* ++++ */}
@@ -821,7 +821,7 @@ const EmployeeHandbook = () => {
                     Continuing Benefit Plan Coverage<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    35
+                    <a href="#35">35</a>
                     </TableCell>
                   </TableRow>
                   {/* ++++ */}
@@ -830,7 +830,7 @@ const EmployeeHandbook = () => {
                     Salary Action<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    35
+                    <a href="#35">35</a>
                     </TableCell>
                   </TableRow>
                   {/* ++++ */}
@@ -839,7 +839,7 @@ const EmployeeHandbook = () => {
                     Vacation and Personal Time<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    35
+                    <a href="#35">35</a>
                     </TableCell>
                   </TableRow>
                   {/* ++++ */}
@@ -848,7 +848,7 @@ const EmployeeHandbook = () => {
                     Performance Appraisal<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    36
+                    <a href="#36">36</a>
                     </TableCell>
                   </TableRow>
                   {/* ++++ */}
@@ -857,7 +857,7 @@ const EmployeeHandbook = () => {
                     Returning/Not Returning From a Leave<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    36
+                    <a href="#36">36</a>
                     </TableCell>
                   </TableRow> 
                   {/* -*- */}
@@ -866,7 +866,7 @@ const EmployeeHandbook = () => {
                     605 Military Leave<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    36
+                    <a href="#36">36</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -875,7 +875,7 @@ const EmployeeHandbook = () => {
                     680 Return To Work Program<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    37
+                    <a href="#37">37</a>
                     </TableCell>
                   </TableRow> 
                   {/* -*- */}
@@ -884,7 +884,7 @@ const EmployeeHandbook = () => {
                     701 Employee Conduct and Work Rules<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    39
+                    <a href="#39">39</a>
                     </TableCell>
                   </TableRow> 
                   {/* -*- */}
@@ -893,7 +893,7 @@ const EmployeeHandbook = () => {
                     702 Drug, Alcohol And Weapons Policy<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    41
+                    <a href="#41">41</a>
                     </TableCell>
                   </TableRow> 
                   {/* -*- */}
@@ -902,7 +902,7 @@ const EmployeeHandbook = () => {
                     OBJECTIVE<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    41
+                    <a href="#41">41</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -911,7 +911,7 @@ const EmployeeHandbook = () => {
                     DEFINITIONS<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    42
+                    <a href="#42">42</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -920,7 +920,7 @@ const EmployeeHandbook = () => {
                     Procedures<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    43
+                    <a href="#43">43</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -929,7 +929,7 @@ const EmployeeHandbook = () => {
                     Drug Abuse Program<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    43
+                    <a href="#43">43</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -938,7 +938,7 @@ const EmployeeHandbook = () => {
                     PreZemployment Testing<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    44
+                    <a href="#44">44</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -947,7 +947,7 @@ const EmployeeHandbook = () => {
                     For Cause Testing, Random and Annual Testing<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    44
+                    <a href="#44">44</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -956,7 +956,7 @@ const EmployeeHandbook = () => {
                     Rehabilitation Amnesty<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    45
+                    <a href="#45">45</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -965,7 +965,7 @@ const EmployeeHandbook = () => {
                     Refusal to Test<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    45
+                    <a href="#45">45</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -974,7 +974,7 @@ const EmployeeHandbook = () => {
                     Rehire<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    46
+                    <a href="#46">46</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -983,7 +983,7 @@ const EmployeeHandbook = () => {
                     Employee Assistance Program (EAP)<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    46
+                    <a href="#46">46</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -992,7 +992,7 @@ const EmployeeHandbook = () => {
                     Contract/Temporary and Subcontract Personnel<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    46
+                    <a href="#46">46</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -1001,7 +1001,7 @@ const EmployeeHandbook = () => {
                     Searches<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    46
+                    <a href="#46">46</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -1010,7 +1010,7 @@ const EmployeeHandbook = () => {
                     Acknowledgment<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    47
+                    <a href="#47">47</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -1019,7 +1019,7 @@ const EmployeeHandbook = () => {
                     Compliance with Local Law<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    47
+                    <a href="#47">47</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -1028,7 +1028,7 @@ const EmployeeHandbook = () => {
                     Right to Amend<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    47
+                    <a href="#47">47</a>
                     </TableCell>
                   </TableRow>
                 </Table>
@@ -1059,7 +1059,7 @@ const EmployeeHandbook = () => {
                     703 Sexual and Other Unlawful Harassment<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    47
+                    <a href="#47">47</a>
                     </TableCell>
                   </TableRow>
                   <TableRow className="w100 row font12 pl30 pr30">
@@ -1067,7 +1067,7 @@ const EmployeeHandbook = () => {
                     Zero Tolerance for Harassment, Discrimination, and Retaliation.<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    47
+                    <a href="#47">47</a>
                     </TableCell>
                   </TableRow>
                   <TableRow className="w100 row font12 pl30 pr30">
@@ -1075,7 +1075,7 @@ const EmployeeHandbook = () => {
                     Definition of Unlawful Harassment<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    48
+                    <a href="#48">48</a>
                     </TableCell>
                   </TableRow>
                   <TableRow className="w100 row font12 pl30 pr30">
@@ -1083,7 +1083,7 @@ const EmployeeHandbook = () => {
                     Conduct Covered By this Policy<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    48
+                    <a href="#48">48</a>
                     </TableCell>
                   </TableRow>
                   <TableRow className="w100 row font12 pl30 pr30">
@@ -1091,7 +1091,7 @@ const EmployeeHandbook = () => {
                     Responsibilities<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    48
+                    <a href="#48">48</a>
                     </TableCell>
                   </TableRow>
                   <TableRow className="w100 row font12 pl30 pr30">
@@ -1099,7 +1099,7 @@ const EmployeeHandbook = () => {
                     Procedures<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    49
+                    <a href="#49">49</a>
                     </TableCell>
                   </TableRow>
                   <TableRow className="w100 row font12 pl30 pr30 ml24">
@@ -1107,7 +1107,7 @@ const EmployeeHandbook = () => {
                     Reporting Hostile or Abusive Conduct.<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    49
+                    <a href="#49">49</a>
                     </TableCell>
                   </TableRow>
                   <TableRow className="w100 row font12 pl30 pr30">
@@ -1115,7 +1115,7 @@ const EmployeeHandbook = () => {
                     Management Response to Harassment Reports<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    49
+                    <a href="#49">49</a>
                     </TableCell>
                   </TableRow>
                   <TableRow className="w100 row font12 pl30 pr30">
@@ -1123,7 +1123,7 @@ const EmployeeHandbook = () => {
                     Performing Further Investigation.<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    50
+                    <a href="#50">50</a>
                     </TableCell>
                   </TableRow>
                   <TableRow className="w100 row font12 pl30 pr30">
@@ -1131,7 +1131,7 @@ const EmployeeHandbook = () => {
                     Resolving Conflicts of Interest in Inquiries or Investigations<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    50
+                    <a href="#50">50</a>
                     </TableCell>
                   </TableRow>
                   <TableRow className="w100 row font12 pl30 pr30">
@@ -1139,7 +1139,7 @@ const EmployeeHandbook = () => {
                     Maintaining Confidentiality, Keeping Records, and Monitoring Compliance<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    51
+                    <a href="#51">51</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -1148,7 +1148,7 @@ const EmployeeHandbook = () => {
                     704 Attendance and Punctuality<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    52
+                    <a href="#52">52</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -1157,7 +1157,7 @@ const EmployeeHandbook = () => {
                     705 Personal Appearance<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    52
+                    <a href="#52">52</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -1166,7 +1166,7 @@ const EmployeeHandbook = () => {
                     706 Return of Property<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    53
+                    <a href="#53">53</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -1175,7 +1175,7 @@ const EmployeeHandbook = () => {
                     710 Security Inspections<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    53
+                    <a href="#53">53</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -1184,7 +1184,7 @@ const EmployeeHandbook = () => {
                     712 Solicitation<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    53
+                    <a href="#53">53</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -1193,7 +1193,7 @@ const EmployeeHandbook = () => {
                     716 Progressive Discipline<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    54
+                    <a href="#54">54</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -1202,7 +1202,7 @@ const EmployeeHandbook = () => {
                     718 Problem Resolution<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    55
+                    <a href="#55">55</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -1211,7 +1211,7 @@ const EmployeeHandbook = () => {
                     719 Employment Dispute Arbitration<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    56
+                    <a href="#56">56</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -1220,7 +1220,7 @@ const EmployeeHandbook = () => {
                     722 Workplace Etiquette<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    56
+                    <a href="#56">56</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -1229,7 +1229,7 @@ const EmployeeHandbook = () => {
                     780 OpenZdoor Policy<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    57
+                    <a href="#57">57</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -1238,7 +1238,7 @@ const EmployeeHandbook = () => {
                     800 LifeZThreatening Illnesses in the Workplace<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    57
+                    <a href="#57">57</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -1247,7 +1247,7 @@ const EmployeeHandbook = () => {
                     880 Asset Protection Help Line<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                    58
+                    <a href="#58">58</a>
                     </TableCell>
                   </TableRow>
                 </Table>
@@ -1259,7 +1259,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
 {/* ----------- Page 6 WELCOME NEW EMPLOYEE (v) ----------- */}
-      <Grid xs={12} className="pageBreak">
+      <Grid xs={12} className="pageBreak" id="v">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -1313,7 +1313,7 @@ Chairman & Chief Executive Officer
       </Grid>
 
 {/* ----------- Page 7 INTRODUCTORY STATEMENT (vi) ----------- */}
-      <Grid xs={12} className="pageBreak">
+      <Grid xs={12} className="pageBreak" id="vi">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -1378,7 +1378,7 @@ controlling.
       </Grid>
 
 {/* ----------- Page 8 CUSTOMER RELATIONS (vii) ----------- */}
-      <Grid xs={12} className="pageBreak">
+      <Grid xs={12} className="pageBreak" id="vii">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -1425,7 +1425,7 @@ sales and profit.
       </Grid>
 
 {/* ----------- Page 9 ENVIRONMENT, HEALTH AND SAFETY POLICY STATEMENT (viii) ----------- */}
-      <Grid xs={12} className="pageBreak">
+      <Grid xs={12} className="pageBreak" id="viii">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -1495,7 +1495,7 @@ Chairman & Chief Executive Officer
       </Grid>
 
 {/* ----------- Page 10 101 Nature of Employment (1) ----------- */}
-      <Grid xs={12} className="pageBreak">
+      <Grid xs={12} className="pageBreak" id="1">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -1575,7 +1575,7 @@ organization, within applicable legal limits, and protect the right of employees
       </Grid>
 
 {/* ----------- Page 11 103 Equal Employment Opportunity (2) ----------- */}
-      <Grid xs={12} className="pageBreak">
+      <Grid xs={12} className="pageBreak" id="2">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -1668,7 +1668,7 @@ Solutions, Inc. employee. Disregarding or failing to comply with this standard o
       </Grid>
 
 {/* ----------- Page 12 105 Personal Relationships in the Workplace (3) ----------- */}
-      <Grid xs={12} className="pageBreak">
+      <Grid xs={12} className="pageBreak" id="3">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -1764,7 +1764,7 @@ Inc.'s expense by a health professional of Trans-Global Solutions, Inc.'s choice
       </Grid>
 
 {/* ----------- Page 13 107 Immigration Law Compliance (4) ----------- */}
-      <Grid xs={12} className="pageBreak">
+      <Grid xs={12} className="pageBreak" id="4">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -1861,7 +1861,7 @@ employees from any conflict of interest that might arise.
       </Grid>
 
 {/* ----------- Page 14  (5) ----------- */}
-      <Grid xs={12} className="pageBreak">
+      <Grid xs={12} className="pageBreak" id="5">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -1928,7 +1928,7 @@ duties or will not damage the Company’s relationship.
       </Grid>
 
 {/* ----------- Page 15 110 Outside Employment (6) ----------- */}
-      <Grid xs={12} className="pageBreak">
+      <Grid xs={12} className="pageBreak" id="6">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -2022,7 +2022,7 @@ they do not actually benefit from the disclosed information.
       </Grid>
 
 {/* ----------- Page 16 114 Disability Accommodation (7) ----------- */}
-      <Grid xs={12} className="pageBreak">
+      <Grid xs={12} className="pageBreak" id="7">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -2113,7 +2113,7 @@ Each employee is designated as either NONEXEMPT or EXEMPT from federal and state
       </Grid>
 
 {/* ----------- Page 17 202 Access to Personnel Files (8) ----------- */}
-      <Grid xs={12} className="pageBreak">
+      <Grid xs={12} className="pageBreak" id="8">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -2199,7 +2199,7 @@ the files.
       </Grid>
 
 {/* ----------- Page 18 203 Employment Reference Checks (9) ----------- */}
-      <Grid xs={12} className="pageBreak">
+      <Grid xs={12} className="pageBreak" id="9">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -2302,7 +2302,7 @@ Additionally, the introductory employment period gives the employee's supervisor
       </Grid>
 
 {/* ----------- Page 19 208 Employment Applications (10) ----------- */}
-      <Grid xs={12} className="pageBreak">
+      <Grid xs={12} className="pageBreak" id="10">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -2409,7 +2409,7 @@ equitable wages that reflect the requirements and responsibilities of their posi
       </Grid>
 
 {/* ----------- Page 20 301 Employee Benefits (11) ----------- */}
-      <Grid xs={12} className="pageBreak">
+      <Grid xs={12} className="pageBreak" id="11">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -2499,7 +2499,7 @@ Solutions, Inc.
       </Grid>
 
 {/* ----------- Page 21 303 Vacation Benefits (12) ----------- */}
-      <Grid xs={12} className="pageBreak">
+      <Grid xs={12} className="pageBreak" id="12">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -2593,7 +2593,7 @@ Any employee seeking to have time away from work for any reason must complete a 
       </Grid>
 
 {/* ----------- Page 22 305 Holidays (13) ----------- */}
-      <Grid xs={12} className="pageBreak">
+      <Grid xs={12} className="pageBreak" id="13">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -2699,7 +2699,7 @@ Paid time off for holidays will not be counted as hours worked for the purposes 
       </Grid>
 
 {/* ----------- Page 23 307 Sick Leave Benefits (14) ----------- */}
-      <Grid xs={12} className="pageBreak">
+      <Grid xs={12} className="pageBreak" id="14">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -2789,7 +2789,7 @@ should contact the supervisor or Human Resources. The supervisor or Human Resour
       </Grid>
 
 {/* ----------- Page 24 307 Sick Leave Benefits (15) ----------- */}
-      <Grid xs={12} className="pageBreak">
+      <Grid xs={12} className="pageBreak" id="15">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -2883,7 +2883,7 @@ absence.
       </Grid>
 
 {/* ----------- Page 25 311 Jury Duty (16) ----------- */}
-      <Grid xs={12} className="pageBreak">
+      <Grid xs={12} className="pageBreak" id="16">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -2980,7 +2980,7 @@ Any circumstance beyond the control of the employee where an Absence Request cou
       </Grid>
 
 {/* ----------- Page 26 312 Witness Duty (17) ----------- */}
-      <Grid xs={12} className="pageBreak">
+      <Grid xs={12} className="pageBreak" id="17">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -3077,7 +3077,7 @@ to participate in the health insurance plan:
       </Grid>
 
 {/* ----------- Page 27 316 Benefits Continuation (COBRA) (18) ----------- */}
-      <Grid xs={12} className="pageBreak">
+      <Grid xs={12} className="pageBreak" id="18">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -3178,7 +3178,7 @@ plan:
       </Grid>
 
 {/* ----------- Page 28 320 401(k) Savings Plan (19) ----------- */}
-      <Grid xs={12} className="pageBreak">
+      <Grid xs={12} className="pageBreak" id="19">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -3274,7 +3274,7 @@ may result in disciplinary action, up to and including termination of employment
       </Grid>
 
 {/* ----------- Page 29 403 Paydays (20) ----------- */}
-      <Grid xs={12} className="pageBreak">
+      <Grid xs={12} className="pageBreak" id="20">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -3349,7 +3349,7 @@ may result in disciplinary action, up to and including termination of employment
       </Grid>
 
 {/* ----------- Page 30 409 Administrative Pay Corrections (21) ----------- */}
-      <Grid xs={12} className="pageBreak">
+      <Grid xs={12} className="pageBreak" id="21">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -3426,7 +3426,7 @@ for Trans-Global Solutions, Inc. The Safety Manager has responsibility for imple
       </Grid>
 
 {/* ----------- Page 31 502 Work Schedules (22) ----------- */}
-      <Grid xs={12} className="pageBreak">
+      <Grid xs={12} className="pageBreak" id="22">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -3505,7 +3505,7 @@ speak in a courteous and professional manner. Please confirm information receive
       </Grid>
 
 {/* ----------- Page 32 505 Smoking (23) ----------- */}
-      <Grid xs={12} className="pageBreak">
+      <Grid xs={12} className="pageBreak" id="23">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -3579,7 +3579,7 @@ may result in disciplinary action, up to and including possible termination of e
       </Grid>
 
 {/* ----------- Page 33 508 Use of Equipment and Computer Systems (24) ----------- */}
-      <Grid xs={12} className="pageBreak">
+      <Grid xs={12} className="pageBreak" id="24">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -3653,7 +3653,7 @@ well as excessive or avoidable traffic and parking violations, can result in dis
       </Grid>
 
 {/* ----------- Page 34 510 Emergency Closings (25) ----------- */}
-      <Grid xs={12} className="pageBreak">
+      <Grid xs={12} className="pageBreak" id="25">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -3724,7 +3724,7 @@ advance by the Department Manager.
       </Grid>
 
 {/* ----------- Page 35 514 Visitors in the Workplace (26) ----------- */}
-      <Grid xs={12} className="pageBreak">
+      <Grid xs={12} className="pageBreak" id="26">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -3802,7 +3802,7 @@ Revision Date: 1/1/04<br/><br/>
       </Grid>
 
 {/* ----------- Page 36 517 Internet Usage (27) ----------- */}
-      <Grid xs={12} className="pageBreak">
+      <Grid xs={12} className="pageBreak" id="27">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -3876,7 +3876,7 @@ The equipment, services, and technology provided to access the Internet remain a
       </Grid>
 
 {/* ----------- Page 37 Trans-Global Solutions, (28) ----------- */}
-      <Grid xs={12} className="pageBreak">
+      <Grid xs={12} className="pageBreak" id="28">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -3953,7 +3953,7 @@ gambling<br/>
       </Grid>
 
 {/* ----------- Page 38 518 Workplace Monitoring (29) ----------- */}
-      <Grid xs={12} className="pageBreak">
+      <Grid xs={12} className="pageBreak" id="29">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -4033,7 +4033,7 @@ violence and of suspicious individuals or activities. The identity of the indivi
       </Grid>
 
 {/* ----------- Page 39 526 Cellular Phone and Handheld Radio Usage (30) ----------- */}
-      <Grid xs={12} className="pageBreak">
+      <Grid xs={12} className="pageBreak" id="30">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -4110,7 +4110,7 @@ meetings applies to conversations conducted over a cell phone or handheld radio.
       </Grid>
 
 {/* ----------- Page 40 602 Family and Medical Leave (31) ----------- */}
-      <Grid xs={12} className="pageBreak">
+      <Grid xs={12} className="pageBreak" id="31">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -4138,7 +4138,7 @@ eligible employee is entitled to continued group health plan coverage as if the 
 work. At the conclusion of the leave, subject to some exceptions, an employee generally has a right to
 return to the same or to an equivalent position.<br/><br/>
 
-Employee Eligibility Criteria<br/><br/>
+<b className="italic font12">Employee Eligibility Criteria</b><br/><br/>
 
 To be eligible for FMLA leave, an employee must have been employed by Trans-Global Solutions, Inc.:<br/><br/>
 
@@ -4147,10 +4147,10 @@ To be eligible for FMLA leave, an employee must have been employed by Trans-Glob
 * for at least 1250 hours during the 12 month period immediately preceding the
 commencement of the leave; and<br/>
 * at a worksite (a) with 50 or more employees; or (b) where 50 or more employees are
-located within 75 miles of the worksite.
+located within 75 miles of the worksite.<br/><br/>
 </Grid>
 
-Events, Which May Entitle An Employee to FMLA Leave<br/><br/>
+<b className="italic font12">Events, Which May Entitle An Employee to FMLA Leave</b><br/><br/>
 
 FMLA leave may be taken for any one, or for a combination of, the following reasons:<br/><br/>
 <Grid className="pl20">
@@ -4165,9 +4165,9 @@ one or more of the essential functions of his or her job.<br/><br/>
 A "serious health condition" is an injury, illness, impairment, or physical or mental condition that
 involves inpatient care or continuing treatment by a health care provider.<br/><br/>
 
-How Much FMLA Leave May Be Taken<br/><br/>
+<Grid className="font14">How Much FMLA Leave May Be Taken</Grid><br/><br/>
 
-The 12EMonth Period
+<b className="italic font12">The 12EMonth Period</b>
                     </TableCell>
                   </TableRow>
                 </Table>
@@ -4175,6 +4175,1985 @@ The 12EMonth Period
             </TableRow>
             </Table>
           <Grid className="PageNum">31</Grid>
+        </TableContainer>
+      </Grid>
+
+{/* ----------- Page 41 (32) ----------- */}
+      <Grid xs={12} className="pageBreak" id="32">
+        <TableContainer className="MainTable">
+          <Table className="SecondMainTable">
+            <TableRow className="w100 pl30 pr30">
+              <TableCell className="w100">
+                <Table className="w100">
+                  {/* -*- */}
+                  <TableRow className="w100 mt6">
+                    <TableCell className="w100">
+                    <h1 style={{marginBottom:"0px"}}>Trans-Global Solutions, Inc.<br/>
+                    Field Payroll Personnel</h1>
+                    </TableCell>
+                  </TableRow>
+                  {/* -*- */}
+                  <TableRow className="w100 mt10 font14">
+                    <TableCell className="w100 textJustify">
+<b className="italic font12"></b><br/>
+An eligible employee is entitled to up to 12 workweeks of unpaid leave during a 12-month period for any
+FMLA qualifying reason(s). The 12-month period is a rolling 12-month period measured backward from
+the date an employee uses any FMLA leave.<br/><br/>
+
+<b className="italic font12">Limitations on FMLA Leave</b><br/><br/>
+
+Leave to care for a newborn or for a newly placed child must conclude within 12 months after the birth or
+placement of the child.<br/><br/>
+
+When both spouses are employed by Trans-Global Solutions, Inc, they are together entitled to a combined
+total of 12 workweeks of FMLA leave within the designated 12 month period for the birth, adoption or
+foster care placement of a child with the employees, for aftercare of the newborn or newly placed child,
+and to care for a parent (but not in-law) with a serious health condition. Each spouse may be entitled to
+additional FMLA leave for other FMLA qualifying reasons (i.e., the difference between the leave taken
+individually for any of the above reasons and 12 workweeks, but not more than a total of 12 workweeks
+per person).<br/><br/>
+
+For example, if each spouse took 6 weeks of leave to care for a newborn child, each could later use an
+additional 6 weeks due to his/her own serious health condition or to care for a child with a serious health
+condition.<br/><br/>
+
+<b className="italic font12">Intermittent Or Reduced Work Schedule Leave</b><br/><br/>
+
+Intermittent leave is leave taken in separate blocks of time. A reduced work schedule leave is a leave
+schedule that reduces an employee's usual number of hours per workweek or hours per workday.<br/><br/>
+
+Leave to care for a newborn or for a newly placed child may not be taken intermittently or on a reduced
+work schedule unless Trans-Global Solutions, Inc. agrees with respect to an individual leave request.<br/><br/>
+
+If an employee is granted and takes leave intermittently or on a reduced work schedule basis, the
+employee must, when requested, attempt to schedule the leave so as not to unduly disrupt Trans-Global
+Solutions, Inc.s operations. When an employee takes intermittent or reduced work schedule leave for
+foreseeable planned medical treatment, Trans-Global Solutions, Inc. may temporarily transfer the
+employee to an alternative position with equivalent pay and benefits for which the employee is qualified
+and which better accommodates recurring periods of leave.<br/><br/>
+
+<b className="italic font12">Requests for FMLA Leave</b><br/><br/>
+
+An employee should request FMLA leave by completing the Employer's Request for Leave form and
+submitting it to the Human Resources Manager.<br/><br/>
+
+When leave is foreseeable for childbirth, placement of a child or planned medical treatment for the
+employee's or family member's serious health condition, the employee must provide Trans-Global
+Solutions, Inc. with at least 30 days advance notice, or such shorter notice as is practicable (i.e., within 1
+                    </TableCell>
+                  </TableRow>
+                </Table>
+              </TableCell>
+            </TableRow>
+            </Table>
+          <Grid className="PageNum">32</Grid>
+        </TableContainer>
+      </Grid>
+
+{/* ----------- Page 42 (33) ----------- */}
+      <Grid xs={12} className="pageBreak" id="33">
+        <TableContainer className="MainTable">
+          <Table className="SecondMainTable">
+            <TableRow className="w100 pl30 pr30">
+              <TableCell className="w100">
+                <Table className="w100">
+                  {/* -*- */}
+                  <TableRow className="w100 mt6">
+                    <TableCell className="w100">
+                    <h1 style={{marginBottom:"0px"}}>Trans-Global Solutions, Inc.<br/>
+                    Field Payroll Personnel</h1>
+                    </TableCell>
+                  </TableRow>
+                  {/* -*- */}
+                  <TableRow className="w100 mt10 font14">
+                    <TableCell className="w100 textJustify">
+                        or 2 business days of learning of the need for the leave). When the timing of the leave is not foreseeable,
+the employee must provide Trans-Global Solutions, Inc. with notice of the need for leave as soon as
+practicable (i.e., within 1 or 2 business days of learning of the need for the leave).<br/><br/>
+
+<b className="italic font12">Required Documentation</b><br/><br/>
+
+When leave is taken to care for a family member, Trans-Global Solutions, Inc. may require the employee
+to provide documentation or statement of family relationship (e.g., birth certificate or court document).<br/><br/>
+
+An employee may be required to submit medical certification from a health care provider to support a
+request for FMLA leave for the employee's or a family member's serious health condition. Medical
+certification forms are available from the Human Resources Manager.<br/>
+
+If Trans-Global Solutions, Inc. has reason to doubt the employee's initial certification, Trans-Global
+Solutions, Inc. may: (i) with the employee's permission, have a designated health care provider contact
+the employee's health care provider in an effort to clarify or authenticate the initial certification; and/or
+(ii) require the employee to obtain a second opinion by an independent-designated provider at Trans-
+Global Solutions, Inc.s expense. If the initial and second certifications differ, Trans-Global Solutions, Inc.
+may, at its expense, require the employee to obtain a third, final and binding certification from a jointly
+selected health care provider.<br/><br/>
+
+During FMLA leave, Trans-Global Solutions, Inc. may request that the employee provide recertification
+of a serious health condition at intervals in accordance with the FMLA. In addition, during FMLA leave,
+the employee must provide Trans-Global Solutions, Inc. with periodic reports regarding the employee's
+status and intent to return to work. If the employee's anticipated return to work date changes and it
+becomes necessary for the employee to take more or less leave than originally anticipated, the employee
+must provide Trans-Global Solutions, Inc. with reasonable notice (i.e., within 2 business days) of the
+employee's changed circumstances and new return to work date. If the employee gives Trans-Global
+Solutions, Inc. notice of the employee's intent not to return to work, the employee will be considered to
+have voluntarily resigned.<br/><br/>
+
+Before the employee returns to work from FMLA leave for the employee's own serious health condition,
+the employee may be required to submit a fitness for duty certification from the employee's health care
+provider, with respect to the condition for which the leave was taken, stating that the employee is able to
+resume work.<br/><br/>
+
+FMLA leave or return to work may be delayed or denied if the appropriate documentation is not provided
+in a timely manner. Also, a failure to provide requested documentation of the reason for an absence from
+work may lead to termination of employment.<br/><br/>
+
+<b className="italic font12">Use of Paid and Unpaid Leave</b><br/><br/>
+
+FMLA provides eligible employees with up to 12 workweeks of unpaid leave. If an employee has accrued
+paid leave (e.g., vacation, sick leave, personal leave), however, the employee must use any qualifying
+paid leave first. "Qualifying paid leave" is leave that would otherwise be available to the employee for the
+purpose for which the FMLA leave is taken. The remainder of the 12 workweeks of leave, if any, will be
+unpaid FMLA leave. Any paid leave used for an FMLA qualifying reason will be charged against an
+                    </TableCell>
+                  </TableRow>
+                </Table>
+              </TableCell>
+            </TableRow>
+            </Table>
+          <Grid className="PageNum">33</Grid>
+        </TableContainer>
+      </Grid>
+
+{/* ----------- Page 43 (34) ----------- */}
+      <Grid xs={12} className="pageBreak" id="34">
+        <TableContainer className="MainTable">
+          <Table className="SecondMainTable">
+            <TableRow className="w100 pl30 pr30">
+              <TableCell className="w100">
+                <Table className="w100">
+                  {/* -*- */}
+                  <TableRow className="w100 mt6">
+                    <TableCell className="w100">
+                    <h1 style={{marginBottom:"0px"}}>Trans-Global Solutions, Inc.<br/>
+                    Field Payroll Personnel</h1>
+                    </TableCell>
+                  </TableRow>
+                  {/* -*- */}
+                  <TableRow className="w100 mt10 font14">
+                    <TableCell className="w100 textJustify">
+                      employee's entitlement to FMLA leave. This includes leave for disability or workers' compensation
+injury/illness, provided that the leave meets FMLA requirements. The substitution of paid leave for
+unpaid leave does not extend the 12-workweek leave period.<br/><br/>
+
+<b className="italic font12">Designation of Leave</b><br/><br/>
+
+Trans-Global Solutions, Inc. will notify the employee that leave has been designated as FMLA leave.
+Trans-Global Solutions, Inc. may provisionally designate the employee's leave as FMLA leave if Trans-
+Global Solutions, Inc. has not received medical certification or has not otherwise been able to confirm
+that the employee's leave qualifies as FMLA leave.<br/><br/>
+
+<b className="italic font12">Maintenance of Health Benefits</b><br/><br/>
+
+During FMLA leave an employee is entitled to continued group health plan coverage under the same
+conditions as if the employee had continued to work.<br/><br/>
+
+To the extent that an employee's FMLA leave is paid, the employee's portion of health insurance
+premiums will be deducted from the employee's salary. For the portion of FMLA leave that is unpaid, the
+employee's portion of health insurance premiums may be paid pursuant to a system voluntarily agreed to
+by Trans-Global Solutions, Inc. and the employee.<br/><br/>
+
+If the employee's payment of health insurance premiums is more than 30 days late, Trans- Global
+Solutions, Inc. may discontinue health insurance coverage upon notice to the employee.<br/><br/>
+
+<b className="italic font12">Return from FMLA Leave</b><br/><br/>
+
+Upon return from FMLA leave, Trans-Global Solutions, Inc. will place the employee in the same position
+the employee held before the leave or an equivalent position with equivalent pay, benefits and other
+employment terms.<br/><br/>
+
+<b className="italic font12">Limitations on Reinstatement</b><br/><br/>
+
+An employee is entitled to reinstatement only if he/she would have continued to be employed had FMLA
+leave not been taken. Thus, an employee is not entitled to reinstatement if, because of a layoff, reduction
+in force or other reason, the employee would not be employed at the time job restoration is sought.<br/><br/>
+
+Trans-Global Solutions, Inc. reserves the right to deny reinstatement to salaried, eligible employees who
+are among the highest paid 10 percent of Trans-Global Solutions, Inc.s employees employed within 75
+miles of the worksite ("key employees") if such denial is necessary to prevent substantial and grievous
+economic injury to Trans-Global Solutions, Inc.'s operations.
+                    </TableCell>
+                  </TableRow>
+                </Table>
+              </TableCell>
+            </TableRow>
+            </Table>
+          <Grid className="PageNum">34</Grid>
+        </TableContainer>
+      </Grid>
+
+{/* ----------- Page 44 (35) ----------- */}
+      <Grid xs={12} className="pageBreak" id="35">
+        <TableContainer className="MainTable">
+          <Table className="SecondMainTable">
+            <TableRow className="w100 pl30 pr30">
+              <TableCell className="w100">
+                <Table className="w100">
+                  {/* -*- */}
+                  <TableRow className="w100 mt6">
+                    <TableCell className="w100">
+                    <h1 style={{marginBottom:"0px"}}>Trans-Global Solutions, Inc.<br/>
+                    Field Payroll Personnel</h1>
+                    </TableCell>
+                  </TableRow>
+                  {/* -*- */}
+                  <TableRow className="w100 mt10 font14">
+                    <TableCell className="w100 textJustify">
+                      <b className="italic font12">Failure To Return To Work Following FMLA Leave</b><br/><br/>
+
+If the employee does not return to work following the conclusion of FMLA leave, the employee will be
+considered to have voluntarily resigned. Trans-Global Solutions, Inc. may recover health insurance
+premiums that Trans-Global Solutions, Inc. paid on behalf of the employee during any unpaid FMLA
+leave except that Trans-Global Solutions, Inc.s share of such premiums may not be recovered if the
+employee fails to return to work because of the employee's or a family member's serious health condition
+or because of other circumstances beyond the employee's control. In such cases, Trans-Global Solutions,
+Inc. may require the employee to provide medical certification of the employee's or the family member's
+serious health condition.<br/><br/>
+
+<b className="italic font12">Additional Information</b><br/><br/>
+
+For further information or clarification about FMLA leave, please contact the Human Resources
+Manager.<br/><br/>
+
+                      <b className="font16 header bold">603 Personal Leave</b><br/>
+                      <Grid className="font12">
+                      Effective Date: 1/1/04<br/>
+                      Revision Date: <br/><br/>
+                      </Grid>
+Trans-Global Solutions, Inc. provides a leave of absence without pay to eligible employees who wish to
+take time off from work duties to fulfill personal obligations. Employees in the following employment
+classification(s) are eligible to request personal leave as described in this policy:<br/><br/>
+
+  <Grid className="pl20">
+    * Regular full-time employees<br/><br/>
+  </Grid>
+Should a situation arise that temporarily prevents an employee from working, he/she may be eligible for a
+personal Leave of Absence without pay. However, employees must be employed for at least one year
+prior to the requested leave. A leave of absence without pay will not be granted for the pursuit of other
+employment.<br/><br/>
+
+Any request for a leave of absence without pay must be submitted in writing as far in advance as possible
+and it will be reviewed on a case-by-case basis by the employee’s supervisor/manager and the Human
+Resources Department. The decision to approve or disapprove is based on the circumstances, the length
+of time requested, the employee's job performance and attendance and punctuality record, the reasons for
+the leave, the effect the employee's absence will have on the work in the department and the expectation
+that the employee will return to work when the leave expires.<br/><br/>
+
+Leaves of absence will be considered only after all vacation, sick time, and/or FMLA have been
+exhausted. The duration of a leave of absence, if granted, can be for a maximum of 6 months.<br/><br/>
+
+<b className="italic font12">Continuing Benefit Plan Coverage</b><br/><br/>
+
+While on a personal unpaid leave of absence an employee's medical coverage will end on the 1st day of
+the month following the start of such leave. Employees will have the opportunity of continuing their
+                    </TableCell>
+                  </TableRow>
+                </Table>
+              </TableCell>
+            </TableRow>
+            </Table>
+          <Grid className="PageNum">35</Grid>
+        </TableContainer>
+      </Grid>
+
+{/* ----------- Page 45 (36) ----------- */}
+      <Grid xs={12} className="pageBreak" id="36">
+        <TableContainer className="MainTable">
+          <Table className="SecondMainTable">
+            <TableRow className="w100 pl30 pr30">
+              <TableCell className="w100">
+                <Table className="w100">
+                  {/* -*- */}
+                  <TableRow className="w100 mt6">
+                    <TableCell className="w100">
+                    <h1 style={{marginBottom:"0px"}}>Trans-Global Solutions, Inc.<br/>
+                    Field Payroll Personnel</h1>
+                    </TableCell>
+                  </TableRow>
+                  {/* -*- */}
+                  <TableRow className="w100 mt10 font14">
+                    <TableCell className="w100 textJustify">
+                      benefits for a maximum period of 18 months by paying the monthly premiums as required by COBRA
+legislation.<br/><br/>
+
+Unemployment Insurance benefits cannot be collected while on a leave of absence without pay.<br/><br/>
+
+<b className="italic font12">Salary Action</b><br/><br/>
+
+Any planned salary increase for an employee returning from an unpaid leave of absence without pay will
+be deferred by the length of the leave.<br/><br/>
+
+<b className="italic font12">Vacation and Personal Time</b><br/><br/>
+
+During the calendar year that an employee takes an unpaid leave of absence without pay, the employee is
+not eligible for vacation. Unused vacation and personal days must be used before an unpaid leave of
+absence without pay will be granted.<br/><br/>
+
+<b className="italic font12">Performance Appraisal</b><br/><br/>
+
+The normal performance appraisal date of an employee on an unpaid leave of absence without pay will be
+extended by the length of the leave.<br/><br/>
+
+<b className="italic font12">Returning/Not Returning From a Leave</b><br/><br/>
+
+Due to the nature of our business, Trans-Global Solutions, Inc. cannot guarantee either that an employee's
+job will remain available or that a comparable position will exist when return from an unpaid leave is
+sought. When an employee is ready to return from a leave of absence without pay, Trans-Global Solutions
+Inc. will attempt to reinstate the employee to his/her former position or to one with similar
+responsibilities. If the position or a similar position is not available, the employee will be terminated.<br/><br/>
+
+An employee who returns to work following an unpaid leave will be considered as having continuous
+service. If an employee does not return from an unpaid leave of absence without pay, the termination date
+is the last day of the authorized leave period or the date the employee notifies his/her supervisor/manager
+he/she is not returning, whichever is sooner. Such employees may be considered for reemployment.<br/><br/>
+
+<b className="font16 header bold">605 Military Leave</b><br/>
+<Grid className="font12">
+Effective Date: 6/2/98<br/>
+Revision Date: 1/1/04<br/><br/>
+</Grid>
+
+A military leave of absence will be granted to employees who are absent from work because of service in
+the U.S. uniformed services in accordance with the Uniformed Services Employment and Reemployment
+Rights Act (USERRA). Advance notice of military service is required, unless military necessity prevents
+such notice or it is otherwise impossible or unreasonable.
+                    </TableCell>
+                  </TableRow>
+                </Table>
+              </TableCell>
+            </TableRow>
+            </Table>
+          <Grid className="PageNum">36</Grid>
+        </TableContainer>
+      </Grid>
+
+{/* ----------- Page 46 (37) ----------- */}
+      <Grid xs={12} className="pageBreak" id="37">
+        <TableContainer className="MainTable">
+          <Table className="SecondMainTable">
+            <TableRow className="w100 pl30 pr30">
+              <TableCell className="w100">
+                <Table className="w100">
+                  {/* -*- */}
+                  <TableRow className="w100 mt6">
+                    <TableCell className="w100">
+                    <h1 style={{marginBottom:"0px"}}>Trans-Global Solutions, Inc.<br/>
+                    Field Payroll Personnel</h1>
+                    </TableCell>
+                  </TableRow>
+                  {/* -*- */}
+                  <TableRow className="w100 mt10 font14">
+                    <TableCell className="w100 textJustify">
+                      The leave will be unpaid. However, employees may use any available paid time off for the absence.<br/><br/>
+
+Continuation of health insurance benefits is available as required by USERRA based on the length of the
+leave and subject to the terms, conditions and limitations of the applicable plans for which the employee
+is otherwise eligible.<br/><br/>
+
+Benefit accruals, such as vacation, sick leave, or holiday benefits, will be suspended during the leave and
+will resume upon the employee's return to active employment.<br/>
+
+Employees on military leave for up to 30 days are required to return to work for the first regularly
+scheduled shift after the end of service, allowing reasonable travel time. Employees on longer military
+leave must apply for reinstatement in accordance with USERRA and all applicable state laws.<br/><br/>
+
+Employees returning from military leave will be placed in the position they would have attained had they
+remained continuously employed or a comparable one depending on the length of military service in
+accordance with USERRA. They will be treated as though they were continuously employed for purposes
+of determining benefits based on length of service.<br/><br/>
+
+Contact the Human Resources Manager for more information or questions about military leave.<br/><br/>
+
+<b className="font16 header bold">680 Return To Work Program</b><br/>
+<Grid className="font12">
+Effective Date: 6/2/98<br/>
+Revision Date: 1/1/04<br/><br/>
+</Grid>
+
+Trans-Global Solutions, Inc. is committed to providing the training, supervision, equipment and
+counseling necessary to prevent job-related injuries or illnesses. However, if a job related injury or illness
+does occur, Trans-Global Solutions, Inc. is committed to a policy of minimizing the isolation time away
+from work and the loss of wages for our employees.<br/><br/>
+
+To ensure that our employees are kept informed, there will be regular communication with the employee
+from the Workers Compensation Administrator and the employee's supervisor. It will be through this
+communication that we endeavor to return the employee to work as soon as possible.<br/><br/>
+
+All decisions and assignments for our employees will always meet the restrictions assigned by the treating
+physician as well as meeting with the guidelines and requirements of the Americans with Disabilities Act.
+In keeping with this spirit, this program is intended to assist only those employees who encounter work
+related temporary disabilities and/or restrictions. All job assignments under this policy will be temporary
+in nature.<br/><br/>
+
+RESPONSIBILITY: The Workers Compensation Administrator will determine the eligibility for
+participation in the Return to Work Program with assistance from the employee's physician, the employee
+and the employee's supervisor.<br/><br/>
+
+The Workers Compensation Administrator will be responsible for communicating to an employee's
+treating physician any work that could be available to the employee, how the company can assist in
+returning the injured worker to a productive status and how the Return to Work Program can be utilized in
+assisting the rehabilitation of the employee.<br/><br/>
+
+ELIGIBILITY: An employee will become eligible for the Return to Work program when:
+                    </TableCell>
+                  </TableRow>
+                </Table>
+              </TableCell>
+            </TableRow>
+            </Table>
+          <Grid className="PageNum">37</Grid>
+        </TableContainer>
+      </Grid>
+
+{/* ----------- Page 47 (38) ----------- */}
+      <Grid xs={12} className="pageBreak" id="38">
+        <TableContainer className="MainTable">
+          <Table className="SecondMainTable">
+            <TableRow className="w100 pl30 pr30">
+              <TableCell className="w100">
+                <Table className="w100">
+                  {/* -*- */}
+                  <TableRow className="w100 mt6">
+                    <TableCell className="w100">
+                    <h1 style={{marginBottom:"0px"}}>Trans-Global Solutions, Inc.<br/>
+                    Field Payroll Personnel</h1>
+                    </TableCell>
+                  </TableRow>
+                  {/* -*- */}
+                  <TableRow className="w100 mt10 font14">
+                    <TableCell className="w100 textJustify">
+1. The employee notifies the Workers Compensation Administrator of his/her release to work with
+restrictions.<br/><br/>
+
+2. The employee must provide to the Workers Compensation Administrator a written release from his/her
+physician stating the requirement for light duty or listing specific restrictions.
+In this situation, the employee will be contacted by phone and/or certified letter informing them that light
+duty is available.<br/><br/>
+
+The Workers Compensation Administrator will determine if a light duty work assignment can be
+provided which will be consistent with the treating physician's work release. All work assignments will be
+consistent with, and not exceed, the limitations set by the treating physician. The employee must agree
+not to work beyond his/her physical limitations and will immediately bring any concerns regarding their
+assignment to the attention of their supervisor and the Workers Compensation Administrator.<br/><br/>
+
+An employee will be eligible to participate in the light duty program for 30 days. After this period of
+time, eligibility for continued light duty will be reviewed with the employee and the treating physician. If
+an employee is not able to return to full duty within 30 days, a decision will be made regarding whether or
+not to continue with the light duty, dependant on the circumstances of the injury.<br/><br/>
+
+JOB ASSIGNMENT: Every effort will be made to accommodate the needs of the employee by modifying
+the employee's normal work assignment. However, work availability may make it necessary to transfer
+employees from one department to another as long as light duty is required.<br/><br/>
+
+No permanent job assignments will be created through this program. Employees with permanent
+disabilities, as defined by the ADA, that would prevent them from performing the essential functions of
+their job will be afforded all rights, privileges and considerations granted by the American with
+Disabilities Act.<br/><br/>
+
+RATE OF PAY: An employee approved for the Return to Work program will be paid at their regular
+classification base rate of pay less overtime. The employee will sign or punch in and out for work on the
+time sheet for the department in which they have be assigned for light duty. Benefits (i.e. vacation) for
+employees who are in the Return to Work program will continue to accrue at the employee’s primary base
+of pay.<br/><br/>
+
+SCHEDULE: While every effort will be made to maintain an employees preferred shift and schedule, it
+may be necessary to change an employees regular days off and/or work hour while in the Return to Work
+Program. The employees actual number of hours worked will not exceed the treating physicians
+instructions if a restricted hours of work assignment is required.<br/><br/>
+
+The employee’s supervisor will schedule hours of work. Employees working on the Return to Work
+program should not work overtime without advance approval from their light duty supervisor. If an
+employee’s health status or ability to work changes; the employee must immediately report to his/her
+supervisor and the Workers Compensation Administrator. The treating physician must confirm all
+changes in health or work status in writing to the Workers Compensation Administrator.<br/><br/>
+
+Employees participating in the Return to Work Program are encouraged to schedule their doctor
+                    </TableCell>
+                  </TableRow>
+                </Table>
+              </TableCell>
+            </TableRow>
+            </Table>
+          <Grid className="PageNum">38</Grid>
+        </TableContainer>
+      </Grid>
+
+{/* ----------- Page 48 (39) ----------- */}
+      <Grid xs={12} className="pageBreak" id="39">
+        <TableContainer className="MainTable">
+          <Table className="SecondMainTable">
+            <TableRow className="w100 pl30 pr30">
+              <TableCell className="w100">
+                <Table className="w100">
+                  {/* -*- */}
+                  <TableRow className="w100 mt6">
+                    <TableCell className="w100">
+                    <h1 style={{marginBottom:"0px"}}>Trans-Global Solutions, Inc.<br/>
+                    Field Payroll Personnel</h1>
+                    </TableCell>
+                  </TableRow>
+                  {/* -*- */}
+                  <TableRow className="w100 mt10 font14">
+                    <TableCell className="w100 textJustify">
+appointments and/or physical therapy around their work schedule. If this cannot be arranged,
+appointments should be scheduled at the beginning or end of a work shift. The employee should notify
+his/her light duty Supervisor as far in advance as possible of all appointments requiring time away from
+work.<br/><br/>
+
+PARTCIPATION IN THE RETURN TO WORK PROGRAM: Participation in the Return to Work (light
+duty) Program is intended to assist those employees who encounter work related injuries to minimize the
+isolation time away from work and loss of wages. If an employee qualifies for and is offered a light duty
+assignment, they may not refuse the assignment without a documented medical reason. If an employee
+refuses or fails to report for a light duty assignment, for other than a documented medical reason, it could
+negatively impact on the employee’s eligibility to receive Workers Compensation benefits as well as on
+their employment status.<br/><br/>
+
+EXAMPLES OF LIGHT DUTY JOB ASSIGNMENTS: Trans-Global Solutions, Inc. has the ability to
+determine what jobs are available to be utilized as a light duty job assignment. The following positions
+are mentioned as examples of jobs that can be made available for light duty return to work assignments.
+An assignment can be a combination of positions as required by the physicians release and restrictions.
+(In addition, Trans-Global Solutions, Inc. is willing to tailor any job possible to return an employee to
+active and productive employment.)<br/><br/>
+
+Basically sedentary office type jobs.<br/><br/>
+
+Light physical activity with some standing, bending and lifting.<br/><br/>
+
+Medium work, includes heavier lifting.<br/><br/>
+
+Modification of regular position.<br/><br/>
+
+Create a position. (In a limited number of circumstances an employee’s abilities/limitations might be such
+that a temporary assignment might be created specifically for the employee.)<br/><br/>
+
+<b className="font16 header bold">701 Employee Conduct and Work Rules</b><br/>
+<Grid className="font12">
+Effective Date: 6/2/98<br/>
+Revision Date: 1/1/04<br/><br/>
+</Grid>
+To ensure orderly operations and provide the best possible work environment, Trans-Global Solutions,
+Inc. expects employees to follow rules of conduct that will protect the interests and safety of all
+employees and the organization.<br/><br/>
+
+It is not possible to list all the forms of behavior that are considered unacceptable in the workplace. The
+following are examples of infractions of rules of conduct that may result in disciplinary action, up to and
+including termination of employment:<br/><br/>
+
+1) Unauthorized possession of Company property, or of the property of a fellow employee.<br/><br/>
+
+2) Negligence, improper conduct or deliberate damage to property of the Company, its employees or
+others doing business with the Company.
+                    </TableCell>
+                  </TableRow>
+                </Table>
+              </TableCell>
+            </TableRow>
+            </Table>
+          <Grid className="PageNum">39</Grid>
+        </TableContainer>
+      </Grid>
+
+{/* ----------- Page 49 (40) ----------- */}
+      <Grid xs={12} className="pageBreak" id="40">
+        <TableContainer className="MainTable">
+          <Table className="SecondMainTable">
+            <TableRow className="w100 pl30 pr30">
+              <TableCell className="w100">
+                <Table className="w100">
+                  {/* -*- */}
+                  <TableRow className="w100 mt6">
+                    <TableCell className="w100">
+                    <h1 style={{marginBottom:"0px"}}>Trans-Global Solutions, Inc.<br/>
+                    Field Payroll Personnel</h1>
+                    </TableCell>
+                  </TableRow>
+                  {/* -*- */}
+                  <TableRow className="w100 mt10 font14">
+                    <TableCell className="w100 textJustify">
+3) Willful destruction of Company property or the property of a fellow employee.<br/><br/>
+4) Deliberate misuse of, or unauthorized use of Company supplies, materials, machines, equipment,
+vehicles or tooling.<br/><br/>
+5) Misrepresentation or falsification of records, employment documents time cards or time reports.<br/><br/>
+6) Altering one's paycheck in any manner.<br/><br/>
+7) Fighting with, or threatening or attempting bodily injury to another on Company premises.<br/><br/>
+8) Visiting, loitering, loafing, lounging, or sleeping during scheduled working hours, or leaving the work
+area without permission of one's supervisor.<br/><br/>
+9) Stealing (including making unauthorized personal long distance telephone calls at Company expense).<br/><br/>
+10) Allowing an unauthorized person on Company premises.<br/><br/>
+11) Disobedience or insubordination.<br/><br/>
+12) Improper conduct which is indecent, destructive, abusive or of a criminal nature which would have
+harmful effects on employee relations or the Company reputation.<br/><br/>
+13) Exceeding the authorized number or length of break periods.<br/><br/>
+14) Excessive absenteeism or failure to report to work for three (3) consecutive workdays without
+notification and a satisfactory explanation to the Company.<br/><br/>
+15) Working unauthorized overtime.<br/><br/>
+16) Failing to properly complete required reporting.<br/><br/>
+17) Failing to meet Company work standards in terms of quantity and quality.<br/><br/>
+18) Interfering with another employee's efforts to meet Company work standards.<br/><br/>
+19) Violation of an established Company sanitary or safety rule, including smoking in a prohibited area or
+bypassing an established safety procedure<br/><br/>
+20) Use, possession, transportation, sale of, or being under the influence of alcohol and/or illegal drugs
+(non-prescription drugs) while at the Company work facilities, or while on the premises and facilities of
+others utilized by the Company in the conduct of its business.<br/><br/>
+21) Possessing weapons or explosives of any type on Company vehicles or on company property or
+offices without written authorization by Management.<br/><br/>
+22) Willful tampering in the operation of equipment that could result in a serious accident or could result
+in a reportable injury.
+                    </TableCell>
+                  </TableRow>
+                </Table>
+              </TableCell>
+            </TableRow>
+            </Table>
+          <Grid className="PageNum">40</Grid>
+        </TableContainer>
+      </Grid>
+
+{/* ----------- Page 50 (41) ----------- */}
+      <Grid xs={12} className="pageBreak" id="41">
+        <TableContainer className="MainTable">
+          <Table className="SecondMainTable">
+            <TableRow className="w100 pl30 pr30">
+              <TableCell className="w100">
+                <Table className="w100">
+                  {/* -*- */}
+                  <TableRow className="w100 mt6">
+                    <TableCell className="w100">
+                    <h1 style={{marginBottom:"0px"}}>Trans-Global Solutions, Inc.<br/>
+                    Field Payroll Personnel</h1>
+                    </TableCell>
+                  </TableRow>
+                  {/* -*- */}
+                  <TableRow className="w100 mt10 font14">
+                    <TableCell className="w100 textJustify">
+23) Sexual or other unlawful or unwelcome harassment.<br/><br/>
+
+24) Misrepresentation of the Company through false, fraudulent or malicious statements or actions.<br/><br/>
+
+25) Unauthorized disclosure of confidential information.<br/><br/>
+
+Employment with Trans-Global Solutions, Inc. is at the mutual consent of Trans-Global Solutions, Inc.
+and the employee, and either party may terminate that relationship at any time, with or without cause, and
+with or without advance notice.<br/><br/>
+
+<b className="font16 header bold">702 Drug, Alcohol And Weapons Policy</b><br/>
+<Grid className="font12">
+Effective Date: 6/2/98<br/>
+Revision Date: 1/1/04<br/><br/>
+</Grid>
+The procedures in this policy are intended to provide management with guideline for administering an
+effective drug and alcohol testing program and search policy, and to comply with certain federal
+regulations. It is not intended, nor does it, create any expressed or implicit contract, or otherwise confer
+any rights upon any individual. Except where otherwise agreed, the Company reserves the right to
+interpret, modify, change or deviate from this policy in whole or in part without prior notice.<br/><br/>
+
+The illegal use, sale or possession of narcotics, drugs, alcohol or controlled substances while on the job or
+on Company property is prohibited and is a dischargeable offense. Any illegal substance will be turned
+over to the appropriate law enforcement agency and may result in criminal prosecution.<br/><br/>
+
+Possession of weapons including, but not limited to firearms and knives, presents the possibility of danger
+in the workplace and therefore is in violation of our safety policy. The possession of such articles without
+prior management approval is proper cause for administrative or disciplinary action up to and including
+termination of employment.<br/><br/>
+
+Off-the-job illegal drug use which could adversely affect an employee's job performance or which could
+jeopardize the safety of others, the public, or Company equipment, is proper cause for administrative or
+disciplinary action up to and including termination of employment.<br/><br/>
+
+Employees who are arrested for off-the-job drug activity may be considered to be in violation of this
+policy. In deciding what action to take, management will take into consideration the nature of the charges,
+the employee's present job assignment, the employee's record with the Company and other factors relating
+to the impact and circumstances of the employee's arrest.<br/><br/>
+
+<b class="italic font12">OBJECTIVE</b><br/><br/>
+Our business involves provision of rail transportation and related rail services, bulk-handling operations,
+engineering and manufacturing services, construction and erection services. Therefore, the safety of our
+employees and facilities, as well as the safety of the general public and our ability to fulfill our
+obligations under the Drug-Free Work Place Act of 1988, is of paramount concern.
+                    </TableCell>
+                  </TableRow>
+                </Table>
+              </TableCell>
+            </TableRow>
+            </Table>
+          <Grid className="PageNum">41</Grid>
+        </TableContainer>
+      </Grid>
+
+{/* ----------- Page 51 (42) ----------- */}
+      <Grid xs={12} className="pageBreak" id="42">
+        <TableContainer className="MainTable">
+          <Table className="SecondMainTable">
+            <TableRow className="w100 pl30 pr30">
+              <TableCell className="w100">
+                <Table className="w100">
+                  {/* -*- */}
+                  <TableRow className="w100 mt6">
+                    <TableCell className="w100">
+                    <h1 style={{marginBottom:"0px"}}>Trans-Global Solutions, Inc.<br/>
+                    Field Payroll Personnel</h1>
+                    </TableCell>
+                  </TableRow>
+                  {/* -*- */}
+                  <TableRow className="w100 mt10 font14">
+                    <TableCell className="w100 textJustify">
+While the Company has no intention of intruding into the private lives of its employees, the Company
+does expect employees to report for work in a condition to perform their duties. The Company recognizes
+that employees off-the-job, as well as on-the-job, involvement with drugs; alcohol and weapons can have
+an impact on the workplace and on our ability to accomplish our goal of a drug, alcohol and weapons-free
+work environment.<br/><br/>
+
+<b class="italic font12">DEFINITIONS</b><br/><br/>
+Under the Influence<br/><br/>
+For the purpose of this policy, being under the influence means that the employee is affected by a drug or
+alcohol or the combination of a drug and alcohol in any detectable manner. The symptoms of influence
+are not confined to those consistent with misbehavior, nor to obvious impairment of physical or mental
+ability, such as slurred speech or difficulty in maintaining balance.<br/><br/>
+
+Illegal drug<br/><br/>
+
+Illegal drug means any drug (a) not legally obtainable or (b) legally obtainable but not legally obtained or
+used. Therefore, the term includes prescription drugs obtained illegally and prescription drugs not being
+used for prescribed purposes. It also includes marijuana, cocaine and heroin and derivatives of those
+drugs, among other illegal drugs.<br/><br/>
+
+Legal drug<br/><br/>
+
+Legal drug includes prescribed and over-the-counter drugs legally obtained and being used for the
+purpose for which they were prescribed and/or manufactured.<br/><br/>
+
+Premises<br/><br/>
+
+Premises includes all buildings and other facilities used by the Company to conduct its operations plus all
+work sites to which employees are assigned in the course of the performance of their duties for the
+Company.<br/><br/>
+
+Reasonable Suspicion<br/><br/>
+
+For all purposes under this policy, reasonable suspicion shall be defined as a belief based on observed,
+specific, objective facts where the rational inference to be drawn under the circumstances is that the
+person is under the influence of drugs or alcohol. An unexplained workplace accident may be considered
+to provide reasonable suspicion.<br/><br/>
+
+Criminal Drug Statute<br/><br/>
+
+For the purpose of the Policy, criminal drug statute means a federal or non-federal criminal statute
+involving the manufacture, distribution, dispensing, possessing or use of any controlled substance.
+                    </TableCell>
+                  </TableRow>
+                </Table>
+              </TableCell>
+            </TableRow>
+            </Table>
+          <Grid className="PageNum">42</Grid>
+        </TableContainer>
+      </Grid>
+
+{/* ----------- Page 52 (43) ----------- */}
+      <Grid xs={12} className="pageBreak" id="43">
+        <TableContainer className="MainTable">
+          <Table className="SecondMainTable">
+            <TableRow className="w100 pl30 pr30">
+              <TableCell className="w100">
+                <Table className="w100">
+                  {/* -*- */}
+                  <TableRow className="w100 mt6">
+                    <TableCell className="w100">
+                    <h1 style={{marginBottom:"0px"}}>Trans-Global Solutions, Inc.<br/>
+                    Field Payroll Personnel</h1>
+                    </TableCell>
+                  </TableRow>
+                  {/* -*- */}
+                  <TableRow className="w100 mt10 font14">
+                    <TableCell className="w100 textJustify">
+Controlled Substance<br/><br/>
+
+For the purpose of the Policy, controlled substance means a controlled substance in Schedules I through V
+of Section 202 of the Controlled Substance Act (21 U.S.C. 812) and as further defined in regulation 21
+CFR 1308.11-1308.15.<br/><br/>
+
+Conviction<br/><br/>
+
+For the purpose of the Policy, conviction means a finding of guilt (including a plea of nolo contendere) or
+imposition of sentence, or both, by any judicial body charged with the responsibility to determine
+violations of the federal or respective state criminal drug statues.<br/><br/>
+
+<b class="italic font12">Procedures</b><br/><br/>
+
+The Company will take steps to prevent and discourage such use, possession, sale, or distribution of
+stated contraband at any time by any Company employees or contract employees. In accordance with this
+policy, periodic searches, random or annual urinalysis, drug screening or blood testing may be conducted.
+Such searches and testing will be performed by the Company using qualified contracted agents, or
+qualified, named employees.<br/><br/>
+
+Over-the-counter drugs and drugs prescribed by a physician for an employee's personal use within the last
+twelve months from the date of drug testing and quantities not exceeding reasonable or specified dosage
+requirements are not subject to the Policy. Any employee who is taking medication prescribed by a
+physician must be able to provide a record of the prescription, including the name of the medication, the
+prescribing physician's name, the reason it was prescribed, and any limitations the prescription may place
+on the employee's ability to perform assigned duties. Further, employees taking prescription or nonprescription
+medication are responsible for being aware of any potential effect such drugs may have on
+their reactions, judgment, or ability to perform their duties, and if impairment is possible, to report such
+use to their supervisor prior to reporting to work.<br/><br/>
+
+Compliance with the policy is strictly voluntary. Refusal by an employee to submit to a search or testing
+procedure may, however, constitute grounds for termination or appropriate disciplinary action.<br/><br/>
+
+The primary purpose of this policy is to promote the safety and well being of all employees. It would be
+inconsistent to promote a strong safety effort while allowing the use of drugs and alcohol or the
+possession of weapons to undermine the safe and effective performance of employees on the job.<br/><br/>
+
+<b class="italic font12">Drug Abuse Program</b><br/><br/>
+
+Consistent with our overall policy on drugs, alcohol, and weapons, the Company has established a
+detailed program to provide and maintain a drug free work environment.
+                    </TableCell>
+                  </TableRow>
+                </Table>
+              </TableCell>
+            </TableRow>
+            </Table>
+          <Grid className="PageNum">43</Grid>
+        </TableContainer>
+      </Grid>
+
+{/* ----------- Page 53 (44) ----------- */}
+      <Grid xs={12} className="pageBreak" id="44">
+        <TableContainer className="MainTable">
+          <Table className="SecondMainTable">
+            <TableRow className="w100 pl30 pr30">
+              <TableCell className="w100">
+                <Table className="w100">
+                  {/* -*- */}
+                  <TableRow className="w100 mt6">
+                    <TableCell className="w100">
+                    <h1 style={{marginBottom:"0px"}}>Trans-Global Solutions, Inc.<br/>
+                    Field Payroll Personnel</h1>
+                    </TableCell>
+                  </TableRow>
+                  {/* -*- */}
+                  <TableRow className="w100 mt10 font14">
+                    <TableCell className="w100 textJustify">
+The Company may test for the following substances and for any other substance as may be required by
+state law, federal law, regulations or contractual agreement:<br/><br/>
+
+<Grid className="pl20">
+• Alcohol<br/>
+• Hallucinogens Propoxyhene (Darvon)<br/>
+• Amphetamines<br/>
+• Marijuana (cannabinoid metabolites)<br/>
+• Barbiturates<br/>
+• Methadone<br/>
+• Benzodiazepines<br/>
+• Opiate derivatives (heroin, morphine, codeine)<br/>
+• Cocaine Metabolites<br/>
+• Phencyclidine (PCP)<br/><br/>
+</Grid>
+
+The Company reserves the right to conduct a periodic review of the foregoing list and to add additional
+drugs to the list, with or without notice.<br/><br/>
+
+<b class="italic font12">PreEemployment Testing</b><br/><br/>
+
+Each applicant for employment will be required as a condition of employment to undergo a urine drug
+screen. Applicants will be asked to read the policy and sign the Pre-Employment Offer and Employee
+Consent to Alcohol and Drug Screening. If an applicant tests positive and is determined to be in violation
+of this Policy, applicant will be ineligible for employment.<br/><br/>
+
+It is preferred that a new employee be tested prior to reporting for work. However, it is realized that under
+certain circumstances a new employee may start before test results are known. In such circumstances the
+employee's hiring is conditional upon passing the drug test.<br/><br/>
+
+All employment offer letters are to contain a statement that employment is conditional upon passing a
+drug test. Employees will be required to read and sign the Pre-Employment Offer and Employee Consent
+to Alcohol and Drug Screening immediately prior to the first day of employment.<br/><br/>
+
+<b class="italic font12">For Cause Testing, Random and Annual Testing</b><br/><br/>
+
+Subsequently, each employee, as a condition of continued employment, is subject to medical or physical
+examination or tests, including urine drug screen, at the determination of the responsible department
+manager or project manager/superintendent and concurrence of the Company officer to whom the
+employee reports, providing the following conditions are met:<br/><br/>
+
+If the employee's supervisor has reasonable cause to suspect that the employee is in violation of this
+policy; or<br/><br/>
+
+If the employee's job performance is deficient in a manner which suggests a possible violation of this
+policy; or
+                    </TableCell>
+                  </TableRow>
+                </Table>
+              </TableCell>
+            </TableRow>
+            </Table>
+          <Grid className="PageNum">44</Grid>
+        </TableContainer>
+      </Grid>
+
+{/* ----------- Page 54 (45) ----------- */}
+      <Grid xs={12} className="pageBreak" id="45">
+        <TableContainer className="MainTable">
+          <Table className="SecondMainTable">
+            <TableRow className="w100 pl30 pr30">
+              <TableCell className="w100">
+                <Table className="w100">
+                  {/* -*- */}
+                  <TableRow className="w100 mt6">
+                    <TableCell className="w100">
+                    <h1 style={{marginBottom:"0px"}}>Trans-Global Solutions, Inc.<br/>
+                    Field Payroll Personnel</h1>
+                    </TableCell>
+                  </TableRow>
+                  {/* -*- */}
+                  <TableRow className="w100 mt10 font14">
+                    <TableCell className="w100 textJustify">
+                      If the position is designated as a safety sensitive and/or high risk occupation; or<br/><br/>
+
+If the local office has a practice of annual drug screening to meet client requirements, or<br/><br/>
+
+If the employee is selected at random for testing in order to monitor and ensure compliance by all
+employees with this policy.<br/><br/>
+
+The random selection will be done centrally by Human Resources and will not be done by individual
+offices or sites, unless specifically authorized. Employees will be asked to sign the Pre-Employment
+Offer and Employee Consent to Alcohol and Drug Screening form.<br/><br/>
+
+<b class="italic font12">Rehabilitation Amnesty</b><br/><br/>
+
+If an employee tests positive and is determined to be in violation of this policy, the employee will be
+terminated. Any adulterated specimen will be viewed as a positive result, and will be treated as such.<br/><br/>
+
+Any employee who feels he/she has a substance abuse problem is encouraged to voluntarily seek
+rehabilitation through referral to the Employee Assistance Program (EAP). Any employee who
+voluntarily enters a bona fide drug or alcohol rehabilitation program will be given a leave of absence in
+order to complete the program, and will not be subject to disciplinary action as a result thereof, provided
+he/she remains in strict compliance with the rehabilitation program, successfully completes the program,
+and remains free of drugs, controlled substances and alcohol thereafter. Return to work under this
+amnesty policy will be allowed only upon written certification from the rehabilitation program that the
+employee has successfully completed the program and is fit to return to work.<br/><br/>
+
+Rehabilitation amnesty will only be given one time to any employee, and will not be available to any
+employee after he/she has notice that a drug or alcohol test is to be given, or after an event has occurred
+which could lead to testing (i.e., accident or injury, charge with drug related offense, etc.).<br/><br/>
+
+Employees returning from drug rehabilitation must sign an agreement setting forth the terms of
+reinstatement, including the requirement that the employee will be subject to periodic unannounced drug
+testing for a period twenty-four (24) months following return to work.<br/><br/>
+
+Employees returning from rehabilitation shall be returned to their former position if it is still available, or
+if not available, to a different available position, if they are qualified to fill said position, until their former
+position is available. If no such position is available, the employee will be placed on leave of absence
+until a position for which he/she is qualified becomes available. Employees will not be returned to
+positions for which they are no longer qualified. (Employees returning from rehabilitation may have
+additional rights if leave has been taken under FMLA).<br/><br/>
+
+Insurance may be available to help defray the costs of rehabilitation. To the extent that no insurance is
+provided, however, the cost shall be the responsibility of the employee.<br/><br/>
+
+<b class="italic font12">Refusal to Test</b><br/><br/>
+
+An employee who refuses to submit to drug testing, as provided for in this Policy, will be asked to leave
+                    </TableCell>
+                  </TableRow>
+                </Table>
+              </TableCell>
+            </TableRow>
+            </Table>
+          <Grid className="PageNum">45</Grid>
+        </TableContainer>
+      </Grid>
+
+{/* ----------- Page 55 (46) ----------- */}
+      <Grid xs={12} className="pageBreak" id="46">
+        <TableContainer className="MainTable">
+          <Table className="SecondMainTable">
+            <TableRow className="w100 pl30 pr30">
+              <TableCell className="w100">
+                <Table className="w100">
+                  {/* -*- */}
+                  <TableRow className="w100 mt6">
+                    <TableCell className="w100">
+                    <h1 style={{marginBottom:"0px"}}>Trans-Global Solutions, Inc.<br/>
+                    Field Payroll Personnel</h1>
+                    </TableCell>
+                  </TableRow>
+                  {/* -*- */}
+                  <TableRow className="w100 mt10 font14">
+                    <TableCell className="w100 textJustify">
+                      the office or project site immediately and the employee will be discharged.<br/><br/>
+
+                      <b class="italic font12">Rehire</b><br/><br/>
+
+An employee who is discharged for distributing or possession of drugs in violation of this policy will not
+be eligible for rehire. Employees discharged or suspended for positive results on pre-employment,
+random and/or for cause drug testing are not eligible for re-hire for one year and must provide proof of
+EAP rehabilitation see above.<br/><br/>
+
+<b class="italic font12">Employee Assistance Program (EAP)</b><br/><br/>
+
+The Company recognizes that drug abuse and/or dependency are medical/ behavioral conditions that can
+be successfully treated. Employees with drug problems are encouraged to request assistance from the
+Employee Assistance Program. Participation in an EAP is totally voluntary and completely confidential;
+however, a request for assistance or participation in an EAP does not excuse an employee from violation
+of this policy. The only exception to the EAP confidentiality provision occurs when an employee is
+referred, by the Company, to the EAP provider, through a referral, as set forth in this policy. Information
+on the EAP can be obtained from the Human Resources Manager.<br/><br/>
+
+<b class="italic font12">Contract/Temporary and Subcontract Personnel</b><br/><br/>
+
+Personnel working for Trans-Global Solutions, Inc. under a contract either directly or through the service
+of an outside firm are required to abide by this policy. Contract personnel must be tested upon
+employment.<br/>
+
+Such personnel who test positive will be terminated immediately and will be allowed to reapply after one
+year and showing proof of rehabilitation. Upon reapplication they will be required to be tested before
+beginning employment, regardless of the expected duration of the assignment.<br/><br/>
+The cost for this testing (and any re-testing) will be borne by the employing contracting firm or the
+individual contract personnel.<br/><br/>
+
+<b class="italic font12">Searches</b><br/><br/>
+
+Employees and their property and effects will be subject to search while on company property (owned or
+leased), while operating company equipment, or while conducting business on the company's behalf.
+Items and areas subject to search include, but are not limited to, vehicles, offices, quarters, desks, lockers,
+briefcases, purses, files, etc.<br/><br/>
+
+Employees and their property will also be subject to search by customers and other third parties while on
+their property.<br/><br/>
+
+Prohibited items and substances discovered during a search should be confiscated. If these items are
+discovered during a search, the local police department should be notified immediately.
+                    </TableCell>
+                  </TableRow>
+                </Table>
+              </TableCell>
+            </TableRow>
+            </Table>
+          <Grid className="PageNum">46</Grid>
+        </TableContainer>
+      </Grid>
+
+{/* ----------- Page 56 (47) ----------- */}
+      <Grid xs={12} className="pageBreak" id="47">
+        <TableContainer className="MainTable">
+          <Table className="SecondMainTable">
+            <TableRow className="w100 pl30 pr30">
+              <TableCell className="w100">
+                <Table className="w100">
+                  {/* -*- */}
+                  <TableRow className="w100 mt6">
+                    <TableCell className="w100">
+                    <h1 style={{marginBottom:"0px"}}>Trans-Global Solutions, Inc.<br/>
+                    Field Payroll Personnel</h1>
+                    </TableCell>
+                  </TableRow>
+                  {/* -*- */}
+                  <TableRow className="w100 mt10 font14">
+                    <TableCell className="w100 textJustify">
+Individuals are not to be forcibly searched or detained, or touched in any way during a search without
+prior consent.<br/><br/>
+
+Where a search has revealed that an employee is in possession of alcohol, drugs, drug paraphernalia, or
+prohibited substances in violation of this policy, he/she should at a minimum be immediately relieved of
+duty and sent home pending a final determination as to his/her employment status.<br/><br/>
+
+<b class="italic font12">Acknowledgment</b><br/><br/>
+
+All personnel will be required to sign a statement acknowledging their understanding of and compliance
+with Company policy.<br/><br/>
+
+<b class="italic font12">Compliance with Local Law</b><br/><br/>
+
+This policy will be administered in accordance with federal, state, and local law. All or any part of this
+policy in conflict with any law shall be void and inapplicable in the jurisdiction subject to such laws.
+Where federal law conflicts with state or local law, federal law shall be followed.<br/><br/>
+
+<b class="italic font12">Right to Amend</b><br/><br/>
+
+The Company reserves the right to amend any or all of this drug, alcohol and weapons Policy.<br/><br/>
+
+
+<b className="font16 header bold">703 Sexual and Other Unlawful Harassment</b><br/>
+<Grid className="font12">
+Effective Date: 6/2/98<br/>
+Revision Date: 2/1/15<br/><br/>
+</Grid>
+Trans-Global Solutions, Inc. is committed to a work environment in which all individuals are treated with
+respect and dignity. Each individual has the right to work in a professional atmosphere that promotes
+equal employment opportunities and prohibits discriminatory practices, including harassment. Therefore,
+Trans-Global Solutions, Inc. expects that all relationships among persons in the workplace will be
+business-like and free of bias, prejudice and harassment.<br/><br/>
+
+<b class="italic font12">Zero Tolerance for Harassment, Discrimination, and Retaliation.</b><br/><br/>
+
+It is the policy of TGS to maintain a model workplace free from harassment and other forms of discrimination based
+on race, color, religion, sex, national origin, age, disability, and sexual orientation. Accordingly, TGS has zero
+tolerance for harassment or any other form of unlawful discrimination.<br/><br/>
+
+In addition, TGS will not tolerate retaliation against any employee for reporting matters under this policy or
+procedure, or for assisting in any inquiry about such a report.
+                    </TableCell>
+                  </TableRow>
+                </Table>
+              </TableCell>
+            </TableRow>
+            </Table>
+          <Grid className="PageNum">47</Grid>
+        </TableContainer>
+      </Grid>
+
+{/* ----------- Page 57 (48) ----------- */}
+      <Grid xs={12} className="pageBreak" id="48">
+        <TableContainer className="MainTable">
+          <Table className="SecondMainTable">
+            <TableRow className="w100 pl30 pr30">
+              <TableCell className="w100">
+                <Table className="w100">
+                  {/* -*- */}
+                  <TableRow className="w100 mt6">
+                    <TableCell className="w100">
+                    <h1 style={{marginBottom:"0px"}}>Trans-Global Solutions, Inc.<br/>
+                    Field Payroll Personnel</h1>
+                    </TableCell>
+                  </TableRow>
+                  {/* -*- */}
+                  <TableRow className="w100 mt10 font14">
+                    <TableCell className="w100 textJustify">
+                    <b class="italic font12">Definition of Unlawful Harassment.</b><br/><br/>
+Unlawful harassment includes unwelcome intimidation, ridicule, insult, comments, or physical conduct based on
+race, color, religion, sex (whether or not of a sexual nature), national origin, age, disability, sexual orientation, or
+retaliation where:<br/><br/>
+(1) An employee’s acceptance or rejection of such conduct explicitly or implicitly forms the basis for an
+employment decision affecting the employee; or<br/>
+(2) The conduct is sufficiently severe or pervasive as to alter the terms, conditions, or privileges of the employee’s
+employment, or otherwise create an abusive work environment. This type of harassment typically does not involve
+discrete personnel actions such as denial of promotion.<br/><br/>
+<b class="italic font12">Conduct Covered By this Policy</b><br/><br/>
+The conduct covered by this Policy is broader than the legal definition of unlawful harassment listed above. It
+includes hostile or abusive conduct based on race, color, religion, sex (whether or not of a sexual nature), national
+origin, age, disability, sexual orientation, or retaliation, even if the conduct has not risen to the level of illegality.
+This is because the goal of this policy is to avoid – or, at least, limit – harm to any employee subjected to
+unwelcome hostile or abusive conduct based on a protected characteristic by ensuring that appropriate officials are
+notified of – and have the opportunity to promptly correct – such conduct before it becomes so severe or pervasive
+as to violate the law, or as soon as possible thereafter.<br/><br/>
+<b class="italic font12">Responsibilities</b><br/><br/>
+The Human Resources Manager is responsible for:<br/><br/>
+(1) Disseminating this Policy to all employees on an annual basis and periodically reminding employees of their
+responsibilities under this Policy.<br/>
+(2) Developing and providing periodic training for all employees on this Policy and its requirements.<br/>
+(3) Developing a performance measure in compliance with this Policy; ensuring that performance plans of all
+supervisors and managers include a performance measure addressing compliance with this Policy; and ensuring that
+supervisors and managers are appropriately rated on the measure.<br/>
+(4) Receiving reports alleging violations of this Policy and making or directing further inquiries into such reports, as
+appropriate and necessary.<br/>
+(5) Providing oversight, technical assistance, and support to TGS staff to assure compliance with this Policy.<br/>
+(6) Maintaining a written record of reports made and actions taken pursuant to this Policy. These records will be
+maintained in a secure location.<br/>
+(7) Responding to inquiries from TGS staff or their representatives about workplace harassment, including
+explaining information about the requirements of this Policy, as well as the existence of, and filing requirements for,
+other processes that may be available for employees to seek resolution of their disputes.<br/><br/>
+All TGS Staff are expected to:<br/><br/>
+(1) Understand their rights and responsibilities under this Policy;<br/>
+(2) Participate in the periodic training required under this Policy;<br/>
+(3) Refrain from engaging in hostile or abusive conduct;
+                    </TableCell>
+                  </TableRow>
+                </Table>
+              </TableCell>
+            </TableRow>
+            </Table>
+          <Grid className="PageNum">48</Grid>
+        </TableContainer>
+      </Grid>
+
+{/* ----------- Page 58 (49) ----------- */}
+      <Grid xs={12} className="pageBreak" id="49">
+        <TableContainer className="MainTable">
+          <Table className="SecondMainTable">
+            <TableRow className="w100 pl30 pr30">
+              <TableCell className="w100">
+                <Table className="w100">
+                  {/* -*- */}
+                  <TableRow className="w100 mt6">
+                    <TableCell className="w100">
+                    <h1 style={{marginBottom:"0px"}}>Trans-Global Solutions, Inc.<br/>
+                    Field Payroll Personnel</h1>
+                    </TableCell>
+                  </TableRow>
+                  {/* -*- */}
+                  <TableRow className="w100 mt10 font14">
+                    <TableCell className="w100 textJustify">
+(4) Report hostile or abusive conduct by employees or others in the workplace.<br/>
+
+(5) Inform the supervisor of the offending employee, a management official, or the Human Resources Manager if
+subjected to unwelcome hostile or abusive conduct; and<br/>
+
+(6) Fully cooperate in any inquiry or investigation.<br/><br/>
+Supervisors and other management also must:<br/><br/>
+(1) Ensure a workplace free of illegal harassment;<br/>
+(2) Ensure that their subordinates are aware of this Policy and its requirements;<br/>
+(3) Act promptly and effectively to stop hostile or abusive conduct of which they are aware;<br/>
+(4) Notify appropriate officials of reported or observed harassing conduct and of their efforts to correct the conduct;<br/>
+(5) Appropriately evaluate subordinate supervisors and managers of their performance under this Policy.<br/><br/>
+Mechanisms to assist in carrying out these responsibilities are described below.<br/><br/>
+<b class="italic font12">Procedures</b><br/><br/>
+<b>Reporting Hostile or Abusive Conduct.</b><br/>
+(1) Any employee who has been subjected to unwelcome hostile or abusive conduct is encouraged to inform the
+person(s) responsible for the conduct that it is unwelcome and offensive, and request that it cease. If the conduct
+continues, or if the employee is uncomfortable confronting the responsible person(s) about the conduct, s/he should
+report the matter to:<br/>
+<Grid className="pl20">
+(a) The supervisor of the employee engaging in the hostile or abusive conduct;<br/>
+(b) Another supervisor or other management official; or<br/>
+(c) The Human Resources Manager.<br/><br/>
+</Grid>
+(2) Employees who know of hostile or abusive conduct directed at others are encouraged to report the matter to the
+supervisor of the offending employee, another supervisor or other management official, or to the Human Resources
+Manager.<br/><br/>
+(3) Initial contacts to the telephone line or e-mail address will be confidential. Employees may obtain information
+about this policy, or report hostile or abusive conduct to the Human Resources Manager.<br/><br/>
+NOTE: Reports made pursuant to this Policy do NOT replace, substitute, or otherwise satisfy the separate
+obligations of an EEO complaint, negotiated grievance or other statutory process. Unlike this Policy, those
+procedures typically provide for remedial relief to the victims of a violation.<br/><br/>
+<b class="italic font12">Management Response to Harassment Reports.</b><br/><br/>
+(1) Conducting Preliminary Inquiries. A supervisor or manager who receives a report of, or otherwise becomes
+aware of, hostile or abusive conduct involving subordinates within her/his chain-of-command must determine:<br/><br/>
+<Grid className="pl20">
+(a) WHAT conduct is at issue and whether it arguably could be considered hostile or abusive;<br/>
+(b) WHO may be involved;
+</Grid>
+                    </TableCell>
+                  </TableRow>
+                </Table>
+              </TableCell>
+            </TableRow>
+            </Table>
+          <Grid className="PageNum">49</Grid>
+        </TableContainer>
+      </Grid>
+
+{/* ----------- Page 59 (50) ----------- */}
+      <Grid xs={12} className="pageBreak" id="50">
+        <TableContainer className="MainTable">
+          <Table className="SecondMainTable">
+            <TableRow className="w100 pl30 pr30">
+              <TableCell className="w100">
+                <Table className="w100">
+                  {/* -*- */}
+                  <TableRow className="w100 mt6">
+                    <TableCell className="w100">
+                    <h1 style={{marginBottom:"0px"}}>Trans-Global Solutions, Inc.<br/>
+                    Field Payroll Personnel</h1>
+                    </TableCell>
+                  </TableRow>
+                  {/* -*- */}
+                  <TableRow className="w100 mt10 font14">
+                    <TableCell className="w100 textJustify">
+<Grid className="pl20">
+(c) WHETHER any immediate corrective action is required to insulate the alleged victim from further
+hostile or abusive conduct; and<br/>
+(d) WHAT action is necessary and appropriate to otherwise address the report.<br/><br/>
+</Grid>
+(2) Notifying Appropriate Officials of Report.<br/><br/>
+<Grid className="pl20">
+(a) A supervisor or manager who becomes aware of allegedly hostile or abusive conduct involving employees
+outside of his/her chain-of-command must, within one business day, notify the following appropriate officials:<br/><br/>
+<Grid className="pl20">
+1. The harassing employee’s supervisor or, if the conduct implicates the supervisor, the Human Resources
+Manager; and<br/>
+2. The victim's supervisor or, if the conduct implicates the supervisor, the Human Resources Manager.<br/><br/>
+</Grid>
+(b) Supervisors and managers who become aware of hostile or abusive conduct within their chain-of-command
+must, no later than one business day following receipt of the report, notify the Human Resources Manager. This
+notification must include a description of any initial steps taken in response to the conduct and a plan of necessary
+and appropriate action to address the report.<br/>
+(c) When a report is made directly to the Human Resources Manager, s/he shall:<br/>
+<Grid className="pl20">
+1. Immediately acknowledge receipt of the report;<br/>
+2. Notify the Office/Department(s) implicated in the report; and<br/>
+3. Require the Offices/Departments implicated in the report to immediately conduct a preliminary inquiry
+and take any other necessary and appropriate action.<br/><br/>
+</Grid>
+</Grid>
+<b class="italic font12">Performing Further Investigation.</b><br/><br/>
+(1) Deciding whether further investigation is necessary. The Human Resources Manager shall have sole discretion to
+decide whether further investigation is required, or if the preliminary inquiry is sufficient to determine whether
+corrective action is necessary. These decisions are fact specific, and must be made on a case-by-case basis.<br/><br/>
+(2) Deciding how investigations will be carried-out. When the Human Resources Manager determines that further
+investigation is necessary:<br/>
+<Grid className="pl20">
+(a) The Human Resources Manager and the affected Office/Department shall, by agreement, determine
+who will direct further investigations. The Human Resources Manager may engage management officials
+from outside the involved office/department, or an outside investigative service if s/he deems it necessary
+and appropriate.
+(b) The investigation must be conducted swiftly, impartially, and in a manner appropriate to the allegation.<br/><br/>
+</Grid>
+<b class="italic font12">Resolving Conflicts of Interest in Inquiries or Investigations.</b><br/><br/>
+(1) If a manager, supervisor or director is implicated in the potentially harassing conduct, the Human Resources
+Manager shall be responsible for conducting the preliminary inquiry and directing any further investigation that is
+warranted.<br/><br/>
+(2) Any dispute between the affected Office/Department and the Human Resources Manager regarding further
+investigation will be resolved by the Chief Financial Officer.<br/><br/>
+Taking Corrective Action. If it is determined that unwelcome hostile or abusive conduct occurred, corrective
+action will be necessary.
+                    </TableCell>
+                  </TableRow>
+                </Table>
+              </TableCell>
+            </TableRow>
+            </Table>
+          <Grid className="PageNum">50</Grid>
+        </TableContainer>
+      </Grid>
+
+{/* ----------- Page 60 (51) ----------- */}
+      <Grid xs={12} className="pageBreak" id="51">
+        <TableContainer className="MainTable">
+          <Table className="SecondMainTable">
+            <TableRow className="w100 pl30 pr30">
+              <TableCell className="w100">
+                <Table className="w100">
+                  {/* -*- */}
+                  <TableRow className="w100 mt6">
+                    <TableCell className="w100">
+                    <h1 style={{marginBottom:"0px"}}>Trans-Global Solutions, Inc.<br/>
+                    Field Payroll Personnel</h1>
+                    </TableCell>
+                  </TableRow>
+                  {/* -*- */}
+                  <TableRow className="w100 mt10 font14">
+                    <TableCell className="w100 textJustify">
+(1) To determine the appropriate corrective action, the Office/Departments(s) implicated in the report will consult
+with the Human Resources Manager. The action necessary will depend on the severity and/or pervasiveness of the
+offense, the response required in policy to end such conduct, the offender’s disciplinary/conduct history, and other
+surrounding circumstances. A non-exclusive list of possible corrective actions follows:<br/><br/>
+<Grid className="pl20">
+  (a) If the conduct consisted of only occasional remarks that are arguably offensive but not severe,
+  corrective action may consist of no more than discussing the matter with the responsible individual(s),
+  explaining why it was inappropriate, and instructing them that it should not continue.<br/>
+  (b) If more than one person has engaged in inappropriate but not severe conduct, if there is other evidence
+  that employees are not sure about what conduct is appropriate and permissible, or if employees appear
+  unaware of how to properly respond to such conduct, appropriate training should be provided.<br/>
+  (c) If the conduct is more severe or pervasive, including frequent offensive remarks, touching, or other
+  egregious harassing behavior, the employee responsible for the hostile or abusive conduct should be
+  separated from the victim, at least until the matter otherwise can be resolved. This should not be
+  accomplished by transferring the employee who reported or otherwise was the victim of hostile or abusive
+  conduct. If the victim, without having been asked or prompted, specifically requests such a transfer,
+  management should inform the employee that s/he need not leave, and that instead the employee
+  responsible for the hostile or abusive conduct may be transferred. Nonetheless, to the extent possible, the
+  victim's request should be honored.<br/>
+  (d) For the most serious incidents, corrective action may include any disciplinary action otherwise available
+  for violations of conduct standards, such as suspension, demotion, or termination.<br/><br/>
+</Grid>
+(2) Appropriate corrective action, disciplinary or otherwise, up to and including removal will be taken against any
+supervisor or other management official who fails to perform her/his obligations as set forth in this Policy, including
+any unreasonable failure to report known violations of this policy.<br/><br/>
+
+<b class="italic font12">Maintaining Confidentiality, Keeping Records, and Monitoring Compliance.</b><br/><br/>
+
+(1) Maintaining Confidentiality. All reports of hostile or abusive conduct and related information will be
+maintained on a confidential basis to the greatest extent possible. The identity of the employee alleging violations of
+this Policy will be kept confidential, except as necessary to conduct an appropriate investigation into the alleged
+violations or when otherwise required by law.<br/><br/>
+
+(2) Writing Reports and Maintaining Records. A brief written report must be made to the Human Resources
+Manager regarding the final resolution of each allegation of hostile or abusive conduct under this Policy.<br/>
+<Grid className="pl20">
+(a) These reports must identify the individuals implicated, the conduct involved, and the corrective action
+taken, if any. These records must be sufficient to aid the Human Resources Manager in determining how to
+address any future incidents.<br/>
+(b) If requested by the Human Resources Manager, written reports also may include a detailed description
+of the inquiry or investigation, an explanation of any conclusions, the reasoning for any corrective action
+issued, and/or any documents or other tangible evidence obtained during or created as a result of the
+inquiry or investigation.<br/>
+(c) The Human Resources Manager shall maintain the written reports in a secure location. These written
+reports are protected by the Privacy Act, and will be maintained in accordance with its requirements and
+exemptions.<br/><br/>
+</Grid>
+(3) Monitoring the Procedures. The Human Resources Manager must ensure that these procedures are properly
+executed by:
+                    </TableCell>
+                  </TableRow>
+                </Table>
+              </TableCell>
+            </TableRow>
+            </Table>
+          <Grid className="PageNum">51</Grid>
+        </TableContainer>
+      </Grid>
+
+{/* ----------- Page 61 (52) ----------- */}
+      <Grid xs={12} className="pageBreak" id="52">
+        <TableContainer className="MainTable">
+          <Table className="SecondMainTable">
+            <TableRow className="w100 pl30 pr30">
+              <TableCell className="w100">
+                <Table className="w100">
+                  {/* -*- */}
+                  <TableRow className="w100 mt6">
+                    <TableCell className="w100">
+                    <h1 style={{marginBottom:"0px"}}>Trans-Global Solutions, Inc.<br/>
+                    Field Payroll Personnel</h1>
+                    </TableCell>
+                  </TableRow>
+                  {/* -*- */}
+                  <TableRow className="w100 mt10 font14">
+                    <TableCell className="w100 textJustify">
+<Grid className="pl20">
+(a) Monitoring inquiries and investigations under this Policy of reported or otherwise discovered hostile or
+abusive conduct;<br/>
+(b) Providing guidance concerning the information to be gathered and methods to be used during inquiries
+and investigations; and<br/>
+(c) Otherwise assuring that the investigations are swift, thorough, impartial, and appropriate to the
+allegation.<br/><br/>
+</Grid>
+(4) <b>Monitoring the Work Environment.</b> Managers/Directors will be responsible for ensuring that their
+offices/departments are in full compliance with requirements of this Policy. In addition, these officials are
+responsible for monitoring the work environment following a report alleging a violation of this Policy to ensure that
+there are no further violations or incidents of retaliation against any individual who has reported harassment or
+participated in the inquiry or investigation.<br/><br/>
+
+<b>FURTHER INFORMATION.</b> Any TGS employee or employee representative seeking further information
+concerning this Policy may contact the Human Resources Manager.<br/><br/>
+
+<b className="font16 header bold">704 Attendance and Punctuality</b><br/>
+<Grid className="font12">
+Effective Date: 6/2/98<br/>
+Revision Date: 1/1/04<br/><br/>
+</Grid>
+
+To maintain a safe and productive work environment, Trans-Global Solutions, Inc. expects employees to
+be reliable and to be punctual in reporting for scheduled work. Absenteeism and tardiness place a burden
+on other employees and on Trans-Global Solutions, Inc. In the rare instances when employees cannot
+avoid being late to work or are unable to work as scheduled, they should notify their supervisor as soon as
+possible in advance of the anticipated tardiness or absence. Any employee who fails, within three days of
+his/her initial absence, to contact their immediate supervisor or Human Resources will be considered as
+having voluntarily resigned employment.<br/><br/>
+
+Poor attendance and excessive tardiness are disruptive. Either may lead to disciplinary action, up to and
+including termination of employment.<br/><br/>
+
+<b className="font16 header bold">705 Personal Appearance</b><br/>
+<Grid className="font12">
+Effective Date: 6/2/98<br/>
+Revision Date: 1/1/04<br/><br/>
+</Grid>
+Dress, grooming, and personal cleanliness standards contribute to the morale of all employees and affect
+the business image Trans-Global Solutions, Inc. presents to customers and visitors.<br/><br/>
+
+During business hours or when representing Trans-Global Solutions, Inc., you are expected to present a
+clean, neat, and tasteful appearance. You should dress and groom yourself according to the requirements
+of your position and accepted social standards. This is particularly true if your job involves dealing with
+customers or visitors in person.<br/><br/>
+
+Your supervisor or department head is responsible for establishing a reasonable dress code appropriate to
+the job you perform. If your supervisor feels your personal appearance is inappropriate, you may be asked
+to leave the workplace until you are properly dressed or groomed. Under such circumstance, you will not
+be compensated for the time away from work. Consult your supervisor if you have questions as to what
+constitutes appropriate appearance. Where necessary, reasonable accommodation may be made to a person with a disability.
+                    </TableCell>
+                  </TableRow>
+                </Table>
+              </TableCell>
+            </TableRow>
+            </Table>
+          <Grid className="PageNum">52</Grid>
+        </TableContainer>
+      </Grid>
+
+{/* ----------- Page 62 (53) ----------- */}
+      <Grid xs={12} className="pageBreak" id="53">
+        <TableContainer className="MainTable">
+          <Table className="SecondMainTable">
+            <TableRow className="w100 pl30 pr30">
+              <TableCell className="w100">
+                <Table className="w100">
+                  {/* -*- */}
+                  <TableRow className="w100 mt6">
+                    <TableCell className="w100">
+                    <h1 style={{marginBottom:"0px"}}>Trans-Global Solutions, Inc.<br/>
+                    Field Payroll Personnel</h1>
+                    </TableCell>
+                  </TableRow>
+                  {/* -*- */}
+                  <TableRow className="w100 mt10 font14">
+                    <TableCell className="w100 textJustify">
+<b className="font16 header bold">706 Return of Property</b><br/>
+<Grid className="font12">
+Effective Date: 6/2/98<br/>
+Revision Date: 1/1/04<br/><br/>
+</Grid>
+Employees are responsible for all Trans-Global Solutions, Inc. property, materials, or written information
+issued to them or in their possession or control. Employees must return all Trans-Global Solutions, Inc.
+property immediately upon request or upon termination of employment. Where permitted by applicable
+laws, Trans-Global Solutions, Inc. may withhold from the employee's check or final paycheck the cost of
+any items that they have signed and not returned when required. Trans-Global Solutions, Inc. may also
+take all action deemed appropriate to recover or protect its property.<br/><br/>
+
+<b className="font16 header bold">710 Security Inspections</b><br/>
+<Grid className="font12">
+Effective Date: 6/2/98<br/>
+Revision Date: 1/1/04<br/><br/>
+</Grid>
+
+Trans-Global Solutions, Inc. wishes to maintain a work environment that is free of illegal drugs, alcohol,
+firearms, explosives, or other improper materials. To this end, Trans-Global Solutions, Inc. prohibits the
+possession, transfer, sale, or use of such materials on its premises. Trans-Global Solutions, Inc. requires
+the cooperation of all employees in administering this policy.<br/><br/>
+
+Desks, lockers, and other storage devices may be provided for the convenience of employees but remain
+the sole property of Trans-Global Solutions, Inc. Accordingly, they, as well as any articles found within
+them, can be inspected by any agent or representative of Trans-Global Solutions, Inc. at any time, either
+with or without prior notice.<br/><br/>
+
+Trans-Global Solutions, Inc. likewise wishes to discourage theft or unauthorized possession of the
+property of employees, Trans-Global Solutions, Inc., visitors, and customers. To facilitate enforcement of
+this policy, Trans-Global Solutions, Inc. or its representative may inspect not only desks and lockers but
+also persons entering and/or leaving the premises and any packages or other belongings. Any employee
+who wishes to avoid inspection of any articles or materials should not bring such items onto Trans-Global
+Solutions, Inc.'s premises.<br/><br/>
+
+<b className="font16 header bold">712 Solicitation</b><br/>
+<Grid className="font12">
+Effective Date: 6/2/98<br/>
+Revision Date: 1/1/04<br/><br/>
+</Grid>
+In an effort to ensure a productive and harmonious work environment, persons not employed by Trans-
+Global Solutions, Inc. may not solicit or distribute literature in the workplace at any time for any purpose.<br/><br/>
+
+Trans-Global Solutions, Inc. recognizes that employees may have interests in events and organizations
+outside the workplace. However, employees may not solicit or distribute literature concerning these
+activities during working time. (Working time does not include lunch periods, work breaks, or any other
+periods in which employees are not on duty.)<br/><br/>
+
+Examples of impermissible forms of solicitation include:<br/><br/>
+
+* The collection of money, goods, or gifts for political groups
+                    </TableCell>
+                  </TableRow>
+                </Table>
+              </TableCell>
+            </TableRow>
+            </Table>
+          <Grid className="PageNum">53</Grid>
+        </TableContainer>
+      </Grid>
+
+{/* ----------- Page 63 (54) ----------- */}
+      <Grid xs={12} className="pageBreak" id="54">
+        <TableContainer className="MainTable">
+          <Table className="SecondMainTable">
+            <TableRow className="w100 pl30 pr30">
+              <TableCell className="w100">
+                <Table className="w100">
+                  {/* -*- */}
+                  <TableRow className="w100 mt6">
+                    <TableCell className="w100">
+                    <h1 style={{marginBottom:"0px"}}>Trans-Global Solutions, Inc.<br/>
+                    Field Payroll Personnel</h1>
+                    </TableCell>
+                  </TableRow>
+                  {/* -*- */}
+                  <TableRow className="w100 mt10 font14">
+                    <TableCell className="w100 textJustify">
+<Grid className="pl20">
+* The sale of goods, services, or subscriptions outside the scope of official organization
+business<br/>
+* The circulation of petitions<br/>
+* The distribution of literature not approved by the employer<br/>
+* The solicitation of memberships, fees, or dues<br/><br/>
+</Grid>
+In addition, the posting of written solicitations on company bulletin boards is restricted. These bulletin
+boards display important information, and employees should consult them frequently for:<br/>
+<Grid className="pl20">
+* Affirmative Action statement<br/>
+* Internal memoranda<br/>
+* Organization announcements<br/>
+* Payday notice<br/>
+* Workers' compensation insurance information<br/>
+* State disability insurance/unemployment insurance information<br/>
+</Grid>
+If employees have a message of interest to the workplace, they may submit it to the Human Resources
+Manager for approval. All approved messages will be posted by the Human Resources Manager.<br/><br/>
+
+<b className="font16 header bold">716 Progressive Discipline</b><br/>
+<Grid className="font12">
+Effective Date: 6/2/98<br/>
+Revision Date: 1/1/04<br/><br/>
+</Grid>
+The purpose of this policy is to state Trans-Global Solutions, Inc.'s position on administering equitable
+and consistent discipline for unsatisfactory conduct in the workplace. The best disciplinary measure is the
+one that does not have to be enforced and comes from good leadership and fair supervision at all
+employment levels.<br/><br/>
+
+Trans-Global Solutions, Inc.'s own best interest lies in ensuring fair treatment of all employees and in
+making certain that disciplinary actions are prompt, uniform, and impartial. The major purpose of any
+disciplinary action is to correct the problem, prevent recurrence, and prepare the employee for satisfactory
+service in the future.<br/><br/>
+
+Although employment with Trans-Global Solutions, Inc. is based on mutual consent and both the
+employee and Trans-Global Solutions, Inc. have the right to terminate employment at will, with or
+without cause or advance notice, Trans-Global Solutions, Inc. may use progressive discipline at its
+discretion.<br/><br/>
+
+Disciplinary action may call for any of four steps -- verbal warning, written warning, suspension with or
+without pay, or termination of employment -- depending on the severity of the problem and the number of
+occurrences. There may be circumstances when one or more steps are bypassed.<br/><br/>
+
+Progressive discipline means that, with respect to most disciplinary problems, these steps will normally
+be followed: a first offense may call for a verbal warning; a next offense may be followed by a written
+warning; another offense may lead to a suspension; and, still another offense may then lead to termination
+of employment.
+                    </TableCell>
+                  </TableRow>
+                </Table>
+              </TableCell>
+            </TableRow>
+            </Table>
+          <Grid className="PageNum">54</Grid>
+        </TableContainer>
+      </Grid>
+
+{/* ----------- Page 64 (55) ----------- */}
+      <Grid xs={12} className="pageBreak" id="55">
+        <TableContainer className="MainTable">
+          <Table className="SecondMainTable">
+            <TableRow className="w100 pl30 pr30">
+              <TableCell className="w100">
+                <Table className="w100">
+                  {/* -*- */}
+                  <TableRow className="w100 mt6">
+                    <TableCell className="w100">
+                    <h1 style={{marginBottom:"0px"}}>Trans-Global Solutions, Inc.<br/>
+                    Field Payroll Personnel</h1>
+                    </TableCell>
+                  </TableRow>
+                  {/* -*- */}
+                  <TableRow className="w100 mt10 font14">
+                    <TableCell className="w100 textJustify">
+Trans-Global Solutions, Inc. recognizes that there are certain types of employee problems that are serious
+enough to justify either a suspension, or, in other situations, termination of employment, without going
+through the usual progressive discipline steps.<br/><br/>
+
+While it is impossible to list every type of behavior that may be deemed a serious offense, the Employee
+Conduct and Work Rules policy includes examples of problems that may result in immediate suspension
+or termination of employment. However, the problems listed are not all necessarily serious offenses, but
+may be examples of unsatisfactory conduct that will trigger progressive discipline.<br/><br/>
+
+By using progressive discipline, we hope that most employee problems can be corrected at an early stage,
+benefiting both the employee and Trans-Global Solutions, Inc. One must remember, neither the employee
+nor Trans-Global Solutions, Inc. is bound to continue the employment relationship if either chooses, at its
+will, to end the relationship at any time.<br/><br/>
+
+<b className="font16 header bold">718 Problem Resolution</b><br/>
+<Grid className="font12">
+Effective Date: 1/1/04<br/>
+Revision Date: <br/><br/>
+</Grid>
+Trans-Global Solutions, Inc. is committed to providing the best possible working conditions for its
+employees. Part of this commitment is encouraging an open and frank atmosphere in which any problem,
+complaint, suggestion, or question receives a timely response from Trans-Global Solutions, Inc.
+supervisors and management.<br/><br/>
+
+Trans-Global Solutions, Inc. strives to ensure fair and honest treatment of all employees. Supervisors,
+managers, and employees are expected to treat each other with mutual respect. Employees are encouraged
+to offer positive and constructive criticism.<br/><br/>
+
+If employees disagree with established rules of conduct, policies, or practices, they can express their
+concern through the problem resolution procedure. No employee will be penalized, formally or
+informally, for voicing a complaint with Trans-Global Solutions, Inc. in a reasonable, business-like
+manner, or for using the problem resolution procedure.<br/><br/>
+
+If a situation occurs when employees believe that a condition of employment or a decision affecting them
+is unjust or inequitable, they are encouraged to make use of the following steps. The employee may
+discontinue the procedure at any step.<br/><br/>
+
+<Grid className="pl20">
+1. Employee presents problem to immediate supervisor after incident occurs. If supervisor is unavailable
+or employee believes it would be inappropriate to contact that person, employee may present problem to
+Department Manager or any other member of management.<br/>
+2. Supervisor responds to problem during discussion or after consulting with appropriate management,
+when necessary. Supervisor documents discussion.<br/>
+3. Employee presents problem to the Human Resources Manager if problem is unresolved.<br/>
+4. Human Resources Manager counsels and advises employee, assists in putting problem in writing, visits
+with employee's manager(s), if necessary, and sends the employees written problem statement to the CEO of the Company.
+</Grid>
+                    </TableCell>
+                  </TableRow>
+                </Table>
+              </TableCell>
+            </TableRow>
+            </Table>
+          <Grid className="PageNum">55</Grid>
+        </TableContainer>
+      </Grid>
+
+{/* ----------- Page 65 (56) ----------- */}
+      <Grid xs={12} className="pageBreak" id="56">
+        <TableContainer className="MainTable">
+          <Table className="SecondMainTable">
+            <TableRow className="w100 pl30 pr30">
+              <TableCell className="w100">
+                <Table className="w100">
+                  {/* -*- */}
+                  <TableRow className="w100 mt6">
+                    <TableCell className="w100">
+                    <h1 style={{marginBottom:"0px"}}>Trans-Global Solutions, Inc.<br/>
+                    Field Payroll Personnel</h1>
+                    </TableCell>
+                  </TableRow>
+                  {/* -*- */}
+                  <TableRow className="w100 mt10 font14">
+                    <TableCell className="w100 textJustify">
+5. CEO reviews and considers problem. CEO informs employee of decision and forwards copy of written
+response to the Human Resources Manager for employee's file. The CEO has full authority to make any
+adjustment deemed appropriate to resolve the problem.<br/><br/>
+Not every problem can be resolved to everyone's total satisfaction, but only through understanding and
+discussion of mutual problems can employees and management develop confidence in each other. This
+confidence is important to the operation of an efficient and harmonious work environment, and helps to
+ensure everyone's job security.<br/><br/>
+
+<b className="font16 header bold">719 Employment Dispute Arbitration</b><br/>
+<Grid className="font12">
+Effective Date: 4/1/15<br/>
+Revision Date: <br/><br/>
+</Grid>
+Trans-Global Solutions, Inc. strives to maintain an amicable and friendly relationship with its present and
+former employers, but does realize that at times that relationship may end in a less than satisfactory
+manner for either party. In order to ensure fair and rapid resolution of employee-employer disputes,
+Trans-Global Solutions, Inc. participates in a mandatory arbitration program.<br/><br/>
+
+Trans-Global Solutions, Inc.’s use of the mandatory arbitration program does not limit the employee’s
+access to legally provided relief available through the Equal Employment Opportunity Comission
+(EEOC), Occupational Safety and Health Administration (OSHA), National Labor Relations
+Board(NLRB), or any other legally established administrative entity.<br/><br/>
+
+Trans-Global Solutions, Inc.’s mandatory arbitration program relies on a neutral arbitrator who issues a
+written award judgement, after having been presented evidence by both parties during an extensive
+discovery process, resolving any type of employee-employer dispute that would otherwise be available in
+a Court of Law. Employment dispute arbitration is available to the employee or former employee at no
+cost.<br/><br/>
+
+<b className="font16 header bold">722 Workplace Etiquette</b><br/>
+<Grid className="font12">
+Effective Date: 1/1/04<br/>
+Revision Date: <br/><br/>
+</Grid>
+Trans-Global Solutions, Inc. strives to maintain a positive work environment where employees treat each
+other with respect and courtesy. Sometimes issues arise when employees are unaware that their behavior
+in the workplace may be disruptive or annoying to others. Many of these day-to-day issues can be
+addressed by politely talking with a co-worker to bring the perceived problem to his or her attention. In
+most cases, common sense will dictate an appropriate resolution. Trans-Global Solutions, Inc. encourages
+all employees to keep an open mind and graciously accept constructive feedback or a request to change
+behavior that may be affecting another employee's ability to concentrate and be productive.<br/><br/>
+
+The following workplace etiquette guidelines are not necessarily intended to be hard and fast work rules
+with disciplinary consequences. They are simply suggestions for appropriate workplace behavior to help
+everyone be more conscientious and considerate of co-workers and the work environment. Please contact
+the Human Resources Manager if you have comments, concerns, or suggestions regarding these
+workplace etiquette guidelines.
+                    </TableCell>
+                  </TableRow>
+                </Table>
+              </TableCell>
+            </TableRow>
+            </Table>
+          <Grid className="PageNum">56</Grid>
+        </TableContainer>
+      </Grid>
+
+{/* ----------- Page 66 (57) ----------- */}
+      <Grid xs={12} className="pageBreak" id="57">
+        <TableContainer className="MainTable">
+          <Table className="SecondMainTable">
+            <TableRow className="w100 pl30 pr30">
+              <TableCell className="w100">
+                <Table className="w100">
+                  {/* -*- */}
+                  <TableRow className="w100 mt6">
+                    <TableCell className="w100">
+                    <h1 style={{marginBottom:"0px"}}>Trans-Global Solutions, Inc.<br/>
+                    Field Payroll Personnel</h1>
+                    </TableCell>
+                  </TableRow>
+                  {/* -*- */}
+                  <TableRow className="w100 mt10 font14">
+                    <TableCell className="w100 textJustify">
+<Grid className="pl20">
+  * Keep the work area orderly and picked up.<br/>
+  * Avoid public accusations or criticisms of other employees. Address such issues privately
+  with those involved or your supervisor.<br/>
+  * Try to minimize unscheduled interruptions of other employees while they are working.<br/>
+  * Be conscious of how your voice travels, and try to lower the volume of your voice when
+  talking on the phone or to others in open areas.<br/>
+  * Keep socializing to a minimum, and try to conduct conversations in areas where the noise
+  will not be distracting to others.<br/>
+  * Try not to block walkways or work areas while carrying on conversations.<br/>
+  * Refrain from using inappropriate language (swearing).<br/>
+  * Avoid discussions of your personal life/issues in public conversations that can be easily
+  overheard.<br/>
+  * Monitor the volume when listening to music, voice mail, or a speakerphone that others can
+  hear.<br/>
+  * Clean up after yourself and do not leave behind waste, trash or a messy work area.<br/><br/>
+</Grid>
+<b className="font16 header bold">780 Open-door Policy</b><br/>
+<Grid className="font12">
+Effective Date: 6/2/98<br/>
+Revision Date: 1/1/04<br/><br/>
+</Grid>
+
+Trans-Global Solutions, Inc. promotes an atmosphere whereby employees can talk freely with members
+of the management staff. Employees are encouraged to openly discuss with their supervisor any problems
+so appropriate action may be taken. If the supervisor cannot be of assistance, the Human Resources
+Manager is available for consultation and guidance. Trans-Global Solutions, Inc. is interested in all of our
+employees' success and happiness with us. We, therefore, welcome the opportunity to help employees
+whenever feasible.<br/><br/>
+
+<b className="font16 header bold">800 Life-Threatening Illnesses in the Workplace</b><br/>
+<Grid className="font12">
+Effective Date: 6/2/98<br/>
+Revision Date: 1/1/04<br/><br/>
+</Grid>
+Employees with life-threatening illnesses, such as cancer, heart disease, and AIDS, often wish to continue
+their normal pursuits, including work, to the extent allowed by their condition. Trans-Global Solutions,
+Inc. supports these endeavors as long as employees are able to meet acceptable performance standards. As
+in the case of other disabilities, Trans-Global Solutions, Inc. will make reasonable accommodations in
+accordance with all legal requirements, to allow qualified employees with life-threatening illnesses to
+perform the essential functions of their jobs without presenting a direct threat to the health and safety of
+others.<br/><br/>
+
+Medical information on individual employees is treated confidentially. Trans-Global Solutions, Inc. will
+take reasonable precautions to protect such information from inappropriate disclosure. Managers and
+other employees have a responsibility to respect and maintain the confidentiality of employee medical
+information. Anyone inappropriately disclosing such information is subject to disciplinary action, up to
+and including termination of employment.<br/><br/>
+
+Employees with questions or concerns about life-threatening illnesses are encouraged to contact the
+Human Resources Manager for information and referral to appropriate services and resources.
+                    </TableCell>
+                  </TableRow>
+                </Table>
+              </TableCell>
+            </TableRow>
+            </Table>
+          <Grid className="PageNum">57</Grid>
+        </TableContainer>
+      </Grid>
+
+{/* ----------- Page 67 880 Asset Protection Help Line (58) ----------- */}
+      <Grid xs={12} className="pageBreak" id="58">
+        <TableContainer className="MainTable">
+          <Table className="SecondMainTable">
+            <TableRow className="w100 pl30 pr30">
+              <TableCell className="w100">
+                <Table className="w100">
+                  {/* -*- */}
+                  <TableRow className="w100 mt6">
+                    <TableCell className="w100">
+                    <h1 style={{marginBottom:"0px"}}>Trans-Global Solutions, Inc.<br/>
+                    Field Payroll Personnel</h1>
+                    </TableCell>
+                  </TableRow>
+                  {/* -*- */}
+                  <TableRow className="w100 mt10 font14">
+                    <TableCell className="w100 textJustify">
+<b className="font16 header bold">880 Asset Protection Help Line</b><br/>
+<Grid className="font12">
+Effective Date: 1/1/04<br/>
+Revision Date: <br/><br/>
+</Grid>
+The Trans-Global Solutions, Inc. Asset Protection Help Line at 1-800-735-3277 was established for the
+purpose of providing employees, as well as agents and representatives of the Company, with the resource
+and support necessary to identify and report any matter which could be illegal, wrong, or in violation of
+Company Policy. We expect all employees and agents of the Company to be truthful, honest and as
+accurate as possible in all Company related matters. Accurate and complete information is important for
+the efficient and proper management of our business. Anonymous communications are accepted on this
+help line. The Asset Protection Help Line provides an opportunity for employees to protect the
+Company's assets and other property as they would their own.
+                    </TableCell>
+                  </TableRow>
+                </Table>
+              </TableCell>
+            </TableRow>
+            </Table>
+          <Grid className="PageNum">58</Grid>
+        </TableContainer>
+      </Grid>
+
+{/* ----------- Page 68 880 Asset Protection Help Line (59) ----------- */}
+      <Grid xs={12} className="pageBreak" id="59">
+        <TableContainer className="MainTable">
+          <Table className="SecondMainTable">
+            <TableRow className="w100 pl30 pr30">
+              <TableCell className="w100">
+                <Table className="w100">
+                  {/* -*- */}
+                  <TableRow className="w100 mt6">
+                    <TableCell className="w100">
+                    <h1 style={{marginBottom:"0px"}}>Trans-Global Solutions, Inc.<br/>
+                    Field Payroll Personnel</h1>
+                    </TableCell>
+                  </TableRow>
+                  {/* -*- */}
+                  <TableRow className="w100 mt10 font14">
+                    <TableCell className="w100 textJustify">
+<b className="font16 header bold">EMPLOYEE ACKNOWLEDGEMENT FORM</b><br/><br/>
+
+The employee handbook describes important information about Trans-Global Solutions, Inc.,
+and I understand that I should consult the Human Resources Manager regarding any questions
+not answered in the handbook. I have specifically been provided a copy of the Company's
+Environmental Health and Safety Policy Statement and understand that pursuant to that policy I
+should alert management of any violations as soon as possible. I have entered into my
+employment relationship with Trans-Global Solutions, Inc. voluntarily and acknowledge that
+there is no specified length of employment. Accordingly, either I or Trans-Global Solutions, Inc.
+can terminate the relationship at will, with or without cause, at any time. Since the information,
+policies, and benefits described here are necessarily subject to change, I acknowledge that
+revisions to the handbook may occur, except to Trans-Global Solutions, Inc.'s policy of
+employment-at-will. All such changes will be communicated through official notices, and I
+understand that revised information may supersede, modify, or eliminate existing policies. Only
+the Chief Executive Officer of Trans-Global Solutions, Inc. has the ability to adopt any revisions
+to the policies in this handbook.<br/><br/>
+
+Furthermore, I acknowledge that this handbook is neither a contract of employment nor a legal
+document. I have received the handbook, and I understand that it is my responsibility to read and
+comply with the policies contained in this handbook and any revisions made to it.
+                    </TableCell>
+                  </TableRow>
+                  {/* -*- */}
+                  <TableRow className="w100 mt30">
+                    <TableCell className="w100 row">
+                    EMPLOYEE'S NAME (printed):
+                    <input type="text" name="textfield" id="textfield" className="w h18 pl8 bn bb" />
+                    </TableCell>
+                  </TableRow>
+                  {/* -*- */}
+                  <TableRow className="w100 mt30">
+                    <TableCell className="w100 row">
+                    EMPLOYEE'S SIGNATURE:
+                    <input type="text" name="textfield" id="textfield" className="w h18 pl8 bn bb" />
+                    </TableCell>
+                  </TableRow>
+                  {/* -*- */}
+                  <TableRow className="w100 mt30">
+                    <TableCell className="w100 row">
+                    DATE:
+                    <input type="text" name="textfield" id="textfield" className="w h18 pl8 bn bb" />
+                    </TableCell>
+                  </TableRow>
+                </Table>
+              </TableCell>
+            </TableRow>
+            </Table>
+          <Grid className="PageNum">59</Grid>
         </TableContainer>
       </Grid>
       <Acknowledge/>
