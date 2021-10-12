@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import {
   Grid,
@@ -22,7 +22,6 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 /** Local Libraries, functions & dependencies */
 import { helpers } from '../helpers';
 
-console.log(helpers);
 
 const {
   capitalize
@@ -33,13 +32,23 @@ const useStyles = makeStyles((theme) => ({
     width: theme.spacing(17),
     height: theme.spacing(17),
   },
+  DisplayNone: {
+    display: 'none'
+  }
 }));
+
 const PageHeader = () => {
   const classes = useStyles();
+
+  const [authenticatedHeader, setAuthHeader] = useState(
+    localStorage.getItem('access_jwt') || ''
+  )
+
   useEffect(() => {
     let clone = document.querySelector('#PageTitle').cloneNode(true);
     document.querySelector('h1').appendChild(clone);
   }, []);
+
   const MenuOpen = (event) => {
     var element = document.getElementById("LeftContol");
     element.classList.remove("CloseMenu");
@@ -84,16 +93,24 @@ const PageHeader = () => {
     localStorage.getItem('user_profile')
   );
 
-  let {
-    firstName,
-    lastName
-  } = userProfile;
+  if (userProfile) {
+    var {
+      firstName = '',
+      lastName = '',
+    } = userProfile;
 
-  firstName = capitalize(firstName);
-  
-  lastName = capitalize(lastName);
-  
-  const withoutMiddleFullname = `${firstName} ${lastName}`; 
+    firstName = capitalize(firstName);
+
+    lastName = capitalize(lastName);
+
+    var withoutMiddleFullname = `${firstName} ${lastName}`;
+  }
+
+  /********************************************************** */
+
+  /** Setting Header styles if the user is authenticated */
+
+  const headerClassName = authenticatedHeader ? '' : classes.DisplayNone;
 
   /********************************************************** */
 
@@ -105,7 +122,11 @@ const PageHeader = () => {
             <Button onClick={MenuOpen} />
             <h1></h1>
           </Grid>
-          <Grid xs={9} container justify="flex-end" alignItems="center">
+          <Grid xs={9}
+            container
+            justify="flex-end"
+            alignItems="center"
+            className={headerClassName}>
             <Grid lg={12} container justify="flex-end">
               <Grid xs className="HeaderSearchBox">
                 <Button></Button>
