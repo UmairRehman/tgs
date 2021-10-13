@@ -6,7 +6,8 @@ import {
   Typography,
   Button,
   List,
-  ListItem
+  ListItem,
+  FormControl
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import TextField from '@material-ui/core/TextField';
@@ -92,6 +93,96 @@ const Questionnaire = () => {
 //         <MobileScreen />
 //     )
 //   }
+
+    const [hairTest, setHairTest] = useState('')
+    const [drugTest, setDrugTest] = useState('')
+
+    const [prison, setPrison] = useState('')
+
+    const [accommodation, setAccommodation] = useState('')
+
+    const [comment, setComment] = useState('')
+
+    const [availability, setAvailability] = useState('')
+
+    const [language, setLanguage] = useState('')
+
+    const [bilingual, setBilingual] = useState('')
+
+    const [bilingualLanguage, setBilingualLanguage] = useState('')
+
+    const [overTime, setOverTime] = useState('')
+
+    const [shift, setShitf] = useState('')
+    
+    const [holidays, setHolidays] = useState('')
+    
+    const [workWeekends, setWorkWeekends] = useState('')
+
+    const [travels, setTravels] = useState('')
+
+    const [relocate, setRelocate] = useState('')
+
+    const [tgsComment, setTgsComment] = useState('')
+
+    const [wordExperience, setWordExperience] = useState('')
+
+    const [workBefore, setWorkBefore] = useState('')
+
+
+    async function onSubmit(){
+        let data = {
+            hairTest : hairTest,
+            drugTest : drugTest,
+            prison : prison,
+            accommodation : accommodation,
+            comment : comment,
+            availability : availability,
+            language : language,
+            bilingual : bilingual,
+            bilingualLanguage : bilingualLanguage,
+            overTime : overTime,
+            shift : shift,
+            holidays : holidays,
+            workWeekends : workWeekends,
+            travels : travels,
+            relocate : relocate,
+            tgsComment : tgsComment,
+            wordExperience : wordExperience,
+            wordExperience : wordExperience
+        }
+
+        // DRY KISS
+        // WET0KISS <<
+
+        // if 
+        // (
+        //     data.hairTest == '' && 
+        //     data.drugTest == '' && 
+        //     data.prison  == '' && 
+        //     data.accommodation  == '' && 
+        //     data.comment  == '' && 
+        //     data.availability  == '' && 
+        //     data.language  == '' &&
+        //     data.bilingual  == '' && 
+        //     data.bilingualLanguage  == '' && 
+        //     data.overTime  == '' && 
+        //     data.shift  == '' && 
+        //     data.prison  == ''
+        // )
+
+        console.log(data)
+    } 
+
+    useEffect(() => {
+               
+    },[])
+
+
+
+
+
+
   return (
     <Grid container xs={12} className="Liq-Container HRPortal">
       <Grid xs={12} md={2} className="LeftContol" id="LeftContol">
@@ -128,6 +219,7 @@ const Questionnaire = () => {
                                 options={Follicle}
                                 className="w100p"
                                 renderInput={(params) => <TextField {...params} variant="outlined" placeholder="Select"/>}
+                                onChange={(events, newValues)=>setHairTest(newValues)}
                             />
                         </Grid>
                     </Grid>
@@ -142,6 +234,7 @@ const Questionnaire = () => {
                                 options={Follicle}
                                 className="w100p"
                                 renderInput={(params) => <TextField {...params} variant="outlined" placeholder="Select"/>}
+                                onChange={(events, newValues)=>setDrugTest(newValues)}
                             />
                         </Grid>
                     </Grid>
@@ -156,6 +249,7 @@ const Questionnaire = () => {
                                 options={Follicle}
                                 className="w100p"
                                 renderInput={(params) => <TextField {...params} variant="outlined" placeholder="Select"/>}
+                                onChange={(events, newValues)=>setPrison(newValues)}
                             />
                         </Grid>
                     </Grid>
@@ -170,6 +264,7 @@ const Questionnaire = () => {
                                 options={Follicle}
                                 className="w100p"
                                 renderInput={(params) => <TextField {...params} variant="outlined" placeholder="Select"/>}
+                                onChange={(events, newValues)=>setAccommodation(newValues)}
                             />
                         </Grid>
                     </Grid>
@@ -179,10 +274,13 @@ const Questionnaire = () => {
                             <Grid xs={12} className="mb14">
                             If no, Please Explain:
                             </Grid>
-                            <TextField id="outlined-basic" placeholder="Comment here" variant="outlined" className="w100p"/>
+                            <FormControl>
+
+                            <TextField required id="outlined-basic" onChange={(e)=> setComment(e.target.value)} placeholder="Comment here" variant="outlined" className="w100p"/>
                             <Typography variant="h6" className="MuiTypography-subtitle2 MuiTypography-colorTextSecondary" component="h6">
                                 Please leave this field empty if you have no comments
                             </Typography>
+                            </FormControl>
                         </Grid>
                     </Grid>
 
@@ -197,6 +295,8 @@ const Questionnaire = () => {
                                 options={Follicle}
                                 className="w100p"
                                 renderInput={(params) => <TextField {...params} variant="outlined" placeholder="Select"/>}
+                                onChange={(events, newValues)=>setAvailability(newValues)}
+
                             />
                         </Grid>
                     </Grid>
@@ -211,6 +311,7 @@ const Questionnaire = () => {
                                 options={Follicle}
                                 className="w100p"
                                 renderInput={(params) => <TextField {...params} variant="outlined" placeholder="Select"/>}
+                                onChange={(events, newValues)=>setLanguage(newValues)} 
                             />
                         </Grid>
                     </Grid>
@@ -225,6 +326,7 @@ const Questionnaire = () => {
                                 options={Follicle}
                                 className="w100p"
                                 renderInput={(params) => <TextField {...params} variant="outlined" placeholder="Select"/>}
+                                onChange={(events, newValues)=>setBilingual(newValues)}
                             />
                         </Grid>
                     </Grid>
@@ -234,7 +336,7 @@ const Questionnaire = () => {
                             <Grid xs={12} className="mb14">
                             If yes, What lanuage:
                             </Grid>
-                            <TextField id="outlined-basic" placeholder="Comment here" variant="outlined" className="w100p"/>
+                            <TextField id="outlined-basic" onChange={(e)=> setBilingualLanguage(e.target.value)} placeholder="Comment here" variant="outlined" className="w100p"/>
                             <Typography variant="h6" className="MuiTypography-subtitle2 MuiTypography-colorTextSecondary" component="h6">
                                 Please leave this field empty if you have no comments
                             </Typography>
@@ -256,6 +358,7 @@ const Questionnaire = () => {
                                 options={Follicle}
                                 className="w100p"
                                 renderInput={(params) => <TextField {...params} variant="outlined" placeholder="Select"/>}
+                                onChange={(events, newValues)=>setOverTime(newValues)}
                             />
                         </Grid>
                     </Grid>
@@ -270,6 +373,7 @@ const Questionnaire = () => {
                                 options={Follicle}
                                 className="w100p"
                                 renderInput={(params) => <TextField {...params} variant="outlined" placeholder="Select"/>}
+                                onChange={(events, newValues)=>setShitf(newValues)}
                             />
                         </Grid>
                     </Grid>
@@ -284,6 +388,7 @@ const Questionnaire = () => {
                                 options={Follicle}
                                 className="w100p"
                                 renderInput={(params) => <TextField {...params} variant="outlined" placeholder="Select"/>}
+                                onChange={(events, newValues)=>setHolidays(newValues)}
                             />
                         </Grid>
                     </Grid>
@@ -298,6 +403,7 @@ const Questionnaire = () => {
                                 options={Follicle}
                                 className="w100p"
                                 renderInput={(params) => <TextField {...params} variant="outlined" placeholder="Select"/>}
+                                onChange={(events, newValues)=>setWorkWeekends(newValues)}
                             />
                         </Grid>
                     </Grid>
@@ -312,6 +418,7 @@ const Questionnaire = () => {
                                 options={Follicle}
                                 className="w100p"
                                 renderInput={(params) => <TextField {...params} variant="outlined" placeholder="Select"/>}
+                                onChange={(events, newValues)=>setTravels(newValues)}
                             />
                         </Grid>
                     </Grid>
@@ -326,6 +433,7 @@ const Questionnaire = () => {
                                 options={Follicle}
                                 className="w100p"
                                 renderInput={(params) => <TextField {...params} variant="outlined" placeholder="Select"/>}
+                                onChange={(events, newValues)=>setRelocate(newValues)}
                             />
                         </Grid>
                     </Grid>
@@ -341,7 +449,7 @@ const Questionnaire = () => {
                             <Grid xs={12} className="mb14">
                             How did you hear about TGS
                             </Grid>
-                            <TextField id="outlined-basic" placeholder="Type here" variant="outlined" className="w100p"/>
+                            <TextField id="outlined-basic" onChange={(e)=>setTgsComment(e.target.value)} placeholder="Type here" variant="outlined" className="w100p"/>
                             <Typography variant="h6" className="MuiTypography-subtitle2 MuiTypography-colorTextSecondary" component="h6">
                                 Please leave this field empty if you have no comments
                             </Typography>
@@ -358,19 +466,21 @@ const Questionnaire = () => {
                                 options={Follicle}
                                 className="w100p"
                                 renderInput={(params) => <TextField {...params} variant="outlined" placeholder="Select"/>}
+                                onChange={(events, newValues)=>setWorkBefore(newValues)}
                             />
                         </Grid>
                     </Grid>
-
-
-
-                    
-                   
                 </Grid>
                 <Grid xs={12} className="mt50">
                     <Grid xs={12} md={8} lg={6} container justify="space-between">
                         <Link to="/application" className="LinkButtonBack">Back</Link>
-                        <Link to="/submission" className="LinkButton">Save & Continue</Link>
+                        <Button 
+                            // to="/submission" 
+                            className="LinkButton"
+                            onClick={onSubmit}
+                            >
+                                Save & Continue
+                        </Button>
                     </Grid>
                 </Grid>
             </Grid>
