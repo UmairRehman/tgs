@@ -1,29 +1,167 @@
-import React from "react";
+import React, {useState} from "react";
 import {
-  Grid,TableContainer,Table,TableCell,TableRow,List,ListItem
+  Grid,TableContainer,Table,TableCell,TableRow,List,ListItem,Button,
 } from "@material-ui/core";
 import Avatar from '@material-ui/core/Avatar';
 import { Link } from "react-router-dom";
 import FormHeader from "../../../../Components/FormHeader";
 import { TabletView } from "react-device-detect";
+import DatePicker from 'react-date-picker';
+import { useHistory } from "react-router-dom";
+import html2canvas from 'html2canvas';
+import LocalPrintshopIcon from '@material-ui/icons/LocalPrintshop';
+import CancelIcon from '@material-ui/icons/Cancel';
+
 
 const PostConditionalJobOffer2 = () => {
+
+  let history = useHistory();
+
+  const CloseTab = () => {
+    window.close();
+  }
+
+  const PrintOut = () => {
+      window.print();
+  }
+
+  const [stage, setStage] = useState('Second')
+
+  const [error, setError] = useState('')
+
+  const [date, setDate] = useState(new Date())
+
+  const [pDate, setPDate] = useState(new Date())
+
+  async function submit(){
+
+    let canvas = await(html2canvas(document.querySelector('#capture')));
+    let  image = (canvas.toDataURL('image/png'))
+
+    let data ={
+      name : document.getElementById('name').value,
+      seecurityNumber : document.getElementById('seecurityNumber').value,
+      date : date ,
+      dateOnInjury : document.getElementById('dateOnInjury').value,
+      typeOfInjury : document.getElementById('typeOfInjury').value,
+      injuryDetails1 : [
+        document.getElementById("doctorName[0]").value,
+        document.getElementById("address[0]").value,
+        document.getElementById("phone[0]").value
+      ],
+      injuryDetails2 : [
+        document.getElementById("doctorName[1]").value,
+        document.getElementById("address[1]").value,
+        document.getElementById("phone[1]").value
+      ],
+      injuryOccure : document.getElementById('injuryOccure').value,
+      injuryAddress : document.getElementById('injuryAddress').value,
+      injuryPhone : document.getElementById('injuryPhone').value,
+      comment : document.getElementById('comment').value,
+      bills : document.getElementById('bills').value,
+      howMuch : document.getElementById('howMuch').value,
+      howLong : document.getElementById('howLong').value,
+      howMuch2 : document.getElementById('howMuch2').value,
+      attorney : document.getElementById('attorney').value,
+      settlement : document.getElementById('settlement').value,
+      dateRelease : document.getElementById('dateRelease').value,
+      limitations : document.getElementById('limitations').value,
+      drName : document.getElementById('drName').value,
+      drAddress : document.getElementById('drAddress').value,
+      drPhone : document.getElementById('drPhone').value,
+      confidential : document.getElementById('confidential').value,
+      signature : document.getElementById('signature').value,
+      pDate :pDate,
+      image: image
+    }
+    console.log(data)
+    const nullCheck = Object.values(data)
+    .reduce((total, accumulator) => total || !accumulator, false);
+  
+    if (nullCheck== false){
+      console.log(data)
+    //  save in local storage for submit 
+    localStorage.setItem( 'secondFormDataImage', JSON.stringify(image) )
+    localStorage.setItem( 'secondFormData', JSON.stringify(data) )
+      history.push({
+        pathname : "/documents/post-conditional-job-offer/3",
+      });
+    }
+    else {
+      setError("field must be filed")
+      alert("Error! Field must be Filled")
+    }
+
+  }
+
+
+  async function eventHandle(value){
+    if (value == "second"){
+      submit()  
+    }
+    else {
+     alert('Please go step by step')
+    }
+  }
+
+
   return (
-    <Grid container xs={12} className="LiqForms-Container">
-        <FormHeader/>
+    <Grid id="capture" container xs={12} className="LiqForms-Container">
+        <Grid className="FormsHeader">
+          <List>
+              <ListItem>
+                  <Grid className="FormMenuLogo"></Grid>
+              </ListItem>
+              <ListItem>
+                  {/* <Button>
+                      <SaveIcon/>
+                  </Button> */}
+              </ListItem>
+              <ListItem>
+                  <Button onClick={() => window.print()}>
+                      <LocalPrintshopIcon/>
+                  </Button>
+              </ListItem>
+              <ListItem>
+                  <Button onClick={() => window.close()}>
+                      <CancelIcon/>
+                  </Button>
+              </ListItem>
+          </List>
+        </Grid>
+
         <Grid className="FormPagi">
           <List>
-            <ListItem className="ActiveComplete">
-              <Link to="/documents/post-conditional-job-offer">1</Link>
-            </ListItem>
+            <ListItem >
+              <a onClick={() => eventHandle('first')} 
+                // to="/documents/post-conditional-job-offer"
+              >
+                  1
+              </a>
+            </ListItem> 
             <ListItem className="Active">
-              <Link to="/documents/post-conditional-job-offer/2">2</Link>
+              <a 
+              onClick={() => eventHandle('first')}
+                // to="/documents/post-conditional-job-offer/2"
+                >
+                  2
+              </a>
             </ListItem>
+            
             <ListItem>
-              <Link to="/documents/post-conditional-job-offer/3">3</Link>
+              <a
+                onClick={() => eventHandle('second')}
+                >
+                3
+              </a>
             </ListItem>
+
             <ListItem>
-              <Link to="/documents/post-conditional-job-offer/4">4</Link>
+              <a 
+               onClick={() => eventHandle('forth')}
+              >
+                4
+              </a>
             </ListItem>
           </List>
         </Grid>
@@ -50,28 +188,33 @@ const PostConditionalJobOffer2 = () => {
                   <TableRow className="w100 mt10 row">
                     <TableCell className="w50 row pr10">
                     NAME:
-                    <input type="text" name="textfield" id="textfield" className="w h18 pl8 bn bb" />
+                    <input type="text" name="textfield" id="name" className="w h18 pl8 bn bb" />
                     </TableCell>
                     <TableCell className="w50 row pl10">
                     SOCIAL SECURITY NO.:
-                    <input type="text" name="textfield" id="textfield" className="w h18 pl8 bn bb" />
+                    <input type="text" name="textfield" id="seecurityNumber" className="w h18 pl8 bn bb" />
                     </TableCell>
                   </TableRow>
                   <TableRow className="w100 mt10 row">
                     <TableCell className="w100 row">
                     Address:
-                    <input type="text" name="textfield" id="textfield" className="w h18 pl8 bn bb" />
+                    <DatePicker
+                      onChange={(value) => { setDate(value) }}
+                      value={date}
+                      id="offerDate"
+                      className="datePickerReact"
+                      />
                     </TableCell>
                   </TableRow>
                   <TableRow className="w100 mt10 row">
                     <TableCell className="w4">6.</TableCell>
                     <TableCell className="w50 row pr10">
                       Date of Injury:
-                    <input type="text" name="textfield" id="textfield" className="w h18 pl8 bn bb" />
+                    <input type="text" name="textfield" id="dateOnInjury" className="w h18 pl8 bn bb" />
                     </TableCell>
                     <TableCell className="w50 row pl10">
                     Type of Injury:
-                    <input type="text" name="textfield" id="textfield" className="w h18 pl8 bn bb" />
+                    <input type="text" name="textfield" id="typeOfInjury" className="w h18 pl8 bn bb" />
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -84,30 +227,30 @@ const PostConditionalJobOffer2 = () => {
                   <TableRow className="w100 mt10 row">
                     <TableCell className="w4"></TableCell>
                     <TableCell className="w30 pr20 textCenter">
-                    <input type="text" name="textfield" id="textfield" className="w100 bn bb textCenter mb5" />
+                    <input type="text" name="textfield" id="doctorName[0]" className="w100 bn bb textCenter mb5" />
                     (Name)
                     </TableCell>
                     <TableCell className="w40 pr10 textCenter">
-                    <input type="text" name="textfield" id="textfield" className="w100 bn bb textCenter mb5" />
+                    <input type="text" name="textfield" id="address[0]" className="w100 bn bb textCenter mb5" />
                     (Address)
                     </TableCell>
                     <TableCell className="w30 pl20 textCenter">
-                    <input type="text" name="textfield" id="textfield" className="w100 bn bb textCenter mb5" />
+                    <input type="text" name="textfield" id="phone[0]" className="w100 bn bb textCenter mb5" />
                     (Phone)
                     </TableCell>
                   </TableRow>
                   <TableRow className="w100 mt10 row">
                     <TableCell className="w4"></TableCell>
                     <TableCell className="w30 pr20 textCenter">
-                    <input type="text" name="textfield" id="textfield" className="w100 bn bb textCenter mb5" />
+                    <input type="text" name="textfield" id="doctorName[1]" className="w100 bn bb textCenter mb5" />
                     (Name)
                     </TableCell>
                     <TableCell className="w40 pr10 textCenter">
-                    <input type="text" name="textfield" id="textfield" className="w100 bn bb textCenter mb5" />
+                    <input type="text" name="textfield" id="address[1]" className="w100 bn bb textCenter mb5" />
                     (Address)
                     </TableCell>
                     <TableCell className="w30 pl20 textCenter">
-                    <input type="text" name="textfield" id="textfield" className="w100 bn bb textCenter mb5" />
+                    <input type="text" name="textfield" id="phone[1]" className="w100 bn bb textCenter mb5" />
                     (Phone)
                     </TableCell>
                   </TableRow>
@@ -121,15 +264,15 @@ const PostConditionalJobOffer2 = () => {
                   <TableRow className="w100 mt10 row">
                     <TableCell className="w4"></TableCell>
                     <TableCell className="w30 pr20 textCenter">
-                    <input type="text" name="textfield" id="textfield" className="w100 bn bb textCenter mb5" />
+                    <input type="text" name="textfield" id="injuryOccure" className="w100 bn bb textCenter mb5" />
                     (Name)
                     </TableCell>
                     <TableCell className="w40 pr10 textCenter">
-                    <input type="text" name="textfield" id="textfield" className="w100 bn bb textCenter mb5" />
+                    <input type="text" name="textfield" id="injuryAddress" className="w100 bn bb textCenter mb5" />
                     (Address)
                     </TableCell>
                     <TableCell className="w30 pl20 textCenter">
-                    <input type="text" name="textfield" id="textfield" className="w100 bn bb textCenter mb5" />
+                    <input type="text" name="textfield" id="injuryPhone" className="w100 bn bb textCenter mb5" />
                     (Phone)
                     </TableCell>
                   </TableRow>
@@ -143,10 +286,7 @@ const PostConditionalJobOffer2 = () => {
                   <TableRow className="w100 mt10 row">
                     <TableCell className="w4"></TableCell>
                     <TableCell className="w100">
-                    <input type="text" name="textfield" id="textfield" className="w100 bn bb mt8" />
-                    <input type="text" name="textfield" id="textfield" className="w100 bn bb mt8" />
-                    <input type="text" name="textfield" id="textfield" className="w100 bn bb mt8" />
-                    <input type="text" name="textfield" id="textfield" className="w100 bn bb mt8" />
+                    <input type="text" name="textfield" id="comment" className="w100 bn bb mt8" />
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -162,16 +302,16 @@ const PostConditionalJobOffer2 = () => {
                       Medical Bills
                     </TableCell>
                     <TableCell className="w10 row">
-                      <input type="radio" name="mb" className="mr6 mt2"/>
+                      <input type="radio" name="mb" id="bills" value="yes" className="mr6 mt2"/>
                       Yes
                     </TableCell>
                     <TableCell className="w10 row">
-                      <input type="radio" name="mb" className="mr6 mt2"/>
+                      <input type="radio" name="mb" id="bills" value="no" className="mr6 mt2"/>
                       No
                     </TableCell>
                     <TableCell className="w row">
                       How Much?
-                      <input type="text" name="textfield" id="textfield" className="w bn bb" />
+                      <input type="text" name="textfield" id="howMuch" className="w bn bb" />
                     </TableCell>
                   </TableRow>
                   <TableRow className="w100 mt10 pl30 row">
@@ -181,11 +321,11 @@ const PostConditionalJobOffer2 = () => {
                     </TableCell>
                     <TableCell className="w row pr20">
                       How Long?
-                      <input type="text" name="textfield" id="textfield" className="w bn bb" />
+                      <input type="text" name="textfield" id="howLong" className="w bn bb" />
                     </TableCell>
                     <TableCell className="w row">
                       How Much?
-                      <input type="text" name="textfield" id="textfield" className="w bn bb" />
+                      <input type="text" name="textfield" id="howMuch2" className="w bn bb" />
                     </TableCell>
                   </TableRow>
                   <TableRow className="w100 mt10 pl30 row">
@@ -194,11 +334,11 @@ const PostConditionalJobOffer2 = () => {
                       Attorney’s Fees
                     </TableCell>
                     <TableCell className="w10 row">
-                      <input type="radio" name="at" className="mr6 mt2"/>
+                      <input type="radio" name="at" id="attorney" value="yes" className="mr6 mt2"/>
                       Yes
                     </TableCell>
                     <TableCell className="w10 row">
-                      <input type="radio" name="at" className="mr6 mt2"/>
+                      <input type="radio" name="at" id="attorney" value="no" className="mr6 mt2"/>
                       No
                     </TableCell>
                   </TableRow>
@@ -208,11 +348,11 @@ const PostConditionalJobOffer2 = () => {
                       Settlement
                     </TableCell>
                     <TableCell className="w10 row">
-                      <input type="radio" name="st" className="mr6 mt2"/>
+                      <input type="radio" name="st" id="settlement" value="yes" className="mr6 mt2"/>
                       Yes
                     </TableCell>
                     <TableCell className="w10 row">
-                      <input type="radio" name="st" className="mr6 mt2"/>
+                      <input type="radio" name="st" id="settelment" value="yes" className="mr6 mt2"/>
                       No
                     </TableCell>
                   </TableRow>
@@ -221,7 +361,7 @@ const PostConditionalJobOffer2 = () => {
                     <TableCell className="w4">11.</TableCell>
                     <TableCell className="w100 row">
                      Date Released By Doctor To Go Back To Work:
-                     <input type="text" name="textfield" id="textfield" className="w bn bb" />
+                     <input type="text" name="textfield" id="dateRelease" className="w bn bb" />
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -231,11 +371,11 @@ const PostConditionalJobOffer2 = () => {
                     Any Limitations of Work To Be Done?
                     </TableCell>
                     <TableCell className="w10 row">
-                      <input type="radio" name="mb" className="mr6 mt2"/>
+                      <input type="radio" name="mb" id="limitations" value="yes" className="mr6 mt2"/>
                       Yes
                     </TableCell>
                     <TableCell className="w10 row">
-                      <input type="radio" name="mb" className="mr6 mt2"/>
+                      <input type="radio" name="mb" id="limitations" value="no" className="mr6 mt2"/>
                       No
                     </TableCell>
                     <TableCell className="w row">
@@ -245,15 +385,15 @@ const PostConditionalJobOffer2 = () => {
                   <TableRow className="w100 mt10 row">
                     <TableCell className="w4"></TableCell>
                     <TableCell className="w30 pr20 textCenter">
-                    <input type="text" name="textfield" id="textfield" className="w100 bn bb textCenter mb5" />
+                    <input type="text" name="textfield" id="drName" className="w100 bn bb textCenter mb5" />
                     (Doctor’s Name)
                     </TableCell>
                     <TableCell className="w40 pr10 textCenter">
-                    <input type="text" name="textfield" id="textfield" className="w100 bn bb textCenter mb5" />
+                    <input type="text" name="textfield" id="drAddress" className="w100 bn bb textCenter mb5" />
                     (Address)
                     </TableCell>
                     <TableCell className="w30 pl20 textCenter">
-                    <input type="text" name="textfield" id="textfield" className="w100 bn bb textCenter mb5" />
+                    <input type="text" name="textfield" id="drPhone" className="w100 bn bb textCenter mb5" />
                     (Phone)
                     </TableCell>
                   </TableRow>
@@ -264,11 +404,11 @@ const PostConditionalJobOffer2 = () => {
                     Do You Allow Us Access To Your Confidential Medical Information?
                     </TableCell>
                     <TableCell className="w10 row">
-                      <input type="radio" name="dyau" className="mr6 mt2"/>
+                      <input type="radio" name="dyau" id="confidential" value="yes" className="mr6 mt2"/>
                       Yes
                     </TableCell>
                     <TableCell className="w10 row">
-                      <input type="radio" name="dyau" className="mr6 mt2"/>
+                      <input type="radio" name="dyau" id="confidential" value="no" className="mr6 mt2"/>
                       No
                     </TableCell>
                   </TableRow>
@@ -276,11 +416,16 @@ const PostConditionalJobOffer2 = () => {
                   <TableRow className="w100 mt50 row">
                     <TableCell className="w50 row pr10">
                       YOUR SIGNATURE:
-                      <input type="text" name="textfield" id="textfield" className="w bn bb textCenter mb5" />
+                      <input type="text" name="textfield" id="signature" className="w bn bb textCenter mb5" />
                     </TableCell>
                     <TableCell className="w50 row pl10">
                       DATE:
-                      <input type="text" name="textfield" id="textfield" className="w bn bb textCenter mb5" />
+                      <DatePicker
+                        onChange={(value) => { setPDate(value) }}
+                        value={pDate}
+                        id="offerDate"
+                        className="datePickerReact"
+                      />
                     </TableCell>
                   </TableRow>
                 </Table>
@@ -292,8 +437,8 @@ const PostConditionalJobOffer2 = () => {
             <TableRow className="w100 mt20">
               <TableCell className="w100 textCenter">
               Trans-Global Solutions, Inc.<br/>
-  1735 W. Cardinal Dr., Beaumont, Texas 77705<br/>
-  Phone (409) 720-5413 – Fax (409) 729-7041
+              1735 W. Cardinal Dr., Beaumont, Texas 77705<br/>
+              Phone (409) 720-5413 – Fax (409) 729-7041
               </TableCell>
             </TableRow>
           </Table>

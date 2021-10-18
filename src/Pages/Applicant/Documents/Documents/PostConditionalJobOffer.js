@@ -1,29 +1,157 @@
-import React from "react";
+import React, {useState} from "react";
 import {
-  Grid,TableContainer,Table,TableCell,TableRow,List,ListItem
+  Grid,TableContainer,Table,TableCell,TableRow,List,ListItem,Button
 } from "@material-ui/core";
 import Avatar from '@material-ui/core/Avatar';
 import { Link } from "react-router-dom";
 import FormHeader from "../../../../Components/FormHeader";
 import { TabletView } from "react-device-detect";
+import DatePicker from 'react-date-picker';
+import SaveIcon from '@material-ui/icons/Save';
+import LocalPrintshopIcon from '@material-ui/icons/LocalPrintshop';
+import CancelIcon from '@material-ui/icons/Cancel';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { useHistory } from "react-router-dom";
+import html2canvas from 'html2canvas';
+
 
 const PostConditionalJobOffer = () => {
+  
+  let history = useHistory();
+
+  const CloseTab = () => {
+    window.close();
+  }
+  const PrintOut = () => {
+      window.print();
+  }
+
+  const [date, setDate] = useState(new Date())
+
+  const [error, setError] = useState('')
+
+  const [stage, setStage] = useState("first")
+
+  const [submitDate, setSubmitDate] = useState(new Date())
+
+  const [dateOfBirth, setDateOfBirth] = useState( new Date())
+
+  const [PDFImage, setPDFImage] = useState('')
+
+  async function submit(){
+
+    let canvas = await(html2canvas(document.querySelector('#capture')));
+    let  image = (canvas.toDataURL('image/png'))
+    // setPDFImage(image)
+    
+    let data = {
+      name : document.getElementById('name').value,
+      securityNumber : document.getElementById('securityNumber').value,
+      dateOfBirth : dateOfBirth,
+      health : document.getElementById('health').value,
+      comment : document.getElementById('comment').value,
+      eye : document.getElementById('eye').value,
+      breathing : document.getElementById('breathing').value,
+      allergies : document.getElementById('allergies').value,
+      feet : document.getElementById('feet').value,
+      knees : document.getElementById('knees').value,
+      mental : document.getElementById('mental').value,
+      other : document.getElementById('other').value,
+      disability : document.getElementById('disability').value,
+      healthComment : document.getElementById('healthComment').value,
+      injured : document.getElementById('injured').value,
+      // compensation : document.getElementById('compensation').value,
+      // natural : document.getElementById('natural').value,
+      signature : document.getElementById('signature').value,
+      submitDate : submitDate,
+      image: image
+    }
+    const nullCheck = Object.values(data)
+    .reduce((total, accumulator) => total || !accumulator, false);
+  
+    if (nullCheck== false){
+      console.log(data)
+    //  save in local storage for submit 
+    localStorage.setItem( 'firstFormDataImage', JSON.stringify(image) )
+    localStorage.setItem( 'firstFormData', JSON.stringify(data) )
+      history.push({
+        pathname : "/documents/post-conditional-job-offer/2",
+      });
+    }
+    else {
+      setError("field must be filed")
+      alert("Error! Field must be Filled")
+    }
+  }
+
+
+  async function eventHandle(value){
+    if (value == "second"){
+      submit()
+    }
+    else {
+     alert('Please go step by step')
+    }
+  }
+
+
   return (
-    <Grid container xs={12} className="LiqForms-Container font11">
-        <FormHeader/>
+    <Grid  id="capture" container xs={12} className="LiqForms-Container font11">
+        <Grid className="FormsHeader">
+          <List>
+              <ListItem>
+                  <Grid className="FormMenuLogo"></Grid>
+              </ListItem>
+              <ListItem>
+                  {/* <Button onClick={submit}>
+                      <SaveIcon/>
+                  </Button> */}
+              </ListItem>
+              <ListItem>
+                  <Button onClick={() => window.print()}>
+                      <LocalPrintshopIcon/>
+                  </Button>
+              </ListItem>
+              <ListItem>
+                  <Button onClick={() => window.close()}>
+                      <CancelIcon/>
+                  </Button>
+              </ListItem>
+          </List>
+        </Grid>
         <Grid className="FormPagi">
           <List>
             <ListItem className="Active">
-              <Link to="/documents/post-conditional-job-offer">1</Link>
-            </ListItem>
+              <a onClick={() => eventHandle('first')} 
+                // to="/documents/post-conditional-job-offer"
+              >
+                  1
+              </a>
+            </ListItem> 
             <ListItem>
-              <Link to="/documents/post-conditional-job-offer/2">2</Link>
+              <a 
+              onClick={() => eventHandle('second')}
+                // to="/documents/post-conditional-job-offer/2"
+                >
+                  2
+              </a>
             </ListItem>
+            
             <ListItem>
-              <Link to="/documents/post-conditional-job-offer/3">3</Link>
+              <a
+                onClick={() => eventHandle('third')}
+                // to="/documents/post-conditional-job-offer/3"
+                >
+                3
+              </a>
             </ListItem>
+
             <ListItem>
-              <Link to="/documents/post-conditional-job-offer/4">4</Link>
+              <a 
+               onClick={() => eventHandle('forth')}
+              >
+                4
+              </a>
             </ListItem>
           </List>
         </Grid>
@@ -48,7 +176,7 @@ const PostConditionalJobOffer = () => {
                   <TableRow className="border">
                     <TableCell className="p4 font11">
                     Notice: Due to the requirements of federal law, this questionnaire is to be completed after a conditional job offer has been made. It is very important to answer all questions asked.<br/> 
-NOTICE FOR EMPLOYEES WORKING IN LOUISIANA: Pursuant to Louisiana Law, failure to answer the following questions truthfully may result in your forfeiture of worker’s compensation benefits under R.S.23-1201-1.
+                    NOTICE FOR EMPLOYEES WORKING IN LOUISIANA: Pursuant to Louisiana Law, failure to answer the following questions truthfully may result in your forfeiture of worker’s compensation benefits under R.S.23-1201-1.
                     </TableCell>
                   </TableRow>
                 </Table>
@@ -61,7 +189,7 @@ NOTICE FOR EMPLOYEES WORKING IN LOUISIANA: Pursuant to Louisiana Law, failure to
                       <Table>
                         <TableRow>
                           <TableCell className="pb4">
-                          <input type="text" name="textfield" id="textfield" className="w100 bn bb" />
+                          <input type="text" name="textfield" id="name" className="w100 bn bb" />
                           </TableCell>
                         </TableRow>
                         <TableRow>
@@ -73,7 +201,7 @@ NOTICE FOR EMPLOYEES WORKING IN LOUISIANA: Pursuant to Louisiana Law, failure to
                     <Table>
                         <TableRow>
                           <TableCell className="pb4">
-                          <input type="text" name="textfield" id="textfield" className="w100 bn bb" />
+                          <input type="text" name="textfield" id="securityNumber" className="w100 bn bb" />
                           </TableCell>
                         </TableRow>
                         <TableRow>
@@ -85,7 +213,12 @@ NOTICE FOR EMPLOYEES WORKING IN LOUISIANA: Pursuant to Louisiana Law, failure to
                     <Table>
                         <TableRow>
                           <TableCell className="pb4">
-                          <input type="text" name="textfield" id="textfield" className="w100 bn bb" />
+                          <DatePicker
+                            onChange={(value) => { setDateOfBirth(value) }}
+                            value={dateOfBirth}
+                            id="offerDate"
+                            className="datePickerReact"
+                          />
                           </TableCell>
                         </TableRow>
                         <TableRow>
@@ -100,12 +233,12 @@ NOTICE FOR EMPLOYEES WORKING IN LOUISIANA: Pursuant to Louisiana Law, failure to
                     <TableCell className="w60">
                       <span className="font14 mr16">1.</span>Are you in perfect health?
                     </TableCell>
-                    <TableCell className="w20"><input type="radio" name="Health" className="mr5"/> Yes</TableCell>
-                    <TableCell className="w20"><input type="radio" name="Health" className="mr5"/> No</TableCell>
+                    <TableCell className="w20"><input type="radio" id="health" value="yes" name="Health" className="mr5"/> Yes</TableCell>
+                    <TableCell className="w20"><input type="radio"  id="health" value="no" name="Health" className="mr5"/> No</TableCell>
                   </TableRow>
                   <TableRow className="w100">
                     <TableCell className="w100 row nowarp justify-between">
-                    <span className="font14 mr10"></span>If not, please explain:<input type="text" name="textfield" id="textfield" className="w78 bn bb" />
+                    <span className="font14 mr10"></span>If not, please explain:<input name="comment" type="text" name="textfield" id="comment" className="w78 bn bb" />
                     </TableCell>
                   </TableRow>
                 </Table>
@@ -121,48 +254,48 @@ NOTICE FOR EMPLOYEES WORKING IN LOUISIANA: Pursuant to Louisiana Law, failure to
                       <Table className="w60">
                         <TableRow className="w100 row mt4">
                           <TableCell className="w60">Eyes or Ears</TableCell>
-                          <TableCell className="w20"><input type="radio" name="Health1" className="mr5"/> Yes</TableCell>
-                          <TableCell className="w20"><input type="radio" name="Health1" className="mr5"/> No</TableCell>
+                          <TableCell className="w20"><input id="eye" value="yes" type="radio" name="Health1" className="mr5"/> Yes</TableCell>
+                          <TableCell className="w20"><input id="eye" value="no" type="radio" name="Health1" className="mr5"/> No</TableCell>
                         </TableRow>
                         <TableRow className="w100 row mt4">
                           <TableCell className="w60">Breathing</TableCell>
-                          <TableCell className="w20"><input type="radio" name="Health2" className="mr5"/> Yes</TableCell>
-                          <TableCell className="w20"><input type="radio" name="Health2" className="mr5"/> No</TableCell>
+                          <TableCell className="w20"><input type="radio"  id="breathing" value="yes" name="Health2" className="mr5"/> Yes</TableCell>
+                          <TableCell className="w20"><input type="radio" id="breathing"  name="Health2" className="mr5"/> No</TableCell>
                         </TableRow>
                         <TableRow className="w100 row mt4">
                           <TableCell className="w60">Allergies</TableCell>
-                          <TableCell className="w20"><input type="radio" name="Health3" className="mr5"/> Yes</TableCell>
-                          <TableCell className="w20"><input type="radio" name="Health3" className="mr5"/> No</TableCell>
+                          <TableCell className="w20"><input type="radio"  id="allergies" value="yes" name="Health3" className="mr5"/> Yes</TableCell>
+                          <TableCell className="w20"><input type="radio"  id="allergies" value="no" name="Health3" className="mr5"/> No</TableCell>
                         </TableRow>
                         <TableRow className="w100 row mt4">
                           <TableCell className="w60">Back or Neck</TableCell>
-                          <TableCell className="w20"><input type="radio" name="Health4" className="mr5"/> Yes</TableCell>
-                          <TableCell className="w20"><input type="radio" name="Health4" className="mr5"/> No</TableCell>
+                          <TableCell className="w20"><input type="radio" id="back" value="yes" name="Health4" className="mr5"/> Yes</TableCell>
+                          <TableCell className="w20"><input type="radio" id="back" value="no" name="Health4" className="mr5"/> No</TableCell>
                         </TableRow>
                         <TableRow className="w100 row mt4">
                           <TableCell className="w60">Feet, Legs, Arms, or Hands</TableCell>
-                          <TableCell className="w20"><input type="radio" name="Health5" className="mr5"/> Yes</TableCell>
-                          <TableCell className="w20"><input type="radio" name="Health5" className="mr5"/> No</TableCell>
+                          <TableCell className="w20"><input type="radio" id="feet" value="yes" name="Health5" className="mr5"/> Yes</TableCell>
+                          <TableCell className="w20"><input type="radio" id="feet" value="no" name="Health5" className="mr5"/> No</TableCell>
                         </TableRow>
                         <TableRow className="w100 row mt4">
                           <TableCell className="w60">Knees</TableCell>
-                          <TableCell className="w20"><input type="radio" name="Health6" className="mr5"/> Yes</TableCell>
-                          <TableCell className="w20"><input type="radio" name="Health6" className="mr5"/> No</TableCell>
+                          <TableCell className="w20"><input type="radio" id="knees" value="yes" name="Health6" className="mr5"/> Yes</TableCell>
+                          <TableCell className="w20"><input type="radio" id="knees" value="no" name="Health6" className="mr5"/> No</TableCell>
                         </TableRow>
                         <TableRow className="w100 row mt4">
                           <TableCell className="w60">Nervous/Mental Disorder</TableCell>
-                          <TableCell className="w20"><input type="radio" name="Health7" className="mr5"/> Yes</TableCell>
-                          <TableCell className="w20"><input type="radio" name="Health7" className="mr5"/> No</TableCell>
+                          <TableCell className="w20"><input type="radio" id="mental" value="yes" name="Health7" className="mr5"/> Yes</TableCell>
+                          <TableCell className="w20"><input type="radio" id="mental" value="no" name="Health7" className="mr5"/> No</TableCell>
                         </TableRow>
                         <TableRow className="w100 row mt4">
                           <TableCell className="w60">Other</TableCell>
-                          <TableCell className="w20"><input type="radio" name="Health8" className="mr5"/> Yes</TableCell>
-                          <TableCell className="w20"><input type="radio" name="Health8" className="mr5"/> No</TableCell>
+                          <TableCell className="w20"><input type="radio" id="other" value="yes" name="Health8" className="mr5"/> Yes</TableCell>
+                          <TableCell className="w20"><input type="radio" id="other" value="no" name="Health8" className="mr5"/> No</TableCell>
                         </TableRow>
                         <TableRow className="w100 row mt4">
                           <TableCell className="w60">Have you any disability, physical or mental, which would prevent you from performing specific kinds of work in the job(s) applied for?</TableCell>
-                          <TableCell className="w20"><input type="radio" name="Health10" className="mr5"/> Yes</TableCell>
-                          <TableCell className="w20"><input type="radio" name="Health10" className="mr5"/> No</TableCell>
+                          <TableCell className="w20"><input type="radio" id="disability" value="yes" name="Health10" className="mr5"/> Yes</TableCell>
+                          <TableCell className="w20"><input type="radio" id="disability" value="no" name="Health10" className="mr5"/> No</TableCell>
                         </TableRow>
                       </Table>
                     </TableCell>
@@ -174,8 +307,7 @@ NOTICE FOR EMPLOYEES WORKING IN LOUISIANA: Pursuant to Louisiana Law, failure to
                   </TableRow>
                   <TableRow className="w100">
                     <TableCell className="w100">
-                    <input type="text" name="textfield" id="textfield" maxLength="90" className="w100 bn bb" />
-                    <input type="text" name="textfield" id="textfield" maxLength="90" className="w100 bn bb mt4" />
+                    <input type="text" name="textfield" id="healthComment" maxLength="90" className="w100 bn bb" />
                     </TableCell>
                   </TableRow>
                 </Table>
@@ -187,8 +319,8 @@ NOTICE FOR EMPLOYEES WORKING IN LOUISIANA: Pursuant to Louisiana Law, failure to
                       3.	Have you ever been injured on the job?<br/>
                       <span className="font14 mr28"></span>If yes, please give details by completing a supplemental form.
                     </TableCell>
-                    <TableCell className="w20"><input type="radio" name="Healthif1" className="mr5"/> Yes</TableCell>
-                    <TableCell className="w20"><input type="radio" name="Healthif1" className="mr5"/> No</TableCell>
+                    <TableCell className="w20"><input type="radio" id="injured" value="yes" name="Healthif1" className="mr5"/> Yes</TableCell>
+                    <TableCell className="w20"><input type="radio" id="injured" value="no" name="Healthif1" className="mr5"/> No</TableCell>
                   </TableRow>
                   <TableRow className="w100 row mt4">
                     <TableCell className="w60">
@@ -196,8 +328,8 @@ NOTICE FOR EMPLOYEES WORKING IN LOUISIANA: Pursuant to Louisiana Law, failure to
                       Have you ever received worker’s compensation payments?<br/>
                       <span className="font14 mr28"></span>If yes, please give details by completing a supplemental form.
                     </TableCell>
-                    <TableCell className="w20"><input type="radio" name="Healthif2" className="mr5"/> Yes</TableCell>
-                    <TableCell className="w20"><input type="radio" name="Healthif2" className="mr5"/> No</TableCell>
+                    <TableCell className="w20"><input type="radio" id="compensation " value="yes" name="Healthif2" className="mr5"/> Yes</TableCell>
+                    <TableCell className="w20"><input type="radio" id="compensation " value="no" name="Healthif2" className="mr5"/> No</TableCell>
                   </TableRow>
                   <TableRow className="w100 row mt4">
                     <TableCell className="w100">
@@ -214,13 +346,12 @@ NOTICE FOR EMPLOYEES WORKING IN LOUISIANA: Pursuant to Louisiana Law, failure to
                     <TableCell className="w60">
                       <span className="font14 mr28"></span>(Example: Back problems – No heavy lifting.)
                     </TableCell>
-                    <TableCell className="w20"><input type="radio" name="Healthif3" className="mr5"/> Yes</TableCell>
-                    <TableCell className="w20"><input type="radio" name="Healthif3" className="mr5"/> No</TableCell>
+                    <TableCell className="w20"><input type="radio" id="natural " value="yes" name="Healthif3" className="mr5"/> Yes</TableCell>
+                    <TableCell className="w20"><input type="radio" id="natural " value="no" name="Healthif3" className="mr5"/> No</TableCell>
                   </TableRow>
                   <TableRow className="w100 mt6">
                     <TableCell className="w100">
-                    <input type="text" name="textfield" id="textfield" maxLength="90" className="w100 bn bb" />
-                    <input type="text" name="textfield" id="textfield" maxLength="90" className="w100 bn bb mt6" />
+                    <input type="text" name="textfield" id="comment3" maxLength="90" className="w100 bn bb" />
                     </TableCell>
                   </TableRow>
                 </Table>
@@ -240,7 +371,7 @@ NOTICE FOR EMPLOYEES WORKING IN LOUISIANA: Pursuant to Louisiana Law, failure to
                     <TableCell className="w50 pr30">
                       <TableRow className="w100">
                         <TableCell className="w100">
-                        <input type="text" name="textfield" id="textfield" maxLength="90" className="w100 bn bb" />
+                        <input type="text" name="textfield" id="signature" maxLength="90" className="w100 bn bb" />
                         </TableCell>
                       </TableRow>
                       <TableRow className="w100">
@@ -250,7 +381,12 @@ NOTICE FOR EMPLOYEES WORKING IN LOUISIANA: Pursuant to Louisiana Law, failure to
                     <TableCell className="w50 pl30">
                     <TableRow className="w100">
                         <TableCell className="w100">
-                        <input type="text" name="textfield" id="textfield" maxLength="90" className="w100 bn bb" />
+                          <DatePicker
+                            onChange={(value) => { setSubmitDate(value) }}
+                            value={submitDate}
+                            id="offerDate"
+                            className="datePickerReact"
+                          />
                         </TableCell>
                       </TableRow>
                       <TableRow className="w100">

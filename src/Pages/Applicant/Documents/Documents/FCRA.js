@@ -1,16 +1,75 @@
-import React from "react";
+import React, {useState} from "react";
 import {
-  Grid,TableContainer,Table,TableCell,TableRow
+  Grid,TableContainer,Table,TableCell,TableRow, Button, List, ListItem
 } from "@material-ui/core";
 import Avatar from '@material-ui/core/Avatar';
 import { Link } from "react-router-dom";
 import FormHeader from "../../../../Components/FormHeader";
 import { TabletView } from "react-device-detect";
+import SaveIcon from '@material-ui/icons/Save';
+import LocalPrintshopIcon from '@material-ui/icons/LocalPrintshop';
+import CancelIcon from '@material-ui/icons/Cancel';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import DatePicker from 'react-date-picker';
 
 const FCRA = () => {
+
+  
+const CloseTab = () => {
+  window.close();
+}
+const PrintOut = () => {
+  window.print();
+}
+const [error, setError] = useState('')
+
+const [date, setDate] = useState(new Date())
+const [companyDate, setCompanyDate] = useState(new Date())
+
+function submit(){
+  let data={
+    signature : document.getElementById('signature').value,
+    name : document.getElementById('name').value,
+    witnessSignature : document.getElementById('witnessSignature').value,
+    date : date
+  }
+  const nullCheck = Object.values(data)
+  .reduce((total, accumulator) => total || !accumulator, false);
+
+  if (nullCheck== false){
+    console.log(data)
+  }
+  else {
+    setError("field must be filed")
+    alert("Error! Field must be Filled")
+  }
+
+}
+
   return (
     <Grid container xs={12} className="LiqForms-Container">
-        <FormHeader/>
+        <Grid className="FormsHeader">
+          <List>
+              <ListItem>
+                  <Grid className="FormMenuLogo"></Grid>
+              </ListItem>
+              <ListItem>
+                  <Button onClick={submit}>
+                      <SaveIcon/>
+                  </Button>
+              </ListItem>
+              <ListItem>
+                  <Button onClick={() => window.print()}>
+                      <LocalPrintshopIcon/>
+                  </Button>
+              </ListItem>
+              <ListItem>
+                  <Button onClick={() => window.close()}>
+                      <CancelIcon/>
+                  </Button>
+              </ListItem>
+          </List>
+        </Grid>
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow>
@@ -101,18 +160,24 @@ const FCRA = () => {
                     <TableCell className="w100">
                       <TableRow className="w100 row">
                         <TableCell className="w100 row pr16">
-                          Signature <input type="text" name="textfield" id="textfield" className="w h18 pl8 bn bb" />
+                          Signature <input type="text" name="textfield" id="signature" className="w h18 pl8 bn bb" />
                         </TableCell>
                         <TableCell className="w100 row pl16">
-                          Printed Name <input type="text" name="textfield" id="textfield" className="w h18 pl8 bn bb" />
+                          Printed Name <input type="text" name="textfield" id="name" className="w h18 pl8 bn bb" />
                         </TableCell>
                       </TableRow>
                       <TableRow className="w100 row mt20">
                         <TableCell className="w100 row pr16">
-                        Witness Signature <input type="text" name="textfield" id="textfield" className="w h18 pl8 bn bb" />
+                        Witness Signature <input type="text" name="textfield" id="witnessSignature" className="w h18 pl8 bn bb" />
                         </TableCell>
                         <TableCell className="w100 row pl16">
-                          Date <input type="text" name="textfield" id="textfield" className="w h18 pl8 bn bb" />
+                          Date 
+                          <DatePicker
+                            onChange={(value) => { setDate(value) }}
+                            value={date}
+                            id="offerDate"
+                            className="datePickerReact"
+                          />
                         </TableCell>
                       </TableRow>
                     </TableCell>

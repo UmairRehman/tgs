@@ -1,16 +1,63 @@
-import React from "react";
+import React, {useState} from "react";
 import {
-  Grid,TableContainer,Table,TableCell,TableRow,List,ListItem
+  Grid,TableContainer,Table,TableCell,TableRow,List,ListItem,Button
 } from "@material-ui/core";
+import SaveIcon from '@material-ui/icons/Save';
+import LocalPrintshopIcon from '@material-ui/icons/LocalPrintshop';
+import CancelIcon from '@material-ui/icons/Cancel';
 import Avatar from '@material-ui/core/Avatar';
 import { Link } from "react-router-dom";
 import FormHeader from "../../../../Components/FormHeader";
 import { TabletView } from "react-device-detect";
+import DatePicker from 'react-date-picker';
 
 const FuelCardAgreement = () => {
+
+  const [error, setError] = useState('')
+
+  const [printedName, setPrintedName] = useState('')
+
+  const [signature, setSignature] = useState('')
+
+  const [date, setDate] = useState('')
+
+  async function submit(){
+
+    let data = {
+      printedName : printedName,
+      signature : signature,
+      date : date
+    }
+
+    console.log(data)
+  
+  }
+
   return (
     <Grid container xs={12} className="LiqForms-Container">
-        <FormHeader/>
+        {/* <FormHeader/> */}
+        <Grid className="FormsHeader">
+          <List>
+              <ListItem>
+                  <Grid className="FormMenuLogo"></Grid>
+              </ListItem>
+              <ListItem>
+                  <Button onClick={submit}>
+                      <SaveIcon/>
+                  </Button>
+              </ListItem>
+              <ListItem>
+                  <Button onClick={() => window.print()}>
+                      <LocalPrintshopIcon/>
+                  </Button>
+              </ListItem>
+              <ListItem>
+                  <Button onClick={() => window.close()}>
+                      <CancelIcon/>
+                  </Button>
+              </ListItem>
+          </List>
+        </Grid>
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow>
@@ -28,30 +75,30 @@ const FuelCardAgreement = () => {
                   </TableRow>
                   <TableRow className="w100 mt10">
                     <TableCell>
-                    A Wright Express PIN number has been assigned to you in connection with your work for Trans-Global Solutions, Inc.  Each company vehicle has been assigned a card which must remain with the vehicle at all times.  Do not carry cards in your pocket or wallet.  Lost, stolen or missing cards should be reported to management immediately.<br/><br/>
-The Wright Express card is to be used exclusively for fueling company vehicles.  Using the Wright Express card for personal use or to fuel non-assigned vehicles is PROHIBITED, and will result in disciplinary action up to and including termination of employment.  In addition, the following terms of use must be followed at all times:
+                      A Wright Express PIN number has been assigned to you in connection with your work for Trans-Global Solutions, Inc.  Each company vehicle has been assigned a card which must remain with the vehicle at all times.  Do not carry cards in your pocket or wallet.  Lost, stolen or missing cards should be reported to management immediately.<br/><br/>
+                      The Wright Express card is to be used exclusively for fueling company vehicles.  Using the Wright Express card for personal use or to fuel non-assigned vehicles is PROHIBITED, and will result in disciplinary action up to and including termination of employment.  In addition, the following terms of use must be followed at all times:
                     </TableCell>
                   </TableRow>
                   <TableRow className="w100 pl10 ListBullet">
                     <TableCell>
                       <List>
                         <ListItem>
-                        PIN numbers should NOT be shared.  PIN owners are responsible for all fuel purchases made with their PIN numbers.
+                          PIN numbers should NOT be shared.  PIN owners are responsible for all fuel purchases made with their PIN numbers.
                         </ListItem>
                         <ListItem>
-                        PIN numbers must not be kept with the fuel cards.  
+                          PIN numbers must not be kept with the fuel cards.  
                         </ListItem>
                         <ListItem>
-                        Fueling vehicles while the engine is running is prohibited.                        
+                          Fueling vehicles while the engine is running is prohibited.                        
                         </ListItem>
                         <ListItem>
-                        Leaving vehicles unattended while fueling is prohibited.                   
+                          Leaving vehicles unattended while fueling is prohibited.                   
                         </ListItem>
                         <ListItem>
-                        Drivers are responsible for entering all information correctly each time the card is used.                        
+                          Drivers are responsible for entering all information correctly each time the card is used.                        
                         </ListItem>
                         <ListItem>
-                        Drivers should fuel vehicles with regular unleaded gas or diesel.  Premium grade gasoline is restricted.
+                          Drivers should fuel vehicles with regular unleaded gas or diesel.  Premium grade gasoline is restricted.
                         </ListItem>
                       </List>
                     </TableCell>
@@ -64,19 +111,24 @@ The Wright Express card is to be used exclusively for fueling company vehicles. 
                   <TableRow className="w100 mt20">
                     <TableCell className="font16 row w100">
                       Printed Name:
-                      <input type="text" name="textfield" id="textfield" className="w h22 pl8 bn bb" />
+                      <input onChange={(e)=>setPrintedName(e.target.value)} type="text" name="textfield" id="textfield" className="w h22 pl8 bn bb" />
                     </TableCell>
                   </TableRow>
                   <TableRow className="w100 mt20">
                     <TableCell className="font16 row w100">
                       Signature:
-                      <input type="text" name="textfield" id="textfield" className="w h22 pl8 bn bb" />
+                      <input onClick={(e)=>setSignature(e.target.value)} type="text" name="textfield" id="textfield" className="w h22 pl8 bn bb" />
                     </TableCell>
                   </TableRow>
                   <TableRow className="w100 mt20">
                     <TableCell className="font16 row w100">
                       Date:
-                      <input type="text" name="textfield" id="textfield" className="w h22 pl8 bn bb" />
+                      <DatePicker
+                      onChange={(value) => { setDate(value) }}
+                      value={date}
+                      id="offerDate"
+                      className="datePickerReact"
+                    />
                     </TableCell>
                   </TableRow>
                 </Table>
@@ -85,8 +137,8 @@ The Wright Express card is to be used exclusively for fueling company vehicles. 
             <TableRow className="w100 mt20">
               <TableCell className="w100 textCenter">
               Trans-Global Solutions, Inc.<br/>
-  1735 W. Cardinal Dr., Beaumont, Texas 77705<br/>
-  Phone (409) 720-5413 – Fax (409) 729-7041
+              1735 W. Cardinal Dr., Beaumont, Texas 77705<br/>
+              Phone (409) 720-5413 – Fax (409) 729-7041
               </TableCell>
             </TableRow>
           </Table>

@@ -1,16 +1,100 @@
-import React from "react";
+import React, {useState} from "react";
 import {
-  Grid,TableContainer,Table,TableCell,TableRow
+  Grid,TableContainer,Table,TableCell,TableRow, Button, ListItem, List
 } from "@material-ui/core";
 import Avatar from '@material-ui/core/Avatar';
 import { Link } from "react-router-dom";
 import FormHeader from "../../../../Components/FormHeader";
 import { TabletView } from "react-device-detect";
 
+import SaveIcon from '@material-ui/icons/Save';
+import LocalPrintshopIcon from '@material-ui/icons/LocalPrintshop';
+import CancelIcon from '@material-ui/icons/Cancel';
+import DatePicker from 'react-date-picker';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
 const DirectDeposit = () => {
+
+
+  const CloseTab = () => {
+    window.close();
+}
+const PrintOut = () => {
+    window.print();
+}
+
+  const [date, setDate] = useState(new Date())
+
+  const [error, setError] = useState('')
+
+function submit(){
+  let data = { 
+    name: document.getElementById("name").value, 
+    address: document.getElementById("address").value,
+    securityNumber: document.getElementById("securityNumber").value,
+    accountType : [
+      document.getElementById("accountType[0]").value,
+      document.getElementById("accountType[1]").value,
+      document.getElementById("accountType[2]").value
+    ],
+
+    routingNumber : [
+      document.getElementById("routingNumber[0]").value,
+      document.getElementById("routingNumber[1]").value,
+      document.getElementById("routingNumber[2]").value
+    ],
+
+    accountNumber : [
+      document.getElementById("accountNumber[0]").value,
+      document.getElementById("accountNumber[1]").value,
+      document.getElementById("accountNumber[2]").value
+    ],
+
+
+    signature: document.getElementById("signature").value,
+    date: date,
+  }
+
+
+  const nullCheck = Object.values(data)
+  .reduce((total, accumulator) => total || !accumulator, false);
+
+  if (nullCheck== false){
+    console.log(data)
+  }
+  else {
+    setError("field must be filed")
+    alert("Error! Field must be Filled")
+}
+
+
+}
+
+
   return (
     <Grid container xs={12} className="LiqForms-Container">
-        <FormHeader/>
+        <Grid className="FormsHeader">
+          <List>
+              <ListItem>
+                  <Grid className="FormMenuLogo"></Grid>
+              </ListItem>
+              <ListItem>
+                  <Button onClick={submit}>
+                      <SaveIcon/>
+                  </Button>
+              </ListItem>
+              <ListItem>
+                  <Button onClick={() => window.print()}>
+                      <LocalPrintshopIcon/>
+                  </Button>
+              </ListItem>
+              <ListItem>
+                  <Button onClick={() => window.close()}>
+                      <CancelIcon/>
+                  </Button>
+              </ListItem>
+          </List>
+        </Grid>
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow>
@@ -54,24 +138,21 @@ const DirectDeposit = () => {
                       <TableCell className="w60">
                         <TableRow className="w100">
                           <TableCell className="w100 row">
-                          Employee Name: <input type="text" name="textfield" id="textfield" className="w h18 pl8 bn bb" />
+                          Employee Name: <input type="text" name="textfield" id="name" className="w h18 pl8 bn bb" />
                           </TableCell>
                           <TableCell className="w100 mt16 row">
                           Address:
-                          <input type="text" name="textfield" id="textfield" className="w h18 pl8 bn bb" />
+                          <input type="text" name="textfield" id="address" className="w h18 pl8 bn bb" />
                           </TableCell>
                           <TableCell className="w100 mt16 row">
-                          <input type="text" name="textfield" id="textfield" className="w h18 pl8 bn bb" />
-                          </TableCell>
-                          <TableCell className="w100 mt16 row">
-                          Social Security#: <input type="text" name="textfield" id="textfield" className="w h18 pl8 bn bb" />
+                          Social Security#: <input type="text" name="textfield" id="securityNumber" className="w h18 pl8 bn bb" />
                           </TableCell>
                         </TableRow>
                       </TableCell>
                       <TableCell className="w20 pl30 row align-center">
                         <TableRow>
                           <TableCell>
-                            <TableRow className="w20">
+                            {/* <TableRow className="w20">
                               <TableCell className="w100 row">
                               <input type="text" name="textfield" id="textfield" className="w h18 pl8 bn bb" /> New
                               </TableCell>
@@ -80,7 +161,7 @@ const DirectDeposit = () => {
                               <TableCell className="w100 row">
                               <input type="text" name="textfield" id="textfield" className="w h18 pl8 bn bb" /> Chnage
                               </TableCell>
-                            </TableRow>
+                            </TableRow> */}
                           </TableCell>
                         </TableRow>
                       </TableCell>
@@ -100,33 +181,33 @@ const DirectDeposit = () => {
                   <TableRow className="w100 mt20 mb20">
                     <TableCell className="w textCenter pr10">
                     ACCT. TYPE<br/>(C or S)
-                    <input type="text" name="textfield" id="textfield" className="w100 h18 bn bb mt6" />
-                    <input type="text" name="textfield" id="textfield" className="w100 h18 bn bb mt6" />
-                    <input type="text" name="textfield" id="textfield" className="w100 h18 bn bb mt6" />
+                    <input type="text" name="textfield" id="accountType[0]" className="w100 h18 bn bb mt6" />
+                    <input type="text" name="textfield" id="accountType[1]" className="w100 h18 bn bb mt6" />
+                    <input type="text" name="textfield" id="accountType[2]" className="w100 h18 bn bb mt6" />
                     </TableCell>
                     <TableCell className="w textCenter pl10 pr10">
                     ROUTING NUMBER<br/>( Should be 9 Digits)
-                    <input type="text" name="textfield" id="textfield" className="w100 h18 bn bb mt6" />
-                    <input type="text" name="textfield" id="textfield" className="w100 h18 bn bb mt6" />
-                    <input type="text" name="textfield" id="textfield" className="w100 h18 bn bb mt6" />
+                    <input type="text" name="textfield" id="routingNumber[0]" className="w100 h18 bn bb mt6" />
+                    <input type="text" name="textfield" id="routingNumber[1]" className="w100 h18 bn bb mt6" />
+                    <input type="text" name="textfield" id="routingNumber[2]" className="w100 h18 bn bb mt6" />
                     </TableCell>
                     <TableCell className="w textCenter pl10 pr10">
                     ACCOUNT NUMBER<br/><br/>
-                    <input type="text" name="textfield" id="textfield" className="w100 h18 bn bb mt6" />
-                    <input type="text" name="textfield" id="textfield" className="w100 h18 bn bb mt6" />
-                    <input type="text" name="textfield" id="textfield" className="w100 h18 bn bb mt6" />
+                    <input type="text" name="textfield" id="accountNumber[0]" className="w100 h18 bn bb mt6" />
+                    <input type="text" name="textfield" id="accountNumber[1]" className="w100 h18 bn bb mt6" />
+                    <input type="text" name="textfield" id="accountNumber[2]" className="w100 h18 bn bb mt6" />
                     </TableCell>
                     <TableCell className="w textCenter pl10 pr10">
                     FINANCIAL INSTITUTION
-                    <input type="text" name="textfield" id="textfield" className="w100 h18 bn bb mt6" />
-                    <input type="text" name="textfield" id="textfield" className="w100 h18 bn bb mt6" />
-                    <input type="text" name="textfield" id="textfield" className="w100 h18 bn bb mt6" />
+                    <input type="text" name="textfield" id="institute[0]" className="w100 h18 bn bb mt6" />
+                    <input type="text" name="textfield" id="institute[1]" className="w100 h18 bn bb mt6" />
+                    <input type="text" name="textfield" id="institute[2]" className="w100 h18 bn bb mt6" />
                     </TableCell>
                     <TableCell className="w textCenter pl10">
                     AMOUNT<br/>(or Balance)
-                    <input type="text" name="textfield" id="textfield" className="w100 h18 bn bb mt6" />
-                    <input type="text" name="textfield" id="textfield" className="w100 h18 bn bb mt6" />
-                    <input type="text" name="textfield" id="textfield" className="w100 h18 bn bb mt6" />
+                    <input type="text" name="textfield" id="amount[0]" className="w100 h18 bn bb mt6" />
+                    <input type="text" name="textfield" id="amount[2]" className="w100 h18 bn bb mt6" />
+                    <input type="text" name="textfield" id="amount[3]" className="w100 h18 bn bb mt6" />
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -155,13 +236,18 @@ const DirectDeposit = () => {
                     <TableCell className="w40 pr30">
                       <TableRow className="w100">
                         <TableCell className="w100">
-                        <input type="text" name="textfield" id="textfield" className="w100 h18 bn bb mt6 mb6" />
+                        <input type="text" name="textfield" id="signature" className="w100 h18 bn bb mt6 mb6" />
                         Employee Signature
                         </TableCell>
                       </TableRow>
                       <TableRow className="w100 mt30">
                         <TableCell className="w100">
-                        <input type="text" name="textfield" id="textfield" className="w100 h18 bn bb mt6 mb6" />
+                        <DatePicker
+                        onChange={(value) => { setDate(value) }}
+                        value={date}
+                        id="offerDate"
+                        className="datePickerReact"
+                      />
                         Date
                         </TableCell>
                       </TableRow>
