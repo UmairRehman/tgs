@@ -1,16 +1,79 @@
-import React from "react";
+import React, {useState} from "react";
 import {
-  Grid,TableContainer,Table,TableCell,TableRow
+  Grid,TableContainer,Table,TableCell,TableRow, List, ListItem, Button
 } from "@material-ui/core";
 import Avatar from '@material-ui/core/Avatar';
 import { Link } from "react-router-dom";
 import FormHeader from "../../../../Components/FormHeader";
 import { TabletView } from "react-device-detect";
+import SaveIcon from '@material-ui/icons/Save';
+import LocalPrintshopIcon from '@material-ui/icons/LocalPrintshop';
+import CancelIcon from '@material-ui/icons/Cancel';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import DatePicker from 'react-date-picker';
+
+
 
 const ArbitrationAgreement = () => {
+
+  const CloseTab = () => {
+    window.close();
+  }
+  const PrintOut = () => {
+      window.print();
+  }
+
+const [date, setDate] = useState(new Date())
+
+const [companyDate, setCompanyDate] = useState(new Date())
+
+const [error, setError] = useState('')
+
+function submit(){
+  let data = {
+    employe : document.getElementById('employe').value,
+    date : date,
+    company : document.getElementById('company').value,
+    companyDate : companyDate
+  }
+
+  const nullCheck = Object.values(data)
+  .reduce((total, accumulator) => total || !accumulator, false);
+
+  if (nullCheck== false){
+    console.log(data)
+  }
+  else {
+    setError("field must be filed")
+    alert("Error! Field must be Filled")
+  }
+}
+
   return (
     <Grid container xs={12} className="LiqForms-Container">
-        <FormHeader/>
+        <Grid className="FormsHeader">
+          <List>
+              <ListItem>
+                  <Grid className="FormMenuLogo"></Grid>
+              </ListItem>
+              <ListItem>
+                  <Button onClick={submit}>
+                      <SaveIcon/>
+                  </Button>
+              </ListItem>
+              <ListItem>
+                  <Button onClick={() => window.print()}>
+                      <LocalPrintshopIcon/>
+                  </Button>
+              </ListItem>
+              <ListItem>
+                  <Button onClick={() => window.close()}>
+                      <CancelIcon/>
+                  </Button>
+              </ListItem>
+          </List>
+        </Grid>
+
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow>
@@ -228,11 +291,17 @@ const ArbitrationAgreement = () => {
                       </TableRow>
                       <TableRow className="w100 row mt10">
                         <TableCell className="w100 pr16">
-                        <input type="text" name="textfield" id="textfield" className="w100 h18 pl8 bn bb" />
+                        <input type="text" name="textfield" id="employe" className="w100 h18 pl8 bn bb" />
                           Employee:
                         </TableCell>
                         <TableCell className="w100 row pl16">
-                        Dated: <input type="text" name="textfield" id="textfield" className="w h18 pl8 bn bb" />
+                        Dated:
+                        <DatePicker
+                          onChange={(value) => { setDate(value) }}
+                          value={date}
+                          id="offerDate"
+                          className="datePickerReact"
+                        />
                         </TableCell>
                       </TableRow>
                       <TableRow className="w100 bold mt16">
@@ -242,11 +311,18 @@ const ArbitrationAgreement = () => {
                       </TableRow>
                       <TableRow className="w100 row mt10">
                         <TableCell className="w100 pr16">
-                        <input type="text" name="textfield" id="textfield" className="w100 h18 pl8 bn bb" />
+                        <input type="text" name="textfield" id="company" className="w100 h18 pl8 bn bb" />
                         Trans-Global Solutions, Inc. Official: 
                         </TableCell>
                         <TableCell className="w100 row pl16">
-                        Dated: <input type="text" name="textfield" id="textfield" className="w h18 pl8 bn bb" />
+                        Dated:
+                        Dated:
+                        <DatePicker
+                          onChange={(value) => { setCompanyDate(value) }}
+                          value={companyDate}
+                          id="offerDate"
+                          className="datePickerReact"
+                        /> 
                         </TableCell>
                       </TableRow>
                     </TableCell>
