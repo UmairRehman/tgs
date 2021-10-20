@@ -1,6 +1,3 @@
-/** Core Dependencies */
-import React, { useEffect, useState } from 'react';
-
 /** THIRD PARTY DEPENDENCIES */
 import axios from 'axios';
 
@@ -47,8 +44,8 @@ const errorHandler = async (error) => {
     detail = { ...detail, messageToShow };
 
     const httpEvent = new CustomEvent(
-        'http-error-event',
-        { detail }
+        'trigger-snackbar',
+        { detail },
     );
 
     window.dispatchEvent(httpEvent);

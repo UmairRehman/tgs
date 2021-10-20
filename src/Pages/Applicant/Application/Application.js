@@ -4,7 +4,7 @@ import {
     Checkbox,
     TextareaAutosize,
     Typography,
-    Button
+    Button,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import TextField from '@material-ui/core/TextField';
@@ -18,6 +18,19 @@ import { es, fi } from "date-fns/locale";
 
 // import MobileScreen from './Mobile/Enter-RailRoad-Add';
 // import {isMobile} from 'react-device-detect';
+
+/** Services & Local dependencies */
+import { Imports } from '../../../Imports';
+
+import Services from '../../../Services';
+
+import Snackbar from '../../../Components/Snackbar';
+
+
+const {
+    users
+} = Services;
+
 
 const PositionLevel = [
     { title: 'Accounting and finance' },
@@ -57,7 +70,7 @@ const CitizenStatus = [
     { title: 'Citizen' },
     { title: 'Non-Citizen' },
     { title: 'Permanent Residence' },
-    { title: 'Alien Authorized to Work' }
+    { title: 'Alien Authorized to Work' },
 ];
 const MaritalStatus = [
     { title: 'Single' },
@@ -92,6 +105,7 @@ const ITR5 = ['Yes', 'No'];
 const OJE = ['Yes', 'No'];
 
 const Application = () => {
+    const snackBarDefaultDuration = 4000;
 
     /** State for files */
     const filesToUpload = useState({
@@ -100,7 +114,7 @@ const Application = () => {
     });
 
     /** State for Job Details */
-    const jobDetails = useState({
+    const position = useState({
         id: '',
         description: '',
         category: '',
@@ -115,7 +129,7 @@ const Application = () => {
         city: '',
         state: '',
         zip: '',
-        telephoneNumebr: '',
+        phone_number: '',
     });
 
     /** State for spouse information */
@@ -123,35 +137,37 @@ const Application = () => {
         name: '',
         dateOfBirth: new Date(),
         address: '',
-        telephoneNumebr: '',
+        phone_number: '',
     });
 
     /** State required for marital status */
     const maritalInformation = useState({
-        martialStatus: '',
+        marital_status: '',
     });
 
     /** State required for homeAddress */
     const homeAddress = useState({
-        streetAddress1: '',
-        streetAddress2: '',
+        street_address1: '',
+        street_address2: '',
         city: '',
         state: '',
         zip: '',
-        usCitizen: '',
+        us_citizen: '',
     });
 
     /** State for Contact Information */
     const contactInformation = useState({
-        firstName: '',
-        middleName: '',
-        lastName: '',
-        emailAddress: '',
+        first_name: '',
+        middle_name: '',
+        last_name: '',
+        email: '',
         ssn: '',
-        homePhone: '',
-        cellPhone: '',
-        agreeToNotifications: true,
+        home_phone: '',
+        cell_phone: '',
+        agree_to_notifications: true,
     });
+
+    const [snackBarMessage, setSnackBarMessage] = useState('');
 
     // useEffect(($e) => {
     //     applicationForm = {
@@ -160,7 +176,7 @@ const Application = () => {
     //         ...homeAddress,
     //         ...maritalInformation,
     //         ...emergencyContact,
-    //         ...jobDetails,
+    //         ...position,
     //         ...filesToUpload,
     //     };
     // }, [
@@ -168,22 +184,43 @@ const Application = () => {
     //     homeAddress,
     //     maritalInformation,
     //     emergencyContact,
-    //     jobDetails,
+    //     position,
     //     filesToUpload,
     // ]);
 
     let applicationForm = {};
 
     const updateApplicationForm = (addedUpdates = {}) => {
+        const [maritalInfo] = maritalInformation;
+        const [emergencyContactInfo] = emergencyContact;
+
         applicationForm = {
             ...contactInformation[0],
             ...homeAddress[0],
-            ...maritalInformation[0],
-            ...emergencyContact[0],
-            ...jobDetails[0],
+            ...maritalInfo,
+            emergencyContact: emergencyContactInfo,
+            ...position[0],
             ...filesToUpload[0],
             ...addedUpdates[0],
         };
+    }
+
+    /**
+   * Shows a snackbar / toast
+   * @param {string} messageToShow - String message to toast
+   * @returns {void}
+   */
+    const showSnackBar = (messageToShow) => {
+        const snackbarTriggerEvent = new CustomEvent(
+            'trigger-snackbar',
+            {
+                detail: {
+                    messageToShow
+                }
+            }
+        );
+
+        window.dispatchEvent(snackbarTriggerEvent)
     }
 
     /** State for Applciation Form */
@@ -198,13 +235,6 @@ const Application = () => {
     const flags = {
         typing: false
     };
-
-    if (window)
-        Object.assign(window, {
-            filesToUpload,
-            contactInformation,
-            applicationForm,
-        });
 
     /**
      * A function for handling individual states to manage via labels and identififers
@@ -224,14 +254,27 @@ const Application = () => {
         buffers.timeouts.typing = setTimeout(propagateStateFormControlUpdate.bind(null, ...args), 250);
     }
 
-    const propagateStateFormControlUpdate = (state, prop, $e, values) => {
+    const propagateStateFormControlUpdate = (
+        state,
+        prop,
+        $e,
+        values = {}
+    ) => {
+
         const [previousState, stateSetter] = state;
 
+        let { title = '' } = values;
+
+        title = title
+            .split()
+            .join('_')
+            .toLowerCase();
+
         const {
-            target: { files, value }
+            target: { files, value, checked }
         } = $e;
 
-        const newValueToUse = files || values || value;
+        const newValueToUse = files || title || value || checked;
 
         const stateToApply = {
             ...previousState,
@@ -241,7 +284,7 @@ const Application = () => {
         stateSetter(stateToApply);
 
         updateApplicationForm(stateToApply);
-        
+
     }
 
     useEffect(() => {
@@ -253,6 +296,49 @@ const Application = () => {
     //         <MobileScreen />
     //     )
     //   }
+
+    const removeHttpErrorListener = () => {
+        window.removeEventListener('trigger-snackbar', ($e) => { });
+    }
+
+    /**
+  * @param {*} applicantObject - Applicant data object for registration 
+  * @returns {string|Error}
+  */
+    const validateApplicant = async (applicantObject) => {
+        try {
+
+            return await Imports
+                .registerApplicant
+                .validate(applicantObject);
+
+        } catch (exc) {
+            let { message } = exc;
+
+            const messageSnippet = message
+                .split('_')
+                .join(' ');
+
+            message = `Enter ${messageSnippet} field(s) properly`
+
+            showSnackBar(message);
+
+            throw exc;
+        }
+    }
+
+    const registerApplicant = async () => {
+        try {
+            const isValidApplicant = await validateApplicant(applicationForm);
+
+            const response = await users.register(applicationForm);
+            console.log(response);
+
+            removeHttpErrorListener();
+        } catch (exc) {
+            console.log(exc);
+        }
+    }
 
     return (
         <Grid container xs={12} className="Liq-Container HRPortal">
@@ -276,11 +362,11 @@ const Application = () => {
                                         <Grid xs={12} className="mbold mb14">
                                             First Name
                                         </Grid>
-                                        <TextField id="outlined-basic" placeholder="Type Here" variant="outlined" className="w100p"
+                                        <TextField id="first_name" placeholder="Type Here" variant="outlined" className="w100p"
                                             onChange={
                                                 ($e) => setStateForFormControl(
                                                     contactInformation,
-                                                    'firstName',
+                                                    'first_name',
                                                     $e,
                                                 )
                                             } />
@@ -293,7 +379,7 @@ const Application = () => {
                                             onChange={
                                                 ($e) => setStateForFormControl(
                                                     contactInformation,
-                                                    'middleName',
+                                                    'middle_name',
                                                     $e
                                                 )
                                             } />
@@ -306,7 +392,7 @@ const Application = () => {
                                             onChange={
                                                 ($e) => setStateForFormControl(
                                                     contactInformation,
-                                                    'lastName',
+                                                    'last_name',
                                                     $e,
                                                 )
                                             } />
@@ -322,7 +408,7 @@ const Application = () => {
                                             onChange={
                                                 ($e) => setStateForFormControl(
                                                     contactInformation,
-                                                    'emailAddress',
+                                                    'email',
                                                     $e,
                                                 )
                                             } />
@@ -351,7 +437,7 @@ const Application = () => {
                                             onChange={
                                                 ($e) => setStateForFormControl(
                                                     contactInformation,
-                                                    'homePhone',
+                                                    'home_phone',
                                                     $e,
                                                 )
                                             } />
@@ -364,7 +450,7 @@ const Application = () => {
                                             onChange={
                                                 ($e) => setStateForFormControl(
                                                     contactInformation,
-                                                    'cellPhone',
+                                                    'cell_phone',
                                                     $e,
                                                 )
                                             } />
@@ -379,7 +465,7 @@ const Application = () => {
                                         onChange={
                                             ($e) => setStateForFormControl(
                                                 contactInformation,
-                                                'agreeToNotifications',
+                                                'agree_to_notifications',
                                                 $e,
                                             )
                                         }
@@ -402,7 +488,7 @@ const Application = () => {
                                             onChange={
                                                 ($e) => setStateForFormControl(
                                                     homeAddress,
-                                                    'streetAddress1',
+                                                    'street_address1',
                                                     $e,
                                                 )
                                             } />
@@ -415,7 +501,7 @@ const Application = () => {
                                             onChange={
                                                 ($e) => setStateForFormControl(
                                                     homeAddress,
-                                                    'streetAddress2',
+                                                    'street_address2',
                                                     $e,
                                                 )
                                             } />
@@ -483,7 +569,7 @@ const Application = () => {
                                             onChange={
                                                 ($e, values) => setStateForFormControl(
                                                     homeAddress,
-                                                    'usCitizen',
+                                                    'us_citizen',
                                                     $e,
                                                     values
                                                 )
@@ -503,15 +589,15 @@ const Application = () => {
                                             id="combo-box-demo"
                                             options={MaritalStatus}
                                             getOptionLabel={(option) => option.title}
-                                            renderInput={(params) => <TextField {...params} label="Select" variant="outlined"
-                                                onChange={
-                                                    ($e, values) => setStateForFormControl(
-                                                        maritalInformation,
-                                                        'maritalStatus',
-                                                        $e,
-                                                        values
-                                                    )
-                                                } />}
+                                            renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
+                                            onChange={
+                                                ($e, values) => setStateForFormControl(
+                                                    maritalInformation,
+                                                    'marital_status',
+                                                    $e,
+                                                    values
+                                                )
+                                            }
                                         />
                                     </Grid>
                                     <Grid xs={6} className="mt30 pl20">
@@ -709,7 +795,7 @@ const Application = () => {
                                         <TextField id="outlined-basic" placeholder="Type Here" variant="outlined" className="w100p"
                                             onChange={
                                                 ($e) => setStateForFormControl(
-                                                    jobDetails,
+                                                    position,
                                                     'id',
                                                     $e,
                                                 )
@@ -722,7 +808,7 @@ const Application = () => {
                                         <TextField id="outlined-basic" placeholder="Type Here" variant="outlined" className="w100p"
                                             onChange={
                                                 ($e) => setStateForFormControl(
-                                                    jobDetails,
+                                                    position,
                                                     'description',
                                                     $e,
                                                 )
@@ -746,7 +832,7 @@ const Application = () => {
                                                     renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
                                                     onChange={
                                                         ($e, values) => setStateForFormControl(
-                                                            jobDetails,
+                                                            position,
                                                             'category',
                                                             $e,
                                                             values,
@@ -768,8 +854,8 @@ const Application = () => {
                                                 <TextareaAutosize className="w100p" rowsMin={6} placeholder="Comment here"
                                                     onChange={
                                                         ($e) => setStateForFormControl(
-                                                            jobDetails,
-                                                            'noteForHr',
+                                                            position,
+                                                            'notesForHr',
                                                             $e,
                                                         )
                                                     } />
@@ -827,7 +913,10 @@ const Application = () => {
                             </Grid>
                             <Grid xs={12} className="mt50">
                                 <Grid xs={12} md={8} lg={6}>
-                                    <Link to="/create-password" className="LinkButton">Create Password & Account</Link>
+                                    <button onClick={registerApplicant} >Test</button>
+                                    <Snackbar
+                                    ></Snackbar>
+                                    {/* <Link to="/create-password" className="LinkButton">Create Password & Account</Link> */}
                                 </Grid>
                             </Grid>
                         </Grid>

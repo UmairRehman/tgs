@@ -19,10 +19,7 @@ import {
   Input,
   InputLabel,
   InputAdornment,
-  Snackbar,
 } from '@material-ui/core';
-
-import CloseIcon from '@material-ui/icons/Close';
 
 // import FilledInput from '@material-ui/core/FilledInput';
 // import OutlinedInput from '@material-ui/core/OutlinedInput';
@@ -45,12 +42,11 @@ import Services from '../../Services';
 
 import { Imports } from '../../Imports';
 
+import Snackbar from '../../Components/Snackbar';
+
 
 const {
-  api: {
-    Interceptor: api,
-    routes
-  }
+  users
 } = Services;
 
 const useStyles = makeStyles((theme) => ({
@@ -71,10 +67,10 @@ const useStyles = makeStyles((theme) => ({
 
 const Login = () => {
 
-  const snackBarDefaultDuration = 4000;
-
   const [isSnackBarOpen, triggerSnackBar] = useState(false);
+
   const [snackBarMessage, setSnackBarMessage] = useState('');
+
   const [isLoggingIn, setIsLoggingIn] = useState(false);
 
   const classes = useStyles();
@@ -87,46 +83,22 @@ const Login = () => {
     showPassword: false,
   });
 
-  /** Event listeners */
-  window.addEventListener('http-error-event', ($e) => {
-    const {
-      detail: { messageToShow }
-    } = $e;
-
-    showSnackBar(messageToShow);
-
-    return triggerSnackBar(true);
-  });
-
   /**
-   * @param  {...any} args - Arguments passed on snackbar close
-   * @returns {void}
-   */
-  const handleClose = (...args) => {
-    return triggerSnackBar(false);
-  }
-  /********************************************************************* */
+ * Shows a snackbar / toast
+ * @param {string} messageToShow - String message to toast
+ * @returns {void}
+ */
+  const showSnackBar = (messageToShow) => {
+    const snackbarTriggerEvent = new CustomEvent(
+      'trigger-snackbar',
+      {
+        detail: {
+          messageToShow
+        }
+      }
+    );
 
-  const snackBarAction = <React.Fragment>
-    <IconButton
-      size="small"
-      aria-label="close"
-      color="inherit"
-      onClick={handleClose}
-    >
-      <CloseIcon fontSize="small" />
-    </IconButton>
-  </React.Fragment>;
-
-  /**
-   * Shows a snackbar / toast
-   * @param {string} message - String message to toast
-   * @returns {void}
-   */
-  const showSnackBar = (message) => {
-    setSnackBarMessage(message);
-
-    return triggerSnackBar(true);
+    window.dispatchEvent(snackbarTriggerEvent)
   }
 
   /**
@@ -154,24 +126,21 @@ const Login = () => {
 
       if (!email) {
         setIsLoggingIn(false);
+
         return showSnackBar('Please enter email address');
       }
 
       if (!password) {
         setIsLoggingIn(false);
+
         return showSnackBar('Please enter password');
       }
 
       const isValid = await validatePassword(password);
 
-      const res = await api.post(
-        routes.employee.applicant_login,
-        payload
-      );
+      const res = await users.login(payload);
 
       localStorage.setItem('user_profile', JSON.stringify(res));
-
-      window.removeEventListener('http-error-event', ($e) => { });
 
       setIsLoggingIn(false);
 
@@ -267,12 +236,7 @@ const Login = () => {
                 onClick={loginUser}
                 disabled={isLoggingIn}>Login</Button>
               <Snackbar
-                open={isSnackBarOpen}
-                autoHideDuration={snackBarDefaultDuration}
-                onClose={handleClose}
-                message={snackBarMessage}
-                action={snackBarAction}
-              />
+              ></Snackbar>
             </Grid>
             <Grid xs={12} container justify="center" className="mt20">
               {/* <Link to="/application" className="ApplicantBtn">Submit Application & Create Account</Link> */}

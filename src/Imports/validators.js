@@ -10,7 +10,9 @@ const {
 } = statics;
 
 export const patterns = {
-    password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/
+    password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+    phoneRegExp: /^(([+][0-9]{2})|[0-9]{1})[0-9]{10}$/,
+    // phoneRegExpOld: /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 }
 
 export const validators = {
@@ -21,4 +23,109 @@ export const validators = {
             patterns.password,
             invalid_password
         ),
+    registerApplicant: yup.object({
+        first_name: yup.string()
+            .required('first_name'),
+        middle_name: yup.string()
+            .required('middle_name'),
+        last_name: yup.string()
+            .required('last_name'),
+        email: yup.string().email()
+            .required('email'),
+        ssn: yup.string()
+            .matches(/[0-9]{9}/)
+            .required('ssn'),
+        home_phone: yup.string()
+            .matches(patterns.phoneRegExp, 'home_phone number is not valid')
+            .required('home_phone'),
+        cell_phone: yup.string()
+            .matches(patterns.phoneRegExp, 'cell_phone number is not valid')
+            .required('cell_phone'),
+        agree_to_notifications: yup.boolean()
+            .default(true),
+
+        street_address1: yup.string()
+            .required('street_address1'),
+        street_address2: yup.string()
+            .required('street_address2'),
+        city: yup.string()
+            .required('city'),
+        state: yup.string()
+            .required('state'),
+        zip: yup.string()
+            .required('zip'),
+        us_citizen: yup.string()
+            .oneOf([
+                'citizen',
+                'non-citizen',
+                'permanent_residence',
+                'alien_authorized_to_work',
+            ])
+            .required('us_citizen'),
+
+
+        marital_status: yup.string()
+            .oneOf([
+                'single',
+                'married',
+                'separated',
+                'divorced',
+                'widowed',
+            ])
+            .required('marital_status'),
+
+        spouse_name: yup.string().when('marital_status', {
+            is: true,
+            then: yup.string()
+                .required('spouse_name')
+        }),
+
+        spouse_date_of_birth: yup.string().when('marital_status', {
+            is: true,
+            then: yup.string()
+                .required('spouse_date_of_birth')
+        }),
+
+        spouse_address: yup.string().when('marital_status', {
+            is: true,
+            then: yup.string()
+                .required('spouse_address')
+        }),
+        spouse_phone_number: yup.string().when('marital_status', {
+            is: true,
+            then: yup.string()
+                .matches(patterns.phoneRegExp, 'spouse_phone_number is not valid')
+                .required('spouse_phone_number')
+        }),
+
+        emergency_contact: yup.object({
+            name: yup.string()
+                .required('emergency_contact name'),
+            relationship: yup.string()
+                .required('emergency_contact relationship'),
+            address: yup.string()
+                .required('emergency_contact address'),
+            city: yup.string()
+                .required('emergency_contact city'),
+            state: yup.string()
+                .required('emergency_contact state'),
+            zip: yup.string()
+                .required('emergency_contact zip'),
+            phone_number: yup.string()
+                .matches(patterns.phoneRegExp, 'emergency_contact.phone_number is not valid')
+                .required('emergency_contact phone_number')
+        }),
+
+        position: yup.object({
+            id: yup.string()
+                .required('job_position id'),
+            description: yup.string()
+                .required('job_position description'),
+            category: yup.string()
+                .required('job_position category'),
+            notes_for_hr: yup.string()
+                .required('job_position notes_for_hr'),
+        }),
+
+    }, 'form')
 }
