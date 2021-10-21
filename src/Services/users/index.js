@@ -18,3 +18,10 @@ export const register = async (payload) => {
         payload
     );
 }
+
+export const createPassword = async (payload) => {
+    return await api.put(
+        routes.employee.create_password,
+        payload
+    );
+}

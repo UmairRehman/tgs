@@ -15,6 +15,8 @@ import PageHeader from "../../../Components/PageHeader";
 import LeftControl from "../../../Components/LeftControl";
 import { capitalize } from "../../../helpers/capitalize";
 import { es, fi } from "date-fns/locale";
+import { useHistory } from "react-router-dom";
+
 
 // import MobileScreen from './Mobile/Enter-RailRoad-Add';
 // import {isMobile} from 'react-device-detect';
@@ -80,7 +82,7 @@ const MaritalStatus = [
     { title: 'Widowed' }
 ];
 const JobCategories = [
-    { title: 'Administrative assistant' },
+    { title: '1' },
     { title: 'Business development manager' },
     { title: 'Civil service administrative officer' },
     { title: 'Compliance officer' },
@@ -105,6 +107,10 @@ const ITR5 = ['Yes', 'No'];
 const OJE = ['Yes', 'No'];
 
 const Application = () => {
+
+    let history = useHistory();
+
+
     const snackBarDefaultDuration = 4000;
 
     /** State for files */
@@ -113,16 +119,9 @@ const Application = () => {
         socialSecurityCard: null,
     });
 
-    /** State for Job Details */
-    const position = useState({
-        id: '',
-        description: '',
-        category: '',
-        notesForHr: '',
-    });
 
     /** State for EmergencyContact */
-    const emergencyContact = useState({
+    const emergency_contact = useState({
         name: '',
         relationship: '',
         address: '',
@@ -131,6 +130,13 @@ const Application = () => {
         zip: '',
         phone_number: '',
     });
+
+    const position = useState({
+        id : '',
+        description: '',
+        category: '',
+        notes_for_hr: '',         
+    })
 
     /** State for spouse information */
     const spouseInformation = useState({
@@ -165,6 +171,10 @@ const Application = () => {
         home_phone: '',
         cell_phone: '',
         agree_to_notifications: true,
+        souse_name: '',
+        souse_dateOfBirth: new Date(),
+        souse_address: '',
+        souse_phone_number: '',
     });
 
     const [snackBarMessage, setSnackBarMessage] = useState('');
@@ -175,7 +185,7 @@ const Application = () => {
     //         ...contactInformation,
     //         ...homeAddress,
     //         ...maritalInformation,
-    //         ...emergencyContact,
+    //         ...emergency_contact,
     //         ...position,
     //         ...filesToUpload,
     //     };
@@ -183,7 +193,7 @@ const Application = () => {
     //     contactInformation,
     //     homeAddress,
     //     maritalInformation,
-    //     emergencyContact,
+    //     emergency_contact,
     //     position,
     //     filesToUpload,
     // ]);
@@ -192,14 +202,14 @@ const Application = () => {
 
     const updateApplicationForm = (addedUpdates = {}) => {
         const [maritalInfo] = maritalInformation;
-        const [emergencyContactInfo] = emergencyContact;
+        const [emergency_contactInfo] = emergency_contact;
 
         applicationForm = {
             ...contactInformation[0],
             ...homeAddress[0],
             ...maritalInfo,
-            emergencyContact: emergencyContactInfo,
-            ...position[0],
+            emergency_contact: emergency_contactInfo,
+            position:position[0],
             ...filesToUpload[0],
             ...addedUpdates[0],
         };
@@ -311,6 +321,7 @@ const Application = () => {
             return await Imports
                 .registerApplicant
                 .validate(applicantObject);
+                console.log("success")
 
         } catch (exc) {
             let { message } = exc;
@@ -331,12 +342,14 @@ const Application = () => {
         try {
             const isValidApplicant = await validateApplicant(applicationForm);
 
-            const response = await users.register(applicationForm);
-            console.log(response);
+            let response = await users.register(applicationForm);
+            localStorage.setItem('token',response?.token)
+            history.push("/create-password");
 
             removeHttpErrorListener();
         } catch (exc) {
             console.log(exc);
+            console.log(applicationForm)
         }
     }
 
@@ -607,8 +620,8 @@ const Application = () => {
                                         <TextField id="outlined-basic" placeholder="Type Here" variant="outlined" className="w100p"
                                             onChange={
                                                 ($e) => setStateForFormControl(
-                                                    spouseInformation,
-                                                    'name',
+                                                    contactInformation,
+                                                    'spouse_name',
                                                     $e,
                                                 )
                                             } />
@@ -624,8 +637,8 @@ const Application = () => {
                                         <TextField id="outlined-basic" placeholder="Type Here" variant="outlined" className="w100p"
                                             onChange={
                                                 ($e) => setStateForFormControl(
-                                                    spouseInformation,
-                                                    'dateOfBirth',
+                                                    contactInformation,
+                                                    'spouse_dateOfBirth',
                                                     $e,
                                                 )
                                             } />
@@ -637,8 +650,8 @@ const Application = () => {
                                         <TextField id="outlined-basic" placeholder="Type Here" variant="outlined" className="w100p"
                                             onChange={
                                                 ($e) => setStateForFormControl(
-                                                    spouseInformation,
-                                                    'address',
+                                                    contactInformation,
+                                                    'spouse_address',
                                                     $e,
                                                 )
                                             } />
@@ -654,8 +667,8 @@ const Application = () => {
                                         <TextField id="outlined-basic" placeholder="Type Here" variant="outlined" className="w100p"
                                             onChange={
                                                 ($e) => setStateForFormControl(
-                                                    spouseInformation,
-                                                    'telephoneNumber',
+                                                    contactInformation,
+                                                    'spouse_telephoneNumber',
                                                     $e,
                                                 )
                                             } />
@@ -676,7 +689,7 @@ const Application = () => {
                                         <TextField id="outlined-basic" placeholder="Type Here" variant="outlined" className="w100p"
                                             onChange={
                                                 ($e) => setStateForFormControl(
-                                                    emergencyContact,
+                                                    emergency_contact,
                                                     'name',
                                                     $e,
                                                 )
@@ -689,7 +702,7 @@ const Application = () => {
                                         <TextField id="outlined-basic" placeholder="Type Here" variant="outlined" className="w100p"
                                             onChange={
                                                 ($e) => setStateForFormControl(
-                                                    emergencyContact,
+                                                    emergency_contact,
                                                     'relationship',
                                                     $e,
                                                 )
@@ -706,7 +719,7 @@ const Application = () => {
                                         <TextField id="outlined-basic" placeholder="Type Here" variant="outlined" className="w100p"
                                             onChange={
                                                 ($e) => setStateForFormControl(
-                                                    emergencyContact,
+                                                    emergency_contact,
                                                     'address',
                                                     $e,
                                                 )
@@ -723,7 +736,7 @@ const Application = () => {
                                         <TextField id="outlined-basic" placeholder="Type Here" variant="outlined" className="w100p"
                                             onChange={
                                                 ($e) => setStateForFormControl(
-                                                    emergencyContact,
+                                                    emergency_contact,
                                                     'city',
                                                     $e,
                                                 )
@@ -741,7 +754,7 @@ const Application = () => {
                                             renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
                                             onChange={
                                                 ($e, values) => setStateForFormControl(
-                                                    emergencyContact,
+                                                    emergency_contact,
                                                     'state',
                                                     $e,
                                                     values,
@@ -756,7 +769,7 @@ const Application = () => {
                                         <TextField id="outlined-basic" placeholder="Type Here" variant="outlined" className="w100p"
                                             onChange={
                                                 ($e) => setStateForFormControl(
-                                                    emergencyContact,
+                                                    emergency_contact,
                                                     'zip',
                                                     $e,
                                                 )
@@ -773,8 +786,8 @@ const Application = () => {
                                         <TextField id="outlined-basic" placeholder="Type Here" variant="outlined" className="w100p"
                                             onChange={
                                                 ($e) => setStateForFormControl(
-                                                    emergencyContact,
-                                                    'telephoneNumber',
+                                                    emergency_contact,
+                                                    'phone_number',
                                                     $e,
                                                 )
                                             } />
@@ -855,7 +868,7 @@ const Application = () => {
                                                     onChange={
                                                         ($e) => setStateForFormControl(
                                                             position,
-                                                            'notesForHr',
+                                                            'notes_for_hr',
                                                             $e,
                                                         )
                                                     } />
@@ -905,7 +918,8 @@ const Application = () => {
                                                             'socialSecurityCard',
                                                             $e
                                                         )
-                                                    } />
+                                                    }
+                                                     />
                                             </Grid>
                                         </Grid>
                                     </Grid>

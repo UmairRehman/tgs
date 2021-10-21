@@ -12,6 +12,9 @@ const axiosInstance = axios.create();
 
 const { httpMessages } = Imports;
 
+const omitJWTRoutes = [
+
+];
 
 const requestHandler = (request) => {
     const { url: apiToConsume } = request;
@@ -69,42 +72,55 @@ axiosInstance.interceptors.response
 
 axiosInstance.postMethod = axiosInstance.post;
 axiosInstance.getMethod = axiosInstance.get;
+axiosInstance.putMethod = axiosInstance.put;
 
 const HTTPClientFunctionsWrapper = async (method, ...args) => {
     /** Not using a try-catch block deliberately to allow global handlers to manage
      * it.
      */
     const [uri, ...rest] = args;
-    
+
     const [payload] = rest;
 
-    const response = await axiosInstance[method](uri, payload);
-    
+    // HTTP Requests 
+    const response = await axiosInstance[method](
+        uri,
+        payload,
+        {
+            headers: {
+                Authorization: localStorage.getItem('token')
+            }
+        }
+    );
+
     const { data: axiosObjectData } = response;
-    
-    const { data: endpointData } = axiosObjectData;
-    
+
+    // const { data: endpointData } = axiosObjectData;
+    // console.log(axiosObjectData);
     localStorage.setItem(
         `response-${uri}`,
-        JSON.stringify(endpointData)
+        JSON.stringify(axiosObjectData)
     );
-    
-    return endpointData;
+
+    return axiosObjectData;
 }
 
 const newPostMethod = HTTPClientFunctionsWrapper.bind(null, 'postMethod');
 const newGetMethod = HTTPClientFunctionsWrapper.bind(null, 'getMethod');
+const newPutMethod = HTTPClientFunctionsWrapper.bind(null, 'putMethod');
 
 Object.assign(
     axiosInstance,
     {
         post: newPostMethod,
         get: newGetMethod,
+        put: newPutMethod
     },
 )
 
 axiosInstance.post = newPostMethod;
-axiosInstance.post = newPostMethod;
+axiosInstance.get = newGetMethod;
+axiosInstance.put = newPutMethod;
 /** */
 
 export const Interceptor = { axiosInstance };

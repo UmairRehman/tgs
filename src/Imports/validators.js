@@ -11,7 +11,7 @@ const {
 
 export const patterns = {
     password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-    phoneRegExp: /^(([+][0-9]{2})|[0-9]{1})[0-9]{10}$/,
+    phoneRegExp: /^(([+][0-9]{1,2})|[0-9]{1})[0-9]{10}$/,
     // phoneRegExpOld: /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 }
 
@@ -116,16 +116,16 @@ export const validators = {
                 .required('emergency_contact phone_number')
         }),
 
-        position: yup.object({
-            id: yup.string()
-                .required('job_position id'),
-            description: yup.string()
-                .required('job_position description'),
-            category: yup.string()
-                .required('job_position category'),
-            notes_for_hr: yup.string()
-                .required('job_position notes_for_hr'),
-        }),
+        // position: yup.object({
+        //     id: yup.string()
+        //         .required('job_position id'),
+        //     description: yup.string()
+        //         .required('job_position description'),
+        //     category: yup.string()
+        //         .required('job_position category'),
+        //     notes_for_hr: yup.string()
+        //         .required('job_position notes_for_hr'),
+        // }),
 
     }, 'form')
 }

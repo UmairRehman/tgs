@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Grid,
   TextField,
@@ -15,18 +15,19 @@ import {
   Input,
   InputLabel,
   InputAdornment
-
-
-
-
-
 } from '@material-ui/core';
 import { Link } from "react-router-dom";
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 // import MobileScreen from '../Start/Mobile/Login';
 // import {isMobile} from 'react-device-detect';
+import Services from '../../../Services';
+import { useHistory } from "react-router-dom";
 
+
+const {
+  users
+} = Services;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -45,6 +46,31 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const CreatePassword = () => {
+  let history = useHistory();
+  const [error, setError] = useState(false);
+  const [token, setToken] = useState(localStorage.getItem('token'))
+
+  async function submit(){
+    let data = {
+      password: password,
+      confirm_password : confirmPassword
+    }
+    if(password === confirmPassword){
+      setError(false)
+      try{
+        const createPassword = await users.createPassword(data)
+        if(createPassword.message == 'success'){
+          history.push("/submission");
+        }
+      }
+      catch(exc){
+        console.log(exc);
+      }
+    }
+    else{
+      setError(true);
+    }
+  }
   
   const gotoDashBoard = () => {
     window.location = '/dashboard';
@@ -52,6 +78,10 @@ const CreatePassword = () => {
 
 
   const classes = useStyles();
+
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  
   const [values, setValues] = React.useState({
     amount: '',
     password: '',
@@ -107,8 +137,8 @@ const CreatePassword = () => {
                     placeholder="Password"
                       id="standard-adornment-password"
                       type={values.showPassword ? 'text' : 'password'}
-                      value={values.password}
-                      onChange={handleChange('Create password')}
+                      value={password}
+                      onChange={ e =>setPassword(e.target.value)}
                       endAdornment={
                         <InputAdornment position="end">
                           <IconButton
@@ -129,8 +159,8 @@ const CreatePassword = () => {
                     placeholder="Verify Password"
                       id="standard-adornment-password"
                       type={values.showPassword ? 'text' : 'password'}
-                      value={values.password}
-                      onChange={handleChangeV('password')}
+                      value={confirmPassword}
+                      onChange={ e => setConfirmPassword(e.target.value)}
                       endAdornment={
                         <InputAdornment position="end">
                           <IconButton
@@ -144,6 +174,9 @@ const CreatePassword = () => {
                       }
                     />
                   </FormControl>
+                  {error == true?
+                    <h5>Paswword does not match</h5>
+                  :"" }
                   <Typography xs={12} className="CreateFieldTItle">Verify Password</Typography>
                   {/* <TextField placeholder="Password" type="password"/> */}
                   <Grid xs={12} container className="mt16 pwdcriteria">
@@ -176,7 +209,8 @@ const CreatePassword = () => {
                     </List>
                   </Grid>
                   <Grid xs={12} container justify="center" className="mt40 mb40">
-                      <Link to="/questionnaire" className="ApplicantBtn">Login</Link>
+                      <Button onClick={submit} className="ApplicantBtn">Login</Button>
+                      {/* to="/questionnaire" */}
                   </Grid>
               </Grid>
           </Grid>

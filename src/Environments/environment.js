@@ -12,14 +12,14 @@
 
   apiPaths: {
     port: 3000,
-    base: 'http://localhost',
+    base: 'http://192.168.18.50',
     router: ''
   },
 
   socketPaths: {
     port: 3000,
     base: 'http://localhost',
-    router: ''
+    router: 'api/'
   },
 
   get apiPath() {
