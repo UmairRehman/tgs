@@ -5,23 +5,26 @@ const {
     routes
 } = apiExports;
 
-export const login = async (payload) => {
+export const login = async (payload, headers) => {
     return await api.post(
         routes.employee.applicant_login,
-        payload
+        payload,
+        headers
     );
 }
 
-export const register = async (payload) => {
+export const register = async (payload, headers) => {
     return await api.post(
         routes.employee.applicant_register,
-        payload
+        payload,
+        headers
     );
 }
 
-export const createPassword = async (payload) => {
+export const createPassword = async (payload, headers) => {
     return await api.put(
         routes.employee.create_password,
-        payload
+        payload,
+        headers
     );
 }

@@ -80,16 +80,17 @@ const HTTPClientFunctionsWrapper = async (method, ...args) => {
      */
     const [uri, ...rest] = args;
 
-    const [payload] = rest;
+    const [payload, headers = {}] = rest;
 
     // HTTP Requests 
     const response = await axiosInstance[method](
         uri,
         payload,
         {
+            ...headers,
             headers: {
                 Authorization: localStorage.getItem('token')
-            }
+            },
         }
     );
 
