@@ -116,9 +116,8 @@ const Application = () => {
     /** State for files */
     const filesToUpload = useState({
         resume: null,
-        socialSecurityCard: null,
+        state_driver_license: null,
     });
-
 
     /** State for EmergencyContact */
     const emergency_contact = useState({
@@ -131,11 +130,12 @@ const Application = () => {
         phone_number: '',
     });
 
+    /** State for Job Details */
     const position = useState({
-        id : '',
+        id: '',
         description: '',
         category: '',
-        notes_for_hr: '',         
+        notes_for_hr: '',
     })
 
     /** State for spouse information */
@@ -203,13 +203,16 @@ const Application = () => {
     const updateApplicationForm = (addedUpdates = {}) => {
         const [maritalInfo] = maritalInformation;
         const [emergency_contactInfo] = emergency_contact;
+        const [positionObject] = position
+
+        console.log(position[0])
 
         applicationForm = {
             ...contactInformation[0],
             ...homeAddress[0],
             ...maritalInfo,
             emergency_contact: emergency_contactInfo,
-            position:position[0],
+            position: positionObject,
             ...filesToUpload[0],
             ...addedUpdates[0],
         };
@@ -321,7 +324,7 @@ const Application = () => {
             return await Imports
                 .registerApplicant
                 .validate(applicantObject);
-                console.log("success")
+            console.log("success")
 
         } catch (exc) {
             let { message } = exc;
@@ -342,9 +345,40 @@ const Application = () => {
         try {
             const isValidApplicant = await validateApplicant(applicationForm);
 
-            let response = await users.register(applicationForm);
-            localStorage.setItem('token',response?.token)
+            const formDataToPush = new FormData();
+
+            Object.keys(applicationForm)
+                .forEach(key => {
+
+                    const currentField = applicationForm[key];
+
+                    const pushField = typeof currentField !== 'string'
+                        ? (currentField instanceof FileList)
+                            ? currentField[0]
+                            : JSON.stringify(currentField)
+                        : currentField;
+
+                    formDataToPush.append(
+                        key,
+                        pushField
+                    );
+                });
+
+            console.log(formDataToPush);
+
+            let response = await users.register(
+                applicationForm,
+                {
+                    'Content-Type': 'multipart/form-data'
+                },
+            );
+
+
+            localStorage.setItem('token', response?.token);
+
             history.push("/create-password");
+
+            console.log(response);
 
             removeHttpErrorListener();
         } catch (exc) {
@@ -915,11 +949,11 @@ const Application = () => {
                                                     onChange={
                                                         $e => setStateForFormControl(
                                                             filesToUpload,
-                                                            'socialSecurityCard',
+                                                            'state_driver_license',
                                                             $e
                                                         )
                                                     }
-                                                     />
+                                                />
                                             </Grid>
                                         </Grid>
                                     </Grid>
