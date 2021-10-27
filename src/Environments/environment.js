@@ -11,14 +11,14 @@
   envName: 'dev',
 
   apiPaths: {
-    port: 3000,
-    base: 'http://192.168.18.50',
-    router: ''
+    port: 80,
+    base: 'http://209.64.123.132',
+    router: 'api/'
   },
 
   socketPaths: {
-    port: 3000,
-    base: 'http://localhost',
+    port: 80,
+    base: 'http://209.64.123.132',
     router: 'api/'
   },
 

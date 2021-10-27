@@ -28,3 +28,11 @@ export const createPassword = async (payload, headers) => {
         headers
     );
 }
+
+export const loginEmployee = async (payload, headers) => {
+    return await api.post(
+        routes.employee.employee_login,
+        payload,
+        headers,
+    )
+}

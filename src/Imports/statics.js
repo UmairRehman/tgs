@@ -6,6 +6,8 @@ export const statics = {
         //- should be 8 chars minimum.
         invalid_password: 'Password must have atleast 1 uppercase, 1 lowercase letter , 1 number and 1 special character.',
         incomplete_invalid_form: 'Please fill in the form properly',
-        employee_exists: 'Employee with the provided credentials Already exists'
+        employee_exists: 'Employee with the provided credentials Already exists',
+        applicant_rejected: 'Application has been rejected',
+        invalid_email: 'Invalid Email address',
     }
 }

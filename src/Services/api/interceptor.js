@@ -87,8 +87,8 @@ const HTTPClientFunctionsWrapper = async (method, ...args) => {
         uri,
         payload,
         {
-            ...headers,
             headers: {
+                ...headers,
                 Authorization: localStorage.getItem('token')
             },
         }

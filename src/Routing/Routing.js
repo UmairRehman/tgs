@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Login from '../Pages/Start/Login';
+import EmployeeLogin from '../Pages/Start/EmployeeLogin';
 import Dashboard from '../Pages/Employee/Dashboard/Dashboard';
 import SafetyTesting from '../Pages/Employee/Safety/SafetyTesting';
 import SafetyTestingEdit from '../Pages/Employee/Safety/safety-testing-edit';
@@ -52,6 +53,7 @@ import DrugAlcoholWeapons from '../Pages/Applicant/Documents/Documents/DrugAlcoh
 const Routing = () => (
   <Router>
     <Route exact path="/" component={()=><Login/>}/>
+    <Route exact path="/login" component={()=><EmployeeLogin/>}/>
     
     {/* Employee Portanl Nav */}
     <Route exact path="/dashboard" component={()=><Dashboard/>}/>

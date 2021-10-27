@@ -205,7 +205,6 @@ const Application = () => {
         const [emergency_contactInfo] = emergency_contact;
         const [positionObject] = position
 
-        console.log(position[0])
 
         applicationForm = {
             ...contactInformation[0],
@@ -216,6 +215,8 @@ const Application = () => {
             ...filesToUpload[0],
             ...addedUpdates[0],
         };
+
+        console.log(applicationForm);
     }
 
     /**
@@ -271,10 +272,12 @@ const Application = () => {
         state,
         prop,
         $e,
-        values = {}
+        values,
     ) => {
 
         const [previousState, stateSetter] = state;
+
+        values = values || {};
 
         let { title = '' } = values;
 
@@ -367,7 +370,7 @@ const Application = () => {
             console.log(formDataToPush);
 
             let response = await users.register(
-                applicationForm,
+                formDataToPush,
                 {
                     'Content-Type': 'multipart/form-data'
                 },
@@ -961,7 +964,7 @@ const Application = () => {
                             </Grid>
                             <Grid xs={12} className="mt50">
                                 <Grid xs={12} md={8} lg={6}>
-                                    <button onClick={registerApplicant} >Test</button>
+                                    <button onClick={registerApplicant} className="LinkButton" >Test</button>
                                     <Snackbar
                                     ></Snackbar>
                                     {/* <Link to="/create-password" className="LinkButton">Create Password & Account</Link> */}

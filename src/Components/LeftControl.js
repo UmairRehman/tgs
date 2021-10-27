@@ -27,7 +27,7 @@ const LeftControl = () => {
 
   useEffect(() => {
     setMenuloader(true)
-    let storageRole = localStorage.getItem('role');
+    let storageRole = localStorage.getItem('role') || 'applicant';
     setRole(storageRole);
     console.log(role)
     setTimeout(() => {

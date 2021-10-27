@@ -36,7 +36,7 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 
 /** Local Dependencies */
-import MobileScreen from '../Start/Mobile/Login';
+import MobileScreen from './Mobile/Login';
 
 
 /** Local Static Imports & Objects */
@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Login = () => {
+const EmployeeLogin = () => {
 
   const history = useHistory();
 
@@ -127,14 +127,14 @@ const Login = () => {
     try {
       setIsLoggingIn(true);
 
-      const { password, email } = values;
+      const { password, username } = values;
 
-      const payload = { password, email };
+      const payload = { password, username };
 
-      if (!email) {
+      if (!username) {
         setIsLoggingIn(false);
 
-        return showSnackBar('Please enter email address');
+        return showSnackBar('Please enter username');
       }
 
       if (!password) {
@@ -143,34 +143,23 @@ const Login = () => {
         return showSnackBar('Please enter password');
       }
 
-      const isValid = await validatePassword(password);
+      /** Disabled for AD Users */
+      // const isValid = await validatePassword(password);
 
       const {
         data
-      } = await users.login(payload);
+      } = await users.loginEmployee(payload);
 
       storage.set('user_profile', JSON.stringify(data))
 
       setIsLoggingIn(false);
 
-      const {
-        path: pathname,
-        params: state,
-      } = Imports
-        .employeeStatuses[
-        data.EmployeeStatusId
-        ];
+      /** REPLACE - by router */
+      window.location = '/dashboard';
 
-      const stateToPush = state
-        ? {
-          pathname,
-          state,
-        }
-        : pathname;
-
-      history.push(stateToPush);
-
-      // return true;
+      history.pushState()
+      
+      return true;
 
     } catch (exc) {
       setIsLoggingIn(false);
@@ -214,10 +203,10 @@ const Login = () => {
       </Grid>
       <Grid className="LoginFormPlace">
         <Grid className="LoginForm">
-          <Grid className="LoginTitle">Login</Grid>
+          <Grid className="LoginTitle">Employee Login</Grid>
           <Grid className="FormFields">
 
-            <TextField placeholder="Email / User ID" type="text" onChange={handleChange('email')} />
+            <TextField placeholder="Email / User ID" type="text" onChange={handleChange('username')} />
 
             <FormControl
               className="LoginPwd">
@@ -271,4 +260,4 @@ const Login = () => {
     </Grid>
   );
 }
-export default Login;
+export default EmployeeLogin;
