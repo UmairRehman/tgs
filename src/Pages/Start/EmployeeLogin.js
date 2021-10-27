@@ -147,9 +147,11 @@ const EmployeeLogin = () => {
       // const isValid = await validatePassword(password);
 
       const {
-        data
+        data,
+        token,
       } = await users.loginEmployee(payload);
 
+      storage.set('access_jwt', token);
       storage.set('user_profile', JSON.stringify(data))
 
       setIsLoggingIn(false);

@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 const CreatePassword = () => {
   let history = useHistory();
   const [error, setError] = useState(false);
-  const [token, setToken] = useState(localStorage.getItem('token'))
+  const [token, setToken] = useState(localStorage.getItem('access_jwt'))
 
   async function submit(){
     let data = {

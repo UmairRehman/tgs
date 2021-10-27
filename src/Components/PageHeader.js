@@ -52,6 +52,7 @@ const PageHeader = () => {
   const MenuOpen = (event) => {
     var element = document.getElementById("LeftContol");
     element.classList.remove("CloseMenu");
+
     var element = document.getElementById("LeftContol");
     element.classList.add("OpenMenu");
   };
@@ -95,15 +96,10 @@ const PageHeader = () => {
 
   if (userProfile) {
     var {
-      firstName = '',
-      lastName = '',
+      dnUsername = 'Not Found',
     } = userProfile;
 
-    firstName = capitalize(firstName);
-
-    lastName = capitalize(lastName);
-
-    var withoutMiddleFullname = `${firstName} ${lastName}`;
+    dnUsername = capitalize(dnUsername);
   }
 
   /********************************************************** */
@@ -285,8 +281,8 @@ const PageHeader = () => {
                 </Grid>
               </Button>
               <Button className="HeadUserFrame">
-                <Avatar alt={withoutMiddleFullname} src="/static/images/avatar/1.jpg" />
-                {withoutMiddleFullname}
+                <Avatar alt={dnUsername} src="/static/images/avatar/1.jpg" />
+                {dnUsername}
                 <IconButton edge="end" aria-label="comments">
                   <ExpandMoreIcon />
                 </IconButton>
@@ -328,7 +324,7 @@ const PageHeader = () => {
             Angelina, Keep your profile fresh!
           </Grid>
           <Grid xs={12} container justify="center" className="mt40">
-            <Avatar alt="{withoutMiddleFullname} " src="/static/images/avatar/1.jpg" className={classes.Avatarlarge} />
+            <Avatar alt="{dnUsername} " src="/static/images/avatar/1.jpg" className={classes.Avatarlarge} />
           </Grid>
           <Grid xs={12} className="tcenter mt20">
             Take or upload a photo

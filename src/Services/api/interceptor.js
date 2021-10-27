@@ -89,7 +89,7 @@ const HTTPClientFunctionsWrapper = async (method, ...args) => {
         {
             headers: {
                 ...headers,
-                Authorization: localStorage.getItem('token')
+                Authorization: localStorage.getItem('access_jwt')
             },
         }
     );

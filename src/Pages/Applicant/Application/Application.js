@@ -82,18 +82,17 @@ const MaritalStatus = [
     { title: 'Widowed' }
 ];
 const JobCategories = [
-    { title: '1' },
-    { title: 'Business development manager' },
-    { title: 'Civil service administrative officer' },
-    { title: 'Compliance officer' },
-    { title: 'European Union official' },
-    { title: 'Health service manager' },
-    { title: 'Local government administrative assistant' },
-    { title: 'Management consultant' },
-    { title: 'Operational researcher' },
-    { title: 'Purchasing manager' },
-    { title: 'Business analyst' },
-    { title: 'Civil service executive officer' }
+    { title: 1, label: 'Business development manager' },
+    { title: 2, label: 'Civil service administrative officer' },
+    { title: 3, label: 'Compliance officer' },
+    { title: 4, label: 'European Union official' },
+    { title: 5, label: 'Health service manager' },
+    { title: 6, label: 'Local government administrative assistant' },
+    { title: 7, label: 'Management consultant' },
+    { title: 8, label: 'Operational researcher' },
+    { title: 9, label: 'Purchasing manager' },
+    { title: 10, label: 'Business analyst' },
+    { title: 11, label: 'Civil service executive officer' },
 ];
 
 const ITR1 = ['Yes', 'No'];
@@ -265,7 +264,7 @@ const Application = () => {
         }
 
         /** 250ms is the default animation and throttling time used by Material Design */
-        buffers.timeouts.typing = setTimeout(propagateStateFormControlUpdate.bind(null, ...args), 250);
+        buffers.timeouts.typing = setTimeout(propagateStateFormControlUpdate.bind(null, ...args), 0);
     }
 
     const propagateStateFormControlUpdate = (
@@ -279,12 +278,13 @@ const Application = () => {
 
         values = values || {};
 
-        let { title = '' } = values;
+        let { title = 0 } = values;
 
-        title = title
-            .split()
-            .join('_')
-            .toLowerCase();
+        if (typeof title === 'string')
+            title = title
+                .split()
+                .join('_')
+                .toLowerCase();
 
         const {
             target: { files, value, checked }
@@ -377,7 +377,7 @@ const Application = () => {
             );
 
 
-            localStorage.setItem('token', response?.token);
+            localStorage.setItem('access_jwt', response?.token);
 
             history.push("/create-password");
 
@@ -878,7 +878,7 @@ const Application = () => {
                                                     className="w100p"
                                                     id="combo-box-demo"
                                                     options={JobCategories}
-                                                    getOptionLabel={(option) => option.title}
+                                                    getOptionLabel={(option) => option.label}
                                                     renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
                                                     onChange={
                                                         ($e, values) => setStateForFormControl(
