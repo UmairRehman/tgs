@@ -59,9 +59,8 @@ const CreatePassword = () => {
       setError(false)
       try{
         const createPassword = await users.createPassword(data)
-        if(createPassword.message == 'success'){
-          history.push("/submission");
-        }
+        if(createPassword.message == 'success')
+          history.push("/");
       }
       catch(exc){
         console.log(exc);

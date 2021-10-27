@@ -966,6 +966,7 @@ li.LogOutIcon:hover:before {
 }
 
 .LinkButton {
+    border: 0px;
     min-width: 160px !important;
     border-radius: 8px !important;
     padding: 16px 40px !important;

@@ -3,8 +3,10 @@
  * @param {string} text 
  * @returns {string} Capitalized String
  */
-export const capitalize = (text) => {
-    const [firstChar, ...rest] = text.split('');
+export const capitalize = (text = '') => {
+    let [firstChar, ...rest] = text.split('');
+
+    firstChar = firstChar || '';
     
     const restOfTheString = rest.join('');
     

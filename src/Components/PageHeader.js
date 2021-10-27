@@ -92,7 +92,7 @@ const PageHeader = () => {
    */
   const userProfile = JSON.parse(
     localStorage.getItem('user_profile')
-  );
+  ) || { userName: 'Not Found' };
 
   if (userProfile) {
     var {
