@@ -214,7 +214,7 @@ const Login = () => {
       </Grid>
       <Grid className="LoginFormPlace">
         <Grid className="LoginForm">
-          <Grid className="LoginTitle">Login</Grid>
+          <Grid className="LoginTitle">Applicant Login</Grid>
           <Grid className="FormFields">
 
             <TextField placeholder="Email / User ID" type="text" onChange={handleChange('email')} />

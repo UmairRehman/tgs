@@ -964,7 +964,7 @@ const Application = () => {
                             </Grid>
                             <Grid xs={12} className="mt50">
                                 <Grid xs={12} md={8} lg={6}>
-                                    <button onClick={registerApplicant} className="LinkButton" >Test</button>
+                                    <button onClick={registerApplicant} className="LinkButton" >Create Password & Account</button>
                                     <Snackbar
                                     ></Snackbar>
                                     {/* <Link to="/create-password" className="LinkButton">Create Password & Account</Link> */}
