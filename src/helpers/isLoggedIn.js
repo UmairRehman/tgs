@@ -1,7 +1,7 @@
 import Services from '../Services';
 
 export const isLoggedIn = () => {
-    const storage = Services.Storage();
+    const storage = Services.storage;
 
-    return !!storage.getItem('access_jwt');
+    return !!storage.get('access_jwt');
 }
