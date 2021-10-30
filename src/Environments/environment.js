@@ -11,8 +11,10 @@
   envName: 'dev',
 
   apiPaths: {
-    port: 80,
-    base: 'http://209.64.123.132',
+    port: 4040,
+    base: 'http://34.225.30.148',
+    // base: 'http://209.64.123.132',
+    // 3.23.118.71
     router: 'api/'
   },
 

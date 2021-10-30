@@ -10,7 +10,7 @@ import {
   makeStyles
 } from "@material-ui/core";
 
-import { Link, useLocation  } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
@@ -116,19 +116,62 @@ const Submission = () => {
 
   const location = useLocation();
 
-  console.log(location.state);
-
   const storage = new Storage();
 
+  const {
+    state: { applyToStorage }
+  } = location;
+
+  if (applyToStorage) {
+
+    for (let key in applyToStorage) {
+      const data = applyToStorage[key];
+
+      storage.set(key, JSON.stringify(data));
+    }
+
+    const queryParams = new URLSearchParams(location.state);
+
+    if (queryParams.has('applyToStorage'))
+      queryParams.delete('applyToStorage');
+  }
+
   const classes = useStyles();
+  /** Retreiving User Profile Information, cached in localstorage.
+ * TO APPLY - state service later.
+ */
+  const userProfile = JSON.parse(
+    localStorage.getItem('user_profile')
+  )
 
-  /** Setting Header styles if the user is authenticated */
+  if (userProfile) {
+    var {
+      EmployeeStatusId
+    } = userProfile;
+  }
 
-  const step1Creds = storage.get('step1-creds');
+  /********************************************************** */
 
-  const proceedSectionClassName = step1Creds
+  /** Setting sidebar styles if the user is authenticated */
+
+  const submissionStatus = Imports.employeeStatuses
+    .find(status => status.id === EmployeeStatusId);
+
+  const {
+    params: {
+      status,
+      nextStep: linkToUse,
+    }
+  } = submissionStatus;
+
+  const proceedSectionClassName = (
+    status > 0
+  )
     ? classes.SubmissionProcess
     : classes.DisplayNone;
+  /********************************************************** */
+
+
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -156,7 +199,7 @@ const Submission = () => {
               </Grid>
             </Grid>
             <Grid className={proceedSectionClassName}>
-              <Link to="/documents">Proceed to next step</Link>
+              <Link to={linkToUse}>Proceed to next step</Link>
               This   option  will  be  available  after  your  profile  is  approved by HR. You will receive an  email  to  continue with the next steps of the process.
             </Grid>
           </Grid>

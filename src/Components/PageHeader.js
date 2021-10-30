@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import {
   Grid,
   TextField,
@@ -38,6 +38,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const PageHeader = () => {
+  const history = useHistory();
+  
   const classes = useStyles();
 
   const [authenticatedHeader, setAuthHeader] = useState(
@@ -96,10 +98,17 @@ const PageHeader = () => {
 
   if (userProfile) {
     var {
-      dnUsername = 'Not Found',
+      dnUsername,
+      firstName,
+      lastName,
     } = userProfile;
 
-    dnUsername = capitalize(dnUsername);
+    dnUsername = capitalize(dnUsername || '');
+    firstName = capitalize(firstName || '');
+    lastName = capitalize(lastName || '');
+
+    /** dnUserName is for employees, firstName & lastName is for applicants */
+    dnUsername = dnUsername || `${firstName} ${lastName}` || 'Not Found';
   }
 
   /********************************************************** */
@@ -109,6 +118,11 @@ const PageHeader = () => {
   const headerClassName = authenticatedHeader ? '' : classes.DisplayNone;
 
   /********************************************************** */
+
+  const logout = () => {
+    localStorage.clear();
+    history.push('/');
+  }
 
   return (
     <Grid>
@@ -294,9 +308,9 @@ const PageHeader = () => {
                       </Grid>
                     </ListItem>
                     <ListItem className="LogOutIcon">
-                      <Link to="/">
+                      <Button onClick={logout}>
                         Logout
-                      </Link>
+                      </Button>
                     </ListItem>
                   </List>
                 </Grid>

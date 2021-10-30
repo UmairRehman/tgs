@@ -17,6 +17,7 @@ import { capitalize } from "../../../helpers/capitalize";
 import { es, fi } from "date-fns/locale";
 import { useHistory } from "react-router-dom";
 
+import DatePicker from 'react-date-picker';
 
 // import MobileScreen from './Mobile/Enter-RailRoad-Add';
 // import {isMobile} from 'react-device-detect';
@@ -107,8 +108,9 @@ const OJE = ['Yes', 'No'];
 
 const Application = () => {
 
-    let history = useHistory();
+    const [dateOfBirth, dateOfBirthSetter] = useState(new Date());
 
+    let history = useHistory();
 
     const snackBarDefaultDuration = 4000;
 
@@ -137,14 +139,6 @@ const Application = () => {
         notes_for_hr: '',
     })
 
-    /** State for spouse information */
-    const spouseInformation = useState({
-        name: '',
-        dateOfBirth: new Date(),
-        address: '',
-        phone_number: '',
-    });
-
     /** State required for marital status */
     const maritalInformation = useState({
         marital_status: '',
@@ -170,10 +164,10 @@ const Application = () => {
         home_phone: '',
         cell_phone: '',
         agree_to_notifications: true,
-        souse_name: '',
-        souse_dateOfBirth: new Date(),
-        souse_address: '',
-        souse_phone_number: '',
+        spouse_name: '',
+        spouse_dateOfBirth: new Date(),
+        spouse_address: '',
+        spouse_phone_number: '',
     });
 
     const [snackBarMessage, setSnackBarMessage] = useState('');
@@ -286,9 +280,14 @@ const Application = () => {
                 .join('_')
                 .toLowerCase();
 
-        const {
-            target: { files, value, checked }
-        } = $e;
+        /** Date picker's event is the value that is set */
+        if (!$e.target) {
+            var value = $e;
+        } else {
+            var {
+                target: { files, value, checked }
+            } = $e;
+        }
 
         const newValueToUse = files || title || value || checked;
 
@@ -671,14 +670,16 @@ const Application = () => {
                                         <Grid xs={12} className="mbold mb14">
                                             Spouse's Date of Birth
                                         </Grid>
-                                        <TextField id="outlined-basic" placeholder="Type Here" variant="outlined" className="w100p"
-                                            onChange={
-                                                ($e) => setStateForFormControl(
-                                                    contactInformation,
-                                                    'spouse_dateOfBirth',
-                                                    $e,
-                                                )
-                                            } />
+                                        <DatePicker
+                                            onChange={($e) => setStateForFormControl(
+                                                contactInformation,
+                                                'spouse_dateOfBirth',
+                                                $e,
+                                            )}
+                                            value={dateOfBirth}
+                                            id="spouse-dob"
+                                            className="datePickerReact w100p bg-white react-date-picker p-2"
+                                        />
                                     </Grid>
                                     <Grid xs={6} className="mt30 pl20">
                                         <Grid xs={12} className="mbold mb14">

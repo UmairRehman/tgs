@@ -9,5 +9,7 @@ export const statics = {
         employee_exists: 'Employee with the provided credentials Already exists',
         applicant_rejected: 'Application has been rejected',
         invalid_email: 'Invalid Email address',
+        INTERNAL_SERVER_ERROR: 'An error occured, kindly contact support',
+        form_submitted: 'Form Already Submitted',
     }
 }

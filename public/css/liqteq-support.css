@@ -1857,7 +1857,7 @@ textarea::-ms-input-placeholder { /* Microsoft Edge */
     flex-wrap: wrap;
     justify-content: center;
 }
-.SubmissionTable div::before {
+.SubmissionTable div::before, .task-done::before {
     content: '';
     display: block;
     width: 160px;
@@ -1866,6 +1866,7 @@ textarea::-ms-input-placeholder { /* Microsoft Edge */
     background: url(../assets/TickDoneIcon.svg) no-repeat center center transparent;
     background-size: 100%;
 }
+
 .Submission .SubmissionProccess {
     width: 200px;
     position: absolute;

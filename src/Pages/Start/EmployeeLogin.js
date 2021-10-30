@@ -208,7 +208,7 @@ const EmployeeLogin = () => {
           <Grid className="LoginTitle">Employee Login</Grid>
           <Grid className="FormFields">
 
-            <TextField placeholder="Email / User ID" type="text" onChange={handleChange('username')} />
+            <TextField placeholder="User ID" type="text" onChange={handleChange('username')} />
 
             <FormControl
               className="LoginPwd">
