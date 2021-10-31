@@ -343,6 +343,62 @@
 
 .reactDatePicker{
     margin-left: 40px !important;
-  }
+}
+
+.text-center {
+    text-align: center;
+}
+
+.d-none {
+    display: none!important;
+}
+
+.p-2 {
+    padding: 0.5rem!important;
+}
+
+.p-3 {
+    padding: 1rem!important;
+}
+
+.m-0 {
+    margin: 0px;
+}
+
+.react-date-picker > div {
+    border: none!important;
+    border-radius: 5px!important;
+    box-shadow: 1px 2px 5px -2px #555!important;
+    padding: 0.5rem;
+}
+
+.bg-white {
+    background-color: #fff;
+}
   
-  
+
+.task-done::before {
+    content: '';
+    display: block;
+    width: 160px;
+    height: 160px;
+    margin: 0px;
+    background: url(../assets/TickDoneIcon.svg) no-repeat center center transparent;
+    background-size: 100%;
+}
+
+.d-flex {
+    display: flex!important;
+}
+
+.justify-content-center {
+    justify-content: center;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.flex-column {
+    flex-direction: column;
+}

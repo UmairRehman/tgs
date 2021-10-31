@@ -99,6 +99,12 @@ const PostConditionalJobOffer4 = () => {
         ],
         form: 6,
       });
+      
+      const step3FormsSubmitted = JSON.parse(storage.get('step-3-form-postConditionalOffer')) || true;
+
+      storage.set('step-3-form-postConditionalOffer', JSON.stringify(step3FormsSubmitted));
+
+      window.self.close();     
     }
     else {
       setError("field must be filed")

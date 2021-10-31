@@ -1857,7 +1857,7 @@ textarea::-ms-input-placeholder { /* Microsoft Edge */
     flex-wrap: wrap;
     justify-content: center;
 }
-.SubmissionTable div::before, .task-done::before {
+.SubmissionTable div::before {
     content: '';
     display: block;
     width: 160px;

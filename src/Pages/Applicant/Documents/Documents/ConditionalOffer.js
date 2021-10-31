@@ -121,9 +121,14 @@ const ConditionalOffer = () => {
         image: [image],
         form: 5,
       });
+
+      const step3FormsSubmitted = JSON.parse(storage.get('step-3-form-conditonalOffer')) || true;
+
+      storage.set('step-3-form-conditonalOffer', JSON.stringify(step3FormsSubmitted));
       
       showSnackBar('Form has been submitted!');
       
+      window.self.close();
     } catch (exc) {
       setPosting(false);
 

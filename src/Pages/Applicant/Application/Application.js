@@ -678,7 +678,7 @@ const Application = () => {
                                             )}
                                             value={dateOfBirth}
                                             id="spouse-dob"
-                                            className="datePickerReact w100p bg-white react-date-picker p-2"
+                                            className="datePickerReact w100p bg-white react-date-picker"
                                         />
                                     </Grid>
                                     <Grid xs={6} className="mt30 pl20">
@@ -926,15 +926,31 @@ const Application = () => {
                                                 Resume / CV
                                             </Grid>
                                             <Grid xs={12} id="Step2DragFile" className="Step2DragFile mt14">
-                                                Drop File Here OR <label for="ResumeSelect" className="labelButton">Select Files</label>
-                                                <input type="file" id="ResumeSelect" className="hide"
-                                                    onChange={
-                                                        ($e) => setStateForFormControl(
-                                                            filesToUpload,
-                                                            'resume',
-                                                            $e,
-                                                        )
-                                                    } />
+                                                <Grid className={
+                                                    filesToUpload[0].resume
+                                                        ? 'd-flex p-3 m-0 justify-content-center flex-column align-items-center'
+                                                        : 'd-none'
+                                                }>
+                                                    <Grid className="task-done"></Grid>
+                                                    <Typography>
+                                                        Resume has been uploaded
+                                                    </Typography>
+                                                </Grid>
+                                                <Grid xs={12} className={
+                                                    filesToUpload[0].resume
+                                                        ? 'd-none'
+                                                        : 'text-center'
+                                                }>
+                                                    Drop File Here OR <label for="ResumeSelect" className="labelButton">Select Files</label>
+                                                    <input type="file" id="ResumeSelect" className="hide"
+                                                        onChange={
+                                                            ($e) => setStateForFormControl(
+                                                                filesToUpload,
+                                                                'resume',
+                                                                $e,
+                                                            )
+                                                        } />
+                                                </Grid>
                                             </Grid>
                                         </Grid>
                                     </Grid>
@@ -948,16 +964,32 @@ const Application = () => {
                                                 Social Security Card
                                             </Grid>
                                             <Grid xs={12} id="Step2DragFile" className="Step2DragFile mt14">
-                                                Drop File Here OR <label for="licenseSelect" className="labelButton">Select Files</label>
-                                                <input type="file" id="licenseSelect" className="hide"
-                                                    onChange={
-                                                        $e => setStateForFormControl(
-                                                            filesToUpload,
-                                                            'state_driver_license',
-                                                            $e
-                                                        )
-                                                    }
-                                                />
+                                                <Grid className={
+                                                    filesToUpload[0].state_driver_license
+                                                        ? 'd-flex p-3 m-0 justify-content-center flex-column align-items-center'
+                                                        : 'd-none'
+                                                }>
+                                                    <Grid className="task-done"></Grid>
+                                                    <Typography>
+                                                        State Driver's License has been uploaded
+                                                    </Typography>
+                                                </Grid>
+                                                <Grid xs={12} className={
+                                                    filesToUpload[0].state_driver_license
+                                                        ? 'd-none'
+                                                        : 'text-center'
+                                                }>
+                                                    Drop File Here OR <label for="licenseSelect" className="labelButton">Select Files</label>
+                                                    <input type="file" id="licenseSelect" className="hide"
+                                                        onChange={
+                                                            $e => setStateForFormControl(
+                                                                filesToUpload,
+                                                                'state_driver_license',
+                                                                $e
+                                                            )
+                                                        }
+                                                    />
+                                                </Grid>
                                             </Grid>
                                         </Grid>
                                     </Grid>
