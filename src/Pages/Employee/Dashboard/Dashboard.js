@@ -19,10 +19,10 @@ import {isMobile} from 'react-device-detect';
 
 // Tables Columns
 const columns = [
-  { field: "id", headerName: "Employee ID",  type: "value" },
-  { field: "licenseCertificate", headerName: "License Certificate",  type: "value" },
-  { field: "issueDate", headerName: "Issue Date",  type: "value" },
-  { field: "expiryDate", headerName: "Expiry Date",  type: "value" },
+  { id: "id", label: "Employee ID", minWidth: 50, type: "value" },
+  { id: "licenseCertificate", label: "License Certificate", minWidth: 100, type: "value" },
+  { id: "issueDate", label: "Issue Date", minWidth: 50, type: "value" },
+  { id: "expiryDate", label: "Expiry Date", minWidth: 50, type: "value" },
 ];
 
 // table dummy data
@@ -32,6 +32,7 @@ const rows = [
     issueDate :"3/10/2021",
     expiryDate: "6/10/2021"}
 ];
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -59,16 +60,7 @@ const Dashboard = () => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    setIsLoading(false)
-    let response = []
-    console.log("res",response);
-    if(response){
-      setData(rows)
-      setIsLoading(true)
-    }
   
-  }, [])
   if(isMobile) {
     return (
         <MobileScreen />
@@ -129,16 +121,59 @@ const Dashboard = () => {
                   className="LiqTables Dash-Table DashTable-Desk"
               >
                 <Paper>
-                <div style={{ height: 400, width: '100%' }}>
-                
-                  {/* <TableContainer> */}
-                  <DataGrid
+                {/* <DataGrid
                     rows={rows}
                     columns={columns}
                     pageSize={5}
                     rowsPerPageOptions={[5]}
-                  />
-                {/* </TableContainer> */}
+                  /> */}
+                  <TableContainer>
+                  <Table aria-label="table">
+                    <TableHead>
+                      <TableRow>
+                        {columns.map((column) => (
+                          <TableCell
+                            className="bold f16"
+                            key={column.id}
+                            align={column.align}
+                            style={{ minWidth: column.minWidth }}
+                          >
+                            {column.label}
+                          </TableCell>
+                        ))}
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {rows
+                        .map((row) => {
+                          return (
+                            <TableRow
+                              hover
+                              role="checkbox"
+                              tabIndex={-1}
+                              key={row.code}
+                            >
+                              {columns.map((column) => {
+                                const value = row[column.id];
+                                return (
+                                  <TableCell
+                                    key={column.id}
+                                    align={column.align}
+                                  >
+                                    {column.format &&
+                                    typeof value === "number"
+                                      ? column.format(value)
+                                      : value}
+                                  </TableCell>
+                                );
+                              })}
+                            </TableRow>
+                          );
+                        })}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+                <div style={{ height: 400, width: '100%' }}>
                 
                 </div>
                 </Paper>
