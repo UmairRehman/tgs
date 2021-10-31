@@ -11,5 +11,6 @@ export const statics = {
         invalid_email: 'Invalid Email address',
         INTERNAL_SERVER_ERROR: 'An error occured, kindly contact support',
         form_submitted: 'Form Already Submitted',
+        user_not_found_in_db: "User does not exist",
     }
 }
