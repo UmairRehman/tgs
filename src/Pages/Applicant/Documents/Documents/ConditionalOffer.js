@@ -11,8 +11,6 @@ import DatePicker from 'react-date-picker';
 import SaveIcon from '@material-ui/icons/Save';
 import LocalPrintshopIcon from '@material-ui/icons/LocalPrintshop';
 import CancelIcon from '@material-ui/icons/Cancel';
-import { Formik, Form } from 'formik';
-import * as Yup from 'yup';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const ConditionalOffer = () => {
