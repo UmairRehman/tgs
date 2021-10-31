@@ -80,7 +80,7 @@ const HTTPClientFunctionsWrapper = async (method, ...args) => {
      */
     const [uri, ...rest] = args;
 
-    const [payload, headers = {}] = rest;
+    const [payload = {}, headers = {}] = rest;
 
     // HTTP Requests 
     const response = await axiosInstance[method](

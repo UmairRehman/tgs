@@ -1,7 +1,8 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import {
-  Grid,TableContainer,Table,TableCell,TableRow,List,ListItem,Button,
+  Grid, TableContainer, Table, TableCell, TableRow, List, ListItem, Button,
 } from "@material-ui/core";
+import SaveIcon from '@material-ui/icons/Save';
 import Avatar from '@material-ui/core/Avatar';
 import { Link } from "react-router-dom";
 import FormHeader from "../../../../Components/FormHeader";
@@ -13,7 +14,26 @@ import LocalPrintshopIcon from '@material-ui/icons/LocalPrintshop';
 import CancelIcon from '@material-ui/icons/Cancel';
 
 
+/** Local dependencies & Libraries */
+import Services from '../../../../Services';
+
+import { Imports } from '../../../../Imports';
+
+
+const {
+  users
+} = Services;
+
+const {
+  styles: {
+    displayNoneStyles: useStyles
+  }
+} = Imports;
+
+
 const PostConditionalJobOffer2 = () => {
+
+  const classes = useStyles();
 
   let history = useHistory();
 
@@ -22,8 +42,10 @@ const PostConditionalJobOffer2 = () => {
   }
 
   const PrintOut = () => {
-      window.print();
+    window.print();
   }
+
+  const [isPosting, setPosting] = useState(false);
 
   const [stage, setStage] = useState('Second')
 
@@ -33,61 +55,64 @@ const PostConditionalJobOffer2 = () => {
 
   const [pDate, setPDate] = useState(new Date())
 
-  async function submit(){
+  async function submit() {
 
-    let canvas = await(html2canvas(document.querySelector('#capture')));
-    let  image = (canvas.toDataURL('image/png'))
+    setPosting(true);
 
-    let data ={
-      name : document.getElementById('name').value,
-      seecurityNumber : document.getElementById('seecurityNumber').value,
-      date : date ,
-      dateOnInjury : document.getElementById('dateOnInjury').value,
-      typeOfInjury : document.getElementById('typeOfInjury').value,
-      injuryDetails1 : [
+    let canvas = await (html2canvas(document.querySelector('#capture')));
+    let image = (canvas.toDataURL('image/png'))
+
+    let data = {
+      name: document.getElementById('name').value,
+      seecurityNumber: document.getElementById('seecurityNumber').value,
+      date: date,
+      dateOnInjury: document.getElementById('dateOnInjury').value,
+      typeOfInjury: document.getElementById('typeOfInjury').value,
+      injuryDetails1: [
         document.getElementById("doctorName[0]").value,
         document.getElementById("address[0]").value,
         document.getElementById("phone[0]").value
       ],
-      injuryDetails2 : [
+      injuryDetails2: [
         document.getElementById("doctorName[1]").value,
         document.getElementById("address[1]").value,
         document.getElementById("phone[1]").value
       ],
-      injuryOccure : document.getElementById('injuryOccure').value,
-      injuryAddress : document.getElementById('injuryAddress').value,
-      injuryPhone : document.getElementById('injuryPhone').value,
-      comment : document.getElementById('comment').value,
-      bills : document.getElementById('bills').value,
-      howMuch : document.getElementById('howMuch').value,
-      howLong : document.getElementById('howLong').value,
-      howMuch2 : document.getElementById('howMuch2').value,
-      attorney : document.getElementById('attorney').value,
-      settlement : document.getElementById('settlement').value,
-      dateRelease : document.getElementById('dateRelease').value,
-      limitations : document.getElementById('limitations').value,
-      drName : document.getElementById('drName').value,
-      drAddress : document.getElementById('drAddress').value,
-      drPhone : document.getElementById('drPhone').value,
-      confidential : document.getElementById('confidential').value,
-      signature : document.getElementById('signature').value,
-      pDate :pDate,
+      injuryOccure: document.getElementById('injuryOccure').value,
+      injuryAddress: document.getElementById('injuryAddress').value,
+      injuryPhone: document.getElementById('injuryPhone').value,
+      comment: document.getElementById('comment').value,
+      bills: document.getElementById('bills').value,
+      howMuch: document.getElementById('howMuch').value,
+      howLong: document.getElementById('howLong').value,
+      howMuch2: document.getElementById('howMuch2').value,
+      attorney: document.getElementById('attorney').value,
+      settlement: document.getElementById('settlement').value,
+      dateRelease: document.getElementById('dateRelease').value,
+      limitations: document.getElementById('limitations').value,
+      drName: document.getElementById('drName').value,
+      drAddress: document.getElementById('drAddress').value,
+      drPhone: document.getElementById('drPhone').value,
+      confidential: document.getElementById('confidential').value,
+      signature: document.getElementById('signature').value,
+      pDate: pDate,
       image: image
     }
     console.log(data)
     const nullCheck = Object.values(data)
-    .reduce((total, accumulator) => total || !accumulator, false);
-  
-    if (nullCheck== false){
+      .reduce((total, accumulator) => total || !accumulator, false);
+
+    setPosting(false);
+
+    if (nullCheck == false) {
       console.log(data)
-    //  save in local storage for submit 
-    localStorage.setItem( 'secondFormDataImage', JSON.stringify(image) )
-    localStorage.setItem( 'secondFormData', JSON.stringify(data) )
+      //  save in local storage for submit 
+      localStorage.setItem('secondFormDataImage', image);
+      localStorage.setItem('secondFormData', JSON.stringify(data))
       history.push({
-        pathname : "/documents/post-conditional-job-offer/3",
+        pathname: "/documents/post-conditional-job-offer/3",
       });
-    }
-    else {
+    } else {
       setError("field must be filed")
       alert("Error! Field must be Filled")
     }
@@ -95,354 +120,354 @@ const PostConditionalJobOffer2 = () => {
   }
 
 
-  async function eventHandle(value){
-    if (value == "second"){
-      submit()  
+  async function eventHandle(value) {
+    if (value == "second") {
+      submit()
     }
     else {
-     alert('Please go step by step')
+      alert('Please go step by step')
     }
   }
 
 
   return (
     <Grid id="capture" container xs={12} className="LiqForms-Container">
-        <Grid className="FormsHeader">
-          <List>
-              <ListItem>
-                  <Grid className="FormMenuLogo"></Grid>
-              </ListItem>
-              <ListItem>
-                  {/* <Button>
-                      <SaveIcon/>
-                  </Button> */}
-              </ListItem>
-              <ListItem>
-                  <Button onClick={() => window.print()}>
-                      <LocalPrintshopIcon/>
-                  </Button>
-              </ListItem>
-              <ListItem>
-                  <Button onClick={() => window.close()}>
-                      <CancelIcon/>
-                  </Button>
-              </ListItem>
-          </List>
-        </Grid>
+      <Grid className={isPosting ? classes.displayNone : 'FormsHeader'}>
+        <List>
+          <ListItem>
+            <Grid className="FormMenuLogo"></Grid>
+          </ListItem>
+          <ListItem>
+            <Button onClick={() => submit()}>
+              <SaveIcon />
+            </Button>
+          </ListItem>
+          <ListItem>
+            <Button onClick={() => window.print()}>
+              <LocalPrintshopIcon />
+            </Button>
+          </ListItem>
+          <ListItem>
+            <Button onClick={() => window.close()}>
+              <CancelIcon />
+            </Button>
+          </ListItem>
+        </List>
+      </Grid>
 
-        <Grid className="FormPagi">
-          <List>
-            <ListItem >
-              <a onClick={() => eventHandle('first')} 
-                // to="/documents/post-conditional-job-offer"
-              >
-                  1
-              </a>
-            </ListItem> 
-            <ListItem className="Active">
-              <a 
+      <Grid className="FormPagi">
+        <List>
+          <ListItem >
+            <a onClick={() => eventHandle('first')}
+            // to="/documents/post-conditional-job-offer"
+            >
+              1
+            </a>
+          </ListItem>
+          <ListItem className="Active">
+            <a
               onClick={() => eventHandle('first')}
-                // to="/documents/post-conditional-job-offer/2"
-                >
-                  2
-              </a>
-            </ListItem>
-            
-            <ListItem>
-              <a
-                onClick={() => eventHandle('second')}
-                >
-                3
-              </a>
-            </ListItem>
+            // to="/documents/post-conditional-job-offer/2"
+            >
+              2
+            </a>
+          </ListItem>
 
-            <ListItem>
-              <a 
-               onClick={() => eventHandle('forth')}
-              >
-                4
-              </a>
-            </ListItem>
-          </List>
-        </Grid>
-        <TableContainer className="MainTable">
-          <Table className="SecondMainTable">
-            <TableRow>
-              <TableCell>
-                <Table className="w100">
-                  <TableRow className="w100 mb10 mt10 row justify-center">
-                    <TableCell>
+          <ListItem>
+            <a
+              onClick={() => eventHandle('second')}
+            >
+              3
+            </a>
+          </ListItem>
+
+          <ListItem>
+            <a
+              onClick={() => eventHandle('forth')}
+            >
+              4
+            </a>
+          </ListItem>
+        </List>
+      </Grid>
+      <TableContainer className="MainTable">
+        <Table className="SecondMainTable">
+          <TableRow>
+            <TableCell>
+              <Table className="w100">
+                <TableRow className="w100 mb10 mt10 row justify-center">
+                  <TableCell>
                     <Avatar alt="TGS" className="TGSLogoSVG" src="https://tgs.liquidtechnologies.pk/assets/TGS_Logo2.svg" />
-                    </TableCell>
-                  </TableRow>
-                  <TableRow className="w100">
-                    <TableCell className="w100 textCenter">
-                    SUPPLEMENTAL INFORMATION TO:<br/>
-                    POST CONDITIONAL JOB OFFER QUESTIONNAIRE<br/>
+                  </TableCell>
+                </TableRow>
+                <TableRow className="w100">
+                  <TableCell className="w100 textCenter">
+                    SUPPLEMENTAL INFORMATION TO:<br />
+                    POST CONDITIONAL JOB OFFER QUESTIONNAIRE<br />
                     (To Be Completed By Applicant)
-                    </TableCell>
-                  </TableRow>
-                </Table>
-                <Table className="mt10">
-                  {/* --**-- */}
-                  <TableRow className="w100 mt10 row">
-                    <TableCell className="w50 row pr10">
+                  </TableCell>
+                </TableRow>
+              </Table>
+              <Table className="mt10">
+                {/* --**-- */}
+                <TableRow className="w100 mt10 row">
+                  <TableCell className="w50 row pr10">
                     NAME:
                     <input type="text" name="textfield" id="name" className="w h18 pl8 bn bb" />
-                    </TableCell>
-                    <TableCell className="w50 row pl10">
+                  </TableCell>
+                  <TableCell className="w50 row pl10">
                     SOCIAL SECURITY NO.:
                     <input type="text" name="textfield" id="seecurityNumber" className="w h18 pl8 bn bb" />
-                    </TableCell>
-                  </TableRow>
-                  <TableRow className="w100 mt10 row">
-                    <TableCell className="w100 row">
+                  </TableCell>
+                </TableRow>
+                <TableRow className="w100 mt10 row">
+                  <TableCell className="w100 row">
                     Address:
                     <DatePicker
                       onChange={(value) => { setDate(value) }}
                       value={date}
                       id="offerDate"
                       className="datePickerReact"
-                      />
-                    </TableCell>
-                  </TableRow>
-                  <TableRow className="w100 mt10 row">
-                    <TableCell className="w4">6.</TableCell>
-                    <TableCell className="w50 row pr10">
-                      Date of Injury:
+                    />
+                  </TableCell>
+                </TableRow>
+                <TableRow className="w100 mt10 row">
+                  <TableCell className="w4">6.</TableCell>
+                  <TableCell className="w50 row pr10">
+                    Date of Injury:
                     <input type="text" name="textfield" id="dateOnInjury" className="w h18 pl8 bn bb" />
-                    </TableCell>
-                    <TableCell className="w50 row pl10">
+                  </TableCell>
+                  <TableCell className="w50 row pl10">
                     Type of Injury:
                     <input type="text" name="textfield" id="typeOfInjury" className="w h18 pl8 bn bb" />
-                    </TableCell>
-                  </TableRow>
-                  {/* -*- */}
-                  <TableRow className="w100 mt10 row">
-                    <TableCell className="w4">7.</TableCell>
-                    <TableCell className="w100 row pr10">
+                  </TableCell>
+                </TableRow>
+                {/* -*- */}
+                <TableRow className="w100 mt10 row">
+                  <TableCell className="w4">7.</TableCell>
+                  <TableCell className="w100 row pr10">
                     Doctors Who Treated the Injury:
-                    </TableCell>
-                  </TableRow>
-                  <TableRow className="w100 mt10 row">
-                    <TableCell className="w4"></TableCell>
-                    <TableCell className="w30 pr20 textCenter">
+                  </TableCell>
+                </TableRow>
+                <TableRow className="w100 mt10 row">
+                  <TableCell className="w4"></TableCell>
+                  <TableCell className="w30 pr20 textCenter">
                     <input type="text" name="textfield" id="doctorName[0]" className="w100 bn bb textCenter mb5" />
                     (Name)
-                    </TableCell>
-                    <TableCell className="w40 pr10 textCenter">
+                  </TableCell>
+                  <TableCell className="w40 pr10 textCenter">
                     <input type="text" name="textfield" id="address[0]" className="w100 bn bb textCenter mb5" />
                     (Address)
-                    </TableCell>
-                    <TableCell className="w30 pl20 textCenter">
+                  </TableCell>
+                  <TableCell className="w30 pl20 textCenter">
                     <input type="text" name="textfield" id="phone[0]" className="w100 bn bb textCenter mb5" />
                     (Phone)
-                    </TableCell>
-                  </TableRow>
-                  <TableRow className="w100 mt10 row">
-                    <TableCell className="w4"></TableCell>
-                    <TableCell className="w30 pr20 textCenter">
+                  </TableCell>
+                </TableRow>
+                <TableRow className="w100 mt10 row">
+                  <TableCell className="w4"></TableCell>
+                  <TableCell className="w30 pr20 textCenter">
                     <input type="text" name="textfield" id="doctorName[1]" className="w100 bn bb textCenter mb5" />
                     (Name)
-                    </TableCell>
-                    <TableCell className="w40 pr10 textCenter">
+                  </TableCell>
+                  <TableCell className="w40 pr10 textCenter">
                     <input type="text" name="textfield" id="address[1]" className="w100 bn bb textCenter mb5" />
                     (Address)
-                    </TableCell>
-                    <TableCell className="w30 pl20 textCenter">
+                  </TableCell>
+                  <TableCell className="w30 pl20 textCenter">
                     <input type="text" name="textfield" id="phone[1]" className="w100 bn bb textCenter mb5" />
                     (Phone)
-                    </TableCell>
-                  </TableRow>
-                  {/* -*- */}
-                  <TableRow className="w100 mt10 row">
-                    <TableCell className="w4">8.</TableCell>
-                    <TableCell className="w100 row pr10">
+                  </TableCell>
+                </TableRow>
+                {/* -*- */}
+                <TableRow className="w100 mt10 row">
+                  <TableCell className="w4">8.</TableCell>
+                  <TableCell className="w100 row pr10">
                     Where Did the Injury Occur?
-                    </TableCell>
-                  </TableRow>
-                  <TableRow className="w100 mt10 row">
-                    <TableCell className="w4"></TableCell>
-                    <TableCell className="w30 pr20 textCenter">
+                  </TableCell>
+                </TableRow>
+                <TableRow className="w100 mt10 row">
+                  <TableCell className="w4"></TableCell>
+                  <TableCell className="w30 pr20 textCenter">
                     <input type="text" name="textfield" id="injuryOccure" className="w100 bn bb textCenter mb5" />
                     (Name)
-                    </TableCell>
-                    <TableCell className="w40 pr10 textCenter">
+                  </TableCell>
+                  <TableCell className="w40 pr10 textCenter">
                     <input type="text" name="textfield" id="injuryAddress" className="w100 bn bb textCenter mb5" />
                     (Address)
-                    </TableCell>
-                    <TableCell className="w30 pl20 textCenter">
+                  </TableCell>
+                  <TableCell className="w30 pl20 textCenter">
                     <input type="text" name="textfield" id="injuryPhone" className="w100 bn bb textCenter mb5" />
                     (Phone)
-                    </TableCell>
-                  </TableRow>
-                  {/* -*- */}
-                  <TableRow className="w100 mt10 row">
-                    <TableCell className="w4">9.</TableCell>
-                    <TableCell className="w100 row pr10">
+                  </TableCell>
+                </TableRow>
+                {/* -*- */}
+                <TableRow className="w100 mt10 row">
+                  <TableCell className="w4">9.</TableCell>
+                  <TableCell className="w100 row pr10">
                     How Did the Injury Happen?
-                    </TableCell>
-                  </TableRow>
-                  <TableRow className="w100 mt10 row">
-                    <TableCell className="w4"></TableCell>
-                    <TableCell className="w100">
+                  </TableCell>
+                </TableRow>
+                <TableRow className="w100 mt10 row">
+                  <TableCell className="w4"></TableCell>
+                  <TableCell className="w100">
                     <input type="text" name="textfield" id="comment" className="w100 bn bb mt8" />
-                    </TableCell>
-                  </TableRow>
-                  {/* -*- */}
-                  <TableRow className="w100 mt10 row">
-                    <TableCell className="w4">10.</TableCell>
-                    <TableCell className="w100 row pr10">
+                  </TableCell>
+                </TableRow>
+                {/* -*- */}
+                <TableRow className="w100 mt10 row">
+                  <TableCell className="w4">10.</TableCell>
+                  <TableCell className="w100 row pr10">
                     Was Worker’s Compensation Payment Made For:
-                    </TableCell>
-                  </TableRow>
-                  <TableRow className="w100 mt10 pl30 row">
-                    <TableCell className="w4">a.</TableCell>
-                    <TableCell className="w26">
-                      Medical Bills
-                    </TableCell>
-                    <TableCell className="w10 row">
-                      <input type="radio" name="mb" id="bills" value="yes" className="mr6 mt2"/>
-                      Yes
-                    </TableCell>
-                    <TableCell className="w10 row">
-                      <input type="radio" name="mb" id="bills" value="no" className="mr6 mt2"/>
-                      No
-                    </TableCell>
-                    <TableCell className="w row">
-                      How Much?
-                      <input type="text" name="textfield" id="howMuch" className="w bn bb" />
-                    </TableCell>
-                  </TableRow>
-                  <TableRow className="w100 mt10 pl30 row">
-                    <TableCell className="w4">b.</TableCell>
-                    <TableCell className="w26">
-                      Time off/Pay
-                    </TableCell>
-                    <TableCell className="w row pr20">
-                      How Long?
-                      <input type="text" name="textfield" id="howLong" className="w bn bb" />
-                    </TableCell>
-                    <TableCell className="w row">
-                      How Much?
-                      <input type="text" name="textfield" id="howMuch2" className="w bn bb" />
-                    </TableCell>
-                  </TableRow>
-                  <TableRow className="w100 mt10 pl30 row">
-                    <TableCell className="w4">c.</TableCell>
-                    <TableCell className="w26">
-                      Attorney’s Fees
-                    </TableCell>
-                    <TableCell className="w10 row">
-                      <input type="radio" name="at" id="attorney" value="yes" className="mr6 mt2"/>
-                      Yes
-                    </TableCell>
-                    <TableCell className="w10 row">
-                      <input type="radio" name="at" id="attorney" value="no" className="mr6 mt2"/>
-                      No
-                    </TableCell>
-                  </TableRow>
-                  <TableRow className="w100 mt10 pl30 row">
-                    <TableCell className="w4">d.</TableCell>
-                    <TableCell className="w26">
-                      Settlement
-                    </TableCell>
-                    <TableCell className="w10 row">
-                      <input type="radio" name="st" id="settlement" value="yes" className="mr6 mt2"/>
-                      Yes
-                    </TableCell>
-                    <TableCell className="w10 row">
-                      <input type="radio" name="st" id="settelment" value="yes" className="mr6 mt2"/>
-                      No
-                    </TableCell>
-                  </TableRow>
-                  {/* -*- */}
-                  <TableRow className="w100 mt10 row">
-                    <TableCell className="w4">11.</TableCell>
-                    <TableCell className="w100 row">
-                     Date Released By Doctor To Go Back To Work:
-                     <input type="text" name="textfield" id="dateRelease" className="w bn bb" />
-                    </TableCell>
-                  </TableRow>
-                  {/* -*- */}
-                  <TableRow className="w100 mt10 row">
-                    <TableCell className="w4">12.</TableCell>
-                    <TableCell className="w40 row pr10">
+                  </TableCell>
+                </TableRow>
+                <TableRow className="w100 mt10 pl30 row">
+                  <TableCell className="w4">a.</TableCell>
+                  <TableCell className="w26">
+                    Medical Bills
+                  </TableCell>
+                  <TableCell className="w10 row">
+                    <input type="radio" name="mb" id="bills" value="yes" className="mr6 mt2" />
+                    Yes
+                  </TableCell>
+                  <TableCell className="w10 row">
+                    <input type="radio" name="mb" id="bills" value="no" className="mr6 mt2" />
+                    No
+                  </TableCell>
+                  <TableCell className="w row">
+                    How Much?
+                    <input type="text" name="textfield" id="howMuch" className="w bn bb" />
+                  </TableCell>
+                </TableRow>
+                <TableRow className="w100 mt10 pl30 row">
+                  <TableCell className="w4">b.</TableCell>
+                  <TableCell className="w26">
+                    Time off/Pay
+                  </TableCell>
+                  <TableCell className="w row pr20">
+                    How Long?
+                    <input type="text" name="textfield" id="howLong" className="w bn bb" />
+                  </TableCell>
+                  <TableCell className="w row">
+                    How Much?
+                    <input type="text" name="textfield" id="howMuch2" className="w bn bb" />
+                  </TableCell>
+                </TableRow>
+                <TableRow className="w100 mt10 pl30 row">
+                  <TableCell className="w4">c.</TableCell>
+                  <TableCell className="w26">
+                    Attorney’s Fees
+                  </TableCell>
+                  <TableCell className="w10 row">
+                    <input type="radio" name="at" id="attorney" value="yes" className="mr6 mt2" />
+                    Yes
+                  </TableCell>
+                  <TableCell className="w10 row">
+                    <input type="radio" name="at" id="attorney" value="no" className="mr6 mt2" />
+                    No
+                  </TableCell>
+                </TableRow>
+                <TableRow className="w100 mt10 pl30 row">
+                  <TableCell className="w4">d.</TableCell>
+                  <TableCell className="w26">
+                    Settlement
+                  </TableCell>
+                  <TableCell className="w10 row">
+                    <input type="radio" name="st" id="settlement" value="yes" className="mr6 mt2" />
+                    Yes
+                  </TableCell>
+                  <TableCell className="w10 row">
+                    <input type="radio" name="st" id="settelment" value="yes" className="mr6 mt2" />
+                    No
+                  </TableCell>
+                </TableRow>
+                {/* -*- */}
+                <TableRow className="w100 mt10 row">
+                  <TableCell className="w4">11.</TableCell>
+                  <TableCell className="w100 row">
+                    Date Released By Doctor To Go Back To Work:
+                    <input type="text" name="textfield" id="dateRelease" className="w bn bb" />
+                  </TableCell>
+                </TableRow>
+                {/* -*- */}
+                <TableRow className="w100 mt10 row">
+                  <TableCell className="w4">12.</TableCell>
+                  <TableCell className="w40 row pr10">
                     Any Limitations of Work To Be Done?
-                    </TableCell>
-                    <TableCell className="w10 row">
-                      <input type="radio" name="mb" id="limitations" value="yes" className="mr6 mt2"/>
-                      Yes
-                    </TableCell>
-                    <TableCell className="w10 row">
-                      <input type="radio" name="mb" id="limitations" value="no" className="mr6 mt2"/>
-                      No
-                    </TableCell>
-                    <TableCell className="w row">
+                  </TableCell>
+                  <TableCell className="w10 row">
+                    <input type="radio" name="mb" id="limitations" value="yes" className="mr6 mt2" />
+                    Yes
+                  </TableCell>
+                  <TableCell className="w10 row">
+                    <input type="radio" name="mb" id="limitations" value="no" className="mr6 mt2" />
+                    No
+                  </TableCell>
+                  <TableCell className="w row">
                     If yes, describe on the back of this form.
-                    </TableCell>
-                  </TableRow>
-                  <TableRow className="w100 mt10 row">
-                    <TableCell className="w4"></TableCell>
-                    <TableCell className="w30 pr20 textCenter">
+                  </TableCell>
+                </TableRow>
+                <TableRow className="w100 mt10 row">
+                  <TableCell className="w4"></TableCell>
+                  <TableCell className="w30 pr20 textCenter">
                     <input type="text" name="textfield" id="drName" className="w100 bn bb textCenter mb5" />
                     (Doctor’s Name)
-                    </TableCell>
-                    <TableCell className="w40 pr10 textCenter">
+                  </TableCell>
+                  <TableCell className="w40 pr10 textCenter">
                     <input type="text" name="textfield" id="drAddress" className="w100 bn bb textCenter mb5" />
                     (Address)
-                    </TableCell>
-                    <TableCell className="w30 pl20 textCenter">
+                  </TableCell>
+                  <TableCell className="w30 pl20 textCenter">
                     <input type="text" name="textfield" id="drPhone" className="w100 bn bb textCenter mb5" />
                     (Phone)
-                    </TableCell>
-                  </TableRow>
-                  {/* --**-- */}
-                  <TableRow className="w100 mt10 row">
-                    <TableCell className="w4">13.</TableCell>
-                    <TableCell className="w60">
-                    Do You Allow Us Access To Your Confidential Medical Information?
-                    </TableCell>
-                    <TableCell className="w10 row">
-                      <input type="radio" name="dyau" id="confidential" value="yes" className="mr6 mt2"/>
-                      Yes
-                    </TableCell>
-                    <TableCell className="w10 row">
-                      <input type="radio" name="dyau" id="confidential" value="no" className="mr6 mt2"/>
-                      No
-                    </TableCell>
-                  </TableRow>
-                  {/* --**-- */}
-                  <TableRow className="w100 mt50 row">
-                    <TableCell className="w50 row pr10">
-                      YOUR SIGNATURE:
-                      <input type="text" name="textfield" id="signature" className="w bn bb textCenter mb5" />
-                    </TableCell>
-                    <TableCell className="w50 row pl10">
-                      DATE:
-                      <DatePicker
-                        onChange={(value) => { setPDate(value) }}
-                        value={pDate}
-                        id="offerDate"
-                        className="datePickerReact"
-                      />
-                    </TableCell>
-                  </TableRow>
-                </Table>
+                  </TableCell>
+                </TableRow>
                 {/* --**-- */}
-                
-                
-              </TableCell>
-            </TableRow>
-            <TableRow className="w100 mt20">
-              <TableCell className="w100 textCenter">
-              Trans-Global Solutions, Inc.<br/>
-              1735 W. Cardinal Dr., Beaumont, Texas 77705<br/>
+                <TableRow className="w100 mt10 row">
+                  <TableCell className="w4">13.</TableCell>
+                  <TableCell className="w60">
+                    Do You Allow Us Access To Your Confidential Medical Information?
+                  </TableCell>
+                  <TableCell className="w10 row">
+                    <input type="radio" name="dyau" id="confidential" value="yes" className="mr6 mt2" />
+                    Yes
+                  </TableCell>
+                  <TableCell className="w10 row">
+                    <input type="radio" name="dyau" id="confidential" value="no" className="mr6 mt2" />
+                    No
+                  </TableCell>
+                </TableRow>
+                {/* --**-- */}
+                <TableRow className="w100 mt50 row">
+                  <TableCell className="w50 row pr10">
+                    YOUR SIGNATURE:
+                    <input type="text" name="textfield" id="signature" className="w bn bb textCenter mb5" />
+                  </TableCell>
+                  <TableCell className="w50 row pl10">
+                    DATE:
+                    <DatePicker
+                      onChange={(value) => { setPDate(value) }}
+                      value={pDate}
+                      id="offerDate"
+                      className="datePickerReact"
+                    />
+                  </TableCell>
+                </TableRow>
+              </Table>
+              {/* --**-- */}
+
+
+            </TableCell>
+          </TableRow>
+          <TableRow className="w100 mt20">
+            <TableCell className="w100 textCenter">
+              Trans-Global Solutions, Inc.<br />
+              1735 W. Cardinal Dr., Beaumont, Texas 77705<br />
               Phone (409) 720-5413 – Fax (409) 729-7041
-              </TableCell>
-            </TableRow>
-          </Table>
-        </TableContainer>
+            </TableCell>
+          </TableRow>
+        </Table>
+      </TableContainer>
     </Grid>
   );
 }

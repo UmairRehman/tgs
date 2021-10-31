@@ -46,11 +46,17 @@ import { Imports } from '../../Imports';
 
 import Snackbar from '../../Components/Snackbar';
 
+import { helpers } from '../../helpers';
+
 
 const {
   users,
   Storage,
 } = Services;
+
+const {
+  showSnackBar,
+} = helpers;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -74,10 +80,6 @@ const Login = () => {
 
   const storage = new Storage();
 
-  const [isSnackBarOpen, triggerSnackBar] = useState(false);
-
-  const [snackBarMessage, setSnackBarMessage] = useState('');
-
   const [isLoggingIn, setIsLoggingIn] = useState(false);
 
   const classes = useStyles();
@@ -90,23 +92,7 @@ const Login = () => {
     showPassword: false,
   });
 
-  /**
- * Shows a snackbar / toast
- * @param {string} messageToShow - String message to toast
- * @returns {void}
- */
-  const showSnackBar = (messageToShow) => {
-    const snackbarTriggerEvent = new CustomEvent(
-      'trigger-snackbar',
-      {
-        detail: {
-          messageToShow
-        }
-      }
-    );
-
-    window.dispatchEvent(snackbarTriggerEvent)
-  }
+  
 
   /**
    * @param {string} password - Password to validate 
@@ -146,20 +132,25 @@ const Login = () => {
       const isValid = await validatePassword(password);
 
       const {
-        data
+        data,
+        token,
       } = await users.login(payload);
 
+      storage.set('access_jwt', token);
       storage.set('user_profile', JSON.stringify(data))
 
       setIsLoggingIn(false);
+
+      console.log(Imports);
 
       const {
         path: pathname,
         params: state,
       } = Imports
-        .employeeStatuses[
-        data.EmployeeStatusId
-        ];
+        .employeeStatuses
+        .find(
+          status => status.id === data.EmployeeStatusId
+        )
 
       const stateToPush = state
         ? {

@@ -3,7 +3,8 @@ import {
   Grid,
   List,
   Button,
-  ListItem
+  ListItem,
+  makeStyles,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import FormHeader from "../../../../Components/FormHeader";
@@ -13,11 +14,48 @@ import LocalPrintshopIcon from '@material-ui/icons/LocalPrintshop';
 import CancelIcon from '@material-ui/icons/Cancel';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
+
+/** Third party dependencies */
+import html2canvas from 'html2canvas';
+
+
+/** Local dependencies & Libraries */
+import Services from '../../../../Services';
+
+import { helpers } from '../../../../helpers';
+
+import { Imports } from '../../../../Imports';
+
+import Snackbar from '../../../../Components/Snackbar';
+
+
+const {
+  users,
+  Storage,
+} = Services;
+
+const {
+  showSnackBar,
+} = helpers;
+
+const {
+  styles: {
+    displayNoneStyles: useStyles
+  } 
+} = Imports;
+
+
 const ConditionalOffer = () => {
 
-  const [startDate, setStartDate] = useState(new Date())
+  const storage = new Storage();
 
-  const [offerDate, setOfferDate] = useState(new Date())
+  const classes = useStyles();
+
+  const [startDate, setStartDate] = useState(new Date());
+
+  const [offerDate, setOfferDate] = useState(new Date());
+
+  const [PDFimage, setPDFImage] = useState('');
 
   useEffect(() => {
 
@@ -25,68 +63,83 @@ const ConditionalOffer = () => {
 
   }, [])
 
-  const [error, setError] = useState('')
+  const [error, setError] = useState('');
 
-  function submit() {
+  const [isPosting, setPosting] = useState(false);
 
-    let officersName = document.getElementById("officersName").value;
+  async function submit() {
 
-    let position = document.getElementById("position").value;
+    try {
 
-    let payRate = document.getElementById("payRate").value;
+      setPosting(true);
 
-    let hourly = document.getElementById("hourly").value;
+      let officersName = document.getElementById("officersName").value;
+      let position = document.getElementById("position").value;
+      let payRate = document.getElementById("payRate").value;
+      let hourly = document.getElementById("hourly").value;
+      let weekly = document.getElementById("weekly").value;
+      let location = document.getElementById("location").value;
+      let departmentCode = document.getElementById("departmentCode").value;
+      let phone = document.getElementById("phone").value;
+      let laptop = document.getElementById("laptop").value;
+      let terms = document.getElementById("terms").value;
+      let offeree = document.getElementById("offeree").value;
 
-    let weekly = document.getElementById("weekly").value;
+      let data = {
+        officersName,
+        position,
+        offerDate,
+        payRate,
+        hourly,
+        startDate,
+        weekly,
+        location,
+        departmentCode,
+        phone,
+        laptop,
+        terms,
+        offeree,
+      }
 
-    let location = document.getElementById("location").value;
+      const nullCheck = Object.values(data)
+        .reduce((total, accumulator) => total || !accumulator, false);
 
-    let departmentCode = document.getElementById("departmentCode").value;
+      if (nullCheck) {
+        setError("field must be filed")
+        return showSnackBar("Kindly fill in all fields!");
+      }
 
-    let phone = document.getElementById("phone").value;
+      let canvas = await (html2canvas(document.querySelector('#capture')));
+      let image = (canvas.toDataURL('image/png'));
+      setPDFImage(image);
 
-    let laptop = document.getElementById("laptop").value;
+      setPosting(false);
 
-    let terms = document.getElementById("terms").value;
+      const resposne = await users.submitForm({
+        image: [image],
+        form: 5,
+      });
 
-    let offeree = document.getElementById("offeree").value;
+      const step3FormsSubmitted = JSON.parse(storage.get('step-3-form-conditonalOffer')) || true;
 
-    let data = {
-      officersName: officersName,
-      position: position,
-      offerDate: offerDate,
-      payRate: payRate,
-      hourly: hourly,
-      startDate: startDate,
-      weekly: weekly,
-      location: location,
-      departmentCode: departmentCode,
-      phone: phone,
-      laptop: laptop,
-      terms: terms,
-      offeree: offeree,
-    }
+      storage.set('step-3-form-conditonalOffer', JSON.stringify(step3FormsSubmitted));
+      
+      showSnackBar('Form has been submitted!');
+      
+      window.self.close();
+    } catch (exc) {
+      setPosting(false);
 
-    const nullCheck = Object.values(data)
-      .reduce((total, accumulator) => total || !accumulator, false);
-
-    if (nullCheck== false){
-      console.log(data)
-
-
-    }
-    else {
-      setError("field must be filed")
-      alert("Error! Field must be Filled")
+      return showSnackBar(exc);
     }
 
   }
 
-  
   return (
-    <Grid container xs={12} className="LiqForms-Container">
+    <Grid id="capture" container xs={12} className="LiqForms-Container">
+      <Snackbar></Snackbar>
       {/* <FormHeader/> */}
-      <Grid className="FormsHeader">
+      <Grid className={isPosting ? classes.DisplayNone : 'FormsHeader'}>
         <List>
           <ListItem>
             <Grid className="FormMenuLogo"></Grid>
