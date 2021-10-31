@@ -1,4 +1,4 @@
-import React from 'react';
+import React , { useState , useEffect } from 'react';
 import {
   Grid,
   Box,
@@ -9,38 +9,34 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Paper
+  Paper,
 } from '@material-ui/core';
+import { DataGrid } from '@mui/x-data-grid';
 import PageHeader from '../../../Components/PageHeader';
 import LeftControl from '../../../Components/LeftControl';
 import MobileScreen from './Mobile/Dashboard';
 import {isMobile} from 'react-device-detect';
 
+// Tables Columns
 const columns = [
-  { id: "EmployeeID", label: "Employee ID", minWidth: 100, type: "value" },
-  { id: "LicenseCertificate", label: "License Certificate", minWidth: 100, type: "value" },
-  { id: "IssueDate", label: "Issue Date", minWidth: 100, type: "value" },
-  { id: "ExpiryDate", label: "Expiry Date", minWidth: 100, type: "value" },
+  { field: "id", headerName: "Employee ID",  type: "value" },
+  { field: "licenseCertificate", headerName: "License Certificate",  type: "value" },
+  { field: "issueDate", headerName: "Issue Date",  type: "value" },
+  { field: "expiryDate", headerName: "Expiry Date",  type: "value" },
 ];
 
-function createData(
-  EmployeeID,
-  LicenseCertificate,
-  IssueDate,
-  ExpiryDate
-) {
-  return {
-      EmployeeID,
-      LicenseCertificate,
-      IssueDate,
-      ExpiryDate
-  };
-}
+// table dummy data
 const rows = [
-  createData("1101", "Backhoe", "3/10/2021", "6/10/2021"),
+  { id:1101,
+    licenseCertificate:"Block Chain",
+    issueDate :"3/10/2021",
+    expiryDate: "6/10/2021"}
 ];
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
+
+
 
   return (
     <div
@@ -59,6 +55,20 @@ function TabPanel(props) {
   );
 }
 const Dashboard = () => {
+
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setIsLoading(false)
+    let response = []
+    console.log("res",response);
+    if(response){
+      setData(rows)
+      setIsLoading(true)
+    }
+  
+  }, [])
   if(isMobile) {
     return (
         <MobileScreen />
@@ -119,52 +129,18 @@ const Dashboard = () => {
                   className="LiqTables Dash-Table DashTable-Desk"
               >
                 <Paper>
-                  <TableContainer>
-                  <Table aria-label="table">
-                    <TableHead>
-                      <TableRow>
-                        {columns.map((column) => (
-                          <TableCell
-                            className="bold f16"
-                            key={column.id}
-                            align={column.align}
-                            style={{ minWidth: column.minWidth }}
-                          >
-                            {column.label}
-                          </TableCell>
-                        ))}
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {rows
-                        .map((row) => {
-                          return (
-                            <TableRow
-                              hover
-                              role="checkbox"
-                              tabIndex={-1}
-                              key={row.code}
-                            >
-                              {columns.map((column) => {
-                                const value = row[column.id];
-                                return (
-                                  <TableCell
-                                    key={column.id}
-                                    align={column.align}
-                                  >
-                                    {column.format &&
-                                    typeof value === "number"
-                                      ? column.format(value)
-                                      : value}
-                                  </TableCell>
-                                );
-                              })}
-                            </TableRow>
-                          );
-                        })}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
+                <div style={{ height: 400, width: '100%' }}>
+                
+                  {/* <TableContainer> */}
+                  <DataGrid
+                    rows={rows}
+                    columns={columns}
+                    pageSize={5}
+                    rowsPerPageOptions={[5]}
+                  />
+                {/* </TableContainer> */}
+                
+                </div>
                 </Paper>
               </Grid>
             </Grid>
