@@ -86,14 +86,15 @@ const Railroad = () => {
     department: '', //7
     site: '', //8
     GPS: '', //9
-    // date : moment(new Date()).format('yyyy-mm-dd'), //10
-    date : new Date(), //10
+    date : moment(new Date()).format('YY-MM-DD'), //10
+    // date : new Date(), //10
     time: moment(new Date()).format('HH:mm:ss a'), //11
     jobID: '', //12
     crewMembers: [
       {name: '' ,position: '' ,image:''}
     ] //13
   })
+
 
   const handleSubmitData = (event,value,key) =>{
     console.log(value);
@@ -147,12 +148,14 @@ const Railroad = () => {
 
   };
 
-  const submitBtn = () =>{
+  const submitBtn = async () =>{
     let primary_comment = document.getElementById('primary_comment').value
     let assisting_comment = document.getElementById('assisting_comment').value
     let GPS = document.getElementById('GPS').value
     let jobID = document.getElementById('jobID').value
     let data = {...railRoad,primary_comment,assisting_comment,GPS,jobID}
+    
+
     console.log(railRoad);
     console.log("data",data);
   };
@@ -172,13 +175,28 @@ const Railroad = () => {
   };
 
    // handle input change
-  const handleInputChange = (name, value,index) => {
+  const handleInputChange = async (name, value,index) => {
     
     console.log(name , value , index);
     const { crewMembers } = railRoad;
+    if(name == 'image') {
+      value = await getBase64(value)
+      console.log("converted base 64" ,value);
+    }
     crewMembers[index][name] = value;
     setRailRoad({...railRoad , crewMembers });
   };
+
+  //convert image into base64
+
+  const getBase64 = async (file) =>{
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
+    });
+  }
  
   useEffect(() => {
     setRailRoad({...railRoad,primary:dummyData.User.name})
@@ -311,24 +329,24 @@ const Railroad = () => {
                           Date
                         </Grid>
                         <Grid xs={12} className="mt14">
-                        <DatePicker
+                        {/* <DatePicker
                           format={'dd-MM-yyyy'}
                           value={railRoad.date}
                           onChange={(value) => { handleSubmitData('x',value, 10) }}
                           id="date"
                           className="datePickerReact"
-                        />
-                        {/* <TextField
+                        /> */}
+                        <TextField
                           id="date"
                           type="date"
                           className="DateTimePicker"
-                          defaultValue="yyyy-MM-dd"
+                          defaultValue={railRoad.date}
                           value={railRoad.date}
-                          // onChange={handleSubmitData}
+                          onChange={(e,value) => { handleSubmitData('x',e.target.value, 10) }}
                           InputLabelProps={{
                             shrink: true,
                           }}
-                        /> */}
+                        />
                         </Grid>
                       </Grid>
                       <Grid className="DateTimeTables mt30">
@@ -336,22 +354,24 @@ const Railroad = () => {
                           Time
                         </Grid>
                         <Grid xs={12} className="mt14">
-                        <TimePicker
+                        {/* <TimePicker
                           format={'hh:mm:ss a'}
                           value={railRoad.time}
                           onChange={(value) => { handleSubmitData('x',value, 11) }}
                           id="time"
                           className="datePickerReact"
-                        />
-                        {/* <TextField
+                        /> */}
+                        <TextField
                           id="time"
                           type="time"
+                          value={railRoad.time}
+                          onChange={(e,value) => { handleSubmitData('x',e.target.value, 11) }}
                           className="DateTimePicker"
                           defaultValue="HH:mm:ss"
                           InputLabelProps={{
                             shrink: true,
                           }}
-                        /> */}
+                        />
                         </Grid>
                       </Grid>
                     </Grid>
@@ -482,7 +502,7 @@ const Railroad = () => {
                         (railRoad.crewMembers).map((x,i)=>{
                           return(
                             <Grid xs={12} container className="mt30">
-                              <Grid xs={6} className="pr40">
+                              <Grid xs={4} className="pr20">
                                 <Grid xs={12} className="mbold">
                                   {`Crew member ${i+1}`}
                                 </Grid>
@@ -501,11 +521,11 @@ const Railroad = () => {
                                   renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
                                 />
                               </Grid>
-                              <Grid xs={6} container>
+                              <Grid xs={8} container>
                                 <Grid xs={12} className="mbold">
                                   Crew Position
                                 </Grid>
-                                <Grid xs={9}>
+                                <Grid xs={7}>
                                   <Autocomplete
                                     className="w100p"
                                     id="combo-box-demo"
@@ -521,27 +541,25 @@ const Railroad = () => {
                                     renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
                                   />
                                 </Grid>
-                                <Grid xs={3} container justify="flex-end">
-                                  <label className={(x.image=='')?"PickBtn":"PickBtnFileUploaded"} for="crew2" ></label>
+                                <Grid xs={5} container justify="space-between" className="pl20">
+                                  <label className={(x.image=='')?"PickBtn":"PickBtnFileUploaded"} for={`crew${i}`} ></label>
                                   <input 
                                       type="file" 
-                                      id="crew2" 
+                                      id={`crew${i}`} 
                                       name="image" 
                                       ref = {ref2}
                                       className="hide"
                                       onChange={(e,value) => { 
-                                        let name = ref2.current.getAttribute("name");
+                                        // let name = ref2.current.getAttribute("name");
                                         let value1 = e.target.files[0];
 
-                                        handleInputChange(name, value1,i)}
+                                        handleInputChange('image', value1,i)}
                                       }
                                       />
+                                      {railRoad.crewMembers.length !== 1 && <button
+                                    className="removeBtn"
+                                    onClick={() => removeCrew(i)}></button>}
                                 </Grid>
-                                <div className="btn-box">
-                                  {railRoad.crewMembers.length !== 1 && <button
-                                    className="mr10"
-                                    onClick={() => removeCrew(i)}>Remove</button>}
-                                </div>
                               </Grid>
                             </Grid>
                           )

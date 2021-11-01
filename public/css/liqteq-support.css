@@ -2106,3 +2106,17 @@ textarea::-ms-input-placeholder { /* Microsoft Edge */
     left: -5px;
     top: 21px;
   } */
+  .removeBtn {
+      font-size: 0px;
+      display: block;
+      width: 55px;
+      height: 55px;
+      background: url(../assets/closeIco.png) no-repeat center center white;
+      background-size: 70%;
+      border: none;
+      border-radius: 8px;
+  }
+
+  .removeBtn:hover {
+    background-color: #2963AD;
+    }
