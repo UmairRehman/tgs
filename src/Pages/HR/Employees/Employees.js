@@ -1,4 +1,5 @@
 import React, {useState,useEffect} from "react";
+import { useHistory } from "react-router-dom";
 import {
   Grid,
   Button,
@@ -38,7 +39,9 @@ const columns = [
     hc,
     pn,
     ed
-  ) {
+  ) 
+  
+  {
     return {
         ap,
         emID,
@@ -48,7 +51,7 @@ const columns = [
         ed
     };
   }
-  
+
   const rows = [
     createData("Joe Dae", "44433", "01/20/2021", "Houston, Texas", "402-233-5555", "Joe.Dae@gmail.com"),
   ];
@@ -78,7 +81,16 @@ const FailPass = [
     { title: 'Pending' }
 ];
 
+
+
+
 const EmployeeLookup = () => {
+  
+  let history = useHistory();
+  const [name, setName] = useState('')
+  const [id, setId] = useState('')
+
+
     const [page, setPage] = React.useState(0);
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -88,6 +100,11 @@ const EmployeeLookup = () => {
 //         <MobileScreen />
 //     )
 //   }
+
+  function onSubmit(){
+    history.push('/employees/result')
+  }
+  
   return (
     <Grid container xs={12} className="Liq-Container HRPortal">
       <Grid xs={12} md={2} className="LeftContol" id="LeftContol">
@@ -103,15 +120,16 @@ const EmployeeLookup = () => {
                 <Grid xs={12} md={8} lg={6} container className="HREmSearch">
                     <Grid xs={5}>
                         <Typography>Name</Typography>
-                        <TextField id="outlined-basic" value="Ryan" variant="outlined" className="w100p"/>
+                        <TextField id="outlined-basic" value={name} onChange={(e)=>{setName(e.target.value)}} variant="outlined" className="w100p"/>
                     </Grid>
                     <Grid xs={5}>
                         <Typography>Employee ID</Typography>
-                        <TextField id="outlined-basic" value="11001" variant="outlined" className="w100p"/>
+                        <TextField id="outlined-basic" value={id} onChange={(e)=>{setId(e.target.value)}}variant="outlined" className="w100p"/>
                     </Grid>
                     <Grid xs={2}>
                         <Typography className="SearchBtnDot">.</Typography>
-                        <Link to="/employees/result"></Link>
+                        <Button  onClick={onSubmit} >Search</Button>
+                        <Link  to="/employees/result"></Link>
                     </Grid>
                 </Grid>
             </Grid>

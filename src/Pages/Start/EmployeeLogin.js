@@ -157,7 +157,20 @@ const EmployeeLogin = () => {
       setIsLoggingIn(false);
 
       /** REPLACE - by router */
-      window.location = '/dashboard';
+
+      console.log(data)
+      let JobCategoryID =  data.JobCategory.id;
+      let SubDepartmentID = data.SubDepartment.DepartmentId
+
+      if(JobCategoryID == 1 && SubDepartmentID == 5){
+        localStorage.setItem('role', 'hr')
+        window.location = '/new-hire-queue';
+      }
+      else {
+        window.location = '/login';
+
+      }
+
 
       history.pushState()
       

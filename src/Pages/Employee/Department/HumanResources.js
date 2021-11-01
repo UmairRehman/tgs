@@ -60,30 +60,6 @@ const HumanResources = () => {
                 <Grid xs={6} className="mbold">
                   HR Department
                 </Grid>
-                {/* <Grid xs={6} container justify="flex-end">
-                  <Button aria-controls="ContactSubMenu" className="MoreLinkIcon" aria-haspopup="true" onClick={handleClick}>
-                  </Button>
-                  <Menu
-                    id="ContactSubMenu"
-                    anchorEl={anchorEl}
-                    keepMounted
-                    open={Boolean(anchorEl)}
-                    onClose={handleClose}
-                  >
-                    <MenuItem>
-                      <Link to="/human-resources" className={pathname === '/human-resources' ? 'NavSelected' : ''}>Human Resources</Link>
-                    </MenuItem>
-                    <MenuItem>
-                      <Link to="/operations" className={pathname === '/operations' ? 'NavSelected' : ''}>Operations</Link>
-                    </MenuItem>
-                    <MenuItem>
-                      <Link to="/safety" className={pathname === '/safety' ? 'NavSelected' : ''}>Safety</Link>
-                    </MenuItem>
-                    <MenuItem>
-                      <Link to="/information-technology" className={pathname === '/information-technology' ? 'NavSelected' : ''}>Information Technology</Link>
-                    </MenuItem>
-                  </Menu>
-                </Grid> */}
               </Grid>
               <Grid xs={12} className="mt14 ContactTable">
               <Paper>

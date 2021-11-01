@@ -10,5 +10,10 @@ export const routes = {
     },
     employee: {
         employee_login: 'employee/employee/login',
+    },
+    hr:{
+        get_applicant: 'employee/hr/applicant',
+        get_applicant_by_id : 'employee/hr/applicant/',
+        step1 : 'employee/hr/step/0/approve'
     }
 }

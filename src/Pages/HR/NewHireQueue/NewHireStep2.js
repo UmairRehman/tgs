@@ -17,19 +17,32 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import PageHeader from "../../../Components/PageHeader";
 import LeftControl from "../../../Components/LeftControl";
+import { useHistory } from "react-router-dom";
+import { useLocation } from 'react-router'
+
+
 // import { withRouter } from 'react-router-dom';
 // import MobileScreen from './Mobile/Enter-RailRoad-Add';
 // import {isMobile} from 'react-device-detect';
 
 
-const columns = [
-    { id: "ap", label: "Applicant", minWidth: 170, type: "value" },
-    { id: "emID", label: "Employee ID", minWidth: 120, type: "value" },
-    { id: "dop", label: "Date of Application", minWidth: 100, type: "value" },
-    { id: "hc", label: "Home City, St", minWidth: 100, type: "value" },
-    { id: "pn", label: "Phone Number", minWidth: 170, type: "value" },
-    { id: "ed", label: "Email Address", minWidth: 170, type: "value" }
-  ];
+
+
+  /** Local deoendencies & Libraries */
+  import Services from '../../../Services';
+  const {
+      hr
+    } = Services;
+    var moment = require('moment-timezone');
+    
+    const columns = [
+        { id: "firstName", label: "Applicant", minWidth: 170, type: "value" },
+        { id: "id", label: "Employee ID", minWidth: 120, type: "value" },
+        { id: "docreatedAtp", label: "Date of Application", minWidth: 100, type: "value" },
+        { id: "city", label: "Home City, St", minWidth: 100, type: "value" },
+        { id: "cellPhone", label: "Phone Number", minWidth: 170, type: "value" },
+        { id: "email", label: "Email Address", minWidth: 170, type: "value" }
+    ];
   
   function createData(
     ap,
@@ -50,9 +63,8 @@ const columns = [
   }
   
   const rows = [
-    createData("Joe Dae", "44433", "01/20/2021", "Houston, Texas", "402-233-5555", "Joe.Dae@gmail.com"),
+    ("Joe Dae", "44433", "01/20/2021", "Houston, Texas", "402-233-5555", "Joe.Dae@gmail.com"),
   ];
-
 
 
 
@@ -60,7 +72,6 @@ const columns = [
 const Approval = [
     { title: 'Approve'},
     { title: 'Not Approve' },
-    { title: 'Pending' }
 ];
 const PositionLevel = [
     { title: 'Accounting and finance'},
@@ -75,11 +86,30 @@ const FullTitle = [
 const FailPass = [
     { title: 'Pass'},
     { title: 'Fail' },
-    { title: 'Pending' }
 ];
 
 const NewHireStep2 = () => {
+    
+    let history = useHistory();
+    const location  = useLocation();
+
     const [page, setPage] = React.useState(0);
+    
+    const [applicantData, setApplicantData] = useState({})
+    const [emergencyContact, setEmergencyContact] = useState({})
+    const [files, setFiles] = useState({})
+    const [spouse, setSpouse] = useState({})
+    const [holdData, setHoldData] = useState({})
+
+    const [approval, setapproval] = useState('')
+    const [drugTestDate, setdrugTestDate] = useState('')
+    const [drugTest, setdrugTest] = useState('')
+    const [backgroundDate, setbackgroundDate] = useState('')
+    const [backgroundCheck, setbackgroundCheck] = useState('')
+    const [hireDate, sethireDate] = useState('')
+    const [loader, setLoader] = useState('')
+    
+
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
@@ -88,6 +118,48 @@ const NewHireStep2 = () => {
 //         <MobileScreen />
 //     )
 //   }
+
+    function onFormSubmit(event){
+        event.preventDefault()
+
+        let data = {
+            employee_id : 1, 
+            comment: document.getElementById('comment').value,
+            hire_date: hireDate,
+            drug_test_date: drugTestDate,
+            background_complete_at: backgroundDate, 
+            drug_test : drugTest == 'Yes' ? true :false,
+            background_check: backgroundCheck == 'Yes' ? true :false
+        }
+        console.log(data)
+    }
+
+    
+    useEffect(async() => {
+        setLoader(true)
+        window.scrollTo(0, 0);
+
+        let applicantDataHistory = location?.state
+        setHoldData(applicantDataHistory.data)
+
+        try{
+            let data = await hr.getAllApplicantsByID(applicantDataHistory) ;
+            console.log(data.data)
+            setApplicantData(data.employee)
+            setApplicantData(data.employee)
+            setEmergencyContact(data.emergency_contact)
+            setFiles(data.files)
+            setSpouse(data.spouse)
+        }
+        catch(exc){
+            console.log(exc);
+        }
+        
+
+        setLoader(false)
+
+    }, []);
+
   return (
     <Grid container xs={12} className="Liq-Container HRPortal">
       <Grid xs={12} md={2} className="LeftContol" id="LeftContol">
@@ -117,18 +189,18 @@ const NewHireStep2 = () => {
                           ))}
                         </TableRow>
                       </TableHead>
-                      <TableBody>
-                        {rows
-                          .map((row) => {
+                      {/* <TableBody>
+                        {applicantData 
+                          .map((applicantData) => {
                             return (
                               <TableRow
                                 hover
                                 role="checkbox"
                                 tabIndex={-1}
-                                key={row.code}
+                                key={applicantData.code}
                               >
                                 {columns.map((column) => {
-                                  const value = row[column.id];
+                                  const value = applicantData[column.id];
                                   return (
                                     <TableCell
                                       key={column.id}
@@ -141,12 +213,13 @@ const NewHireStep2 = () => {
                               </TableRow>
                             );
                           })}
-                      </TableBody>
+                      </TableBody> */}
                     </Table>
                   </TableContainer>
                 </Paper>
             </Grid>
             <Grid xs={12} md={8} lg={6}>
+            <form onSubmit={onFormSubmit} >
                 <Grid xs={12} container className="LRM40">
                     <Grid xs={6} className="mt30 pr20">
                         <Grid xs={12}>
@@ -157,6 +230,7 @@ const NewHireStep2 = () => {
                                 <Autocomplete
                                     className="w100p"
                                     id="combo-box-demo"
+                                    onChange={(e, value) => {setapproval(value.title)}}
                                     options={Approval}
                                     getOptionLabel={(option) => option.title}
                                     renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
@@ -179,6 +253,7 @@ const NewHireStep2 = () => {
                         </Grid>
                     </Grid>
                 </Grid>
+                
                 <Grid xs={12}>
                     {/* ---------- */}
                     <Grid xs={12} container>
@@ -193,6 +268,7 @@ const NewHireStep2 = () => {
                                         type="date"
                                         className="DateTimePicker"
                                         defaultValue="YY-MM-DD"
+                                        onChange={(e) => {setdrugTestDate(e.target.value)}}
                                         InputLabelProps={{
                                             shrink: true,
                                         }}
@@ -210,6 +286,7 @@ const NewHireStep2 = () => {
                                         className="w100p"
                                         id="combo-box-demo"
                                         options={FailPass}
+                                        onChange={(e, value) => {setdrugTest(value.title)}}
                                         getOptionLabel={(option) => option.title}
                                         renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
                                     />
@@ -228,6 +305,7 @@ const NewHireStep2 = () => {
                                     <TextField
                                         id="date"
                                         type="date"
+                                        onChange={(e) => {setbackgroundDate(e.target.value)}}
                                         className="DateTimePicker"
                                         defaultValue="YY-MM-DD"
                                         InputLabelProps={{
@@ -244,6 +322,7 @@ const NewHireStep2 = () => {
                                 </Grid>
                                 <Grid xs={12} className="mt14">
                                     <Autocomplete
+                                        onChange={(e, value) => {setbackgroundCheck(value.title)}}
                                         className="w100p"
                                         id="combo-box-demo"
                                         options={FailPass}
@@ -264,6 +343,7 @@ const NewHireStep2 = () => {
                                 <TextField
                                     id="date"
                                     type="date"
+                                    onChange={(e) => {sethireDate(e.target.value)}}
                                     className="DateTimePicker"
                                     defaultValue="YY-MM-DD"
                                     InputLabelProps={{
@@ -281,7 +361,7 @@ const NewHireStep2 = () => {
                                     Comments
                                 </Grid>
                                 <Grid xs={12} className="mt14">
-                                    <TextareaAutosize className="w100p" rowsMin={6} placeholder="Comment here" />
+                                    <TextareaAutosize id="comment" className="w100p" rowsMin={6} placeholder="Comment here" />
                                 </Grid>
                                 <Typography variant="h6" className="MuiTypography-subtitle2 MuiTypography-colorTextSecondary" component="h6">
                                     Please leave this field empty if you have no comments
@@ -304,9 +384,11 @@ const NewHireStep2 = () => {
                     </Grid>
                     <Grid xs={12} container justify="space-between" className="mt50">
                         <Link to="/new-hire-queue/234" className="LinkButtonBack">Back</Link>
-                        <Link to="/new-hire-queue/step/1" className="LinkButton">Save & Continue</Link>
+                        <Button className="LinkButton" type='submit' >Save & Continue</Button>
+                        {/* <Link to="/new-hire-queue/step/1" className="LinkButton"> */}
                     </Grid>
                 </Grid>
+                </form>
             </Grid>
           </Grid>
           {/* Page Start End */}

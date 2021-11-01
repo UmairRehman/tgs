@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   Grid,
   List,
@@ -43,11 +43,43 @@ const RequestCat = [
   { title: 'Management' }
 ];
 const CreateTicket = () => {
+
+  const [requestBy, setRequestBy] = useState('')
+
+  const [requestFor, setRequestFor] = useState([])
+
+  const [requestType, setRequestType] = useState('')
+
+  const [category, setCategory] = useState('')
+
+  const [comment, setComment] = useState('')
+
+
+
   if(isMobile) {
     return (
         <MobileScreen />
     )
   }
+
+
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    let data = {
+      requestBy : requestBy,
+      requestFor: requestFor,
+      requestType: requestType,
+      category : category,
+      comment : comment,
+    }
+
+    console.log(data)
+  }
+
+
+
+
   return (
     <Grid container xs={12} className="Liq-Container">
       <Grid xs={12} md={2} className="LeftContol" id="LeftContol">
@@ -60,6 +92,9 @@ const CreateTicket = () => {
           {/* Page Start */}
           <Grid xs={12} className="ContentPage FormTableArea">
             <Grid xs={12} container>
+
+
+              <form style={{width:'100%'}} onSubmit={handleSubmit}>
                 <Grid xs={12} md={5} className="EvaluatorsTables pr40">
                   <Grid xs={12}>
                     <Grid xs={12}>
@@ -70,6 +105,7 @@ const CreateTicket = () => {
                         <Autocomplete
                             // multiple
                             className="w100p"
+                            onChange={(e, value)=>{setRequestBy(value.title)}}
                             id="checkboxes-tags-demo"
                             options={RequestBy}
                             disableCloseOnSelect
@@ -86,8 +122,9 @@ const CreateTicket = () => {
                               </React.Fragment>
                             )}
                             renderInput={(params) => (
-                              <TextField {...params} variant="outlined" placeholder="Please Select" />
+                              <TextField  required={true} {...params} variant="outlined" placeholder="Please Select" />
                             )}
+                            required
                           />
                       </Grid>
                     </Grid>
@@ -102,6 +139,8 @@ const CreateTicket = () => {
                             multiple
                             className="w100p"
                             id="checkboxes-tags-demo"
+                            onChange={(e, value)=>{setRequestFor(value)}}
+
                             options={RequestFor}
                             disableCloseOnSelect
                             getOptionLabel={(option) => option.title}
@@ -132,9 +171,10 @@ const CreateTicket = () => {
                           <Autocomplete
                             className="w100p"
                             id="combo-box-demo"
+                            onChange={(e, value)=>{setRequestType(value.title)}}  
                             options={RequestType}
                             getOptionLabel={(option) => option.title}
-                            renderInput={(params) => <TextField {...params} label="Please Select" variant="outlined" />}
+                            renderInput={(params) => <TextField  required={true} {...params} label="Please Select" variant="outlined" />}
                           />
                       </Grid>
                     </Grid>
@@ -149,8 +189,9 @@ const CreateTicket = () => {
                             className="w100p"
                             id="combo-box-demo"
                             options={RequestCat}
+                            onChange={(e, value)=>{setCategory(value.title)}}
                             getOptionLabel={(option) => option.title}
-                            renderInput={(params) => <TextField {...params} label="Please Select" variant="outlined" />}
+                            renderInput={(params) => <TextField   required={true} {...params} label="Please Select" variant="outlined" />}
                           />
                       </Grid>
                     </Grid>
@@ -160,13 +201,14 @@ const CreateTicket = () => {
                       Comments
                     </Grid>
                     <Grid xs={12} className="mt14">
-                      <TextareaAutosize className="w100p" rowsMin={6} placeholder="Share Your Thoughts...." />
+                      <TextareaAutosize  onChange={(e)=>{setComment(e.target.value)}} className="w100p" rowsMin={6} placeholder="Share Your Thoughts...."  required/>
                     </Grid>
                   </Grid>
                   <Grid xs={12} container className="mt50">
-                    <Button className="LinkButton">Submit</Button>
+                    <Button type="submit" className="LinkButton">Submit</Button>
                   </Grid>
                 </Grid>
+              </form>
             </Grid>
           </Grid>
           {/* Page Start End */}

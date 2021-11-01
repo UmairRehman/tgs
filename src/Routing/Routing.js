@@ -74,8 +74,8 @@ const Routing = () => (
 
     {/* HR Portal Nav */}
     <Route exact path="/new-hire-queue" component={()=><NewHireQueue/>}/>
-    <Route exact path="/new-hire-queue/:id" component={()=><NewHireStep1/>}/>
-    <Route exact path="/new-hire-queue/step/:id" component={()=><NewHireStep2/>}/>
+    <Route exact path="/new-hire-queue/details" component={()=><NewHireStep1/>}/>
+    <Route exact path="/new-hire-queue/details/approval" component={()=><NewHireStep2/>}/>
 
     <Route exact path="/tickets-alerts" component={()=><TicketsAndAlerts/>}/>
     <Route exact path="/tickets-alerts/alert/:id" component={()=><AlartUpdate/>}/>
