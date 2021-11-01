@@ -557,8 +557,8 @@ const Railroad = () => {
                                       }
                                       />
                                       {railRoad.crewMembers.length !== 1 && <button
-                                    className="removeBtn"
-                                    onClick={() => removeCrew(i)}></button>}
+                                        className="removeBtn"
+                                        onClick={() => removeCrew(i)}></button>}
                                 </Grid>
                               </Grid>
                             </Grid>
