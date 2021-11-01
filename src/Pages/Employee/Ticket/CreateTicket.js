@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Grid,
   List,
@@ -6,7 +6,9 @@ import {
   Checkbox, 
   Button,
   TextareaAutosize,
-  Typography
+  Typography,
+  Select,
+  MenuItem
 } from "@material-ui/core";
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -21,32 +23,82 @@ import {isMobile} from 'react-device-detect';
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
+const dummyData = {
+  RequestBy : [
+    "James Mary",
+    "Robert Patricia",
+    "John Jennifer" 
+  ],
+   RequestFor : [
+    'David Afton',
+    'Alexandra Daddario' ,
+    'Stephen Hartley' 
+  ],
+   RequestType : [
+    'IT department',
+    'Accounts  department' ,
+    'Management  department'
+  ],
+   RequestCat : [
+    'IT',
+    'Accounts' ,
+    'Management' 
+  ]
+}
 
-const RequestBy = [
-  { title: 'James Mary'},
-  { title: 'Robert Patricia' },
-  { title: 'John Jennifer' }
-];
-const RequestFor = [
-  { title: 'David Afton'},
-  { title: 'Alexandra Daddario' },
-  { title: 'Stephen Hartley' }
-];
-const RequestType = [
-  { title: 'IT department'},
-  { title: 'Accounts  department' },
-  { title: 'Management  department' }
-];
-const RequestCat = [
-  { title: 'IT'},
-  { title: 'Accounts' },
-  { title: 'Management' }
-];
 const CreateTicket = () => {
+
+  const [ticketData, setTicketData] = useState({
+     requestedBy:'',
+     requestedFor:[],
+     requestedType:'',
+     category:'',
+     comments:''
+  })
+
+  const handleSubmitRequested = (event, value, caseType) =>{
+    console.log("data",value);
+    //cases
+    // 1 requestBy
+    // 2 requestFor
+    // 3 requestedType 
+    // 4 category
+    // 5 comment
+    switch (caseType) {
+
+      case 1:
+        setTicketData({...ticketData,requestedBy:value})
+        break;
+
+      case 2:
+        setTicketData({...ticketData,requestedFor:value})
+        break;
+
+      case 3:
+        setTicketData({...ticketData,requestedType:value})
+        break;
+
+      case 4:
+        setTicketData({...ticketData,category:value})
+        break;
+
+      case 5:
+        setTicketData({...ticketData,comments:event.target.value})
+        break;
+    
+      default:
+        break;
+    }
+  }
+
+  const submitData = ()=>{
+    console.log("ticket Data", ticketData);
+  }
+
   if(isMobile) {
     return (
         <MobileScreen />
-    )
+   )
   }
   return (
     <Grid container xs={12} className="Liq-Container">
@@ -71,24 +123,26 @@ const CreateTicket = () => {
                             // multiple
                             className="w100p"
                             id="checkboxes-tags-demo"
-                            options={RequestBy}
+                            options={dummyData.RequestBy}
                             disableCloseOnSelect
-                            getOptionLabel={(option) => option.title}
+                            getOptionLabel={(option) => option}
+                            value={ ticketData.requestedBy }
+                            onChange={ (event, value)=>handleSubmitRequested(event,value,1) }
                             renderOption={(option, { selected }) => (
                               <React.Fragment>
-                                {/* <Checkbox
+                                 {/* <Checkbox
                                   icon={icon}
                                   checkedIcon={checkedIcon}
                                   style={{ marginRight: 8 }}
                                   checked={selected}
-                                /> */}
-                                {option.title}
+                                />  */}
+
+                                {option}
                               </React.Fragment>
                             )}
                             renderInput={(params) => (
                               <TextField {...params} variant="outlined" placeholder="Please Select" />
-                            )}
-                          />
+                            )}/>
                       </Grid>
                     </Grid>
                   </Grid>
@@ -102,9 +156,11 @@ const CreateTicket = () => {
                             multiple
                             className="w100p"
                             id="checkboxes-tags-demo"
-                            options={RequestFor}
+                            options={dummyData.RequestFor}
                             disableCloseOnSelect
-                            getOptionLabel={(option) => option.title}
+                            value = { ticketData.requestedFor }
+                            onChange={ (event,value) =>handleSubmitRequested(event,value,2) }
+                            getOptionLabel={(option) => option}
                             renderOption={(option, { selected }) => (
                               <React.Fragment>
                                 <Checkbox
@@ -113,7 +169,7 @@ const CreateTicket = () => {
                                   style={{ marginRight: 8 }}
                                   checked={selected}
                                 />
-                                {option.title}
+                                {option}
                               </React.Fragment>
                             )}
                             renderInput={(params) => (
@@ -132,8 +188,10 @@ const CreateTicket = () => {
                           <Autocomplete
                             className="w100p"
                             id="combo-box-demo"
-                            options={RequestType}
-                            getOptionLabel={(option) => option.title}
+                            options={dummyData.RequestType}
+                            value = { ticketData.requestType }
+                            onChange={ (event,value) =>handleSubmitRequested(event,value,3) }
+                            getOptionLabel={(option) => option}
                             renderInput={(params) => <TextField {...params} label="Please Select" variant="outlined" />}
                           />
                       </Grid>
@@ -148,8 +206,10 @@ const CreateTicket = () => {
                           <Autocomplete
                             className="w100p"
                             id="combo-box-demo"
-                            options={RequestCat}
-                            getOptionLabel={(option) => option.title}
+                            options={dummyData.RequestCat}
+                            value = { ticketData.category }
+                            onChange={ (event,value) =>handleSubmitRequested(event,value,4) }
+                            getOptionLabel={(option) => option}
                             renderInput={(params) => <TextField {...params} label="Please Select" variant="outlined" />}
                           />
                       </Grid>
@@ -160,11 +220,17 @@ const CreateTicket = () => {
                       Comments
                     </Grid>
                     <Grid xs={12} className="mt14">
-                      <TextareaAutosize className="w100p" rowsMin={6} placeholder="Share Your Thoughts...." />
+                      <TextareaAutosize 
+                        className="w100p" 
+                        rowsMin={6} 
+                        placeholder="Share Your Thoughts...."
+                        value = { ticketData.comments }
+                        onChange={ (event,value) =>handleSubmitRequested(event,value,5) } 
+                        />
                     </Grid>
                   </Grid>
                   <Grid xs={12} container className="mt50">
-                    <Button className="LinkButton">Submit</Button>
+                    <Button className="LinkButton" onClick={submitData} >Submit</Button>
                   </Grid>
                 </Grid>
             </Grid>

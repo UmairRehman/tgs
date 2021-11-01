@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from "react";
+import React, {useState,useEffect,useRef} from "react";
 import {
   Grid,
   List,
@@ -13,53 +13,178 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import DatePicker from 'react-date-picker';
+import TimePicker from "react-time-picker"; 
 import PageHeader from "../../../Components/PageHeader";
 import LeftControl from "../../../Components/LeftControl";
 
 import MobileScreen from './Mobile/Enter-RailRoad-Add';
 import {isMobile} from 'react-device-detect';
 
+var moment = require ('moment-timezone')
+
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
+const dummyData = {
+  User :{
+    name:'Angelina Joulie'
+  },
 
-const crew_membera = [
-  { title: 'James Mary'},
-  { title: 'Robert Patricia' },
-  { title: 'John Jennifer' }
-];
+  Crew_member : [
+    'James Mary',
+    'Robert Patricia' ,
+    'John Jennifer'
+  ],
+  
+  OJE : ['Yes', 'No'],
+  
+  CrewMember  : [
+    'Liam Noah',
+    'Oliver Elijah' ,
+    'William James' ,
+    'Benjamin Lucas'
+  ],
+  CrewPosition  : [
+    'Engineer',
+    'Conductor' ,
+    'BR1' ,
+    'BR2' ,
+    'Other' 
+  ],
 
-const testingRules = [
-  { title: '6.1) Rule Description'},
-  { title: '6.2) Rule Description' },
-  { title: '6.3) Rule Description' },
-  { title: '6.4) Rule Description'},
-  { title: '6.5) Rule Description' },
-  { title: '6.6) Rule Description' }
-];
-const OJE = ['Yes', 'No'];
+  Department : [
+    'IT',
+    'Accounts' ,
+    'Management' ,
+    'Engineering'
+  ],
 
-const CrewMember  = [
-  { title: 'Liam Noah'},
-  { title: 'Oliver Elijah' },
-  { title: 'William James' },
-  { title: 'Benjamin Lucas' }
-];
-const CrewPosition  = [
-  { title: 'Engineer'},
-  { title: 'Conductor' },
-  { title: 'BR1' },
-  { title: 'BR2' },
-  { title: 'Other' }
-];
+  Site : [
+    'Cedar Port',
+    'Karachi Port' ,
+    'Defence' ,
+    'Malir'
+  ]
+};
+
+
 
 
 const Railroad = () => {
-  useEffect(() => {
+  const ref0 = useRef();
+  const ref1 = useRef();
+  const ref2 = useRef();
+
+  const [railRoad, setRailRoad] = useState({
+    primary: '', //1
+    oje: dummyData.OJE[0], //2
+    primary_comment: '', //3
+    assisting: [], //4
+    joinTest: dummyData.OJE[1], //5
+    assisting_comment: '', //6
+    department: '', //7
+    site: '', //8
+    GPS: '', //9
+    // date : moment(new Date()).format('yyyy-mm-dd'), //10
+    date : new Date(), //10
+    time: moment(new Date()).format('HH:mm:ss a'), //11
+    jobID: '', //12
+    crewMembers: [
+      {name: '' ,position: '' ,image:''}
+    ] //13
+  })
+
+  const handleSubmitData = (event,value,key) =>{
+    console.log(value);
+
+    switch (key) {
+      case 2:
+        setRailRoad({...railRoad,oje:value})
+        break;
+
+      case 3:
+      setRailRoad({...railRoad,primary_comment:event.target.value})
+      break;
+
+      case 4:
+      setRailRoad({...railRoad,assisting:value})
+      break;
+
+      case 5:
+      setRailRoad({...railRoad,joinTest:value})
+      break;
+
+      case 6:
+      setRailRoad({...railRoad,assisting_comment:event.target.value})
+      break;
+
+      case 7:
+      setRailRoad({...railRoad,department:value})
+      break;
+      
+      case 8:
+      setRailRoad({...railRoad,site:value})
+      break;
+      
+      case 9:
+      setRailRoad({...railRoad,GPS:event.target.value})
+      break;
+
+      case 10:
+      setRailRoad({...railRoad,date:value})
+      break;
     
+      case 11:
+      setRailRoad({...railRoad,time:value})
+      break;
+
+      
+
+      default:
+        break;
+    }
+
+  };
+
+  const submitBtn = () =>{
+    let primary_comment = document.getElementById('primary_comment').value
+    let assisting_comment = document.getElementById('assisting_comment').value
+    let GPS = document.getElementById('GPS').value
+    let jobID = document.getElementById('jobID').value
+    let data = {...railRoad,primary_comment,assisting_comment,GPS,jobID}
+    console.log(railRoad);
+    console.log("data",data);
+  };
+
+  //add crew
+  const addCrew = () => {
+    let { crewMembers }= railRoad
+    crewMembers.push( {name: '' ,position: '' ,image:''})
+    setRailRoad({...railRoad , crewMembers });
+  };
+
+  //remove crew
+  const removeCrew = index => {
+    const { crewMembers } = railRoad;
+    crewMembers.splice(index, 1);
+    setRailRoad({...railRoad , crewMembers });
+  };
+
+   // handle input change
+  const handleInputChange = (name, value,index) => {
+    
+    console.log(name , value , index);
+    const { crewMembers } = railRoad;
+    crewMembers[index][name] = value;
+    setRailRoad({...railRoad , crewMembers });
+  };
+ 
+  useEffect(() => {
+    setRailRoad({...railRoad,primary:dummyData.User.name})
   }, []);
-  const [value, setValue] = useState(OJE[0]);
-  const [inputValue, setInputValue] = useState('');
+  const [value, setValue] = useState(dummyData.OJE[0]);
+  
 
   if(isMobile) {
     return (
@@ -90,7 +215,7 @@ const Railroad = () => {
                         Primary
                       </Grid>
                       <Grid xs={12} className="mt14">
-                        <TextField id="outlined-basic" label="Comment here" value="Angelina Jolie" disabled variant="outlined" className="w100p"/>
+                        <TextField id="outlined-basic" label="Comment here" value={`${dummyData.User.name}`} disabled variant="outlined" className="w100p"/>
                       </Grid>
                     </Grid>
                   </Grid>
@@ -104,9 +229,11 @@ const Railroad = () => {
                             multiple
                             className="w100p"
                             id="checkboxes-tags-demo"
-                            options={testingRules}
+                            options={dummyData.CrewMember}
                             disableCloseOnSelect
-                            getOptionLabel={(option) => option.title}
+                            getOptionLabel={(option) => option}
+                            value={railRoad.assisting}
+                            onChange={ (event,value) => {handleSubmitData(event, value,4)}}
                             renderOption={(option, { selected }) => (
                               <React.Fragment>
                                 <Checkbox
@@ -115,7 +242,7 @@ const Railroad = () => {
                                   style={{ marginRight: 8 }}
                                   checked={selected}
                                 />
-                                {option.title}
+                                {option}
                               </React.Fragment>
                             )}
                             renderInput={(params) => (
@@ -134,8 +261,10 @@ const Railroad = () => {
                           <Autocomplete
                             className="w100p"
                             id="combo-box-demo"
-                            options={crew_membera}
-                            getOptionLabel={(option) => option.title}
+                            options={dummyData.Department}
+                            getOptionLabel={(option) => option}
+                            value={railRoad.department}
+                            onChange={ (event,value) => {handleSubmitData(event, value,7)}}
                             renderInput={(params) => <TextField {...params} label="Department" variant="outlined" />}
                           />
                       </Grid>
@@ -153,8 +282,10 @@ const Railroad = () => {
                           <Autocomplete
                             className="w100p"
                             id="combo-box-demo"
-                            options={crew_membera}
-                            getOptionLabel={(option) => option.title}
+                            options={dummyData.Site}
+                            getOptionLabel={(option) => option}
+                            value={railRoad.site}
+                            onChange={ (event,value) => {handleSubmitData(event, value,8)}}
                             renderInput={(params) => <TextField {...params} label="Site" variant="outlined" />}
                           />
                       </Grid>
@@ -164,7 +295,14 @@ const Railroad = () => {
                         GPS (Lat, Long )
                       </Grid>
                       <Grid xs={12} className="mt14">
-                        <TextField id="outlined-basic" label="Latitudes & Longitudes" variant="outlined" className="w100p"/>
+                        <TextField 
+                            id="GPS" 
+                            label="Latitudes & Longitudes" 
+                            variant="outlined" 
+                            className="w100p"
+                            // value={railRoad.GPS}
+                            // onChange={ (event,value) => {handleSubmitData(event, value,9)}}
+                            />
                       </Grid>
                     </Grid>
                     <Grid xs={12} className="dateTimePickerFrame">
@@ -173,15 +311,24 @@ const Railroad = () => {
                           Date
                         </Grid>
                         <Grid xs={12} className="mt14">
-                        <TextField
+                        <DatePicker
+                          format={'dd-MM-yyyy'}
+                          value={railRoad.date}
+                          onChange={(value) => { handleSubmitData('x',value, 10) }}
+                          id="date"
+                          className="datePickerReact"
+                        />
+                        {/* <TextField
                           id="date"
                           type="date"
                           className="DateTimePicker"
-                          defaultValue="YY-MM-DD"
+                          defaultValue="yyyy-MM-dd"
+                          value={railRoad.date}
+                          // onChange={handleSubmitData}
                           InputLabelProps={{
                             shrink: true,
                           }}
-                        />
+                        /> */}
                         </Grid>
                       </Grid>
                       <Grid className="DateTimeTables mt30">
@@ -189,15 +336,22 @@ const Railroad = () => {
                           Time
                         </Grid>
                         <Grid xs={12} className="mt14">
-                        <TextField
+                        <TimePicker
+                          format={'hh:mm:ss a'}
+                          value={railRoad.time}
+                          onChange={(value) => { handleSubmitData('x',value, 11) }}
+                          id="time"
+                          className="datePickerReact"
+                        />
+                        {/* <TextField
                           id="time"
                           type="time"
                           className="DateTimePicker"
-                          defaultValue="YY-MM-DD"
+                          defaultValue="HH:mm:ss"
                           InputLabelProps={{
                             shrink: true,
                           }}
-                        />
+                        /> */}
                         </Grid>
                       </Grid>
                     </Grid>
@@ -214,22 +368,25 @@ const Railroad = () => {
                     <Grid xs={12} container>
                       <Grid xs={3} className="mt14 pr40">
                         <Autocomplete
-                          value={value}
-                          onChange={(event, newValue) => {
-                            setValue(newValue);
-                          }}
-                          inputValue={inputValue}
-                          onInputChange={(event, newInputValue) => {
-                            setInputValue(newInputValue);
+                          value={railRoad.oje}
+                          onChange={(event, value) => {
+                            handleSubmitData(event, value,2)
                           }}
                           id="controllable-states-demo"
-                          options={OJE}
+                          options={dummyData.OJE}
                           className="w100p"
                           renderInput={(params) => <TextField {...params} variant="outlined" />}
                         />
                       </Grid>
                       <Grid xs={9} className="mt14 fieldSubText">
-                        <TextField id="outlined-basic" label="Comment here" variant="outlined" className="w100p"/>
+                        <TextField 
+                          id="primary_comment" 
+                          label={'Comment here'}
+                          variant="outlined" 
+                          className="w100p"
+                          // value = { railRoad.primary_comment }
+                          // onChange={ (event,value) =>handleSubmitData(event,value,3) } 
+                          />
                         <Typography variant="h6" className="MuiTypography-subtitle2 MuiTypography-colorTextSecondary" component="h6">
                           Please leave this field empty if you have no comments
                         </Typography>
@@ -246,22 +403,18 @@ const Railroad = () => {
                     <Grid xs={12} container>
                       <Grid xs={3} className="mt14 pr40">
                         <Autocomplete
-                          value={value}
-                          onChange={(event, newValue) => {
-                            setValue(newValue);
-                          }}
-                          inputValue={inputValue}
-                          onInputChange={(event, newInputValue) => {
-                            setInputValue(newInputValue);
-                          }}
+                          value={railRoad.joinTest}
+                          onChange={(event, value) => {
+                            handleSubmitData(event,value, 5)
+                          }}  
                           id="controllable-states-demo"
-                          options={OJE}
+                          options={dummyData.OJE}
                           className="w100p"
                           renderInput={(params) => <TextField {...params} variant="outlined" />}
                         />
                       </Grid>
                       <Grid xs={9} className="mt14 fieldSubText">
-                        <TextField id="outlined-basic" label="Comment here" variant="outlined" className="w100p"/>
+                        <TextField id="assisting_comment" label="Comment here" variant="outlined" className="w100p"/>
                         <Typography variant="h6" className="MuiTypography-subtitle2 MuiTypography-colorTextSecondary" component="h6">
                           Please leave this field empty if you have no comments
                         </Typography>
@@ -280,15 +433,20 @@ const Railroad = () => {
                         Job ID
                       </Grid>
                       <Grid xs={6} className="mt14 pr40">
-                        <TextField id="outlined-basic" label="Job ID" variant="outlined" className="w100p"/>
+                        <TextField id="jobID" label="Job ID" variant="outlined" className="w100p"/>
                       </Grid>
                       <Grid xs={6} container justify="flex-end" className="mt14 fieldSubText">
-                        <Button className="LinkButton ButtonAddIcon">Add Crew Member</Button>
+                        <Button 
+                            className="LinkButton ButtonAddIcon" 
+                            onClick={addCrew}
+                            >
+                              Add Crew Member
+                        </Button>
                       </Grid>
                     </Grid>
                     {/* Add New Crew Members Loop */}
                     <Grid xs={12} className="Scrolling SafetyCrewHeight mt30">
-                      <Grid xs={12} container className="mt30">
+                      {/* <Grid xs={12} container className="mt30">
                         <Grid xs={6} className="pr40">
                           <Grid xs={12} className="mbold">
                             Crew member 1
@@ -296,8 +454,8 @@ const Railroad = () => {
                           <Autocomplete
                             className="w100p"
                             id="combo-box-demo"
-                            options={CrewMember}
-                            getOptionLabel={(option) => option.title}
+                            options={dummyData.CrewMember}
+                            getOptionLabel={(option) => option}
                             renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
                           />
                         </Grid>
@@ -309,8 +467,8 @@ const Railroad = () => {
                             <Autocomplete
                               className="w100p"
                               id="combo-box-demo"
-                              options={CrewPosition}
-                              getOptionLabel={(option) => option.title}
+                              options={dummyData.CrewPosition}
+                              getOptionLabel={(option) => option}
                               renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
                             />
                           </Grid>
@@ -319,263 +477,76 @@ const Railroad = () => {
                             <input type="file" id="crew1" className="hide"/>
                           </Grid>
                         </Grid>
-                      </Grid>
-                      <Grid xs={12} container className="mt30">
-                        <Grid xs={6} className="pr40">
-                          <Grid xs={12} className="mbold">
-                            Crew member 2
-                          </Grid>
-                          <Autocomplete
-                            className="w100p"
-                            id="combo-box-demo"
-                            options={CrewMember}
-                            getOptionLabel={(option) => option.title}
-                            renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
-                          />
-                        </Grid>
-                        <Grid xs={6} container>
-                          <Grid xs={12} className="mbold">
-                            Crew Position
-                          </Grid>
-                          <Grid xs={9}>
-                            <Autocomplete
-                              className="w100p"
-                              id="combo-box-demo"
-                              options={CrewPosition}
-                              getOptionLabel={(option) => option.title}
-                              renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
-                            />
-                          </Grid>
-                          <Grid xs={3} container justify="flex-end">
-                            <label className="PickBtn" for="crew2"></label>
-                            <input type="file" id="crew2" className="hide"/>
-                          </Grid>
-                        </Grid>
-                      </Grid>
-                      <Grid xs={12} container className="mt30">
-                        <Grid xs={6} className="pr40">
-                          <Grid xs={12} className="mbold">
-                            Crew member 3
-                          </Grid>
-                          <Autocomplete
-                            className="w100p"
-                            id="combo-box-demo"
-                            options={CrewMember}
-                            getOptionLabel={(option) => option.title}
-                            renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
-                          />
-                        </Grid>
-                        <Grid xs={6} container>
-                          <Grid xs={12} className="mbold">
-                            Crew Position
-                          </Grid>
-                          <Grid xs={9}>
-                            <Autocomplete
-                              className="w100p"
-                              id="combo-box-demo"
-                              options={CrewPosition}
-                              getOptionLabel={(option) => option.title}
-                              renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
-                            />
-                          </Grid>
-                          <Grid xs={3} container justify="flex-end">
-                            <label className="PickBtn" for="crew3"></label>
-                            <input type="file" id="crew3" className="hide"/>
-                          </Grid>
-                        </Grid>
-                      </Grid>
-                      <Grid xs={12} container className="mt30">
-                        <Grid xs={6} className="pr40">
-                          <Grid xs={12} className="mbold">
-                            Crew member 4
-                          </Grid>
-                          <Autocomplete
-                            className="w100p"
-                            id="combo-box-demo"
-                            options={CrewMember}
-                            getOptionLabel={(option) => option.title}
-                            renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
-                          />
-                        </Grid>
-                        <Grid xs={6} container>
-                          <Grid xs={12} className="mbold">
-                            Crew Position
-                          </Grid>
-                          <Grid xs={9}>
-                            <Autocomplete
-                              className="w100p"
-                              id="combo-box-demo"
-                              options={CrewPosition}
-                              getOptionLabel={(option) => option.title}
-                              renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
-                            />
-                          </Grid>
-                          <Grid xs={3} container justify="flex-end">
-                            <label className="PickBtn" for="crew4"></label>
-                            <input type="file" id="crew4" className="hide"/>
-                          </Grid>
-                        </Grid>
-                      </Grid>
-                      <Grid xs={12} container className="mt30">
-                        <Grid xs={6} className="pr40">
-                          <Grid xs={12} className="mbold">
-                            Crew member 5
-                          </Grid>
-                          <Autocomplete
-                            className="w100p"
-                            id="combo-box-demo"
-                            options={CrewMember}
-                            getOptionLabel={(option) => option.title}
-                            renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
-                          />
-                        </Grid>
-                        <Grid xs={6} container>
-                          <Grid xs={12} className="mbold">
-                            Crew Position
-                          </Grid>
-                          <Grid xs={9}>
-                            <Autocomplete
-                              className="w100p"
-                              id="combo-box-demo"
-                              options={CrewPosition}
-                              getOptionLabel={(option) => option.title}
-                              renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
-                            />
-                          </Grid>
-                          <Grid xs={3} container justify="flex-end">
-                            <label className="PickBtn" for="crew5"></label>
-                            <input type="file" id="crew5" className="hide"/>
-                          </Grid>
-                        </Grid>
-                      </Grid>
-                      <Grid xs={12} container className="mt30">
-                        <Grid xs={6} className="pr40">
-                          <Grid xs={12} className="mbold">
-                            Crew member 6
-                          </Grid>
-                          <Autocomplete
-                            className="w100p"
-                            id="combo-box-demo"
-                            options={CrewMember}
-                            getOptionLabel={(option) => option.title}
-                            renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
-                          />
-                        </Grid>
-                        <Grid xs={6} container>
-                          <Grid xs={12} className="mbold">
-                            Crew Position
-                          </Grid>
-                          <Grid xs={9}>
-                            <Autocomplete
-                              className="w100p"
-                              id="combo-box-demo"
-                              options={CrewPosition}
-                              getOptionLabel={(option) => option.title}
-                              renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
-                            />
-                          </Grid>
-                          <Grid xs={3} container justify="flex-end">
-                            <label className="PickBtn" for="crew6"></label>
-                            <input type="file" id="crew6" className="hide"/>
-                          </Grid>
-                        </Grid>
-                      </Grid>
-                      <Grid xs={12} container className="mt30">
-                        <Grid xs={6} className="pr40">
-                          <Grid xs={12} className="mbold">
-                            Crew member 7
-                          </Grid>
-                          <Autocomplete
-                            className="w100p"
-                            id="combo-box-demo"
-                            options={CrewMember}
-                            getOptionLabel={(option) => option.title}
-                            renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
-                          />
-                        </Grid>
-                        <Grid xs={6} container>
-                          <Grid xs={12} className="mbold">
-                            Crew Position
-                          </Grid>
-                          <Grid xs={9}>
-                            <Autocomplete
-                              className="w100p"
-                              id="combo-box-demo"
-                              options={CrewPosition}
-                              getOptionLabel={(option) => option.title}
-                              renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
-                            />
-                          </Grid>
-                          <Grid xs={3} container justify="flex-end">
-                            <label className="PickBtn" for="crew7"></label>
-                            <input type="file" id="crew7" className="hide"/>
-                          </Grid>
-                        </Grid>
-                      </Grid>
-                      <Grid xs={12} container className="mt30">
-                        <Grid xs={6} className="pr40">
-                          <Grid xs={12} className="mbold">
-                            Crew member 8
-                          </Grid>
-                          <Autocomplete
-                            className="w100p"
-                            id="combo-box-demo"
-                            options={CrewMember}
-                            getOptionLabel={(option) => option.title}
-                            renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
-                          />
-                        </Grid>
-                        <Grid xs={6} container>
-                          <Grid xs={12} className="mbold">
-                            Crew Position
-                          </Grid>
-                          <Grid xs={9}>
-                            <Autocomplete
-                              className="w100p"
-                              id="combo-box-demo"
-                              options={CrewPosition}
-                              getOptionLabel={(option) => option.title}
-                              renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
-                            />
-                          </Grid>
-                          <Grid xs={3} container justify="flex-end">
-                            <label className="PickBtn" for="crew8"></label>
-                            <input type="file" id="crew8" className="hide"/>
-                          </Grid>
-                        </Grid>
-                      </Grid>
-                      <Grid xs={12} container className="mt30">
-                        <Grid xs={6} className="pr40">
-                          <Grid xs={12} className="mbold">
-                            Crew member 9
-                          </Grid>
-                          <Autocomplete
-                            className="w100p"
-                            id="combo-box-demo"
-                            options={CrewMember}
-                            getOptionLabel={(option) => option.title}
-                            renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
-                          />
-                        </Grid>
-                        <Grid xs={6} container>
-                          <Grid xs={12} className="mbold">
-                            Crew Position
-                          </Grid>
-                          <Grid xs={9}>
-                            <Autocomplete
-                              className="w100p"
-                              id="combo-box-demo"
-                              options={CrewPosition}
-                              getOptionLabel={(option) => option.title}
-                              renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
-                            />
-                          </Grid>
-                          <Grid xs={3} container justify="flex-end">
-                            <label className="PickBtn" for="crew9"></label>
-                            <input type="file" id="crew9" className="hide"/>
-                          </Grid>
-                        </Grid>
-                      </Grid>
+                      </Grid> */}
+                      {
+                        (railRoad.crewMembers).map((x,i)=>{
+                          return(
+                            <Grid xs={12} container className="mt30">
+                              <Grid xs={6} className="pr40">
+                                <Grid xs={12} className="mbold">
+                                  {`Crew member ${i+1}`}
+                                </Grid>
+                                <Autocomplete
+                                  className="w100p"
+                                  id="combo-box-name"
+                                  ref={ref0}
+                                  name = "name"
+                                  options={dummyData.CrewMember}
+                                  getOptionLabel={(option) => option}
+                                  value={x.name}
+                                  onChange={(e,value) => { 
+                                                let name = ref0.current.getAttribute("name");
+                                                handleInputChange(name, value,i)}
+                                              }
+                                  renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
+                                />
+                              </Grid>
+                              <Grid xs={6} container>
+                                <Grid xs={12} className="mbold">
+                                  Crew Position
+                                </Grid>
+                                <Grid xs={9}>
+                                  <Autocomplete
+                                    className="w100p"
+                                    id="combo-box-demo"
+                                    name="position"
+                                    ref={ref1}
+                                    options={dummyData.CrewPosition}
+                                    getOptionLabel={(option) => option}
+                                    value={x.position}
+                                    onChange={(e,value) => { 
+                                      let name = ref1.current.getAttribute("name");
+                                      handleInputChange(name, value,i)}
+                                    }
+                                    renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
+                                  />
+                                </Grid>
+                                <Grid xs={3} container justify="flex-end">
+                                  <label className={(x.image=='')?"PickBtn":"PickBtnFileUploaded"} for="crew2" ></label>
+                                  <input 
+                                      type="file" 
+                                      id="crew2" 
+                                      name="image" 
+                                      ref = {ref2}
+                                      className="hide"
+                                      onChange={(e,value) => { 
+                                        let name = ref2.current.getAttribute("name");
+                                        let value1 = e.target.files[0];
+
+                                        handleInputChange(name, value1,i)}
+                                      }
+                                      />
+                                </Grid>
+                                <div className="btn-box">
+                                  {railRoad.crewMembers.length !== 1 && <button
+                                    className="mr10"
+                                    onClick={() => removeCrew(i)}>Remove</button>}
+                                </div>
+                              </Grid>
+                            </Grid>
+                          )
+                        })
+                      }
                     </Grid>
                     {/* Add New Crew Members End */}
                   </Grid>
@@ -583,7 +554,12 @@ const Railroad = () => {
             </Grid>
             <Grid xs={12} container justify="flex-end" className="mt50">
               <Link to="/safety-testing" className="LinkButtonBack mr10">Close</Link>
-              <Button className="LinkButton">Save</Button>
+              <Button 
+                  className="LinkButton"
+                  onClick={submitBtn}
+                  >
+                Save
+              </Button>
             </Grid>
           </Grid>
           {/* Page Start End */}

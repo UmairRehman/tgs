@@ -1158,6 +1158,15 @@ textarea::-ms-input-placeholder { /* Microsoft Edge */
     background-size: 60%;
     background-color: white !important;
 }
+.PickBtnFileUploaded {
+    width: 55px;
+    height: 55px;
+    border-radius: 8px;
+    cursor: pointer;
+    background:url(../assets/PickCameraIcon.svg) no-repeat center center;
+    background-size: 60%;
+    background-color: #2963ad !important;
+}
 .SafetyCrewHeight {
     height: 350px;
 }
