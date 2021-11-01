@@ -11,6 +11,7 @@ export const routes = {
     },
     employee: {
         employee_login: 'employee/employee/login',
+        get_employee_all_certificates : '/employee/certificate/employee/',
     },
     hr:{
         get_applicant: 'employee/hr/applicant',
