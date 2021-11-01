@@ -80,7 +80,7 @@ const LeftControl = () => {
           <List component="nav" aria-label="main mailbox folders">
 
             {/* Employee Nav */}
-            {menuLoader ? null : role !== "applicant" ?
+            {menuLoader ? null : role == "applicant" ?
               <div>
                 <ListItem button className="DashIcon">
                   <Link to="/dashboard" className="Liq-NavLinks" className={pathname === '/dashboard' ? 'NavSelected' : ''}>
