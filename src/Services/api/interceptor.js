@@ -35,6 +35,9 @@ const responseHandler = (response) => {
 }
 
 const errorHandler = async (error) => {
+    if (!error.response)
+        return console.log(error);
+
     let {
         response: {
             data: { message },
@@ -92,7 +95,7 @@ const HTTPClientFunctionsWrapper = async (method, ...args) => {
                 Authorization: localStorage.getItem('access_jwt')
             },
         }
-    );
+    ) || {};
 
     const { data: axiosObjectData } = response;
 

@@ -380,8 +380,6 @@ const Application = () => {
 
             history.push("/create-password");
 
-            console.log(response);
-
             removeHttpErrorListener();
         } catch (exc) {
             console.log(exc);

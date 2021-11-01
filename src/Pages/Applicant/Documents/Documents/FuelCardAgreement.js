@@ -92,6 +92,10 @@ const FuelCardAgreement = () => {
 
       storage.set('step-3-form-fuelCardAgreement', JSON.stringify(step3FormsSubmitted));
 
+      const step3FormPosted = new BroadcastChannel('step3form_posted');
+
+      step3FormPosted.postMessage({ topic: 'form-updated', message: {} })
+
       showSnackBar('Form has been submitted!');
 
       window.self.close();

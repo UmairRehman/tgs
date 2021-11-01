@@ -111,7 +111,7 @@ const PostConditionalJobOffer = () => {
 
       setPosting(false);
       setError("field must be filed");
-      alert("Error! Field must be Filled");
+      alert("Kindly fill in all the fields");
     } catch (exc) {
       setPosting(false);
       
