@@ -8,7 +8,7 @@ import {
     List,
     ListItem
 } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
@@ -20,13 +20,22 @@ import LeftControl from "../../../Components/LeftControl";
 // import {isMobile} from 'react-device-detect';
 
 
-/** Third party dependencies & Libraries */
+/** Local party dependencies & Libraries */
 import Services from '../../../Services';
+
+import Snackbar from '../../../Components/Snackbar';
+
+import { helpers } from "../../../helpers";
 
 
 const {
+    users,
     Storage,
 } = Services;
+
+const {
+    showSnackBar,
+} = helpers;
 
 
 // const GFG_Fun = () => {
@@ -40,7 +49,81 @@ const {
 //     }
 // }
 const DocumentsStep3 = () => {
-    // const [file, setFile] = useState(false);
+
+    const history = useHistory();
+
+    const [formsPosted, setFormsPosted] = useState(false);
+
+    var step3FormPosted = new BroadcastChannel('step3form_posted');
+
+    step3FormPosted.onmessage = ($e) => {
+        const { data = {} } = $e;
+
+        const { topic, message } = data;
+
+        switch (topic) {
+            case 'form-updated':
+                toggleFormsPosted();
+                break;
+            default:
+                break;
+        }
+    }
+
+    const toggleFormsPosted = () => {
+        setFormsPosted(true);
+        setTimeout(setFormsPosted.bind(null, false), 0);
+    }
+
+    const saveAndContinue = async () => {
+        try {
+            const checks = [
+                'step-3-form-arbitration',
+                'step-3-form-conditionalOffer',
+                'step-3-form-postConditionalOffer',
+                'step-3-form-fuelCardAgreement',
+                'step-3-form-bootCard',
+                'step-3-form-twic',
+                'step-3-form-directDeposit',
+                'step-3-form-fcra',
+                'step-3-form-conditionalOffer',
+            ]
+
+            let allFormsSubmitted = checks
+                .map(key => storage.get(key))
+                .reduce((accumulator, current) => current && !!accumulator, true);
+
+            allFormsSubmitted = allFormsSubmitted && Object.values(files)
+                .reduce((accumulator, current) => accumulator && !!current, true);
+
+            if (!allFormsSubmitted)
+                return showSnackBar('Please complete & Submit all forms');
+
+            const multiPartFormDataHeaders = {
+                'Content-Type': 'multipart/form-data'
+            };
+
+            const formData = new FormData();
+
+            formData.append('W4', files.w4[0]);
+            formData.append('I9', files.i9[0]);
+            formData.append('DISA', files.disa[0]);
+
+            const { data } = await users.postStep3(
+                formData,
+                multiPartFormDataHeaders
+            )
+
+            storage.set(
+                'user_profile',
+                JSON.stringify(data)
+            );
+
+            history.push('/documents/step/4');
+        } catch (exc) {
+            console.log(exc);
+        }
+    }
 
     const storage = new Storage();
 
@@ -53,6 +136,10 @@ const DocumentsStep3 = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
+
+    useEffect(() => {
+        showSnackBar('Form posted');
+    }, [formsPosted]);
 
     useEffect(() => {
         // var i9 = document.getElementById("i9");
@@ -82,10 +169,16 @@ const DocumentsStep3 = () => {
     }
 
 
-    const triggerInput = (id) => {
+    const triggerInput = (id, $e) => {
+        const ev = $e || window.event;
+
         const element = document.getElementById(id);
 
-        element.click();
+        // element.click();
+
+        ev.stopPropagation();
+
+        return false;
     }
 
     return (
@@ -121,7 +214,7 @@ const DocumentsStep3 = () => {
                                         Conditional Offer
                                     </Grid>
                                     <Button className={
-                                        storage.get('step-3-form-conditonalOffer')
+                                        storage.get('step-3-form-conditionalOffer')
                                             ? ''
                                             : 'graytick'
                                     }></Button>
@@ -202,19 +295,19 @@ const DocumentsStep3 = () => {
                                     Download I-9, W-4 and DISA Forms here
                                 </Typography>
 
-                                <a href="/Assets/Forms/I-9.pdf" target="blank" className="PDFDownload">
+                                <a href="/assets/forms/I-9.pdf" target="blank" className="PDFDownload">
                                     <Grid className="FileName">
                                         I-9 Forms
                                     </Grid>
                                     <Button></Button>
                                 </a>
-                                <a href="/Assets/Forms/W-4.pdf" target="blank" className="PDFDownload">
+                                <a href="/assets/forms/W-4.pdf" target="blank" className="PDFDownload">
                                     <Grid className="FileName">
                                         W-4 Forms
                                     </Grid>
                                     <Button></Button>
                                 </a>
-                                <a href="/Assets/Forms/DISA_Final" target="blank" className="PDFDownload">
+                                <a href="/assets/forms/DISA_Final" target="blank" className="PDFDownload">
                                     <Grid className="FileName">
                                         DISA Forms
                                     </Grid>
@@ -226,54 +319,60 @@ const DocumentsStep3 = () => {
                                     Please upload the I-9, W-4 and DISA forms and ensure that the forms are filled out clearly in block letters using a black or blue pen.
                                 </Typography>
 
-                                <label for="i9" className="i9 UploadFile DocDownload"
+                                <label for="i9" className={
+                                    'i9 UploadFile' + (
+                                        files.i9
+                                            ? ' active'
+                                            : ''
+                                    )
+                                }
                                     onClick={triggerInput.bind(null, 'i9')}>
                                     <Grid className="FileName">
                                         Upload I-9 Form Here
                                     </Grid>
-                                    <Button className={
-                                        files.i9
-                                            ? ''
-                                            : ''
-                                    }></Button>
+                                    <Button></Button>
                                 </label>
                                 <input type="file" id="i9" className="hide"
                                     onChange={storeFile.bind(null, 'i9')} />
-                                <label for="w4" className="w4f UploadFile DocDownload"
+                                <label for="w4" className={
+                                    'w4f UploadFile' + (
+                                        files.w4
+                                            ? ' active'
+                                            : ''
+                                    )
+                                }
                                     onClick={triggerInput.bind(null, 'w4')}>
                                     <Grid className="FileName">
                                         Upload W-4 Form Here
                                     </Grid>
-                                    <Button className={
-                                        files.w4
-                                            ? ''
-                                            : ''
-                                    }></Button>
+                                    <Button></Button>
                                 </label>
                                 <input type="file" id="w4" className="hide"
                                     onChange={storeFile.bind(null, 'w4')} />
-                                <label for="disa" className="disa UploadFile DocDownload"
+                                <label for="disa" className={
+                                    'disa UploadFile' + (
+                                        files.disa
+                                            ? ' active'
+                                            : ''
+                                    )
+                                }
                                     onClick={triggerInput.bind(null, 'disa')}>
                                     <Grid className="FileName">
                                         Upload DISA Form Here
                                     </Grid>
-                                    <Button className={
-                                        files.disa
-                                            ? ''
-                                            : ''
-                                    }></Button>
+                                    <Button></Button>
                                 </label>
                                 <input type="file" id="disa" className="hide"
                                     onChange={storeFile.bind(null, 'disa')} />
                                 <Typography variant="h6" className="MuiTypography-subtitle2 MuiTypography-colorTextSecondary" component="h6">
                                     Please ensure you have signed the documents before uploading them
                                 </Typography>
-                                <Link to="" className="ZipFile">
+                                <a href="/assets/forms/Zipped.zip" target="_blank" className="ZipFile">
                                     <Grid className="FileName">
                                         All PDF ZIP Files
                                     </Grid>
                                     <Button></Button>
-                                </Link>
+                                </a>
                                 <Typography variant="h6" className="MuiTypography-subtitle2 MuiTypography-colorTextSecondary" component="h6">
                                     Only for HR
                                 </Typography>
@@ -282,7 +381,10 @@ const DocumentsStep3 = () => {
                             <Grid xs={12} className="mt50">
                                 <Grid xs={12} md={8} lg={6} container justify="space-between">
                                     <Link to="/documents" className="LinkButtonBack">Back</Link>
-                                    <Link to="/documents/step/4" className="LinkButton">Save & Continue</Link>
+                                    <Button className="LinkButton"
+                                        onClick={saveAndContinue}>Save & Continue</Button>
+                                    <Snackbar
+                                    ></Snackbar>
                                 </Grid>
                             </Grid>
                         </Grid>

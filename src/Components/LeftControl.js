@@ -66,7 +66,7 @@ const LeftControl = () => {
 
   /** Setting sidebar styles if the user is authenticated */
 
-  const sidebarClassName = EmployeeStatusId > 1 ? 'eDocumentsIcon' : classes.DisplayNone;
+  const sidebarClassName = classes.DisplayNone;
 
   /********************************************************** */
 
@@ -80,7 +80,7 @@ const LeftControl = () => {
           <List component="nav" aria-label="main mailbox folders">
 
             {/* Employee Nav */}
-            {menuLoader ? null : role !== "applicant" ?
+            {menuLoader ? null : role == "applicant" ?
               <div>
                 <ListItem button className="DashIcon">
                   <Link to="/dashboard" className="Liq-NavLinks" className={pathname === '/dashboard' ? 'NavSelected' : ''}>

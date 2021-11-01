@@ -2011,6 +2011,12 @@ textarea::-ms-input-placeholder { /* Microsoft Edge */
     text-decoration: none;
     cursor: pointer;
 }
+
+.UploadFile.active Button {
+    width: 40px;
+    background: url(../assets/TickDoneIcon.svg) no-repeat 10px center white!important;
+}
+
 .UploadFile .FileName {
     width: 180px;
     padding: 10px 0;

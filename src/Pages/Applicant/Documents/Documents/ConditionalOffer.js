@@ -41,7 +41,7 @@ const {
 const {
   styles: {
     displayNoneStyles: useStyles
-  } 
+  }
 } = Imports;
 
 
@@ -120,12 +120,17 @@ const ConditionalOffer = () => {
         form: 5,
       });
 
-      const step3FormsSubmitted = JSON.parse(storage.get('step-3-form-conditonalOffer')) || true;
+      const step3FormsSubmitted = JSON.parse(storage.get('step-3-form-conditionalOffer')) || true;
 
-      storage.set('step-3-form-conditonalOffer', JSON.stringify(step3FormsSubmitted));
-      
+      storage.set('step-3-form-conditionalOffer', JSON.stringify(step3FormsSubmitted));
+
+      const step3FormPosted = new BroadcastChannel('step3form_posted');
+
+      step3FormPosted.postMessage({ topic: 'form-updated', message: {} })
+
+
       showSnackBar('Form has been submitted!');
-      
+
       window.self.close();
     } catch (exc) {
       setPosting(false);
