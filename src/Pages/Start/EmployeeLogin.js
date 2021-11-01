@@ -157,10 +157,26 @@ const EmployeeLogin = () => {
       setIsLoggingIn(false);
 
       /** REPLACE - by router */
-      window.location = '/dashboard';
+      let {
+        JobCategory: { id: jobCategoryID },
+        SubDepartment: { DepartmentId: subDepartmentID }
+      } = data;
 
-      history.pushState()
-      
+      const role = Imports.categoryDepartmentPair({
+        jobCategoryID,
+        subDepartmentID,
+      })
+
+      if (role === 'hr') {
+        localStorage.setItem('role', 'hr')
+        window.location = '/new-hire-queue';
+      } else {
+        window.location = '/login';
+      }
+
+
+      history.pushState();
+
       return true;
 
     } catch (exc) {

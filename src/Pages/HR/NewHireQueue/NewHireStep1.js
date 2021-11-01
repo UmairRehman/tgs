@@ -8,6 +8,7 @@ import {
   TextareaAutosize,
   Typography
 } from "@material-ui/core";
+import DatePicker from 'react-date-picker';
 import { Link } from "react-router-dom";
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -15,12 +16,27 @@ import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import PageHeader from "../../../Components/PageHeader";
 import LeftControl from "../../../Components/LeftControl";
+import { useLocation } from 'react-router'
+import { useHistory } from "react-router-dom";
+
+
+/** Local deoendencies & Libraries */
+import Services from '../../../Services';
+
+
+const {
+  hr
+} = Services;
+var moment = require('moment-timezone');
 
 // import MobileScreen from './Mobile/Enter-RailRoad-Add';
 // import {isMobile} from 'react-device-detect';
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
+
+
+
 
 
 const Approval = [
@@ -54,9 +70,9 @@ const Paytype = [
     { title: 'weekly' }
 ];
 const queueRate = [
-    {title: '$10'},
-    {title: '$20'},
-    {title: '$30'},
+    {title: '10'},
+    {title: '20'},
+    {title: '30'},
 ];
 const Supervisor = [
     {title: 'John Alex'},
@@ -74,25 +90,123 @@ const ITR5 = ['Yes', 'No'];
 const OJE = ['Yes', 'No'];
 
 const NewHireStep1 = () => {
-    useEffect(() => {
+
+      let history = useHistory();
+
+    const [applicantData, setApplicantData] = useState({})
+    const [emergencyContact, setEmergencyContact] = useState({})
+    const [files, setFiles] = useState({})
+    const [spouse, setSpouse] = useState({})
+
+
+
+    // states for Form 
+
+    const [step1, setStep1] = useState('')
+    const [position, setPosition] = useState('')
+    const [jobCode, setjobCode] = useState('')
+    const [rate, setrate] = useState('')
+    const [department, setdepartment] = useState('')
+    const [fullTitle, setfullTitle] = useState('')
+    const [positionCategory, setpositionCategory] = useState('')
+    const [positionLocation, setpositionLocation] = useState('')
+    const [partType, setpartType] = useState('')
+    const [startDate, setstartDate] = useState(new Date())
+    const [subDepartment, setsubDepartment] = useState('')
+    const [supervisor, setSupervisor] = useState('')
+    const [comment, setcomment] = useState('')
+    const [computer, setcomputer] = useState('')
+    const [active, setactive] = useState('')
+    const [companyCellPhone, setcompanyCellPhone] = useState('')
+    const [companyVehicle, setcompanyVehicle] = useState('')
+    const [fuelCard, setfuelCard] = useState('')
+    const [ITComment, setITComment] = useState('')
+
+
+
+    const location  = useLocation();
+    const [holdData, setHoldData] = useState({})
+
+    
+    async function onformSubmit(event){
+        event.preventDefault();
+        let data = {
+            employee_id : holdData?.id,
+            Supervisor_Id : holdData?.SupervisorId == null ? 1 : 1,
+            location_id: 1, 
+            step1,
+            position,
+            job_code: jobCode,
+            rate,
+            department:1,
+            full_title : fullTitle,
+            position_level: 1,
+            position_category: 1,
+            pay_type : 1,
+            SubDepartment_Id:1,
+            start_date : moment(startDate).format('YYYY-MM-DD'),
+            // subDepartment,
+            supervisor,
+            comment: document.getElementById('comment1').value,
+            IT:{
+                computer: computer  == "Yes" ? true :false,
+                AD : active == "Yes" ? true :false,
+                cell_phone: companyCellPhone == "Yes" ? true :false,
+                vehicle : companyVehicle== "Yes" ? true :false,
+                fuel_card : fuelCard== "Yes" ? true :false,
+                comment: document.getElementById('comment1').value ,
+            }
+            
+        }
+        console.log(data)
+
+        
+        try{
+            let data1 = await hr.step1(data) ;
+            history.push('./new-hire-queue')
+        
+        }
+        catch(exc){
+            console.log(exc);
+        }
+    }
+
+    useEffect(async() => {
         window.scrollTo(0, 0);
+
+        let applicantDataHistory = location?.state
+        setHoldData(applicantDataHistory)
+        console.log(applicantDataHistory)
+
+        try{
+            let data = await hr.getAllApplicantsByID(applicantDataHistory) ;
+            setApplicantData(data.employee)
+            setEmergencyContact(data.emergency_contact)
+            setFiles(data.files)
+            setSpouse(data.spouse)
+            console.log(applicantData)
+        
+        }
+        catch(exc){
+            console.log(exc);
+        }
+        
+
+
     }, []);
 
-//   if(isMobile) {
-//     return (
-//         <MobileScreen />
-//     )
-//   }
+    
   return (
     <Grid container xs={12} className="Liq-Container HRPortal">
       <Grid xs={12} md={2} className="LeftContol" id="LeftContol">
         <LeftControl />
       </Grid>
-      <Grid xs={12} md={10} container justify="center" className="PageContent">
+      <Grid xs={12} md={10} container justify="center" className="PageContent"> 
         <Grid className="PagesFrame">
           <PageHeader />
           <Grid id="PageTitle">New Applicant - Step 1 Approval</Grid>
           {/* Page Start */}
+          <form onSubmit={onformSubmit}>
           <Grid xs={12} className="ContentPage FormTableArea">
             <Grid xs={12} container>
                 <Grid xs={12}>
@@ -102,7 +216,7 @@ const NewHireStep1 = () => {
                             Applicant Name
                             </Grid>
                             <Grid>
-                            Ryan Westmeyer
+                            {applicantData?.firstName}
                             </Grid>
                         </ListItem>
                         <ListItem container className="p0 pt6 pb20">
@@ -110,7 +224,7 @@ const NewHireStep1 = () => {
                             Employee ID
                             </Grid>
                             <Grid>
-                            44433
+                            {applicantData?.id}
                             </Grid>
                         </ListItem>
                         <ListItem container className="p0 pt6 pb20">
@@ -118,7 +232,8 @@ const NewHireStep1 = () => {
                             Date of Application
                             </Grid>
                             <Grid>
-                            30/20/2021
+                            {moment(new Date(applicantData?.updatedAt)).format("dd-mm-yyyy")}
+                            
                             </Grid>
                         </ListItem>
                         <ListItem container className="p0 pt6 pb20">
@@ -126,7 +241,9 @@ const NewHireStep1 = () => {
                             Home City, St
                             </Grid>
                             <Grid>
-                            Houston, Texas 77066
+                            {applicantData?.address}
+                            , {applicantData?.address1}
+
                             </Grid>
                         </ListItem>
                         <ListItem container className="p0 pt6 pb20">
@@ -134,7 +251,7 @@ const NewHireStep1 = () => {
                             Phone Number
                             </Grid>
                             <Grid>
-                            832 704 6517
+                            {applicantData?.cellPhone}
                             </Grid>
                         </ListItem>
                         <ListItem container className="p0 pt6 pb20">
@@ -142,7 +259,7 @@ const NewHireStep1 = () => {
                             Email Address
                             </Grid>
                             <Grid>
-                            Ryan.westmeyer@gmail.com
+                            {applicantData?.email}
                             </Grid>
                         </ListItem>
                         <ListItem container className="p0 pt6 pb20">
@@ -150,7 +267,8 @@ const NewHireStep1 = () => {
                             Job ID / Description
                             </Grid>
                             <Grid>
-                            1234
+                            {applicantData?.jobDescription}
+
                             </Grid>
                         </ListItem>
                         <ListItem container className="p0 pt6 pb20">
@@ -158,7 +276,8 @@ const NewHireStep1 = () => {
                             Job Category
                             </Grid>
                             <Grid>
-                            Operations
+                            {applicantData?.JobCategoryId}
+
                             </Grid>
                         </ListItem>
                         <ListItem container alignItems="flex-start" className="p0 pt6 pb20">
@@ -166,7 +285,7 @@ const NewHireStep1 = () => {
                             Notes For HR
                             </Grid>
                             <Grid xs={3}>
-                            Lorem Ipsum Lorem IpsumLorem Ipsum Lorem IpsumLorem IpsumLorem Ipsum Lorem IpsumLorem IpsumLorem.
+                            {applicantData?.notesForHR}
                             </Grid>
                         </ListItem>
                         <ListItem container className="p0 pt6 pb20">
@@ -205,8 +324,9 @@ const NewHireStep1 = () => {
                                         className="w100p"
                                         id="combo-box-demo"
                                         options={Approval}
+                                        onChange={(e, value)=>{setStep1(value.title)}}
                                         getOptionLabel={(option) => option.title}
-                                        renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
+                                        renderInput={(params) => <TextField required={true}  {...params} label="Select" variant="outlined" />}
                                     />
                                 </Grid>
                             </Grid>
@@ -237,9 +357,10 @@ const NewHireStep1 = () => {
                                     <Autocomplete
                                         className="w100p"
                                         id="combo-box-demo"
+                                        onChange={(e, value)=>{setPosition(value.title)}}
                                         options={PositionLevel}
                                         getOptionLabel={(option) => option.title}
-                                        renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
+                                        renderInput={(params) => <TextField required={true}  {...params} label="Select" variant="outlined" />}
                                     />
                                 </Grid>
                             </Grid>
@@ -251,11 +372,12 @@ const NewHireStep1 = () => {
                                 </Grid>
                                 <Grid xs={12} className="mt14">
                                     <Autocomplete
+                                        onChange={(e, value)=>{setfullTitle(value.title)}}
                                         className="w100p"
                                         id="combo-box-demo"
                                         options={FullTitle}
                                         getOptionLabel={(option) => option.title}
-                                        renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
+                                        renderInput={(params) => <TextField required={true}  {...params} label="Select" variant="outlined" />}
                                     />
                                 </Grid>
                             </Grid>
@@ -272,9 +394,10 @@ const NewHireStep1 = () => {
                                     <Autocomplete
                                         className="w100p"
                                         id="combo-box-demo"
+                                        onChange={(e, value)=>{setpositionCategory(value.title)}}
                                         options={PositionLevel}
                                         getOptionLabel={(option) => option.title}
-                                        renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
+                                        renderInput={(params) => <TextField required={true}  {...params} label="Select" variant="outlined" />}
                                     />
                                 </Grid>
                             </Grid>
@@ -287,10 +410,11 @@ const NewHireStep1 = () => {
                                 <Grid xs={12} className="mt14">
                                     <Autocomplete
                                         className="w100p"
+                                        onChange={(e, value)=>{setpositionLocation(value.title)}}
                                         id="combo-box-demo"
                                         options={PositionLoc}
                                         getOptionLabel={(option) => option.title}
-                                        renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
+                                        renderInput={(params) => <TextField required={true}  {...params} label="Select" variant="outlined" />}
                                     />
                                 </Grid>
                             </Grid>
@@ -307,9 +431,10 @@ const NewHireStep1 = () => {
                                     <Autocomplete
                                         className="w100p"
                                         id="combo-box-demo"
+                                        onChange={(e, value)=>{setjobCode(value.title)}}
                                         options={JobCode}
                                         getOptionLabel={(option) => option.title}
-                                        renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
+                                        renderInput={(params) => <TextField required={true}  {...params} label="Select" variant="outlined" />}
                                     />
                                 </Grid>
                             </Grid>
@@ -323,9 +448,10 @@ const NewHireStep1 = () => {
                                     <Autocomplete
                                         className="w100p"
                                         id="combo-box-demo"
+                                        onChange={(e, value)=>{setpartType(value.title)}}
                                         options={Paytype}
                                         getOptionLabel={(option) => option.title}
-                                        renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
+                                        renderInput={(params) => <TextField required={true}  {...params} label="Select" variant="outlined" />}
                                     />
                                 </Grid>
                             </Grid>
@@ -342,9 +468,10 @@ const NewHireStep1 = () => {
                                     <Autocomplete
                                         className="w100p"
                                         id="combo-box-demo"
+                                        onChange={(e, value)=>{setrate(value.title)}}
                                         options={queueRate}
                                         getOptionLabel={(option) => option.title}
-                                        renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
+                                        renderInput={(params) => <TextField required={true}  {...params} label="Select" variant="outlined" />}
                                     />
                                 </Grid>
                             </Grid>
@@ -355,14 +482,13 @@ const NewHireStep1 = () => {
                                     Start Date
                                 </Grid>
                                 <Grid xs={12} className="mt14">
-                                    <TextField
-                                        id="date"
-                                        type="date"
+                                     <DatePicker
+                                        onChange={(value) => { setstartDate(value) }}
+                                        value={startDate}
                                         className="DateTimePicker"
                                         defaultValue="YY-MM-DD"
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
+                                        id="date"
+                                        className="datePickerReact"
                                     />
                                 </Grid>
                             </Grid>
@@ -378,10 +504,11 @@ const NewHireStep1 = () => {
                                 <Grid xs={12} className="mt14">
                                     <Autocomplete
                                         className="w100p"
+                                        onChange={(e, value)=>{setdepartment(value.title)}}
                                         id="combo-box-demo"
                                         options={PositionLevel}
                                         getOptionLabel={(option) => option.title}
-                                        renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
+                                        renderInput={(params) => <TextField required={true}  {...params} label="Select" variant="outlined" />}
                                     />
                                 </Grid>
                             </Grid>
@@ -394,10 +521,11 @@ const NewHireStep1 = () => {
                                 <Grid xs={12} className="mt14">
                                     <Autocomplete
                                         className="w100p"
+                                        onChange={(e, value)=>{setsubDepartment(value)}}
                                         id="combo-box-demo"
                                         options={FullTitle}
                                         getOptionLabel={(option) => option.title}
-                                        renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
+                                        renderInput={(params) => <TextField required={true}  {...params} label="Select" variant="outlined" />}
                                     />
                                 </Grid>
                             </Grid>
@@ -412,11 +540,12 @@ const NewHireStep1 = () => {
                                 </Grid>
                                 <Grid xs={12} className="mt14">
                                     <Autocomplete
+                                        onChange={(e, value)=>{setSupervisor(value.title)}}
                                         className="w100p"
                                         id="combo-box-demo"
                                         options={Supervisor}
                                         getOptionLabel={(option) => option.title}
-                                        renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
+                                        renderInput={(params) => <TextField required={true}  {...params} label="Select" variant="outlined" />}
                                     />
                                 </Grid>
                             </Grid>
@@ -430,7 +559,7 @@ const NewHireStep1 = () => {
                                     Other
                                 </Grid>
                                 <Grid xs={12} className="mt14">
-                                    <TextareaAutosize className="w100p" rowsMin={6} placeholder="Comment here" />
+                                    <TextareaAutosize id="comment1" className="w100p" rowsMin={6} placeholder="Comment here" />
                                 </Grid>
                                 <Typography variant="h6" className="MuiTypography-subtitle2 MuiTypography-colorTextSecondary" component="h6">
                                     Please leave this field empty if you have no comments
@@ -456,9 +585,10 @@ const NewHireStep1 = () => {
                             <Grid xs={3}>
                                 <Autocomplete
                                     id="controllable-states-demo"
+                                    onChange={(e, value)=>{setcomputer(value)}}
                                     options={ITR1}
                                     className="w100p"
-                                    renderInput={(params) => <TextField {...params} variant="outlined" placeholder="Select"/>}
+                                    renderInput={(params) => <TextField required={true}  {...params} variant="outlined" placeholder="Select"/>}
                                 />
                             </Grid>
                         </Grid>
@@ -470,21 +600,23 @@ const NewHireStep1 = () => {
                                 <Autocomplete
                                     id="controllable-states-demo"
                                     options={ITR2}
+                                    onChange={(e, value)=>{setactive(value)}}
                                     className="w100p"
-                                    renderInput={(params) => <TextField {...params} variant="outlined" placeholder="Select"/>}
+                                    renderInput={(params) => <TextField required={true}  {...params} variant="outlined" placeholder="Select"/>}
                                 />
                             </Grid>
                         </Grid>
-                        <Grid xs={12} container justify="space-between" className="mt30">
+                        <Grid xs={12} container justify="space-between"  className="mt30">
                             <Grid xs={9}>
                                 Company Cell Phone
                             </Grid>
                             <Grid xs={3}>
                                 <Autocomplete
+                                onChange={(e, value)=>{setcompanyCellPhone(value)}}
                                     id="controllable-states-demo"
                                     options={ITR3}
                                     className="w100p"
-                                    renderInput={(params) => <TextField {...params} variant="outlined" placeholder="Select"/>}
+                                    renderInput={(params) => <TextField required={true}  {...params} variant="outlined" placeholder="Select"/>}
                                 />
                             </Grid>
                         </Grid>
@@ -495,9 +627,10 @@ const NewHireStep1 = () => {
                             <Grid xs={3}>
                                 <Autocomplete
                                     id="controllable-states-demo"
+                                    onChange={(e, value)=>{setcompanyVehicle(value)}}
                                     options={ITR4}
                                     className="w100p"
-                                    renderInput={(params) => <TextField {...params} variant="outlined" placeholder="Select"/>}
+                                    renderInput={(params) => <TextField required={true}  {...params} variant="outlined" placeholder="Select"/>}
                                 />
                             </Grid>
                         </Grid>
@@ -508,9 +641,10 @@ const NewHireStep1 = () => {
                             <Grid xs={3}>
                                 <Autocomplete
                                     id="controllable-states-demo"
+                                    onChange={(e, value)=>{setfuelCard(value)}}
                                     options={ITR5}
                                     className="w100p"
-                                    renderInput={(params) => <TextField {...params} variant="outlined" placeholder="Select"/>}
+                                    renderInput={(params) => <TextField required={true}  {...params} variant="outlined" placeholder="Select"/>}
                                 />
                             </Grid>
                         </Grid>
@@ -523,7 +657,7 @@ const NewHireStep1 = () => {
                                     Comments to IT
                                 </Grid>
                                 <Grid xs={12} className="mt14">
-                                    <TextareaAutosize className="w100p" rowsMin={6} placeholder="Comment here" />
+                                    <TextareaAutosize required id="comment2" className="w100p" rowsMin={6} placeholder="Comment here" />
                                 </Grid>
                                 <Typography variant="h6" className="MuiTypography-subtitle2 MuiTypography-colorTextSecondary" component="h6">
                                     Please leave this field empty if you have no comments
@@ -535,11 +669,16 @@ const NewHireStep1 = () => {
                 <Grid xs={12} className="mt50">
                     <Grid xs={12} md={8} lg={6} container justify="space-between">
                         <Link to="/new-hire-queue" className="LinkButtonBack">Back</Link>
-                        <Link to="/new-hire-queue/step/1" className="LinkButton">Save & Continue</Link>
+                        <Button type="submit" >
+                            {/* <Link to="/new-hire-queue/details/approval" className="LinkButton"> */}
+                                Save & Continue
+                            {/* </Link> */}
+                        </Button>
                     </Grid>
                 </Grid>
             </Grid>
           </Grid>
+          </form>
           {/* Page Start End */}
         </Grid>
       </Grid>

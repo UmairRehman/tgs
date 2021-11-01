@@ -63,6 +63,7 @@ export const postStep3 = async (payload, headers) => {
 
 export const submitForm = async (payload, headers) => {
     const { form } = payload;
+    
     return await api.post(
         routes.applicant.step3Forms
             .concat(form),

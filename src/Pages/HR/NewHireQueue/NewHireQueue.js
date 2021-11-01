@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {
   Grid,
   Button,
@@ -12,56 +12,70 @@ import {
   TablePagination,
   TextField
 } from "@material-ui/core";
+import { DataGrid } from '@mui/x-data-grid';
 import { Link } from "react-router-dom";
 import PageHeader from "../../../Components/PageHeader";
 import LeftControl from "../../../Components/LeftControl";
+import {employeeStatuses} from '../../../Imports/employeeStatuses'
+import { useHistory } from "react-router-dom";
 // import MobileScreen from './Mobile/SafetyTesting';
 // import {isMobile} from 'react-device-detect';
 
+
+/** Local deoendencies & Libraries */
+import Services from '../../../Services';
+
+
+const {
+  hr
+} = Services;
+
 const columns = [
-  { id: "eID", label: "Employee ID", minWidth: 170, type: "value" },
-  { id: "Name", label: "Name", minWidth: 120, type: "value" },
-  { id: "Department", label: "Department", minWidth: 100, type: "value" },
-  { id: "City", label: "City", minWidth: 100, type: "value" },
-  { id: "Email", label: "Email", minWidth: 170, type: "value" },
-  { id: "ApplicationStage", label: "Application Stage", minWidth: 170, type: "value" },
+  { id: "id", label: "Employee ID", minWidth: 170, type: "value" },
+  { id: "firstName", label: "Name", minWidth: 120, type: "value" },
+  { id: "SubDepartmentId", label: "Department", minWidth: 100, type: "value" },
+  { id: "state", label: "City", minWidth: 100, type: "value" },
+  { id: "email", label: "Email", minWidth: 170, type: "value" },
+  { id: "EmployeeStatusId", label: "Application Stage", minWidth: 170, type: "value" },
   { id: "View", label: "View", minWidth: 50, type: "edit" },
   { id: "Complete", label: "Complete", minWidth: 50, type: "view" },
 ];
 
-function createData(
-  eID,
-  Name,
-  Department,
-  City,
-  Email,
-  ApplicationStage,
-  View,
-  Complete
-) {
-  return {
-    eID,
-    Name,
-    Department,
-    City,
-    Email,
-    ApplicationStage,
-    View,
-    Complete
-  };
-}
+// function createData(
+//   eID,
+//   Name,
+//   Department,
+//   City,
+//   Email,
+//   ApplicationStage,
+//   View,
+//   Complete
+// )
+//  {
+//   return {
+//     eID,
+//     Name,
+//     Department,
+//     City,
+//     Email,
+//     ApplicationStage,
+//     View,
+//     Complete
+//   };
+// }
 
 const rows = [
-  createData("1234", "Ryan Westmeyer", "Information Technology", "Houston", "Ryan@tgs.com", "Step 1"),
-  createData("324", "John Daniel", "Human Resources", "California", "Singer@tgs.com", "Step 4"),
-  createData("554", "Paul Jason", "Operations", "Chicago", "Saim@tgs.com", "Step 3"),
-  createData("783", "Donald Jeff", "Safety", "Houston", "Stive@tgs.com", "Step 1"),
-  createData("234", "William Anthony", "Safety", "Dallas", "Rocking@tgs.com", "Step 2"),
-  createData("5433", "Mark Robert", "Operations", "Florida", "Serial@tgs.com", "Step 4"),
+  ("1234", "Ryan Westmeyer", "Information Technology", "Houston", "Ryan@tgs.com", "Step 1"),
+  ("324", "John Daniel", "Human Resources", "California", "Singer@tgs.com", "Step 4"),
+  ("554", "Paul Jason", "Operations", "Chicago", "Saim@tgs.com", "Step 3"),
+  ("783", "Donald Jeff", "Safety", "Houston", "Stive@tgs.com", "Step 1"),
+  ("234", "William Anthony", "Safety", "Dallas", "Rocking@tgs.com", "Step 2"),
+  ("5433", "Mark Robert", "Operations", "Florida", "Serial@tgs.com", "Step 4"),
 ];
 
-
 const NewHireQueue = () => {
+
+  let history = useHistory();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -73,6 +87,42 @@ const NewHireQueue = () => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
+  const [applicantData, setApplicantData] = useState([])
+  
+  useEffect(async() => {
+
+    try{
+      let data = await hr.getAllApplicants() ;
+      // setApplicantData(data.data);
+      setApplicantData(data.data);      
+    }
+    catch(exc){
+      console.log(exc);
+    }
+  }, [])
+
+
+  function onClickView(value){
+
+    if(value.EmployeeStatusId == 1){
+      history.push({
+        pathname : "/new-hire-queue/details",
+        state: value
+      });
+    }
+    else if(value.EmployeeStatusId == 4){
+      history.push({
+        pathname : "/new-hire-queue/details/approval",
+        state: value
+      });
+    }
+    else {
+      alert('Do nothing')
+    }
+  }
+
+
   return (
     <Grid container xs={12} className="Liq-Container NewHireQueue">
       <Grid xs={12} md={2} className="LeftContol" id="LeftContol">
@@ -110,21 +160,21 @@ const NewHireQueue = () => {
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {rows
+                        {applicantData
                           .slice(
                             page * rowsPerPage,
                             page * rowsPerPage + rowsPerPage
                           )
-                          .map((row) => {
+                          .map((applicantData) => {
                             return (
                               <TableRow
                                 hover
                                 role="checkbox"
                                 tabIndex={-1}
-                                key={row.code}
+                                key={applicantData.code}
                               >
                                 {columns.map((column) => {
-                                  const value = row[column.id];
+                                  const value = applicantData[column.id];
                                   return (
                                     <TableCell
                                       key={column.id}
@@ -135,7 +185,8 @@ const NewHireQueue = () => {
                                         ? column.format(value)
                                         : value} */}
                                       {column.type == "edit" ? (
-                                        <Link to={`/new-hire-queue/${row.eID}`} className="ViewIcon"></Link>
+                                        <Button onClick={()=>onClickView(applicantData)} className="ViewIcon" ></Button>
+                                        // <Link to={`/new-hire-queue/${applicantData.eID}`} className="ViewIcon"></Link>
                                         // <Link onClick={handleClickOpen} className="ViewIcon"></Link>
                                       ) : column.type == "view" ? (
                                         <Grid className="CompleteIcon"></Grid>
@@ -174,6 +225,7 @@ const NewHireQueue = () => {
               </Grid>
             </Grid> 
           </Grid>
+          
           {/* Page Start End */}
         </Grid>
       </Grid>

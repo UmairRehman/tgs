@@ -30,7 +30,6 @@ const requestHandler = (request) => {
 }
 
 const responseHandler = (response) => {
-    console.log(response);
     return response;
 }
 
