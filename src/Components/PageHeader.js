@@ -1,4 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, {
+  useEffect,
+  useState,
+  useRef,
+  useCallback,
+} from 'react';
 import { Link, useHistory } from "react-router-dom";
 import {
   Grid,
@@ -19,13 +24,37 @@ import {
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
+
+/** Third party packages & Dependencies */
+import Webcam from "react-webcam";
+
+
 /** Local Libraries, functions & dependencies */
 import { helpers } from '../helpers';
+
+import Services from '../Services';
+
+
+/** Local Statics & Imports */
+import { environment } from '../Environments/environment';
 
 
 const {
   capitalize
 } = helpers;
+
+const {
+  users,
+  api: {
+    routes
+  },
+  Storage,
+} = Services;
+
+const {
+  apiPath
+} = environment;
+
 
 const useStyles = makeStyles((theme) => ({
   Avatarlarge: {
@@ -38,9 +67,73 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const PageHeader = () => {
+  const videoConstraints = {
+    width: 300,
+    height: 300,
+    facingMode: "user"
+  };
+
+  const webCamRef = useRef(null);
+
+  const uploadAndHandleUX = async (image) => {
+    const updatedPic = await users.setDisplayPicture({
+      image
+    });
+
+    setSavingImage(false);
+
+    triggerCamera(false);
+
+    setDisplayPicture(image);
+  }
+
+  const captureImage = useCallback(
+    async () => {
+      try {
+
+        setSavingImage(true);
+
+        const image = webCamRef.current.getScreenshot();
+
+        await uploadAndHandleUX(image);
+      } catch (exc) {
+        console.log(exc);
+      }
+
+    },
+    [webCamRef]
+  );
+
+  const uploadPhoto = () => {
+    const el = document.getElementById('imageToUploadInput');
+
+    el.click();
+  }
+
+  const handlePhoto = async ($e) => {
+    const { files } = $e.target;
+
+    const reader = new FileReader();
+
+    const uri = await new Promise((resolve, reject) => {
+      reader.onloadend = () => resolve(reader.result);
+      reader.readAsDataURL(files[0]);
+    })
+
+    await uploadAndHandleUX(uri);
+  }
+
+  const storage = new Storage();
+
   const history = useHistory();
-  
+
   const classes = useStyles();
+
+  const [cameraTriggered, triggerCamera] = useState(false);
+
+  const [savingImage, setSavingImage] = useState(false);
+
+  const [displayPicture, setDisplayPicture] = useState('null');
 
   const [authenticatedHeader, setAuthHeader] = useState(
     localStorage.getItem('access_jwt') || ''
@@ -73,8 +166,32 @@ const PageHeader = () => {
   };
   // Modal Profile Picture Changer Close
 
+  /** Retreiving display picture */
+  const retreiveDP = async () => {
+    var reader = new FileReader();
 
 
+    const img = await fetch(
+      apiPath
+        .concat(routes.employee.getProfilePic),
+      {
+        headers: {
+          Authorization: storage.get('access_jwt')
+        }
+      }
+    );
+
+    const dataBlob = await img.blob();
+
+    const uri = await new Promise((resolve, reject) => {
+      reader.onloadend = () => resolve(reader.result);
+      reader.readAsDataURL(dataBlob);
+    })
+
+    setDisplayPicture(uri);
+  };
+
+  retreiveDP();
 
   // For Modal
   const [aletopen, setAlertOpen] = React.useState(false);
@@ -295,7 +412,7 @@ const PageHeader = () => {
                 </Grid>
               </Button>
               <Button className="HeadUserFrame">
-                <Avatar alt={dnUsername} src="/static/images/avatar/1.jpg" />
+                <Avatar alt={dnUsername} src={displayPicture} className="mx-1" />
                 {dnUsername}
                 <IconButton edge="end" aria-label="comments">
                   <ExpandMoreIcon />
@@ -335,17 +452,62 @@ const PageHeader = () => {
             Change Picture
           </Grid>
           <Grid xs={12} className="tcenter mt30">
-            Angelina, Keep your profile fresh!
+            {dnUsername}, Keep your profile fresh!
           </Grid>
-          <Grid xs={12} container justify="center" className="mt40">
-            <Avatar alt="{dnUsername} " src="/static/images/avatar/1.jpg" className={classes.Avatarlarge} />
+          <Grid xs={12} container justify="center" className="mt40 position-relative">
+            <div
+              className={
+                savingImage
+                  ? 'backdrop'
+                  : 'd-none'
+              }
+            >
+              <span>Saving...</span>
+            </div>
+            <Webcam
+              videoConstraints={videoConstraints}
+              ref={webCamRef}
+              className={
+                'rounded scale-x-_1 ' + (
+                  cameraTriggered
+                    ? ''
+                    : 'd-none'
+                )
+              } />
+            <Button className={
+              cameraTriggered
+                ? 'ApplicantBtn my-2'
+                : 'd-none'
+            }
+              onClick={captureImage}>
+              Capture
+            </Button>
+            <Avatar alt={dnUsername} src={displayPicture} className={
+              cameraTriggered
+                ? 'd-none'
+                : classes.Avatarlarge
+            } />
           </Grid>
           <Grid xs={12} className="tcenter mt20">
             Take or upload a photo
           </Grid>
           <Grid xs={12} className="ProfileUpdateBtn mt30">
-            <Button>Use Camera</Button>
-            <Button>Upload Photo</Button>
+            <Button
+              className={
+                cameraTriggered
+                  ? 'd-none'
+                  : ''
+              }
+              onClick={
+                triggerCamera.bind(null, true)
+              }>Use Camera</Button>
+            <Button onClick={uploadPhoto}>Upload Photo</Button>
+            <input
+              id="imageToUploadInput"
+              type="file"
+              accept="img/*"
+              onChange={handlePhoto}
+              hidden />
           </Grid>
         </DialogContent>
       </Dialog>

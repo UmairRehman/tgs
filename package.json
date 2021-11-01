@@ -39,6 +39,7 @@
     "react-swipeable-views": "^0.14.0",
     "react-time-picker": "^4.4.3",
     "react-to-pdf": "0.0.14",
+    "react-webcam": "^6.0.0",
     "save": "^2.4.0",
     "styled-components": "^5.3.1",
     "web-vitals": "^1.1.2",

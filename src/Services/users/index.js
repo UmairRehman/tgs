@@ -45,6 +45,22 @@ export const postStep1 = async (payload, headers) => {
     )
 }
 
+export const retreiveDisplayPicture = async (payload, headers) => {
+    return await api.get(
+        routes.employee.getProfilePic,
+        payload,
+        headers,
+    )
+}
+
+export const setDisplayPicture = async (payload, headers) => {
+    return await api.post(
+        routes.employee.getProfilePic,
+        payload,
+        headers,
+    )
+}
+
 export const postStep2 = async (payload, headers) => {
     return await api.post(
         routes.applicant.step2,
@@ -63,7 +79,7 @@ export const postStep3 = async (payload, headers) => {
 
 export const submitForm = async (payload, headers) => {
     const { form } = payload;
-    
+
     return await api.post(
         routes.applicant.step3Forms
             .concat(form),

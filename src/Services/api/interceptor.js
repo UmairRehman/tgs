@@ -75,55 +75,67 @@ axiosInstance.interceptors.response
 axiosInstance.postMethod = axiosInstance.post;
 axiosInstance.getMethod = axiosInstance.get;
 axiosInstance.putMethod = axiosInstance.put;
+axiosInstance.optionsMethod = axiosInstance.options;
 
 const HTTPClientFunctionsWrapper = async (method, ...args) => {
-    /** Not using a try-catch block deliberately to allow global handlers to manage
+    try {
+        /** Not using a try-catch block deliberately to allow global handlers to manage
      * it.
      */
-    const [uri, ...rest] = args;
+        const [uri, ...rest] = args;
 
-    const [payload = {}, headers = {}] = rest;
+        let [payload = {}, headers = {}] = rest;
 
-    // HTTP Requests 
-    const response = await axiosInstance[method](
-        uri,
-        payload,
-        {
-            headers: {
-                ...headers,
-                Authorization: localStorage.getItem('access_jwt')
-            },
-        }
-    ) || {};
+        headers = {
+            ...headers,
+            Authorization: localStorage.getItem('access_jwt')
+        };
 
-    const { data: axiosObjectData } = response;
+        // HTTP Requests 
+        const response = await axiosInstance[method](
+            uri,
+            payload,
+            {
+                headers,
+            }
+        ) || {};
 
-    // const { data: endpointData } = axiosObjectData;
-    // console.log(axiosObjectData);
-    localStorage.setItem(
-        `response-${uri}`,
-        JSON.stringify(axiosObjectData)
-    );
+        const { data: axiosObjectData } = response;
 
-    return axiosObjectData;
+        // const { data: endpointData } = axiosObjectData;
+        // console.log(axiosObjectData);
+        localStorage.setItem(
+            `response-${uri}`,
+            JSON.stringify(axiosObjectData)
+        );
+
+        return axiosObjectData;
+    } catch (exc) {
+        console.log(exc);
+
+        throw exc;
+    }
 }
 
 const newPostMethod = HTTPClientFunctionsWrapper.bind(null, 'postMethod');
 const newGetMethod = HTTPClientFunctionsWrapper.bind(null, 'getMethod');
 const newPutMethod = HTTPClientFunctionsWrapper.bind(null, 'putMethod');
+const newOptionsMethod = HTTPClientFunctionsWrapper.bind(null, 'optionsMethod');
 
 Object.assign(
     axiosInstance,
     {
         post: newPostMethod,
         get: newGetMethod,
-        put: newPutMethod
+        put: newPutMethod,
+        options: newOptionsMethod,
     },
 )
 
 axiosInstance.post = newPostMethod;
 axiosInstance.get = newGetMethod;
 axiosInstance.put = newPutMethod;
+axiosInstance.options = newOptionsMethod;
 /** */
 
 export const Interceptor = { axiosInstance };

@@ -11,6 +11,8 @@ export const routes = {
     },
     employee: {
         employee_login: 'employee/employee/login',
+        getProfilePic: 'employee/employee/profile_pic',
+        setProfilePic: 'employee/employee/profile_pic',
     },
     hr:{
         get_applicant: 'employee/hr/applicant',
