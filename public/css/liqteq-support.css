@@ -281,6 +281,7 @@ input:-internal-autofill-selected {
     border-radius: 8px;
     text-decoration: none;
     text-align: center;
+    margin: 2px 0px;
 }
 .LoginForm .MuiFormLabel-root.Mui-focused {
     color: #3978BD;

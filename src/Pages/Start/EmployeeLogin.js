@@ -254,7 +254,7 @@ const EmployeeLogin = () => {
             </Grid>
             <Grid xs={12} container justify="center" className="mt20">
               {/* <Link to="/application" className="ApplicantBtn">Submit Application & Create Account</Link> */}
-              <a href="application" className="ApplicantBtn">Submit Application & Create Account</a>
+              <a href="/" className="ApplicantBtn">Register / Login as Applicant</a>
             </Grid>
           </Grid>
         </Grid>
