@@ -134,7 +134,19 @@ const DocumentsStep4 = () => {
     }, []);
 
     useEffect(() => {
+        showSnackBar('Form posted');
     }, [formsPosted]);
+
+    const saveAndContinue = async () => {
+        try {
+            const repsonse = await users.submitStep4();
+
+            history.push('/submission/complete');
+            
+        } catch (exc) {
+            console.log(exc);
+        }
+    }
 
     //   if(isMobile) {
     //     return (
@@ -225,7 +237,7 @@ const DocumentsStep4 = () => {
                             <Grid xs={12} className="mt50">
                                 <Grid xs={12} md={8} lg={6} container justify="space-between">
                                     <Link to="/documents/step/3" className="LinkButtonBack">Back</Link>
-                                    <Link to="/submission/complete" className="LinkButton">Save & Continue</Link>
+                                    <Button className="LinkButton" onClick={saveAndContinue}>Save & Continue</Button>
                                 </Grid>
                             </Grid>
                         </Grid>

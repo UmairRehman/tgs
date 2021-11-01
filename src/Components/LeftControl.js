@@ -66,7 +66,7 @@ const LeftControl = () => {
 
   /** Setting sidebar styles if the user is authenticated */
 
-  const sidebarClassName = EmployeeStatusId > 1 ? 'eDocumentsIcon' : classes.DisplayNone;
+  const sidebarClassName = classes.DisplayNone;
 
   /********************************************************** */
 

@@ -138,6 +138,7 @@ const DocumentsStep3 = () => {
     }, []);
 
     useEffect(() => {
+        showSnackBar('Form posted');
     }, [formsPosted]);
 
     useEffect(() => {

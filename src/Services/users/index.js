@@ -71,4 +71,10 @@ export const submitForm = async (payload, headers) => {
     )
 }
 
-
+export const submitStep4 = async (payload, headers) => {
+    return await api.post(
+        routes.applicant.submitStep4,
+        payload,
+        headers,
+    )
+}
