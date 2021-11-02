@@ -206,7 +206,11 @@ const PageHeader = () => {
     }
   };
 
-  retreiveDP();
+  try {
+    retreiveDP();
+  } catch (exc) {
+    console.log(exc);
+  }
 
   // For Modal
   const [aletopen, setAlertOpen] = React.useState(false);
