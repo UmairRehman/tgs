@@ -2116,7 +2116,6 @@ textarea::-ms-input-placeholder { /* Microsoft Edge */
     left: -5px;
     top: 21px;
   } */
-<<<<<<< HEAD
 
 .mx-1 {
     margin-right:0.5rem!important;
@@ -2167,7 +2166,6 @@ video.rounded {
 .position-relative {
     position: relative;
 }
-=======
   .removeBtn {
       font-size: 0px;
       display: block;
@@ -2182,4 +2180,3 @@ video.rounded {
   .removeBtn:hover {
     background-color: #2963AD;
     }
->>>>>>> employee_portal_integration
