@@ -207,7 +207,7 @@ const PageHeader = () => {
   };
 
   try {
-    retreiveDP();
+    // retreiveDP();
   } catch (exc) {
     console.log(exc);
   }
