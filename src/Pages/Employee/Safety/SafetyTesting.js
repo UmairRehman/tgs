@@ -1,4 +1,4 @@
-import React from "react";
+import React , { useState ,useEffect } from "react";
 import {
   Grid,
   Button,
@@ -21,56 +21,23 @@ import PageHeader from "../../../Components/PageHeader";
 import LeftControl from "../../../Components/LeftControl";
 import MobileScreen from './Mobile/SafetyTesting';
 import {isMobile} from 'react-device-detect';
+import Services from '../../../Services'
+
+var moment = require('moment-timezone')
+const {
+  employee,
+  Storage
+} = Services
 
 const columns = [
-  { id: "eventid", label: "Event ID", minWidth: 170, type: "value" },
+  { id: "id", label: "Event ID", minWidth: 170, type: "value" },
   { id: "date", label: "Date", minWidth: 120, type: "value" },
   { id: "time", label: "Time", minWidth: 100, type: "value" },
-  { id: "location", label: "Location", minWidth: 100, type: "value" },
-  { id: "jobid", label: "Job ID", minWidth: 170, type: "value" },
+  { id: "locationAdded", label: "Location", minWidth: 100, type: "value" },
+  { id: "jobID", label: "Job ID", minWidth: 170, type: "value" },
   { id: "resulttest", label: "Result / Test", minWidth: 170, type: "value" },
   { id: "editrules", label: "Add Rules", minWidth: 50, type: "edit" },
   { id: "viewrules", label: "View Rules", minWidth: 50, type: "view" },
-];
-
-function createData(
-  eventid,
-  date,
-  time,
-  location,
-  jobid,
-  resulttest,
-  editrules,
-  viewrules
-) {
-  return {
-    eventid,
-    date,
-    time,
-    location,
-    jobid,
-    resulttest,
-    editrules,
-    viewrules,
-  };
-}
-
-const rows = [
-  createData("20101", "1-20-2021", "13:14", "Cedar Port", "54568", "1"),
-  createData("20102", "1-20-2021", "10:26", "Port of Beaumont", "987498", "0"),
-  createData("20103", "1-20-2021", "18:22", "Cedar Port", "452118", "3"),
-  createData("20104", "1-20-2021", "09:23", "Port of Beaumont", "5421", "4"),
-  createData("20105", "1-20-2021", "01:42", "Port of Beaumont", "78751", "3"),
-  createData("20106", "1-20-2021", "13:51", "Port of Beaumont", "1235", "2"),
-  createData("20107", "1-20-2021", "10:14", "Cedar Port", "15488", "1"),
-  createData("20108", "1-20-2021", "12:55", "Port of Beaumont", "12588", "6"),
-  createData("20109", "1-20-2021", "17:58", "Port of Beaumont", "3644", "7"),
-  createData("201010", "1-20-2021", "03:15", "Port of Beaumont", "2458", "2"),
-  createData("201011", "1-20-2021", "01:65", "Cedar Port", "45263", "2"),
-  createData("201012", "1-20-2021", "06:22", "Port of Beaumont", "42582", "6"),
-  createData("201013", "1-20-2021", "01:15", "Port of Beaumont", "15263", "1"),
-  createData("201014", "1-20-2021", "09:47", "Port of Beaumont", "94152", "2"),
-  createData("201015", "1-20-2021", "11:55", "Cedar Port", "2166", "3"),
 ];
 
 
@@ -100,6 +67,33 @@ const SafetyTesting = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const [rows, setRows] = useState([]) 
+ 
+  const getlistEvents =async () =>{
+    try {
+      let data = await employee.get_test_event_listing()
+      console.log(data);
+      if(data.httpStatus==200){
+        data= data.data
+        data.forEach(element => {
+          element.date = moment( new Date(element.date) ).format('DD-MM-YYYY')
+          element.time = element.time.slice(0,-3)
+          element.locationAdded = element.TGSLocation.name
+        });
+        setRows(data)
+      }
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
+  useEffect(async () => {
+    
+    let data = await getlistEvents()
+    
+  }, [])
+
 
   if(isMobile) {
     return (

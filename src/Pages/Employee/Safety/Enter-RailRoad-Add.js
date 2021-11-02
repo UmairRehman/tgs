@@ -13,13 +13,22 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import Switch from '@mui/material/Switch';
 import DatePicker from 'react-date-picker';
 import TimePicker from "react-time-picker"; 
 import PageHeader from "../../../Components/PageHeader";
 import LeftControl from "../../../Components/LeftControl";
 
+
 import MobileScreen from './Mobile/Enter-RailRoad-Add';
 import {isMobile} from 'react-device-detect';
+
+/** Local deoendencies & Libraries */
+import Services from '../../../Services';
+const {
+  employee,
+  Storage
+} = Services;
 
 var moment = require ('moment-timezone')
 
@@ -76,12 +85,14 @@ const Railroad = () => {
   const ref1 = useRef();
   const ref2 = useRef();
 
+  const storage = new Storage ()
+
   const [railRoad, setRailRoad] = useState({
     primary: '', //1
-    oje: dummyData.OJE[0], //2
-    primary_comment: '', //3
+    oje: false, //2
+    ojeComment: '', //3
     assisting: [], //4
-    joinTest: dummyData.OJE[1], //5
+    joinTest: false, //5
     assisting_comment: '', //6
     department: '', //7
     site: '', //8
@@ -89,7 +100,7 @@ const Railroad = () => {
     date : moment(new Date()).format('YY-MM-DD'), //10
     // date : new Date(), //10
     time: moment(new Date()).format('HH:mm:ss a'), //11
-    jobID: '', //12
+    jobId: '', //12
     crewMembers: [
       {name: '' ,position: '' ,image:''}
     ] //13
@@ -105,7 +116,7 @@ const Railroad = () => {
         break;
 
       case 3:
-      setRailRoad({...railRoad,primary_comment:event.target.value})
+      setRailRoad({...railRoad,ojeComment:event.target.value})
       break;
 
       case 4:
@@ -148,22 +159,65 @@ const Railroad = () => {
 
   };
 
-  const submitBtn = async () =>{
-    let primary_comment = document.getElementById('primary_comment').value
+  const apiBody = async () =>{
+    let ojeComment = document.getElementById('ojeComment').value
     let assisting_comment = document.getElementById('assisting_comment').value
     let GPS = document.getElementById('GPS').value
-    let jobID = document.getElementById('jobID').value
-    let data = {...railRoad,primary_comment,assisting_comment,GPS,jobID}
-    
+    let [latitude,longitude] = GPS.split(',')
+    let jobId = document.getElementById('jobId').value
+    let { crewMembers } = railRoad
+    let crewMembersData=[]
+    crewMembers.forEach((row)=>{
+      if(row.name && row.position )
+        crewMembersData.push({id:row.name.id , position:row.position.name , image:row.image})
+    })
+    let data = {
+      primaryId:lists.currentUser.id,
+      assistingId: railRoad.assisting.id,
+      DepartmentId  : railRoad.department.id,
+      site_id:railRoad.site.id,
+      latitude  :   latitude  ,
+      longitude :  longitude,
+      date  :   railRoad.date,
+      time  :   railRoad.time,
+      oje : railRoad.oje,
+      ojeComment   : ojeComment,
+      joinTest  :   railRoad.joinTest,
+      jobId :  jobId ,
+      crewMember   : crewMembersData ,
+      joinTestComment: assisting_comment
+    }
+    return data
+  }
 
-    console.log(railRoad);
-    console.log("data",data);
+  const submitBtn = async (event) =>{
+    event.preventDefault();
+
+    let data = await apiBody()
+      if(data){
+          try {
+            let result = await employee.create_test_event({...data})
+            if(result?.httpStatus== 200){
+              console.log('result',result);
+              // setSuccess(true);
+              // setLoading(false);
+            }
+          } catch (error) {
+            // setSuccess(true);
+            // setLoading(false);
+            console.log(error);
+          }
+      }
+      console.log('data',data);   
+    // console.log(railRoad);
+    // console.log("data",data);
+    // console.log("lists",lists);
   };
 
   //add crew
   const addCrew = () => {
     let { crewMembers }= railRoad
-    crewMembers.push( {name: '' ,position: '' ,image:''})
+    crewMembers.push( {name: '' ,position: '' ,image:'' })
     setRailRoad({...railRoad , crewMembers });
   };
 
@@ -197,13 +251,70 @@ const Railroad = () => {
       reader.onerror = error => reject(error);
     });
   }
+
+  const getLocation = async () =>{
+    
+    function success(position) {
+      const latitude  = position.coords.latitude;
+      const longitude = position.coords.longitude;
+  
+      console.log('latitude', latitude);
+      console.log('longitude', longitude);
+    }
+  
+    function error() {
+      console.log( 'Unable to retrieve your location');
+    }
+  
+    if(!navigator.geolocation) {
+      console.log( 'Geolocation is not supported by your browser');
+    } else {
+      console.log( 'Locating…');
+      navigator.geolocation.getCurrentPosition(success, error);
+    }
+  }
  
-  useEffect(() => {
+  const [lists, setLists] = useState({
+    currentUser:'',
+    users:[],
+    positions:[],
+    departments:[],
+    sites:[]
+  })
+
+  const setListData = async () =>{
+    let userList = await employee.get_employee_listing()
+    if(userList.httpStatus==200){
+      userList=userList.data;
+      console.log(userList);
+    }
+    let departmentList = await employee.get_department_listing()
+    if(departmentList.httpStatus==200){
+      departmentList=departmentList.data;
+      console.log(departmentList);
+    }
+    let jobCategoryList = await employee.get_job_category_listing()
+    if(jobCategoryList.httpStatus==200){
+      jobCategoryList=jobCategoryList.data;
+      console.log(jobCategoryList);
+    }
+    let siteList = await employee.get_site_listing()
+    if(siteList.httpStatus==200){
+      siteList=siteList.data;
+      console.log(siteList);
+    }
+    let currentUser = JSON.parse(storage.get('user_profile'))
+    setLists({ ...lists, users:userList , positions: jobCategoryList , departments: departmentList ,sites:siteList , currentUser:currentUser})
+    return true
+  }
+  useEffect(async() => {
+      //listing function
+      await setListData()
     setRailRoad({...railRoad,primary:dummyData.User.name})
   }, []);
   const [value, setValue] = useState(dummyData.OJE[0]);
   
-
+  
   if(isMobile) {
     return (
         <MobileScreen />
@@ -220,6 +331,7 @@ const Railroad = () => {
           <Grid id="PageTitle">Railroad Testing Event</Grid>
           {/* Page Start */}
           <Grid xs={12} className="ContentPage FormTableArea">
+          {/* <form style={{width:'100%'}} onSubmit={{submitBtn}}> */}
             <Grid xs={12} container>
                 <Typography variant="h5" className="mbold f16" component="h6">
                     Evaluators
@@ -233,7 +345,7 @@ const Railroad = () => {
                         Primary
                       </Grid>
                       <Grid xs={12} className="mt14">
-                        <TextField id="outlined-basic" label="Comment here" value={`${dummyData.User.name}`} disabled variant="outlined" className="w100p"/>
+                        <TextField id="outlined-basic" label="Comment here" value={`${lists?.currentUser?.dnUsername}`} disabled variant="outlined" className="w100p"/>
                       </Grid>
                     </Grid>
                   </Grid>
@@ -244,25 +356,25 @@ const Railroad = () => {
                       </Grid>
                       <Grid xs={12} className="mt14">
                         <Autocomplete
-                            multiple
+                            // multiple
                             className="w100p"
                             id="checkboxes-tags-demo"
-                            options={dummyData.CrewMember}
                             disableCloseOnSelect
-                            getOptionLabel={(option) => option}
                             value={railRoad.assisting}
                             onChange={ (event,value) => {handleSubmitData(event, value,4)}}
-                            renderOption={(option, { selected }) => (
-                              <React.Fragment>
-                                <Checkbox
-                                  icon={icon}
-                                  checkedIcon={checkedIcon}
-                                  style={{ marginRight: 8 }}
-                                  checked={selected}
-                                />
-                                {option}
-                              </React.Fragment>
-                            )}
+                            options={lists.users}
+                            getOptionLabel={ option => option.dnUsername}
+                            // renderOption={(option, { selected }) => (
+                              // <React.Fragment>
+                              //   <Checkbox
+                              //     icon={icon}
+                              //     checkedIcon={checkedIcon}
+                              //     style={{ marginRight: 8 }}
+                              //     checked={selected}
+                              //   />
+                              //   {option}
+                              // </React.Fragment>
+                            // )}
                             renderInput={(params) => (
                               <TextField {...params} variant="outlined" placeholder="Assisting" />
                             )}
@@ -279,8 +391,8 @@ const Railroad = () => {
                           <Autocomplete
                             className="w100p"
                             id="combo-box-demo"
-                            options={dummyData.Department}
-                            getOptionLabel={(option) => option}
+                            options={lists.departments}
+                            getOptionLabel={ option => option.name}
                             value={railRoad.department}
                             onChange={ (event,value) => {handleSubmitData(event, value,7)}}
                             renderInput={(params) => <TextField {...params} label="Department" variant="outlined" />}
@@ -300,8 +412,8 @@ const Railroad = () => {
                           <Autocomplete
                             className="w100p"
                             id="combo-box-demo"
-                            options={dummyData.Site}
-                            getOptionLabel={(option) => option}
+                            options={lists.sites}
+                            getOptionLabel={ option => option.name}
                             value={railRoad.site}
                             onChange={ (event,value) => {handleSubmitData(event, value,8)}}
                             renderInput={(params) => <TextField {...params} label="Site" variant="outlined" />}
@@ -318,9 +430,10 @@ const Railroad = () => {
                             label="Latitudes & Longitudes" 
                             variant="outlined" 
                             className="w100p"
-                            // value={railRoad.GPS}
-                            // onChange={ (event,value) => {handleSubmitData(event, value,9)}}
+                            value={railRoad.GPS}
+                            onChange={ (event,value) => {handleSubmitData(event, value,9)}}
                             />
+                          {/* <Button onClick={ getLocation }>GET</Button> */}
                       </Grid>
                     </Grid>
                     <Grid xs={12} className="dateTimePickerFrame">
@@ -387,7 +500,8 @@ const Railroad = () => {
                     </Grid>
                     <Grid xs={12} container>
                       <Grid xs={3} className="mt14 pr40">
-                        <Autocomplete
+                      <Switch checked={railRoad.oje} onChange={ (event,value) =>handleSubmitData(event, value,2) } />
+                        {/* <Autocomplete
                           value={railRoad.oje}
                           onChange={(event, value) => {
                             handleSubmitData(event, value,2)
@@ -396,15 +510,15 @@ const Railroad = () => {
                           options={dummyData.OJE}
                           className="w100p"
                           renderInput={(params) => <TextField {...params} variant="outlined" />}
-                        />
+                        /> */}
                       </Grid>
                       <Grid xs={9} className="mt14 fieldSubText">
                         <TextField 
-                          id="primary_comment" 
+                          id="ojeComment" 
                           label={'Comment here'}
                           variant="outlined" 
                           className="w100p"
-                          // value = { railRoad.primary_comment }
+                          // value = { railRoad.ojeComment }
                           // onChange={ (event,value) =>handleSubmitData(event,value,3) } 
                           />
                         <Typography variant="h6" className="MuiTypography-subtitle2 MuiTypography-colorTextSecondary" component="h6">
@@ -422,7 +536,8 @@ const Railroad = () => {
                     </Grid>
                     <Grid xs={12} container>
                       <Grid xs={3} className="mt14 pr40">
-                        <Autocomplete
+                      <Switch checked={railRoad.joinTest} onChange={ (event,value) =>handleSubmitData(event,value, 5) } />
+                        {/* <Autocomplete
                           value={railRoad.joinTest}
                           onChange={(event, value) => {
                             handleSubmitData(event,value, 5)
@@ -431,7 +546,7 @@ const Railroad = () => {
                           options={dummyData.OJE}
                           className="w100p"
                           renderInput={(params) => <TextField {...params} variant="outlined" />}
-                        />
+                        /> */}
                       </Grid>
                       <Grid xs={9} className="mt14 fieldSubText">
                         <TextField id="assisting_comment" label="Comment here" variant="outlined" className="w100p"/>
@@ -453,7 +568,7 @@ const Railroad = () => {
                         Job ID
                       </Grid>
                       <Grid xs={6} className="mt14 pr40">
-                        <TextField id="jobID" label="Job ID" variant="outlined" className="w100p"/>
+                        <TextField id="jobId" label="Job ID" variant="outlined" className="w100p"/>
                       </Grid>
                       <Grid xs={6} container justify="flex-end" className="mt14 fieldSubText">
                         <Button 
@@ -511,12 +626,12 @@ const Railroad = () => {
                                   id="combo-box-name"
                                   ref={ref0}
                                   name = "name"
-                                  options={dummyData.CrewMember}
-                                  getOptionLabel={(option) => option}
-                                  value={x.name}
+                                  options={lists.users}
+                                  getOptionLabel={ option => option.dnUsername}
+                                  value={x.dnUsername}
                                   onChange={(e,value) => { 
                                                 let name = ref0.current.getAttribute("name");
-                                                handleInputChange(name, value,i)}
+                                                handleInputChange('name', value,i)}
                                               }
                                   renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
                                 />
@@ -531,12 +646,12 @@ const Railroad = () => {
                                     id="combo-box-demo"
                                     name="position"
                                     ref={ref1}
-                                    options={dummyData.CrewPosition}
-                                    getOptionLabel={(option) => option}
+                                    options={lists.positions}
+                                    getOptionLabel={ option => option.name}
                                     value={x.position}
                                     onChange={(e,value) => { 
                                       let name = ref1.current.getAttribute("name");
-                                      handleInputChange(name, value,i)}
+                                      handleInputChange('position', value,i)}
                                     }
                                     renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
                                   />
@@ -579,6 +694,7 @@ const Railroad = () => {
                 Save
               </Button>
             </Grid>
+            {/* </form> */}
           </Grid>
           {/* Page Start End */}
         </Grid>
