@@ -39,6 +39,7 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import MobileScreen from './Mobile/Login';
 
 
+
 /** Local Static Imports & Objects */
 import Services from '../../Services';
 
@@ -162,7 +163,7 @@ const EmployeeLogin = () => {
       let JobCategoryID =  data.JobCategory.id;
       let SubDepartmentID = data.SubDepartment.DepartmentId
 
-      if(JobCategoryID == 1 && SubDepartmentID == 5){
+      if(data?.role_id == Imports?.role?.hr ){
         localStorage.setItem('role', 'hr')
         window.location = '/new-hire-queue';
       }

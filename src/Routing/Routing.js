@@ -78,8 +78,8 @@ const Routing = () => (
     <Route exact path="/new-hire-queue/details/approval" component={()=><NewHireStep2/>}/>
 
     <Route exact path="/tickets-alerts" component={()=><TicketsAndAlerts/>}/>
-    <Route exact path="/tickets-alerts/alert/:id" component={()=><AlartUpdate/>}/>
-    <Route exact path="/tickets-alerts/ticket/:id" component={()=><TicketUpdate/>}/>
+    <Route exact path="/tickets-alerts/alert/details" component={()=><AlartUpdate/>}/>
+    <Route exact path="/tickets-alerts/ticket/details" component={()=><TicketUpdate/>}/>
 
     <Route exact path="/employees" component={()=><Employees/>}/>
     <Route exact path="/employees/result" component={()=><EmployeeResult/>}/>
