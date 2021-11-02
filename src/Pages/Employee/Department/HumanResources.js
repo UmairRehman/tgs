@@ -18,6 +18,14 @@ import PageHeader from '../../../Components/PageHeader';
 import LeftControl from '../../../Components/LeftControl';
 import MobileScreen from './Mobile/HumanResources';
 import {isMobile} from 'react-device-detect';
+
+import Services from '../../../Services'
+
+const {
+  employee,
+  Storage
+} = Services;
+
 const HumanResources = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -37,6 +45,29 @@ const HumanResources = () => {
     const [active, setActive] = useState([
         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
     ]);
+
+    
+
+    const [rows, setRows] = useState([])
+    const getContacts = async ()=>{
+      //hr id = 5 but no data right now
+      let data = await employee.department_contact_list({id:1})
+      
+      return (data?.httpStatus ==200) ? data.data : new Error ('api failed to fetch contacts')
+
+    }
+    useEffect(() => {
+      console.log(rows)
+    }, [rows])
+    useEffect( async () => {
+      try {
+        let result = await getContacts()
+        if(result)
+          setRows(result)
+      } catch (error) {
+        console.log(error);
+      }
+    }, [])
     // 
     if(isMobile) {
       return (
@@ -73,39 +104,23 @@ const HumanResources = () => {
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                              <TableRow>
-                                  <TableCell>
-                                    Ryan Reynolds
-                                  </TableCell>
-                                  <TableCell>
-                                    Head of HR
-                                  </TableCell>
-                                  <TableCell>
-                                    +1 (031) 5555558
-                                  </TableCell>
-                              </TableRow>
-                              <TableRow>
-                                  <TableCell>
-                                    Ryan Reynolds
-                                  </TableCell>
-                                  <TableCell>
-                                    Head of HR
-                                  </TableCell>
-                                  <TableCell>
-                                    +1 (031) 5555558
-                                  </TableCell>
-                              </TableRow>
-                              <TableRow>
-                                  <TableCell>
-                                    Ryan Reynolds
-                                  </TableCell>
-                                  <TableCell>
-                                    Head of HR
-                                  </TableCell>
-                                  <TableCell>
-                                    +1 (031) 5555558
-                                  </TableCell>
-                              </TableRow>
+                              {
+                                (rows) &&
+                                rows.map(row=>{
+                                  return(
+                                    <TableRow>
+                                      <TableCell>
+                                        {`${row.name}`}
+                                      </TableCell>
+                                      <TableCell>
+                                      {`${row.title}`}
+                                      </TableCell>
+                                      <TableCell>
+                                      {`${row.phone}`}
+                                      </TableCell>
+                                  </TableRow>
+                                )})
+                              }
                       </TableBody>
                     </Table>
                   </TableContainer>

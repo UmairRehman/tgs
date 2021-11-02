@@ -54,3 +54,14 @@ export const create_ticket = async (payload, headers) => {
         headers
     );
 };
+
+
+export const department_contact_list = async (payload, headers) => {
+    const { id } = payload;
+
+    return await api.get(
+        routes.employee.department_contact_list.concat(id),
+        payload,
+        headers
+    );
+};

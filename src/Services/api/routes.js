@@ -16,8 +16,8 @@ export const routes = {
         get_department_list:'/employee/department',
         get_ticket_type_list:'/employee/ticket/type',
         get_ticket_category_by_type:'/employee/ticket/category/',
-        create_ticket:'/employee/ticket'
-        
+        create_ticket:'/employee/ticket',
+        department_contact_list: '/employee/departmentContact/',  
     },
     hr:{
         get_applicant: 'employee/hr/applicant',
