@@ -28,6 +28,18 @@ export const routes = {
     hr:{
         get_applicant: 'employee/hr/applicant',
         get_applicant_by_id : 'employee/hr/applicant/',
-        step1 : 'employee/hr/step/0/approve'
+        step1 : 'employee/hr/step/0/approve',
+        step2 : 'employee/hr/step/1/approve',
+        get_tickets_and_allerts: 'employee/ticket',
+        get_ticket_by_id: 'employee/ticket/',
+        update_tickets : 'employee/ticket/',
+
+
+        // dropdowns 
+        get_job_categories : 'employee/jobCategory',
+        department : 'employee/department',
+        location : '/employee/location',
+        paytype : 'employee/payType',
+        subDepartment : 'employee/department/subDepartment/',
     }
 }

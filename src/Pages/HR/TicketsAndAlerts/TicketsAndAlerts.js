@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {
   Grid,
   Button,
@@ -16,16 +16,29 @@ import {
 import { Link } from "react-router-dom";
 import PageHeader from "../../../Components/PageHeader";
 import LeftControl from "../../../Components/LeftControl";
+import { useHistory } from "react-router-dom";
+
+
 // import MobileScreen from './Mobile/SafetyTesting';
 // import {isMobile} from 'react-device-detect';
 
+
+/** Local deoendencies & Libraries */
+import Services from '../../../Services';
+
+
+const {
+  hr
+} = Services;
+
+
 const columns = [
-  { id: "eid", label: "Employee ID", minWidth: 120, type: "value" },
-  { id: "nm", label: "Name", minWidth: 155, type: "value" },
-  { id: "ta", label: "Ticket / Alert", minWidth: 160, type: "value" },
-  { id: "ct", label: "Category", minWidth: 80, maxWidth: 100, type: "value" },
-  { id: "ds", label: "Description", minWidth: 300, type: "value" },
-  { id: "V", label: "View", minWidth: 50, type: "edit" },
+  { id: "employeeid", label: "Employee ID", minWidth: 120, type: "value" },
+  { id: "name", label: "Name", minWidth: 155, type: "value" },
+  { id: "alertType", label: "Tickets/Alerts", minWidth: 300, type: "value" },
+  { id: "category", label: "Category", minWidth: 80, maxWidth: 100, type: "value" },
+  { id: "description", label: "Description", minWidth: 300, type: "value" },
+  { id: "id", label: "View", minWidth: 50, type: "edit" },
   { id: "C", label: "Complete", minWidth: 50, type: "view" },
 ];
 
@@ -60,6 +73,8 @@ const rows = [
 
 
 const TicketsAndAlerts = () => {
+  let history = useHistory();
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -71,6 +86,50 @@ const TicketsAndAlerts = () => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
+  const [loader, setLoader] = useState(false)
+  const [ticket, setTicket] = useState({})
+  const [test, setTest] = useState([])
+  useEffect(async() => {
+    
+    try{
+      setLoader(true)
+      let data = await hr.get_tickets() ;
+      console.log(data.data)
+
+      setTest((data.data.map((rows) => ({
+        id : rows.id,
+        employeeid : rows.FEmployee.id,
+        name : rows.FEmployee.firstName + " " + rows.FEmployee.middleName + " " + rows.FEmployee.lastName,
+        alertType: rows.isAlert ? "Alert" : "Ticket",
+        category : rows.TicketType.name,
+        description : rows.creation_comment
+      }))))
+    }
+    catch(exc){
+      console.log(exc);
+    }
+
+  }, [])
+
+  function onClickDetail(value){
+    console.log(value)
+    if(value.alertType == "Ticket"){
+      history.push({
+        pathname : "/tickets-alerts/ticket/details",
+        state: value
+      });
+    }
+    else {
+      history.push({
+        pathname : "/tickets-alerts/alert/details",
+        state: value
+      });
+    } 
+
+  }
+
+
   return (
     <Grid container xs={12} className="Liq-Container NewHireQueue">
       <Grid xs={12} md={2} className="LeftContol" id="LeftContol">
@@ -107,28 +166,30 @@ const TicketsAndAlerts = () => {
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {rows
+                        {test
                           .slice(
                             page * rowsPerPage,
                             page * rowsPerPage + rowsPerPage
                           )
-                          .map((row) => {
+                          .map((test) => {
                             return (
                               <TableRow
                                 hover
                                 role="checkbox"
                                 tabIndex={-1}
-                                key={row.code}
+                                key={test.code}
                               >
                                 {columns.map((column) => {
-                                  const value = row[column.id];
+                                  // console.log(column)
+                                  const value = test[column.id];
                                   return (
                                     <TableCell
                                       key={column.id}
                                       align={column.align}
                                     >
                                       {column.type == "edit" ? (
-                                        <Link to={`/tickets-alerts/alert/${row.eid}`} className="ViewIcon"></Link>
+                                        <Button className="ViewIcon" onClick={()=>onClickDetail(test)}>
+                                        </Button>
                                       ) : column.type == "view" ? (
                                         <Grid className="CompleteIcon"></Grid>
                                       ) : (

@@ -185,12 +185,11 @@ const NewHireQueue = () => {
                                         ? column.format(value)
                                         : value} */}
                                       {column.type == "edit" ? (
+                                        applicantData.EmployeeStatusId == 1 || applicantData.EmployeeStatusId == 4 ?
                                         <Button onClick={()=>onClickView(applicantData)} className="ViewIcon" ></Button>
-                                        // <Link to={`/new-hire-queue/${applicantData.eID}`} className="ViewIcon"></Link>
-                                        // <Link onClick={handleClickOpen} className="ViewIcon"></Link>
+                                        :null
                                       ) : column.type == "view" ? (
                                         <Grid className="CompleteIcon"></Grid>
-                                        // <Button to={`/new-hire-queue/${row.eventid}`} className="CompleteIcon"></Button>
                                       ) : (
                                         value
                                       )}

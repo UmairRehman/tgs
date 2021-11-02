@@ -15,11 +15,81 @@ import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import PageHeader from "../../../Components/PageHeader";
 import LeftControl from "../../../Components/LeftControl";
+import { useHistory } from "react-router-dom";
+import { useLocation } from 'react-router'
+
+
+/** Local deoendencies & Libraries */
+import Services from '../../../Services';
+
+const {
+    hr
+} = Services;
+var moment = require('moment-timezone');
 
 // import MobileScreen from './Mobile/Enter-RailRoad-Add';
 // import {isMobile} from 'react-device-detect';
 const AlartUpdate = () => {
+
+    
+    let history = useHistory();
+    const location  = useLocation();
+
+    const [date, setDate] = useState(new Date())
+    const [tickets, setTickets] = useState({})
+    const [alertID, setAlertID] = useState('')
+    const [Btickets, setBtickets] = useState({})
+    const [Ftickets, setFtickets] = useState({})
+    const [ticketsCategory, setTicketsCategory] = useState({})
+    const [ticketstype, setTicketstype] = useState({})
+    
+    useEffect(async() => {
+        window.scrollTo(0, 0);
+        let alertData = location?.state
+        console.log(alertData)
+        setAlertID(alertData)
+        try{
+            
+            let data = await hr.get_tickets_by_id(alertData) ;
+            console.log(data)
+            setTickets(data)
+
+
+        }
+        catch(exc){
+            console.log(exc);
+        }
+        
+
+    
+    }, []);
+
+
+
+
+ async function onSubmitAlert(event){
+    event.preventDefault()
+    console.log("data");
+    let data = {
+        comment: document.getElementById('comment').value, 
+        id :alertID.id
+    } 
+    console.log(data)
+    
+    try{
+        let data1 = await hr.update_tickets(data) ;
+        history.push('/tickets-alerts')
+    }
+    catch(exc){
+        console.log(exc);
+    }
+
+
+
+}
+
     useEffect(() => {
+
         window.scrollTo(0, 0);
     }, []);
 
@@ -40,8 +110,8 @@ const AlartUpdate = () => {
             {/* Page Start */}
             <Grid xs={6} className="TicketAlertTab">
                 <Grid xs={12} container>
-                <Link to="/tickets-alerts/alert/1234" className="ActiveTab">Close Alert</Link>
-                <Link to="/tickets-alerts/ticket/1234">Ticket Update</Link>
+                <Link to="/tickets-alerts/alert/details" className="ActiveTab">Close Alert</Link>
+                <Link to="/tickets-alerts/ticket/details">Ticket Update</Link>
                 </Grid>
             </Grid>
             <Grid xs={12} className="TicketAlertTabH1">
@@ -56,7 +126,7 @@ const AlartUpdate = () => {
                             Alert Department
                             </Grid>
                             <Grid>
-                            IT
+                            {tickets?.data?.TicketType?.name }
                             </Grid>
                         </ListItem>
                         <ListItem container className="p0 pt6 pb20">
@@ -64,7 +134,8 @@ const AlartUpdate = () => {
                             Alert Category
                             </Grid>
                             <Grid>
-                            Terminated: AD Enabled
+                            {tickets?.data?.TicketCategory?.name }
+                            
                             </Grid>
                         </ListItem>
                         <ListItem container className="p0 pt6 pb20">
@@ -72,7 +143,8 @@ const AlartUpdate = () => {
                             Alert Description
                             </Grid>
                             <Grid>
-                            John Doe (1235) terminated 03/20/2021 / AD Enabled
+                            {tickets?.data?.creation_comment }
+
                             </Grid>
                         </ListItem>
                         <ListItem container className="p0 pt6 pb20">
@@ -80,11 +152,13 @@ const AlartUpdate = () => {
                             Alert Date
                             </Grid>
                             <Grid>
-                            03/20/2021
+                            { moment(tickets?.data?.createdAt).format('YYYY-MM-DD') }
                             </Grid>
                         </ListItem>
                     </List>
                 </Grid>
+
+                <form  onSubmit={onSubmitAlert}>
                 <Grid xs={12} md={6}>
                     <Grid xs={12} container>
                         <Grid xs={12} className="mt30 pr40">
@@ -96,6 +170,7 @@ const AlartUpdate = () => {
                                     <TextField
                                         id="date"
                                         type="date"
+                                        onChange={(e,value)=>setDate(e.target.value)}
                                         className="DateTimePicker"
                                         defaultValue="YY-MM-DD"
                                         InputLabelProps={{
@@ -114,7 +189,7 @@ const AlartUpdate = () => {
                                     Closeout Comment
                                 </Grid>
                                 <Grid xs={12} className="mt14">
-                                    <TextareaAutosize className="w100p" rowsMin={6} placeholder="Comment here" />
+                                    <TextareaAutosize id="comment" className="w100p" rowsMin={6} placeholder="Comment here"  required/>
                                 </Grid>
                                 <Typography variant="h6" className="MuiTypography-subtitle2 MuiTypography-colorTextSecondary" component="h6">
                                     Please leave this field empty if you have no comments
@@ -125,9 +200,13 @@ const AlartUpdate = () => {
                     
                     <Grid xs={12} container justify="space-between" className="mt50 pr40">
                         <Link to="/tickets-alerts" className="LinkButtonBack">Back</Link>
-                        <Link to="/tickets-alerts/alert/1" className="LinkButton">Save & Continue</Link>
+                        <Button  className="LinkButton" type="submit">Save & Continue</Button>
+                        {/* <Link to="/tickets-alerts/alert/1" className="LinkButton">Save & Continue</Link> */}
                     </Grid>
                 </Grid>
+                </form>
+
+
             </Grid>
           </Grid>
           {/* Page Start End */}
