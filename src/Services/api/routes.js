@@ -33,6 +33,7 @@ export const routes = {
         get_tickets_and_allerts: 'employee/ticket',
         get_ticket_by_id: 'employee/ticket/',
         update_tickets : 'employee/ticket/',
+        get_employee_by_id : 'employee/hr/employee/',
 
 
         // dropdowns 

@@ -18,6 +18,15 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import PageHeader from "../../../Components/PageHeader";
 import LeftControl from "../../../Components/LeftControl";
+
+/** Local deoendencies & Libraries */
+import Services from '../../../Services';
+
+
+const {
+  hr
+} = Services;
+
 // import { withRouter } from 'react-router-dom';
 // import MobileScreen from './Mobile/Enter-RailRoad-Add';
 // import {isMobile} from 'react-device-detect';
@@ -101,8 +110,30 @@ const EmployeeLookup = () => {
 //     )
 //   }
 
-  function onSubmit(){
-    history.push('/employees/result')
+
+  async function onSubmit(event){
+    event.preventDefault()
+    if(name.length > 0 || id.length > 0){
+
+
+      let data={
+        id : name ? name : id ,
+      } 
+
+      console.log(data)
+      try{
+        let data1 = await hr.getEmployee(data) ;
+        console.log(data1)    
+      }
+      catch(exc){
+        console.log(exc);
+      }
+    }
+    else{
+      console.log("error")
+    }
+
+    
   }
   
   return (
@@ -118,19 +149,21 @@ const EmployeeLookup = () => {
           <Grid xs={12} className="ContentPage BlueHeadTable FormTableArea">
             <Grid xs={12}>
                 <Grid xs={12} md={8} lg={6} container className="HREmSearch">
-                    <Grid xs={5}>
-                        <Typography>Name</Typography>
-                        <TextField id="outlined-basic" value={name} onChange={(e)=>{setName(e.target.value)}} variant="outlined" className="w100p"/>
-                    </Grid>
-                    <Grid xs={5}>
-                        <Typography>Employee ID</Typography>
-                        <TextField id="outlined-basic" value={id} onChange={(e)=>{setId(e.target.value)}}variant="outlined" className="w100p"/>
-                    </Grid>
-                    <Grid xs={2}>
-                        <Typography className="SearchBtnDot">.</Typography>
-                        <Button  onClick={onSubmit} >Search</Button>
-                        <Link  to="/employees/result"></Link>
-                    </Grid>
+                  <form style={{width:'100%'}} onClick={onSubmit}>
+                      <Grid xs={5}>
+                          <Typography>Name</Typography>
+                          <TextField id="outlined-basic" value={name} onChange={(e)=>{setName(e.target.value)}} variant="outlined" className="w100p"/>
+                      </Grid>
+                      <Grid style={{marginTop:'10px'}} xs={5}>
+                          <Typography>Employee ID</Typography>
+                          <TextField id="outlined-basic" value={id} onChange={(e)=>{setId(e.target.value)}}variant="outlined" className="w100p"/>
+                      </Grid>
+                      <Grid xs={2}>
+                          <Typography className="SearchBtnDot">.</Typography>
+                          <Button type='submit' >Search</Button>
+                          <Link  to="/employees/result"></Link>
+                      </Grid>
+                  </form>
                 </Grid>
             </Grid>
           </Grid>

@@ -174,7 +174,7 @@ const NewHireStep1 = () => {
         
         try{
             let data1 = await hr.step1(data) ;
-            history.push('./new-hire-queue')
+            history.push('/new-hire-queue')
         
         }
         catch(exc){

@@ -123,3 +123,14 @@ export const subDepartment = async (payload, headers) => {
     );
 }
 
+
+export const getEmployee = async (payload, headers) => {
+    const { id } = payload;
+    return await api.get(
+        routes.hr.get_employee_by_id
+        .concat(id),
+        payload,
+        headers
+    );
+}
+
