@@ -3,6 +3,7 @@ import { validators } from './validators';
 import { employeeStatuses } from './employeeStatuses';
 import { role } from './role';
 import * as Styles from './styles'; 
+import { categoryDepartmentPair } from './categoryDepartmentPairs';
 
 export const Imports = {
     ...statics,
@@ -10,4 +11,5 @@ export const Imports = {
     employeeStatuses,
     role,
     ...Styles,
+    categoryDepartmentPair,
 };

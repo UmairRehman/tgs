@@ -114,7 +114,7 @@ const PostConditionalJobOffer2 = () => {
       });
     } else {
       setError("field must be filed")
-      alert("Error! Field must be Filled")
+      alert("Kindly fill in all the fields")
     }
 
   }

@@ -95,11 +95,7 @@ const NewHireQueue = () => {
     try{
       let data = await hr.getAllApplicants() ;
       // setApplicantData(data.data);
-      setApplicantData(data.data);
-      
-      console.log(data.data)
-      console.log(applicantData)
-      
+      setApplicantData(data.data);      
     }
     catch(exc){
       console.log(exc);

@@ -158,23 +158,26 @@ const EmployeeLogin = () => {
       setIsLoggingIn(false);
 
       /** REPLACE - by router */
+      let {
+        JobCategory: { id: jobCategoryID },
+        SubDepartment: { DepartmentId: subDepartmentID }
+      } = data;
 
-      console.log(data)
-      let JobCategoryID =  data.JobCategory.id;
-      let SubDepartmentID = data.SubDepartment.DepartmentId
+      const role = Imports.categoryDepartmentPair({
+        jobCategoryID,
+        subDepartmentID,
+      })
 
-      if(data?.role_id == Imports?.role?.hr ){
+      if (role === 'hr') {
         localStorage.setItem('role', 'hr')
         window.location = '/new-hire-queue';
-      }
-      else {
+      } else {
         window.location = '/login';
-
       }
 
 
-      history.pushState()
-      
+      history.pushState();
+
       return true;
 
     } catch (exc) {

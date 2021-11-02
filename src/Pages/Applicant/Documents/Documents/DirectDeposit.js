@@ -102,7 +102,7 @@ const DirectDeposit = () => {
       }
       else {
         setError("field must be filed")
-        alert("Error! Field must be Filled")
+        alert("Kindly fill in all the fields")
       }
 
       // console.log("clickerd")
@@ -118,6 +118,10 @@ const DirectDeposit = () => {
       const step3FormsSubmitted = JSON.parse(storage.get('step-3-form-directDeposit')) || true;
 
       storage.set('step-3-form-directDeposit', JSON.stringify(step3FormsSubmitted));
+
+      const step3FormPosted = new BroadcastChannel('step3form_posted');
+
+      step3FormPosted.postMessage({ topic: 'form-updated', message: {} });
 
       showSnackBar('Form has been submitted!');
 

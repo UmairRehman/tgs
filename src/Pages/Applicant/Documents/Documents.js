@@ -117,8 +117,6 @@ const Documents = () => {
       );
 
       history.push('/documents/step/3');
-
-      console.log(data);
     } catch (exc) {
       console.log(exc);
     }

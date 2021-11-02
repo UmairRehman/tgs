@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import {
   Grid,
   List,
@@ -6,7 +6,9 @@ import {
   Checkbox, 
   Button,
   TextareaAutosize,
-  Typography
+  Typography,
+  Select,
+  MenuItem
 } from "@material-ui/core";
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -21,29 +23,77 @@ import {isMobile} from 'react-device-detect';
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
+const dummyData = {
+  RequestBy : [
+    "James Mary",
+    "Robert Patricia",
+    "John Jennifer" 
+  ],
+   RequestFor : [
+    'David Afton',
+    'Alexandra Daddario' ,
+    'Stephen Hartley' 
+  ],
+   RequestType : [
+    'IT department',
+    'Accounts  department' ,
+    'Management  department'
+  ],
+   RequestCat : [
+    'IT',
+    'Accounts' ,
+    'Management' 
+  ]
+}
 
-const RequestBy = [
-  { title: 'James Mary'},
-  { title: 'Robert Patricia' },
-  { title: 'John Jennifer' }
-];
-const RequestFor = [
-  { title: 'David Afton'},
-  { title: 'Alexandra Daddario' },
-  { title: 'Stephen Hartley' }
-];
-const RequestType = [
-  { title: 'IT department'},
-  { title: 'Accounts  department' },
-  { title: 'Management  department' }
-];
-const RequestCat = [
-  { title: 'IT'},
-  { title: 'Accounts' },
-  { title: 'Management' }
-];
 const CreateTicket = () => {
 
+  const [ticketData, setTicketData] = useState({
+     requestedBy:'',
+     requestedFor:[],
+     requestedType:'',
+     category:'',
+     comments:''
+  })
+
+  const handleSubmitRequested = (event, value, caseType) =>{
+    console.log("data",value);
+    //cases
+    // 1 requestBy
+    // 2 requestFor
+    // 3 requestedType 
+    // 4 category
+    // 5 comment
+    switch (caseType) {
+
+      case 1:
+        setTicketData({...ticketData,requestedBy:value})
+        break;
+
+      case 2:
+        setTicketData({...ticketData,requestedFor:value})
+        break;
+
+      case 3:
+        setTicketData({...ticketData,requestedType:value})
+        break;
+
+      case 4:
+        setTicketData({...ticketData,category:value})
+        break;
+
+      case 5:
+        setTicketData({...ticketData,comments:event.target.value})
+        break;
+    
+      default:
+        break;
+    }
+  }
+
+  const submitData = ()=>{
+    console.log("ticket Data", ticketData);
+  }
   const [requestBy, setRequestBy] = useState('')
 
   const [requestFor, setRequestFor] = useState([])
@@ -59,7 +109,7 @@ const CreateTicket = () => {
   if(isMobile) {
     return (
         <MobileScreen />
-    )
+   )
   }
 
 
@@ -107,18 +157,21 @@ const CreateTicket = () => {
                             className="w100p"
                             onChange={(e, value)=>{setRequestBy(value.title)}}
                             id="checkboxes-tags-demo"
-                            options={RequestBy}
+                            options={dummyData.RequestBy}
                             disableCloseOnSelect
-                            getOptionLabel={(option) => option.title}
+                            getOptionLabel={(option) => option}
+                            value={ ticketData.requestedBy }
+                            onChange={ (event, value)=>handleSubmitRequested(event,value,1) }
                             renderOption={(option, { selected }) => (
                               <React.Fragment>
-                                {/* <Checkbox
+                                 {/* <Checkbox
                                   icon={icon}
                                   checkedIcon={checkedIcon}
                                   style={{ marginRight: 8 }}
                                   checked={selected}
-                                /> */}
-                                {option.title}
+                                />  */}
+
+                                {option}
                               </React.Fragment>
                             )}
                             renderInput={(params) => (
@@ -141,9 +194,11 @@ const CreateTicket = () => {
                             id="checkboxes-tags-demo"
                             onChange={(e, value)=>{setRequestFor(value)}}
 
-                            options={RequestFor}
+                            options={requestFor}
                             disableCloseOnSelect
-                            getOptionLabel={(option) => option.title}
+                            value = { ticketData.requestedFor }
+                            onChange={ (event,value) =>handleSubmitRequested(event,value,2) }
+                            getOptionLabel={(option) => option}
                             renderOption={(option, { selected }) => (
                               <React.Fragment>
                                 <Checkbox
@@ -152,7 +207,7 @@ const CreateTicket = () => {
                                   style={{ marginRight: 8 }}
                                   checked={selected}
                                 />
-                                {option.title}
+                                {option}
                               </React.Fragment>
                             )}
                             renderInput={(params) => (
@@ -172,7 +227,7 @@ const CreateTicket = () => {
                             className="w100p"
                             id="combo-box-demo"
                             onChange={(e, value)=>{setRequestType(value.title)}}  
-                            options={RequestType}
+                            options={requestType}
                             getOptionLabel={(option) => option.title}
                             renderInput={(params) => <TextField  required={true} {...params} label="Please Select" variant="outlined" />}
                           />
@@ -188,7 +243,7 @@ const CreateTicket = () => {
                           <Autocomplete
                             className="w100p"
                             id="combo-box-demo"
-                            options={RequestCat}
+                            options={category}
                             onChange={(e, value)=>{setCategory(value.title)}}
                             getOptionLabel={(option) => option.title}
                             renderInput={(params) => <TextField   required={true} {...params} label="Please Select" variant="outlined" />}
