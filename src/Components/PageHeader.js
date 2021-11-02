@@ -171,7 +171,7 @@ const PageHeader = () => {
   /** Retreiving display picture */
   const retreiveDP = async () => {
     try {
-      if (retreiveingDP)
+      if (retreiveingDP || displayPicture !== 'null')
         return false;
 
       if (!retreiveingDP)
