@@ -17,26 +17,32 @@ import LeftControl from '../../../Components/LeftControl';
 import MobileScreen from './Mobile/Dashboard';
 import {isMobile} from 'react-device-detect';
 
+/** Local deoendencies & Libraries */
+import Services from '../../../Services';
+
+var moment = require('moment-timezone')
+const {
+  employee,
+  Storage
+} = Services;
 // Tables Columns
 const columns = [
-  { field: "id", headerName: "Employee ID",  type: "value" },
-  { field: "licenseCertificate", headerName: "License Certificate",  type: "value" },
-  { field: "issueDate", headerName: "Issue Date",  type: "value" },
-  { field: "expiryDate", headerName: "Expiry Date",  type: "value" },
+  { id: "EmployeeId", label: "Employee ID", minWidth: 50, type: "value" },
+  { id: "name", label: "License Certificate", minWidth: 100, type: "value" },
+  { id: "issue_date", label: "Issue Date", minWidth: 50, type: "value" },
+  { id: "expiry_date", label: "Expiry Date", minWidth: 50, type: "value" },
 ];
 
 // table dummy data
-const rows = [
-  { id:1101,
-    licenseCertificate:"Block Chain",
-    issueDate :"3/10/2021",
-    expiryDate: "6/10/2021"}
-];
+// const rows = [
+//   { id:1101,
+//     licenseCertificate:"Block Chain",
+//     issueDate :"3/10/2021",
+//     expiryDate: "6/10/2021"}
+// ];
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
-
-
 
   return (
     <div
@@ -55,20 +61,36 @@ function TabPanel(props) {
   );
 }
 const Dashboard = () => {
+  const storage = new Storage();
+
+  const [rows, setRows] = useState([])
+
+  useEffect(async () => {
+    let user = JSON.parse(await storage.get('user_profile'))
+    console.log("user",user);
+    if(user){
+      try {
+        let data = await  employee.get_employee_certificates({id:user.id})
+        console.log(data.data.rows);
+        if(data){
+          //data = data.data.rows
+          data.data.rows.forEach(row=>{
+            row.issue_date = moment( new Date(row.issue_date) ).format('YYYY-MM-DD')
+            row.expiry_date = moment( new Date(row.expiry_date) ).format('YYYY-MM-DD')
+          });
+          setRows(data.data.rows)
+        }
+      } catch (error) {
+        console.log("Error in Dashboard fetch", error);
+      }
+    }
+    
+  }, [])
 
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    setIsLoading(false)
-    let response = []
-    console.log("res",response);
-    if(response){
-      setData(rows)
-      setIsLoading(true)
-    }
   
-  }, [])
   if(isMobile) {
     return (
         <MobileScreen />
@@ -129,16 +151,59 @@ const Dashboard = () => {
                   className="LiqTables Dash-Table DashTable-Desk"
               >
                 <Paper>
-                <div style={{ height: 400, width: '100%' }}>
-                
-                  {/* <TableContainer> */}
-                  <DataGrid
+                {/* <DataGrid
                     rows={rows}
                     columns={columns}
                     pageSize={5}
                     rowsPerPageOptions={[5]}
-                  />
-                {/* </TableContainer> */}
+                  /> */}
+                  <TableContainer>
+                  <Table aria-label="table">
+                    <TableHead>
+                      <TableRow>
+                        {columns.map((column) => (
+                          <TableCell
+                            className="bold f16"
+                            key={column.id}
+                            align={column.align}
+                            style={{ minWidth: column.minWidth }}
+                          >
+                            {column.label}
+                          </TableCell>
+                        ))}
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {rows
+                        .map((row) => {
+                          return (
+                            <TableRow
+                              hover
+                              role="checkbox"
+                              tabIndex={-1}
+                              key={row.code}
+                            >
+                              {columns.map((column) => {
+                                const value = row[column.id];
+                                return (
+                                  <TableCell
+                                    key={column.id}
+                                    align={column.align}
+                                  >
+                                    {column.format &&
+                                    typeof value === "number"
+                                      ? column.format(value)
+                                      : value}
+                                  </TableCell>
+                                );
+                              })}
+                            </TableRow>
+                          );
+                        })}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+                <div style={{ height: 400, width: '100%' }}>
                 
                 </div>
                 </Paper>

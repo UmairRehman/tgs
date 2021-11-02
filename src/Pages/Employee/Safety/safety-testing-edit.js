@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import {
   Grid,
   List,
@@ -66,6 +66,14 @@ const SafetyTestingEdit = () => {
     crew_member3:{ name : '' , result: '' , comment: ''},
     crew_member4:{ name : '' , result: '' , comment: ''}
   });
+
+  useEffect(() => {
+    if ("geolocation" in navigator) {
+      console.log("Available");
+    } else {
+      console.log("Not Available");
+    }
+  }, [])
   
   //cases
       //  testingRule = 1
@@ -153,6 +161,9 @@ const SafetyTestingEdit = () => {
 
   const submitBtn = () =>{
     console.log("data",safetyTesting);
+    navigator.geolocation.getCurrentPosition(function(position) {
+      console.log(position)
+    });
   }
 
   if(isMobile) {
