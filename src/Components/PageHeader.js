@@ -424,7 +424,7 @@ const PageHeader = () => {
                         Change Picture
                       </Grid>
                     </ListItem>
-                    <ListItem className="LogOutIcon">
+                    <ListItem className="LogOutIcon LogoutButton">
                       <Button onClick={logout}>
                         Logout
                       </Button>

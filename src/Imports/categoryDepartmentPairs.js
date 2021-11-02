@@ -9,7 +9,7 @@ const employeeCategoryDepartmentObjects = [
         jobCategoryID: 2,
         subDepartmentID: 5,
     }
-]
+];
 
 export const categoryDepartmentPair = (query) => {
     const {
