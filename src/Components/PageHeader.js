@@ -135,6 +135,8 @@ const PageHeader = () => {
 
   const [displayPicture, setDisplayPicture] = useState('null');
 
+  const [retreiveingDP, setRetreivingDP] = useState(false);
+
   const [authenticatedHeader, setAuthHeader] = useState(
     localStorage.getItem('access_jwt') || ''
   )
@@ -168,27 +170,40 @@ const PageHeader = () => {
 
   /** Retreiving display picture */
   const retreiveDP = async () => {
-    var reader = new FileReader();
+    try {
+      if (retreiveingDP)
+        return false;
+
+      if (!retreiveingDP)
+        setRetreivingDP(true);
+
+      var reader = new FileReader();
 
 
-    const img = await fetch(
-      apiPath
-        .concat(routes.employee.getProfilePic),
-      {
-        headers: {
-          Authorization: storage.get('access_jwt')
+      const img = await fetch(
+        apiPath
+          .concat(routes.employee.getProfilePic),
+        {
+          headers: {
+            Authorization: storage.get('access_jwt')
+          }
         }
-      }
-    );
+      );
 
-    const dataBlob = await img.blob();
+      const dataBlob = await img.blob();
 
-    const uri = await new Promise((resolve, reject) => {
-      reader.onloadend = () => resolve(reader.result);
-      reader.readAsDataURL(dataBlob);
-    })
+      const uri = await new Promise((resolve, reject) => {
+        reader.onloadend = () => resolve(reader.result);
+        reader.readAsDataURL(dataBlob);
+      })
 
-    setDisplayPicture(uri);
+      setDisplayPicture(uri);
+
+      setRetreivingDP(false);
+    } catch (exc) {
+      console.log(exc);
+      setRetreivingDP(false);
+    }
   };
 
   retreiveDP();
