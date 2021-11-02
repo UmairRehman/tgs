@@ -1,11 +1,10 @@
 /** Core Dependencies */
 import React, { useEffect, useState } from 'react';
 
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import { isMobile } from 'react-device-detect';
 
-import { useHistory } from "react-router-dom";
 
 
 /** Third party dependencies */
@@ -46,6 +45,7 @@ import Services from '../../Services';
 import { Imports } from '../../Imports';
 
 import Snackbar from '../../Components/Snackbar';
+
 
 
 const {
@@ -147,32 +147,30 @@ const EmployeeLogin = () => {
       /** Disabled for AD Users */
       // const isValid = await validatePassword(password);
 
+      const response = await users.loginEmployee(payload);
+
       const {
         data,
         token,
-      } = await users.loginEmployee(payload);
+        role_id,
+      } = response;
 
       storage.set('access_jwt', token);
-      storage.set('user_profile', JSON.stringify(data))
+
+      storage.set('user_profile', JSON.stringify(data));
+
+      storage.set('role_id', role_id);
 
       setIsLoggingIn(false);
 
       /** REPLACE - by router */
-      let {
-        JobCategory: { id: jobCategoryID },
-        SubDepartment: { DepartmentId: subDepartmentID }
-      } = data;
 
-      const role = Imports.categoryDepartmentPair({
-        jobCategoryID,
-        subDepartmentID,
-      })
+      const role = Imports.role[role_id];
 
-      if (role === 'hr') {
-        localStorage.setItem('role', 'hr')
-        window.location = '/new-hire-queue';
+      if (role) {
+        history.push(role.navigateTo)
       } else {
-        window.location = '/login';
+        history.push('/login')
       }
 
 
