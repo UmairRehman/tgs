@@ -12,5 +12,6 @@ export const statics = {
         INTERNAL_SERVER_ERROR: 'An error occured, kindly contact support',
         form_submitted: 'Form Already Submitted',
         user_not_found_in_db: "User does not exist",
+        already_employee: "User is already registered as employee",
     }
 }

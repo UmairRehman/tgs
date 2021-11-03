@@ -133,9 +133,9 @@ const PageHeader = () => {
 
   const [savingImage, setSavingImage] = useState(false);
 
-  const [displayPicture, setDisplayPicture] = useState('null');
-
-  const [retreiveingDP, setRetreivingDP] = useState(false);
+  const [displayPicture, setDisplayPicture] = useState(
+    storage.get('displayPicture')
+  );
 
   const [authenticatedHeader, setAuthHeader] = useState(
     localStorage.getItem('access_jwt') || ''
@@ -171,11 +171,16 @@ const PageHeader = () => {
   /** Retreiving display picture */
   const retreiveDP = async () => {
     try {
-      if (retreiveingDP || displayPicture !== 'null')
+      if (displayPicture)
         return false;
 
-      if (!retreiveingDP)
-        setRetreivingDP(true);
+      /** Throttling via local storage
+       * Due to strange state behaviour needs to be looked into
+       */
+      if (storage.get('retreivingDp'))
+        return false;
+
+      storage.set('retreivingDp', true);
 
       var reader = new FileReader();
 
@@ -199,15 +204,19 @@ const PageHeader = () => {
 
       setDisplayPicture(uri);
 
-      setRetreivingDP(false);
+      storage.set('displayPicture', uri);
+
+      storage.remove('retreivingDp');
+      
     } catch (exc) {
       console.log(exc);
-      setRetreivingDP(false);
+
+      storage.remove('retreivingDp');
     }
   };
 
   try {
-    // retreiveDP();
+    retreiveDP();
   } catch (exc) {
     console.log(exc);
   }
@@ -256,7 +265,13 @@ const PageHeader = () => {
   /********************************************************** */
 
   const logout = () => {
-    localStorage.clear();
+    let employee = !!storage.get('role_id');
+
+    storage.clear();
+
+    if (employee)
+      return history.push('/login');
+
     history.push('/');
   }
 

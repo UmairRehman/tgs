@@ -15,20 +15,27 @@ export class Storage {
         if (this.persist)
             return localStorage.setItem(key, value);
 
-        this[key] = value;
+        this.volatile[key] = value;
     }
 
     get = (key) => {
         if (this.persist)
             return localStorage.getItem(key);
 
-        return this[key];
+        return this.volatile[key];
     }
 
     remove = (key) => {
         if (this.persist)
             return localStorage.removeItem(key);
 
-        delete this[key];
+        delete this.volatile[key];
+    }
+
+    clear = () => {
+        if (this.persist)
+            return localStorage.clear();
+
+        this.volatile = {};
     }
 }
