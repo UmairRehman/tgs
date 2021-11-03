@@ -38,7 +38,7 @@ import { useLocation } from 'react-router'
     const columns = [
         { id: "firstName", label: "Applicant", minWidth: 170, type: "value" },
         { id: "id", label: "Employee ID", minWidth: 120, type: "value" },
-        { id: "docreatedAtp", label: "Date of Application", minWidth: 100, type: "value" },
+        { id: "createdAt", label: "Date of Application", minWidth: 100, type: "value" },
         { id: "city", label: "Home City, St", minWidth: 100, type: "value" },
         { id: "cellPhone", label: "Phone Number", minWidth: 170, type: "value" },
         { id: "email", label: "Email Address", minWidth: 170, type: "value" }
@@ -119,11 +119,11 @@ const NewHireStep2 = () => {
 //     )
 //   }
 
-    function onFormSubmit(event){
+    async function onFormSubmit(event){
         event.preventDefault()
 
         let data = {
-            employee_id : 1, 
+            employee_id : applicantData.id, 
             comment: document.getElementById('comment').value,
             hire_date: hireDate,
             drug_test_date: drugTestDate,
@@ -132,6 +132,15 @@ const NewHireStep2 = () => {
             background_check: backgroundCheck == 'Yes' ? true :false
         }
         console.log(data)
+
+        try{
+            let data1 = await hr.step2(data) ;
+            history.push('/new-hire-queue')
+        
+        }
+        catch(exc){
+            console.log(exc);
+        }
     }
 
     
@@ -144,12 +153,12 @@ const NewHireStep2 = () => {
 
         try{
             let data = await hr.getAllApplicantsByID(applicantDataHistory) ;
-            console.log(data.data)
             setApplicantData(data.employee)
             setApplicantData(data.employee)
             setEmergencyContact(data.emergency_contact)
             setFiles(data.files)
             setSpouse(data.spouse)
+            console.log(applicantData)
         }
         catch(exc){
             console.log(exc);
@@ -189,8 +198,8 @@ const NewHireStep2 = () => {
                           ))}
                         </TableRow>
                       </TableHead>
-                      {/* <TableBody>
-                        {applicantData 
+                      <TableBody>
+                        {[applicantData] 
                           .map((applicantData) => {
                             return (
                               <TableRow
@@ -213,7 +222,7 @@ const NewHireStep2 = () => {
                               </TableRow>
                             );
                           })}
-                      </TableBody> */}
+                      </TableBody>
                     </Table>
                   </TableContainer>
                 </Paper>

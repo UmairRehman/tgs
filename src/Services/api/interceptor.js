@@ -104,11 +104,7 @@ const HTTPClientFunctionsWrapper = async (method, ...args) => {
 
         // const { data: endpointData } = axiosObjectData;
         // console.log(axiosObjectData);
-        localStorage.setItem(
-            `response-${uri}`,
-            JSON.stringify(axiosObjectData)
-        );
-
+        
         return axiosObjectData;
     } catch (exc) {
         console.log(exc);

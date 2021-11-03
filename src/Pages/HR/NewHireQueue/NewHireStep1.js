@@ -40,14 +40,14 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 
 const Approval = [
-    { title: 'Approve'},
+    { id : '1', title: 'Approve'},
     { title: 'Not Approve' },
     { title: 'Pending' }
 ];
 const PositionLevel = [
-    { title: 'Manager'},
-    { title: 'Director' },
-    { title: 'Assitant' }
+    { title: 'Managment' , id : 1},
+    { title: 'Executive' , id:2},
+    { title: 'Labour' , id:3 }
 ];
 const PositionLoc = [
     { title: 'Head office Canda'},
@@ -121,6 +121,17 @@ const NewHireStep1 = () => {
     const [companyVehicle, setcompanyVehicle] = useState('')
     const [fuelCard, setfuelCard] = useState('')
     const [ITComment, setITComment] = useState('')
+    const [locationID, setLocationID] = useState('')
+
+
+    // dropdowns
+
+    const [jobCategoriesOption, setJobCategoriesOption] = useState([])
+    const [locationDropdown, setLocationDropdown] = useState([])
+    const [paytypeDropdown, setPaytypeDropdown] = useState([])
+    const [departmentDropdown, setDepartmentDropdown] = useState([])
+    const [SubDepartmentDropdown, setSubDepartmentDropdown] = useState([])
+
 
 
 
@@ -133,17 +144,17 @@ const NewHireStep1 = () => {
         let data = {
             employee_id : holdData?.id,
             Supervisor_Id : holdData?.SupervisorId == null ? 1 : 1,
-            location_id: 1, 
+            location_id: positionLocation, 
             step1,
             position,
             job_code: jobCode,
             rate,
-            department:1,
+            department: department,
             full_title : fullTitle,
             position_level: 1,
-            position_category: 1,
-            pay_type : 1,
-            SubDepartment_Id:1,
+            position_category: positionCategory,
+            pay_type : partType,
+            SubDepartment_Id: subDepartment,
             start_date : moment(startDate).format('YYYY-MM-DD'),
             // subDepartment,
             supervisor,
@@ -163,7 +174,7 @@ const NewHireStep1 = () => {
         
         try{
             let data1 = await hr.step1(data) ;
-            history.push('./new-hire-queue')
+            history.push('/new-hire-queue')
         
         }
         catch(exc){
@@ -190,10 +201,47 @@ const NewHireStep1 = () => {
         catch(exc){
             console.log(exc);
         }
+
+        // get job catrgories options
+        try{
+            let jobCategory = await hr.get_job_categories() ;
+            setJobCategoriesOption(jobCategory.data)
+
+            let locationData = await hr.location() ;
+            setLocationDropdown(locationData.data)
+
+            let payLocationData = await hr.pay_type() ;
+            setPaytypeDropdown(payLocationData.data)
+
+            let departmentData = await hr.department() ;
+            setDepartmentDropdown(departmentData.data)
+        }
+        catch(exc){
+            console.log(exc);
+        }
         
 
 
     }, []);
+
+
+    async function onDepartmentChange(e, value){
+        setdepartment(value.id)
+        try{
+            let data = {
+                id: value.id
+            }
+            let jobSubCategory = await hr.subDepartment(data) ;
+            console.log(jobSubCategory?.data?.rows)
+            setSubDepartmentDropdown(jobSubCategory?.data?.rows)
+            
+        }
+        catch(exc){
+            console.log(exc);
+        }
+    }
+
+
 
     
   return (
@@ -394,8 +442,8 @@ const NewHireStep1 = () => {
                                     <Autocomplete
                                         className="w100p"
                                         id="combo-box-demo"
-                                        onChange={(e, value)=>{setpositionCategory(value.title)}}
-                                        options={PositionLevel}
+                                        onChange={(e, value)=>{setpositionCategory(value.id)}}
+                                        options={jobCategoriesOption}
                                         getOptionLabel={(option) => option.title}
                                         renderInput={(params) => <TextField required={true}  {...params} label="Select" variant="outlined" />}
                                     />
@@ -410,9 +458,9 @@ const NewHireStep1 = () => {
                                 <Grid xs={12} className="mt14">
                                     <Autocomplete
                                         className="w100p"
-                                        onChange={(e, value)=>{setpositionLocation(value.title)}}
+                                        onChange={(e, value)=>{setpositionLocation(value.id)}}
                                         id="combo-box-demo"
-                                        options={PositionLoc}
+                                        options={locationDropdown}
                                         getOptionLabel={(option) => option.title}
                                         renderInput={(params) => <TextField required={true}  {...params} label="Select" variant="outlined" />}
                                     />
@@ -448,8 +496,8 @@ const NewHireStep1 = () => {
                                     <Autocomplete
                                         className="w100p"
                                         id="combo-box-demo"
-                                        onChange={(e, value)=>{setpartType(value.title)}}
-                                        options={Paytype}
+                                        onChange={(e, value)=>{setpartType(value.id)}}
+                                        options={paytypeDropdown}
                                         getOptionLabel={(option) => option.title}
                                         renderInput={(params) => <TextField required={true}  {...params} label="Select" variant="outlined" />}
                                     />
@@ -504,9 +552,10 @@ const NewHireStep1 = () => {
                                 <Grid xs={12} className="mt14">
                                     <Autocomplete
                                         className="w100p"
-                                        onChange={(e, value)=>{setdepartment(value.title)}}
+                                        onChange={(e, value)=>onDepartmentChange(e,value)}
+                                        // onChange={(e, value)=>{setdepartment(value.id)}}
                                         id="combo-box-demo"
-                                        options={PositionLevel}
+                                        options={departmentDropdown}
                                         getOptionLabel={(option) => option.title}
                                         renderInput={(params) => <TextField required={true}  {...params} label="Select" variant="outlined" />}
                                     />
@@ -521,9 +570,10 @@ const NewHireStep1 = () => {
                                 <Grid xs={12} className="mt14">
                                     <Autocomplete
                                         className="w100p"
-                                        onChange={(e, value)=>{setsubDepartment(value)}}
+                                        // onChange={(e,value)=>onChangeSubDepartment(e,value)}
+                                        onChange={(e, value)=>{setsubDepartment(value.id)}}
                                         id="combo-box-demo"
-                                        options={FullTitle}
+                                        options={SubDepartmentDropdown}
                                         getOptionLabel={(option) => option.title}
                                         renderInput={(params) => <TextField required={true}  {...params} label="Select" variant="outlined" />}
                                     />

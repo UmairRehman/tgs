@@ -133,7 +133,9 @@ const PageHeader = () => {
 
   const [savingImage, setSavingImage] = useState(false);
 
-  const [displayPicture, setDisplayPicture] = useState('null');
+  const [displayPicture, setDisplayPicture] = useState(
+    storage.get('displayPicture')
+  );
 
   const [authenticatedHeader, setAuthHeader] = useState(
     localStorage.getItem('access_jwt') || ''
@@ -168,30 +170,56 @@ const PageHeader = () => {
 
   /** Retreiving display picture */
   const retreiveDP = async () => {
-    var reader = new FileReader();
+    try {
+      if (displayPicture)
+        return false;
+
+      /** Throttling via local storage
+       * Due to strange state behaviour needs to be looked into
+       */
+      if (storage.get('retreivingDp'))
+        return false;
+
+      storage.set('retreivingDp', true);
+
+      var reader = new FileReader();
 
 
-    const img = await fetch(
-      apiPath
-        .concat(routes.employee.getProfilePic),
-      {
-        headers: {
-          Authorization: storage.get('access_jwt')
+      const img = await fetch(
+        apiPath
+          .concat(routes.employee.getProfilePic),
+        {
+          headers: {
+            Authorization: storage.get('access_jwt')
+          }
         }
-      }
-    );
+      );
 
-    const dataBlob = await img.blob();
+      const dataBlob = await img.blob();
 
-    const uri = await new Promise((resolve, reject) => {
-      reader.onloadend = () => resolve(reader.result);
-      reader.readAsDataURL(dataBlob);
-    })
+      const uri = await new Promise((resolve, reject) => {
+        reader.onloadend = () => resolve(reader.result);
+        reader.readAsDataURL(dataBlob);
+      })
 
-    setDisplayPicture(uri);
+      setDisplayPicture(uri);
+
+      storage.set('displayPicture', uri);
+
+      storage.remove('retreivingDp');
+      
+    } catch (exc) {
+      console.log(exc);
+
+      storage.remove('retreivingDp');
+    }
   };
 
-  retreiveDP();
+  try {
+    retreiveDP();
+  } catch (exc) {
+    console.log(exc);
+  }
 
   // For Modal
   const [aletopen, setAlertOpen] = React.useState(false);
@@ -237,7 +265,13 @@ const PageHeader = () => {
   /********************************************************** */
 
   const logout = () => {
-    localStorage.clear();
+    let employee = !!storage.get('role_id');
+
+    storage.clear();
+
+    if (employee)
+      return history.push('/login');
+
     history.push('/');
   }
 
@@ -424,7 +458,7 @@ const PageHeader = () => {
                         Change Picture
                       </Grid>
                     </ListItem>
-                    <ListItem className="LogOutIcon">
+                    <ListItem className="LogOutIcon LogoutButton">
                       <Button onClick={logout}>
                         Logout
                       </Button>
