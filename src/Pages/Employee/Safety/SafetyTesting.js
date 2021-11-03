@@ -35,7 +35,7 @@ const columns = [
   { id: "time", label: "Time", minWidth: 100, type: "value" },
   { id: "locationAdded", label: "Location", minWidth: 100, type: "value" },
   { id: "jobID", label: "Job ID", minWidth: 170, type: "value" },
-  { id: "resulttest", label: "Result / Test", minWidth: 170, type: "value" },
+  { id: "rulesCount", label: "Rules", minWidth: 170, type: "value" },
   { id: "editrules", label: "Add Rules", minWidth: 50, type: "edit" },
   { id: "viewrules", label: "View Rules", minWidth: 50, type: "view" },
 ];
@@ -80,6 +80,7 @@ const SafetyTesting = () => {
           element.date = moment( new Date(element.date) ).format('DD-MM-YYYY')
           element.time = element.time.slice(0,-3)
           element.locationAdded = element.TGSLocation.name
+          element.rulesCount = element.TestEventRules.length
         });
         setRows(data)
       }
