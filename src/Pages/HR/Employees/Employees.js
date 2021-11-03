@@ -98,7 +98,7 @@ const EmployeeLookup = () => {
   let history = useHistory();
   const [name, setName] = useState('')
   const [id, setId] = useState('')
-
+  const [error, setError] = useState(false)
 
     const [page, setPage] = React.useState(0);
     useEffect(() => {
@@ -113,24 +113,33 @@ const EmployeeLookup = () => {
 
   async function onSubmit(event){
     event.preventDefault()
-    if(name.length > 0 || id.length > 0){
+    if(id.length > 0){
 
 
       let data={
-        id : name ? name : id ,
+        id : id ,
       } 
 
       console.log(data)
       try{
         let data1 = await hr.getEmployee(data) ;
         console.log(data1)    
+
+        history.push({
+          pathname : "/employees/result",
+          state: data1?.employee[0]?.id
+        });
+      
       }
+
+      
       catch(exc){
         console.log(exc);
       }
     }
     else{
       console.log("error")
+      setError(!error)
     }
 
     
@@ -150,13 +159,14 @@ const EmployeeLookup = () => {
             <Grid xs={12}>
                 <Grid xs={12} md={8} lg={6} container className="HREmSearch">
                   <form style={{width:'100%'}} onClick={onSubmit}>
-                      <Grid xs={5}>
+                      {/* <Grid xs={5}>
                           <Typography>Name</Typography>
                           <TextField id="outlined-basic" value={name} onChange={(e)=>{setName(e.target.value)}} variant="outlined" className="w100p"/>
-                      </Grid>
+                      </Grid> */}
                       <Grid style={{marginTop:'10px'}} xs={5}>
                           <Typography>Employee ID</Typography>
                           <TextField id="outlined-basic" value={id} onChange={(e)=>{setId(e.target.value)}}variant="outlined" className="w100p"/>
+                          <p style={{display:error == true   ? "block": "none" }}>Id is required</p>
                       </Grid>
                       <Grid xs={2}>
                           <Typography className="SearchBtnDot">.</Typography>
