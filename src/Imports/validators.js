@@ -33,7 +33,7 @@ export const validators = {
         email: yup.string().email()
             .required('email'),
         ssn: yup.string()
-            .matches(/[0-9]{9}/)
+            .matches(/[0-9]{9}/, 'SSN must be a nine digit number')
             .required('ssn'),
         home_phone: yup.string()
             .matches(patterns.phoneRegExp, 'home_phone number is not valid')
