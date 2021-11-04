@@ -16,11 +16,11 @@ import {
 import { Link } from "react-router-dom";
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import PageHeader from "../../../Components/PageHeader";
-import LeftControl from "../../../Components/LeftControl";
+import PageHeader from "../../Components/PageHeader";
+import LeftControl from "../../Components/LeftControl";
 
 /** Local deoendencies & Libraries */
-import Services from '../../../Services';
+import Services from '../../Services';
 
 
 const {
@@ -93,7 +93,7 @@ const FailPass = [
 
 
 
-const EmployeeLookup = () => {
+const Search = () => {
   
   let history = useHistory();
   const [name, setName] = useState('')
@@ -102,13 +102,10 @@ const EmployeeLookup = () => {
 
     const [page, setPage] = React.useState(0);
     useEffect(() => {
+    
         window.scrollTo(0, 0);
+    
     }, []);
-//   if(isMobile) {
-//     return (
-//         <MobileScreen />
-//     )
-//   }
 
 
   async function onSubmit(event){
@@ -126,7 +123,7 @@ const EmployeeLookup = () => {
         console.log(data1)    
 
         history.push({
-          pathname : "/employees/result",
+          pathname : "/details",
           state: data1?.employee[0]?.id
         });
       
@@ -153,7 +150,7 @@ const EmployeeLookup = () => {
       <Grid xs={12} md={10} container justify="center" className="PageContent">
         <Grid className="PagesFrame">
           <PageHeader />
-          <Grid id="PageTitle">Employee Lookup</Grid>
+          <Grid id="PageTitle">Employee Lokjabskabsakbsokup</Grid>
           {/* Page Start */}
           <Grid xs={12} className="ContentPage BlueHeadTable FormTableArea">
             <Grid xs={12}>
@@ -184,4 +181,4 @@ const EmployeeLookup = () => {
   );
 }
 
-export default EmployeeLookup;
+export default Search;
