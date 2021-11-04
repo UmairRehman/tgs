@@ -11,9 +11,9 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import { useLocation } from "react-router-dom";
 import PageHeader from "../../../Components/PageHeader";
 import LeftControl from "../../../Components/LeftControl";
-
 import MobileScreen from './Mobile/safety-testing-edit';
 import {isMobile} from 'react-device-detect';
 var moment = require('moment-timezone');
@@ -30,9 +30,9 @@ const dummyData = {
     jobID : 1
   },
   crew_member: [
-    'James Mary',
-    'Robert Patricia' ,
-    'John Jennifer',
+    { id: 1, name:'James Mary'},
+    { id: 2, name:'Robert Patricia'},
+    { id: 3, name:'John Jennifer'},
   ],
   
   testingRules : [
@@ -45,12 +45,12 @@ const dummyData = {
   ],
   
   Results : [
-    '8.1) Result Description',
-    '8.2) Result Description' ,
-    '8.3) Result Description' ,
-    '8.4) Result Description',
-    '8.5) Result Description' ,
-    '8.6) Result Description'
+    { id: 1 , title :  'Result Description 1' },
+    { id: 2 , title :  'Result Description 2' } ,
+    { id: 3 , title :  'Result Description 3' } ,
+    { id: 4 , title :  'Result Description 4' },
+    { id: 5 , title :  'Result Description 5' } ,
+    { id: 6 , title :  'Result Description 6' }
   ]
 };
 
@@ -58,21 +58,26 @@ const dummyData = {
 
 
 const SafetyTestingEdit = () => {
-
+  let params = useLocation();
+  const eventId = params.state.eventID;
   const [safetyTesting, setSafetyTesting] = useState({
     testingRules:[],
-    crew_member1:{ name : '' , result: '' , comment: ''},
-    crew_member2:{ name : '' , result: '' , comment: ''},
-    crew_member3:{ name : '' , result: '' , comment: ''},
-    crew_member4:{ name : '' , result: '' , comment: ''}
+    crewList:[]
   });
+  
+
+  // crewMember = [
+  //   { id:' ', resultId: '' ,comment:''},
+  // ]
 
   useEffect(() => {
-    if ("geolocation" in navigator) {
-      console.log("Available");
-    } else {
-      console.log("Not Available");
-    }
+
+    let crewList =  dummyData.crew_member.map((row)=>{
+      return ({ id: row.id, name:row.name, result:'' , comment:'' })
+    })
+    console.log("eventId",eventId);
+    console.log("crewList",crewList);
+    setSafetyTesting({ ...safetyTesting , crewList:crewList })    
   }, [])
   
   //cases
@@ -81,78 +86,81 @@ const SafetyTestingEdit = () => {
       //  crew member 2 :  name = 5 , result = 6, comment = 7 
       //  crew member 3 :  name = 8 , result = 9, comment = 10 
       //  crew member 4 :  name = 11 , result = 12, comment = 13
+
+  const handleCrewData = (module , value , index) =>{
+    console.log(module , value , index);
+    const { crewList } = safetyTesting ; 
+
+    crewList[index][module] = value ;
+    setSafetyTesting({ ...safetyTesting , crewList:crewList })
+  }
   
   const handleSubmitData = (event ,value, key) => {
     console.log(value);
-    let { crew_member1 ,
-          crew_member2 ,
-          crew_member3 ,
-          crew_member4 
-      } = safetyTesting
     switch (key) {
       case 1:
         setSafetyTesting({...safetyTesting,testingRules:value});
         break;
 
-      case 2:
-        crew_member1.name=value 
-        setSafetyTesting({...safetyTesting, crew_member1});
-        break;
+      // case 2:
+      //   crew_member1.name=value 
+      //   setSafetyTesting({...safetyTesting, crew_member1});
+      //   break;
 
-      case 3:
-        crew_member1.result=value 
-      setSafetyTesting({...safetyTesting , crew_member1  });
-      break;
+      // case 3:
+      //   crew_member1.result=value 
+      // setSafetyTesting({...safetyTesting , crew_member1  });
+      // break;
 
-      case 4:
-        crew_member1.comment=event.target.value 
-      setSafetyTesting({...safetyTesting , crew_member1  });
-      break;
+      // case 4:
+      //   crew_member1.comment=event.target.value 
+      // setSafetyTesting({...safetyTesting , crew_member1  });
+      // break;
 
-      case 5:
-        crew_member2.name=value 
-        setSafetyTesting({...safetyTesting, crew_member2});
-        break;
+      // case 5:
+      //   crew_member2.name=value 
+      //   setSafetyTesting({...safetyTesting, crew_member2});
+      //   break;
 
-      case 6:
-        crew_member2.result=value 
-      setSafetyTesting({...safetyTesting , crew_member2  });
-      break;
+      // case 6:
+      //   crew_member2.result=value 
+      // setSafetyTesting({...safetyTesting , crew_member2  });
+      // break;
 
-      case 7:
-        crew_member2.comment=event.target.value 
-      setSafetyTesting({...safetyTesting , crew_member2  });
-      break;
+      // case 7:
+      //   crew_member2.comment=event.target.value 
+      // setSafetyTesting({...safetyTesting , crew_member2  });
+      // break;
 
-      case 8:
-        crew_member3.name=value 
-        setSafetyTesting({...safetyTesting, crew_member3});
-        break;
+      // case 8:
+      //   crew_member3.name=value 
+      //   setSafetyTesting({...safetyTesting, crew_member3});
+      //   break;
 
-      case 9:
-        crew_member3.result=value 
-      setSafetyTesting({...safetyTesting , crew_member3  });
-      break;
+      // case 9:
+      //   crew_member3.result=value 
+      // setSafetyTesting({...safetyTesting , crew_member3  });
+      // break;
 
-      case 10:
-        crew_member3.comment=event.target.value 
-      setSafetyTesting({...safetyTesting , crew_member3  });
-      break;
+      // case 10:
+      //   crew_member3.comment=event.target.value 
+      // setSafetyTesting({...safetyTesting , crew_member3  });
+      // break;
 
-      case 11:
-        crew_member4.name=value 
-        setSafetyTesting({...safetyTesting, crew_member4});
-        break;
+      // case 11:
+      //   crew_member4.name=value 
+      //   setSafetyTesting({...safetyTesting, crew_member4});
+      //   break;
 
-      case 12:
-        crew_member4.result=value 
-      setSafetyTesting({...safetyTesting , crew_member4  });
-      break;
+      // case 12:
+      //   crew_member4.result=value 
+      // setSafetyTesting({...safetyTesting , crew_member4  });
+      // break;
 
-      case 13:
-        crew_member4.comment=event.target.value 
-      setSafetyTesting({...safetyTesting , crew_member4  });
-      break;
+      // case 13:
+      //   crew_member4.comment=event.target.value 
+      // setSafetyTesting({...safetyTesting , crew_member4  });
+      // break;
         
       default:
         break;
@@ -160,10 +168,20 @@ const SafetyTestingEdit = () => {
   };
 
   const submitBtn = () =>{
-    console.log("data",safetyTesting);
-    navigator.geolocation.getCurrentPosition(function(position) {
-      console.log(position)
-    });
+    let { crewList } = safetyTesting
+
+    let x = crewList.map((row, index)=>{
+      let comment = document.getElementById(`comment${index}`).value
+      let resultId = row.result.id
+      return ({id:row.id , resultId,comment})
+    })
+    let data = {
+      rules : safetyTesting.testingRules ,
+      crew_member : x
+    }
+    // setSafetyTesting({...safetyTesting, })
+    console.log("data",data);
+    
   }
 
   if(isMobile) {
@@ -234,7 +252,7 @@ const SafetyTestingEdit = () => {
                           id="checkboxes-tags-demo"
                           options={dummyData.testingRules}
                           disableCloseOnSelect
-                          getOptionLabel={(option) => option}
+                          getOptionLabel={option => option.title}
                           value = { safetyTesting.testingRules }
                           onChange={ (event,value) =>handleSubmitData(event,value,1) }
                           renderOption={(option, { selected }) => (
@@ -258,11 +276,14 @@ const SafetyTestingEdit = () => {
             </Grid>
             
             <Grid xs={12} container className="FormTableArea mt20">
-                <Grid className="Cols4 mt30">
+              {
+                safetyTesting?.crewList.map((row,index)=>{
+                  return(
+                    <Grid className="Cols4 mt30">
                   <Grid xs={12} container justify="space-between">
                     <Grid xs={12} sm={6} container alignContent="center" className="mbold">Crew Member:</Grid>
                     <Grid xs={12} sm={6}>
-                      <Autocomplete
+                      {/* <Autocomplete
                         className="w100p"
                         id="combo-box-demo"
                         options={dummyData.crew_member}
@@ -270,7 +291,8 @@ const SafetyTestingEdit = () => {
                         onChange={ (event,value) =>handleSubmitData(event,value,2) }
                         getOptionLabel={(option) => option}
                         renderInput={(params) => <TextField {...params} label="Member" variant="outlined" />}
-                      />
+                      /> */}
+                       <TextField required={true} id="outlined-basic" label="Comment here" value={`${row.name}`} disabled variant="outlined" className="w100p"/>
                     </Grid>
                   </Grid>
                   <Grid xs={12} className="mt40">
@@ -282,9 +304,9 @@ const SafetyTestingEdit = () => {
                           className="w100p"
                           id="combo-box-demo"
                           options={dummyData.Results}
-                          value = { safetyTesting.crew_member1.result }
-                          onChange={ (event,value) =>handleSubmitData(event,value,3) }
-                          getOptionLabel={(option) => option}
+                          value = { row.result.title }
+                          onChange={ (event,value) =>handleCrewData('result',value,index) }
+                          getOptionLabel={option => option.title}
                           renderInput={(params) => <TextField {...params} label="Results" variant="outlined" />}
                         />
                     </Grid>
@@ -295,16 +317,25 @@ const SafetyTestingEdit = () => {
                     </Grid>
                     <Grid xs={12} className="mt14">
                       <TextareaAutosize 
-                          className="w100p" 
+                          className="w100p"
+                          id={`comment${index}`} 
                           rowsMin={6} 
                           placeholder="Share Your Thoughts...."
-                          value = { safetyTesting.crew_member1.comments }
-                          onChange={ (event,value) =>handleSubmitData(event,value,4) }  
+                          // value = { row?.comment }
+                          // onChange={ (event,value) =>{
+                          //   value = event.target.value  
+                          //   handleSubmitData('comment',value,index)
+                          //   }}  
                       />
                     </Grid>
                   </Grid>
                 </Grid>
-                <Grid className="Cols4 mt30">
+                  )
+                })
+                  
+              }
+                
+                {/* <Grid className="Cols4 mt30">
                   <Grid xs={12} container justify="space-between">
                     <Grid xs={12} sm={6} container alignContent="center" className="mbold">Crew Member:</Grid>
                     <Grid xs={12} sm={6}>
@@ -438,7 +469,7 @@ const SafetyTestingEdit = () => {
                       />
                     </Grid>
                   </Grid>
-                </Grid>
+                </Grid> */}
                 <Grid xs={12} className="mt30">
                   <Button className="LinkButton" onClick={submitBtn}>Save</Button>
                 </Grid>

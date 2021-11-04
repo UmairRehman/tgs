@@ -59,7 +59,7 @@ const Routing = () => (
     <Route exact path="/dashboard" component={()=><Dashboard/>}/>
 
     <Route exact path="/safety-testing" component={()=><SafetyTesting/>}/>
-    <Route exact path="/safety-testing/:id" component={()=><SafetyTestingEdit/>}/>
+    <Route exact path="/add-event-rules" component={()=><SafetyTestingEdit/>}/>
     <Route exact path="/enter-railroad-event" component={()=><Reilroad/>}/>
     
     <Route exact path="/create-ticket" component={()=><CreateTicket/>}/>

@@ -22,6 +22,8 @@ import LeftControl from "../../../Components/LeftControl";
 import MobileScreen from './Mobile/SafetyTesting';
 import {isMobile} from 'react-device-detect';
 import Services from '../../../Services'
+import { useHistory } from "react-router-dom";
+
 
 var moment = require('moment-timezone')
 const {
@@ -42,8 +44,9 @@ const columns = [
 
 
 const SafetyTesting = () => {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const history = useHistory();
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -56,13 +59,21 @@ const SafetyTesting = () => {
 
 
   // For Modal
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   const handleClickOpen = () => {
     setOpen(true);
   };
+  
+  const handleAddRule =(value) =>{
+    console.log("value",value);
+    // history.push({
+    //   pathname : "/add-event-rules",
+    //   state: {eventID: value}
+    // });
+  }
 
   const handleClose = () => {
     setOpen(false);
@@ -167,7 +178,14 @@ const SafetyTesting = () => {
                                         ? column.format(value)
                                         : value} */}
                                       {column.type == "edit" ? (
-                                        <Link to={`/safety-testing/${row.eventid}`} className="EditIcon"></Link>
+                                        <Link 
+                                          // onClick={()=>handleAddRule(row.id)} 
+                                          to={{
+                                            pathname : "/add-event-rules",
+                                            state: {eventID: row.id}
+                                          }}
+                                          className="EditIcon">
+                                         </Link>
                                       ) : column.type == "view" ? (
                                         <Button  onClick={handleClickOpen} className="ViewIcon"></Button>
                                       ) : (
