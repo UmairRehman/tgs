@@ -49,6 +49,7 @@ const {
     routes
   },
   Storage,
+  SocketClient,
 } = Services;
 
 const {
@@ -66,7 +67,14 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+const testClient = new SocketClient({
+  namespace: 'broadcast'
+});
+
+testClient.connect();
+
 const PageHeader = () => {
+
   const videoConstraints = {
     width: 300,
     height: 300,
@@ -261,6 +269,7 @@ const PageHeader = () => {
   /** Setting Header styles if the user is authenticated */
 
   const headerClassName = authenticatedHeader ? '' : classes.DisplayNone;
+
 
   /********************************************************** */
 

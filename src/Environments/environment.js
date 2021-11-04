@@ -11,16 +11,22 @@
   envName: 'dev',
 
   apiPaths: {
+    // port: 3000,
+    // port: 80,
     port: 4040,
+    // base: 'http://localhost',
+    // base: 'http://209.64.123.132
     base: 'http://34.225.30.148',
-    // base: 'http://34.225.30.148',
     // 3.23.118.71
     router: 'api/'
   },
-
+  
   socketPaths: {
-    port: 80,
-    base: 'http://209.64.123.132',
+    port: 3000,
+    // port: 4040,
+    base: 'http://localhost',
+    // base: 'http://209.64.123.132',
+    // base: 'http://34.225.30.148',
     router: 'api/'
   },
 

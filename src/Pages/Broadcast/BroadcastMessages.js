@@ -50,17 +50,17 @@ function createData(
 }
 
 const rows = [
-  createData("John Doe", "HR", "16-06-2021", "HR Update", "Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum"),
-  createData("John Doe", "IT", "16-06-2021", "Safety Update", "Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsumLorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum"),
-  createData("John Doe", "Sales", "16-06-2021", "HR Update", "Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum"),
-  createData("John Doe", "HR", "16-06-2021", "Safety Update", "Lorem IPsum Lorem IPsum Lorem IPsum LoremLorem IPsum Lorem IPsum Lorem IPsum"),
-  createData("John Doe", "HR", "16-06-2021", "HR Update", "Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum"),
-  createData("John Doe", "IT", "16-06-2021", "Safety Update", "Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsumLorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum"),
-  createData("John Doe", "Sales", "16-06-2021", "HR Update", "Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum"),
-  createData("John Doe", "HR", "16-06-2021", "Safety Update", "Lorem IPsum Lorem IPsum Lorem IPsum LoremLorem IPsum Lorem IPsum Lorem IPsum"),createData("John Doe", "HR", "16-06-2021", "HR Update", "Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum"),
-  createData("John Doe", "IT", "16-06-2021", "Safety Update", "Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsumLorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum"),
-  createData("John Doe", "Sales", "16-06-2021", "HR Update", "Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum"),
-  createData("John Doe", "HR", "16-06-2021", "Safety Update", "Lorem IPsum Lorem IPsum Lorem IPsum LoremLorem IPsum Lorem IPsum Lorem IPsum")
+  // createData("John Doe", "HR", "16-06-2021", "HR Update", "Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum"),
+  // createData("John Doe", "IT", "16-06-2021", "Safety Update", "Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsumLorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum"),
+  // createData("John Doe", "Sales", "16-06-2021", "HR Update", "Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum"),
+  // createData("John Doe", "HR", "16-06-2021", "Safety Update", "Lorem IPsum Lorem IPsum Lorem IPsum LoremLorem IPsum Lorem IPsum Lorem IPsum"),
+  // createData("John Doe", "HR", "16-06-2021", "HR Update", "Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum"),
+  // createData("John Doe", "IT", "16-06-2021", "Safety Update", "Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsumLorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum"),
+  // createData("John Doe", "Sales", "16-06-2021", "HR Update", "Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum"),
+  // createData("John Doe", "HR", "16-06-2021", "Safety Update", "Lorem IPsum Lorem IPsum Lorem IPsum LoremLorem IPsum Lorem IPsum Lorem IPsum"),createData("John Doe", "HR", "16-06-2021", "HR Update", "Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum"),
+  // createData("John Doe", "IT", "16-06-2021", "Safety Update", "Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsumLorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum"),
+  // createData("John Doe", "Sales", "16-06-2021", "HR Update", "Lorem IPsum Lorem IPsum Lorem IPsum Lorem IPsum"),
+  // createData("John Doe", "HR", "16-06-2021", "Safety Update", "Lorem IPsum Lorem IPsum Lorem IPsum LoremLorem IPsum Lorem IPsum Lorem IPsum")
 ];
 
 
