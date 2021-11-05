@@ -97,3 +97,28 @@ export const create_test_event = async (payload, headers) => {
         headers
     );
 };
+
+export const get_test_event_by_id = async (payload, headers) => {
+    const { id } = payload;
+    return await api.get(
+        routes.employee.get_test_event_by_id.concat(id),
+        payload,
+        headers
+    );
+};
+
+export const rules_listing = async (payload, headers) => {
+    return await api.get(
+        routes.employee.get_rules_list,
+        payload,
+        headers
+    );
+};
+
+export const add_rule_event = async (payload, headers) => {
+    return await api.post(
+        routes.employee.create_test_event_rule,
+        payload,
+        headers
+    );
+};

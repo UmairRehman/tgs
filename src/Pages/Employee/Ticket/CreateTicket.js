@@ -278,7 +278,7 @@ const CreateTicket = () => {
                             )}
                             required
                           /> */}
-                          <TextField id="outlined-basic" label="Comment here" value={`${ticketData?.requestedBy?.dnUsername}`} disabled variant="outlined" className="w100p"/>
+                          <TextField id="outlined-basic" label="Comment here" value={`${ticketData?.requestedBy?.firstName} ${ticketData?.requestedBy?.middleName} ${ticketData?.requestedBy?.lastName}`} disabled variant="outlined" className="w100p"/>
                       </Grid>
                     </Grid>
                   </Grid>
@@ -295,7 +295,7 @@ const CreateTicket = () => {
                             disableCloseOnSelect
                             value = { ticketData.requestedFor }
                             options={lists.employees}
-                            getOptionLabel={ option => option.dnUsername}
+                            getOptionLabel={ option => (`${option.firstName} ${option.middleName} ${option.lastName}`) }
                             onChange={ (event,value) =>{
                               handleSubmitRequested(event,value,2)
                             }
@@ -308,7 +308,7 @@ const CreateTicket = () => {
                                   style={{ marginRight: 8 }}
                                   checked={selected}
                                 />
-                                {option.dnUsername}
+                                {`${option.firstName} ${option.middleName} ${option.lastName}`}
                               </React.Fragment>
                             )}
                             renderInput={(params) => (
