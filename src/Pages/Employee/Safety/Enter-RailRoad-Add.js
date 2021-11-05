@@ -149,7 +149,7 @@ const Railroad = () => {
     let crewMembersData=[]
     crewMembers.forEach((row)=>{
       if(row.name && row.position )
-        crewMembersData.push({id:row.name.id , position:row.position.name , image:row.image})
+        crewMembersData.push({id:row.name.id , position:row.position.title , image:row.image})
     })
     let data = {
       primaryId:lists.currentUser.id,
@@ -332,7 +332,7 @@ const Railroad = () => {
                         Primary
                       </Grid>
                       <Grid xs={12} className="mt14">
-                        <TextField required={true} id="outlined-basic" label="Comment here" value={`${lists?.currentUser?.dnUsername}`} disabled variant="outlined" className="w100p"/>
+                        <TextField required={true} id="outlined-basic" label="Comment here" value={`${lists?.currentUser?.firstName} ${lists?.currentUser?.middleName} ${lists?.currentUser?.lastName}`} disabled variant="outlined" className="w100p"/>
                       </Grid>
                     </Grid>
                   </Grid>
@@ -350,7 +350,7 @@ const Railroad = () => {
                             value={railRoad.assisting}
                             onChange={ (event,value) => {handleSubmitData(event, value,4)}}
                             options={lists.users}
-                            getOptionLabel={ option => option.dnUsername}
+                            getOptionLabel={ option => (`${option.firstName} ${option.middleName} ${option.lastName}`)}
                             // renderOption={(option, { selected }) => (
                               // <React.Fragment>
                               //   <Checkbox
@@ -379,7 +379,7 @@ const Railroad = () => {
                             className="w100p"
                             id="combo-box-demo"
                             options={lists.departments}
-                            getOptionLabel={ option => option.name}
+                            getOptionLabel={ option => option.title}
                             value={railRoad.department}
                             onChange={ (event,value) => {handleSubmitData(event, value,7)}}
                             renderInput={(params) => <TextField required={true} {...params} label="Department" variant="outlined" />}
@@ -400,7 +400,7 @@ const Railroad = () => {
                             className="w100p"
                             id="combo-box-demo"
                             options={lists.sites}
-                            getOptionLabel={ option => option.name}
+                            getOptionLabel={ option => option.title}
                             value={railRoad.site}
                             onChange={ (event,value) => {handleSubmitData(event, value,8)}}
                             renderInput={(params) => <TextField required={true} {...params} label="Site" variant="outlined" />}
@@ -616,8 +616,8 @@ const Railroad = () => {
                                   id="combo-box-name" 
                                   name = "name"
                                   options={lists.users}
-                                  getOptionLabel={ option => option.dnUsername}
-                                  value={x.dnUsername}
+                                  getOptionLabel={ option => (`${option.firstName} ${option.middleName} ${option.lastName}`)}
+                                  value={`${x.firstName} ${x.middleName} ${x.lastName}`}
                                   onChange={(e,value) => { 
                                                 handleInputChange('name', value,i)}
                                               }
@@ -634,7 +634,7 @@ const Railroad = () => {
                                     id="combo-box-demo"
                                     name="position"
                                     options={lists.positions}
-                                    getOptionLabel={ option => option.name}
+                                    getOptionLabel={ option => option.title}
                                     value={x.position}
                                     onChange={(e,value) => { 
                                       handleInputChange('position', value,i)}

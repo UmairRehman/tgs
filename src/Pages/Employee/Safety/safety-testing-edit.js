@@ -11,11 +11,16 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import { useLocation } from "react-router-dom";
 import PageHeader from "../../../Components/PageHeader";
 import LeftControl from "../../../Components/LeftControl";
-
 import MobileScreen from './Mobile/safety-testing-edit';
 import {isMobile} from 'react-device-detect';
+import Services from '../../../Services';
+const {
+  employee,
+  Storage
+} = Services;
 var moment = require('moment-timezone');
 
 
@@ -30,27 +35,24 @@ const dummyData = {
     jobID : 1
   },
   crew_member: [
-    'James Mary',
-    'Robert Patricia' ,
-    'John Jennifer',
+    { id: 1, name:'James Mary'},
+    { id: 2, name:'Robert Patricia'},
+    { id: 3, name:'John Jennifer'},
   ],
   
   testingRules : [
-    '6.1) Rule Description' ,
-    '6.2) Rule Description' ,
-    '6.3) Rule Description' ,
-    '6.4) Rule Description',
-    '6.5) Rule Description' ,
-    '6.6) Rule Description',
+    {id:1 , title:'6.1) Rule Description' },
+    {id:2 , title:'6.2) Rule Description' },
+    {id:3 , title:'6.3) Rule Description' },
+    {id:4 , title:'6.4) Rule Description'},
+    {id:5 , title:'6.5) Rule Description' },
+    {id:6 , title:'6.6) Rule Description'},
   ],
   
   Results : [
-    '8.1) Result Description',
-    '8.2) Result Description' ,
-    '8.3) Result Description' ,
-    '8.4) Result Description',
-    '8.5) Result Description' ,
-    '8.6) Result Description'
+    { id: 1 , title :  'Pass' },
+    { id: 2 , title :  'Fail' } ,
+    { id: 3 , title :  'Not Available' }
   ]
 };
 
@@ -58,21 +60,65 @@ const dummyData = {
 
 
 const SafetyTestingEdit = () => {
+  let params = useLocation();
+  const eventId = params.state.eventID;
+  
+  const [ruleList, setRuleList] = useState([])
+  const [eventDetail, setEventDetail] = useState({
+    eventID : "",
+    date : moment(new Date()).format("dd-mm-yyyy"),
+    time : moment(new Date()).format("hh:mm:ss a"),
+    jobID : ""
+  })
 
   const [safetyTesting, setSafetyTesting] = useState({
     testingRules:[],
-    crew_member1:{ name : '' , result: '' , comment: ''},
-    crew_member2:{ name : '' , result: '' , comment: ''},
-    crew_member3:{ name : '' , result: '' , comment: ''},
-    crew_member4:{ name : '' , result: '' , comment: ''}
+    crewList:[]
   });
+  
 
-  useEffect(() => {
-    if ("geolocation" in navigator) {
-      console.log("Available");
-    } else {
-      console.log("Not Available");
-    }
+  // crewMember = [
+  //   { id:' ', resultId: '' ,comment:''},
+  // ]
+
+  const getEventDetails = async (id) =>{
+    try {
+      let response = await employee.get_test_event_by_id({id})
+      if(response.httpStatus ==200)
+        return response.data   
+    } catch (error) {
+        console.log("ERROR",error);
+    }  
+  }
+
+  const getRulesList = async () =>{
+    try {
+      let res = await employee.rules_listing()
+      if(res.httpStatus ==200)
+        return res.data   
+    } catch (error) {
+        console.log("ERROR",error);
+    }  
+  }
+
+  useEffect(async () => {
+
+    let eventDetails  = await getEventDetails(eventId)
+    let crewList =  eventDetails?.crew?.rows?.map((row)=>{
+      return ({ id: row.Employee.id, name:`${row.Employee.firstName} ${row.Employee.middleName} ${row.Employee.lastName}`, result:'' , comment:'' })
+    })
+    setSafetyTesting({ ...safetyTesting, crewList:crewList })  
+    let details = { 
+      eventID : eventDetails.event.id,
+      date : moment(new Date(eventDetails.event.date)).format("DD-MM-YYYY"),
+      time : eventDetails.event.time.slice(0,-3),
+      jobID : eventDetails.event.jobID,
+     }
+     setEventDetail(details)
+    let rulesList = await getRulesList()
+    setRuleList(rulesList)
+    console.log(('data',rulesList));
+
   }, [])
   
   //cases
@@ -81,89 +127,56 @@ const SafetyTestingEdit = () => {
       //  crew member 2 :  name = 5 , result = 6, comment = 7 
       //  crew member 3 :  name = 8 , result = 9, comment = 10 
       //  crew member 4 :  name = 11 , result = 12, comment = 13
+
+  const handleCrewData = (module , value , index) =>{
+    console.log(module , value , index);
+    const { crewList } = safetyTesting ; 
+
+    crewList[index][module] = value ;
+    setSafetyTesting({ ...safetyTesting , crewList:crewList })
+  }
   
   const handleSubmitData = (event ,value, key) => {
     console.log(value);
-    let { crew_member1 ,
-          crew_member2 ,
-          crew_member3 ,
-          crew_member4 
-      } = safetyTesting
     switch (key) {
       case 1:
         setSafetyTesting({...safetyTesting,testingRules:value});
         break;
 
-      case 2:
-        crew_member1.name=value 
-        setSafetyTesting({...safetyTesting, crew_member1});
-        break;
-
-      case 3:
-        crew_member1.result=value 
-      setSafetyTesting({...safetyTesting , crew_member1  });
-      break;
-
-      case 4:
-        crew_member1.comment=event.target.value 
-      setSafetyTesting({...safetyTesting , crew_member1  });
-      break;
-
-      case 5:
-        crew_member2.name=value 
-        setSafetyTesting({...safetyTesting, crew_member2});
-        break;
-
-      case 6:
-        crew_member2.result=value 
-      setSafetyTesting({...safetyTesting , crew_member2  });
-      break;
-
-      case 7:
-        crew_member2.comment=event.target.value 
-      setSafetyTesting({...safetyTesting , crew_member2  });
-      break;
-
-      case 8:
-        crew_member3.name=value 
-        setSafetyTesting({...safetyTesting, crew_member3});
-        break;
-
-      case 9:
-        crew_member3.result=value 
-      setSafetyTesting({...safetyTesting , crew_member3  });
-      break;
-
-      case 10:
-        crew_member3.comment=event.target.value 
-      setSafetyTesting({...safetyTesting , crew_member3  });
-      break;
-
-      case 11:
-        crew_member4.name=value 
-        setSafetyTesting({...safetyTesting, crew_member4});
-        break;
-
-      case 12:
-        crew_member4.result=value 
-      setSafetyTesting({...safetyTesting , crew_member4  });
-      break;
-
-      case 13:
-        crew_member4.comment=event.target.value 
-      setSafetyTesting({...safetyTesting , crew_member4  });
-      break;
-        
       default:
         break;
     }
   };
 
-  const submitBtn = () =>{
-    console.log("data",safetyTesting);
-    navigator.geolocation.getCurrentPosition(function(position) {
-      console.log(position)
-    });
+  const finalData = () => {
+    let { crewList } = safetyTesting
+    let rule_result = crewList.map((row, index)=>{
+      let comment = document.getElementById(`comment${index}`).value
+      let result = row.result.title
+      return ({crew_id:row.id , result,comment})
+    })
+
+    let data = {
+        rule_id : safetyTesting.testingRules.id,
+        event_id : eventId,
+        rule_result : rule_result
+    }
+    return data
+  }
+
+  const submitBtn = async () =>{ 
+    let body = await finalData();
+    if(body){
+      try {
+        let res = await employee.add_rule_event({...body})
+        if(res?.httpStatus == 200)
+        {
+          console.log('result',res);
+        }  
+      } catch (error) {
+        console.log('API ERROR', error);
+      }
+    }
   }
 
   if(isMobile) {
@@ -192,7 +205,7 @@ const SafetyTestingEdit = () => {
                       Event ID
                     </Grid>
                     <Grid>
-                      {dummyData.staticData.eventID}
+                      {eventDetail.eventID}
                     </Grid>
                   </ListItem>
                   <ListItem container className="p0 pt6 pb20">
@@ -200,7 +213,7 @@ const SafetyTestingEdit = () => {
                       Date
                     </Grid>
                     <Grid>
-                      {dummyData.staticData.date}
+                      {eventDetail.date}
                     </Grid>
                   </ListItem>
                   <ListItem container className="p0 pt6 pb20">
@@ -208,7 +221,7 @@ const SafetyTestingEdit = () => {
                       Time
                     </Grid>
                     <Grid>
-                      {dummyData.staticData.time}
+                      {eventDetail.time}
                     </Grid>
                   </ListItem>
                   <ListItem container className="p0 pt6 pb20">
@@ -216,7 +229,7 @@ const SafetyTestingEdit = () => {
                       Job ID
                     </Grid>
                     <Grid>
-                      {dummyData.staticData.jobID}
+                      {eventDetail.jobID}
                     </Grid>
                   </ListItem>
                 </List>
@@ -229,12 +242,11 @@ const SafetyTestingEdit = () => {
                       </Grid>
                       <Grid xs={12} className="mt14 MultiCheckBox">
                         <Autocomplete
-                          multiple
                           className="w100p"
                           id="checkboxes-tags-demo"
-                          options={dummyData.testingRules}
+                          options={ruleList}
                           disableCloseOnSelect
-                          getOptionLabel={(option) => option}
+                          getOptionLabel={option => option.FullName}
                           value = { safetyTesting.testingRules }
                           onChange={ (event,value) =>handleSubmitData(event,value,1) }
                           renderOption={(option, { selected }) => (
@@ -245,7 +257,7 @@ const SafetyTestingEdit = () => {
                                 style={{ marginRight: 8 }}
                                 checked={selected}
                               />
-                              {option}
+                              {option.FullName}
                             </React.Fragment>
                           )}
                           renderInput={(params) => (
@@ -258,11 +270,14 @@ const SafetyTestingEdit = () => {
             </Grid>
             
             <Grid xs={12} container className="FormTableArea mt20">
-                <Grid className="Cols4 mt30">
+              {
+                safetyTesting?.crewList.map((row,index)=>{
+                  return(
+                    <Grid className="Cols4 mt30">
                   <Grid xs={12} container justify="space-between">
-                    <Grid xs={12} sm={6} container alignContent="center" className="mbold">Crew Member:</Grid>
-                    <Grid xs={12} sm={6}>
-                      <Autocomplete
+                    <Grid xs={12}  container alignContent="center" className="mbold">Crew Member:</Grid>
+                    <Grid xs={12} >
+                      {/* <Autocomplete
                         className="w100p"
                         id="combo-box-demo"
                         options={dummyData.crew_member}
@@ -270,7 +285,8 @@ const SafetyTestingEdit = () => {
                         onChange={ (event,value) =>handleSubmitData(event,value,2) }
                         getOptionLabel={(option) => option}
                         renderInput={(params) => <TextField {...params} label="Member" variant="outlined" />}
-                      />
+                      /> */}
+                       <TextField required={true} id="outlined-basic" label="Comment here" value={`${row.name}`} disabled variant="outlined" className="w100p"/>
                     </Grid>
                   </Grid>
                   <Grid xs={12} className="mt40">
@@ -282,11 +298,15 @@ const SafetyTestingEdit = () => {
                           className="w100p"
                           id="combo-box-demo"
                           options={dummyData.Results}
-                          value = { safetyTesting.crew_member1.result }
-                          onChange={ (event,value) =>handleSubmitData(event,value,3) }
-                          getOptionLabel={(option) => option}
+                          value = { row.result.title }
+                          onChange={ (event,value) =>handleCrewData('result',value,index) }
+                          getOptionLabel={option => option.title}
                           renderInput={(params) => <TextField {...params} label="Results" variant="outlined" />}
                         />
+                        {/* <TextField id="outlined-basic" label="Comment here" 
+                            // value={`${ticketData?.requestedBy?.firstName} ${ticketData?.requestedBy?.middleName} ${ticketData?.requestedBy?.lastName}`} 
+                            // disabled 
+                            variant="outlined" className="w100p"/> */}
                     </Grid>
                   </Grid>
                   <Grid xs={12} className="mt40">
@@ -295,16 +315,25 @@ const SafetyTestingEdit = () => {
                     </Grid>
                     <Grid xs={12} className="mt14">
                       <TextareaAutosize 
-                          className="w100p" 
+                          className="w100p"
+                          id={`comment${index}`} 
                           rowsMin={6} 
                           placeholder="Share Your Thoughts...."
-                          value = { safetyTesting.crew_member1.comments }
-                          onChange={ (event,value) =>handleSubmitData(event,value,4) }  
+                          // value = { row?.comment }
+                          // onChange={ (event,value) =>{
+                          //   value = event.target.value  
+                          //   handleSubmitData('comment',value,index)
+                          //   }}  
                       />
                     </Grid>
                   </Grid>
                 </Grid>
-                <Grid className="Cols4 mt30">
+                  )
+                })
+                  
+              }
+                
+                {/* <Grid className="Cols4 mt30">
                   <Grid xs={12} container justify="space-between">
                     <Grid xs={12} sm={6} container alignContent="center" className="mbold">Crew Member:</Grid>
                     <Grid xs={12} sm={6}>
@@ -438,7 +467,7 @@ const SafetyTestingEdit = () => {
                       />
                     </Grid>
                   </Grid>
-                </Grid>
+                </Grid> */}
                 <Grid xs={12} className="mt30">
                   <Button className="LinkButton" onClick={submitBtn}>Save</Button>
                 </Grid>

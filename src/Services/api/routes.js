@@ -24,6 +24,9 @@ export const routes = {
         site_list: 'employee/location',
         create_test_event: 'employee/testEvent/1',
         get_test_event_list: 'employee/testEvent',
+        get_test_event_by_id:'employee/testEvent/',
+        get_rules_list:'employee/testEventRule/rules',
+        create_test_event_rule:'employee/testEventRule',
     },
     hr:{
         get_applicant: 'employee/hr/applicant',
@@ -34,6 +37,7 @@ export const routes = {
         get_ticket_by_id: 'employee/ticket/',
         update_tickets : 'employee/ticket/',
         get_employee_by_id : 'employee/hr/employee/',
+        update_employee_address :'employee/hr/employee',
 
 
         // dropdowns 

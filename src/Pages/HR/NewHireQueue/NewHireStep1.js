@@ -534,7 +534,6 @@ const NewHireStep1 = () => {
                                         onChange={(value) => { setstartDate(value) }}
                                         value={startDate}
                                         className="DateTimePicker"
-                                        defaultValue="YY-MM-DD"
                                         id="date"
                                         className="datePickerReact"
                                     />
