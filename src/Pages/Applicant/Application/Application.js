@@ -165,7 +165,7 @@ const Application = () => {
         cell_phone: '',
         agree_to_notifications: true,
         spouse_name: '',
-        spouse_dateOfBirth: new Date(),
+        spouse_date_of_birth: new Date(),
         spouse_address: '',
         spouse_phone_number: '',
     });
@@ -346,6 +346,10 @@ const Application = () => {
     const registerApplicant = async () => {
         try {
             const isValidApplicant = await validateApplicant(applicationForm);
+
+            /** Transformations */
+            if (applicationForm.spouse_date_of_birth)
+                applicationForm.spouse_date_of_birth = applicationForm.spouse_date_of_birth.toString();
 
             const formDataToPush = new FormData();
 
@@ -647,7 +651,11 @@ const Application = () => {
                                             }
                                         />
                                     </Grid>
-                                    <Grid xs={6} className="mt30 pl20">
+                                    <Grid xs={6} className={
+                                        maritalInformation[0].marital_status === 'married'
+                                            ? 'mt30 pl20'
+                                            : 'd-none'
+                                    }>
                                         <Grid xs={12} className="mbold mb14">
                                             Name of Spouse
                                         </Grid>
@@ -664,14 +672,18 @@ const Application = () => {
 
                                 {/* ---------- */}
                                 <Grid xs={12} container className="LRM40">
-                                    <Grid xs={6} className="mt30 pr20">
+                                    <Grid xs={6} className={
+                                        maritalInformation[0].marital_status === 'married'
+                                            ? 'mt30 pr20'
+                                            : 'd-none'
+                                    }>
                                         <Grid xs={12} className="mbold mb14">
                                             Spouse's Date of Birth
                                         </Grid>
                                         <DatePicker
                                             onChange={($e) => setStateForFormControl(
                                                 contactInformation,
-                                                'spouse_dateOfBirth',
+                                                'spouse_date_of_birth',
                                                 $e,
                                             )}
                                             value={dateOfBirth}
@@ -679,7 +691,11 @@ const Application = () => {
                                             className="datePickerReact w100p bg-white react-date-picker"
                                         />
                                     </Grid>
-                                    <Grid xs={6} className="mt30 pl20">
+                                    <Grid xs={6} className={
+                                        maritalInformation[0].marital_status === 'married'
+                                            ? 'mt30 pl20'
+                                            : 'd-none'
+                                    }>
                                         <Grid xs={12} className="mbold mb14">
                                             Spouse's Address
                                         </Grid>
@@ -696,7 +712,11 @@ const Application = () => {
 
                                 {/* ---------- */}
                                 <Grid xs={12} container className="LRM40">
-                                    <Grid xs={12} className="mt30">
+                                    <Grid xs={12} className={
+                                        maritalInformation[0].marital_status === 'married'
+                                            ? 'mt30'
+                                            : 'd-none'
+                                    }>
                                         <Grid xs={12} className="mbold mb14">
                                             Spouse's Telephone Number
                                         </Grid>
