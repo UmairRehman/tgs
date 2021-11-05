@@ -9,6 +9,13 @@ import { Storage } from '../storage';
 /** Local imports & Statics */
 import { environment } from '../../Environments/environment';
 
+import { Imports } from '../../Imports';
+
+
+const {
+    role
+} = Imports;
+
 
 export class SocketClient {
     storage;
@@ -34,6 +41,9 @@ export class SocketClient {
         const token = encodeURIComponent(
             this.storage.get('access_jwt')
         );
+
+        if (!token)
+            return false;
 
         this.client = io(
             `${base}:${port}/${namespace}`,
@@ -61,12 +71,49 @@ export class SocketClient {
                 console.log('disconnected');
             });
 
-            this.client.on('test-event', (args) => {
-                console.log(args);
-            })
+            this.client.on('broadcast', this.broadcastHandler);
+
         } catch (exc) {
             console.log(exc);
         }
+    }
 
+    broadcastHandler = (socketResponse) => {
+        const {
+            EmployeeId,
+            SubDepartmentId,
+            message,
+            subject,
+            from,
+        } = socketResponse;
+
+        const { label: sender } = role[SubDepartmentId];
+
+        const broadcastObject = {
+            message,
+            subject,
+            sender,
+            from
+        }
+
+        this.launchBroadcast(broadcastObject);
+    }
+
+    launchBroadcast = (data) => {
+        const broadCastReceivedEvent = new CustomEvent(
+            'broadcast-received',
+            {
+                detail: {
+                    ...data
+                }
+            }
+        );
+
+        window.dispatchEvent(broadCastReceivedEvent)
+    }
+
+    static broadcastListener = (fn) => {
+        window.addEventListener('broadcast-received', fn);
+        return true;
     }
 }

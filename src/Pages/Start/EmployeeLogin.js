@@ -173,9 +173,6 @@ const EmployeeLogin = () => {
         history.push('/login')
       }
 
-
-      history.pushState();
-
       return true;
 
     } catch (exc) {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Grid,
   Button,
@@ -25,6 +25,35 @@ import LeftControl from "../../Components/LeftControl";
 // import MobileScreen from '../Broadcast/Mobile/BroadcastMessages';
 // import {isMobile} from 'react-device-detect';
 
+/** Local imports & Statics */
+import { Imports } from '../../Imports';
+
+
+/** Local dependencies & Libraries */
+import Services from '../../Services';
+
+
+let {
+  role
+} = Imports;
+
+const {
+  broadcast,
+  Storage,
+  SocketClient,
+} = Services;
+
+
+/** Pre-req configuration */
+const roles = Object.values(role);
+
+let broadcastListener;
+
+
+if (!localStorage.getItem('broadcasts'))
+  localStorage.broadcasts = '[]';
+
+
 const columns = [
   { id: "from", label: "From", minWidth: "200px", type: "value" },
   { id: "to", label: "To", minWidth: "80px", type: "value" },
@@ -33,7 +62,7 @@ const columns = [
   { id: "message", label: "Message", minWidth: 500, type: "value" }
 ];
 
-function createData( 
+function createData(
   from,
   to,
   date,
@@ -65,19 +94,9 @@ const rows = [
 
 
 
-const top100Films = [
-  { title: 'Liam Noah', name: 'Liam Noah' },
-  { title: 'Oliver William', name: 'Oliver William' },
-  { title: 'James Benjamin', name: 'James Benjamin' },
-  { title: 'Lucas Henry', name: 'Lucas Henry' },
-  { title: 'Alexander Mason', name: 'Alexander Mason' },
-  { title: 'Michael Ethan', name: 'Michael Ethan' },
-  { title: 'Daniel Jacob', name: 'Daniel Jacob' },
-];
-
-
-
 const BroadcastMessages = () => {
+  const storage = new Storage();
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -96,9 +115,49 @@ const BroadcastMessages = () => {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
+  const [toForBroadcast, setToBroadcast] = useState(roles[0]);
+
+  const [broadcastSubject, setBroadcastSubject] = useState('');
+
+  const [broadcastMessage, setBroadcastMessage] = useState('');
+
+  const handleToValues = (event, value) => {
+    setToBroadcast(value.role_id);
+  }
+
+  const handleBroadcastSubject = ($e, value) => {
+    setBroadcastSubject($e.target.value);
+  }
+
+  const handleBroadcastMessage = ($e, value) => {
+    setBroadcastMessage($e.target.value);
+  }
+
   const handleClickOpenModal = () => {
     setOpen(true);
   };
+
+  const sendBroadcasst = async () => {
+    try {
+      handleCloseModal();
+
+      const { id } = JSON.parse(
+        localStorage.user_profile
+      );
+
+      const broadcastMessageObject = {
+        Department_Id: toForBroadcast,
+        subject: broadcastSubject,
+        message: broadcastMessage,
+        employee_id: id,
+      }
+
+      const response = await broadcast.sendBroadcast(broadcastMessageObject);
+
+    } catch (exc) {
+      console.log(exc);
+    }
+  }
 
   const handleCloseModal = () => {
     setOpen(false);
@@ -108,6 +167,7 @@ const BroadcastMessages = () => {
   //       <MobileScreen />
   //   )
   // }
+
   return (
     <Grid container xs={12} className="Liq-Container">
       <Grid xs={12} md={2} className="LeftContol" id="LeftContol">
@@ -132,7 +192,7 @@ const BroadcastMessages = () => {
               >
                 <Paper>
                   <TableContainer>
-                    <Table  aria-label="table">
+                    <Table aria-label="table">
                       <TableHead>
                         <TableRow>
                           {columns.map((column) => (
@@ -169,7 +229,7 @@ const BroadcastMessages = () => {
                                       align={column.align}
                                     >
                                       {column.format &&
-                                      typeof value === "number"
+                                        typeof value === "number"
                                         ? column.format(value)
                                         : value}
                                     </TableCell>
@@ -217,7 +277,8 @@ const BroadcastMessages = () => {
               freeSolo
               id="free-solo-2-demo"
               disableClearable
-              options={top100Films.map((option) => option.title)}
+              options={roles}
+              getOptionLabel={(option) => option.label}
               renderInput={(params) => (
                 <TextField
                   {...params}
@@ -227,22 +288,25 @@ const BroadcastMessages = () => {
                   InputProps={{ ...params.InputProps, type: 'search' }}
                 />
               )}
+              onChange={handleToValues}
             />
           </Grid>
           <Grid xs={12} className="mbold mt30">
             <Grid xs={12} className="pl14">Subject</Grid>
-            <TextField id="outlined-basic" label="Type Here" variant="outlined" className="w100p"/>
+            <TextField id="outlined-basic" label="Type Here" variant="outlined" className="w100p"
+              onChange={handleBroadcastSubject} />
           </Grid>
           <Grid xs={12} className="mt30">
             <TextareaAutosize className="w100p" rowsMin={6} placeholder="Dear recipient,
-Please note that progress made on last week's event......" />
+Please note that progress made on last week's event......"
+              onChange={handleBroadcastMessage} />
           </Grid>
           <Grid xs={12} container justify="center" className="mt30">
-            <Button className="LinkButton">Send Message</Button>
+            <Button className="LinkButton" onClick={sendBroadcasst}>Send Message</Button>
           </Grid>
         </DialogContent>
       </Dialog>
-      
+
 
 
 

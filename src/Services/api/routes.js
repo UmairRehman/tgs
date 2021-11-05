@@ -42,5 +42,8 @@ export const routes = {
         location : '/employee/location',
         paytype : 'employee/payType',
         subDepartment : 'employee/department/subDepartment/',
+    },
+    broadcast:{
+        create: 'employee/broadcastMessage/',
     }
 }

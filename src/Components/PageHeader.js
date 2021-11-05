@@ -67,11 +67,19 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const testClient = new SocketClient({
+
+let broadcastListener;
+
+/** Pre-req Configuration */
+const broadcastClient = new SocketClient({
   namespace: 'broadcast'
 });
 
-testClient.connect();
+broadcastClient.connect();
+
+if (!localStorage.getItem('broadcasts'))
+  localStorage.broadcasts = '[]';
+
 
 const PageHeader = () => {
 
@@ -215,7 +223,7 @@ const PageHeader = () => {
       storage.set('displayPicture', uri);
 
       storage.remove('retreivingDp');
-      
+
     } catch (exc) {
       console.log(exc);
 
@@ -229,10 +237,32 @@ const PageHeader = () => {
     console.log(exc);
   }
 
+  const getBroadcasts = () => {
+    return JSON.parse(
+      storage.get('broadcasts')
+    )
+  }
+
+  const [broadcasts, insertBroadcasts] = useState(
+    getBroadcasts()
+  );
+
   // For Modal
   const [aletopen, setAlertOpen] = React.useState(false);
   //  const //theme = useTheme();
   //const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const acknowledgeAndClose = () => {
+    AlertPopOff();
+
+    setTimeout(() => {
+      const [first, ...rest] = broadcasts;
+
+      storage.set('broadcasts', JSON.stringify(rest));
+
+      insertBroadcasts(rest);
+    }, 0);
+  }
 
   const AlertPop = () => {
     setAlertOpen(true);
@@ -242,6 +272,28 @@ const PageHeader = () => {
     setAlertOpen(false);
   };
 
+  useEffect(() => {
+    if (!broadcastListener) {
+      broadcastListener = SocketClient.broadcastListener((broadcastEvent) => {
+        const {
+          detail: broadcastObject
+        } = broadcastEvent;
+
+        const useBroadcasts = [...broadcasts, broadcastObject];
+
+        insertBroadcasts(useBroadcasts);
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    storage.set('broadcasts', JSON.stringify(broadcasts));
+
+    if (getBroadcasts().length)
+      AlertPop();
+  }, [broadcasts])
+
+
   /** Retreiving user profile information, cached in localstorage.
    * TO APPLY - state service later
    */
@@ -250,6 +302,7 @@ const PageHeader = () => {
   ) || { userName: 'Not Found' };
 
   if (userProfile) {
+
     var {
       dnUsername,
       firstName,
@@ -571,18 +624,24 @@ const PageHeader = () => {
           <Grid xs={12}>
             <Grid xs={12} className="mbold pl14">To</Grid>
             <Grid xs={12} className="AlertPopTextBox">
-              TGS Safety Team
+              {
+                broadcasts?.[0]?.from || broadcasts?.[0]?.sender
+              }
             </Grid>
           </Grid>
           <Grid xs={12}>
             <Grid xs={12} className="mbold mt30 pl14">Subject</Grid>
             <Grid xs={12} className="AlertPopTextBox">
-              TGS Safety Team
+              {
+                broadcasts?.[0]?.subject
+              }
             </Grid>
           </Grid>
           <Grid xs={12} className="mt16 AlertPopTextBox AlertPopTextarea">
             Dear recipient,<br />
-            Please note that progress made on last week's event......
+            {
+              broadcasts?.[0]?.message
+            }
           </Grid>
           <Grid xs={12} container className="mt10">
             <Grid className="AlertCheckBox">
@@ -594,7 +653,7 @@ const PageHeader = () => {
             </Grid>
           </Grid>
           <Grid xs={12} container justify="center" className="mt30">
-            <Button className="LinkButton">Acknowledge & Close</Button>
+            <Button className="LinkButton" onClick={acknowledgeAndClose}>Acknowledge & Close</Button>
           </Grid>
         </DialogContent>
       </Dialog>
