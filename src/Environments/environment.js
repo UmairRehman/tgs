@@ -18,17 +18,18 @@
     // base: 'http://209.64.123.132
     base: 'http://34.225.30.148',
     // 3.23.118.71
-    router: ''
-    // router: 'api/'
+    // router: ''
+    router: 'api/'
   },
   
   socketPaths: {
-    port: 3000,
-    // port: 4040,
-    base: 'http://localhost',
+    // port: 3000,
+    port: 4040,
+    // base: 'http://localhost',
     // base: 'http://209.64.123.132',
-    // base: 'http://34.225.30.148',
-    router: 'api/'
+    base: 'http://34.225.30.148',
+    // router: 'api/'
+    router: ''
   },
 
   get apiPath() {
