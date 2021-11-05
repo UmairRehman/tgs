@@ -123,7 +123,6 @@ export const subDepartment = async (payload, headers) => {
     );
 }
 
-
 export const getEmployee = async (payload, headers) => {
     const { id } = payload;
     return await api.get(
@@ -134,3 +133,16 @@ export const getEmployee = async (payload, headers) => {
     );
 }
 
+
+
+export const updateEmployeeAddress = async (payload, headers) => {
+    return await api.put(
+        routes.hr.update_employee_address,
+        payload,
+        headers
+    );
+}
+
+// @returns {void}
+//  * @param {string} payload.id - Employee Id
+// 

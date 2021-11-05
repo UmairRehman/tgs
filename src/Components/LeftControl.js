@@ -245,7 +245,18 @@ const LeftControl = () => {
                         </Link>
                       </ListItem>
                     </div>
-                    : null}
+                    : 
+                    role == 'hradmin' ? 
+                      <div>
+                       <ListItem button className="EmployeeIcon">
+                          <Link to="/search" className="Liq-NavLinks" className={pathname === '/employees' ? 'NavSelected' : ''}>
+                            <Icon />
+                            Employees
+                          </Link>
+                        </ListItem>
+                      </div>
+                    
+                    :null}
             {/* Supper Admin End */}
           </List>
         </Grid>

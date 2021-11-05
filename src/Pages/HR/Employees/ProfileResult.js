@@ -23,7 +23,18 @@ import { Link } from "react-router-dom";
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import PageHeader from "../../../Components/PageHeader";
+
 import LeftControl from "../../../Components/LeftControl";
+import { useLocation } from 'react-router'
+import { useHistory } from "react-router-dom";
+
+/** Local deoendencies & Libraries */
+import Services from '../../../Services';
+
+
+const {
+  hr
+} = Services;
 // import { withRouter } from 'react-router-dom';
 // import MobileScreen from './Mobile/Enter-RailRoad-Add';
 // import {isMobile} from 'react-device-detect';
@@ -131,9 +142,38 @@ const FailPass = [
 ];
 
 const ProfileResult = () => {
+
+
+    let history = useHistory();
+
+    const location = useLocation();
+
     const [page, setPage] = React.useState(0);
-    useEffect(() => {
-        window.scrollTo(0, 0);
+
+    const [emplpyeeData, setEmplpyeeData] = useState({})
+
+    useEffect(async() => {
+        
+      window.scrollTo(0, 0);
+
+      let id = location?.state;
+      console.log(id)
+
+
+      try{
+        let data1 = await hr.getEmployee({id}) ;
+        console.log(data1)    
+
+        history.push({
+          pathname : "/employees/result",
+          state: data1?.employee[0]?.id
+        });
+      
+      }
+      catch(exc){
+        console.log(exc);
+      }
+
     }, []);
 
     // For Modal
@@ -154,11 +194,6 @@ const ProfileResult = () => {
         setOpenC(false);
     };
 
-//   if(isMobile) {
-//     return (
-//         <MobileScreen />
-//     )
-//   }
   return (
     <Grid container xs={12} className="Liq-Container HRPortal">
       <Grid xs={12} md={2} className="LeftContol" id="LeftContol">

@@ -37,8 +37,8 @@
   }
 }
 
-
-
-
+.react-date-picker__clear-button{
+  display: none;
+}
 
 

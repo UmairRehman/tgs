@@ -22,6 +22,7 @@ import NewHireStep2 from '../Pages/HR/NewHireQueue/NewHireStep2';
 import AlartUpdate from '../Pages/HR/TicketsAndAlerts/AlartUpdate';
 import TicketUpdate from '../Pages/HR/TicketsAndAlerts/TicketUpdate';
 import EmployeeResult from '../Pages/HR/Employees/Result';
+
 import EmployeesProfile from '../Pages/HR/Employees/EmployeesProfile';
 import ProfileResult from '../Pages/HR/Employees/ProfileResult';
 import Termination from '../Pages/HR/Employees/Termination';
@@ -50,6 +51,9 @@ import EmployeeAgreement from '../Pages/Applicant/Documents/Documents/EmployeeAg
 import EmployeeHandbook from '../Pages/Applicant/Documents/Documents/EmployeeHandbook';
 import SafetyHandbook from '../Pages/Applicant/Documents/Documents/SafetyHandbook';
 import DrugAlcoholWeapons from '../Pages/Applicant/Documents/Documents/DrugAlcoholWeapons';
+import Search from '../Pages/HrAdmin/search';
+import Details from '../Pages/HrAdmin/details';
+
 const Routing = () => (
   <Router>
     <Route exact path="/" component={()=><Login/>}/>
@@ -87,6 +91,11 @@ const Routing = () => (
     <Route exact path="/employees-profile/result" component={()=><ProfileResult/>}/>
     <Route exact path="/employees-profile/termination" component={()=><Termination/>}/>
     <Route exact path="/employees-profile/terminated" component={()=><Terminated/>}/>
+
+    {/* HR admin Portal Nav */}
+
+    <Route path='/search' component={()=><Search/>} />
+    <Route path='/details' component={()=><Details/>} />
 
     {/* Admin Portal Nav */}
     {/* <Route exact path="/messages" component={()=><Messages/>}/> */}
