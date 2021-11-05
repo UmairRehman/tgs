@@ -77,7 +77,7 @@ const top100Films = [
 
 
 
-export default function BroadcastMessages() {
+const BroadcastMessages = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -96,11 +96,11 @@ export default function BroadcastMessages() {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const handleClickOpen = () => {
+  const handleClickOpenModal = () => {
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const handleCloseModal = () => {
     setOpen(false);
   };
   // if(isMobile) {
@@ -121,9 +121,9 @@ export default function BroadcastMessages() {
           <Grid xs={12} className="ContentPage">
             {/* TGS Softwares */}
             <Grid xs={12}>
-              <Link  onClick={handleClickOpen} className="LinkButton">
+              <Button onClick={handleClickOpenModal} className="LinkButton">
                 Send Broadcast Message
-              </Link>
+              </Button>
               <Grid
                 xs={12}
                 container
@@ -203,11 +203,11 @@ export default function BroadcastMessages() {
       <Dialog
         fullScreen={fullScreen}
         open={open}
-        onClose={handleClose}
+        onClose={handleCloseModal}
         className="BroadcastMessageModal LiqTables"
         aria-labelledby="responsive-dialog-title"
       >
-        <Button autoFocus onClick={handleClose} className="ModalClose">
+        <Button autoFocus onClick={handleCloseModal} className="ModalClose">
         </Button>
         <DialogContent>
           <Grid xs={12} className="mbold MsgBrodAuto">
@@ -251,4 +251,4 @@ Please note that progress made on last week's event......" />
   );
 }
 
-// export default SafetyTesting;
+export default BroadcastMessages;
