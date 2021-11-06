@@ -202,6 +202,7 @@ const CreateTicket = () => {
 
   const submitData = async (event)=>{
 
+    event.preventDefault();
     if (!loading) {
       setSuccess(false);
       setLoading(true);
@@ -227,6 +228,7 @@ const CreateTicket = () => {
       }
       console.log('data',data);   
     }
+    return false
   }
 
   const resetData =  () =>{

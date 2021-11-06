@@ -1,9 +1,6 @@
 import React, {useState,useEffect,useRef} from "react";
 import {
   Grid,
-  List,
-  ListItem,
-  Checkbox,
   Button,
   TextareaAutosize,
   Typography
@@ -14,13 +11,8 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import Switch from '@mui/material/Switch';
-import DatePicker from 'react-date-picker';
-import TimePicker from "react-time-picker"; 
 import PageHeader from "../../../Components/PageHeader";
 import LeftControl from "../../../Components/LeftControl";
-
-import { useHistory } from "react-router-dom";
-
 
 import Snackbar from '../../../Components/Snackbar';
 import { helpers } from "../../../helpers";
@@ -30,6 +22,7 @@ import {isMobile} from 'react-device-detect';
 
 /** Local deoendencies & Libraries */
 import Services from '../../../Services';
+import { isDOMComponent } from "react-dom/test-utils";
 const {
   employee,
   Storage
@@ -47,16 +40,10 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
 const Railroad = () => {
   const storage = new Storage ()
 
-  const history = useHistory();
-
-  const reRouteFunction = () => {
-    history.push("/safety-testing");
-  }
-
-
   //loader states
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [flag, setFlag] = useState(true)
 
   const [railRoad, setRailRoad] = useState({
     primary: '', //1
@@ -188,39 +175,33 @@ const Railroad = () => {
     return data
   }
 
-//   useEffect(() => {
-//     if (success && !loading)
-//       setTimeout(() => {
-//         reRouteFunction()
-//       }, 5000);
-// }, [success]);
-
   const submitBtn = async (event) =>{
     
+    event.preventDefault();
     if (!loading) {
         setSuccess(false);
         setLoading(true);
 
-        // event.preventDefault();
   
         try {
               let data = await apiBody()
               let result = await employee.create_test_event({...data})
               if(result?.httpStatus== 200){
                 console.log('result',result);
-                resetData()
-                
+
                 setSuccess(true);
-                return showSnackBar('Form Successfully Submitted');
                 setLoading(false);
+                resetData()
+                return showSnackBar('Form Successfully Submitted');
               }
             } catch (error) {
               setSuccess(false);
-              return showSnackBar(`Error Occured while submitting form: ${error}`);
               setLoading(false);
               console.log(error);
+              return showSnackBar(`Error Occured while submitting form: ${error}`);
             }
       }
+      return false;
   };
 
   //add crew
@@ -269,10 +250,17 @@ const Railroad = () => {
   
       console.log('latitude', latitude);
       console.log('longitude', longitude);
+      let gps = `${longitude},${latitude}`
+      // document.getElementById('GPS').value=gps
+      setRailRoad({...railRoad,GPS:gps})
+
     }
   
-    function error() {
-      console.log( 'Unable to retrieve your location');
+    function error(error) {
+      
+      console.log( 'Unable to retrieve your location',error);
+      setFlag(false)
+      return showSnackBar(`Unable to retrieve your location: Kindly Enter Lat Long `);
     }
   
     if(!navigator.geolocation) {
@@ -420,17 +408,18 @@ const Railroad = () => {
                       <Grid xs={12} className="mbold relative TargetIcon">
                         GPS (Lat, Long )
                       </Grid>
-                      <Grid xs={12} className="mt14">
+                      <Grid xs={12} className="w100p row justifyBetween m0 mt14">
                         <TextField 
+                            disabled={flag}
                             required={true}
                             id="GPS" 
                             label="Latitudes & Longitudes" 
                             variant="outlined" 
-                            className="w100p"
+                            className="w"
                             value={railRoad.GPS}
                             onChange={ (event,value) => {handleSubmitData(event, value,9)}}
                             />
-                          {/* <Button onClick={ getLocation }>GET</Button> */}
+                          <Button className="GetBtn" onClick={ getLocation }>GET</Button>
                       </Grid>
                     </Grid>
                     <Grid xs={12} className="dateTimePickerFrame">
@@ -562,7 +551,7 @@ const Railroad = () => {
                                   name = "name"
                                   options={lists.users}
                                   getOptionLabel={ option => (`${option.firstName} ${option.middleName} ${option.lastName}`)}
-                                  value={`${x.firstName} ${x.middleName} ${x.lastName}`}
+                                  // value={`${x.firstName} ${x.middleName} ${x.lastName}`}
                                   value={x.name}
                                   onChange={(e,value) => { 
                                                 handleInputChange('name', value,i)}
