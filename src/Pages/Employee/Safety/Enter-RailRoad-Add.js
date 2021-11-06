@@ -19,6 +19,11 @@ import TimePicker from "react-time-picker";
 import PageHeader from "../../../Components/PageHeader";
 import LeftControl from "../../../Components/LeftControl";
 
+import { useHistory } from "react-router-dom";
+
+
+import Snackbar from '../../../Components/Snackbar';
+import { helpers } from "../../../helpers";
 
 import MobileScreen from './Mobile/Enter-RailRoad-Add';
 import {isMobile} from 'react-device-detect';
@@ -30,6 +35,10 @@ const {
   Storage
 } = Services;
 
+const {
+  showSnackBar,
+} = helpers;
+
 var moment = require ('moment-timezone')
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
@@ -37,6 +46,13 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const Railroad = () => {
   const storage = new Storage ()
+
+  const history = useHistory();
+
+  const reRouteFunction = () => {
+    history.push("/safety-testing");
+  }
+
 
   //loader states
   const [loading, setLoading] = useState(false);
@@ -148,8 +164,10 @@ const Railroad = () => {
     let { crewMembers } = railRoad
     let crewMembersData=[]
     crewMembers.forEach((row)=>{
-      if(row.name && row.position )
+      if(row.name && row.position && row.image)
         crewMembersData.push({id:row.name.id , position:row.position.title , image:row.image})
+      else 
+        throw Error ("Images missing")  
     })
     let data = {
       primaryId:lists.currentUser.id,
@@ -170,35 +188,39 @@ const Railroad = () => {
     return data
   }
 
+//   useEffect(() => {
+//     if (success && !loading)
+//       setTimeout(() => {
+//         reRouteFunction()
+//       }, 5000);
+// }, [success]);
+
   const submitBtn = async (event) =>{
     
     if (!loading) {
         setSuccess(false);
         setLoading(true);
 
-        event.preventDefault();
-
-        let data = await apiBody()
-          if(data){
-              try {
-                let result = await employee.create_test_event({...data})
-                if(result?.httpStatus== 200){
-                  console.log('result',result);
-                  resetData()
-                  setSuccess(true);
-                  setLoading(false);
-                }
-              } catch (error) {
+        // event.preventDefault();
+  
+        try {
+              let data = await apiBody()
+              let result = await employee.create_test_event({...data})
+              if(result?.httpStatus== 200){
+                console.log('result',result);
+                resetData()
+                
                 setSuccess(true);
+                return showSnackBar('Form Successfully Submitted');
                 setLoading(false);
-                console.log(error);
               }
-          }
-          console.log('data',data);   
-        // console.log(railRoad);
-        // console.log("data",data);
-        // console.log("lists",lists);
-    }
+            } catch (error) {
+              setSuccess(false);
+              return showSnackBar(`Error Occured while submitting form: ${error}`);
+              setLoading(false);
+              console.log(error);
+            }
+      }
   };
 
   //add crew
@@ -343,27 +365,14 @@ const Railroad = () => {
                       </Grid>
                       <Grid xs={12} className="mt14">
                         <Autocomplete
-                            // multiple
                             className="w100p"
                             id="checkboxes-tags-demo"
-                            disableCloseOnSelect
                             value={railRoad.assisting}
                             onChange={ (event,value) => {handleSubmitData(event, value,4)}}
                             options={lists.users}
                             getOptionLabel={ option => (`${option.firstName} ${option.middleName} ${option.lastName}`)}
-                            // renderOption={(option, { selected }) => (
-                              // <React.Fragment>
-                              //   <Checkbox
-                              //     icon={icon}
-                              //     checkedIcon={checkedIcon}
-                              //     style={{ marginRight: 8 }}
-                              //     checked={selected}
-                              //   />
-                              //   {option}
-                              // </React.Fragment>
-                            // )}
                             renderInput={(params) => (
-                              <TextField {...params} variant="outlined" placeholder="Assisting" />
+                              <TextField required={true} {...params} variant="outlined" placeholder="Assisting" />
                             )}
                           />
                       </Grid>
@@ -430,13 +439,7 @@ const Railroad = () => {
                           Date
                         </Grid>
                         <Grid xs={12} className="mt14">
-                        {/* <DatePicker
-                          format={'dd-MM-yyyy'}
-                          value={railRoad.date}
-                          onChange={(value) => { handleSubmitData('x',value, 10) }}
-                          id="date"
-                          className="datePickerReact"
-                        /> */}
+
                         <TextField
                           required={true}
                           id="date"
@@ -456,13 +459,7 @@ const Railroad = () => {
                           Time
                         </Grid>
                         <Grid xs={12} className="mt14">
-                        {/* <TimePicker
-                          format={'hh:mm:ss a'}
-                          value={railRoad.time}
-                          onChange={(value) => { handleSubmitData('x',value, 11) }}
-                          id="time"
-                          className="datePickerReact"
-                        /> */}
+
                         <TextField
                           required={true}
                           id="time"
@@ -491,16 +488,7 @@ const Railroad = () => {
                     <Grid xs={12} container>
                       <Grid xs={3} className="mt14 pr40">
                       <Switch checked={railRoad.oje} onChange={ (event,value) =>handleSubmitData(event, value,2) } />
-                        {/* <Autocomplete
-                          value={railRoad.oje}
-                          onChange={(event, value) => {
-                            handleSubmitData(event, value,2)
-                          }}
-                          id="controllable-states-demo"
-                          options={dummyData.OJE}
-                          className="w100p"
-                          renderInput={(params) => <TextField {...params} variant="outlined" />}
-                        /> */}
+
                       </Grid>
                       <Grid xs={9} className="mt14 fieldSubText">
                         <TextField 
@@ -508,8 +496,6 @@ const Railroad = () => {
                           label={'Comment here'}
                           variant="outlined" 
                           className="w100p"
-                          // value = { railRoad.ojeComment }
-                          // onChange={ (event,value) =>handleSubmitData(event,value,3) } 
                           />
                         <Typography variant="h6" className="MuiTypography-subtitle2 MuiTypography-colorTextSecondary" component="h6">
                           Please leave this field empty if you have no comments
@@ -527,16 +513,7 @@ const Railroad = () => {
                     <Grid xs={12} container>
                       <Grid xs={3} className="mt14 pr40">
                       <Switch  checked={railRoad.joinTest} onChange={ (event,value) =>handleSubmitData(event,value, 5) } />
-                        {/* <Autocomplete
-                          value={railRoad.joinTest}
-                          onChange={(event, value) => {
-                            handleSubmitData(event,value, 5)
-                          }}  
-                          id="controllable-states-demo"
-                          options={dummyData.OJE}
-                          className="w100p"
-                          renderInput={(params) => <TextField {...params} variant="outlined" />}
-                        /> */}
+
                       </Grid>
                       <Grid xs={9} className="mt14 fieldSubText">
                         <TextField id="assisting_comment" label="Comment here" variant="outlined" className="w100p"/>
@@ -571,38 +548,6 @@ const Railroad = () => {
                     </Grid>
                     {/* Add New Crew Members Loop */}
                     <Grid xs={12} className="Scrolling SafetyCrewHeight mt30">
-                      {/* <Grid xs={12} container className="mt30">
-                        <Grid xs={6} className="pr40">
-                          <Grid xs={12} className="mbold">
-                            Crew member 1
-                          </Grid>
-                          <Autocomplete
-                            className="w100p"
-                            id="combo-box-demo"
-                            options={dummyData.CrewMember}
-                            getOptionLabel={(option) => option}
-                            renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
-                          />
-                        </Grid>
-                        <Grid xs={6} container>
-                          <Grid xs={12} className="mbold">
-                            Crew Position
-                          </Grid>
-                          <Grid xs={9}>
-                            <Autocomplete
-                              className="w100p"
-                              id="combo-box-demo"
-                              options={dummyData.CrewPosition}
-                              getOptionLabel={(option) => option}
-                              renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
-                            />
-                          </Grid>
-                          <Grid xs={3} container justify="flex-end">
-                            <label className="PickBtn" for="crew1"></label>
-                            <input type="file" id="crew1" className="hide"/>
-                          </Grid>
-                        </Grid>
-                      </Grid> */}
                       {
                         (railRoad.crewMembers).map((x,i)=>{
                           return(
@@ -618,10 +563,11 @@ const Railroad = () => {
                                   options={lists.users}
                                   getOptionLabel={ option => (`${option.firstName} ${option.middleName} ${option.lastName}`)}
                                   value={`${x.firstName} ${x.middleName} ${x.lastName}`}
+                                  value={x.name}
                                   onChange={(e,value) => { 
                                                 handleInputChange('name', value,i)}
                                               }
-                                  renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
+                                  renderInput={(params) => <TextField required={true} {...params} label="Select" variant="outlined" />}
                                 />
                               </Grid>
                               <Grid xs={8} container>
@@ -639,12 +585,14 @@ const Railroad = () => {
                                     onChange={(e,value) => { 
                                       handleInputChange('position', value,i)}
                                     }
-                                    renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
+                                    renderInput={(params) => <TextField required={true} {...params} label="Select" variant="outlined" />}
                                   />
                                 </Grid>
+                                
                                 <Grid xs={5} container justify="space-between" className="pl20">
                                   <label className={(x.image=='')?"PickBtn":"PickBtnFileUploaded"} for={`crew${i}`} ></label>
                                   <input 
+                                      required
                                       type="file" 
                                       id={`crew${i}`} 
                                       name="image" 
@@ -679,6 +627,7 @@ const Railroad = () => {
               </Button>
             </Grid>
             </form>
+            <Snackbar></Snackbar>
           </Grid>
           {/* Page Start End */}
         </Grid>

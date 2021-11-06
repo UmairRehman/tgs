@@ -30,12 +30,21 @@ import LeftControl from "../../../Components/LeftControl";
 import MobileScreen from './Mobile/CreateTicket';
 import {isMobile} from 'react-device-detect';
 
+
+
 /** Local deoendencies & Libraries */
+import Snackbar from '../../../Components/Snackbar';
+import { helpers } from "../../../helpers";
+
 import Services from '../../../Services';
 const {
   employee,
   Storage
 } = Services;
+
+const {
+  showSnackBar,
+} = helpers;
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
@@ -207,11 +216,13 @@ const CreateTicket = () => {
               resetData()
               setSuccess(true);
               setLoading(false);
+              return showSnackBar('Form Successfully Submitted');
             }
           } catch (error) {
             // setSuccess(true);
             setLoading(false);
             console.log(error);
+            return showSnackBar(`Error Occured while submitting form: ${error}`);
           }
       }
       console.log('data',data);   
@@ -431,6 +442,7 @@ const CreateTicket = () => {
                 </Grid>
               </form>
             </Grid>
+            <Snackbar></Snackbar>
           </Grid>
           {/* Page Start End */}
         </Grid>
