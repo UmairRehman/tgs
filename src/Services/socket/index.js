@@ -23,6 +23,13 @@ export class SocketClient {
     socketConfiguration;
 
     constructor(configuration = {}) {
+        const {
+            messageHandler = console.log
+        } = configuration;
+
+        if (this.messageHandler)
+            Object.assign(this, { messageHandler });
+
         this.socketConfiguration = {
             ...environment.socketPaths,
             ...configuration,
@@ -71,14 +78,23 @@ export class SocketClient {
                 console.log('disconnected');
             });
 
-            this.client.on('broadcast', this.broadcastHandler);
+            this.client.on(
+                this.namespace,
+                this.messageHandler
+            );
 
         } catch (exc) {
             console.log(exc);
         }
     }
+}
 
-    broadcastHandler = (socketResponse) => {
+export class BroadcastClient extends SocketClient {
+    constructor(configuration = {}) {
+        super(configuration);
+    }
+
+    messageHandler = (socketResponse) => {
         const {
             EmployeeId,
             SubDepartmentId,
@@ -114,6 +130,37 @@ export class SocketClient {
 
     static broadcastListener = (fn) => {
         window.addEventListener('broadcast-received', fn);
+        return true;
+    }
+}
+
+export class EventsClient extends SocketClient {
+    constructor(configuration = {}) {
+        super(configuration);
+    }
+
+    messageHandler = (socketResponse) => {
+
+        const eventObject = {};
+
+        this.launchBroadcast(socketResponse);
+    }
+
+    launchBroadcast = (data) => {
+        const eventReceivedEvent = new CustomEvent(
+            'event-received',
+            {
+                detail: {
+                    ...data
+                }
+            }
+        );
+
+        window.dispatchEvent(eventReceivedEvent)
+    }
+
+    static eventstListener = (fn) => {
+        window.addEventListener('event-received', fn);
         return true;
     }
 }

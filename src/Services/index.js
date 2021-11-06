@@ -10,7 +10,7 @@ import * as broadcast from './broadcast';
 
 import { Storage } from './storage';
 
-import { SocketClient } from './socket';
+import * as SocketClients from './socket';
 
 
 const services = {
@@ -20,7 +20,7 @@ const services = {
     employee,
     broadcast,
     Storage,
-    SocketClient,
+    ...SocketClients,
 };
 
 

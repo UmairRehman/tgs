@@ -49,7 +49,8 @@ const {
     routes
   },
   Storage,
-  SocketClient,
+  BroadcastClient,
+  EventsClient,
 } = Services;
 
 const {
@@ -67,15 +68,29 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-
-let broadcastListener;
-
 /** Pre-req Configuration */
-const broadcastClient = new SocketClient({
-  namespace: 'broadcast'
+const status = JSON.parse(localStorage.user_profile || '{}');
+const isEmployee = status?.EmployeeStatusId > 8;
+
+if (isEmployee)
+  var broadcastListener;
+
+let eventsListener;
+
+if (isEmployee)
+  var broadcastClient = new BroadcastClient({
+    namespace: 'broadcast'
+  });
+
+const eventsClient = new EventsClient({
+  namespace: 'events'
 });
 
-broadcastClient.connect();
+if (isEmployee)
+  broadcastClient.connect();
+
+eventsClient.connect();
+
 
 if (!localStorage.getItem('broadcasts'))
   localStorage.broadcasts = '[]';
@@ -273,8 +288,8 @@ const PageHeader = () => {
   };
 
   useEffect(() => {
-    if (!broadcastListener) {
-      broadcastListener = SocketClient.broadcastListener((broadcastEvent) => {
+    if (isEmployee && !broadcastListener) {
+      broadcastListener = BroadcastClient.broadcastListener((broadcastEvent) => {
         const {
           detail: broadcastObject
         } = broadcastEvent;
@@ -284,9 +299,22 @@ const PageHeader = () => {
         insertBroadcasts(useBroadcasts);
       });
     }
+
+    if (!eventsListener) {
+      eventsListener = EventsClient.eventstListener((event) => {
+        const {
+          detail: eventObject
+        } = event;
+
+        console.log(eventObject);
+      });
+    }
   }, []);
 
   useEffect(() => {
+    if (!isEmployee)
+      return;
+
     storage.set('broadcasts', JSON.stringify(broadcasts));
 
     if (getBroadcasts().length)

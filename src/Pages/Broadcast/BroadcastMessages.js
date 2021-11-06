@@ -40,7 +40,7 @@ let {
 const {
   broadcast,
   Storage,
-  SocketClient,
+  BroadcastClient,
 } = Services;
 
 
