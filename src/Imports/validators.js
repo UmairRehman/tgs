@@ -46,8 +46,7 @@ export const validators = {
 
         street_address1: yup.string()
             .required('street_address1'),
-        street_address2: yup.string()
-            .required('street_address2'),
+        street_address2: yup.string(),
         city: yup.string()
             .required('city'),
         state: yup.string()
