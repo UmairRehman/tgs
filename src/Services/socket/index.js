@@ -23,13 +23,6 @@ export class SocketClient {
     socketConfiguration;
 
     constructor(configuration = {}) {
-        const {
-            messageHandler = console.log
-        } = configuration;
-
-        if (this.messageHandler)
-            Object.assign(this, { messageHandler });
-
         this.socketConfiguration = {
             ...environment.socketPaths,
             ...configuration,
@@ -66,6 +59,10 @@ export class SocketClient {
 
     setEventListeners = () => {
         try {
+            const {
+                namespace,
+            } = this.socketConfiguration;
+
             if (!this.client)
                 throw new Error('socket not connected');
 
@@ -79,9 +76,11 @@ export class SocketClient {
             });
 
             this.client.on(
-                this.namespace,
-                this.messageHandler
+                namespace,
+                this.messageHandler || console.log
             );
+
+            this.client.on('test', console.log);
 
         } catch (exc) {
             console.log(exc);
@@ -90,11 +89,14 @@ export class SocketClient {
 }
 
 export class BroadcastClient extends SocketClient {
-    constructor(configuration = {}) {
+
+    constructor(configuration) {
         super(configuration);
     }
 
     messageHandler = (socketResponse) => {
+        console.log(socketResponse);
+
         const {
             EmployeeId,
             SubDepartmentId,
@@ -103,12 +105,10 @@ export class BroadcastClient extends SocketClient {
             from,
         } = socketResponse;
 
-        const { label: sender } = role[SubDepartmentId];
-
         const broadcastObject = {
             message,
             subject,
-            sender,
+            sender: from,
             from
         }
 
