@@ -7,6 +7,7 @@ import {
   Button,
   TextareaAutosize
 } from "@material-ui/core";
+import { Link } from "react-router-dom";
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
@@ -17,10 +18,19 @@ import LeftControl from "../../../Components/LeftControl";
 import MobileScreen from './Mobile/safety-testing-edit';
 import {isMobile} from 'react-device-detect';
 import Services from '../../../Services';
+
+import Snackbar from '../../../Components/Snackbar';
+import { helpers } from "../../../helpers";
+
 const {
   employee,
   Storage
 } = Services;
+
+const {
+  showSnackBar,
+} = helpers;
+
 var moment = require('moment-timezone');
 
 
@@ -60,6 +70,11 @@ const dummyData = {
 
 
 const SafetyTestingEdit = () => {
+
+  //loader states
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+
   let params = useLocation();
   const eventId = params.state.eventID;
   
@@ -100,7 +115,7 @@ const SafetyTestingEdit = () => {
         console.log("ERROR",error);
     }  
   }
-
+  
   useEffect(async () => {
 
     let eventDetails  = await getEventDetails(eventId)
@@ -120,14 +135,7 @@ const SafetyTestingEdit = () => {
     console.log(('data',rulesList));
 
   }, [])
-  
-  //cases
-      //  testingRule = 1
-      //  crew member 1 :  name = 2 , result = 3, comment = 4 
-      //  crew member 2 :  name = 5 , result = 6, comment = 7 
-      //  crew member 3 :  name = 8 , result = 9, comment = 10 
-      //  crew member 4 :  name = 11 , result = 12, comment = 13
-
+ 
   const handleCrewData = (module , value , index) =>{
     console.log(module , value , index);
     const { crewList } = safetyTesting ; 
@@ -164,17 +172,40 @@ const SafetyTestingEdit = () => {
     return data
   }
 
+  const resetData = () => {
+    
+    let crewList = safetyTesting.crewList.map((row,index)=>{
+      document.getElementById(`comment${index}`).value = ''
+      return ({ id: row.id, name:`${row.name}`, result:'', comment:'' })
+    })
+    console.log(crewList);
+    setSafetyTesting({testingRules:[],crewList:crewList})
+}
+
   const submitBtn = async () =>{ 
-    let body = await finalData();
-    if(body){
-      try {
-        let res = await employee.add_rule_event({...body})
-        if(res?.httpStatus == 200)
-        {
-          console.log('result',res);
-        }  
-      } catch (error) {
-        console.log('API ERROR', error);
+
+    if (!loading) {
+      setSuccess(false);
+      setLoading(true);
+
+      let body = await finalData();
+      if(body){
+        try {
+          let res = await employee.add_rule_event({...body})
+          if(res?.httpStatus == 200)
+          {
+            console.log('result',res);
+            setSuccess(true);
+            resetData()
+            setLoading(false);
+            return showSnackBar('Form Successfully Submitted');
+          }  
+        } catch (error) {
+          setSuccess(false);
+          setLoading(false);
+          console.log("error",error);
+          return showSnackBar(`Error Occured while submitting form: ${error}`);
+        }
       }
     }
   }
@@ -195,7 +226,7 @@ const SafetyTestingEdit = () => {
           <Grid id="PageTitle">Add Testing Rule</Grid>
           {/* Page Start */}
           <Grid xs={12} className="ContentPage FormTableArea">
-            
+          <form style={{width:'100%'}} onSubmit={submitBtn}>
             <Grid xs={12} container>
               <Grid xs={4}>
                 {/* List Static Data Start */}
@@ -261,7 +292,7 @@ const SafetyTestingEdit = () => {
                             </React.Fragment>
                           )}
                           renderInput={(params) => (
-                            <TextField {...params} variant="outlined" placeholder="Rules" />
+                            <TextField required={true} {...params} variant="outlined" placeholder="Rules" />
                           )}
                         />
                       </Grid>
@@ -277,16 +308,7 @@ const SafetyTestingEdit = () => {
                   <Grid xs={12} container justify="space-between">
                     <Grid xs={12}  container alignContent="center" className="mbold">Crew Member:</Grid>
                     <Grid xs={12} >
-                      {/* <Autocomplete
-                        className="w100p"
-                        id="combo-box-demo"
-                        options={dummyData.crew_member}
-                        value = { safetyTesting.crew_member1.name }
-                        onChange={ (event,value) =>handleSubmitData(event,value,2) }
-                        getOptionLabel={(option) => option}
-                        renderInput={(params) => <TextField {...params} label="Member" variant="outlined" />}
-                      /> */}
-                       <TextField required={true} id="outlined-basic" label="Comment here" value={`${row.name}`} disabled variant="outlined" className="w100p"/>
+                       <TextField required={true} id={`name${index}`} label="Comment here" value={`${row.name}`} disabled variant="outlined" className="w100p"/>
                     </Grid>
                   </Grid>
                   <Grid xs={12} className="mt40">
@@ -296,17 +318,13 @@ const SafetyTestingEdit = () => {
                     <Grid xs={12} className="mt14">
                       <Autocomplete
                           className="w100p"
-                          id="combo-box-demo"
+                          id={`result${index}`} 
                           options={dummyData.Results}
                           value = { row.result.title }
                           onChange={ (event,value) =>handleCrewData('result',value,index) }
                           getOptionLabel={option => option.title}
-                          renderInput={(params) => <TextField {...params} label="Results" variant="outlined" />}
+                          renderInput={(params) => <TextField required={true} {...params} label="Results" variant="outlined" />}
                         />
-                        {/* <TextField id="outlined-basic" label="Comment here" 
-                            // value={`${ticketData?.requestedBy?.firstName} ${ticketData?.requestedBy?.middleName} ${ticketData?.requestedBy?.lastName}`} 
-                            // disabled 
-                            variant="outlined" className="w100p"/> */}
                     </Grid>
                   </Grid>
                   <Grid xs={12} className="mt40">
@@ -315,163 +333,25 @@ const SafetyTestingEdit = () => {
                     </Grid>
                     <Grid xs={12} className="mt14">
                       <TextareaAutosize 
+                          required={true}
                           className="w100p"
                           id={`comment${index}`} 
                           rowsMin={6} 
                           placeholder="Share Your Thoughts...."
-                          // value = { row?.comment }
-                          // onChange={ (event,value) =>{
-                          //   value = event.target.value  
-                          //   handleSubmitData('comment',value,index)
-                          //   }}  
                       />
                     </Grid>
                   </Grid>
                 </Grid>
                   )
-                })
-                  
+                })     
               }
-                
-                {/* <Grid className="Cols4 mt30">
-                  <Grid xs={12} container justify="space-between">
-                    <Grid xs={12} sm={6} container alignContent="center" className="mbold">Crew Member:</Grid>
-                    <Grid xs={12} sm={6}>
-                      <Autocomplete
-                        className="w100p"
-                        id="combo-box-demo"
-                        options={dummyData.crew_member}
-                        value = { safetyTesting.crew_member2.name }
-                        onChange={ (event,value) =>handleSubmitData(event,value,5) }
-                        getOptionLabel={(option) => option}
-                        renderInput={(params) => <TextField {...params} label="Member" variant="outlined" />}
-                      />
-                    </Grid>
-                  </Grid>
-                  <Grid xs={12} className="mt40">
-                    <Grid xs={12} className="mbold">
-                      Result
-                    </Grid>
-                    <Grid xs={12} className="mt14">
-                      <Autocomplete
-                          className="w100p"
-                          id="combo-box-demo"
-                          options={dummyData.Results}
-                          value = { safetyTesting.crew_member2.result }
-                          onChange={ (event,value) =>handleSubmitData(event,value,6) }
-                          getOptionLabel={(option) => option}
-                          renderInput={(params) => <TextField {...params} label="Results" variant="outlined" />}
-                        />
-                    </Grid>
-                  </Grid>
-                  <Grid xs={12} className="mt40">
-                    <Grid xs={12} className="mbold">
-                      Comments
-                    </Grid>
-                    <Grid xs={12} className="mt14">
-                      <TextareaAutosize className="w100p" 
-                          rowsMin={6} 
-                          placeholder="Share Your Thoughts...."
-                          value = { safetyTesting.crew_member2.comments }
-                          onChange={ (event,value) =>handleSubmitData(event,value,7) }  
-                      />
-                    </Grid>
-                  </Grid>
-                </Grid>
-                <Grid className="Cols4 mt30">
-                  <Grid xs={12} container justify="space-between">
-                    <Grid xs={12} sm={6} container alignContent="center" className="mbold">Crew Member:</Grid>
-                    <Grid xs={12} sm={6}>
-                      <Autocomplete
-                        className="w100p"
-                        id="combo-box-demo"
-                        options={dummyData.crew_member}
-                        value = { safetyTesting.crew_member3.name }
-                        onChange={ (event,value) =>handleSubmitData(event,value,8) }
-                        getOptionLabel={(option) => option}
-                        renderInput={(params) => <TextField {...params} label="Member" variant="outlined" />}
-                      />
-                    </Grid>
-                  </Grid>
-                  <Grid xs={12} className="mt40">
-                    <Grid xs={12} className="mbold">
-                      Result
-                    </Grid>
-                    <Grid xs={12} className="mt14">
-                      <Autocomplete
-                          className="w100p"
-                          id="combo-box-demo"
-                          options={dummyData.Results}
-                          getOptionLabel={(option) => option}
-                          value = { safetyTesting.crew_member3.result }
-                          onChange={ (event,value) =>handleSubmitData(event,value,9) }
-                          renderInput={(params) => <TextField {...params} label="Results" variant="outlined" />}
-                        />
-                    </Grid>
-                  </Grid>
-                  <Grid xs={12} className="mt40">
-                    <Grid xs={12} className="mbold">
-                      Comments
-                    </Grid>
-                    <Grid xs={12} className="mt14">
-                      <TextareaAutosize className="w100p" 
-                          rowsMin={6} 
-                          placeholder="Share Your Thoughts...."
-                          value = { safetyTesting.crew_member3.comments }
-                          onChange={ (event,value) =>handleSubmitData(event,value,10) }  
-                      />
-                    </Grid>
-                  </Grid>
-                </Grid>
-                <Grid className="Cols4 mt30">
-                  <Grid xs={12} container justify="space-between">
-                    <Grid xs={12} sm={6} container alignContent="center" className="mbold">Crew Member:</Grid>
-                    <Grid xs={12} sm={6}>
-                      <Autocomplete
-                        className="w100p"
-                        id="combo-box-demo"
-                        options={dummyData.crew_member}
-                        getOptionLabel={(option) => option}
-                        value = { safetyTesting.crew_member4.name }
-                        onChange={ (event,value) =>handleSubmitData(event,value,11) }
-                        renderInput={(params) => <TextField {...params} label="Member" variant="outlined" />}
-                      />
-                    </Grid>
-                  </Grid>
-                  <Grid xs={12} className="mt40">
-                    <Grid xs={12} className="mbold">
-                      Result
-                    </Grid>
-                    <Grid xs={12} className="mt14">
-                      <Autocomplete
-                          className="w100p"
-                          id="combo-box-demo"
-                          options={dummyData.Results}
-                          getOptionLabel={(option) => option}
-                          value = { safetyTesting.crew_member4.result }
-                          onChange={ (event,value) =>handleSubmitData(event,value,12) }
-                          renderInput={(params) => <TextField {...params} label="Results" variant="outlined" />}
-                        />
-                    </Grid>
-                  </Grid>
-                  <Grid xs={12} className="mt40">
-                    <Grid xs={12} className="mbold">
-                      Comments
-                    </Grid>
-                    <Grid xs={12} className="mt14">
-                      <TextareaAutosize className="w100p" 
-                          rowsMin={6} 
-                          placeholder="Share Your Thoughts...."
-                          value = { safetyTesting.crew_member4.comments }
-                          onChange={ (event,value) =>handleSubmitData(event,value,13) }  
-                      />
-                    </Grid>
-                  </Grid>
-                </Grid> */}
                 <Grid xs={12} className="mt30">
+                  <Link to="/safety-testing" className="LinkButtonBack mr10">Close</Link>
                   <Button className="LinkButton" onClick={submitBtn}>Save</Button>
                 </Grid>
             </Grid>
+            </form>
+            <Snackbar></Snackbar>
           </Grid>
           {/* Page Start End */}
         </Grid>
