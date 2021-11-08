@@ -58,9 +58,11 @@ const LeftControl = () => {
 
   if (userProfile) {
     var {
-      EmployeeStatusId
+      EmployeeStatusId,
+      role_id,
     } = userProfile;
   }
+  
 
   /********************************************************** */
 
@@ -70,6 +72,50 @@ const LeftControl = () => {
 
   /********************************************************** */
 
+  const capabilities = {
+    dashboard:[1,3,6],
+    safety:[1,3,6],
+    create_ticket:[1,2,3,4,6],
+    deparment:[1,3,6],
+    new_hire_queue:[2,4],
+    tickets_alerts:[2,4],
+    employees:[2,4,5],
+    broadcast_message:[2],
+    employees_profile:[2,4]
+  }
+
+//   const sideBarRoleBasedButtons = {
+//     1: {
+//         role: 'general_role',
+//         role_id: 1,
+//         buttons_enabled: ['dashboard','safety', 'create-ticket', 'deparment'],
+//     },
+//     2: {
+//         role: 'systemadmin_role',
+//         role_id: 2,
+//         buttons_enabled: ['new-hire-queue','tickets-alerts', 'create-ticket', 'employees', 'broadcast-message'],
+//     },
+//     3: {
+//         role: 'itmanager_role',
+//         role_id: 3,
+//         buttons_enabled: ['dashboard','safety', 'create-ticket', 'deparment'],
+//     },
+//     4: {
+//         role: 'hr',
+//         role_id: 4,
+//         buttons_enabled: ['new-hire-queue','tickets-alerts', 'create-ticket', 'employees'],
+//     },
+//     5: {
+//         role: 'hrAdmin',
+//         role_id: 5,
+//         buttons_enabled: ['employees'],
+//     },
+//     6: {
+//         role: 'safetytesting_role',
+//         role_id: 6,
+//         buttons_enabled: ['dashboard','safety', 'create-ticket', 'deparment'],
+//     },
+// }
 
   return (
     <Grid xs={12} className="LeftMenuCol">
@@ -78,186 +124,123 @@ const LeftControl = () => {
         <Grid className="BrandLogo"></Grid>
         <Grid className="TGSNav">
           <List component="nav" aria-label="main mailbox folders">
-
-            {/* Employee Nav */}
-            {menuLoader ? null : role == "applicant" ?
               <div>
-                <ListItem button className="DashIcon">
-                  <Link to="/dashboard" className="Liq-NavLinks" className={pathname === '/dashboard' ? 'NavSelected' : ''}>
-                    <Icon />
-                    Dashboard
-                  </Link>
-                </ListItem>
-                <ListItem button className="SafetyIcon">
-                  <Link to="/safety-testing" className="Liq-NavLinks" className={pathname === '/safety-testing' ? 'NavSelected' : ''}>
-                    <Icon />
-                    Safety  Testing
-                  </Link>
-                </ListItem>
-                <ListItem button className="CreatLinkIcon">
-                  <Link to="/create-ticket" className="Liq-NavLinks" className={pathname === '/create-ticket' ? 'NavSelected' : ''}>
-                    <Icon />
-                    Create a ticket
-                  </Link>
-                </ListItem>
-                <ListItem className={
-                  pathname === '/department' |
-                    pathname === '/human-resources' |
-                    pathname === '/operations' |
-                    pathname === '/safety' |
-                    pathname === '/information-technology' ?
-                    'DeptSelected DepartmentIcon' : 'DepartmentIcon'}>
-                  <Link to="/human-resources"
-                    className="Liq-NavLinks" className={
-                      pathname === '/department' |
+                {
+                  (capabilities.dashboard.includes(role_id)) && 
+                    <ListItem button className="DashIcon">
+                      <Link to="/dashboard" className="Liq-NavLinks" className={pathname === '/dashboard' ? 'NavSelected' : ''}>
+                        <Icon />
+                        Dashboard
+                      </Link>
+                    </ListItem>
+                }
+                {
+                  (capabilities.safety.includes(role_id)) &&
+                    <ListItem button className="SafetyIcon">
+                      <Link to="/safety-testing" className="Liq-NavLinks" className={pathname === '/safety-testing' ? 'NavSelected' : ''}>
+                        <Icon />
+                        Safety  Testing
+                      </Link>
+                    </ListItem>
+                }
+                {
+                  (capabilities.create_ticket.includes(role_id)) &&
+                    <ListItem button className="CreatLinkIcon">
+                      <Link to="/create-ticket" className="Liq-NavLinks" className={pathname === '/create-ticket' ? 'NavSelected' : ''}>
+                        <Icon />
+                        Create a ticket
+                      </Link>
+                    </ListItem>
+                }
+                {
+                  (capabilities.deparment.includes(role_id)) &&
+                    <ListItem className={
+                        pathname === '/department' |
                         pathname === '/human-resources' |
                         pathname === '/operations' |
                         pathname === '/safety' |
-                        pathname === '/information-technology' ? 'NavSelected' : ''}>
-                    <Icon />
-                    Department
-                  </Link>
-                  <List component="nav" className="DeptFolder">
-                    <ListItem button>
-                      <Link to="/human-resources" className={pathname === '/human-resources' ? 'NavSubSelected' : ''}>
-                        Human Resources
+                        pathname === '/information-technology' ?
+                        'DeptSelected DepartmentIcon' : 'DepartmentIcon'}>
+                      <Link to="/human-resources"
+                        className="Liq-NavLinks" className={
+                          pathname === '/department' |
+                            pathname === '/human-resources' |
+                            pathname === '/operations' |
+                            pathname === '/safety' |
+                            pathname === '/information-technology' ? 'NavSelected' : ''}>
+                        <Icon />
+                        Department
+                      </Link>
+                      <List component="nav" className="DeptFolder">
+                        <ListItem button>
+                          <Link to="/human-resources" className={pathname === '/human-resources' ? 'NavSubSelected' : ''}>
+                            Human Resources
+                          </Link>
+                        </ListItem>
+                        <ListItem button>
+                          <Link to="/operations" className={pathname === '/operations' ? 'NavSubSelected' : ''}>
+                            Operations
+                          </Link>
+                        </ListItem>
+                        <ListItem button>
+                          <Link to="/safety" className={pathname === '/safety' ? 'NavSubSelected' : ''}>
+                            Safety
+                          </Link>
+                        </ListItem>
+                        <ListItem button>
+                          <Link to="/information-technology" className={pathname === '/information-technology' ? 'NavSubSelected' : ''}>
+                            Information Technology
+                          </Link>
+                        </ListItem>
+                      </List>
+                    </ListItem>    
+                }
+                {
+                  (capabilities.new_hire_queue.includes(role_id)) &&
+                    <ListItem button className="NewHireIcon">
+                      <Link to="/new-hire-queue" className="Liq-NavLinks" className={pathname === '/new-hire-queue' ? 'NavSelected' : ''}>
+                        <Icon />
+                        New Hire Queue
                       </Link>
                     </ListItem>
-                    <ListItem button>
-                      <Link to="/operations" className={pathname === '/operations' ? 'NavSubSelected' : ''}>
-                        Operations
+                }
+                {
+                  (capabilities.tickets_alerts.includes(role_id)) &&
+                    <ListItem button className="AlertIcon">
+                      <Link to="/tickets-alerts" className="Liq-NavLinks" className={pathname === '/tickets-alerts' ? 'NavSelected' : ''}>
+                        <Icon />
+                        Tickets and Alerts
                       </Link>
                     </ListItem>
-                    <ListItem button>
-                      <Link to="/safety" className={pathname === '/safety' ? 'NavSubSelected' : ''}>
-                        Safety
+                }
+                {
+                  (capabilities.employees.includes(role_id)) &&
+                    <ListItem button className="EmployeeIcon">
+                      <Link to="/employees" className="Liq-NavLinks" className={pathname === '/employees' ? 'NavSelected' : ''}>
+                        <Icon />
+                        Employees
                       </Link>
                     </ListItem>
-                    <ListItem button>
-                      <Link to="/information-technology" className={pathname === '/information-technology' ? 'NavSubSelected' : ''}>
-                        Information Technology
-                      </Link>
-                    </ListItem>
-                  </List>
-                </ListItem>
-              </div>
-              : null}
-            {/* Employee Nav End */}
-
-
-            {/* HR Nav */}
-            {menuLoader ? null : role == "hr" ?
-
-              <div>
-                <ListItem button className="NewHireIcon">
-
-                  <Link to="/new-hire-queue" className="Liq-NavLinks" className={pathname === '/new-hire-queue' ? 'NavSelected' : ''}>
-                    <Icon />
-                    New Hire Queue
-                  </Link>
-                </ListItem>
-                <ListItem button className="AlertIcon">
-                  <Link to="/tickets-alerts" className="Liq-NavLinks" className={pathname === '/tickets-alerts' ? 'NavSelected' : ''}>
-                    <Icon />
-                    Tickets and Alerts
-                  </Link>
-                </ListItem>
-                <ListItem button className="EmployeeIcon">
-                  <Link to="/employees" className="Liq-NavLinks" className={pathname === '/employees' ? 'NavSelected' : ''}>
-                    <Icon />
-                    Employees
-                  </Link>
-                </ListItem>
-                <ListItem button className="CreatLinkIcon">
-                  <Link to="/create-ticket" className="Liq-NavLinks" className={pathname === '/create-ticket' ? 'NavSelected' : ''}>
-                    <Icon />
-                    Create a ticket
-                  </Link>
-                </ListItem>
-              </div>
-              : role == "applicant" ?
-                <div>
-                  {/* HR Nav End */}
-                  {/* Applicant Nav */}
-                  {/* NOT REQUIRE - COULD BE PLUGGED IN IF APPLICATION FORM
-                  NEEDS TO BE UPDATED */}
-                  {/* <ListItem button className="eApplicationIcon">
-                    <Link to="/application" className="Liq-NavLinks" className={pathname === '/application' ? 'NavSelected' : ''}>
-                      <Icon />
-                      Employee Application
-                    </Link>
-                  </ListItem> */}
-                  <ListItem button className={sidebarClassName}>
-                    <Link to="/questionnaire" className="Liq-NavLinks" className={pathname === '/documents' ? 'NavSelected' : ''}>
-                      <Icon />
-                      Employee Documents
-                    </Link>
-                  </ListItem>
-                </div>
-                :
-
-                role == 'admin' ?
-                  <div>
-                    {/* Applicant Nav End */}
-
-                    {/* Admin Nav */}
+                }
+                {
+                  (capabilities.employees_profile.includes(role_id)) &&
                     <ListItem button className="EmployeeIcon">
                       <Link to="/employees-profile" className="Liq-NavLinks" className={pathname === '/employees-profile' ? 'NavSelected' : ''}>
                         <Icon />
                         Employees Profile
                       </Link>
                     </ListItem>
-                  </div>
-                  : role == "superAdmin" ?
-                    <div>
-                      {/* Admin Nav End */}
-
-                      {/* Supper Admin */}
-
-                      <ListItem button className="NewHireIcon">
-                        <Link to="/new-hire-queue" className="Liq-NavLinks" className={pathname === '/new-hire-queue' ? 'NavSelected' : ''}>
-                          <Icon />
-                          New Hire Queue
-                        </Link>
-                      </ListItem>
-                      <ListItem button className="AlertIcon">
-                        <Link to="/tickets-alerts" className="Liq-NavLinks" className={pathname === '/tickets-alerts' ? 'NavSelected' : ''}>
-                          <Icon />
-                          Tickets and Alerts
-                        </Link>
-                      </ListItem>
-                      <ListItem button className="CreatLinkIcon">
-                        <Link to="/create-ticket" className="Liq-NavLinks" className={pathname === '/create-ticket' ? 'NavSelected' : ''}>
-                          <Icon />
-                          Create a ticket
-                        </Link>
-                      </ListItem>
-                      <ListItem button className="EmployeeIcon">
-                        <Link to="/employees-profile" className="Liq-NavLinks" className={pathname === '/employees-profile' ? 'NavSelected' : ''}>
-                          <Icon />
-                          Employees Profile
-                        </Link>
-                      </ListItem>
-                      <ListItem button className="MessageIcon">
-                        <Link to="/broadcast-messages" className="Liq-NavLinks" className={pathname === '/broadcast-messages' ? 'NavSelected' : ''}>
-                          <Icon />
-                          Broadcast Message
-                        </Link>
-                      </ListItem>
-                    </div>
-                    : 
-                    role == 'hradmin' ? 
-                      <div>
-                       <ListItem button className="EmployeeIcon">
-                          <Link to="/search" className="Liq-NavLinks" className={pathname === '/employees' ? 'NavSelected' : ''}>
-                            <Icon />
-                            Employees
-                          </Link>
-                        </ListItem>
-                      </div>
-                    
-                    :null}
-            {/* Supper Admin End */}
+                }
+                {
+                  (capabilities.broadcast_message.includes(role_id)) &&
+                    <ListItem button className="MessageIcon">
+                      <Link to="/broadcast-messages" className="Liq-NavLinks" className={pathname === '/broadcast-messages' ? 'NavSelected' : ''}>
+                        <Icon />
+                        Broadcast Message
+                      </Link>
+                    </ListItem>
+                }
+              </div>
           </List>
         </Grid>
       </Grid>

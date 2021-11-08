@@ -244,6 +244,29 @@ const Application = () => {
     };
 
     /**
+     * @param {string|number|Date} value - State Value 
+     * @param {*} validator - Yup Validator
+     * @returns {void} 
+     */
+    const verifyValidations = async (value, validator, args) => {
+        try {
+            return await validator.validate(value);
+        } catch (exc) {
+            let { message } = exc;
+
+            const messageSnippet = message
+                .split('_')
+                .join(' ');
+
+            message = `Enter ${messageSnippet} field(s) properly`
+
+            showSnackBar(message);
+
+            throw exc;
+        }
+    }
+
+    /**
      * A function for handling individual states to manage via labels and identififers
      * @param {*} state - State object to use
      * @param {string} prop - Prop label to be updated
@@ -326,7 +349,6 @@ const Application = () => {
             return await Imports
                 .registerApplicant
                 .validate(applicantObject);
-            console.log("success")
 
         } catch (exc) {
             let { message } = exc;
@@ -491,7 +513,16 @@ const Application = () => {
                                                     'home_phone',
                                                     $e,
                                                 )
-                                            } />
+                                            }
+                                            onBlur={
+                                                verifyValidations
+                                                    .bind(
+                                                        null,
+                                                        contactInformation[0].home_phone,
+                                                        Imports.home_phone
+                                                    )
+                                            }
+                                        />
                                     </Grid>
                                     <Grid xs={6} className="pl20">
                                         <Grid xs={12} className="mbold mb14">
@@ -599,6 +630,14 @@ const Application = () => {
                                             Zip
                                         </Grid>
                                         <TextField id="outlined-basic" placeholder="Type Here" variant="outlined" className="w100p"
+                                            onBlur={
+                                                verifyValidations
+                                                    .bind(
+                                                        null,
+                                                        contactInformation[0].zip,
+                                                        Imports.zip
+                                                    )
+                                            }
                                             onChange={
                                                 ($e) => setStateForFormControl(
                                                     homeAddress,
@@ -721,6 +760,14 @@ const Application = () => {
                                             Spouse's Telephone Number
                                         </Grid>
                                         <TextField id="outlined-basic" placeholder="Type Here" variant="outlined" className="w100p"
+                                            onBlur={
+                                                verifyValidations
+                                                    .bind(
+                                                        null,
+                                                        contactInformation[0].spouse_telephoneNumber,
+                                                        Imports.spouse_phone_number
+                                                    )
+                                            }
                                             onChange={
                                                 ($e) => setStateForFormControl(
                                                     contactInformation,
@@ -846,7 +893,16 @@ const Application = () => {
                                                     'phone_number',
                                                     $e,
                                                 )
-                                            } />
+                                            }
+                                            onBlur={
+                                                verifyValidations
+                                                    .bind(
+                                                        null,
+                                                        contactInformation[0].emergency_contact,
+                                                        Imports.emergency_phone_number
+                                                    )
+                                            }
+                                        />
                                     </Grid>
                                 </Grid>
 

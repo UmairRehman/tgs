@@ -12,8 +12,29 @@ const {
 export const patterns = {
     password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
     phoneRegExp: /^(([+][0-9]{1,2})|[0-9]{1})[0-9]{10}$/,
+    zip: /^[0-9]{5}$/
     // phoneRegExpOld: /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 }
+
+export const home_phone = yup.string()
+    .matches(patterns.phoneRegExp, 'home_phone_number')
+    .required('home_phone');
+
+export const cell_phone = yup.string()
+    .matches(patterns.phoneRegExp, 'cell_phone')
+    .required('cell_phone');
+
+export const zip = yup.string()
+    .matches(patterns.zip, 'zip (5 digits)')
+    .required('zip');
+
+export const spouse_phone_number = yup.string()
+    .matches(patterns.phoneRegExp, 'spouse_phone_number')
+    .required('spouse_phone_number');
+
+export const emergency_phone_number = yup.string()
+    .matches(patterns.phoneRegExp, 'emergency_contact_phone_number')
+    .required('emergency_contact_phone_number');
 
 export const validators = {
     password: yup.string()
@@ -23,6 +44,7 @@ export const validators = {
             patterns.password,
             invalid_password
         ),
+    home_phone,
     registerApplicant: yup.object({
         first_name: yup.string()
             .required('first_name'),
@@ -35,12 +57,8 @@ export const validators = {
         ssn: yup.string()
             .matches(/[0-9]{9}/, 'SSN must be a nine digit number')
             .required('ssn'),
-        home_phone: yup.string()
-            .matches(patterns.phoneRegExp, 'home_phone number is not valid')
-            .required('home_phone'),
-        cell_phone: yup.string()
-            .matches(patterns.phoneRegExp, 'cell_phone number is not valid')
-            .required('cell_phone'),
+        home_phone,
+        cell_phone,
         agree_to_notifications: yup.boolean()
             .default(true),
 
@@ -51,8 +69,7 @@ export const validators = {
             .required('city'),
         state: yup.string()
             .required('state'),
-        zip: yup.string()
-            .required('zip'),
+        zip,
         us_citizen: yup.string()
             .oneOf([
                 'citizen',
@@ -93,7 +110,7 @@ export const validators = {
         spouse_phone_number: yup.string().when('marital_status', {
             is: true,
             then: yup.string()
-                .matches(patterns.phoneRegExp, 'spouse_phone_number is not valid')
+                .matches(patterns.phoneRegExp, 'spouse_phone_number')
                 .required('spouse_phone_number')
         }),
 
@@ -110,9 +127,7 @@ export const validators = {
                 .required('emergency_contact state'),
             zip: yup.string()
                 .required('emergency_contact zip'),
-            phone_number: yup.string()
-                .matches(patterns.phoneRegExp, 'emergency_contact.phone_number is not valid')
-                .required('emergency_contact phone_number')
+            phone_number: emergency_phone_number
         }),
 
         // position: yup.object({

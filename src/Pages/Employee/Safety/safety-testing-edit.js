@@ -182,8 +182,9 @@ const SafetyTestingEdit = () => {
     setSafetyTesting({testingRules:[],crewList:crewList})
 }
 
-  const submitBtn = async () =>{ 
-
+  const submitBtn = async (event) =>{ 
+    
+    event.preventDefault();
     if (!loading) {
       setSuccess(false);
       setLoading(true);
@@ -208,6 +209,7 @@ const SafetyTestingEdit = () => {
         }
       }
     }
+    return false
   }
 
   if(isMobile) {
