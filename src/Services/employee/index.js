@@ -122,3 +122,13 @@ export const add_rule_event = async (payload, headers) => {
         headers
     );
 };
+
+
+export const view_rule_event = async (payload, headers) => {
+    const { id } = payload ;
+    return await api.get(
+        routes.employee.view_test_event_rule.concat(id),
+        payload,
+        headers
+    );
+};

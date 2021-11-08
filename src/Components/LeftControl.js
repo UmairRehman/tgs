@@ -144,6 +144,24 @@ const LeftControl = () => {
                     </ListItem>
                 }
                 {
+                  (capabilities.new_hire_queue.includes(role_id)) &&
+                    <ListItem button className="NewHireIcon">
+                      <Link to="/new-hire-queue" className="Liq-NavLinks" className={pathname === '/new-hire-queue' ? 'NavSelected' : ''}>
+                        <Icon />
+                        New Hire Queue
+                      </Link>
+                    </ListItem>
+                }
+                {
+                  (capabilities.tickets_alerts.includes(role_id)) &&
+                    <ListItem button className="AlertIcon">
+                      <Link to="/tickets-alerts" className="Liq-NavLinks" className={pathname === '/tickets-alerts' ? 'NavSelected' : ''}>
+                        <Icon />
+                        Tickets and Alerts
+                      </Link>
+                    </ListItem>
+                }
+                {
                   (capabilities.create_ticket.includes(role_id)) &&
                     <ListItem button className="CreatLinkIcon">
                       <Link to="/create-ticket" className="Liq-NavLinks" className={pathname === '/create-ticket' ? 'NavSelected' : ''}>
@@ -194,24 +212,6 @@ const LeftControl = () => {
                         </ListItem>
                       </List>
                     </ListItem>    
-                }
-                {
-                  (capabilities.new_hire_queue.includes(role_id)) &&
-                    <ListItem button className="NewHireIcon">
-                      <Link to="/new-hire-queue" className="Liq-NavLinks" className={pathname === '/new-hire-queue' ? 'NavSelected' : ''}>
-                        <Icon />
-                        New Hire Queue
-                      </Link>
-                    </ListItem>
-                }
-                {
-                  (capabilities.tickets_alerts.includes(role_id)) &&
-                    <ListItem button className="AlertIcon">
-                      <Link to="/tickets-alerts" className="Liq-NavLinks" className={pathname === '/tickets-alerts' ? 'NavSelected' : ''}>
-                        <Icon />
-                        Tickets and Alerts
-                      </Link>
-                    </ListItem>
                 }
                 {
                   (capabilities.employees.includes(role_id)) &&
