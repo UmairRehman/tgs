@@ -11,3 +11,11 @@ export const sendBroadcast = async (payload, headers) => {
         headers
     );
 };
+
+export const getAll = async (payload, headers) => {
+    return await api.get(
+        routes.broadcast.getAll,
+        payload,
+        headers
+    );
+}

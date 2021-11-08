@@ -86,25 +86,33 @@ const HTTPClientFunctionsWrapper = async (method, ...args) => {
 
         let [payload = {}, headers = {}] = rest;
 
+        const Authorization = localStorage.getItem('access_jwt');
+
         headers = {
             ...headers,
-            Authorization: localStorage.getItem('access_jwt')
+            Authorization
         };
 
-        // HTTP Requests 
-        const response = await axiosInstance[method](
+        const requestArguments = [
             uri,
             payload,
             {
                 headers,
             }
-        ) || {};
+        ]
+
+        /** REMOVING PAYLOAD IF REQUEST METHOD IS GET */
+        if ((method.includes('get')))
+            requestArguments.splice(1, 1);
+
+        // HTTP Requests 
+        const response = await axiosInstance[method](...requestArguments) || {};
 
         const { data: axiosObjectData } = response;
 
         // const { data: endpointData } = axiosObjectData;
         // console.log(axiosObjectData);
-        
+
         return axiosObjectData;
     } catch (exc) {
         console.log(exc);

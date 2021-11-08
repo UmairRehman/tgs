@@ -27,6 +27,7 @@ export const routes = {
         get_test_event_by_id:'employee/testEvent/',
         get_rules_list:'employee/testEventRule/rules',
         create_test_event_rule:'employee/testEventRule',
+        departments_list: 'employee/department/',
     },
     hr:{
         get_applicant: 'employee/hr/applicant',
@@ -49,5 +50,6 @@ export const routes = {
     },
     broadcast:{
         create: 'employee/broadcastMessage/',
+        getAll: 'employee/broadcastMessage/recieve',
     }
 }

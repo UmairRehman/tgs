@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Grid,
   Button,
@@ -41,11 +41,12 @@ const {
   broadcast,
   Storage,
   BroadcastClient,
+  users,
 } = Services;
 
 
 /** Pre-req configuration */
-const roles = Object.values(role);
+// const roles = Object.values(role);
 
 let broadcastListener;
 
@@ -97,6 +98,8 @@ const rows = [
 const BroadcastMessages = () => {
   const storage = new Storage();
 
+  const [roles, setRoles] = useState([]);
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -108,6 +111,20 @@ const BroadcastMessages = () => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await users.subdepartmentList();
+
+        const { data } = response;
+
+        setRoles(data);
+      } catch (exc) {
+        console.log(exc);
+      }
+    })();
+  }, []);
 
 
   // For Modal
@@ -121,8 +138,50 @@ const BroadcastMessages = () => {
 
   const [broadcastMessage, setBroadcastMessage] = useState('');
 
+  const [useBroadcasts, setBroadcasts] = useState(rows);
+
+  const retreiveBroadcasts = async () => {
+    try {
+      const response = await broadcast.getAll();
+
+      const { data } = response;
+
+      const broadcastsBuffer = data.map(broadcast => {
+        const {
+          Employee: { dnUsername: from },
+          BroadcastMessage: {
+            SubDepartment: { name: to },
+            createdAt: date,
+            subject,
+            message
+          },
+        } = broadcast;
+
+        return {
+          from,
+          to,
+          date,
+          subject,
+          message
+        }
+      });
+
+      setBroadcasts(
+        broadcastsBuffer
+      );
+
+    } catch (exc) {
+      console.log(exc);
+    }
+  }
+
+  useEffect(() => {
+    retreiveBroadcasts();
+  }, [])
+
+
   const handleToValues = (event, value) => {
-    setToBroadcast(value.role_id);
+    setToBroadcast(value.id);
   }
 
   const handleBroadcastSubject = ($e, value) => {
@@ -208,7 +267,7 @@ const BroadcastMessages = () => {
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {rows
+                        {useBroadcasts
                           .slice(
                             page * rowsPerPage,
                             page * rowsPerPage + rowsPerPage
@@ -278,7 +337,7 @@ const BroadcastMessages = () => {
               id="free-solo-2-demo"
               disableClearable
               options={roles}
-              getOptionLabel={(option) => option.label}
+              getOptionLabel={(option) => option.title}
               renderInput={(params) => (
                 <TextField
                   {...params}
