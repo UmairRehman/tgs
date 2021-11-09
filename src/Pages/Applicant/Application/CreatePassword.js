@@ -71,6 +71,7 @@ const CreatePassword = () => {
   const validatePassword = async (password) => {
     try {
       return await Imports
+        .validators
         .password
         .validate(password);
     } catch (exc) {
