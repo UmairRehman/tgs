@@ -29,6 +29,7 @@ import Services from '../../../Services';
 
 import Snackbar from '../../../Components/Snackbar';
 
+console.log(Imports);
 
 const {
     users
@@ -347,6 +348,7 @@ const Application = () => {
         try {
 
             return await Imports
+                .validators
                 .registerApplicant
                 .validate(applicantObject);
 
