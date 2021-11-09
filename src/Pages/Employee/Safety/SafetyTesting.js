@@ -266,7 +266,7 @@ const SafetyTesting = () => {
         <Button autoFocus onClick={handleClose} className="ModalClose">
         </Button>
         <DialogContent>
-          <Grid xs={12}>
+          <Grid xs={12} className="mb20">
             <TableContainer>
               <Table>
                 <TableHead>
@@ -296,27 +296,6 @@ const SafetyTesting = () => {
                       )
                     })
                   }
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Grid>
-          <Grid xs={12}>
-          <TableContainer>
-              <Table className="mt10">
-                <TableHead>
-                  <TableRow>
-                    <TableCell className="pt0 pb6">Reviewer Note</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  <TableRow>
-                    <TableCell>
-                      <DialogContentText>
-                        * 4TH Crew member was not tested on rule 6.2 and N/A was entered for the result. Therefore, a rules record should not be added to the rules table for John 
-Doe4, rule 6.2
-                      </DialogContentText>
-                    </TableCell>
-                  </TableRow>
                 </TableBody>
               </Table>
             </TableContainer>
