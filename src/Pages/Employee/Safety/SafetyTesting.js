@@ -24,12 +24,18 @@ import {isMobile} from 'react-device-detect';
 import Services from '../../../Services'
 import { useHistory } from "react-router-dom";
 
+import Snackbar from '../../../Components/Snackbar';
+import { helpers } from "../../../helpers";
 
 var moment = require('moment-timezone')
 const {
   employee,
   Storage
 } = Services
+
+const {
+  showSnackBar,
+} = helpers;
 
 const columns = [
   { id: "id", label: "Event ID", minWidth: 170, type: "value" },
@@ -42,6 +48,15 @@ const columns = [
   { id: "viewrules", label: "View Rules", minWidth: 50, type: "view" },
 ];
 
+
+const columnsForView = [
+  "ID",
+  "Event_ID",
+  "Rule_NBR",
+  "Crew_Member",
+  "Result",
+  "Comments"
+];
 
 const SafetyTesting = () => {
   const history = useHistory();
@@ -57,13 +72,37 @@ const SafetyTesting = () => {
     setPage(0);
   };
 
-
   // For Modal
   const [open, setOpen] = useState(false);
+  const [modalData, setModalData] = useState([])
+  const [loading, setLoading] = useState(false);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const handleClickOpen = () => {
+  const handleClickOpen = async (value) => {
+    try {
+      setLoading(true)
+      let data = await employee.view_rule_event({ id:value })
+      if(data.httpStatus==200)
+      {
+         data = data?.data.map(row=>{
+            return{
+              id:row.id,
+              eventID:(row?.TestEventRule?.TestEventId)?row.TestEventRule.TestEventId:null,
+              rule_NBR:(row?.TestEventRule?.Rule?.RuleNo)?row.TestEventRule.Rule.RuleNo:null,
+              crew_member:(row?.TestEventTeam?.Employee?.firstName)?`${row.TestEventTeam?.Employee.firstName} ${row.TestEventTeam?.Employee.middleName} ${row.TestEventTeam?.Employee.lastName}`:null,
+              result: (row?.result)?row.result:null,
+              comment: (row?.comment)?row.comment:null
+            }
+          }) 
+          // console.log("data",data);
+          setModalData(data)
+          setLoading(false) 
+      }
+    } catch (error) {
+      return showSnackBar(`Please Try  Again \n Error Occured while fetching data: ${error}`);
+      console.log("Error",error);
+    }
     setOpen(true);
   };
   
@@ -101,11 +140,8 @@ const SafetyTesting = () => {
     }
   }
   useEffect(async () => {
-    
-    let data = await getlistEvents()
-    
+    await getlistEvents()
   }, [])
-
 
   if(isMobile) {
     return (
@@ -187,7 +223,7 @@ const SafetyTesting = () => {
                                           className="EditIcon">
                                          </Link>
                                       ) : column.type == "view" ? (
-                                        <Button  onClick={handleClickOpen} className="ViewIcon"></Button>
+                                        <Button  onClick={()=>handleClickOpen(row.id)} className="ViewIcon"></Button>
                                       ) : (
                                         value
                                       )}
@@ -219,6 +255,7 @@ const SafetyTesting = () => {
 
 
       {/* Modal */}
+
       <Dialog
         fullScreen={fullScreen}
         open={open}
@@ -229,65 +266,36 @@ const SafetyTesting = () => {
         <Button autoFocus onClick={handleClose} className="ModalClose">
         </Button>
         <DialogContent>
-          <Grid xs={12}>
+          <Grid xs={12} className="mb20">
             <TableContainer>
               <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell>ID</TableCell>
-                    <TableCell>Event_ID</TableCell>
-                    <TableCell>Rule_NBR</TableCell>
-                    <TableCell>Crew_Member</TableCell>
-                    <TableCell>Result</TableCell>
-                    <TableCell>Comments</TableCell>
+                    {
+                      // (columnsForView) && 
+                      columnsForView.map((row)=>{
+                        return (
+                          <TableCell>{`${row}`}</TableCell>
+                        );
+                      })
+                    }
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  <TableRow>
-                    <TableCell>564</TableCell>
-                    <TableCell>12345</TableCell>
-                    <TableCell>6.2</TableCell>
-                    <TableCell>John Doe 1 EMP ID</TableCell>
-                    <TableCell>Pass</TableCell>
-                    <TableCell>Null / Blank</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>569</TableCell>
-                    <TableCell>12345</TableCell>
-                    <TableCell>6.2</TableCell>
-                    <TableCell>John Doe 2 EMP ID</TableCell>
-                    <TableCell>Rules Review</TableCell>
-                    <TableCell>DID NOT SECURE RAILCAR</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>570</TableCell>
-                    <TableCell>12345</TableCell>
-                    <TableCell>6.2</TableCell>
-                    <TableCell>John Doe 1 EMP ID</TableCell>
-                    <TableCell>Pass</TableCell>
-                    <TableCell>Null / Blank</TableCell>
-                  </TableRow>
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Grid>
-          <Grid xs={12}>
-          <TableContainer>
-              <Table className="mt10">
-                <TableHead>
-                  <TableRow>
-                    <TableCell className="pt0 pb6">Reviewer Note</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  <TableRow>
-                    <TableCell>
-                      <DialogContentText>
-                        * 4TH Crew member was not tested on rule 6.2 and N/A was entered for the result. Therefore, a rules record should not be added to the rules table for John 
-Doe4, rule 6.2
-                      </DialogContentText>
-                    </TableCell>
-                  </TableRow>
+                  {
+                    modalData.map(row=>{
+                      return(
+                        <TableRow>
+                          <TableCell>{`${row.id}`}</TableCell>
+                          <TableCell>{`${row.eventID}`}</TableCell>
+                          <TableCell>{`${row.rule_NBR}`}</TableCell>
+                          <TableCell>{`${row.crew_member}`}</TableCell>
+                          <TableCell>{`${row.result}`}</TableCell>
+                          <TableCell>{`${row.comment}`}</TableCell>
+                        </TableRow>
+                      )
+                    })
+                  }
                 </TableBody>
               </Table>
             </TableContainer>

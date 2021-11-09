@@ -27,6 +27,7 @@ export const routes = {
         get_test_event_by_id:'employee/testEvent/',
         get_rules_list:'employee/testEventRule/rules',
         create_test_event_rule:'employee/testEventRule',
+        view_test_event_rule:'employee/testEventRuleResult/'
     },
     hr:{
         get_applicant: 'employee/hr/applicant',
