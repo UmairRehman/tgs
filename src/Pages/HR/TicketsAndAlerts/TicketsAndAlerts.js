@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import {
   Grid,
   Button,
@@ -63,12 +63,12 @@ function createData(
 }
 
 const rows = [
-  createData("1234", "Ryan Westmeyer", "Ticket","IT", "Need monitor cables for new docking"),
-  createData("324", "John Daniel", "Alert","Management", "Terminated: AD Enabled"),
-  createData("554", "Paul Jason", "Ticket","IT", "Requesting a second monitor, Current"),
-  createData("783", "Donald Jeff", "Alert","Account", "Terminated: AD Enabled"),
-  createData("234", "William Anthony", "Alert","Management", "Need monitor cables for new docking"),
-  createData("5433", "Mark Robert", "Ticket","Account", "Requesting a second monitor, Current"),
+  createData("1234", "Ryan Westmeyer", "Ticket", "IT", "Need monitor cables for new docking"),
+  createData("324", "John Daniel", "Alert", "Management", "Terminated: AD Enabled"),
+  createData("554", "Paul Jason", "Ticket", "IT", "Requesting a second monitor, Current"),
+  createData("783", "Donald Jeff", "Alert", "Account", "Terminated: AD Enabled"),
+  createData("234", "William Anthony", "Alert", "Management", "Need monitor cables for new docking"),
+  createData("5433", "Mark Robert", "Ticket", "Account", "Requesting a second monitor, Current"),
 ];
 
 
@@ -90,42 +90,47 @@ const TicketsAndAlerts = () => {
   const [loader, setLoader] = useState(false)
   const [ticket, setTicket] = useState({})
   const [test, setTest] = useState([])
-  useEffect(async() => {
-    
-    try{
-      setLoader(true)
-      let data = await hr.get_tickets() ;
-      console.log(data.data)
+  useEffect(async () => {
 
-      setTest((data.data.map((rows) => ({
-        id : rows.id,
-        employeeid : rows.FEmployee.id,
-        name : rows.FEmployee.firstName + " " + rows.FEmployee.middleName + " " + rows.FEmployee.lastName,
-        alertType: rows.isAlert ? "Alert" : "Ticket",
-        category : rows.TicketType.name,
-        description : rows.creation_comment
-      }))))
+    try {
+      setLoader(true)
+      let response = await hr.get_tickets();
+
+      const { data } = response;
+
+      const setTickets = data
+        .reverse()
+        .map((rows) => ({
+          id: rows.id,
+          employeeid: rows.FEmployee.id,
+          name: rows.FEmployee.firstName + " " + rows.FEmployee.middleName + " " + rows.FEmployee.lastName,
+          alertType: rows.isAlert ? "Alert" : "Ticket",
+          category: rows.TicketType.name,
+          description: rows.creation_comment
+        }))
+
+      setTest(setTickets);
     }
-    catch(exc){
+    catch (exc) {
       console.log(exc);
     }
 
   }, [])
 
-  function onClickDetail(value){
+  function onClickDetail(value) {
     console.log(value)
-    if(value.alertType == "Ticket"){
+    if (value.alertType == "Ticket") {
       history.push({
-        pathname : "/tickets-alerts/ticket/details",
+        pathname: "/tickets-alerts/ticket/details",
         state: value
       });
     }
     else {
       history.push({
-        pathname : "/tickets-alerts/alert/details",
+        pathname: "/tickets-alerts/alert/details",
         state: value
       });
-    } 
+    }
 
   }
 
@@ -188,7 +193,7 @@ const TicketsAndAlerts = () => {
                                       align={column.align}
                                     >
                                       {column.type == "edit" ? (
-                                        <Button className="ViewIcon" onClick={()=>onClickDetail(test)}>
+                                        <Button className="ViewIcon" onClick={() => onClickDetail(test)}>
                                         </Button>
                                       ) : column.type == "view" ? (
                                         <Grid className="CompleteIcon"></Grid>
@@ -216,20 +221,20 @@ const TicketsAndAlerts = () => {
                 </Paper>
                 <Grid xs={12} className="TableSearchBox">
                   <Grid xs={12}>
-                  Search By Employee ID
+                    Search By Employee ID
                   </Grid>
                   <Grid xs className="mt6">
                     <Button></Button>
-                    <TextField/>
+                    <TextField />
                   </Grid>
                 </Grid>
               </Grid>
-            </Grid> 
+            </Grid>
           </Grid>
           {/* Page Start End */}
         </Grid>
       </Grid>
- </Grid>
+    </Grid>
   );
 }
 
