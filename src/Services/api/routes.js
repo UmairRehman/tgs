@@ -27,7 +27,9 @@ export const routes = {
         get_test_event_by_id:'employee/testEvent/',
         get_rules_list:'employee/testEventRule/rules',
         create_test_event_rule:'employee/testEventRule',
-        view_test_event_rule:'employee/testEventRuleResult/'
+        view_test_event_rule:'employee/testEventRuleResult/',
+        departments_list: 'employee/department/',
+        all_subdepartments: 'employee/department/sub',
     },
     hr:{
         get_applicant: 'employee/hr/applicant',
@@ -47,5 +49,9 @@ export const routes = {
         location : '/employee/location',
         paytype : 'employee/payType',
         subDepartment : 'employee/department/subDepartment/',
+    },
+    broadcast:{
+        create: 'employee/broadcastMessage/',
+        getAll: 'employee/broadcastMessage/recieve',
     }
 }

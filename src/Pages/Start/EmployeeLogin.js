@@ -116,6 +116,7 @@ const EmployeeLogin = () => {
   const validatePassword = async (password) => {
     try {
       return await Imports
+        .validators
         .password
         .validate(password);
     } catch (exc) {
@@ -172,9 +173,6 @@ const EmployeeLogin = () => {
       } else {
         history.push('/login')
       }
-
-
-      history.pushState();
 
       return true;
 

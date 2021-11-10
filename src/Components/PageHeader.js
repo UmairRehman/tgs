@@ -49,6 +49,9 @@ const {
     routes
   },
   Storage,
+  BroadcastClient,
+  EventsClient,
+  broadcast,
 } = Services;
 
 const {
@@ -66,7 +69,36 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+/** Pre-req Configuration */
+const status = JSON.parse(localStorage.user_profile || '{}');
+const isEmployee = status?.EmployeeStatusId > 8;
+
+if (isEmployee)
+  var broadcastListener;
+
+let eventsListener;
+
+if (isEmployee)
+  var broadcastClient = new BroadcastClient({
+    namespace: 'broadcast'
+  });
+
+const eventsClient = new EventsClient({
+  namespace: 'events'
+});
+
+if (isEmployee)
+  broadcastClient.connect();
+
+eventsClient.connect();
+
+
+if (!localStorage.getItem('broadcasts'))
+  localStorage.broadcasts = '[]';
+
+
 const PageHeader = () => {
+
   const videoConstraints = {
     width: 300,
     height: 300,
@@ -207,7 +239,7 @@ const PageHeader = () => {
       storage.set('displayPicture', uri);
 
       storage.remove('retreivingDp');
-      
+
     } catch (exc) {
       console.log(exc);
 
@@ -221,10 +253,34 @@ const PageHeader = () => {
     console.log(exc);
   }
 
+  const getBroadcasts = () => {
+    return JSON.parse(
+      storage.get('broadcasts')
+    )
+  }
+
+  const [broadcasts, insertBroadcasts] = useState(
+    getBroadcasts()
+  );
+
+  const [notifications, setNotifications] = useState([]);
+
   // For Modal
   const [aletopen, setAlertOpen] = React.useState(false);
   //  const //theme = useTheme();
   //const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const acknowledgeAndClose = () => {
+    AlertPopOff();
+
+    setTimeout(() => {
+      const [first, ...rest] = broadcasts;
+
+      storage.set('broadcasts', JSON.stringify(rest));
+
+      insertBroadcasts(rest);
+    }, 0);
+  }
 
   const AlertPop = () => {
     setAlertOpen(true);
@@ -234,6 +290,82 @@ const PageHeader = () => {
     setAlertOpen(false);
   };
 
+  useEffect(() => {
+    if (isEmployee && !broadcastListener) {
+      broadcastListener = BroadcastClient.broadcastListener((broadcastEvent) => {
+        const {
+          detail: broadcastObject
+        } = broadcastEvent;
+
+        const useBroadcasts = [...broadcasts, broadcastObject];
+
+        insertBroadcasts(useBroadcasts);
+      });
+    }
+
+    if (!eventsListener) {
+      eventsListener = EventsClient.eventstListener((event) => {
+        const {
+          detail: eventObject
+        } = event;
+
+        console.log(eventObject);
+      });
+    }
+
+    retreiveBroadcasts();
+  }, []);
+
+  const retreiveBroadcasts = async () => {
+    try {
+      const response = await broadcast.getAll();
+
+      const { data } = response;
+
+      const notificationsBuffer = data
+        .reverse()
+        .map(broadcast => {
+          let {
+            Employee: { dnUsername: from },
+            BroadcastMessage: {
+              SubDepartment: { name: to },
+              createdAt: date,
+              subject,
+              message
+            },
+            is_read
+          } = broadcast;
+
+          date = new Date(date).toLocaleDateString()
+
+          return {
+            heading: dnUsername,
+            body: message,
+            date,
+            is_read
+          }
+        });
+
+      setNotifications(notificationsBuffer);
+
+    } catch (exc) {
+      console.log(exc);
+    }
+  }
+
+  useEffect(() => {
+    if (!isEmployee)
+      return;
+
+    storage.set('broadcasts', JSON.stringify(broadcasts));
+
+    if (getBroadcasts().length)
+      AlertPop();
+
+    retreiveBroadcasts();
+  }, [broadcasts])
+
+
   /** Retreiving user profile information, cached in localstorage.
    * TO APPLY - state service later
    */
@@ -242,6 +374,7 @@ const PageHeader = () => {
   ) || { userName: 'Not Found' };
 
   if (userProfile) {
+
     var {
       dnUsername,
       firstName,
@@ -261,6 +394,7 @@ const PageHeader = () => {
   /** Setting Header styles if the user is authenticated */
 
   const headerClassName = authenticatedHeader ? '' : classes.DisplayNone;
+
 
   /********************************************************** */
 
@@ -289,7 +423,7 @@ const PageHeader = () => {
             alignItems="center"
             className={headerClassName}>
             <Grid lg={12} container justify="flex-end">
-              <Grid xs className="HeaderSearchBox">
+              <Grid xs className="HeaderSearchBox d-none">
                 <Button></Button>
                 <TextField id="Header-Search" label="Search" />
               </Grid>
@@ -379,69 +513,24 @@ const PageHeader = () => {
               <Button className="HeadAlert">
                 <Grid className="HeaderNotification">
                   <List component="nav" aria-label="main mailbox folders" className="HeaderNoti Scrolling AlertNoti">
-                    <ListItem onClick={AlertPop}>
-                      <Grid xs={12}>
-                        <FormLabel>10:45 PM</FormLabel>
-                        <Typography variant="h6" component="h6">
-                          Jessie John
-                        </Typography>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                      </Grid>
-                    </ListItem>
-                    <ListItem onClick={AlertPop}>
-                      <Grid xs={12}>
-                        <FormLabel>10:45 PM</FormLabel>
-                        <Typography variant="h6" component="h6">
-                          Jessie John
-                        </Typography>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                      </Grid>
-                    </ListItem>
-                    <ListItem onClick={AlertPop}>
-                      <Grid xs={12}>
-                        <FormLabel>10:45 PM</FormLabel>
-                        <Typography variant="h6" component="h6">
-                          Jessie John
-                        </Typography>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                      </Grid>
-                    </ListItem>
-                    <ListItem onClick={AlertPop}>
-                      <Grid xs={12}>
-                        <FormLabel>10:45 PM</FormLabel>
-                        <Typography variant="h6" component="h6">
-                          Jessie John
-                        </Typography>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                      </Grid>
-                    </ListItem>
-                    <ListItem onClick={AlertPop}>
-                      <Grid xs={12}>
-                        <FormLabel>10:45 PM</FormLabel>
-                        <Typography variant="h6" component="h6">
-                          Jessie John
-                        </Typography>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                      </Grid>
-                    </ListItem>
-                    <ListItem onClick={AlertPop}>
-                      <Grid xs={12}>
-                        <FormLabel>10:45 PM</FormLabel>
-                        <Typography variant="h6" component="h6">
-                          Jessie John
-                        </Typography>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                      </Grid>
-                    </ListItem>
-                    <ListItem onClick={AlertPop}>
-                      <Grid xs={12}>
-                        <FormLabel>10:45 PM</FormLabel>
-                        <Typography variant="h6" component="h6">
-                          Jessie John
-                        </Typography>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                      </Grid>
-                    </ListItem>
+                    {notifications
+                      .map((notification) => {
+                        return <ListItem onClick={AlertPop}
+                          className={
+                            notification.is_read
+                              ? ''
+                              : 'UnreadAlert'
+                          }>
+                          <Grid xs={12}>
+                            <FormLabel>{notification.data}</FormLabel>
+                            <Typography variant="h6" component="h6">
+                              {notification.heading}
+                            </Typography>
+                            {notification.body}
+                          </Grid>
+                        </ListItem>
+                      })
+                    }
                   </List>
                 </Grid>
               </Button>
@@ -562,18 +651,24 @@ const PageHeader = () => {
           <Grid xs={12}>
             <Grid xs={12} className="mbold pl14">To</Grid>
             <Grid xs={12} className="AlertPopTextBox">
-              TGS Safety Team
+              {
+                broadcasts?.[0]?.from || broadcasts?.[0]?.sender
+              }
             </Grid>
           </Grid>
           <Grid xs={12}>
             <Grid xs={12} className="mbold mt30 pl14">Subject</Grid>
             <Grid xs={12} className="AlertPopTextBox">
-              TGS Safety Team
+              {
+                broadcasts?.[0]?.subject
+              }
             </Grid>
           </Grid>
           <Grid xs={12} className="mt16 AlertPopTextBox AlertPopTextarea">
             Dear recipient,<br />
-            Please note that progress made on last week's event......
+            {
+              broadcasts?.[0]?.message
+            }
           </Grid>
           <Grid xs={12} container className="mt10">
             <Grid className="AlertCheckBox">
@@ -585,7 +680,7 @@ const PageHeader = () => {
             </Grid>
           </Grid>
           <Grid xs={12} container justify="center" className="mt30">
-            <Button className="LinkButton">Acknowledge & Close</Button>
+            <Button className="LinkButton" onClick={acknowledgeAndClose}>Acknowledge & Close</Button>
           </Grid>
         </DialogContent>
       </Dialog>

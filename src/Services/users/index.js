@@ -95,3 +95,19 @@ export const submitStep4 = async (payload, headers) => {
         headers,
     )
 }
+
+export const subdepartmentList = async (payload, headers) => {
+    return await api.get(
+        routes.employee.departments_list,
+        payload,
+        headers,
+    )
+}
+
+export const allSubDepartmentsList = async (payload, headers) => {
+    return await api.get(
+        routes.employee.all_subdepartments,
+        payload,
+        headers,
+    )
+}

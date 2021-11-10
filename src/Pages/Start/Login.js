@@ -101,6 +101,7 @@ const Login = () => {
   const validatePassword = async (password) => {
     try {
       return await Imports
+        .validators
         .password
         .validate(password);
     } catch (exc) {
@@ -140,8 +141,6 @@ const Login = () => {
       storage.set('user_profile', JSON.stringify(data))
 
       setIsLoggingIn(false);
-
-      console.log(Imports);
 
       const {
         path: pathname,
