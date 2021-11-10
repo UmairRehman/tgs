@@ -142,8 +142,6 @@ const Login = () => {
 
       setIsLoggingIn(false);
 
-      console.log(Imports);
-
       const {
         path: pathname,
         params: state,

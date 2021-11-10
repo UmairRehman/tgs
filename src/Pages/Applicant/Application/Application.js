@@ -636,7 +636,7 @@ const Application = () => {
                                                 verifyValidations
                                                     .bind(
                                                         null,
-                                                        contactInformation[0].zip,
+                                                        homeAddress[0].zip,
                                                         Imports.zip
                                                     )
                                             }
@@ -900,7 +900,7 @@ const Application = () => {
                                                 verifyValidations
                                                     .bind(
                                                         null,
-                                                        contactInformation[0].emergency_contact,
+                                                        emergency_contact[0].phone_number,
                                                         Imports.emergency_phone_number
                                                     )
                                             }
