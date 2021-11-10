@@ -229,11 +229,11 @@ const PostConditionalJobOffer4 = () => {
                     U.S. Armed Forces Disabled Veteran
                   </TableCell>
                   <TableCell className="w10 row">
-                    <input type="text" name="textfield" id="disabledYes" className="w50 h16 bn bb" />
+                    <input type="radio" name="DisabledVeteran" id="disabledYes" className="w50 h16 bn bb" />
                     Yes
                   </TableCell>
                   <TableCell className="w10 row">
-                    <input type="text" name="textfield" id="disabledNo" className="w50 h16 bn bb" />
+                    <input type="radio" name="DisabledVeteran" id="disabledNo" className="w50 h16 bn bb" />
                     No
                   </TableCell>
                 </TableRow>
@@ -242,11 +242,11 @@ const PostConditionalJobOffer4 = () => {
                     U.S. Armed Forces Vietnam Era Veteran
                   </TableCell>
                   <TableCell className="w10 row">
-                    <input type="text" name="textfield" id="vietnamYes" className="w50 h16 bn bb" />
+                    <input type="radio" name="VietnamEraVeteran" id="vietnamYes" className="w50 h16 bn bb" />
                     Yes
                   </TableCell>
                   <TableCell className="w10 row">
-                    <input type="text" name="textfield" id="vietnamNo" className="w50 h16 bn bb" />
+                    <input type="radio" name="VietnamEraVeteran" id="vietnamNo" className="w50 h16 bn bb" />
                     No
                   </TableCell>
                 </TableRow>
@@ -255,11 +255,11 @@ const PostConditionalJobOffer4 = () => {
                     U.S. Armed Other Protected Veteran
                   </TableCell>
                   <TableCell className="w10 row">
-                    <input type="text" name="textfield" id="protectedYes" className="w50 h16 bn bb" />
+                    <input type="radio" name="ProtectedVeteran" id="protectedYes" className="w50 h16 bn bb" />
                     Yes
                   </TableCell>
                   <TableCell className="w10 row">
-                    <input type="text" name="textfield" id="protectedNo" className="w50 h16 bn bb" />
+                    <input type="radio" name="ProtectedVeteran" id="protectedNo" className="w50 h16 bn bb" />
                     No
                   </TableCell>
                 </TableRow>
@@ -274,11 +274,11 @@ const PostConditionalJobOffer4 = () => {
                     (A) Do you have a physical/mental handicap/disability?
                   </TableCell>
                   <TableCell className="w10 row">
-                    <input type="text" name="textfield" id="handicapYes" className="w50 h16 bn bb" />
+                    <input type="radio" name="handicap" id="handicapYes" className="w50 h16 bn bb" />
                     Yes
                   </TableCell>
                   <TableCell className="w10 row">
-                    <input type="text" name="textfield" id="handicapNo" className="w50 h16 bn bb" />
+                    <input type="radio" name="handicap" id="handicapNo" className="w50 h16 bn bb" />
                     No
                   </TableCell>
                 </TableRow>

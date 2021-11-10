@@ -402,3 +402,118 @@
 .flex-column {
     flex-direction: column;
 }
+
+span.ElectricalSafetyImage {
+    background: url(../assets/pdfElectricalImage.jpg) no-repeat right center;
+    background-size: 100%;
+    display: inline-block;
+    width: 90%;
+    height: 200px;
+}
+arrrow {
+    background: url(../assets/arow.svg) no-repeat center bottom;
+    background-size: 15px;
+    width: 20px;
+    height: 25px;
+    margin-right: 10px;
+    display: inline-block;
+}
+arrow {
+    background: url(../assets/arow.svg) no-repeat center 3px;
+    background-size: 15px;
+    width: 20px;
+    height: 16px;
+    margin-left: 10px;
+    display: inline-block;
+}
+span.MachineImage {
+    background: url(../assets/pdfMachineImage.jpg) no-repeat left center;
+    background-size: 100%;
+    display: inline-block;
+    width: 60%;
+    height: 120px;
+}
+span.BackInjuries {
+    background: url(../assets/pdfBackInjuries.jpg) no-repeat left center;
+    background-size: 100%;
+    display: inline-block;
+    width: 100%;
+    height: 230px;
+}
+span.ParcelImage {
+    background: url(../assets/pdfParcelImage.jpg) no-repeat left center;
+    background-size: 100%;
+    display: inline-block;
+    width: 100%;
+    height: 150px;
+}
+span.ExpresslyProhibited {
+    background: url(../assets/pdfExpresslyProhibited.jpg) no-repeat left center;
+    background-size: 100%;
+    display: inline-block;
+    width: 200px;
+    height: 350px;
+}
+span.CorrosiveDangerous {
+    background: url(../assets/pdfCorrosiveDangerous.jpg) no-repeat right center;
+    background-size: 100%;
+    display: inline-block;
+    width: 100%;
+    height: 350px;
+}
+SPAN.FirstaID {
+    background: url(../assets/pdfFirstAid.jpg) no-repeat right center;
+    background-size: 100%;
+    display: block;
+    width: 140PX;
+    height: 150px;
+}
+span.Biohazard {
+    background: url(../assets/pdfBiohazard.jpg) no-repeat right center;
+    background-size: 100%;
+    display: block;
+    width: 80%;
+    height: 350px;
+}
+span.Injury {
+    background: url(../assets/pdfInjury.jpg) no-repeat right center;
+    background-size: 100%;
+    display: block;
+    width: 100%;
+    height: 140px;
+}
+span.InjuryTretment {
+    background: url(../assets/pdfInjuryTretment.jpg) no-repeat left center;
+    background-size: 100%;
+    display: block;
+    width: 100%;
+    height: 140px;
+}
+span.TrunOnMachine {
+    background: url(../assets/pdfTrunOnMachine.jpg) no-repeat left center;
+    background-size: 100%;
+    display: block;
+    width: 100%;
+    height: 210px;
+}
+span.FireSafety {
+    background: url(../assets/pdfFireSafety.jpg) no-repeat right center;
+    background-size: 90%;
+    display: block;
+    width: 100%;
+    height: 210px;
+}
+span.passMethod {
+    background: url(../assets/pdfPassMethod.jpg) no-repeat right center;
+    background-size: 90%;
+    display: block;
+    width: 100%;
+    height: 210px;
+}
+span.weldingCutting {
+    background: url(../assets/pdfWeldingCutting.jpg) no-repeat right center;
+    background-size: 90%;
+    display: block;
+    width: 100%;
+    height: 140px;
+}

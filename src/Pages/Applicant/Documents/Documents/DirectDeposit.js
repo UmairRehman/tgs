@@ -311,7 +311,7 @@ const DirectDeposit = () => {
                           onChange={(value) => { setDate(value) }}
                           value={date}
                           id="offerDate"
-                          className="datePickerReact"
+                          className="datePickerReact mb6"
                         />
                         Date
                       </TableCell>

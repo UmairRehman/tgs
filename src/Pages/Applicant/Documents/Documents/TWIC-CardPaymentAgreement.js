@@ -169,9 +169,9 @@ const TWICCardPaymentAgreement = () => {
                       onChange={(value) => { setHireDate(value) }}
                       value={hireDate}
                       id="offerDate"
-                      className="datePickerReact"
+                      className="datePickerReact pr0 pl0"
                     />
-                    s                    </TableCell>
+                    </TableCell>
                 </TableRow>
                 <TableRow className="w100 mt10 row">
                   <TableCell className="w100 row">
@@ -212,7 +212,7 @@ const TWICCardPaymentAgreement = () => {
                       onChange={(value) => { setSignDate(value) }}
                       value={signDate}
                       id="offerDate"
-                      className="datePickerReact"
+                      className="datePickerReact mb10"
                     />
                     Date Signed
                   </TableCell>
