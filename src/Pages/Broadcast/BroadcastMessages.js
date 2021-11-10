@@ -115,7 +115,7 @@ const BroadcastMessages = () => {
   useEffect(() => {
     (async () => {
       try {
-        const response = await users.subdepartmentList();
+        const response = await users.allSubDepartmentsList();
 
         const { data } = response;
 
@@ -146,25 +146,29 @@ const BroadcastMessages = () => {
 
       const { data } = response;
 
-      const broadcastsBuffer = data.map(broadcast => {
-        const {
-          Employee: { dnUsername: from },
-          BroadcastMessage: {
-            SubDepartment: { name: to },
-            createdAt: date,
+      const broadcastsBuffer = data
+        .reverse()
+        .map(broadcast => {
+          let {
+            Employee: { dnUsername: from },
+            BroadcastMessage: {
+              SubDepartment: { name: to },
+              createdAt: date,
+              subject,
+              message
+            },
+          } = broadcast;
+
+          date = new Date(date).toLocaleDateString()
+
+          return {
+            from,
+            to,
+            date,
             subject,
             message
-          },
-        } = broadcast;
-
-        return {
-          from,
-          to,
-          date,
-          subject,
-          message
-        }
-      });
+          }
+        });
 
       setBroadcasts(
         broadcastsBuffer
@@ -205,7 +209,7 @@ const BroadcastMessages = () => {
       );
 
       const broadcastMessageObject = {
-        Department_Id: toForBroadcast,
+        subDepartmentId: toForBroadcast,
         subject: broadcastSubject,
         message: broadcastMessage,
         employee_id: id,

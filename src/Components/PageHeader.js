@@ -51,6 +51,7 @@ const {
   Storage,
   BroadcastClient,
   EventsClient,
+  broadcast,
 } = Services;
 
 const {
@@ -262,6 +263,8 @@ const PageHeader = () => {
     getBroadcasts()
   );
 
+  const [notifications, setNotifications] = useState([]);
+
   // For Modal
   const [aletopen, setAlertOpen] = React.useState(false);
   //  const //theme = useTheme();
@@ -309,7 +312,46 @@ const PageHeader = () => {
         console.log(eventObject);
       });
     }
+
+    retreiveBroadcasts();
   }, []);
+
+  const retreiveBroadcasts = async () => {
+    try {
+      const response = await broadcast.getAll();
+
+      const { data } = response;
+
+      const notificationsBuffer = data
+        .reverse()
+        .map(broadcast => {
+          let {
+            Employee: { dnUsername: from },
+            BroadcastMessage: {
+              SubDepartment: { name: to },
+              createdAt: date,
+              subject,
+              message
+            },
+            is_read
+          } = broadcast;
+
+          date = new Date(date).toLocaleDateString()
+
+          return {
+            heading: dnUsername,
+            body: message,
+            date,
+            is_read
+          }
+        });
+
+      setNotifications(notificationsBuffer);
+
+    } catch (exc) {
+      console.log(exc);
+    }
+  }
 
   useEffect(() => {
     if (!isEmployee)
@@ -319,6 +361,8 @@ const PageHeader = () => {
 
     if (getBroadcasts().length)
       AlertPop();
+
+    retreiveBroadcasts();
   }, [broadcasts])
 
 
@@ -379,7 +423,7 @@ const PageHeader = () => {
             alignItems="center"
             className={headerClassName}>
             <Grid lg={12} container justify="flex-end">
-              <Grid xs className="HeaderSearchBox">
+              <Grid xs className="HeaderSearchBox d-none">
                 <Button></Button>
                 <TextField id="Header-Search" label="Search" />
               </Grid>
@@ -469,69 +513,24 @@ const PageHeader = () => {
               <Button className="HeadAlert">
                 <Grid className="HeaderNotification">
                   <List component="nav" aria-label="main mailbox folders" className="HeaderNoti Scrolling AlertNoti">
-                    <ListItem onClick={AlertPop}>
-                      <Grid xs={12}>
-                        <FormLabel>10:45 PM</FormLabel>
-                        <Typography variant="h6" component="h6">
-                          Jessie John
-                        </Typography>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                      </Grid>
-                    </ListItem>
-                    <ListItem onClick={AlertPop}>
-                      <Grid xs={12}>
-                        <FormLabel>10:45 PM</FormLabel>
-                        <Typography variant="h6" component="h6">
-                          Jessie John
-                        </Typography>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                      </Grid>
-                    </ListItem>
-                    <ListItem onClick={AlertPop}>
-                      <Grid xs={12}>
-                        <FormLabel>10:45 PM</FormLabel>
-                        <Typography variant="h6" component="h6">
-                          Jessie John
-                        </Typography>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                      </Grid>
-                    </ListItem>
-                    <ListItem onClick={AlertPop}>
-                      <Grid xs={12}>
-                        <FormLabel>10:45 PM</FormLabel>
-                        <Typography variant="h6" component="h6">
-                          Jessie John
-                        </Typography>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                      </Grid>
-                    </ListItem>
-                    <ListItem onClick={AlertPop}>
-                      <Grid xs={12}>
-                        <FormLabel>10:45 PM</FormLabel>
-                        <Typography variant="h6" component="h6">
-                          Jessie John
-                        </Typography>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                      </Grid>
-                    </ListItem>
-                    <ListItem onClick={AlertPop}>
-                      <Grid xs={12}>
-                        <FormLabel>10:45 PM</FormLabel>
-                        <Typography variant="h6" component="h6">
-                          Jessie John
-                        </Typography>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                      </Grid>
-                    </ListItem>
-                    <ListItem onClick={AlertPop}>
-                      <Grid xs={12}>
-                        <FormLabel>10:45 PM</FormLabel>
-                        <Typography variant="h6" component="h6">
-                          Jessie John
-                        </Typography>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                      </Grid>
-                    </ListItem>
+                    {notifications
+                      .map((notification) => {
+                        return <ListItem onClick={AlertPop}
+                          className={
+                            notification.is_read
+                              ? ''
+                              : 'UnreadAlert'
+                          }>
+                          <Grid xs={12}>
+                            <FormLabel>{notification.data}</FormLabel>
+                            <Typography variant="h6" component="h6">
+                              {notification.heading}
+                            </Typography>
+                            {notification.body}
+                          </Grid>
+                        </ListItem>
+                      })
+                    }
                   </List>
                 </Grid>
               </Button>

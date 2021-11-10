@@ -103,3 +103,11 @@ export const subdepartmentList = async (payload, headers) => {
         headers,
     )
 }
+
+export const allSubDepartmentsList = async (payload, headers) => {
+    return await api.get(
+        routes.employee.all_subdepartments,
+        payload,
+        headers,
+    )
+}

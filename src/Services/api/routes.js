@@ -28,6 +28,7 @@ export const routes = {
         get_rules_list:'employee/testEventRule/rules',
         create_test_event_rule:'employee/testEventRule',
         departments_list: 'employee/department/',
+        all_subdepartments: 'employee/department/sub'
     },
     hr:{
         get_applicant: 'employee/hr/applicant',
