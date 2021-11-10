@@ -250,7 +250,7 @@ const PostConditionalJobOffer = () => {
                             onChange={(value) => { setDateOfBirth(value) }}
                             value={dateOfBirth}
                             id="offerDate"
-                            className="datePickerReact"
+                            className="datePickerReact PosRIght"
                           />
                         </TableCell>
                       </TableRow>

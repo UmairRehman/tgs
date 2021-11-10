@@ -242,6 +242,7 @@ const ConditionalOffer = () => {
                       onChange={(value) => { setStartDate(value) }}
                       value={startDate}
                       id="startDate"
+                      className="datePickerReact"
                     />
                     {/* <input type="text" name="textfield" id="textfield" className="w22 h22 bn bb textCenter" />
                       <span className="font12">/</span>
