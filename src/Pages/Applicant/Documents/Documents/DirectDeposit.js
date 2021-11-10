@@ -168,8 +168,7 @@ const DirectDeposit = () => {
               <Table className="w100">
                 <TableRow className="w100 mb10 mt10 row justify-center">
                   <TableCell>
-                    {/* <Avatar alt="TGS" className="TGSLogoSVG" src="https://tgs.liquidtechnologies.pk/assets/TGS_Logo2.svg" /> */}
-                    <Avatar alt="TGS" className="TGSLogoSVG" src="http://localhost/TGS_Logo2.svg" />
+                    <Avatar alt="TGS" className="TGSLogoSVG" src="https://tgs.liquidtechnologies.pk/assets/TGS_Logo2.svg" />
                   </TableCell>
                 </TableRow>
                 <TableRow className="w100">
