@@ -92,7 +92,7 @@ const Login = () => {
     showPassword: false,
   });
 
-  
+
 
   /**
    * @param {string} password - Password to validate 
@@ -157,6 +157,10 @@ const Login = () => {
           state,
         }
         : pathname;
+
+      const applicantLoggedInEvent = new CustomEvent('applicant-logged-in', {});
+
+      window.dispatchEvent(applicantLoggedInEvent);
 
       history.push(stateToPush);
 
