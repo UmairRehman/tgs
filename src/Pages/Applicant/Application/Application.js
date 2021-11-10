@@ -173,25 +173,6 @@ const Application = () => {
 
     const [snackBarMessage, setSnackBarMessage] = useState('');
 
-    // useEffect(($e) => {
-    //     applicationForm = {
-    //         ...applicationForm,
-    //         ...contactInformation,
-    //         ...homeAddress,
-    //         ...maritalInformation,
-    //         ...emergency_contact,
-    //         ...position,
-    //         ...filesToUpload,
-    //     };
-    // }, [
-    //     contactInformation,
-    //     homeAddress,
-    //     maritalInformation,
-    //     emergency_contact,
-    //     position,
-    //     filesToUpload,
-    // ]);
-
     let applicationForm = {};
 
     const updateApplicationForm = (addedUpdates = {}) => {

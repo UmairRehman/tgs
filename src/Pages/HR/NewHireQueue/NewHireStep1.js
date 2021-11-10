@@ -232,8 +232,9 @@ const NewHireStep1 = () => {
                 id: value.id
             }
             let jobSubCategory = await hr.subDepartment(data) ;
-            console.log(jobSubCategory?.data?.rows)
-            setSubDepartmentDropdown(jobSubCategory?.data?.rows)
+            console.log(jobSubCategory?.data)
+            setSubDepartmentDropdown(jobSubCategory?.data)
+            console.log(SubDepartmentDropdown)
             
         }
         catch(exc){
@@ -571,10 +572,11 @@ const NewHireStep1 = () => {
                                         className="w100p"
                                         // onChange={(e,value)=>onChangeSubDepartment(e,value)}
                                         onChange={(e, value)=>{setsubDepartment(value.id)}}
-                                        id="combo-box-demo"
-                                        options={SubDepartmentDropdown}
+                                        id="combo-box-demo" 
+                                        options={SubDepartmentDropdown == null ? null : SubDepartmentDropdown}
                                         getOptionLabel={(option) => option.title}
                                         renderInput={(params) => <TextField required={true}  {...params} label="Select" variant="outlined" />}
+                                        
                                     />
                                 </Grid>
                             </Grid>
