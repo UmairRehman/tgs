@@ -430,7 +430,7 @@ Statistics reveal that a majority of workplace injuries are caused by unsafe act
             <TableRow className="w100 pl60 pr60 mt30">
               <TableCell className="w100">
                 <Table className="w100">
-                  <TableRow className="font16">
+                  <TableRow className="font14">
                     <TableCell className="w100 textJustify">
                     The first time you are observed violating a safety rule or procedure, you will be counseled on how to correct the unsafe behavior and why this is important. Any employee who continues to violate TGS safety rules, policies, procedures and orders and/or continues to demonstrate unsafe behavior, SHALL BE subject to disciplinary action up to and including termination of employment.
                     </TableCell>
@@ -442,7 +442,7 @@ Statistics reveal that a majority of workplace injuries are caused by unsafe act
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
-                  <TableRow className="w100 row font16">
+                  <TableRow className="w100 row font14">
                     <TableCell className="w100 textJustify">
 <dot/> ALWAYS report to your job rested, alert and ready to work<br/><br/>
 
@@ -483,7 +483,7 @@ Statistics reveal that a majority of workplace injuries are caused by unsafe act
               <TableCell className="w100">
                 <Table className="w100">
                   {/* -*- */}
-                  <TableRow className="w100 row font16">
+                  <TableRow className="w100 row font14">
                     <TableCell className="w100 textJustify">
 <dot/> If a machine, equipment or electrical circuit is “Tagged Out”, “Locked Out” or thehazardous energy is otherwise isolated, DO NOT remove the lock or tag, touch or attemptto start or operate it.<br/><br/>
 
@@ -584,14 +584,14 @@ Each employee is responsible for inspecting their personal fall protection equip
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
-                  <TableRow className="w100 row font16">
+                  <TableRow className="w100 row font14">
                     <TableCell className="w100 textJustify">
                     NEVER use a tool, machine or piece of equipment unless you have been trained on how to use it safely. Your Supervisor must ensure that each Employee under his/her authority demonstrate safe work practices. There are safety considerations for using manual and powered hand tools as well:
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
                   <TableRow>
-                    <TableCell className="w100 pt30 pb30 font16 textJustify">
+                    <TableCell className="w100 pt30 pb30 font14 textJustify">
                     <arrrow/> Inspect your hand tools before using them. Inform your Supervisor or designated SiteSafety Coordinator if they’re broken, dull, mushroomed or otherwise defective in anyway.<br/><br/>
 
                     <arrrow/> Use the right tool for the job. If you’re unclear as to what the “right” tool is for aparticular job, ask your Supervisor or designated Site Safety Coordinator.<br/><br/>
@@ -602,7 +602,7 @@ Each employee is responsible for inspecting their personal fall protection equip
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
-                  <TableRow className="w100 row font16">
+                  <TableRow className="w100 row font14">
                     <TableCell className="w100 textJustify">
                     Hammers: Use a hammer only if it is in good condition with the head firmly attached to the handle. Defective hammers should be repaired or replaced prior to use. Grip the handle close to the end to ensure an effective blow. Hammer handles are intended for gripping; do not use them as pry bar or for light tapping. Do not use a wrench, rod, bolt or other tool as a hammer. Never strike hardened objects, such as a wrench, file or another hammer, with anything except a rawhide or soft-metal hammer.<br/><br/>
 Pliers: Pliers are to be used according to their design; gripping an cutting. Never use pliers for loosening or tightening nuts or bolts. Always use a wrench for nuts and bolts. For firm grip with minimum effort pliers should be as nearly parallel as possible. Pliers that cut wire with one hand should always be chosen.<br/><br/>
@@ -626,7 +626,7 @@ If leverage with a small wrench is insufficient, a larger, stronger wrench shoul
               <TableCell className="w100">
                 <Table className="w100">
                   {/* -*- */}
-                  <TableRow className="w100 row font15">
+                  <TableRow className="w100 row font14">
                     <TableCell className="w100 textJustify">
 Screwdrivers: A Screwdriver handle should be smooth and undamaged but not slippery. The side of the shank should be straight and exactly parallel to fit the slot in the screw head. The end of the screwdriver bit should be at an exact right angle. The accuracy of fit between the bit and the screw head should be a close fit, whether it is the standard Slotted or Phillips Head type. Never use a screwdriver as a chisel or pry bar. Do not use a screwdriver with a worn, chipped or broken tip. Keep the bit filed square, following the original taper line. Use a screwdriver with an insulated handle for electrical work.<br/><br/>
 Files: Always equip files with tight fitting handles prior to use, as the end of the tang is very sharp. Whenever possible, clamp the part to be filed in a vise. File teeth are made to cut in one direction in a forward motion. Never use a file for prying as the body of the file is brittle and a slight bending force will snap it. Never use a file as a chisel.<br/><br/>
@@ -674,7 +674,7 @@ Never use electric motor driven tools in any gaseous atmosphere as an explosion 
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
-                  <TableRow className="w100 row font16">
+                  <TableRow className="w100 row font14">
                     <TableCell className="w60  textJustify">
                     <arrrow/> No Employee shall be allowed to performany electrical maintenance or repair of anykind on any electrical equipment,machinery, tool, component or circuit unlesshe/she demonstrates competency inelectrical service and hazardous energy
 isolation; or he or she has been trained in electrical safety and/or authorized bymanagement.
@@ -684,7 +684,7 @@ isolation; or he or she has been trained in electrical safety and/or authorized 
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
-                  <TableRow className="w100 font16">
+                  <TableRow className="w100 font14">
                     <TableCell className="w100 textJustify">
                     <arrrow/> Be alert concerning electrical hazards. Report any smoking or sparking in a switch oroutlet. Report warm, hot, damaged or defective wiring, electrical cords and plugs.<br/><br/>
 
@@ -698,7 +698,7 @@ isolation; or he or she has been trained in electrical safety and/or authorized 
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
-                  <TableRow className="w100 row font16">
+                  <TableRow className="w100 row font14">
                     <TableCell className="w30">
                     <span className="MachineImage"></span>
                     </TableCell>
@@ -964,7 +964,7 @@ Each Material Safety Data Sheet supplies important information about a chemical 
               <TableCell className="w100">
                 <Table className="w100">
                   {/* -*- */}
-                  <TableRow className="w100 mt30 font16 textJustify">
+                  <TableRow className="w100 mt30 font14 textJustify">
                     <TableCell className="w100">
                     <b>ALWAYS</b> read the label or MSDS before using a chemical product. Follow instructions. <b>DO NOT</b> mix cleaners or other chemicals together unless label instructions tell you to do so. Do not bring any chemicals or cleaning products from home. As a rule, if you get a chemical on your body, wash it off immediately. Seek first Aid if necessary. If you have any questions about a chemical, ask your Supervisor.
                     </TableCell>
@@ -976,7 +976,7 @@ Each Material Safety Data Sheet supplies important information about a chemical 
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
-                  <TableRow className="w100 font16 row">
+                  <TableRow className="w100 font14 row">
                     <TableCell className="w100 textJustify">
                     A designated Employee or designated Site Safety Coordinator will be responsible for checking and maintaining the First Aid Kits. A regular inventory of supplies will be taken to ensure that the station or kit remains adequately stocked. Get to know the location of the first aid kit closest to your workstation. If you use the last of any item or notice something missing within the kit, notify your Supervisor and your designated Site Safety Coordinator so that it can be replaced.
                     </TableCell>
@@ -994,7 +994,7 @@ Each Material Safety Data Sheet supplies important information about a chemical 
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
-                  <TableRow className="w100 font16 row">
+                  <TableRow className="w100 font14 row">
                     <TableCell className="w70 textJustify">
                     If an Employee decides to provide first aid on an injury involving blood fluids, protective gloves must be worn. We must ALWAYS treat the exposure to any human body fluid as potentially infectious and be cautious of transmission of the Hepatitis B (HBV) or the Human Immunodeficiency Virus (HIV). Proper follow-up procedures include:<br/><br/>
 <Grid className="font14">
@@ -1088,7 +1088,7 @@ The information furnished here is intended as an assistance to employees who may
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
-                  <TableRow className="w100 font14 row">
+                  <TableRow className="w100 font12 row">
                     <TableCell className="w100 textJustify">
                     The isolation of hazardous energy shall be practiced to prevent serious injury or potential death. Only authorized personnel knowledgeable in hazardous energy isolation shall be allowed to perform lockout/Tagout procedures. Failure to follow these procedures could result in disciplinary action, up to and including termination of employment. Recognized hazardous energy shall consist of electrical, mechanical, chemical, pneumatic, kinetic, hydraulic, steam pressure, etc.<br/><br/>
 
@@ -1259,7 +1259,7 @@ NEVER re-enter the evacuated building for any reason until your Supervisor or de
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
-                  <TableRow className="w100 font14 row">
+                  <TableRow className="w100 font12 row">
                     <TableCell className="w100 textJustify">
                     Before you work with a powered machine for the first time, you MUST:<br/><br/>
 1.Read the operations manual. Make sure that you know the contents, such as:<br/>
@@ -1450,7 +1450,7 @@ NEVER re-enter the evacuated building for any reason until your Supervisor or de
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
-                  <TableRow className="w100 font14 row">
+                  <TableRow className="w100 font12 row">
                     <TableCell className="w100 textJustify">
                     Prior to performing any trench and excavation operations, each employee will be required to complete a minimum of eight hours of Excavation Safety Training approved by the Company’s Director of Safety. All trenching and excavation work shall be supervised by a Competent Person knowledgeable about OSHA’s excavation standard, soil mechanics, soil classification and testing as well as protective systems. Keep in mind that all trenches/excavations greater than four (4) feet in depth must be tested for safe atmospheric conditions and must have been provided with some form of protective systems (i.e. sloping, shoring and shielding). Some trenches/excavations may meet the requirements of a confined space and may therefore require a permit and must be barricaded with proper access provided.<br/><br/>
 
@@ -1473,7 +1473,7 @@ NEVER re-enter the evacuated building for any reason until your Supervisor or de
               <TableCell className="w100">
                 <Table className="w100">
                   {/* -*- */}
-                  <TableRow className="w100 font14 row">
+                  <TableRow className="w100 font12 row">
                     <TableCell className="w100 textJustify">
                     No employee shall enter any trench or excavation without understanding and following these procedures:<br/><br/>
 
@@ -1548,7 +1548,7 @@ NEVER re-enter the evacuated building for any reason until your Supervisor or de
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
-                  <TableRow className="w100 font14 row">
+                  <TableRow className="w100 font12 row">
                     <TableCell className="w100 textJustify">
 In confined space situations, your Supervisor and/or your designated Site Safety Coordinator will evaluate the work area to determine if any of the spaces fall under OSHA’s “Permit-Required Confined Space” regulation and require a permit. If the work area contains permit spaces, the supervisor will inform all exposed employees by posting “DANGER CONFINED SPACE” warning signs, or by any other equally effective means, concerning the existence, the location and the danger posed by the permit spaces.<br/><br/>
 Should it be determined that employees are not to enter permit spaces, the supervisor or your designated Site Safety Coordinator will take measure to prevent employees from entering the permit spaces. If it is decided that employees are to enter the permit spaces, your supervisor and your designated Site Safety Coordinator will be implementing the company’s written Confined Space Entry Program.<br/><br/>
@@ -1562,7 +1562,7 @@ Only designated employees will be trained in Confined Space Entry Operations. Th
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
-                  <TableRow className="w100 font14 row">
+                  <TableRow className="w100 font12 row">
                     <TableCell className="w100 textJustify">
                     As mentioned before, safety is a condition of employment under the policies of Tran-Global Solutions, Inc. It is an ongoing process and a major part of your daily job as well as a commitment to our customers.<br/><br/>
 In the months to come, you will receive additional safety training during Safety Meetings. Your Supervisor and your designated Site Safety Coordinator are always available to answer questions and personally work with your concerning safety in the workplace.<br/><br/>

@@ -418,6 +418,14 @@ arrrow {
     margin-right: 10px;
     display: inline-block;
 }
+arrow {
+    background: url(../assets/arow.svg) no-repeat center 3px;
+    background-size: 15px;
+    width: 20px;
+    height: 16px;
+    margin-left: 10px;
+    display: inline-block;
+}
 span.MachineImage {
     background: url(../assets/pdfMachineImage.jpg) no-repeat left center;
     background-size: 100%;
