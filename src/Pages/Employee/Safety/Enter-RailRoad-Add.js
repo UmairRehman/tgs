@@ -185,9 +185,9 @@ const Railroad = () => {
   
         try {
               let data = await apiBody()
-              // let result = await employee.create_test_event({...data})
-              // if(result?.httpStatus== 200){
-              //   console.log('result',result);
+              let result = await employee.create_test_event({...data})
+              if(result?.httpStatus== 200){
+                console.log('result',result);
 
                 setSuccess(true);
                 setLoading(false);
@@ -199,7 +199,7 @@ const Railroad = () => {
                   history.push('/safety-testing')
                 }, 1500);   
                 return showSnackBar('Form Successfully Submitted');
-              // }
+              }
 
             } catch (error) {
               setSuccess(false);
