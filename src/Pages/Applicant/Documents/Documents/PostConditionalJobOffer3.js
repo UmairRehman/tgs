@@ -258,11 +258,11 @@ const PostConditionalJobOffer3 = () => {
                     <TableRow className="w100">
                       <TableCell className="w100 bold underLine">GENDER</TableCell>
                       <TableCell className="w100 row mt8">
-                        <input type="radio" name="race" id="male" className="w10 h14 mr4 bn bb" />
+                        <input type="radio" name="gender" id="male" className="w10 h14 mr4 bn bb" />
                         Male
                       </TableCell>
                       <TableCell className="w100 row mt8">
-                        <input type="radio" name="race" id="female" className="w10 h14 mr4 bn bb" />
+                        <input type="radio" name="gender" id="female" className="w10 h14 mr4 bn bb" />
                         Female
                       </TableCell>
                     </TableRow>
