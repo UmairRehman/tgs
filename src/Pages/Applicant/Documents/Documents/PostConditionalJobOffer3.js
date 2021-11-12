@@ -258,11 +258,11 @@ const PostConditionalJobOffer3 = () => {
                     <TableRow className="w100">
                       <TableCell className="w100 bold underLine">GENDER</TableCell>
                       <TableCell className="w100 row mt8">
-                        <input type="text" name="textfield" id="male" className="w14 h14 mr4 bn bb" />
+                        <input type="radio" name="race" id="male" className="w10 h14 mr4 bn bb" />
                         Male
                       </TableCell>
                       <TableCell className="w100 row mt8">
-                        <input type="text" name="textfield" id="female" className="w14 h14 mr4 bn bb" />
+                        <input type="radio" name="race" id="female" className="w10 h14 mr4 bn bb" />
                         Female
                       </TableCell>
                     </TableRow>
@@ -272,31 +272,31 @@ const PostConditionalJobOffer3 = () => {
                     <TableRow className="w100">
                       <TableCell className="w100 bold underLine">RACE</TableCell>
                       <TableCell className="w100 row mt8">
-                        <input type="text" name="textfield" id="caucasian" className="w14 h14 mr4 bn bb" />
+                        <input type="radio" name="race" id="caucasian" className="w10 h14 mr4 bn bb" />
                         Caucasian
                       </TableCell>
                       <TableCell className="w100 row mt8">
-                        <input type="text" name="textfield" id="africanAmerican" className="w14 h14 mr4 bn bb" />
+                        <input type="radio" name="race" id="africanAmerican" className="w10 h14 mr4 bn bb" />
                         African American
                       </TableCell>
                       <TableCell className="w100 row mt8">
-                        <input type="text" name="textfield" id="vative " className="w14 h14 mr4 bn bb" />
+                        <input type="radio" name="race" id="vative " className="w10 h14 mr4 bn bb" />
                         Native Hawaiian/Pacific Islander
                       </TableCell>
                       <TableCell className="w100 row mt8">
-                        <input type="text" name="textfield" id="american" className="w14 h14 mr4 bn bb" />
+                        <input type="radio" name="race" id="american" className="w10 h14 mr4 bn bb" />
                         American Indian/Alaskan Native
                       </TableCell>
                       <TableCell className="w100 row mt8">
-                        <input type="text" name="textfield" id="hispanic" className="w14 h14 mr4 bn bb" />
+                        <input type="radio" name="race" id="hispanic" className="w10 h14 mr4 bn bb" />
                         Hispanic or Latino
                       </TableCell>
                       <TableCell className="w100 row mt8">
-                        <input type="text" name="textfield" id="asian" className="w14 h14 mr4 bn bb" />
+                        <input type="radio" name="race" id="asian" className="w10 h14 mr4 bn bb" />
                         Asian
                       </TableCell>
                       <TableCell className="w100 row mt8">
-                        <input type="text" name="textfield" id="reces" className="w14 h14 mr4 bn bb" />
+                        <input type="radio" name="race" id="reces" className="w10 h14 mr4 bn bb" />
                         Two or More Races
                       </TableCell>
                     </TableRow>
@@ -306,36 +306,37 @@ const PostConditionalJobOffer3 = () => {
                     <TableRow className="w100">
                       <TableCell className="w100 bold underLine">REFERRAL SOURCE</TableCell>
                       <TableCell className="w100 row mt8">
-                        <input type="text" name="textfield" id="referral" className="w14 h14 mr4 bn bb" />
+                        <input type="radio" name="referral" id="referral" className="w10 h14 mr4 bn bb" />
                         Employee Referral
                       </TableCell>
                       <TableCell className="w100 row mt8">
-                        <input type="text" name="textfield" id="advertisement" className="w14 h14 mr4 bn bb" />
+                        <input type="radio" name="referral" id="advertisement" className="w10 h14 mr4 bn bb" />
                         Advertisement
                       </TableCell>
                       <TableCell className="w100 row mt8">
-                        <input type="text" name="textfield" id="friend" className="w14 h14 mr4 bn bb" />
+                        <input type="radio" name="referral" id="friend" className="w10 h14 mr4 bn bb" />
                         Friend
                       </TableCell>
                       <TableCell className="w100 row mt8">
-                        <input type="text" name="textfield" id="relative" className="w14 h14 mr4 bn bb" />
+                        <input type="radio" name="referral" id="relative" className="w10 h14 mr4 bn bb" />
                         Relative
                       </TableCell>
                       <TableCell className="w100 row mt8">
-                        <input type="text" name="textfield" id="walkin" className="w14 h14 mr4 bn bb" />
+                        <input type="radio" name="referral" id="walkin" className="w10 h14 mr4 bn bb" />
                         Walk-In
                       </TableCell>
                       <TableCell className="w100 row mt8">
-                        <input type="text" name="textfield" id="agency" className="w14 h14 mr4 bn bb" />
+                        <input type="radio" name="referral" id="agency" className="w10 h14 mr4 bn bb" />
                         Employment Agency
                       </TableCell>
                       <TableCell className="w100 row mt8">
-                        <input type="text" name="textfield" id="recruitment" className="w14 h14 mr4 bn bb" />
+                        <input type="radio" name="referral" id="recruitment" className="w10 h14 mr4 bn bb" />
                         College Recruitment
                       </TableCell>
-                      <TableCell className="w100 row mt16">
+                      <TableCell className="w100 row mt8">
+                        <input type="radio" name="referral" id="recruitment" className="w10 h14 mr4 bn bb" />
                         Other:
-                        <input type="text" name="textfield" id="other" className="w h14 mr4 bn bb" />
+                        <input type="text" name="referral" id="other" className="w68 bn bb" />
                       </TableCell>
                     </TableRow>
                   </TableCell>
