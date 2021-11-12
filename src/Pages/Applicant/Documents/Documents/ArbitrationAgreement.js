@@ -368,7 +368,7 @@ const ArbitrationAgreement = () => {
                             onChange={(value) => { setDate(value) }}
                             value={date}
                             id="offerDate"
-                            className="datePickerReact"
+                            className="datePickerReact data20h" 
                           />
                         </TableCell>
                       </TableRow>
@@ -389,7 +389,7 @@ const ArbitrationAgreement = () => {
                             onChange={(value) => { setCompanyDate(value) }}
                             value={companyDate}
                             id="offerDate"
-                            className="datePickerReact"
+                            className="datePickerReact data20h"
                           />
                         </TableCell>
                       </TableRow>
