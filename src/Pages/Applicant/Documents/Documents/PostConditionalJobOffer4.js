@@ -62,15 +62,13 @@ const PostConditionalJobOffer4 = () => {
     let image = (canvas.toDataURL('image/png'))
 
     let data = {
-      disabledYes: document.getElementById("disabledYes").value,
-      disabledNo: document.getElementById("disabledNo").value,
-      vietnamYes: document.getElementById("vietnamYes").value,
-      vietnamNo: document.getElementById("vietnamNo").value,
-      protectedYes: document.getElementById("protectedYes").value,
-      protectedNo: document.getElementById("protectedNo").value,
-      handicapYes: document.getElementById("handicapYes").value,
-      handicapNo: document.getElementById("handicapNo").value,
-      comment: document.getElementById("comment").value,
+      disabledVeteran : document.querySelector('input[name="disabledVeteran"]:checked')?.value,
+      eraVeteran : document.querySelector('input[name="eraVeteran"]:checked')?.value,
+      protectedVeteran : document.querySelector('input[name="protectedVeteran"]:checked')?.value,
+      disability : (document.querySelector('input[name="disability"]:checked')?.value!='Yes')?
+                      document.querySelector('input[name="disability"]:checked')?.value 
+                      : 
+                      document.getElementById("comment")?.value,
       signature: document.getElementById("signature").value,
       data: date,
       image: image
@@ -82,33 +80,33 @@ const PostConditionalJobOffer4 = () => {
     setPosting(false);
 
     if (nullCheck == false) {
-      //  save in local storage for submit 
-      const firstPage = storage.get('firstFormDataImage');
-      const secondPage = storage.get('secondFormDataImage');
-      const thirdPage = storage.get('thirdFormDataImage');
+      // //  save in local storage for submit 
+      // const firstPage = storage.get('firstFormDataImage');
+      // const secondPage = storage.get('secondFormDataImage');
+      // const thirdPage = storage.get('thirdFormDataImage');
 
-      // localStorage.setItem('fourthFormDataImage', image);
-      // localStorage.setItem('fourthFormData', JSON.stringify(data))
+      // // localStorage.setItem('fourthFormDataImage', image);
+      // // localStorage.setItem('fourthFormData', JSON.stringify(data))
 
-      const response = await users.submitForm({
-        image: [
-          firstPage,
-          secondPage,
-          thirdPage,
-          image
-        ],
-        form: 6,
-      });
+      // const response = await users.submitForm({
+      //   image: [
+      //     firstPage,
+      //     secondPage,
+      //     thirdPage,
+      //     image
+      //   ],
+      //   form: 6,
+      // });
 
-      const step3FormsSubmitted = JSON.parse(storage.get('step-3-form-postConditionalOffer')) || true;
+      // const step3FormsSubmitted = JSON.parse(storage.get('step-3-form-postConditionalOffer')) || true;
 
-      storage.set('step-3-form-postConditionalOffer', JSON.stringify(step3FormsSubmitted));
+      // storage.set('step-3-form-postConditionalOffer', JSON.stringify(step3FormsSubmitted));
 
-      const step3FormPosted = new BroadcastChannel('step3form_posted');
+      // const step3FormPosted = new BroadcastChannel('step3form_posted');
 
-      step3FormPosted.postMessage({ topic: 'form-updated', message: {} })
+      // step3FormPosted.postMessage({ topic: 'form-updated', message: {} })
 
-      window.self.close();
+      // window.self.close();
     }
     else {
       setError("field must be filed")
@@ -229,11 +227,11 @@ const PostConditionalJobOffer4 = () => {
                     U.S. Armed Forces Disabled Veteran
                   </TableCell>
                   <TableCell className="w10 row">
-                    <input type="text" name="textfield" id="disabledYes" className="w50 h16 bn bb" />
+                    <input type="radio" name="disabledVeteran" id="Yes" value="Yes" className="w50 h16 bn bb" />
                     Yes
                   </TableCell>
                   <TableCell className="w10 row">
-                    <input type="text" name="textfield" id="disabledNo" className="w50 h16 bn bb" />
+                    <input type="radio" name="disabledVeteran" id="No" value="No" className="w50 h16 bn bb" />
                     No
                   </TableCell>
                 </TableRow>
@@ -242,11 +240,11 @@ const PostConditionalJobOffer4 = () => {
                     U.S. Armed Forces Vietnam Era Veteran
                   </TableCell>
                   <TableCell className="w10 row">
-                    <input type="text" name="textfield" id="vietnamYes" className="w50 h16 bn bb" />
+                    <input type="radio" name="eraVeteran" id="Yes" value="Yes" className="w50 h16 bn bb" />
                     Yes
                   </TableCell>
                   <TableCell className="w10 row">
-                    <input type="text" name="textfield" id="vietnamNo" className="w50 h16 bn bb" />
+                    <input type="radio" name="eraVeteran" id="No" value="No" className="w50 h16 bn bb" />
                     No
                   </TableCell>
                 </TableRow>
@@ -255,11 +253,11 @@ const PostConditionalJobOffer4 = () => {
                     U.S. Armed Other Protected Veteran
                   </TableCell>
                   <TableCell className="w10 row">
-                    <input type="text" name="textfield" id="protectedYes" className="w50 h16 bn bb" />
+                    <input type="radio" name="protectedVeteran" id="Yes" value="Yes" className="w50 h16 bn bb" />
                     Yes
                   </TableCell>
                   <TableCell className="w10 row">
-                    <input type="text" name="textfield" id="protectedNo" className="w50 h16 bn bb" />
+                    <input type="radio" name="protectedVeteran" id="No" value="No" className="w50 h16 bn bb" />
                     No
                   </TableCell>
                 </TableRow>
@@ -274,11 +272,11 @@ const PostConditionalJobOffer4 = () => {
                     (A) Do you have a physical/mental handicap/disability?
                   </TableCell>
                   <TableCell className="w10 row">
-                    <input type="text" name="textfield" id="handicapYes" className="w50 h16 bn bb" />
+                    <input type="radio" name="disability" id="Yes" value="Yes" className="w50 h16 bn bb" />
                     Yes
                   </TableCell>
                   <TableCell className="w10 row">
-                    <input type="text" name="textfield" id="handicapNo" className="w50 h16 bn bb" />
+                    <input type="radio" name="disability" id="No" value="No" className="w50 h16 bn bb" />
                     No
                   </TableCell>
                 </TableRow>
