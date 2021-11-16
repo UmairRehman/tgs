@@ -132,7 +132,7 @@ const EmployeeAgreement = () => {
                   </TableCell>
                 </TableRow>
                 {/* -*- */}
-                <TableRow className="w100 mt20 font14">
+                <TableRow className="w100 mt20 font12">
                   <TableCell>
                     WITNESSETH:
                     <br />
@@ -221,7 +221,7 @@ const EmployeeAgreement = () => {
                 </TableRow>
                 {/* -*- */}
                 <TableRow className="w100 mt16">
-                  <TableCell className="w36 textCenter pl40">
+                  <TableCell className="w36 pl40">
                     <DatePicker
                       onChange={(value) => {
                         setDateSignature(value);
