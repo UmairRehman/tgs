@@ -80,33 +80,33 @@ const PostConditionalJobOffer4 = () => {
     setPosting(false);
 
     if (nullCheck == false) {
-      // //  save in local storage for submit 
-      // const firstPage = storage.get('firstFormDataImage');
-      // const secondPage = storage.get('secondFormDataImage');
-      // const thirdPage = storage.get('thirdFormDataImage');
+      //  save in local storage for submit 
+      const firstPage = storage.get('firstFormDataImage');
+      const secondPage = storage.get('secondFormDataImage');
+      const thirdPage = storage.get('thirdFormDataImage');
 
-      // // localStorage.setItem('fourthFormDataImage', image);
-      // // localStorage.setItem('fourthFormData', JSON.stringify(data))
+      // localStorage.setItem('fourthFormDataImage', image);
+      // localStorage.setItem('fourthFormData', JSON.stringify(data))
 
-      // const response = await users.submitForm({
-      //   image: [
-      //     firstPage,
-      //     secondPage,
-      //     thirdPage,
-      //     image
-      //   ],
-      //   form: 6,
-      // });
+      const response = await users.submitForm({
+        image: [
+          firstPage,
+          secondPage,
+          thirdPage,
+          image
+        ],
+        form: 6,
+      });
 
-      // const step3FormsSubmitted = JSON.parse(storage.get('step-3-form-postConditionalOffer')) || true;
+      const step3FormsSubmitted = JSON.parse(storage.get('step-3-form-postConditionalOffer')) || true;
 
-      // storage.set('step-3-form-postConditionalOffer', JSON.stringify(step3FormsSubmitted));
+      storage.set('step-3-form-postConditionalOffer', JSON.stringify(step3FormsSubmitted));
 
-      // const step3FormPosted = new BroadcastChannel('step3form_posted');
+      const step3FormPosted = new BroadcastChannel('step3form_posted');
 
-      // step3FormPosted.postMessage({ topic: 'form-updated', message: {} })
+      step3FormPosted.postMessage({ topic: 'form-updated', message: {} })
 
-      // window.self.close();
+      window.self.close();
     }
     else {
       setError("field must be filed")
