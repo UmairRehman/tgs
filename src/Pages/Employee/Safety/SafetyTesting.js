@@ -100,8 +100,8 @@ const SafetyTesting = () => {
           setLoading(false) 
       }
     } catch (error) {
-      return showSnackBar(`Please Try  Again \n Error Occured while fetching data: ${error}`);
       console.log("Error",error);
+      return showSnackBar(`Please Try  Again \n Error Occured while fetching data: ${error}`);
     }
     setOpen(true);
   };
@@ -266,40 +266,58 @@ const SafetyTesting = () => {
         <Button autoFocus onClick={handleClose} className="ModalClose">
         </Button>
         <DialogContent>
-          <Grid xs={12} className="mb20">
-            <TableContainer>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    {
-                      // (columnsForView) && 
-                      columnsForView.map((row)=>{
-                        return (
-                          <TableCell>{`${row}`}</TableCell>
-                        );
-                      })
-                    }
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {
-                    modalData.map(row=>{
-                      return(
+          {
+            (modalData.length>0)?
+            <Grid xs={12} className="mb20">
+                <TableContainer>
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        {
+                          // (columnsForView) && 
+                          columnsForView.map((row)=>{
+                            return (
+                              <TableCell>{`${row}`}</TableCell>
+                            );
+                          })
+                        }
+                      </TableRow>
+                    </TableHead>
+                    
+                    <TableBody>
+                      {
+                        modalData.map(row=>{
+                          return(
+                            <TableRow>
+                              <TableCell>{`${row.id}`}</TableCell>
+                              <TableCell>{`${row.eventID}`}</TableCell>
+                              <TableCell>{`${row.rule_NBR}`}</TableCell>
+                              <TableCell>{`${row.crew_member}`}</TableCell>
+                              <TableCell>{`${row.result}`}</TableCell>
+                              <TableCell>{`${row.comment}`}</TableCell>
+                            </TableRow>
+                          )
+                        })
+                      }
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </Grid>
+            :
+              <Grid xs={12}>
+                <TableContainer>
+                    <Table>
+                      <TableHead>
                         <TableRow>
-                          <TableCell>{`${row.id}`}</TableCell>
-                          <TableCell>{`${row.eventID}`}</TableCell>
-                          <TableCell>{`${row.rule_NBR}`}</TableCell>
-                          <TableCell>{`${row.crew_member}`}</TableCell>
-                          <TableCell>{`${row.result}`}</TableCell>
-                          <TableCell>{`${row.comment}`}</TableCell>
+                          <TableCell className="pt0 pb6">No Rules Found</TableCell>
                         </TableRow>
-                      )
-                    })
-                  }
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Grid>
+                      </TableHead>
+                    </Table>
+                  </TableContainer>
+                </Grid>
+          }
+          
+          
         </DialogContent>
       </Dialog>
       

@@ -5,7 +5,7 @@ import {
   TextareaAutosize,
   Typography
 } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Link , useHistory } from "react-router-dom";
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
@@ -22,7 +22,6 @@ import {isMobile} from 'react-device-detect';
 
 /** Local deoendencies & Libraries */
 import Services from '../../../Services';
-import { isDOMComponent } from "react-dom/test-utils";
 const {
   employee,
   Storage
@@ -38,7 +37,8 @@ const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const Railroad = () => {
-  const storage = new Storage ()
+  let history  = useHistory();
+  const storage = new Storage ();
 
   //loader states
   const [loading, setLoading] = useState(false);
@@ -192,8 +192,15 @@ const Railroad = () => {
                 setSuccess(true);
                 setLoading(false);
                 resetData()
+                /*
+                setTimout used to show , snackbar first and then route back to listing page
+                */ 
+                setTimeout(() => {
+                  history.push('/safety-testing')
+                }, 1500);   
                 return showSnackBar('Form Successfully Submitted');
               }
+
             } catch (error) {
               setSuccess(false);
               setLoading(false);

@@ -7,7 +7,7 @@ import {
   Button,
   TextareaAutosize
 } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Link , useHistory } from "react-router-dom";
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
@@ -70,6 +70,7 @@ const dummyData = {
 
 
 const SafetyTestingEdit = () => {
+  let history = useHistory();
 
   //loader states
   const [loading, setLoading] = useState(false);
@@ -199,6 +200,9 @@ const SafetyTestingEdit = () => {
             setSuccess(true);
             resetData()
             setLoading(false);
+            setTimeout(() => {
+              history.push('/safety-testing')
+            }, 1500);
             return showSnackBar('Form Successfully Submitted');
           }  
         } catch (error) {
