@@ -164,13 +164,13 @@ const SafetyTestingEdit = () => {
       let result = row.result.title
       return ({crew_id:row.id , result,comment})
     })
-
     let data = {
         rule_id : safetyTesting.testingRules.id,
         event_id : eventId,
         rule_result : rule_result
     }
-    return data
+
+    return [data]
   }
 
   const resetData = () => {
@@ -193,7 +193,7 @@ const SafetyTestingEdit = () => {
       let body = await finalData();
       if(body){
         try {
-          let res = await employee.add_rule_event({...body})
+          let res = await employee.add_rule_event(body)
           if(res?.httpStatus == 200)
           {
             console.log('result',res);

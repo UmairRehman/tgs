@@ -85,12 +85,12 @@ const PostConditionalJobOffer = () => {
         mental: document.querySelector('input[name="mental"]:checked')?.value,
         other: document.querySelector('input[name="other"]:checked')?.value,
         disability:
-          document.querySelector('input[name="disability"]:checked')?.value =="yes"
+          document.querySelector('input[name="disability"]:checked')?.value =="no"
             ? document.querySelector('input[name="disability"]:checked')?.value
             : document.getElementById("healthComment").value,
         injured: document.querySelector('input[name="injured"]:checked')?.value,
         compensation: document.querySelector('input[name="compensation"]:checked')?.value,
-        natural: (document.querySelector('input[name="natural"]:checked')?.value=="yes")
+        natural: (document.querySelector('input[name="natural"]:checked')?.value=="no")
             ? document.querySelector('input[name="natural"]:checked')?.value
             : document.getElementById("comment3").value,
         signature: document.getElementById("signature").value,

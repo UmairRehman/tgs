@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Grid,
   TableContainer,
@@ -9,13 +9,13 @@ import {
   ListItem,
   Button,
 } from "@material-ui/core";
-import { 
+import {
   Radio,
   RadioGroup,
   FormControl,
   FormControlLabel,
-  FormLabel
-} from '@mui/material';
+  FormLabel,
+} from "@mui/material";
 
 import Avatar from "@material-ui/core/Avatar";
 import { Link } from "react-router-dom";
@@ -60,10 +60,9 @@ const PostConditionalJobOffer3 = () => {
   const [gender, setGender] = useState("male");
 
   useEffect(() => {
-    document.querySelector('input[name="gender"]').value="male"
+    document.querySelector('input[name="gender"]').value = "male";
     // document.race.value="africanAmerican"
-
-  }, [])
+  }, []);
 
   async function submit() {
     setPosting(true);
@@ -79,7 +78,11 @@ const PostConditionalJobOffer3 = () => {
       dateOfBirth: dob,
       gender: document.querySelector('input[name="gender"]:checked')?.value,
       race: document.querySelector('input[name="race"]:checked')?.value,
-      referral: (document.querySelector('input[name="referral"]:checked')?.value!='other')?document.querySelector('input[name="referral"]:checked')?.value:document.getElementById('otherText')?.value,
+      referral:
+        document.querySelector('input[name="referral"]:checked')?.value !=
+        "other"
+          ? document.querySelector('input[name="referral"]:checked')?.value
+          : document.getElementById("otherText")?.value,
       image: image,
     };
     console.log(data);

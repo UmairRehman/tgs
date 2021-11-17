@@ -82,14 +82,15 @@ const PostConditionalJobOffer2 = () => {
       injuryAddress: document.getElementById('injuryAddress').value,
       injuryPhone: document.getElementById('injuryPhone').value,
       comment: document.getElementById('comment').value,
-      bills: document.querySelector('input[name="bills"]:checked')?.value,
-      howMuch: document.getElementById('howMuch').value,
+      bills: (document.querySelector('input[name="bills"]:checked')?.value=="no")
+                ?document.querySelector('input[name="bills"]:checked')?.value
+                :document.getElementById('howMuch').value,
       howLong: document.getElementById('howLong').value,
       howMuch2: document.getElementById('howMuch2').value,
       attorney: document.querySelector('input[name="attorney"]:checked')?.value,
       settlement: document.querySelector('input[name="settlement"]:checked')?.value,
       dateRelease: document.getElementById('dateRelease').value,
-      limitations: document.getElementById('limitations').value,
+      limitations: document.querySelector('input[name="limitations"]:checked')?.value,
       drName: document.getElementById('drName').value,
       drAddress: document.getElementById('drAddress').value,
       drPhone: document.getElementById('drPhone').value,
@@ -223,19 +224,19 @@ const PostConditionalJobOffer2 = () => {
                 <TableRow className="w100 mt10 row">
                   <TableCell className="w100 row">
                     Address:
-                    <DatePicker
-                      onChange={(value) => { setDate(value) }}
-                      value={date}
-                      id="offerDate"
-                      className="datePickerReact"
-                    />
+                    <input type="text" name="textfield" id="dateOnInjury" className="w h18 pl8 bn bb" />
                   </TableCell>
                 </TableRow>
                 <TableRow className="w100 mt10 row">
                   <TableCell className="w4">6.</TableCell>
                   <TableCell className="w50 row pr10">
                     Date of Injury:
-                    <input type="text" name="textfield" id="dateOnInjury" className="w h18 pl8 bn bb" />
+                    <DatePicker
+                      onChange={(value) => { setDate(value) }}
+                      value={date}
+                      id="offerDate"
+                      className="datePickerReact"
+                    />
                   </TableCell>
                   <TableCell className="w50 row pl10">
                     Type of Injury:
@@ -327,11 +328,11 @@ const PostConditionalJobOffer2 = () => {
                     Medical Bills
                   </TableCell>
                   <TableCell className="w10 row">
-                    <input type="radio" name="mb" id="bills" value="yes" className="mr6 mt2" />
+                    <input type="radio" name="bills" id="yes" value="yes" className="mr6 mt2" />
                     Yes
                   </TableCell>
                   <TableCell className="w10 row">
-                    <input type="radio" name="mb" id="bills" value="no" className="mr6 mt2" />
+                    <input type="radio" name="bills" id="no" value="no" className="mr6 mt2" />
                     No
                   </TableCell>
                   <TableCell className="w row">
@@ -359,11 +360,11 @@ const PostConditionalJobOffer2 = () => {
                     Attorney’s Fees
                   </TableCell>
                   <TableCell className="w10 row">
-                    <input type="radio" name="at" id="attorney" value="yes" className="mr6 mt2" />
+                    <input type="radio" name="attorney" id="yes" value="yes" className="mr6 mt2" />
                     Yes
                   </TableCell>
                   <TableCell className="w10 row">
-                    <input type="radio" name="at" id="attorney" value="no" className="mr6 mt2" />
+                    <input type="radio" name="attorney" id="no" value="no" className="mr6 mt2" />
                     No
                   </TableCell>
                 </TableRow>
@@ -373,11 +374,11 @@ const PostConditionalJobOffer2 = () => {
                     Settlement
                   </TableCell>
                   <TableCell className="w10 row">
-                    <input type="radio" name="st" id="settlement" value="yes" className="mr6 mt2" />
+                    <input type="radio" name="settlement" id="yes" value="yes" className="mr6 mt2" />
                     Yes
                   </TableCell>
                   <TableCell className="w10 row">
-                    <input type="radio" name="st" id="settelment" value="yes" className="mr6 mt2" />
+                    <input type="radio" name="settlement" id="yes" value="yes" className="mr6 mt2" />
                     No
                   </TableCell>
                 </TableRow>
@@ -396,11 +397,11 @@ const PostConditionalJobOffer2 = () => {
                     Any Limitations of Work To Be Done?
                   </TableCell>
                   <TableCell className="w10 row">
-                    <input type="radio" name="mb" id="limitations" value="yes" className="mr6 mt2" />
+                    <input type="radio" name="limitations" id="yes" value="yes" className="mr6 mt2" />
                     Yes
                   </TableCell>
                   <TableCell className="w10 row">
-                    <input type="radio" name="mb" id="limitations" value="no" className="mr6 mt2" />
+                    <input type="radio" name="limitations" id="no" value="no" className="mr6 mt2" />
                     No
                   </TableCell>
                   <TableCell className="w row">
@@ -429,11 +430,11 @@ const PostConditionalJobOffer2 = () => {
                     Do You Allow Us Access To Your Confidential Medical Information?
                   </TableCell>
                   <TableCell className="w10 row">
-                    <input type="radio" name="dyau" id="confidential" value="yes" className="mr6 mt2" />
+                    <input type="radio" name="confidential" id="yes" value="yes" className="mr6 mt2" />
                     Yes
                   </TableCell>
                   <TableCell className="w10 row">
-                    <input type="radio" name="dyau" id="confidential" value="no" className="mr6 mt2" />
+                    <input type="radio" name="confidential" id="no" value="no" className="mr6 mt2" />
                     No
                   </TableCell>
                 </TableRow>
