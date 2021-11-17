@@ -132,7 +132,7 @@ const SafetyTesting = () => {
           element.locationAdded = element.TGSLocation.name
           element.rulesCount = element.TestEventRules.length
         });
-        setRows(data.reverse())
+        setRows(data)
       }
     } catch (error) {
       console.log(error);
