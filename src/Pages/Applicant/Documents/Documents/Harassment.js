@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React,{useState,useEffect} from "react";
 import {
   Grid,
   TableContainer,
@@ -296,8 +296,8 @@ const Harassment = () => {
         </Table>
       </TableContainer>
 
-      {/* --------------------------------------------- Page 2 --------------------------------------------- */}
-      <Grid xs={12} className="pageBreak">
+{/* --------------------------------------------- Page 2 --------------------------------------------- */}
+        <Grid xs={12} className="pageBreak">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 mt20">
@@ -384,7 +384,7 @@ const Harassment = () => {
                   {/* -*- */}
                   <TableRow className="w100 mt10">
                     <TableCell>
-                      (3) Refrain from engaging in hostile or abusive conduct;
+                    (3) Refrain from engaging in hostile or abusive conduct;
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -405,19 +405,19 @@ const Harassment = () => {
                   {/* -*- */}
                   <TableRow className="w100 mt10">
                     <TableCell>
-                      (6) Fully cooperate in any inquiry or investigation.
+                    (6) Fully cooperate in any inquiry or investigation.
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
                   <TableRow className="w100 mt16 bold">
                     <TableCell>
-                      Supervisors and other management also must:
+                    Supervisors and other management also must:
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
                   <TableRow className="w100 mt6">
                     <TableCell>
-                      (1) Ensure a workplace free of illegal harassment;
+                    (1) Ensure a workplace free of illegal harassment;
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -486,7 +486,7 @@ const Harassment = () => {
                   {/* -*- */}
                   <TableRow className="w100 mt10 pl20">
                     <TableCell>
-                      (b) Another supervisor or other management official; or
+                    (b) Another supervisor or other management official; or
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -504,16 +504,16 @@ const Harassment = () => {
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
-                  <TableRow className="w100 mt16">
+                <TableRow className="w100 mt16">
                     <TableCell>
                       (3) Initial contacts to the telephone line or e-mail
                       address will be confidential. Employees may obtain
                       information about this policy, or report hostile or
                       abusive conduct to the Director of Human Resources.
                     </TableCell>
-                  </TableRow>
-                  {/* -*- */}
-                  <TableRow className="w100 mt16">
+                </TableRow>
+                {/* -*- */}
+                <TableRow className="w100 mt16">
                     <TableCell>
                       <b>
                         NOTE: Reports made pursuant to this Policy do NOT
@@ -524,16 +524,24 @@ const Harassment = () => {
                       Unlike this Policy, those procedures typically provide for
                       remedial relief to the victims of a violation.
                     </TableCell>
-                  </TableRow>
+                </TableRow> 
+            {/* -*- */}
+            <TableRow className="w100 mt16">
+                <TableCell>
+                <b>NOTE: Reports made pursuant to this Policy do NOT replace, substitute, or otherwise satisfy the separate
+obligations of an EEO complaint, negotiated grievance or other statutory process.</b> Unlike this Policy, those
+procedures typically provide for remedial relief to the victims of a violation.
+                </TableCell>
+            </TableRow>                
                 </Table>
               </TableCell>
             </TableRow>
-          </Table>
+            </Table>
         </TableContainer>
-      </Grid>
+        </Grid>
 
-      {/* --------------------------------------------- Page 3 --------------------------------------------- */}
-      <Grid xs={12} className="pageBreak">
+{/* --------------------------------------------- Page 3 --------------------------------------------- */}
+        <Grid xs={12} className="pageBreak">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable mt20">
             {/* -*- */}
@@ -577,9 +585,9 @@ const Harassment = () => {
             </TableRow>
             {/* -*- */}
             <TableRow className="w100 mt16 bold">
-              <TableCell>
+                <TableCell>
                 (2) Notifying Appropriate Officials of Report.
-              </TableCell>
+                </TableCell>
             </TableRow>
             {/* -*- */}
             <TableRow className="w100 mt16">
@@ -625,15 +633,15 @@ const Harassment = () => {
             </TableRow>
             {/* -*- */}
             <TableRow className="w100 mt6 pl20">
-              <TableCell>
+                <TableCell>
                 1. Immediately acknowledge receipt of the report;
-              </TableCell>
+                </TableCell>
             </TableRow>
             {/* -*- */}
             <TableRow className="w100 mt10 pl20">
-              <TableCell>
+                <TableCell>
                 2. Notify the Office/Department(s) implicated in the report; and
-              </TableCell>
+                </TableCell>
             </TableRow>
             {/* -*- */}
             <TableRow className="w100 mt10 pl20">
@@ -686,9 +694,9 @@ const Harassment = () => {
             </TableRow>
             {/* -*- */}
             <TableRow className="w100 mt16 bold">
-              <TableCell>
+                <TableCell>
                 Resolving Conflicts of Interest in Inquiries or Investigations.
-              </TableCell>
+                </TableCell>
             </TableRow>
             {/* -*- */}
             <TableRow className="w100 mt6">
@@ -740,10 +748,10 @@ const Harassment = () => {
             </TableRow>
           </Table>
         </TableContainer>
-      </Grid>
+        </Grid>
 
-      {/* --------------------------------------------- Page 4 --------------------------------------------- */}
-      <Grid xs={12} className="pageBreak">
+{/* --------------------------------------------- Page 4 --------------------------------------------- */}
+        <Grid xs={12} className="pageBreak">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable mt20">
             {/* -*- */}
@@ -924,8 +932,8 @@ const Harassment = () => {
               </TableCell>
             </TableRow>
             {/* -*- */}
-            <TableRow className="w100 mt16">
-              <TableCell>
+            <TableRow className="w40 mt16">
+                <TableCell className="w100">
                 Employee Name:
                 <input
                   type="text"
@@ -936,8 +944,8 @@ const Harassment = () => {
               </TableCell>
             </TableRow>
             {/* -*- */}
-            <TableRow className="w100 mt16">
-              <TableCell>
+            <TableRow className="w40 mt16">
+                <TableCell className="w100">
                 Employee Signature:
                 <input
                   type="text"
@@ -954,13 +962,12 @@ const Harassment = () => {
                 1735 W. Cardinal Dr., Beaumont, Texas 77705
                 <br />
                 Phone (409) 720-5413 – Fax (409) 729-7041
-              </TableCell>
+                </TableCell>
             </TableRow>
           </Table>
         </TableContainer>
-      </Grid>
-      <Snackbar></Snackbar>
-      <Acknowledge acknowledgedState={acknowledgedState} />
+        </Grid>
+      <Acknowledge/>
     </Grid>
   );
 };

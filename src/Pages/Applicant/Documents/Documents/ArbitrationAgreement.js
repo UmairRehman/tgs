@@ -384,7 +384,6 @@ const ArbitrationAgreement = () => {
                         </TableCell>
                         <TableCell className="w100 row pl16">
                           Dated:
-                          Dated:
                           <DatePicker
                             onChange={(value) => { setCompanyDate(value) }}
                             value={companyDate}

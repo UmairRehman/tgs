@@ -708,7 +708,9 @@ const Application = () => {
                                                 'spouse_date_of_birth',
                                                 $e,
                                             )}
-                                            value={dateOfBirth}
+                                            value={
+                                                contactInformation[0].spouse_date_of_birth
+                                            }
                                             id="spouse-dob"
                                             className="datePickerReact w100p bg-white react-date-picker"
                                         />

@@ -90,8 +90,10 @@ const eventsClient = new EventsClient({
 if (isEmployee)
   broadcastClient.connect();
 
-eventsClient.connect();
+if (localStorage.getItem('access_jwt'))
+  eventsClient.connect();
 
+window.addEventListener('applicant-logged-in', eventsClient.connect);
 
 if (!localStorage.getItem('broadcasts'))
   localStorage.broadcasts = '[]';
@@ -256,7 +258,7 @@ const PageHeader = () => {
   const getBroadcasts = () => {
     return JSON.parse(
       storage.get('broadcasts')
-    )
+    ) || [];
   }
 
   const [broadcasts, insertBroadcasts] = useState(

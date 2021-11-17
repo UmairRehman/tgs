@@ -6,6 +6,7 @@ import Avatar from '@material-ui/core/Avatar';
 import { Link } from "react-router-dom";
 import FormHeader from "../../../../Components/FormHeader";
 import Acknowledge from "../../../../Components/Acknowledge";
+import DatePicker from 'react-date-picker';
 // import { Alert } from "@material-ui/lab";
 // import { TabletView } from "react-device-detect";
 
@@ -52,6 +53,7 @@ const EmployeeHandbook = () => {
   const acknowledgedState = useState(false);
 
   const [isAcknowledged, setAcknowledged] = acknowledgedState;
+  const [SIGNATUREDate, setSIGNATUREDate] = useState(new Date())
 
   useEffect(() => {
     submit();
@@ -62,11 +64,11 @@ const EmployeeHandbook = () => {
       setPosting(true);
 
       let data = {
-        date: document.getElementById('datetextfield').value,
+        date: SIGNATUREDate,
         name: document.getElementById('nametextfield').value,
         signature: document.getElementById('signaturetextfield').value,
       };
-
+      console.log(data)
       const nullCheck = Object.values(data)
         .reduce((total, accumulator) => total || !accumulator, false);
 
@@ -6256,8 +6258,12 @@ const EmployeeHandbook = () => {
                   {/* -*- */}
                   <TableRow className="w100 mt30">
                     <TableCell className="w100 row">
-                      DATE:
-                      <input type="text" name="textfield" id="datetextfield" className="w h18 pl8 bn bb" />
+                    <DatePicker
+                        onChange={(value) => { setSIGNATUREDate(value) }}
+                        value={SIGNATUREDate}
+                        id="offerDate"
+                        className="datePickerReact data20h"
+                      />
                     </TableCell>
                   </TableRow>
                 </Table>
@@ -6267,7 +6273,7 @@ const EmployeeHandbook = () => {
           <Grid className="PageNum">59</Grid>
         </TableContainer>
       </Grid>
-      <Snackbar snackBarDefaultDuration={60000} ></Snackbar>
+      <Snackbar></Snackbar>
       <Acknowledge acknowledgedState={acknowledgedState} />
     </Grid>
   );

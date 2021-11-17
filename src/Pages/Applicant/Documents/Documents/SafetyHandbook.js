@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React,{useState,useEffect} from "react";
 import {
   Grid,
   TableContainer,
@@ -118,7 +118,6 @@ const SafetyHandbook = () => {
 
       showSnackBar("Form has been submitted!");
 
-      setPosting(false);
 
       window.self.close();
     } catch (exc) {
@@ -157,7 +156,7 @@ const SafetyHandbook = () => {
                     <br />
                     All rights reserved.
                   </TableCell>
-                </TableRow>
+                </TableRow>      
               </Table>
             </TableCell>
           </TableRow>
@@ -277,7 +276,7 @@ const SafetyHandbook = () => {
                       Company Safety Policy<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                      <a href="#1">1</a>
+                  <a href="#3">3</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -286,7 +285,7 @@ const SafetyHandbook = () => {
                       Safety – It’s Part of Every Job<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                      <a href="#1">1</a>
+                  <a href="#4">4</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -295,7 +294,7 @@ const SafetyHandbook = () => {
                       General Safety Rules<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                      <a href="#2">2</a>
+                  <a href="#7">7</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -304,7 +303,7 @@ const SafetyHandbook = () => {
                       Dress for the Job<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                      <a href="#3">3</a>
+                  <a href="#8">8</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -313,7 +312,7 @@ const SafetyHandbook = () => {
                       Warning Signs & Barricades<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                      <a href="#3">3</a>
+                  <a href="#10">10</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -331,7 +330,7 @@ const SafetyHandbook = () => {
                       Rules for Using Manual & Powered Hand Tools<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                      <a href="#4">4</a>
+                  <a href="#11">11</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -340,7 +339,7 @@ const SafetyHandbook = () => {
                       Electrical Safety<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                      <a href="#6">6</a>
+                  <a href="#11">11</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -406,6 +405,21 @@ const SafetyHandbook = () => {
                       <a href="#12">12</a>
                     </TableCell>
                   </TableRow>
+                </Table>
+              </TableCell>
+            </TableRow>
+            </Table>
+          <Grid className="PageNum">3</Grid>
+        </TableContainer>
+      </Grid>
+
+{/* ----------- Page 4 ----------- */}
+      <Grid xs={12} className="pageBreak" id="4">
+        <TableContainer className="MainTable">
+          <Table className="SecondMainTable">
+            <TableRow className="w100 pl60 pr60">
+              <TableCell className="w100">
+                <Table className="w100" style={{marginTop: 50}}>
                   {/* -*- */}
                   <TableRow className="w100 row mt22 font14">
                     <TableCell className="w94 row PageLIstLine">
@@ -520,6 +534,21 @@ const SafetyHandbook = () => {
                       <a href="#20">20</a>
                     </TableCell>
                   </TableRow>
+                </Table>
+              </TableCell>
+            </TableRow>
+            </Table>
+          <Grid className="PageNum">6</Grid>
+        </TableContainer>
+      </Grid>
+
+{/* ----------- Page 7 ----------- */}
+      <Grid xs={12} className="pageBreak" id="7">
+        <TableContainer className="MainTable">
+          <Table className="SecondMainTable">
+            <TableRow className="w100 pl60 pr60 mt30">
+              <TableCell className="w100">
+                <Table className="w100">
                   {/* -*- */}
                   <TableRow className="w100 row mt22 font14">
                     <TableCell className="w94 row PageLIstLine">
@@ -831,6 +860,21 @@ const SafetyHandbook = () => {
                       Warning Signs and Barricades
                     </TableCell>
                   </TableRow>
+                </Table>
+              </TableCell>
+            </TableRow>
+            </Table>
+          <Grid className="PageNum">9</Grid>
+        </TableContainer>
+      </Grid>
+
+{/* ----------- Page 10 ----------- */}
+      <Grid xs={12} className="pageBreak" id="10">
+        <TableContainer className="MainTable">
+          <Table className="SecondMainTable">
+            <TableRow className="w100 pl60 pr60 mt22">
+              <TableCell className="w100">
+                <Table className="w100">
                   {/* -*- */}
                   <TableRow className="w100 row font16">
                     <TableCell className="w100 textJustify">
