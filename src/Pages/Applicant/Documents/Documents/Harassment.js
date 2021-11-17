@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import {
   Grid,
   TableContainer,
@@ -524,15 +524,15 @@ const Harassment = () => {
                       Unlike this Policy, those procedures typically provide for
                       remedial relief to the victims of a violation.
                     </TableCell>
-                </TableRow> 
-            {/* -*- */}
-            <TableRow className="w100 mt16">
-                <TableCell>
-                <b>NOTE: Reports made pursuant to this Policy do NOT replace, substitute, or otherwise satisfy the separate
-obligations of an EEO complaint, negotiated grievance or other statutory process.</b> Unlike this Policy, those
-procedures typically provide for remedial relief to the victims of a violation.
-                </TableCell>
-            </TableRow>                
+                  </TableRow>
+                  {/* -*- */}
+                  <TableRow className="w100 mt16">
+                    <TableCell>
+                      <b>NOTE: Reports made pursuant to this Policy do NOT replace, substitute, or otherwise satisfy the separate
+                        obligations of an EEO complaint, negotiated grievance or other statutory process.</b> Unlike this Policy, those
+                      procedures typically provide for remedial relief to the victims of a violation.
+                    </TableCell>
+                  </TableRow>
                 </Table>
               </TableCell>
             </TableRow>
@@ -933,7 +933,7 @@ procedures typically provide for remedial relief to the victims of a violation.
             </TableRow>
             {/* -*- */}
             <TableRow className="w40 mt16">
-                <TableCell className="w100">
+              <TableCell className="w100">
                 Employee Name:
                 <input
                   type="text"
@@ -945,7 +945,7 @@ procedures typically provide for remedial relief to the victims of a violation.
             </TableRow>
             {/* -*- */}
             <TableRow className="w40 mt16">
-                <TableCell className="w100">
+              <TableCell className="w100">
                 Employee Signature:
                 <input
                   type="text"

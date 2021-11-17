@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Grid, TableContainer, Table, TableCell, TableRow, Button
 } from "@material-ui/core";
@@ -38,7 +38,6 @@ const {
     displayNoneStyles: useStyles
   }
 } = Imports;
-
 
 
 const EmployeeHandbook = () => {
@@ -123,10 +122,9 @@ const EmployeeHandbook = () => {
       setPosting(false);
     }
   }
-
   return (
     <Grid container xs={12} className="LiqForms-Container">
-      <TableContainer className="MainTable capture">
+      <TableContainer className="MainTable">
         <Table className="SecondMainTable">
           <TableRow>
             <TableCell>
@@ -6258,7 +6256,8 @@ const EmployeeHandbook = () => {
                   {/* -*- */}
                   <TableRow className="w100 mt30">
                     <TableCell className="w100 row">
-                    <DatePicker
+                      DATE:
+                      <DatePicker
                         onChange={(value) => { setSIGNATUREDate(value) }}
                         value={SIGNATUREDate}
                         id="offerDate"
