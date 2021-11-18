@@ -212,23 +212,26 @@ const PostConditionalJobOffer2 = () => {
               <Table className="mt10">
                 {/* --**-- */}
                 <TableRow className="w100 mt10 row">
+                  <TableCell className="w4">1.</TableCell>
                   <TableCell className="w50 row pr10">
                     NAME:
                     <input type="text" name="textfield" id="name" className="w h18 pl8 bn bb" />
                   </TableCell>
                   <TableCell className="w50 row pl10">
+                  <TableCell className="w4">2.</TableCell>
                     SOCIAL SECURITY NO.:
                     <input type="text" name="textfield" id="seecurityNumber" className="w h18 pl8 bn bb" />
                   </TableCell>
                 </TableRow>
                 <TableRow className="w100 mt10 row">
+                <TableCell className="w4">3.</TableCell>
                   <TableCell className="w100 row">
                     Address:
                     <input type="text" name="textfield" id="dateOnInjury" className="w h18 pl8 bn bb" />
                   </TableCell>
                 </TableRow>
                 <TableRow className="w100 mt10 row">
-                  <TableCell className="w4">6.</TableCell>
+                  <TableCell className="w4">4.</TableCell>
                   <TableCell className="w50 row pr10">
                     Date of Injury:
                     <DatePicker
@@ -239,13 +242,14 @@ const PostConditionalJobOffer2 = () => {
                     />
                   </TableCell>
                   <TableCell className="w50 row pl10">
+                  <TableCell className="w4">5.</TableCell>
                     Type of Injury:
                     <input type="text" name="textfield" id="typeOfInjury" className="w h18 pl8 bn bb" />
                   </TableCell>
                 </TableRow>
                 {/* -*- */}
                 <TableRow className="w100 mt10 row">
-                  <TableCell className="w4">7.</TableCell>
+                  <TableCell className="w4">6.</TableCell>
                   <TableCell className="w100 row pr10">
                     Doctors Who Treated the Injury:
                   </TableCell>
@@ -282,7 +286,7 @@ const PostConditionalJobOffer2 = () => {
                 </TableRow>
                 {/* -*- */}
                 <TableRow className="w100 mt10 row">
-                  <TableCell className="w4">8.</TableCell>
+                  <TableCell className="w4">7.</TableCell>
                   <TableCell className="w100 row pr10">
                     Where Did the Injury Occur?
                   </TableCell>
@@ -304,7 +308,7 @@ const PostConditionalJobOffer2 = () => {
                 </TableRow>
                 {/* -*- */}
                 <TableRow className="w100 mt10 row">
-                  <TableCell className="w4">9.</TableCell>
+                  <TableCell className="w4">8.</TableCell>
                   <TableCell className="w100 row pr10">
                     How Did the Injury Happen?
                   </TableCell>
@@ -317,7 +321,7 @@ const PostConditionalJobOffer2 = () => {
                 </TableRow>
                 {/* -*- */}
                 <TableRow className="w100 mt10 row">
-                  <TableCell className="w4">10.</TableCell>
+                  <TableCell className="w4">9.</TableCell>
                   <TableCell className="w100 row pr10">
                     Was Worker’s Compensation Payment Made For:
                   </TableCell>
@@ -384,7 +388,7 @@ const PostConditionalJobOffer2 = () => {
                 </TableRow>
                 {/* -*- */}
                 <TableRow className="w100 mt10 row">
-                  <TableCell className="w4">11.</TableCell>
+                  <TableCell className="w4">10.</TableCell>
                   <TableCell className="w100 row">
                     Date Released By Doctor To Go Back To Work:
                     <input type="text" name="textfield" id="dateRelease" className="w bn bb" />
@@ -392,7 +396,7 @@ const PostConditionalJobOffer2 = () => {
                 </TableRow>
                 {/* -*- */}
                 <TableRow className="w100 mt10 row">
-                  <TableCell className="w4">12.</TableCell>
+                  <TableCell className="w4">11.</TableCell>
                   <TableCell className="w40 row pr10">
                     Any Limitations of Work To Be Done?
                   </TableCell>
@@ -425,7 +429,7 @@ const PostConditionalJobOffer2 = () => {
                 </TableRow>
                 {/* --**-- */}
                 <TableRow className="w100 mt10 row">
-                  <TableCell className="w4">13.</TableCell>
+                  <TableCell className="w4">12.</TableCell>
                   <TableCell className="w60">
                     Do You Allow Us Access To Your Confidential Medical Information?
                   </TableCell>
