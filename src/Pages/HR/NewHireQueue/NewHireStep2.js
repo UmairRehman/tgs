@@ -124,20 +124,38 @@ const NewHireStep2 = () => {
 
     async function onFormSubmit(event){
         event.preventDefault()
-
-        let data = {
-            employee_id : applicantData.id, 
-            comment: document.getElementById('comment').value,
-            hire_date: hireDate,
-            drug_test_date: drugTestDate,
-            background_complete_at: backgroundDate, 
-            drug_test : drugTest == 'Yes' ? true :false,
-            background_check: backgroundCheck == 'Yes' ? true :false
+        let data ={}
+        if(approval.value){
+            data = {
+                employee_id : applicantData.id, 
+                comment: document.getElementById('comment').value,
+                hire_date: hireDate,
+                drug_test_date: drugTestDate,
+                background_complete_at: backgroundDate, 
+                drug_test : drugTest == 'Yes' ? true :false,
+                background_check: backgroundCheck == 'Yes' ? true :false
+            }
         }
+        else if(! approval.value){
+            data = {
+                employee_id : applicantData.id,
+                step : 1,
+                comment : document.getElementById("comment").value,
+                data:{
+                    drug_test_date: drugTestDate,
+                    background_complete_at: backgroundDate, 
+                    drug_test : drugTest == 'Yes' ? true :false,
+                    background_check: backgroundCheck == 'Yes' ? true :false
+                }
+            }
+        }
+        
         console.log(data)
 
         try{
-            let data1 = await hr.step2(data) ;
+            (approval.value)
+                ?   await hr.step2(data) 
+                :   await hr.reject(data)
             history.push('/new-hire-queue')
         
         }
