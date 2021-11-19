@@ -156,7 +156,7 @@ const NewHireStep1 = () => {
           cell_phone: companyCellPhone == "Yes" ? true : false,
           vehicle: companyVehicle == "Yes" ? true : false,
           fuel_card: fuelCard == "Yes" ? true : false,
-          comment: document.getElementById("comment1").value,
+          comment: document.getElementById("comment2").value,
         },
       };
     }  
@@ -873,7 +873,6 @@ const NewHireStep1 = () => {
                             </Grid>
                             <Grid xs={12} className="mt14">
                               <TextareaAutosize
-                                required
                                 id="comment2"
                                 className="w100p"
                                 rowsMin={6}
