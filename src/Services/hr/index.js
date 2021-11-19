@@ -41,6 +41,13 @@ export const step2 = async (payload, headers) => {
     );
 }
 
+export const reject = async (payload , headers) => {
+    return await api.post(
+        routes.hr.reject,
+        payload,
+        headers
+    );
+}
 
 export const get_tickets = async (payload, headers) => {
     return await api.get(
