@@ -70,8 +70,8 @@ import { useLocation } from 'react-router'
 
 
 const Approval = [
-    { title: 'Approve'},
-    { title: 'Not Approve' },
+    { title: 'Approve' , value: true},
+    { title: 'Reject' , value: false},
 ];
 const PositionLevel = [
     { title: 'Accounting and finance'},
@@ -101,14 +101,17 @@ const NewHireStep2 = () => {
     const [spouse, setSpouse] = useState({})
     const [holdData, setHoldData] = useState({})
 
-    const [approval, setapproval] = useState('')
+    const [approval, setapproval] = useState(Approval[0])
     const [drugTestDate, setdrugTestDate] = useState('')
     const [drugTest, setdrugTest] = useState('')
     const [backgroundDate, setbackgroundDate] = useState('')
     const [backgroundCheck, setbackgroundCheck] = useState('')
     const [hireDate, sethireDate] = useState('')
     const [loader, setLoader] = useState('')
-    
+    const [statusDateTime, setStatusDateTime] = useState({
+        date: moment(new Date()).format("DD-MM-YYYY"),
+        time: moment(new Date()).format("hh:mm a"),
+    });
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -143,13 +146,20 @@ const NewHireStep2 = () => {
         }
     }
 
+    const setStatus = async (status) => {
+        setapproval(status);
+        setStatusDateTime({
+          date: moment(new Date()).format("DD-MM-YYYY"),
+          time: moment(new Date()).format("hh:mm a"),
+        });
+    };
     
     useEffect(async() => {
         setLoader(true)
         window.scrollTo(0, 0);
 
         let applicantDataHistory = location?.state
-        setHoldData(applicantDataHistory.data)
+        setHoldData(applicantDataHistory?.data)
 
         try{
             let data = await hr.getAllApplicantsByID(applicantDataHistory) ;
@@ -239,7 +249,7 @@ const NewHireStep2 = () => {
                                 <Autocomplete
                                     className="w100p"
                                     id="combo-box-demo"
-                                    onChange={(e, value) => {setapproval(value.title)}}
+                                    onChange={(e, value) => {setStatus(value)}}
                                     options={Approval}
                                     getOptionLabel={(option) => option.title}
                                     renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
@@ -252,13 +262,27 @@ const NewHireStep2 = () => {
                             <Grid xs={12} className="mbold mb14">
                                 Date
                             </Grid>
-                            <TextField id="outlined-basic" label="3/10/2021" disabled variant="outlined" className="w100p"/>
+                            <TextField
+                                id="statusDate"
+                                value={statusDateTime.date}
+                                label="3/10/2021"
+                                disabled
+                                variant="outlined"
+                                className="w100p"
+                                />
                         </Grid>
                         <Grid xs={6} className="pl20">
                             <Grid xs={12} className="mbold mb14">
                                 Time
                             </Grid>
-                            <TextField id="outlined-basic" label="04:05 PM" disabled variant="outlined" className="w100p"/>
+                              <TextField
+                                id="statusTime"
+                                value={statusDateTime.time}
+                                label="04:05 PM"
+                                disabled
+                                variant="outlined"
+                                className="w100p"
+                                />
                         </Grid>
                     </Grid>
                 </Grid>
@@ -343,25 +367,31 @@ const NewHireStep2 = () => {
                         </Grid>
                     </Grid>
                     {/* ---------- */}
-                    <Grid xs={12} container>
-                        <Grid xs={12} className="mt30">
-                            <Grid xs={12} className="mbold">
-                                Hire Date
+                    {
+                        approval.value && 
+                        (
+                            <Grid xs={12} container>
+                                <Grid xs={12} className="mt30">
+                                    <Grid xs={12} className="mbold">
+                                        Hire Date
+                                    </Grid>
+                                    <Grid xs={12} className="mt14">
+                                        <TextField
+                                            id="date"
+                                            type="date"
+                                            onChange={(e) => {sethireDate(e.target.value)}}
+                                            className="DateTimePicker"
+                                            defaultValue="YY-MM-DD"
+                                            InputLabelProps={{
+                                                shrink: true,
+                                            }}
+                                        />
+                                    </Grid>
+                                </Grid>
                             </Grid>
-                            <Grid xs={12} className="mt14">
-                                <TextField
-                                    id="date"
-                                    type="date"
-                                    onChange={(e) => {sethireDate(e.target.value)}}
-                                    className="DateTimePicker"
-                                    defaultValue="YY-MM-DD"
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                />
-                            </Grid>
-                        </Grid>
-                    </Grid>
+                        )
+                    }
+                    
                     {/* ---------- */}
                     <Grid xs={12} container>
                         <Grid xs={12} className="mt30">
@@ -373,24 +403,33 @@ const NewHireStep2 = () => {
                                     <TextareaAutosize id="comment" className="w100p" rowsMin={6} placeholder="Comment here" />
                                 </Grid>
                                 <Typography variant="h6" className="MuiTypography-subtitle2 MuiTypography-colorTextSecondary" component="h6">
-                                    Please leave this field empty if you have no comments
+                                {
+                                    approval.value
+                                        ? `Please leave this field empty if you have no comments`
+                                        : `Please define the reason of rejection`
+                                }
                                 </Typography>
                             </Grid>
                         </Grid>
                     </Grid>
                     {/* ---------- */}
-                    <Grid xs={12} container>
-                        <Grid xs={12} className="mt30">
-                            <Grid xs={12}>
-                                <Grid xs={12} className="mbold">
-                                    Attach Additional Files
-                                </Grid>
-                                <Grid xs={12} id="Step2DragFile" className="Step2DragFile mt14">
-                                    Drop File Here OR <Button>Select Files</Button>
+                    {
+                        approval.value &&
+                        (
+                            <Grid xs={12} container>
+                                <Grid xs={12} className="mt30">
+                                    <Grid xs={12}>
+                                        <Grid xs={12} className="mbold">
+                                            Attach Additional Files
+                                        </Grid>
+                                        <Grid xs={12} id="Step2DragFile" className="Step2DragFile mt14">
+                                            Drop File Here OR <Button>Select Files</Button>
+                                        </Grid>
+                                    </Grid>
                                 </Grid>
                             </Grid>
-                        </Grid>
-                    </Grid>
+                        )
+                    }
                     <Grid xs={12} container justify="space-between" className="mt50">
                         <Link to="/new-hire-queue/234" className="LinkButtonBack">Back</Link>
                         <Button className="LinkButton" type='submit' >Save & Continue</Button>
