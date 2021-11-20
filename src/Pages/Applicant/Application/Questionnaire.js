@@ -28,6 +28,8 @@ import DatePicker from 'react-date-picker';
 /** Local dependencies and services */
 import Services from '../../../Services';
 
+import Snackbar from '../../../Components/Snackbar';
+
 
 const {
     users,
@@ -123,9 +125,11 @@ const Questionnaire = () => {
 
     const [prison, setPrison] = useState('')
 
-    const [accommodation, setAccommodation] = useState('')
+    const [accommodation, setAccommodation] = useState('');
 
-    const [comment, setComment] = useState('')
+    const [comment, setComment] = useState('');
+
+    const [commentDisabled, disableComment] = useState(true);
 
     const [availability, setAvailability] = useState(new Date())
 
@@ -134,6 +138,8 @@ const Questionnaire = () => {
     const [bilingual, setBilingual] = useState('')
 
     const [bilingualLanguage, setBilingualLanguage] = useState('')
+
+    const [bilingualLanguagesDisabled, disableBilingualLanguages] = useState(true);
 
     const [overTime, setOverTime] = useState('')
 
@@ -149,7 +155,76 @@ const Questionnaire = () => {
 
     const [tgsComment, setTgsComment] = useState('')
 
-    const [workBefore, setWorkBefore] = useState('')
+    const [workBefore, setWorkBefore] = useState('');
+
+    const [saveAndContinueDisabled, disableSaveAndContinue] = useState(true);
+
+
+    const optionsMap = {
+        yes: true,
+        no: false,
+    }
+
+    const getRelativeBooleanFromOptionsMap = (stringToMap) => {
+        return optionsMap[stringToMap.toLowerCase()];
+    }
+
+    useEffect(
+        () => {
+            const data = [
+                hairTest,
+                drugTest,
+                prison,
+                accommodation,
+                availability,
+                language,
+                bilingual,
+                overTime,
+                shift,
+                holidays,
+                workWeekends,
+                travels,
+                relocate,
+                tgsComment,
+                workBefore,
+            ];
+
+            let isCompleteForm = data
+                .reduce((accumulated, currentValue) => {
+                    return accumulated && !!currentValue;
+                }, true);
+
+            if (!isCompleteForm)
+                return disableSaveAndContinue(true);
+
+            // Check for Accomadation commemt */
+            if (!accommodation && !comment)
+                return disableSaveAndContinue(true);
+
+            // Check for bilingual language if any
+            if (bilingual && !bilingualLanguage)
+                return disableSaveAndContinue(true);
+
+            disableSaveAndContinue(false);
+        },
+        [
+            hairTest,
+            drugTest,
+            prison,
+            accommodation,
+            availability,
+            language,
+            bilingual,
+            overTime,
+            shift,
+            holidays,
+            workWeekends,
+            travels,
+            relocate,
+            tgsComment,
+            workBefore,
+        ]
+    );
 
 
     async function onSubmit() {
@@ -158,11 +233,9 @@ const Questionnaire = () => {
             drugTest,
             prison,
             accommodation,
-            comment, // text
             availability,
             language,
             bilingual,
-            bilingualLanguage, // text
             overTime,
             shift,
             holidays,
@@ -173,41 +246,41 @@ const Questionnaire = () => {
             workBefore,
         };
 
-        const optionsMap = {
-            yes: true,
-            no: false
-        }
+        // Check for Accomadation commemt */
+        if (!data.accommodation && !comment)
+            return showSnackBar('PLease fill in comments for accomodation');
+
+        // Check for bilingual language if any
+        if (data.bilingual && !bilingualLanguage)
+            return showSnackBar('PLease provide languages for in field bilingal check');
+
 
         /** RAPID - FIX | Boolean transforamtion */
         for (let key in data) {
             const attribute = data[key];
-            let booleanOption
+            let booleanOption;
 
-            if (typeof attribute === 'string') {
-                booleanOption = attribute.toLowerCase();
+            if (!attribute) {
+                return showSnackBar('Please fill in all fields');
+                break;
             }
 
-            data[key] = optionsMap[booleanOption || false];
+            if (typeof attribute === 'string') {
+                booleanOption = getRelativeBooleanFromOptionsMap(attribute);
+            }
 
-            if (data[key] === undefined)
-                data[key] = attribute;
+            data[key] = booleanOption === undefined
+                ? attribute
+                : booleanOption;
+
         }
 
-        // if 
-        // (
-        //     data.hairTest == '' && 
-        //     data.drugTest == '' && 
-        //     data.prison  == '' && 
-        //     data.accommodation  == '' && 
-        //     data.comment  == '' && 
-        //     data.availability  == '' && 
-        //     data.language  == '' &&
-        //     data.bilingual  == '' && 
-        //     data.bilingualLanguage  == '' && 
-        //     data.overTime  == '' && 
-        //     data.shift  == '' && 
-        //     data.prison  == ''
-        // )
+        // Unrequired and sequentially checked (dependent) fields
+        data = {
+            ...data,
+            comment,
+            bilingualLanguage
+        }
 
         try {
             const response = await users.postStep1(data);
@@ -236,9 +309,23 @@ const Questionnaire = () => {
 
     }, [])
 
+    /**
+       * Shows a snackbar / toast
+       * @param {string} messageToShow - String message to toast
+       * @returns {void}
+       */
+    const showSnackBar = (messageToShow) => {
+        const snackbarTriggerEvent = new CustomEvent(
+            'trigger-snackbar',
+            {
+                detail: {
+                    messageToShow
+                }
+            }
+        );
 
-
-
+        window.dispatchEvent(snackbarTriggerEvent);
+    }
 
 
     return (
@@ -334,7 +421,16 @@ const Questionnaire = () => {
                                         </Grid>
                                         <FormControl>
 
-                                            <TextField required id="outlined-basic" onChange={(e) => setComment(e.target.value)} placeholder="Comment here" variant="outlined" className="w100p" />
+                                            <TextField
+                                                required
+                                                id="outlined-basic"
+                                                onChange={(e) => setComment(e.target.value)}
+                                                placeholder="Comment here"
+                                                variant="outlined"
+                                                className="w100p"
+                                                disabled={
+                                                    !accommodation || getRelativeBooleanFromOptionsMap(accommodation)
+                                                } />
                                             <Typography variant="h6" className="MuiTypography-subtitle2 MuiTypography-colorTextSecondary" component="h6">
                                                 Please leave this field empty if you have no comments
                                             </Typography>
@@ -400,7 +496,15 @@ const Questionnaire = () => {
                                         <Grid xs={12} className="mb14">
                                             If yes, What lanuage:
                                         </Grid>
-                                        <TextField id="outlined-basic" onChange={(e) => setBilingualLanguage(e.target.value)} placeholder="Comment here" variant="outlined" className="w100p" />
+                                        <TextField
+                                            id="outlined-basic"
+                                            onChange={(e) => setBilingualLanguage(e.target.value)}
+                                            placeholder="Comment here"
+                                            variant="outlined"
+                                            className="w100p"
+                                            disabled={
+                                                !bilingual || !getRelativeBooleanFromOptionsMap(bilingual)
+                                            } />
                                         <Typography variant="h6" className="MuiTypography-subtitle2 MuiTypography-colorTextSecondary" component="h6">
                                             Please leave this field empty if you have no comments
                                         </Typography>
@@ -538,10 +642,13 @@ const Questionnaire = () => {
                             <Grid xs={12} className="mt50">
                                 <Grid xs={12} md={8} lg={6} container justify="space-between">
                                     <Link to="/application" className="LinkButtonBack">Back</Link>
+                                    <Snackbar
+                                    ></Snackbar>
                                     <Button
                                         // to="/submission" 
                                         className="LinkButton"
                                         onClick={onSubmit}
+                                        disabled={saveAndContinueDisabled}
                                     >
                                         Save & Continue
                                     </Button>

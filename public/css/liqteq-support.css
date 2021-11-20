@@ -987,6 +987,10 @@ li.LogOutIcon:hover:before {
     text-decoration: none !important;
     cursor: pointer;
 }
+.LinkButton:disabled {
+    background-color: #ddd!important;
+    color: #222!important;
+}
 .ButtonAddIcon::after {
     content: '';
     display: block;

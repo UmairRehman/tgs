@@ -149,7 +149,7 @@ const NewHireStep2 = () => {
         window.scrollTo(0, 0);
 
         let applicantDataHistory = location?.state
-        setHoldData(applicantDataHistory.data)
+        setHoldData(applicantDataHistory?.data)
 
         try{
             let data = await hr.getAllApplicantsByID(applicantDataHistory) ;

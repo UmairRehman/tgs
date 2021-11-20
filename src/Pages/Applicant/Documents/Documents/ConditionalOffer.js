@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   Grid,
   List,
@@ -140,6 +140,16 @@ const ConditionalOffer = () => {
 
   }
 
+  const userProfileProp = (prop) => {
+    const userProfile = JSON.parse(localStorage.user_profile);
+
+    const {
+      [prop]: propToSend = ''
+    } = userProfile;
+
+    return propToSend;
+  }
+
   return (
     <Grid id="capture" container xs={12} className="LiqForms-Container">
       <Snackbar></Snackbar>
@@ -195,7 +205,13 @@ const ConditionalOffer = () => {
             <table className="w100 mt10">
               <tbody className="w100">
                 <tr className="w100 row">
-                  <td className="w50 header font14 italic bold row">Offeree’s Name:<input type="text" name="officersName" id="officersName" className="w64 h22 bn bb" /></td>
+                  <td className="w50 header font14 italic bold row">
+                    Offeree’s Name:
+                    <input type="text" name="officersName" id="officersName" className="w64 h22 bn bb"
+                    value={
+                      `${userProfileProp('firstName')} ${userProfileProp('lastName')}` || userProfileProp('dnUsername') 
+                    } />
+                  </td>
                   <td className="w50 header font14 italic bold row">Offer Date:
                     <DatePicker
                       onChange={(value) => { setOfferDate(value) }}
