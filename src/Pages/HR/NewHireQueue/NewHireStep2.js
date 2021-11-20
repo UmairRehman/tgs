@@ -10,7 +10,9 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Paper
+  Paper,
+  Select,
+  Card
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import TextField from '@material-ui/core/TextField';
@@ -97,7 +99,7 @@ const NewHireStep2 = () => {
     
     const [applicantData, setApplicantData] = useState({})
     const [emergencyContact, setEmergencyContact] = useState({})
-    const [files, setFiles] = useState({})
+    const [attachments, setAttachments] = useState([])
     const [spouse, setSpouse] = useState({})
     const [holdData, setHoldData] = useState({})
 
@@ -184,7 +186,7 @@ const NewHireStep2 = () => {
             setApplicantData(data.employee)
             setApplicantData(data.employee)
             setEmergencyContact(data.emergency_contact)
-            setFiles(data.files)
+            setAttachments(data.files)
             setSpouse(data.spouse)
             console.log(applicantData)
         }
@@ -196,6 +198,18 @@ const NewHireStep2 = () => {
         setLoader(false)
 
     }, []);
+
+    const handleAttachements = async  (e) =>{
+        if (e.target.files.length > 0) {
+            setAttachments(Array.from(e.target.files));}
+    }
+
+    //remove attachment
+    const removeAttachment = index => {
+        let files = attachments;
+        files.splice(index, 1);
+        setAttachments(Array.from(files));
+    };
 
   return (
     <Grid container xs={12} className="Liq-Container HRPortal">
@@ -440,8 +454,23 @@ const NewHireStep2 = () => {
                                         <Grid xs={12} className="mbold">
                                             Attach Additional Files
                                         </Grid>
+                                        
                                         <Grid xs={12} id="Step2DragFile" className="Step2DragFile mt14">
-                                            Drop File Here OR <Button>Select Files</Button>
+                                        {
+                                            (attachments).map((attachment,index)=>{
+                                                return(<Grid xs={12} className="attachmentsHR">
+                                                    <div>
+                                                    {
+                                                        `${attachment.name}`
+                                                    }    
+                                                    </div>
+                                                    <Button onClick={() =>removeAttachment(index)}>x</Button>
+                                                </Grid>)})
+                                        }
+                                            <label >
+                                                <input type="file" multiple onChange={handleAttachements} style={{display:"none"}} />
+                                                    Drop File Here OR Select Files
+                                            </label>
                                         </Grid>
                                     </Grid>
                                 </Grid>
