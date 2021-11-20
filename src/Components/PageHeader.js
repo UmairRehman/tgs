@@ -320,6 +320,8 @@ const PageHeader = () => {
 
   const retreiveBroadcasts = async () => {
     try {
+      if (!storage.get('access_jwt'))
+        return;
       const response = await broadcast.getAll();
 
       const { data } = response;
