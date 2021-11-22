@@ -74,11 +74,6 @@ const NewHireStep2 = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  //   if(isMobile) {
-  //     return (
-  //         <MobileScreen />
-  //     )
-  //   }
 
   async function onFormSubmit(event) {
     event.preventDefault();
@@ -170,16 +165,6 @@ const NewHireStep2 = () => {
     files.splice(index, 1);
     setAttachments(Array.from(files));
   };
-
-  //read file as PDF
-  const getPDF = async (file) =>{
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = error => reject(error);
-    });
-  }
 
   return (
     <Grid container xs={12} className="Liq-Container HRPortal">
