@@ -92,7 +92,7 @@ const CreatePassword = () => {
 
         const createPassword = await users.createPassword(data)
         if (createPassword?.httpStatus == 200)
-          history.push("/");
+            history.push("/");
       }
       catch (exc) {
         console.log(exc);
