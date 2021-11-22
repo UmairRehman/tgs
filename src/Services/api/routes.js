@@ -42,7 +42,8 @@ export const routes = {
         update_tickets : 'employee/ticket/',
         get_employee_by_id : 'employee/hr/employee/',
         update_employee_address :'employee/hr/employee',
-
+        //files
+        additional_files_uplaod : 'employee/hr/add_files/',
 
         // dropdowns 
         get_job_categories : 'employee/jobCategory',
