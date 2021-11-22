@@ -36,6 +36,7 @@ export const routes = {
         get_applicant_by_id : 'employee/hr/applicant/',
         step1 : 'employee/hr/step/0/approve',
         step2 : 'employee/hr/step/1/approve',
+        reject : 'employee/hr/step/reject',
         get_tickets_and_allerts: 'employee/ticket',
         get_ticket_by_id: 'employee/ticket/',
         update_tickets : 'employee/ticket/',

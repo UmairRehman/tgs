@@ -10,7 +10,9 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Paper
+  Paper,
+  Select,
+  Card
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import TextField from '@material-ui/core/TextField';
@@ -70,8 +72,8 @@ import { useLocation } from 'react-router'
 
 
 const Approval = [
-    { title: 'Approve'},
-    { title: 'Not Approve' },
+    { title: 'Approve' , value: true},
+    { title: 'Reject' , value: false},
 ];
 const PositionLevel = [
     { title: 'Accounting and finance'},
@@ -97,18 +99,21 @@ const NewHireStep2 = () => {
     
     const [applicantData, setApplicantData] = useState({})
     const [emergencyContact, setEmergencyContact] = useState({})
-    const [files, setFiles] = useState({})
+    const [attachments, setAttachments] = useState([])
     const [spouse, setSpouse] = useState({})
     const [holdData, setHoldData] = useState({})
 
-    const [approval, setapproval] = useState('')
+    const [approval, setapproval] = useState(Approval[0])
     const [drugTestDate, setdrugTestDate] = useState('')
     const [drugTest, setdrugTest] = useState('')
     const [backgroundDate, setbackgroundDate] = useState('')
     const [backgroundCheck, setbackgroundCheck] = useState('')
     const [hireDate, sethireDate] = useState('')
     const [loader, setLoader] = useState('')
-    
+    const [statusDateTime, setStatusDateTime] = useState({
+        date: moment(new Date()).format("DD-MM-YYYY"),
+        time: moment(new Date()).format("hh:mm a"),
+    });
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -121,20 +126,38 @@ const NewHireStep2 = () => {
 
     async function onFormSubmit(event){
         event.preventDefault()
-
-        let data = {
-            employee_id : applicantData.id, 
-            comment: document.getElementById('comment').value,
-            hire_date: hireDate,
-            drug_test_date: drugTestDate,
-            background_complete_at: backgroundDate, 
-            drug_test : drugTest == 'Yes' ? true :false,
-            background_check: backgroundCheck == 'Yes' ? true :false
+        let data ={}
+        if(approval.value){
+            data = {
+                employee_id : applicantData.id, 
+                comment: document.getElementById('comment').value,
+                hire_date: hireDate,
+                drug_test_date: drugTestDate,
+                background_complete_at: backgroundDate, 
+                drug_test : drugTest == 'Yes' ? true :false,
+                background_check: backgroundCheck == 'Yes' ? true :false
+            }
         }
+        else if(! approval.value){
+            data = {
+                employee_id : applicantData.id,
+                step : 1,
+                comment : document.getElementById("comment").value,
+                data:{
+                    drug_test_date: drugTestDate,
+                    background_complete_at: backgroundDate, 
+                    drug_test : drugTest == 'Yes' ? true :false,
+                    background_check: backgroundCheck == 'Yes' ? true :false
+                }
+            }
+        }
+        
         console.log(data)
 
         try{
-            let data1 = await hr.step2(data) ;
+            (approval.value)
+                ?   await hr.step2(data) 
+                :   await hr.reject(data)
             history.push('/new-hire-queue')
         
         }
@@ -143,6 +166,13 @@ const NewHireStep2 = () => {
         }
     }
 
+    const setStatus = async (status) => {
+        setapproval(status);
+        setStatusDateTime({
+          date: moment(new Date()).format("DD-MM-YYYY"),
+          time: moment(new Date()).format("hh:mm a"),
+        });
+    };
     
     useEffect(async() => {
         setLoader(true)
@@ -156,7 +186,7 @@ const NewHireStep2 = () => {
             setApplicantData(data.employee)
             setApplicantData(data.employee)
             setEmergencyContact(data.emergency_contact)
-            setFiles(data.files)
+            setAttachments(data.files)
             setSpouse(data.spouse)
             console.log(applicantData)
         }
@@ -168,6 +198,18 @@ const NewHireStep2 = () => {
         setLoader(false)
 
     }, []);
+
+    const handleAttachements = async  (e) =>{
+        if (e.target.files.length > 0) {
+            setAttachments(Array.from(e.target.files));}
+    }
+
+    //remove attachment
+    const removeAttachment = index => {
+        let files = attachments;
+        files.splice(index, 1);
+        setAttachments(Array.from(files));
+    };
 
   return (
     <Grid container xs={12} className="Liq-Container HRPortal">
@@ -239,7 +281,7 @@ const NewHireStep2 = () => {
                                 <Autocomplete
                                     className="w100p"
                                     id="combo-box-demo"
-                                    onChange={(e, value) => {setapproval(value.title)}}
+                                    onChange={(e, value) => {setStatus(value)}}
                                     options={Approval}
                                     getOptionLabel={(option) => option.title}
                                     renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
@@ -252,13 +294,27 @@ const NewHireStep2 = () => {
                             <Grid xs={12} className="mbold mb14">
                                 Date
                             </Grid>
-                            <TextField id="outlined-basic" label="3/10/2021" disabled variant="outlined" className="w100p"/>
+                            <TextField
+                                id="statusDate"
+                                value={statusDateTime.date}
+                                label="3/10/2021"
+                                disabled
+                                variant="outlined"
+                                className="w100p"
+                                />
                         </Grid>
                         <Grid xs={6} className="pl20">
                             <Grid xs={12} className="mbold mb14">
                                 Time
                             </Grid>
-                            <TextField id="outlined-basic" label="04:05 PM" disabled variant="outlined" className="w100p"/>
+                              <TextField
+                                id="statusTime"
+                                value={statusDateTime.time}
+                                label="04:05 PM"
+                                disabled
+                                variant="outlined"
+                                className="w100p"
+                                />
                         </Grid>
                     </Grid>
                 </Grid>
@@ -343,25 +399,31 @@ const NewHireStep2 = () => {
                         </Grid>
                     </Grid>
                     {/* ---------- */}
-                    <Grid xs={12} container>
-                        <Grid xs={12} className="mt30">
-                            <Grid xs={12} className="mbold">
-                                Hire Date
+                    {
+                        approval.value && 
+                        (
+                            <Grid xs={12} container>
+                                <Grid xs={12} className="mt30">
+                                    <Grid xs={12} className="mbold">
+                                        Hire Date
+                                    </Grid>
+                                    <Grid xs={12} className="mt14">
+                                        <TextField
+                                            id="date"
+                                            type="date"
+                                            onChange={(e) => {sethireDate(e.target.value)}}
+                                            className="DateTimePicker"
+                                            defaultValue="YY-MM-DD"
+                                            InputLabelProps={{
+                                                shrink: true,
+                                            }}
+                                        />
+                                    </Grid>
+                                </Grid>
                             </Grid>
-                            <Grid xs={12} className="mt14">
-                                <TextField
-                                    id="date"
-                                    type="date"
-                                    onChange={(e) => {sethireDate(e.target.value)}}
-                                    className="DateTimePicker"
-                                    defaultValue="YY-MM-DD"
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                />
-                            </Grid>
-                        </Grid>
-                    </Grid>
+                        )
+                    }
+                    
                     {/* ---------- */}
                     <Grid xs={12} container>
                         <Grid xs={12} className="mt30">
@@ -373,24 +435,48 @@ const NewHireStep2 = () => {
                                     <TextareaAutosize id="comment" className="w100p" rowsMin={6} placeholder="Comment here" />
                                 </Grid>
                                 <Typography variant="h6" className="MuiTypography-subtitle2 MuiTypography-colorTextSecondary" component="h6">
-                                    Please leave this field empty if you have no comments
+                                {
+                                    approval.value
+                                        ? `Please leave this field empty if you have no comments`
+                                        : `Please define the reason of rejection`
+                                }
                                 </Typography>
                             </Grid>
                         </Grid>
                     </Grid>
                     {/* ---------- */}
-                    <Grid xs={12} container>
-                        <Grid xs={12} className="mt30">
-                            <Grid xs={12}>
-                                <Grid xs={12} className="mbold">
-                                    Attach Additional Files
-                                </Grid>
-                                <Grid xs={12} id="Step2DragFile" className="Step2DragFile mt14">
-                                    Drop File Here OR <Button>Select Files</Button>
+                    {
+                        approval.value &&
+                        (
+                            <Grid xs={12} container>
+                                <Grid xs={12} className="mt30">
+                                    <Grid xs={12}>
+                                        <Grid xs={12} className="mbold">
+                                            Attach Additional Files
+                                        </Grid>
+                                        
+                                        <Grid xs={12} id="Step2DragFile" className="Step2DragFile mt14">
+                                        {
+                                            (attachments).map((attachment,index)=>{
+                                                return(<Grid xs={12} className="attachmentsHR">
+                                                    <div>
+                                                    {
+                                                        `${attachment.name}`
+                                                    }    
+                                                    </div>
+                                                    <Button onClick={() =>removeAttachment(index)}>x</Button>
+                                                </Grid>)})
+                                        }
+                                            <label >
+                                                <input type="file" multiple onChange={handleAttachements} style={{display:"none"}} />
+                                                    Drop File Here OR Select Files
+                                            </label>
+                                        </Grid>
+                                    </Grid>
                                 </Grid>
                             </Grid>
-                        </Grid>
-                    </Grid>
+                        )
+                    }
                     <Grid xs={12} container justify="space-between" className="mt50">
                         <Link to="/new-hire-queue/234" className="LinkButtonBack">Back</Link>
                         <Button className="LinkButton" type='submit' >Save & Continue</Button>
