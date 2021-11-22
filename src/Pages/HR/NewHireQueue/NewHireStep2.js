@@ -45,39 +45,9 @@ const columns = [
   { id: "email", label: "Email Address", minWidth: 170, type: "value" },
 ];
 
-function createData(ap, emID, dop, hc, pn, ed) {
-  return {
-    ap,
-    emID,
-    dop,
-    hc,
-    pn,
-    ed,
-  };
-}
-
-const rows = [
-  ("Joe Dae",
-  "44433",
-  "01/20/2021",
-  "Houston, Texas",
-  "402-233-5555",
-  "Joe.Dae@gmail.com"),
-];
-
 const Approval = [
   { title: "Approve", value: true },
   { title: "Reject", value: false },
-];
-const PositionLevel = [
-  { title: "Accounting and finance" },
-  { title: "Communications" },
-  { title: "Manager" },
-];
-const FullTitle = [
-  { title: "Accounting and finance Manager" },
-  { title: "Accounting and finance Assistant" },
-  { title: "Accounting and finance Junior" },
 ];
 const FailPass = [{ title: "Pass" }, { title: "Fail" }];
 
@@ -85,14 +55,10 @@ const NewHireStep2 = () => {
   let history = useHistory();
   const location = useLocation();
 
-  const [page, setPage] = React.useState(0);
-
   const [applicantData, setApplicantData] = useState({});
-  const [emergencyContact, setEmergencyContact] = useState({});
   const [attachments, setAttachments] = useState([]);
-  const [spouse, setSpouse] = useState({});
   const [holdData, setHoldData] = useState({});
-
+  
   const [approval, setapproval] = useState(Approval[0]);
   const [drugTestDate, setdrugTestDate] = useState("");
   const [drugTest, setdrugTest] = useState("");
@@ -127,13 +93,6 @@ const NewHireStep2 = () => {
         drug_test: drugTest == "Yes" ? true : false,
         background_check: backgroundCheck == "Yes" ? true : false,
       };
-      let files = []
-      // attachments.map(async (attachment)=>{
-      //     let fileName = attachment.name
-      //     files.push({fileName  ,pdfFile})
-      //   //    formData.append(`${attachment.name}`,attachment,attachment.name);
-      // })
-      console.log(attachments);
     } else if (!approval.value) {
       data = {
         employee_id: applicantData.id,
@@ -156,7 +115,6 @@ const NewHireStep2 = () => {
           if(attachments.length>0 && res?.httpStatus==200){
             const formData = new FormData ()
             attachments.forEach((attachment)=>{
-              console.log(attachment);
               formData.append('file',attachment)
             })
           await hr.additionalFiles({
@@ -192,10 +150,6 @@ const NewHireStep2 = () => {
     try {
       let data = await hr.getAllApplicantsByID(applicantDataHistory);
       setApplicantData(data.employee);
-      setApplicantData(data.employee);
-      setEmergencyContact(data.emergency_contact);
-      setAttachments(data.files);
-      setSpouse(data.spouse);
       console.log(applicantData);
     } catch (exc) {
       console.log(exc);
