@@ -138,7 +138,7 @@ const NewHireStep1 = () => {
         location_id: positionLocation,
         step1,
         position,
-        job_code: jobCode,
+        job_code: document.getElementById("jobIDText").value,
         rate,
         department: department,
         full_title: fullTitle,
