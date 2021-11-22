@@ -150,6 +150,15 @@ export const updateEmployeeAddress = async (payload, headers) => {
     );
 }
 
+export const additionalFiles = async (payload, headers) => {
+    const { id , formData } = payload;
+    return await api.put(
+        routes.hr.additional_files_uplaod.concat(id),
+        formData,
+        headers
+    );
+}
+
 // @returns {void}
 //  * @param {string} payload.id - Employee Id
 // 
