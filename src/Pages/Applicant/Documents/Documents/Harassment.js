@@ -967,7 +967,8 @@ const Harassment = () => {
           </Table>
         </TableContainer>
         </Grid>
-      <Acknowledge/>
+      <Snackbar snackBarDefaultDuration={60000}></Snackbar>
+      <Acknowledge  acknowledgedState={acknowledgedState} />
     </Grid>
   );
 };
