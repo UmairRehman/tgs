@@ -6250,7 +6250,7 @@ const EmployeeHandbook = () => {
                   <TableRow className="w100 mt30">
                     <TableCell className="w100 row">
                       EMPLOYEE'S SIGNATURE:
-                      <input type="text" name="textfield" id="signaturetextfield" className="w h18 pl8 bn bb" />
+                      <input type="text" name="textfield" id="signaturetextfield" className="w pl8 bn bb signatureClass font-20" />
                     </TableCell>
                   </TableRow>
                   {/* -*- */}

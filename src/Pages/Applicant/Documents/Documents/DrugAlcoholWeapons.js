@@ -1798,7 +1798,7 @@ const DrugAlcoholWeapons = () => {
                           type="text"
                           name="textfield"
                           id="textfield"
-                          className="w100 h18 bn bb mt6 mb5"
+                          className="w100 bn bb mt6 mb5 signatureClass font-20"
                         />
                         (TRANS-GLOBAL SOLUTIONS, INC.)
                       </TableCell>
@@ -1910,13 +1910,13 @@ const DrugAlcoholWeapons = () => {
                       </TableCell>
                     </TableRow>
                     {/* -*- */}
-                    <TableRow className="w100 row wrap justify-between mt40">
+                    <TableRow className="w100 row wrap justify-between mt20">
                       <TableCell className="w60 textCenter">
                         <input
                           type="text"
                           name="signature"
                           id="signature"
-                          className="w100 textCenter h18 bn bb mt6 mb5"
+                          className="w100 textCenter bn bb mt4  signatureClass font-20"
                         />
                         EMPLOYEE SIGNATURE
                       </TableCell>
@@ -1939,7 +1939,7 @@ const DrugAlcoholWeapons = () => {
                           type="text"
                           name="witnessSignature"
                           id="witnessSignature"
-                          className="w100 textCenter h18 bn bb mt6 mb5"
+                          className="w100 textCenter bn bb mt4  signatureClass font-20"
                         />
                         SIGNATURE OF SUPERVISOR OR WITNESS
                       </TableCell>

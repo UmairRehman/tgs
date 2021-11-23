@@ -118,7 +118,8 @@ const Routing = () => (
     <Route exact path="/documents/post-conditional-job-offer/2" component={()=><PostConditionalJobOffer2/>}/>
     <Route exact path="/documents/post-conditional-job-offer/3" component={()=><PostConditionalJobOffer3/>}/>
     <Route exact path="/documents/post-conditional-job-offer/4" component={()=><PostConditionalJobOffer4/>}/>
-
+    
+    {/* Applicant Agreement Docs */}
     <Route exact path="/documents/fuel-card-agreement" component={()=><FuelCardAgreement/>}/>
     <Route exact path="/documents/boot-card-agreement" component={()=><BootCardAgreement/>}/>
     <Route exact path="/documents/twic-card-payment-agreement" component={()=><TWICCardPaymentAgreement/>}/>
@@ -126,6 +127,7 @@ const Routing = () => (
     <Route exact path="/documents/fcra" component={()=><FCRA/>}/>
     <Route exact path="/documents/arbitration-agreement" component={()=><ArbitrationAgreement/>}/>
 
+    {/* Applicant Safety Docs */}
     <Route exact path="/documents/employee-agreement" component={()=><EmployeeAgreement/>}/>
     <Route exact path="/documents/harassment" component={()=><Harassment/>}/>
     <Route exact path="/documents/employee-handbook" component={()=><EmployeeHandbook/>}/>

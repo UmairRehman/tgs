@@ -446,7 +446,7 @@ const PostConditionalJobOffer2 = () => {
                 <TableRow className="w100 mt50 row">
                   <TableCell className="w50 row pr10">
                     YOUR SIGNATURE:
-                    <input type="text" name="textfield" id="signature" className="w bn bb textCenter mb5" />
+                    <input type="text" name="textfield" id="signature" className="w bn bb textCenter mb5 signatureClass font-20" />
                   </TableCell>
                   <TableCell className="w50 row pl10">
                     DATE:

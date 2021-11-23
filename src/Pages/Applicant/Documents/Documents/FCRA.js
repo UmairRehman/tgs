@@ -226,15 +226,15 @@ const FCRA = () => {
                   <TableCell className="w100">
                     <TableRow className="w100 row">
                       <TableCell className="w100 row pr16">
-                        Signature <input type="text" name="textfield" id="signature" className="w h18 pl8 bn bb" />
+                        Signature <input type="text" name="textfield" id="signature" className="w pl8 bn bb signatureClass font-20" />
                       </TableCell>
                       <TableCell className="w100 row pl16">
-                        Printed Name <input type="text" name="textfield" id="name" className="w h18 pl8 bn bb" />
+                        Printed Name <input type="text" name="textfield" id="name" className="w pl8 bn bb" />
                       </TableCell>
                     </TableRow>
                     <TableRow className="w100 row mt20">
                       <TableCell className="w100 row pr16">
-                        Witness Signature <input type="text" name="textfield" id="witnessSignature" className="w h18 pl8 bn bb" />
+                        Witness Signature <input type="text" name="textfield" id="witnessSignature" className="w pl8 bn bb signatureClass font-20" />
                       </TableCell>
                       <TableCell className="w100 row pl16">
                         Date

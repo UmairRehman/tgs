@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Parisienne');
 html,body {
     width: 100%;
     height: 100%;
@@ -2262,4 +2263,13 @@ video.rounded {
 }
 .datePickerReact .react-date-picker__inputGroup__day {
     /* width: 18px !important; */
+}
+
+.signatureClass {
+    font-family:  'Parisienne', cursive !important;
+    font-style: italic;
+}
+
+.font-20 {
+    font-size:  20px !important;
 }

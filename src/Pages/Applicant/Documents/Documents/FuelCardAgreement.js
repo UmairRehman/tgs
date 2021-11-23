@@ -194,7 +194,7 @@ const FuelCardAgreement = () => {
                 <TableRow className="w100 mt20">
                   <TableCell className="font16 row w100">
                     Signature:
-                    <input onClick={(e) => setSignature(e.target.value)} type="text" name="textfield" id="textfield" className="w h22 pl8 bn bb" />
+                    <input onClick={(e) => setSignature(e.target.value)} type="text" name="textfield" id="textfield" className="w h22 pl8 bn bb signatureClass font-20" />
                   </TableCell>
                 </TableRow>
                 <TableRow className="w100 mt20">

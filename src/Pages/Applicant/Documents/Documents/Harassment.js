@@ -951,7 +951,7 @@ const Harassment = () => {
                   type="text"
                   name="textfield"
                   id="signaturetextfield"
-                  className="w100 h18 bn bb mt6"
+                  className="w100 bn bb mt6 signatureClass font-20"
                 />
               </TableCell>
             </TableRow>

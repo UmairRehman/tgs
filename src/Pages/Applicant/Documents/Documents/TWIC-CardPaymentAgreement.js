@@ -194,14 +194,14 @@ const TWICCardPaymentAgreement = () => {
                 {/* -*- */}
                 <TableRow className="w100 mt20 mb20">
                   <TableCell className="w30">
-                    <input type="text" name="textfield" id="signature" className="w100 h18 pl8 bn bb mb10" />
+                    <input type="text" name="textfield" id="signature" className="w100 pl8 bn bb mb10 signatureClass font-20" />
                     Employee Signature
                   </TableCell>
                 </TableRow>
                 {/* -*- */}
                 <TableRow className="w100 mt20 mb20">
                   <TableCell className="w30">
-                    <input type="text" name="textfield" id="representative" className="w100 h18 pl8 bn bb mb10" />
+                    <input type="text" name="textfield" id="representative" className="w100 h18 pl8 bn bb mb10 signatureClass font-20" />
                     Company Representative
                   </TableCell>
                 </TableRow>

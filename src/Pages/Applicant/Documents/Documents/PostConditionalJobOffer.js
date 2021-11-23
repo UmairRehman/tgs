@@ -710,7 +710,7 @@ const PostConditionalJobOffer = () => {
                     from TGS’s service if I have been employed.
                   </TableCell>
                 </TableRow>
-                <TableRow className="w100 mt4 row">
+                <TableRow className="w100 mt18   row">
                   <TableCell className="w50 pr30">
                     <TableRow className="w100">
                       <TableCell className="w100">
@@ -719,7 +719,7 @@ const PostConditionalJobOffer = () => {
                           name="textfield"
                           id="signature"
                           maxLength="90"
-                          className="w100 bn bb"
+                          className="w100 bn bb signatureClass font-20"
                         />
                       </TableCell>
                     </TableRow>
@@ -729,7 +729,7 @@ const PostConditionalJobOffer = () => {
                       </TableCell>
                     </TableRow>
                   </TableCell>
-                  <TableCell className="w50 pl30">
+                  <TableCell className="w50 pl30 mt10">
                     <TableRow className="w100">
                       <TableCell className="w100">
                         <DatePicker
