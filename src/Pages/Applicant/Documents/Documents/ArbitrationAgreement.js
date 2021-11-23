@@ -359,7 +359,7 @@ const ArbitrationAgreement = () => {
                       </TableRow>
                       <TableRow className="w100 row mt10">
                         <TableCell className="w100 pr16">
-                          <input type="text" name="textfield" id="employe" className="w100 h18 pl8 bn bb" />
+                          <input type="text" name="textfield" id="employe" className="w100 pl10 bn bb signatureClass font-20" />
                           Employee:
                         </TableCell>
                         <TableCell className="w100 row pl16">
@@ -379,7 +379,7 @@ const ArbitrationAgreement = () => {
                       </TableRow>
                       <TableRow className="w100 row mt10">
                         <TableCell className="w100 pr16">
-                          <input type="text" name="textfield" id="company" className="w100 h18 pl8 bn bb" />
+                          <input type="text" name="textfield" id="company" className="w100 pl10 bn bb signatureClass font-20" />
                           Trans-Global Solutions, Inc. Official:
                         </TableCell>
                         <TableCell className="w100 row pl16">
