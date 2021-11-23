@@ -304,8 +304,8 @@ const ConditionalOffer = () => {
                   <td className="w50">By signing below the Offeree accepts the Offer of Employment made by the TGS, according to the aforementioned terms and conditions.</td>
                 </tr>
                 <tr className="w100 row">
-                  <td className="w50"><input type="text" id="terms" name="textfield" className="w96 bn bb pt10 pb10" /></td>
-                  <td className="w50"><input type="text" id="offeree" name="textfield" className="w100 bn bb pt10 pb10" /></td>
+                  <td className="w50"><input type="text" id="terms" name="textfield" className="w96 bn bb pt10 pb10 signatureClass font-20" /></td>
+                  <td className="w50"><input type="text" id="offeree" name="textfield" className="w100 bn bb pt10 pb10 signatureClass font-20" /></td>
                 </tr>
                 <tr className="w100 row">
                   <td className="w50 bold">Trans-Global Solutions, Inc. Representative</td>
