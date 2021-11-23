@@ -967,7 +967,7 @@ const Harassment = () => {
           </Table>
         </TableContainer>
         </Grid>
-      <Acknowledge/>
+      <Acknowledge  acknowledgedState={acknowledgedState} />
     </Grid>
   );
 };
