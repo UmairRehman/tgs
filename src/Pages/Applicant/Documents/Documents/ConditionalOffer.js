@@ -53,12 +53,14 @@ const ConditionalOffer = () => {
   const classes = useStyles();
 
   const [userData, setUserData] = useState({
-    firstName : '',
-    middleName : '',
-    lastName: '',
-    hireDate : new Date (), 
-    position:{FullTitle: ''},
-    pay:{Rate:0},
+    firstName :  '',
+    middleName :  '',
+    lastName:  '',
+    hireDate :  new Date (), 
+    position:  '',
+    location :  '',
+    pay:  '',
+    deptID :  ''
   })
 
   const [startDate, setStartDate] = useState(new Date());
@@ -74,12 +76,14 @@ const ConditionalOffer = () => {
       firstName : res?.employee?.firstName || '',
       middleName : res?.employee?.middleName || '',
       lastName: res?.employee?.lastName || '',
-      hireDate : res?.employee.hireDate || new Date (), 
-      position: res?.position.FullTitle || null,
-      pay: res?.pay?.Rate || null,
+      hireDate : res?.employee?.hireDate || new Date (), 
+      position: res?.position?.FullTitle || '',
+      location : res?.position?.TGSLocation?.name || '',
+      pay: res?.pay?.Rate || '',
+      deptID : res?.position?.SubDepartmentId || ''
     }
     setUserData(data)
-    console.log(res)
+    console.log(data)
   
 
   }, [])
@@ -227,9 +231,11 @@ const ConditionalOffer = () => {
                   <td className="w50 header font14 italic bold row">
                     Offeree’s Name:
                     <input type="text" name="officersName" id="officersName" className="w64 h22 bn bb"
+                    style={{textTransform:'capitalize'}}
                     value={
-                      `${userData.firstName} ${userData.middle} ${userData.lastName}` 
-                    } />
+                      `${userData.firstName} ${userData.middleName} ${userData.lastName}` 
+                    } 
+                    />
                   </td>
                   <td className="w50 header font14 italic bold row">Offer Date:
                     <DatePicker
@@ -262,6 +268,7 @@ const ConditionalOffer = () => {
                 <tr className="w100 row">
                   <td className="w50 row">Position:
                     <input type="text" name="textfield" id="position" className="w80 bn bb" 
+                    style={{textTransform:"capitalize"}}
                     value = {`${userData.position}`}
                     />
                   
@@ -275,8 +282,12 @@ const ConditionalOffer = () => {
                   </td>
                 </tr>
                 <tr className="w100 row">
-                  <td className="w50 mt10 pt10 row">Location:<input type="text" name="textfield" id="location" className="w80 bn bb" /></td>
-                  <td className="w50 mt10 pt10 row">Department Code:<input type="text" name="textfield" id="departmentCode" className="w60 bn bb" /></td>
+                  <td className="w50 mt10 pt10 row">Location:
+                      <input type="text" name="textfield" id="location" className="w80 bn bb" value={`${userData.location}`}/>
+                  </td>
+                  <td className="w50 mt10 pt10 row">Department Code:
+                      <input type="text" name="textfield" id="departmentCode" className="w60 bn bb" value={`${userData.deptID}`}/>
+                  </td>
                 </tr>
               </tbody>
             </table>
