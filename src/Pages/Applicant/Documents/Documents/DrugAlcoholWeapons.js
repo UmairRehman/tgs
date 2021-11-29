@@ -28,7 +28,7 @@ import { Imports } from "../../../../Imports";
 
 import Snackbar from "../../../../Components/Snackbar";
 
-const { users, Storage } = Services;
+const { users, hr, Storage } = Services;
 
 const { showSnackBar } = helpers;
 
@@ -52,6 +52,22 @@ const DrugAlcoholWeapons = () => {
   const [DateSignature, setDateSignature] = useState(new Date());
   const [DateWitness, setDateWitness] = useState(new Date());
   const [DateSOLUTIONS, setDateSOLUTIONS] = useState(new Date());
+
+  const [userData, setUserData] = useState({
+    firstName : '',
+      middleName : '',
+      lastName: '',
+  })
+  useEffect( async () => {
+    let userProfile = await  JSON.parse(localStorage.user_profile);
+    let res = await hr.getAllApplicantsByID({ id : userProfile.id})
+    let data = {
+      firstName : res?.employee?.firstName || '',
+      middleName : res?.employee?.middleName || '',
+      lastName: res?.employee?.lastName || '',
+     }
+    setUserData(data)
+  }, [])
 
   useEffect(() => {
     submit();
@@ -84,7 +100,6 @@ const DrugAlcoholWeapons = () => {
         setAcknowledged(false);
         return showSnackBar("Kindly fill in all the fields");
       }
-      console.log("clickerd")
       let canvas = await html2canvas(document.querySelector("#capture"));
       let image = canvas.toDataURL("image/png");
 
@@ -108,12 +123,13 @@ const DrugAlcoholWeapons = () => {
       showSnackBar("Form has been submitted!");
 
       setPosting(false);
-
+      setAcknowledged(false);
       window.self.close();
     } catch (exc) {
       console.log(exc);
-
       setPosting(false);
+      setAcknowledged(false);
+      return showSnackBar(exc.message);
     }
   };
 
@@ -1843,7 +1859,8 @@ const DrugAlcoholWeapons = () => {
                           type="text"
                           name="name"
                           id="name"
-                          className="w h18 bn bb mt6 mb5"
+                          className="w h18 bn bb mt6 mb5 input-capitalization"
+                          value={`${userData.firstName} ${userData.middleName} ${userData.lastName}`}
                         />{" "}
                         hereby <b>acknowledge</b> that I have <b>read</b> (or it
                         has been read to me) and <b>understand</b> the Drug,

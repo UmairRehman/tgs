@@ -25,6 +25,7 @@ import Snackbar from '../../../../Components/Snackbar';
 
 const {
   users,
+  hr,
   Storage,
 } = Services;
 
@@ -53,6 +54,22 @@ const EmployeeHandbook = () => {
 
   const [isAcknowledged, setAcknowledged] = acknowledgedState;
   const [SIGNATUREDate, setSIGNATUREDate] = useState(new Date())
+
+  const [userData, setUserData] = useState({
+    firstName : '',
+      middleName : '',
+      lastName: '',
+  })
+  useEffect( async () => {
+    let userProfile = await  JSON.parse(localStorage.user_profile);
+    let res = await hr.getAllApplicantsByID({ id : userProfile.id})
+    let data = {
+      firstName : res?.employee?.firstName || '',
+      middleName : res?.employee?.middleName || '',
+      lastName: res?.employee?.lastName || '',
+     }
+    setUserData(data)
+  }, [])
 
   useEffect(() => {
     submit();
@@ -118,8 +135,9 @@ const EmployeeHandbook = () => {
 
     } catch (exc) {
       console.log(exc);
-
+      setAcknowledged(false);
       setPosting(false);
+      return showSnackBar(exc.message);
     }
   }
   return (
@@ -6243,7 +6261,8 @@ const EmployeeHandbook = () => {
                   <TableRow className="w100 mt30">
                     <TableCell className="w100 row">
                       EMPLOYEE'S NAME (printed):
-                      <input type="text" name="textfield" id="nametextfield" className="w h18 pl8 bn bb" />
+                      <input type="text" name="textfield" id="nametextfield"  className="w100 h18 bn bb mt6 input-capitalization"
+                      value={`${userData.firstName} ${userData.middleName} ${userData.lastName}`} />
                     </TableCell>
                   </TableRow>
                   {/* -*- */}

@@ -28,7 +28,7 @@ import { Imports } from "../../../../Imports";
 
 import Snackbar from "../../../../Components/Snackbar";
 
-const { users, Storage } = Services;
+const { users, hr, Storage } = Services;
 
 const { showSnackBar } = helpers;
 
@@ -50,6 +50,23 @@ const Harassment = () => {
   const [isAcknowledged, setAcknowledged] = acknowledgedState;
   const [DateSignature, setDateSignature] = useState(new Date());
 
+  const [userData, setUserData] = useState({
+    firstName : '',
+      middleName : '',
+      lastName: '',
+  })
+  useEffect( async () => {
+    let userProfile = await  JSON.parse(localStorage.user_profile);
+    let res = await hr.getAllApplicantsByID({ id : userProfile.id})
+    let data = {
+      firstName : res?.employee?.firstName || '',
+      middleName : res?.employee?.middleName || '',
+      lastName: res?.employee?.lastName || '',
+     }
+    setUserData(data)
+    console.log(data)
+  
+  }, [])
 
   useEffect(() => {
     submit();
@@ -105,8 +122,9 @@ const Harassment = () => {
       window.self.close();
     } catch (exc) {
       console.log(exc);
-
+      setAcknowledged(false)
       setPosting(false);
+      return showSnackBar(exc.message)
     }
   };
 
@@ -939,7 +957,8 @@ const Harassment = () => {
                   type="text"
                   name="textfield"
                   id="nametextfield"
-                  className="w100 h18 bn bb mt6"
+                  className="w100 h18 bn bb mt6 input-capitalization"
+                  value={`${userData.firstName} ${userData.middleName} ${userData.lastName}`}
                 />
               </TableCell>
             </TableRow>
