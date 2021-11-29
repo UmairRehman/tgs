@@ -82,8 +82,9 @@ const ArbitrationAgreement = () => {
         console.log(data)
       }
       else {
+        setPosting(false)
         setError("field must be filed")
-        alert("Kindly fill in all the fields")
+        return showSnackBar("Kindly fill in all the fields")
       }
       // console.log("clickerd")
       let canvas = await (html2canvas(document.querySelector('#capture')));
@@ -112,8 +113,8 @@ const ArbitrationAgreement = () => {
 
     } catch (exc) {
       console.log(exc);
-
       setPosting(false);
+      return showSnackBar(exc.message)
     }
   }
 
@@ -408,6 +409,7 @@ const ArbitrationAgreement = () => {
           </Table>
         </TableContainer>
       </Grid>
+      <Snackbar></Snackbar>
     </Grid>
   );
 }

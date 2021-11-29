@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import {
   Grid,
   TableContainer,
@@ -28,7 +28,7 @@ import Services from "../../../../Services";
 
 import { Imports } from "../../../../Imports";
 
-const { users } = Services;
+const { users , hr } = Services;
 
 const {
   styles: { displayNoneStyles: useStyles },
@@ -57,6 +57,11 @@ const PostConditionalJobOffer = () => {
   const [submitDate, setSubmitDate] = useState(new Date());
 
   const [dateOfBirth, setDateOfBirth] = useState(new Date());
+
+  const [userData, setUserData] = useState({
+    name: '',
+    ssn:''
+  })
 
   const [PDFImage, setPDFImage] = useState("");
 
@@ -133,6 +138,23 @@ const PostConditionalJobOffer = () => {
 
     alert("Please go step by step");
   }
+
+  useEffect( async () => {
+    try {
+      let userProfile = await  JSON.parse(localStorage.user_profile);
+      let res = await hr.getAllApplicantsByID({ id : userProfile.id})
+      let data = {
+        firstName : res?.employee?.firstName || '',
+        middleName : res?.employee?.middleName || '',
+        lastName: res?.employee?.lastName || '',
+        ssn : res?.employee?.ssn || ''
+      }
+      setUserData(data)
+      console.log(data)
+    } catch (error) {
+      
+    }
+  }, [])
 
   return (
     <Grid id="capture" container xs={12} className="LiqForms-Container font11">
@@ -239,7 +261,10 @@ const PostConditionalJobOffer = () => {
                             type="text"
                             name="textfield"
                             id="name"
-                            className="w100 bn bb"
+                            className="w100 bn bb input-capitalization"
+                            value={
+                              `${userData.firstName} ${userData.middleName} ${userData.lastName}` 
+                            } 
                           />
                         </TableCell>
                       </TableRow>
@@ -259,6 +284,9 @@ const PostConditionalJobOffer = () => {
                             name="textfield"
                             id="securityNumber"
                             className="w100 bn bb"
+                            value={
+                                `${userData.ssn}` 
+                              } 
                           />
                         </TableCell>
                       </TableRow>

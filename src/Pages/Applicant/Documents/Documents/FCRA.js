@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import {
   Grid, TableContainer, Table, TableCell, TableRow, Button, List, ListItem
 } from "@material-ui/core";
@@ -28,6 +28,7 @@ import Snackbar from '../../../../Components/Snackbar';
 
 const {
   users,
+  hr,
   Storage,
 } = Services;
 
@@ -61,6 +62,24 @@ const FCRA = () => {
   const [date, setDate] = useState(new Date())
   const [companyDate, setCompanyDate] = useState(new Date())
 
+  const [userData, setUserData] = useState({
+    firstName : '',
+      middleName : '',
+      lastName: '',
+  })
+ useEffect( async () => {
+    let userProfile = await  JSON.parse(localStorage.user_profile);
+    let res = await hr.getAllApplicantsByID({ id : userProfile.id})
+    let data = {
+      firstName : res?.employee?.firstName || '',
+      middleName : res?.employee?.middleName || '',
+      lastName: res?.employee?.lastName || '',
+    }
+    setUserData(data)
+    console.log(data)
+  
+  }, [])
+
   async function submit() {
     try {
       setPosting(true);
@@ -78,6 +97,7 @@ const FCRA = () => {
         console.log(data)
       }
       else {
+        setPosting(false)
         setError("field must be filed")
         return showSnackBar("Kindly fill in all the fields")
       }
@@ -107,8 +127,8 @@ const FCRA = () => {
 
     } catch (exc) {
       console.log(exc);
-
       setPosting(false);
+      return showSnackBar(exc.message)
     }
   }
 
@@ -229,7 +249,8 @@ const FCRA = () => {
                         Signature <input type="text" name="textfield" id="signature" className="w pl8 bn bb signatureClass font-20" />
                       </TableCell>
                       <TableCell className="w100 row pl16">
-                        Printed Name <input type="text" name="textfield" id="name" className="w pl8 bn bb" />
+                        Printed Name <input type="text" name="textfield" id="name" className="w pl8 bn bb input-capitalization" 
+                        value={`${userData.firstName} ${userData.middleName} ${userData.lastName}`}/>
                       </TableCell>
                     </TableRow>
                     <TableRow className="w100 row mt20">
@@ -467,6 +488,7 @@ const FCRA = () => {
           </Table>
         </TableContainer>
       </Grid>
+      <Snackbar></Snackbar>
     </Grid>
   );
 }

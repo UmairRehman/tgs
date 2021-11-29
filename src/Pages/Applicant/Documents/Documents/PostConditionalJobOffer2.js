@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import {
   Grid, TableContainer, Table, TableCell, TableRow, List, ListItem, Button,
 } from "@material-ui/core";
@@ -21,7 +21,8 @@ import { Imports } from '../../../../Imports';
 
 
 const {
-  users
+  users,
+  hr
 } = Services;
 
 const {
@@ -54,6 +55,14 @@ const PostConditionalJobOffer2 = () => {
   const [date, setDate] = useState(new Date())
 
   const [pDate, setPDate] = useState(new Date())
+
+  const [userData, setUserData] = useState({
+    firstName : '',
+      middleName : '',
+      lastName: '',
+      ssn : '',
+      address : '',
+  })
 
   async function submit() {
 
@@ -120,6 +129,21 @@ const PostConditionalJobOffer2 = () => {
 
   }
 
+  useEffect( async () => {
+    let userProfile = await  JSON.parse(localStorage.user_profile);
+    let res = await hr.getAllApplicantsByID({ id : userProfile.id})
+    let data = {
+      firstName : res?.employee?.firstName || '',
+      middleName : res?.employee?.middleName || '',
+      lastName: res?.employee?.lastName || '',
+      ssn : res?.employee?.ssn || '',
+      address : res?.employee?.address || '',
+      // address1 : res?.employee?.address1 || '',
+    }
+    setUserData(data)
+    console.log(data)
+  
+  }, [])
 
   async function eventHandle(value) {
     if (value == "second") {
@@ -215,19 +239,31 @@ const PostConditionalJobOffer2 = () => {
                   <TableCell className="w4">1.</TableCell>
                   <TableCell className="w50 row pr10">
                     NAME:
-                    <input type="text" name="textfield" id="name" className="w h18 pl8 bn bb" />
+                    <input type="text" name="textfield" id="name" className="w h18 pl8 bn bb input-capitalization" 
+                       value={
+                        `${userData.firstName} ${userData.middleName} ${userData.lastName}` 
+                      } 
+                    />
                   </TableCell>
                   <TableCell className="w50 row pl10">
                   <TableCell className="w4">2.</TableCell>
                     SOCIAL SECURITY NO.:
-                    <input type="text" name="textfield" id="seecurityNumber" className="w h18 pl8 bn bb" />
+                    <input type="text" name="textfield" id="seecurityNumber" className="w h18 pl8 bn bb" 
+                       value={
+                        `${userData.ssn}` 
+                      } 
+                    />
                   </TableCell>
                 </TableRow>
                 <TableRow className="w100 mt10 row">
                 <TableCell className="w4">3.</TableCell>
                   <TableCell className="w100 row">
                     Address:
-                    <input type="text" name="textfield" id="dateOnInjury" className="w h18 pl8 bn bb" />
+                    <input type="text" name="textfield" id="dateOnInjury" className="w h18 pl8 bn bb"
+                       value={
+                        `${userData.address}` 
+                      } 
+                    />
                   </TableCell>
                 </TableRow>
                 <TableRow className="w100 mt10 row">
@@ -257,11 +293,11 @@ const PostConditionalJobOffer2 = () => {
                 <TableRow className="w100 mt10 row">
                   <TableCell className="w4"></TableCell>
                   <TableCell className="w30 pr20 textCenter">
-                    <input type="text" name="textfield" id="doctorName[0]" className="w100 bn bb textCenter mb5" />
+                    <input type="text" name="textfield" id="doctorName[0]" className="w100 bn bb textCenter mb5 input-capitalization" />
                     (Name)
                   </TableCell>
                   <TableCell className="w40 pr10 textCenter">
-                    <input type="text" name="textfield" id="address[0]" className="w100 bn bb textCenter mb5" />
+                    <input type="text" name="textfield" id="address[0]" className="w100 bn bb textCenter mb5 input-capitalization" />
                     (Address)
                   </TableCell>
                   <TableCell className="w30 pl20 textCenter">
@@ -272,11 +308,11 @@ const PostConditionalJobOffer2 = () => {
                 <TableRow className="w100 mt10 row">
                   <TableCell className="w4"></TableCell>
                   <TableCell className="w30 pr20 textCenter">
-                    <input type="text" name="textfield" id="doctorName[1]" className="w100 bn bb textCenter mb5" />
+                    <input type="text" name="textfield" id="doctorName[1]" className="w100 bn bb textCenter mb5 input-capitalization" />
                     (Name)
                   </TableCell>
                   <TableCell className="w40 pr10 textCenter">
-                    <input type="text" name="textfield" id="address[1]" className="w100 bn bb textCenter mb5" />
+                    <input type="text" name="textfield" id="address[1]" className="w100 bn bb textCenter mb5 input-capitalization" />
                     (Address)
                   </TableCell>
                   <TableCell className="w30 pl20 textCenter">
@@ -294,11 +330,11 @@ const PostConditionalJobOffer2 = () => {
                 <TableRow className="w100 mt10 row">
                   <TableCell className="w4"></TableCell>
                   <TableCell className="w30 pr20 textCenter">
-                    <input type="text" name="textfield" id="injuryOccure" className="w100 bn bb textCenter mb5" />
+                    <input type="text" name="textfield" id="injuryOccure" className="w100 bn bb textCenter mb5 input-capitalization" />
                     (Name)
                   </TableCell>
                   <TableCell className="w40 pr10 textCenter">
-                    <input type="text" name="textfield" id="injuryAddress" className="w100 bn bb textCenter mb5" />
+                    <input type="text" name="textfield" id="injuryAddress" className="w100 bn bb textCenter mb5 input-capitalization" />
                     (Address)
                   </TableCell>
                   <TableCell className="w30 pl20 textCenter">
@@ -415,11 +451,11 @@ const PostConditionalJobOffer2 = () => {
                 <TableRow className="w100 mt10 row">
                   <TableCell className="w4"></TableCell>
                   <TableCell className="w30 pr20 textCenter">
-                    <input type="text" name="textfield" id="drName" className="w100 bn bb textCenter mb5" />
+                    <input type="text" name="textfield" id="drName" className="w100 bn bb textCenter mb5 input-capitalization" />
                     (Doctor’s Name)
                   </TableCell>
                   <TableCell className="w40 pr10 textCenter">
-                    <input type="text" name="textfield" id="drAddress" className="w100 bn bb textCenter mb5" />
+                    <input type="text" name="textfield" id="drAddress" className="w100 bn bb textCenter mb5 input-capitalization" />
                     (Address)
                   </TableCell>
                   <TableCell className="w30 pl20 textCenter">

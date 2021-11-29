@@ -28,7 +28,7 @@ import { Imports } from "../../../../Imports";
 
 import Snackbar from "../../../../Components/Snackbar";
 
-const { users, Storage } = Services;
+const { users, hr, Storage } = Services;
 
 const { showSnackBar, getGenerator } = helpers;
 
@@ -50,6 +50,24 @@ const SafetyHandbook = () => {
   const [isAcknowledged, setAcknowledged] = acknowledgedState;
   const [SignatureDate, setSignatureDate] = useState(new Date());
   const [VerificationDate, setVerificationDate] = useState(new Date());
+
+  const [userData, setUserData] = useState({
+    firstName : '',
+    middleName : '',
+    lastName: '',
+    dept: '',
+  })
+  useEffect( async () => {
+    let userProfile = await  JSON.parse(localStorage.user_profile);
+    let res = await hr.getAllApplicantsByID({ id : userProfile.id})
+    let data = {
+      firstName : res?.employee?.firstName || '',
+      middleName : res?.employee?.middleName || '',
+      lastName: res?.employee?.lastName || '',
+      dept : res?.employee?.SubDepartment?.name || '',
+     }
+    setUserData(data)
+  }, [])
 
   useEffect(() => {
     submit();
@@ -122,8 +140,9 @@ const SafetyHandbook = () => {
       window.self.close();
     } catch (exc) {
       console.log(exc);
-
       setPosting(false);
+      setAcknowledged(false);
+      return showSnackBar(exc.message);
     }
   };
 
@@ -2965,7 +2984,8 @@ const SafetyHandbook = () => {
                             type="text"
                             name="textfield"
                             id="nameText"
-                            className="w100 h18 bn bb mt6"
+                            className="w100 h18 bn bb mt6 input-capitalization"
+                            value={`${userData.firstName} ${userData.middleName} ${userData.lastName}`}
                           />
                           Employee Name (PLEASE PRINT)
                         </TableCell>
@@ -2976,7 +2996,8 @@ const SafetyHandbook = () => {
                             type="text"
                             name="textfield"
                             id="deptText"
-                            className="w100 h18 bn bb mt6"
+                            className="w100 h18 bn bb mt6 input-capitalization"
+                            value={`${userData.dept}`}
                           />
                           Department
                         </TableCell>

@@ -33,7 +33,7 @@ import Services from "../../../../Services";
 
 import { Imports } from "../../../../Imports";
 
-const { users } = Services;
+const { users , hr } = Services;
 
 const {
   styles: { displayNoneStyles: useStyles },
@@ -59,10 +59,28 @@ const PostConditionalJobOffer3 = () => {
   const [dob, setDob] = useState(new Date());
   const [gender, setGender] = useState("male");
 
-  useEffect(() => {
-    document.querySelector('input[name="gender"]').value = "male";
-    // document.race.value="africanAmerican"
-  }, []);
+  const [userData, setUserData] = useState({
+    firstName : '',
+      middleName : '',
+      lastName: '',
+      position : '',
+      address : '',
+  })
+ useEffect( async () => {
+    let userProfile = await  JSON.parse(localStorage.user_profile);
+    let res = await hr.getAllApplicantsByID({ id : userProfile.id})
+    let data = {
+      firstName : res?.employee?.firstName || '',
+      middleName : res?.employee?.middleName || '',
+      lastName: res?.employee?.lastName || '',
+      position : res?.position?.FullTitle || '',
+      address : res?.employee?.address || '',
+      // address1 : res?.employee?.address1 || '',
+    }
+    setUserData(data)
+    console.log(data)
+  
+  }, [])
 
   async function submit() {
     setPosting(true);
@@ -91,8 +109,7 @@ const PostConditionalJobOffer3 = () => {
       false
     );
 
-    setPosting(false);
-
+    
     if (nullCheck == false) {
       console.log(data);
       //  save in local storage for submit
@@ -102,6 +119,7 @@ const PostConditionalJobOffer3 = () => {
         pathname: "/documents/post-conditional-job-offer/4",
       });
     } else {
+      setPosting(false);
       setError("field must be filed");
       alert("Kindly fill in all the fields");
     }
@@ -245,7 +263,8 @@ const PostConditionalJobOffer3 = () => {
                       type="text"
                       name="textfield"
                       id="name"
-                      className="w h18 pl8 bn bb"
+                      className="w h18 pl8 bn bb input-capitalization"
+                      value={`${userData.firstName} ${userData.middleName} ${userData.lastName}`}
                     />
                   </TableCell>
                   <TableCell className="w50 row pl10">
@@ -267,7 +286,8 @@ const PostConditionalJobOffer3 = () => {
                       type="text"
                       name="textfield"
                       id="address"
-                      className="w h18 pl8 bn bb"
+                      className="w h18 pl8 bn bb input-capitalization"
+                      value={`${userData.address}`}
                     />
                   </TableCell>
                 </TableRow>
@@ -278,7 +298,8 @@ const PostConditionalJobOffer3 = () => {
                       type="text"
                       name="textfield"
                       id="jobDetail"
-                      className="w h18 pl8 bn bb"
+                      className="w h18 pl8 bn bb input-capitalization"
+                      value={`${userData.position}`}
                     />
                   </TableCell>
                   <TableCell className="w50 row pl10">

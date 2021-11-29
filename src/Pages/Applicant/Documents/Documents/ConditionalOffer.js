@@ -31,6 +31,7 @@ import Snackbar from '../../../../Components/Snackbar';
 
 const {
   users,
+  hr,
   Storage,
 } = Services;
 
@@ -51,15 +52,39 @@ const ConditionalOffer = () => {
 
   const classes = useStyles();
 
+  const [userData, setUserData] = useState({
+    firstName :  '',
+    middleName :  '',
+    lastName:  '',
+    hireDate :  new Date (), 
+    position:  '',
+    location :  '',
+    pay:  '',
+    deptID :  ''
+  })
+
   const [startDate, setStartDate] = useState(new Date());
 
   const [offerDate, setOfferDate] = useState(new Date());
 
   const [PDFimage, setPDFImage] = useState('');
 
-  useEffect(() => {
-
-    console.log(startDate)
+  useEffect( async () => {
+    let userProfile = await  JSON.parse(localStorage.user_profile);
+    let res = await hr.getAllApplicantsByID({ id : userProfile.id})
+    let data = {
+      firstName : res?.employee?.firstName || '',
+      middleName : res?.employee?.middleName || '',
+      lastName: res?.employee?.lastName || '',
+      hireDate : res?.employee?.hireDate || new Date (), 
+      position: res?.position?.FullTitle || '',
+      location : res?.position?.TGSLocation?.name || '',
+      pay: res?.pay?.Rate || '',
+      deptID : res?.position?.SubDepartmentId || ''
+    }
+    setUserData(data)
+    console.log(data)
+  
 
   }, [])
 
@@ -76,8 +101,7 @@ const ConditionalOffer = () => {
       let officersName = document.getElementById("officersName").value;
       let position = document.getElementById("position").value;
       let payRate = document.getElementById("payRate").value;
-      let hourly = document.getElementById("hourly").value;
-      let weekly = document.getElementById("weekly").value;
+      let payType = document.querySelector('input[name="payType"]:checked')?.value;
       let location = document.getElementById("location").value;
       let departmentCode = document.getElementById("departmentCode").value;
       let phone = document.getElementById("phone").value;
@@ -90,9 +114,8 @@ const ConditionalOffer = () => {
         position,
         offerDate,
         payRate,
-        hourly,
+        payType,
         startDate,
-        weekly,
         location,
         departmentCode,
         phone,
@@ -105,6 +128,8 @@ const ConditionalOffer = () => {
         .reduce((total, accumulator) => total || !accumulator, false);
 
       if (nullCheck) {
+        setPosting(false);
+        console.log("data on fail",data);
         setError("field must be filed")
         return showSnackBar("Kindly fill in all fields!");
       }
@@ -133,9 +158,9 @@ const ConditionalOffer = () => {
 
       window.self.close();
     } catch (exc) {
+      console.log(exc);
       setPosting(false);
-
-      return showSnackBar(exc);
+      return showSnackBar(exc.message);
     }
 
   }
@@ -207,10 +232,11 @@ const ConditionalOffer = () => {
                 <tr className="w100 row">
                   <td className="w50 header font14 italic bold row">
                     Offeree’s Name:
-                    <input type="text" name="officersName" id="officersName" className="w64 h22 bn bb"
+                    <input type="text" name="officersName" id="officersName" className="w64 h22 bn bb input-capitalization"
                     value={
-                      `${userProfileProp('firstName')} ${userProfileProp('lastName')}` || userProfileProp('dnUsername') 
-                    } />
+                      `${userData.firstName} ${userData.middleName} ${userData.lastName}` 
+                    } 
+                    />
                   </td>
                   <td className="w50 header font14 italic bold row">Offer Date:
                     <DatePicker
@@ -241,12 +267,27 @@ const ConditionalOffer = () => {
             <table className="w100">
               <tbody className="w100">
                 <tr className="w100 row">
-                  <td className="w50 row">Position:<input type="text" name="textfield" id="position" className="w80 bn bb" /></td>
-                  <td className="w50 row">Pay Rate:<input type="text" name="textfield" id="payRate" className="w38 bn bb" /> <input id="hourly" type="checkbox" className="ml6 mt4" /> Hourly <input type="checkbox" id="weekly" className="ml10 mt4" /> Bi-Weekly</td>
+                  <td className="w50 row">Position:
+                    <input type="text" name="textfield" id="position" className="w80 bn bb input-capitalization" 
+                    value = {`${userData.position}`}
+                    />
+                  
+                  </td>
+                  <td className="w50 row">Pay Rate:
+                      <input type="text" name="textfield" id="payRate" className="w38 bn bb" 
+                      value= {`${userData.pay}`}
+                      /> 
+                    <input type="radio" id="hourly" value="hourly" name="payType" className="ml6 mt4" /> Hourly 
+                    <input type="radio" id="weekly" value="weekly" name="payType" className="ml10 mt4" /> Bi-Weekly
+                  </td>
                 </tr>
                 <tr className="w100 row">
-                  <td className="w50 mt10 pt10 row">Location:<input type="text" name="textfield" id="location" className="w80 bn bb" /></td>
-                  <td className="w50 mt10 pt10 row">Department Code:<input type="text" name="textfield" id="departmentCode" className="w60 bn bb" /></td>
+                  <td className="w50 mt10 pt10 row">Location:
+                      <input type="text" name="textfield" id="location" className="w80 bn bb input-capitalization" value={`${userData.location}`}/>
+                  </td>
+                  <td className="w50 mt10 pt10 row">Department Code:
+                      <input type="text" name="textfield" id="departmentCode" className="w60 bn bb input-capitalization" value={`${userData.deptID}`}/>
+                  </td>
                 </tr>
               </tbody>
             </table>

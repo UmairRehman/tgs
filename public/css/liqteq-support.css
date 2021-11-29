@@ -2273,3 +2273,6 @@ video.rounded {
 .font-20 {
     font-size:  20px !important;
 }
+.input-capitalization {
+    text-transform: capitalize !important;
+}

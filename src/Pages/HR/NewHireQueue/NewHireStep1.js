@@ -280,11 +280,15 @@ const NewHireStep1 = () => {
                     </ListItem>
                     <ListItem container className="p0 pt6 pb20">
                       <Grid className="w250 bold">Job ID / Description</Grid>
-                      <Grid>{applicantData?.JobCategoryId}</Grid>
+                      <Grid>{
+                        (applicantData?.jobId || applicantData?.jobDescription) 
+                          ?` ${applicantData?.jobId} / ${applicantData?.jobDescription}`
+                          :`Not Available`
+                        }</Grid>
                     </ListItem>
                     <ListItem container className="p0 pt6 pb20">
                       <Grid className="w250 bold">Job Category</Grid>
-                      <Grid>{applicantData?.jobDescription}</Grid>
+                      <Grid>{applicantData?.JobCategoryId}</Grid>
                     </ListItem>
                     <ListItem
                       container

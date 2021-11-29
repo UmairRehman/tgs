@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import {
   Grid, TableContainer, Table, TableCell, TableRow, List, ListItem, Button
 } from "@material-ui/core";
@@ -27,6 +27,7 @@ import Snackbar from '../../../../Components/Snackbar';
 
 const {
   users,
+  hr,
   Storage,
 } = Services;
 
@@ -62,6 +63,25 @@ const TWICCardPaymentAgreement = () => {
 
   const [signDate, setSignDate] = useState(new Date())
 
+  const [userData, setUserData] = useState({
+    firstName : '',
+      middleName : '',
+      lastName: '',
+      ssn : '',
+  })
+
+ useEffect( async () => {
+    let userProfile = await  JSON.parse(localStorage.user_profile);
+    let res = await hr.getAllApplicantsByID({ id : userProfile.id})
+    let data = {
+      firstName : res?.employee?.firstName || '',
+      middleName : res?.employee?.middleName || '',
+      lastName: res?.employee?.lastName || '',
+      ssn : res?.employee?.ssn || '',
+    }
+    setUserData(data)
+    console.log(data)
+  }, [])
 
   async function submit() {
     try {
@@ -84,8 +104,9 @@ const TWICCardPaymentAgreement = () => {
         console.log(data)
       }
       else {
+        setPosting(false)
         setError("field must be filed")
-        alert("Kindly fill in all the fields")
+        return showSnackBar("Kindly fill in all the fields")
       }
 
       // console.log("clickerd")
@@ -114,8 +135,8 @@ const TWICCardPaymentAgreement = () => {
 
     } catch (exc) {
       console.log(exc);
-
       setPosting(false);
+      return showSnackBar(exc.message)
     }
   }
 
@@ -176,13 +197,17 @@ const TWICCardPaymentAgreement = () => {
                 <TableRow className="w100 mt10 row">
                   <TableCell className="w100 row">
                     Employee Name:
-                    <input type="text" name="textfield" id="name" className="w h18 pl8 bn bb" />
+                    <input type="text" name="textfield" id="name" className="w h18 pl8 bn bb input-capitalization" 
+                      value={`${userData.firstName} ${userData.middleName} ${userData.lastName}`}
+                    />
                   </TableCell>
                 </TableRow>
                 <TableRow className="w100 mt10 row">
                   <TableCell className="w100 row">
                     Social Security #:
-                    <input type="text" name="textfield" id="securityNumber" className="w h18 pl8 bn bb" />
+                    <input type="text" name="textfield" id="securityNumber" className="w h18 pl8 bn bb" 
+                      value={`${userData.ssn}`}
+                    />
                   </TableCell>
                 </TableRow>
                 {/* -*- */}
@@ -233,6 +258,7 @@ const TWICCardPaymentAgreement = () => {
           </TableRow>
         </Table>
       </TableContainer>
+      <Snackbar></Snackbar>
     </Grid>
   );
 }
