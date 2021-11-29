@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import {
   Grid, TableContainer, Table, TableCell, TableRow, List, ListItem, Button
 } from "@material-ui/core";
@@ -27,6 +27,7 @@ import Snackbar from '../../../../Components/Snackbar';
 
 const {
   users,
+  hr,
   Storage,
 } = Services;
 
@@ -55,7 +56,25 @@ const FuelCardAgreement = () => {
 
   const [signature, setSignature] = useState('')
 
-  const [date, setDate] = useState('')
+  const [date, setDate] = useState(new Date ())
+  const [userData, setUserData] = useState({
+    firstName :  '',
+    middleName :  '',
+    lastName:  '',
+  })
+useEffect( async () => {
+    let userProfile = await  JSON.parse(localStorage.user_profile);
+    let res = await hr.getAllApplicantsByID({ id : userProfile.id})
+    let data = {
+      firstName : res?.employee?.firstName || '',
+      middleName : res?.employee?.middleName || '',
+      lastName: res?.employee?.lastName || '',
+    }
+    setUserData(data)
+    setPrintedName(`${userData.firstName} ${userData.middleName} ${userData.lastName}`)
+    console.log(data)
+  
+  }, [])
 
   async function submit() {
     try {
@@ -76,6 +95,7 @@ const FuelCardAgreement = () => {
         .reduce((total, accumulator) => total || !accumulator, false);
 
       if (nullCheck) {
+        setPosting(true);
         setError("field must be filed")
         return showSnackBar("Kindly fill in all fields!");
       }
@@ -104,8 +124,8 @@ const FuelCardAgreement = () => {
 
     } catch (exc) {
       console.log(exc);
-
       setPosting(false);
+      return showSnackBar(exc.message);
     }
 
   }
@@ -188,7 +208,7 @@ const FuelCardAgreement = () => {
                 <TableRow className="w100 mt20">
                   <TableCell className="font16 row w100">
                     Printed Name:
-                    <input onChange={(e) => setPrintedName(e.target.value)} type="text" name="textfield" id="textfield" className="w h22 pl8 bn bb" />
+                    <input value={`${userData.firstName} ${userData.middleName} ${userData.lastName}`} type="text" name="textfield" id="textfield" className="w h22 pl8 bn bb input-capitalization" />
                   </TableCell>
                 </TableRow>
                 <TableRow className="w100 mt20">

@@ -27,6 +27,7 @@ import Snackbar from '../../../../Components/Snackbar';
 
 const {
   users,
+  hr,
   Storage,
 } = Services;
 
@@ -50,15 +51,38 @@ const BootCardAgreement = () => {
 
   const [isPosting, setPosting] = useState(false);
 
-  const [dateofInjury, setDateofInjury] = useState('')
+  const [dateofInjury, setDateofInjury] = useState(new Date () )
 
-  const [dateOfRelease, setDateOfRelease] = useState('')
+  const [dateOfRelease, setDateOfRelease] = useState(new Date () )
 
-  const [formDate, setFormDate] = useState('')
+  const [formDate, setFormDate] = useState(new Date ())
 
   const [error, setError] = useState('')
 
   const [PDFimage, setPDFImage] = useState('')
+
+  const [userData, setUserData] = useState({
+    firstName : '',
+      middleName : '',
+      lastName: '',
+      ssn : '',
+      address : '',
+  })
+ useEffect( async () => {
+    let userProfile = await  JSON.parse(localStorage.user_profile);
+    let res = await hr.getAllApplicantsByID({ id : userProfile.id})
+    let data = {
+      firstName : res?.employee?.firstName || '',
+      middleName : res?.employee?.middleName || '',
+      lastName: res?.employee?.lastName || '',
+      ssn : res?.employee?.ssn || '',
+      address : res?.employee?.address || '',
+      // address1 : res?.employee?.address1 || '',
+    }
+    setUserData(data)
+    console.log(data)
+  
+  }, [])
 
   const CloseTab = () => {
     window.close();
@@ -117,8 +141,9 @@ const BootCardAgreement = () => {
       if (nullCheck == false) {
         console.log(data)
       } else {
+        setPosting(false);
         setError("field must be filed")
-        alert("Kindly fill in all the fields")
+        return showSnackBar('Kindly fill in all the fields');
       }
 
       const resposne = await users.submitForm({
@@ -141,9 +166,10 @@ const BootCardAgreement = () => {
       window.self.close();
 
     } catch (exc) {
-      console.log(exc);
-
-      setPosting(false);
+        console.log(exc);
+        setPosting(false);
+        setError("field must be filed")
+        return showSnackBar(exc.message);
     }
   }
 
@@ -205,17 +231,22 @@ const BootCardAgreement = () => {
                 <TableRow className="w100 mt10 row">
                   <TableCell className="w50 row pr10">
                     NAME:
-                    <input required type="text" id="name" className="w h18 pl8 bn bb" required />
+                    <input required type="text" id="name" className="w h18 pl8 bn bb input-capitalization" 
+                      value={`${userData.firstName} ${userData.middleName} ${userData.lastName}`} required />
                   </TableCell>
                   <TableCell className="w50 row pl10">
                     SOCIAL SECURITY NO.:
-                    <input required type="text" name="textfield" id="securityNumber" className="w h18 pl8 bn bb" />
+                    <input required type="text" name="textfield" id="securityNumber" className="w h18 pl8 bn bb" 
+                      value={`${userData.ssn}`}
+                    />
                   </TableCell>
                 </TableRow>
                 <TableRow className="w100 mt10 row">
                   <TableCell className="w100 row">
                     Address:
-                    <input required type="text" name="textfield" id="adddress" className="w h18 pl8 bn bb" />
+                    <input required type="text" name="textfield" id="adddress" className="w h18 pl8 bn bb input-capitalization" 
+                      value={`${userData.address}`}
+                    />
                   </TableCell>
                 </TableRow>
                 <TableRow className="w100 mt10 row">
@@ -475,6 +506,7 @@ const BootCardAgreement = () => {
         </Table>
       </TableContainer>
       {/* </form> */}
+      <Snackbar></Snackbar>
     </Grid>
   );
 }

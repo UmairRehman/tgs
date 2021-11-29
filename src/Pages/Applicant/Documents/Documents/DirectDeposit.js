@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import {
   Grid, TableContainer, Table, TableCell, TableRow, Button, ListItem, List
 } from "@material-ui/core";
@@ -28,6 +28,7 @@ import Snackbar from '../../../../Components/Snackbar';
 
 const {
   users,
+  hr,
   Storage,
 } = Services;
 
@@ -50,6 +51,28 @@ const DirectDeposit = () => {
 
   const [isPosting, setPosting] = useState(false);
 
+  const [userData, setUserData] = useState({
+    firstName : '',
+      middleName : '',
+      lastName: '',
+      ssn : '',
+      address : '',
+  })
+ useEffect( async () => {
+    let userProfile = await  JSON.parse(localStorage.user_profile);
+    let res = await hr.getAllApplicantsByID({ id : userProfile.id})
+    let data = {
+      firstName : res?.employee?.firstName || '',
+      middleName : res?.employee?.middleName || '',
+      lastName: res?.employee?.lastName || '',
+      ssn : res?.employee?.ssn || '',
+      address : res?.employee?.address || '',
+      // address1 : res?.employee?.address1 || '',
+    }
+    setUserData(data)
+    console.log(data)
+  
+  }, [])
 
   const CloseTab = () => {
     window.close();
@@ -101,8 +124,9 @@ const DirectDeposit = () => {
         console.log(data)
       }
       else {
+        setPosting(false)
         setError("field must be filed")
-        alert("Kindly fill in all the fields")
+        return showSnackBar("Kindly fill in all the fields")
       }
 
       // console.log("clickerd")
@@ -131,8 +155,8 @@ const DirectDeposit = () => {
 
     } catch (exc) {
       console.log(exc);
-
       setPosting(false);
+      return showSnackBar(exc.message)
     }
   }
 
@@ -203,14 +227,19 @@ const DirectDeposit = () => {
                   <TableCell className="w60">
                     <TableRow className="w100">
                       <TableCell className="w100 row">
-                        Employee Name: <input type="text" name="textfield" id="name" className="w h18 pl8 bn bb" />
+                        Employee Name: <input type="text" name="textfield" id="name" className="w h18 pl8 bn bb input-capitalization" 
+                         value={`${userData.firstName} ${userData.middleName} ${userData.lastName}`}/>
                       </TableCell>
                       <TableCell className="w100 mt16 row">
                         Address:
-                        <input type="text" name="textfield" id="address" className="w h18 pl8 bn bb" />
+                        <input type="text" name="textfield" id="address" className="w h18 pl8 bn bb input-capitalization" 
+                         value={`${userData.address}`}
+                        />
                       </TableCell>
                       <TableCell className="w100 mt16 row">
-                        Social Security#: <input type="text" name="textfield" id="securityNumber" className="w h18 pl8 bn bb" />
+                        Social Security#: <input type="text" name="textfield" id="securityNumber" className="w h18 pl8 bn bb" 
+                         value={`${userData.ssn}`}
+                        />
                       </TableCell>
                     </TableRow>
                   </TableCell>
@@ -334,6 +363,7 @@ const DirectDeposit = () => {
           </TableRow>
         </Table>
       </TableContainer>
+      <Snackbar></Snackbar>
     </Grid>
   );
 }
