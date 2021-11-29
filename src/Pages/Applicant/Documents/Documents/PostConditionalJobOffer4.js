@@ -88,25 +88,30 @@ const PostConditionalJobOffer4 = () => {
       // localStorage.setItem('fourthFormDataImage', image);
       // localStorage.setItem('fourthFormData', JSON.stringify(data))
 
-      const response = await users.submitForm({
-        image: [
-          firstPage,
-          secondPage,
-          thirdPage,
-          image
-        ],
-        form: 6,
-      });
-
-      const step3FormsSubmitted = JSON.parse(storage.get('step-3-form-postConditionalOffer')) || true;
-
-      storage.set('step-3-form-postConditionalOffer', JSON.stringify(step3FormsSubmitted));
-
-      const step3FormPosted = new BroadcastChannel('step3form_posted');
-
-      step3FormPosted.postMessage({ topic: 'form-updated', message: {} })
-
-      window.self.close();
+      try {
+        const response = await users.submitForm({
+          image: [
+            firstPage,
+            secondPage,
+            thirdPage,
+            image
+          ],
+          form: 6,
+        });
+  
+        const step3FormsSubmitted = JSON.parse(storage.get('step-3-form-postConditionalOffer')) || true;
+  
+        storage.set('step-3-form-postConditionalOffer', JSON.stringify(step3FormsSubmitted));
+  
+        const step3FormPosted = new BroadcastChannel('step3form_posted');
+  
+        step3FormPosted.postMessage({ topic: 'form-updated', message: {} })
+  
+        window.self.close();  
+      } catch (error) {
+        alert(`${error.message}`)
+      }
+      
     }
     else {
       setError("field must be filed")
