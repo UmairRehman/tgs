@@ -128,6 +128,8 @@ const ConditionalOffer = () => {
         .reduce((total, accumulator) => total || !accumulator, false);
 
       if (nullCheck) {
+        setPosting(false);
+        console.log("data on fail",data);
         setError("field must be filed")
         return showSnackBar("Kindly fill in all fields!");
       }
@@ -156,9 +158,9 @@ const ConditionalOffer = () => {
 
       window.self.close();
     } catch (exc) {
+      console.log(exc);
       setPosting(false);
-
-      return showSnackBar(exc);
+      return showSnackBar(exc.message);
     }
 
   }
@@ -230,8 +232,7 @@ const ConditionalOffer = () => {
                 <tr className="w100 row">
                   <td className="w50 header font14 italic bold row">
                     Offeree’s Name:
-                    <input type="text" name="officersName" id="officersName" className="w64 h22 bn bb"
-                    style={{textTransform:'capitalize'}}
+                    <input type="text" name="officersName" id="officersName" className="w64 h22 bn bb input-capitalization"
                     value={
                       `${userData.firstName} ${userData.middleName} ${userData.lastName}` 
                     } 
@@ -267,8 +268,7 @@ const ConditionalOffer = () => {
               <tbody className="w100">
                 <tr className="w100 row">
                   <td className="w50 row">Position:
-                    <input type="text" name="textfield" id="position" className="w80 bn bb" 
-                    style={{textTransform:"capitalize"}}
+                    <input type="text" name="textfield" id="position" className="w80 bn bb input-capitalization" 
                     value = {`${userData.position}`}
                     />
                   
@@ -283,10 +283,10 @@ const ConditionalOffer = () => {
                 </tr>
                 <tr className="w100 row">
                   <td className="w50 mt10 pt10 row">Location:
-                      <input type="text" name="textfield" id="location" className="w80 bn bb" value={`${userData.location}`}/>
+                      <input type="text" name="textfield" id="location" className="w80 bn bb input-capitalization" value={`${userData.location}`}/>
                   </td>
                   <td className="w50 mt10 pt10 row">Department Code:
-                      <input type="text" name="textfield" id="departmentCode" className="w60 bn bb" value={`${userData.deptID}`}/>
+                      <input type="text" name="textfield" id="departmentCode" className="w60 bn bb input-capitalization" value={`${userData.deptID}`}/>
                   </td>
                 </tr>
               </tbody>
