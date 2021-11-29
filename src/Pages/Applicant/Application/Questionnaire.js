@@ -294,7 +294,7 @@ const Questionnaire = () => {
             const user_profile = JSON.parse(storage.get('user_profile'));
 
             history.push({
-                pathname: '/submission',
+                pathname: '/documents',
                 state: {
                     approved: false,
                     step: 1,

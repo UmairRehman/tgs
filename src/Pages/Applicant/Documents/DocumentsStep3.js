@@ -114,12 +114,26 @@ const DocumentsStep3 = () => {
                 multiPartFormDataHeaders
             )
 
-            storage.set(
-                'user_profile',
-                JSON.stringify(data)
-            );
+            // storage.set(
+            //     'user_profile',
+            //     JSON.stringify(data)
+            // );
+            const user_profile = JSON.parse(storage.get('user_profile'));
 
-            history.push('/documents/step/4');
+
+            history.push({
+                pathname: '/submission',
+                state: {
+                    approved: false,
+                    step: 1,
+                    applyToStorage: {
+                        user_profile: {
+                            ...user_profile,
+                            EmployeeStatusId: 6,
+                        }
+                    }
+                }
+            });
         } catch (exc) {
             console.log(exc);
         }
