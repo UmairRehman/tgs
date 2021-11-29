@@ -140,8 +140,20 @@ const DocumentsStep4 = () => {
     const saveAndContinue = async () => {
         try {
             const repsonse = await users.submitStep4();
-
-            history.push('/submission');
+            const user_profile = JSON.parse(storage.get('user_profile'));
+            history.push({
+                pathname: '/submission',
+                state: {
+                    approved: false,
+                    step: 1,
+                    applyToStorage: {
+                        user_profile: {
+                            ...user_profile,
+                            EmployeeStatusId: 4,
+                        }
+                    }
+                }
+            });
 
         } catch (exc) {
             console.log(exc);
