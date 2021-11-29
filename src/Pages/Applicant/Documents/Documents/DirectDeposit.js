@@ -301,7 +301,7 @@ const DirectDeposit = () => {
                   <TableCell className="w40 pr30">
                     <TableRow className="w100">
                       <TableCell className="w100">
-                        <input type="text" name="textfield" id="signature" className="w100 h18 bn bb mt6 mb6" />
+                        <input type="text" name="textfield" id="signature" className="w100 bn bb mt6 mb6 signatureClass font-20" />
                         Employee Signature
                       </TableCell>
                     </TableRow>

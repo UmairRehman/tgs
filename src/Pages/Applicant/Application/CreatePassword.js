@@ -91,8 +91,8 @@ const CreatePassword = () => {
         const isValid = await validatePassword(password);
 
         const createPassword = await users.createPassword(data)
-        if (createPassword.message == 'success')
-          history.push("/");
+        if (createPassword?.httpStatus == 200)
+            history.push("/");
       }
       catch (exc) {
         console.log(exc);

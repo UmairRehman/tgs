@@ -35,8 +35,8 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
 const { apiPath } = environment;
 
 const statuses = [
-  { id: 1, title: "Approve" },
-  { id: 2, title: "Reject" },
+  { id: 1, title: "Approve" ,value:true },
+  { id: 2, title: "Reject" , value:false},
 ];
 const PositionLevel = [
   { title: "Managment", id: 1 },
@@ -84,7 +84,7 @@ const NewHireStep1 = () => {
 
   // states for Form
 
-  const [step1, setStep1] = useState("");
+  const [step1, setStep1] = useState({value:false});
   const [position, setPosition] = useState("");
   const [jobCode, setjobCode] = useState("");
   const [rate, setrate] = useState("");
@@ -122,41 +122,55 @@ const NewHireStep1 = () => {
 
   async function onformSubmit(event) {
     event.preventDefault();
-    let data = {
-      employee_id: holdData?.id,
-      Supervisor_Id: holdData?.SupervisorId == null ? 1 : 1,
-      location_id: positionLocation,
-      step1,
-      position,
-      job_code: jobCode,
-      rate,
-      department: department,
-      full_title: fullTitle,
-      position_level: 1,
-      position_category: positionCategory,
-      pay_type: partType,
-      SubDepartment_Id: subDepartment,
-      start_date: moment(startDate).format("YYYY-MM-DD"),
-      // subDepartment,
-      supervisor,
-      comment: document.getElementById("comment1").value,
-      IT: {
-        computer: computer == "Yes" ? true : false,
-        AD: active == "Yes" ? true : false,
-        cell_phone: companyCellPhone == "Yes" ? true : false,
-        vehicle: companyVehicle == "Yes" ? true : false,
-        fuel_card: fuelCard == "Yes" ? true : false,
+    let data ={};
+    if(! step1.value) 
+    {
+      data= {
+            employee_id : holdData?.id,
+            step : 0,
+            comment : document.getElementById("comment1").value,
+        }
+    }
+    else if(step1.value){
+      data = {
+        employee_id: holdData?.id,
+        Supervisor_Id: holdData?.SupervisorId == null ? 1 : 1,
+        location_id: positionLocation,
+        step1,
+        position,
+        job_code: document.getElementById("jobIDText").value,
+        rate,
+        department: department,
+        full_title: fullTitle,
+        position_level: 1,
+        position_category: positionCategory,
+        pay_type: partType,
+        SubDepartment_Id: subDepartment,
+        start_date: moment(startDate).format("YYYY-MM-DD"),
+        // subDepartment,
+        supervisor,
         comment: document.getElementById("comment1").value,
-      },
-    };
+        IT: {
+          computer: computer == "Yes" ? true : false,
+          AD: active == "Yes" ? true : false,
+          cell_phone: companyCellPhone == "Yes" ? true : false,
+          vehicle: companyVehicle == "Yes" ? true : false,
+          fuel_card: fuelCard == "Yes" ? true : false,
+          comment: document.getElementById("comment2").value,
+        },
+      };
+    }  
     console.log(data);
 
     try {
-      let data1 = await hr.step1(data);
+      (step1.value) 
+        ? await hr.step1(data)
+        : await hr.reject(data)
       history.push("/new-hire-queue");
-    } catch (exc) {
-      console.log(exc);
-    }
+      } catch (exc) {
+        console.log(exc);
+      }
+
   }
 
   useEffect(async () => {
@@ -212,7 +226,7 @@ const NewHireStep1 = () => {
   }
 
   const setStatus = async (status) => {
-    setStep1(status.title);
+    setStep1(status);
     setStatusDateTime({
       date: moment(new Date()).format("DD-MM-YYYY"),
       time: moment(new Date()).format("hh:mm a"),
@@ -358,7 +372,7 @@ const NewHireStep1 = () => {
                     </Grid>
                   </Grid>
                   {/* ---------- */}
-                  {step1 == "Approve" && (
+                  {step1.value && (
                     <div>
                       <Grid xs={12} container className="LRM40">
                         <Grid xs={6} className="mt30 pr20">
@@ -483,6 +497,8 @@ const NewHireStep1 = () => {
                                 required={true}
                                 label="jobID"
                                 variant="outlined"
+                                value={jobCode}
+                                onChange={(e,v)=> setjobCode(e.target.value)}
                               />
                               {/* <Autocomplete
                                         className="w100p"
@@ -530,7 +546,7 @@ const NewHireStep1 = () => {
                               Rate
                             </Grid>
                             <Grid xs={12} className="mt14">
-                              <Autocomplete
+                              {/* <Autocomplete
                                 className="w100p"
                                 id="combo-box-demo"
                                 onChange={(e, value) => {
@@ -546,7 +562,16 @@ const NewHireStep1 = () => {
                                     variant="outlined"
                                   />
                                 )}
-                              />
+                              /> */}
+                              <TextField  className="w100p"
+                                id="rateID"
+                                required={true}
+                                label="Rate"
+                                variant="outlined"
+                                type="number"
+                                value={rate}
+                                onChange={(e,v)=> setrate(e.target.value)}
+                                />
                             </Grid>
                           </Grid>
                         </Grid>
@@ -671,7 +696,7 @@ const NewHireStep1 = () => {
                         </Grid>
                         <Grid xs={12} className="mt14">
                           <TextareaAutosize
-                            required={step1 == "Reject" ? true : false}
+                            required={(! step1.value) ? true : false}
                             id="comment1"
                             className="w100p"
                             rowsMin={6}
@@ -683,16 +708,16 @@ const NewHireStep1 = () => {
                           className="MuiTypography-subtitle2 MuiTypography-colorTextSecondary"
                           component="h6"
                         >
-                          {step1 == "Reject"
-                            ? `Please define the reason of rejection`
-                            : `Please leave this field empty if you have no comments`}
+                          {step1.value
+                            ? `Please leave this field empty if you have no comments`
+                            : `Please define the reason of rejection`}
                         </Typography>
                       </Grid>
                     </Grid>
                   </Grid>
 
                   {/* ---------- */}
-                  {step1 == "Approve" && (
+                  {step1.value && (
                     <div>
                       <Grid xs={12}>
                         <Grid
@@ -848,7 +873,6 @@ const NewHireStep1 = () => {
                             </Grid>
                             <Grid xs={12} className="mt14">
                               <TextareaAutosize
-                                required
                                 id="comment2"
                                 className="w100p"
                                 rowsMin={6}

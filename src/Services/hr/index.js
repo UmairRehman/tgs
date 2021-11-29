@@ -41,6 +41,13 @@ export const step2 = async (payload, headers) => {
     );
 }
 
+export const reject = async (payload , headers) => {
+    return await api.post(
+        routes.hr.reject,
+        payload,
+        headers
+    );
+}
 
 export const get_tickets = async (payload, headers) => {
     return await api.get(
@@ -139,6 +146,15 @@ export const updateEmployeeAddress = async (payload, headers) => {
     return await api.put(
         routes.hr.update_employee_address,
         payload,
+        headers
+    );
+}
+
+export const additionalFiles = async (payload, headers) => {
+    const { id , formData } = payload;
+    return await api.put(
+        routes.hr.additional_files_uplaod.concat(id),
+        formData,
         headers
     );
 }

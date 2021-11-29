@@ -951,7 +951,7 @@ const Harassment = () => {
                   type="text"
                   name="textfield"
                   id="signaturetextfield"
-                  className="w100 h18 bn bb mt6"
+                  className="w100 bn bb mt6 signatureClass font-20"
                 />
               </TableCell>
             </TableRow>
@@ -967,7 +967,8 @@ const Harassment = () => {
           </Table>
         </TableContainer>
         </Grid>
-      <Acknowledge/>
+      <Snackbar snackBarDefaultDuration={60000}></Snackbar>
+      <Acknowledge  acknowledgedState={acknowledgedState} />
     </Grid>
   );
 };

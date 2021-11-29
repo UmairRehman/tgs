@@ -89,7 +89,7 @@ const JobCategories = [
     { title: 'Civil service executive officer' }
 ];
 
-const Follicle = ['Yes', 'No'];
+const Follicle = ['No', 'Yes'];
 const ITR2 = ['Yes', 'No'];
 const ITR3 = ['Yes', 'No'];
 const ITR4 = ['Yes', 'No'];
@@ -198,12 +198,12 @@ const Questionnaire = () => {
                 return disableSaveAndContinue(true);
 
             // Check for Accomadation commemt */
-            if (!accommodation && !comment)
-                return disableSaveAndContinue(true);
+            // if (!accommodation && !comment)
+            //     return disableSaveAndContinue(true);
 
             // Check for bilingual language if any
-            if (bilingual && !bilingualLanguage)
-                return disableSaveAndContinue(true);
+            // if (bilingual && !bilingualLanguage)
+            //     return disableSaveAndContinue(true);
 
             disableSaveAndContinue(false);
         },
@@ -228,6 +228,7 @@ const Questionnaire = () => {
 
 
     async function onSubmit() {
+        console.log("error")
         let data = {
             hairTest,
             drugTest,
@@ -246,13 +247,18 @@ const Questionnaire = () => {
             workBefore,
         };
 
-        // Check for Accomadation commemt */
-        if (!data.accommodation && !comment)
-            return showSnackBar('PLease fill in comments for accomodation');
 
-        // Check for bilingual language if any
-        if (data.bilingual && !bilingualLanguage)
-            return showSnackBar('PLease provide languages for in field bilingal check');
+        if (accommodation == 'No') {
+            if (!data.accommodation && !comment)
+                return showSnackBar('PLease fill in comments for accomodation');
+        }
+
+        if (bilingual == 'Yes') {
+            if (data.bilingual && !bilingualLanguage)
+                return showSnackBar('PLease provide languages for in field bilingal check');
+        }
+
+
 
 
         /** RAPID - FIX | Boolean transforamtion */
@@ -413,30 +419,37 @@ const Questionnaire = () => {
                                         />
                                     </Grid>
                                 </Grid>
-                                {/* ---------- */}
-                                <Grid xs={12} container className="LRM40 mt30">
-                                    <Grid xs={12}>
-                                        <Grid xs={12} className="mb14">
-                                            If no, Please Explain:
-                                        </Grid>
-                                        <FormControl>
 
-                                            <TextField
-                                                required
-                                                id="outlined-basic"
-                                                onChange={(e) => setComment(e.target.value)}
-                                                placeholder="Comment here"
-                                                variant="outlined"
-                                                className="w100p"
-                                                disabled={
-                                                    !accommodation || getRelativeBooleanFromOptionsMap(accommodation)
-                                                } />
-                                            <Typography variant="h6" className="MuiTypography-subtitle2 MuiTypography-colorTextSecondary" component="h6">
-                                                Please leave this field empty if you have no comments
-                                            </Typography>
-                                        </FormControl>
+                                {accommodation == 'No' ?
+                                    < Grid xs={12} container className="LRM40 mt30">
+                                        <Grid xs={12}>
+                                            <Grid xs={12} className="mb14">
+                                                If no, Please Explain:
+                                            </Grid>
+                                            <FormControl>
+
+                                                <TextField
+                                                    required
+                                                    id="outlined-basic"
+                                                    onChange={(e) => setComment(e.target.value)}
+                                                    placeholder="Comment here"
+                                                    variant="outlined"
+                                                    className="w100p"
+                                                    disabled={
+                                                        !accommodation || getRelativeBooleanFromOptionsMap(accommodation)
+                                                    } />
+                                                <Typography variant="h6" className="MuiTypography-subtitle2 MuiTypography-colorTextSecondary" component="h6">
+                                                    Please leave this field empty if you have no comments
+                                                </Typography>
+                                            </FormControl>
+                                        </Grid>
                                     </Grid>
-                                </Grid>
+                                    : null}
+
+                                {/* ---------- */}
+
+
+
 
                                 {/* --------- */}
                                 <Grid xs={12} container justify="space-between" className="mt30">
@@ -446,7 +459,7 @@ const Questionnaire = () => {
                                     <Grid xs={3}>
                                         <DatePicker
                                             onChange={($e) => setAvailability($e)}
-                                            value={new Date()}
+                                            value={availability}
                                             id="spouse-dob"
                                             className="datePickerReact w100p bg-white react-date-picker p-2"
                                         />
@@ -490,26 +503,32 @@ const Questionnaire = () => {
                                         />
                                     </Grid>
                                 </Grid>
-                                {/* ---------- */}
-                                <Grid xs={12} container className="LRM40 mt30">
-                                    <Grid xs={12}>
-                                        <Grid xs={12} className="mb14">
-                                            If yes, What lanuage:
+
+                                {bilingual == 'Yes' ?
+                                    <Grid xs={12} container className="LRM40 mt30">
+                                        <Grid xs={12}>
+                                            <Grid xs={12} className="mb14">
+                                                If yes, What lanuage:
+                                            </Grid>
+                                            <TextField
+                                                id="outlined-basic"
+                                                onChange={(e) => setBilingualLanguage(e.target.value)}
+                                                placeholder="Comment here"
+                                                variant="outlined"
+                                                className="w100p"
+                                                disabled={
+                                                    !bilingual || !getRelativeBooleanFromOptionsMap(bilingual)
+                                                } />
+                                            <Typography variant="h6" className="MuiTypography-subtitle2 MuiTypography-colorTextSecondary" component="h6">
+                                                Please leave this field empty if you have no comments
+                                            </Typography>
                                         </Grid>
-                                        <TextField
-                                            id="outlined-basic"
-                                            onChange={(e) => setBilingualLanguage(e.target.value)}
-                                            placeholder="Comment here"
-                                            variant="outlined"
-                                            className="w100p"
-                                            disabled={
-                                                !bilingual || !getRelativeBooleanFromOptionsMap(bilingual)
-                                            } />
-                                        <Typography variant="h6" className="MuiTypography-subtitle2 MuiTypography-colorTextSecondary" component="h6">
-                                            Please leave this field empty if you have no comments
-                                        </Typography>
                                     </Grid>
-                                </Grid>
+                                    : null}
+
+
+                                {/* ---------- */}
+
 
                                 {/* --------- */}
                                 <Typography variant="h1" component="h2" className="bold f16 mt40">
@@ -659,7 +678,7 @@ const Questionnaire = () => {
                     {/* Page Start End */}
                 </Grid>
             </Grid>
-        </Grid>
+        </Grid >
     );
 }
 

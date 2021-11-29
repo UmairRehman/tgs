@@ -36,33 +36,22 @@ const columns = [
   { id: "SubDepartmentId", label: "Department", minWidth: 100, type: "value" },
   { id: "state", label: "City", minWidth: 100, type: "value" },
   { id: "email", label: "Email", minWidth: 170, type: "value" },
-  { id: "EmployeeStatusId", label: "Application Stage", minWidth: 170, type: "value" },
+  { id: "employeeStatus", label: "Application Stage", minWidth: 170, type: "value" },
   { id: "View", label: "View", minWidth: 50, type: "edit" },
   { id: "Complete", label: "Complete", minWidth: 50, type: "view" },
 ];
 
-// function createData(
-//   eID,
-//   Name,
-//   Department,
-//   City,
-//   Email,
-//   ApplicationStage,
-//   View,
-//   Complete
-// )
-//  {
-//   return {
-//     eID,
-//     Name,
-//     Department,
-//     City,
-//     Email,
-//     ApplicationStage,
-//     View,
-//     Complete
-//   };
-// }
+const employeeStatus = [
+   "Application Pending", //1
+   "Application Approved", //2
+   "Application Rejected", //3
+   "Questionnaire Pending", //4
+   "Questionnaire Approved", //5
+   "Questionnaire Rejected", //6
+   "Documents Submitted", //7
+   "PDF Forms , Submitted", //8
+   "Employee" //9
+]
 
 const rows = [
   ("1234", "Ryan Westmeyer", "Information Technology", "Houston", "Ryan@tgs.com", "Step 1"),
@@ -94,8 +83,13 @@ const NewHireQueue = () => {
 
     try{
       let data = await hr.getAllApplicants() ;
-      // setApplicantData(data.data);
-      setApplicantData(data.data);      
+      if(data?.httpStatus==200){
+        data = data.data; 
+        data.forEach(row => {
+          row.employeeStatus = employeeStatus[row.EmployeeStatusId-1]
+        });
+        setApplicantData(data);      
+      }
     }
     catch(exc){
       console.log(exc);

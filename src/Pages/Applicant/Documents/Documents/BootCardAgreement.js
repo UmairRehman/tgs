@@ -446,7 +446,7 @@ const BootCardAgreement = () => {
                 <TableRow className="w100 mt50 row">
                   <TableCell className="w50 row pr10">
                     YOUR SIGNATURE:
-                    <input required type="text" name="textfield" id="signature" className="w bn bb textCenter mb5" />
+                    <input required type="text" name="textfield" id="signature" className="w bn bb textCenter signatureClass font-20" />
                   </TableCell>
                   <TableCell className="w50 row pl10">
                     DATE:
