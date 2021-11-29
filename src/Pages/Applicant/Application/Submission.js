@@ -122,6 +122,8 @@ const Submission = () => {
     state: { applyToStorage }
   } = location;
 
+  console.log(location)
+
   if (applyToStorage) {
 
     for (let key in applyToStorage) {
@@ -164,6 +166,8 @@ const Submission = () => {
     }
   } = submissionStatus;
 
+  console.log(submissionStatus)
+
   const proceedSectionClassName = (
     status > 0
   )
@@ -198,11 +202,14 @@ const Submission = () => {
                 Thank you for applying to TGS, Our HR Team will review your application & get back to you.
               </Grid>
             </Grid>
+
             <Grid className={proceedSectionClassName}>
               <Link to={linkToUse}>Proceed to next step</Link>
               This   option  will  be  available  after  your  profile  is  approved by HR. You will receive an  email  to  continue with the next steps of the process.
             </Grid>
           </Grid>
+
+          
           {/* Page Start End */}
         </Grid>
       </Grid>

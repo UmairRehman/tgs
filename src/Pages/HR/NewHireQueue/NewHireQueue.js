@@ -105,7 +105,7 @@ const NewHireQueue = () => {
         state: value
       });
     }
-    else if(value.EmployeeStatusId == 4){
+    else if(value.EmployeeStatusId == 6){
       history.push({
         pathname : "/new-hire-queue/details/approval",
         state: value
@@ -179,7 +179,7 @@ const NewHireQueue = () => {
                                         ? column.format(value)
                                         : value} */}
                                       {column.type == "edit" ? (
-                                        applicantData.EmployeeStatusId == 1 || applicantData.EmployeeStatusId == 4 ?
+                                        applicantData?.EmployeeStatusId == 1 || applicantData?.EmployeeStatusId == 6 ?
                                         <Button onClick={()=>onClickView(applicantData)} className="ViewIcon" ></Button>
                                         :null
                                       ) : column.type == "view" ? (

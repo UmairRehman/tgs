@@ -116,7 +116,7 @@ const Documents = () => {
         JSON.stringify(data)
       );
 
-      history.push('/documents/step/3');
+      history.push('/documents/step/4');
     } catch (exc) {
       console.log(exc);
     }
@@ -150,31 +150,27 @@ const Documents = () => {
                   Section 2
                 </Typography>
 
-                <Typography to="" className="DocDownload">
+                <Typography style={{marginTop:'20px'}} to="" className="DocDownload">
                   <Grid className="FileName">
                     Employee Data Sheet & Question
                   </Grid>
                   <Button></Button>
                 </Typography>
-                <Typography to="" className="DocDownload">
+                <Typography  style={{marginTop:'20px'}} to="" className="DocDownload">
                   <Grid className="FileName">
                     Application For Employment
                   </Grid>
                   <Button></Button>
                 </Typography>
-                <Typography to="" className="DocDownload">
+                <Typography style={{marginTop:'20px'}} to="" className="DocDownload">
                   <Grid className="FileName">
                     Driver License
                   </Grid>
                   <Button></Button>
                 </Typography>
 
-
-
-
-
               </Grid>
-              <Grid xs={12} className="mt50">
+              <Grid style={{marginTop:'20px'}} xs={12} className="mt50">
                 <Grid xs={12} md={8} lg={6} container justify="space-between">
                   <Link to="/questionnaire" className="LinkButtonBack">Back</Link>
                   <Button className="LinkButton"
