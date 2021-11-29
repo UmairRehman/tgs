@@ -11,6 +11,8 @@ import {
   TableHead,
   TableRow,
   Paper,
+  List,
+  ListItem,
   Select,
   Card,
 } from "@material-ui/core";
@@ -21,6 +23,8 @@ import PageHeader from "../../../Components/PageHeader";
 import LeftControl from "../../../Components/LeftControl";
 import { useHistory } from "react-router-dom";
 import { useLocation } from "react-router";
+import { environment } from "../../../Environments/environment";
+
 
 // import { withRouter } from 'react-router-dom';
 // import MobileScreen from './Mobile/Enter-RailRoad-Add';
@@ -30,6 +34,9 @@ import { useLocation } from "react-router";
 import Services from "../../../Services";
 const { hr } = Services;
 var moment = require("moment-timezone");
+
+const { apiPath } = environment;
+
 
 const columns = [
   { id: "firstName", label: "Applicant", minWidth: 170, type: "value" },
@@ -56,9 +63,10 @@ const NewHireStep2 = () => {
   const location = useLocation();
 
   const [applicantData, setApplicantData] = useState({});
+  const [userFiles, setUserFiles] = useState([])
   const [attachments, setAttachments] = useState([]);
   const [holdData, setHoldData] = useState({});
-  
+
   const [approval, setapproval] = useState(Approval[0]);
   const [drugTestDate, setdrugTestDate] = useState("");
   const [drugTest, setdrugTest] = useState("");
@@ -99,26 +107,26 @@ const NewHireStep2 = () => {
           drug_test: drugTest == "Yes" ? true : false,
           background_check: backgroundCheck == "Yes" ? true : false,
         },
-      };  
+      };
     }
 
     console.log(data);
 
     try {
-      if(approval.value){
-        let res = await hr.step2(data) 
-          if(attachments.length>0 && res?.httpStatus==200){
-            const formData = new FormData ()
-            attachments.forEach((attachment)=>{
-              formData.append('file',attachment)
-            })
+      if (approval.value) {
+        let res = await hr.step2(data)
+        if (attachments.length > 0 && res?.httpStatus == 200) {
+          const formData = new FormData()
+          attachments.forEach((attachment) => {
+            formData.append('file', attachment)
+          })
           await hr.additionalFiles({
-              id: applicantData.id,
-              formData
-            })
-          }
-      } 
-      else if (! approval.value){
+            id: applicantData.id,
+            formData
+          })
+        }
+      }
+      else if (!approval.value) {
         await hr.reject(data);
       }
       history.push("/new-hire-queue");
@@ -146,6 +154,8 @@ const NewHireStep2 = () => {
       let data = await hr.getAllApplicantsByID(applicantDataHistory);
       setApplicantData(data.employee);
       console.log(applicantData);
+      setUserFiles(data.files)
+      console.log(data.files)
     } catch (exc) {
       console.log(exc);
     }
@@ -174,7 +184,7 @@ const NewHireStep2 = () => {
       <Grid xs={12} md={10} container justify="center" className="PageContent">
         <Grid className="PagesFrame">
           <PageHeader />
-          <Grid id="PageTitle">New Applicant - Step 2</Grid>
+          <Grid id="PageTitle">New Applicant - Step 3</Grid>
           {/* Page Start */}
           <Grid xs={12} className="ContentPage BlueHeadTable FormTableArea">
             <Grid xs={12} className="LiqTables">
@@ -226,7 +236,7 @@ const NewHireStep2 = () => {
                   <Grid xs={6} className="mt30 pr20">
                     <Grid xs={12}>
                       <Grid xs={12} className="mbold">
-                        Step 2 Approval
+                        Step 3 Approval
                       </Grid>
                       <Grid xs={12} className="mt14">
                         <Autocomplete
@@ -458,7 +468,7 @@ const NewHireStep2 = () => {
                             <label>
                               <input
                                 type="file"
-                                accept="application/pdf" 
+                                accept="application/pdf"
                                 multiple
                                 onChange={handleAttachements}
                                 style={{ display: "none" }}
@@ -487,6 +497,39 @@ const NewHireStep2 = () => {
                 </Grid>
               </form>
             </Grid>
+
+            <Grid style={{ padding: '15px', marginTop: '15px' }} xs={12} md={8} lg={6}>
+              <h5 style={{ margin: '0' }}>Forms</h5>
+              <List>
+                {userFiles.map((name) => (
+                  <ListItem container className="p0 pt6 pb20">
+                    <Grid className="PDFDownload">
+                      <Grid className="FileName">{name}</Grid>
+                      {/* <Button></Button> */}
+                      <a
+                        className="Button"
+                        href={`${apiPath}/employee/applicant/download?id=${applicantData?.id}&name=${name}`}
+                        target="_blank"
+                      ></a>
+                    </Grid>
+                  </ListItem>
+                ))}
+
+                {/* <ListItem container className="p0 pt6 pb20">
+                  <Grid className="w250 bold">Resume</Grid>
+                  <Grid className="PDFDownload">
+                    <Grid className="FileName">Resume</Grid>
+                    <a
+                      className="Button"
+                      href={`${apiPath}/employee/applicant/download?id=${applicantData?.id}&name=${resume}`}
+                      target="_blank"
+                    ></a>
+                  </Grid>
+                </ListItem> */}
+              </List>
+
+            </Grid>
+
           </Grid>
           {/* Page Start End */}
         </Grid>

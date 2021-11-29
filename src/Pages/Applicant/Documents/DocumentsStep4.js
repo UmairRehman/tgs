@@ -140,9 +140,21 @@ const DocumentsStep4 = () => {
     const saveAndContinue = async () => {
         try {
             const repsonse = await users.submitStep4();
+            const user_profile = JSON.parse(storage.get('user_profile'));
+            history.push({
+                pathname: '/submission',
+                state: {
+                    approved: false,
+                    step: 1,
+                    applyToStorage: {
+                        user_profile: {
+                            ...user_profile,
+                            EmployeeStatusId: 4,
+                        }
+                    }
+                }
+            });
 
-            history.push('/submission/complete');
-            
         } catch (exc) {
             console.log(exc);
         }
@@ -164,12 +176,12 @@ const DocumentsStep4 = () => {
                     <Grid id="PageTitle" className="f16">Complete Onboarding Document</Grid>
                     {/* Page Start */}
                     <Grid xs={12} className="ContentPage ApplicantForms">
-                        <Grid xs={12} className="StepsLine Step2Line Step4Line">
+                        <Grid xs={12} className="StepsLine Step2Line Step3Line">
                             <List>
                                 <ListItem className="StepComplete">Step 1</ListItem>
                                 <ListItem className="StepComplete">Step 2</ListItem>
                                 <ListItem className="StepComplete">Step 3</ListItem>
-                                <ListItem className="StepComplete">Step 4</ListItem>
+                                <ListItem>Step 4</ListItem>
                             </List>
                         </Grid>
                         <Grid xs={12}>
@@ -178,7 +190,7 @@ const DocumentsStep4 = () => {
                                     You're required to fill out the following documents to complete your application
                                 </Typography>
                                 <Typography variant="h1" component="h2" className="bold f16 mt40">
-                                    Section 4
+                                    Section 3
                                 </Typography>
 
                                 <Link to="/documents/employee-agreement" target="_blank" className="DocDownload">

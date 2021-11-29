@@ -26,26 +26,26 @@ export const employeeStatuses = [
     {
         id: 4,
         name: "Step 1 Submit",
-        path: '/submission',
-        params: { status: 0, step: 1 }
+        path: 'documents',
+        params: { status: 0, step: 2 }
     },
     {
         id: 5,
-        name: "Step 1 Approved",
-        path: '/submission',
-        params: { status: 1, step: 1, nextStep: '/documents' }
+        name: "Step 2 Sumit",
+        path: '/documents/step/4',
+        params: { status: 1, step: 3, nextStep: '/submission' }
     },
     {
         id: 6,
-        name: "Step 1 Reject",
-        path: '/questionnaire',
-        params: { status: 2, step: 1 }
+        name: "Step 3 Submit",
+        path: '/submission',
+        params: { status: 0, step: 3 }
     },
     {
         id: 7,
-        name: "Step 2 Submit",
-        path: '/documents/step/3',
-        params: { status: 1, step: 2, nextStep: '/documents/step/4' },
+        name: "Step 3 Approve",
+        path: '/submission',
+        params: { status: 1, step: 3, nextStep: '/documents/step/3' },
     },
     {
         id: 8,
