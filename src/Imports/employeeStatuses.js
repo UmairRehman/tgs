@@ -56,7 +56,7 @@ export const employeeStatuses = [
     {
         id: 9,
         name: "Employee",
-        path: '/y',
+        path: '/dashboard',
         params: { status: 1, step: 4 },
     },
 ]
