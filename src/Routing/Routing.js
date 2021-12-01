@@ -53,6 +53,7 @@ import SafetyHandbook from '../Pages/Applicant/Documents/Documents/SafetyHandboo
 import DrugAlcoholWeapons from '../Pages/Applicant/Documents/Documents/DrugAlcoholWeapons';
 import Search from '../Pages/HrAdmin/search';
 import Details from '../Pages/HrAdmin/details';
+import OnBoarding from '../Pages/ITManager/Onboarding/onBoarding';
 
 const Routing = () => (
   <Router>
@@ -133,6 +134,9 @@ const Routing = () => (
     <Route exact path="/documents/employee-handbook" component={()=><EmployeeHandbook/>}/>
     <Route exact path="/documents/safety-handbook" component={()=><SafetyHandbook/>}/>
     <Route exact path="/documents/drug-alcohol-weapons" component={()=><DrugAlcoholWeapons/>}/>
+
+      {/* IT Manager*/}
+      <Route path="/on-borarding" component={()=><OnBoarding/>}/>
 
   </Router>
   )
