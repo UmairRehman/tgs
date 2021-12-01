@@ -54,6 +54,7 @@ import DrugAlcoholWeapons from '../Pages/Applicant/Documents/Documents/DrugAlcoh
 import Search from '../Pages/HrAdmin/search';
 import Details from '../Pages/HrAdmin/details';
 import OnBoarding from '../Pages/ITManager/Onboarding/onBoarding';
+import NewHireQueueIT from '../Pages/ITManager/NewHireQueue/newHireITQueue';
 
 const Routing = () => (
   <Router>
@@ -137,6 +138,7 @@ const Routing = () => (
 
       {/* IT Manager*/}
       <Route path="/on-borarding" component={()=><OnBoarding/>}/>
+      <Route path="/new-hire-queue-it" component={()=><NewHireQueueIT/>}/>
 
   </Router>
   )
