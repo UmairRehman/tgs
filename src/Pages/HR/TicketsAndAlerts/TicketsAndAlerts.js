@@ -28,9 +28,12 @@ import Services from '../../../Services';
 
 
 const {
-  hr
+  hr,
+  Storage
 } = Services;
 
+const HR_CATEGORY_ID = 1;
+const IT_CATEGORY_ID = 2;
 
 const columns = [
   { id: "employeeid", label: "Employee ID", minWidth: 120, type: "value" },
@@ -73,6 +76,7 @@ const rows = [
 
 
 const TicketsAndAlerts = () => {
+  const storage = new Storage()
   let history = useHistory();
 
   const [page, setPage] = React.useState(0);
@@ -91,25 +95,30 @@ const TicketsAndAlerts = () => {
   const [ticket, setTicket] = useState({})
   const [test, setTest] = useState([])
   useEffect(async () => {
-
+    let userProfile = await JSON.parse(localStorage.user_profile);
     try {
       setLoader(true)
-      let response = await hr.get_tickets();
-
-      const { data } = response;
-
-      const setTickets = data
-        .reverse()
-        .map((rows) => ({
-          id: rows.id,
-          employeeid: rows.FEmployee.id,
-          name: rows.FEmployee.firstName + " " + rows.FEmployee.middleName + " " + rows.FEmployee.lastName,
-          alertType: rows.isAlert ? "Alert" : "Ticket",
-          category: rows.TicketType.name,
-          description: rows.creation_comment
-        }))
-
-      setTest(setTickets);
+      if(userProfile)
+      {
+        console.log(userProfile.role_id , userProfile.role_id==3);
+        let categoryId = (userProfile.role_id == 3) ? IT_CATEGORY_ID : HR_CATEGORY_ID
+        let response = await hr.listTicketByCategory({roleId:categoryId});
+  
+        const { data } = response;
+  
+        const setTickets = data
+          .reverse()
+          .map((rows) => ({
+            id: rows.id,
+            employeeid: rows.FEmployee.id,
+            name: rows.FEmployee.firstName + " " + rows.FEmployee.middleName + " " + rows.FEmployee.lastName,
+            alertType: rows.isAlert ? "Alert" : "Ticket",
+            category: rows.TicketType.name,
+            description: rows.creation_comment
+          }))
+  
+        setTest(setTickets);
+      }
     }
     catch (exc) {
       console.log(exc);
