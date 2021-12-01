@@ -73,6 +73,7 @@ const DocumentsStep3 = () => {
     const toggleFormsPosted = () => {
         setFormsPosted(true);
         setTimeout(setFormsPosted.bind(null, false), 0);
+        showSnackBar('Form posted');
     }
 
     const saveAndContinue = async () => {
@@ -151,9 +152,9 @@ const DocumentsStep3 = () => {
         window.scrollTo(0, 0);
     }, []);
 
-    useEffect(() => {
-        showSnackBar('Form posted');
-    }, [formsPosted]);
+    // useEffect(() => {
+    //     showSnackBar('Form posted');
+    // }, [formsPosted]);
 
     useEffect(() => {
         // var i9 = document.getElementById("i9");
