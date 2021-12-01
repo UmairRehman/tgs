@@ -31,6 +31,10 @@ export const routes = {
         departments_list: 'employee/department/',
         all_subdepartments: 'employee/department/sub',
     },
+    it :{
+        list_it_request : 'employee/ITRequest',
+        get_it_request  : 'employee/ITRequest/',
+    },
     hr:{
         get_applicant: 'employee/hr/applicant',
         get_applicant_by_id : 'employee/hr/applicant/',
