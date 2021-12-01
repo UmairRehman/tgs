@@ -42,6 +42,7 @@ export const routes = {
         step2 : 'employee/hr/step/1/approve',
         reject : 'employee/hr/step/reject',
         get_tickets_and_allerts: 'employee/ticket',
+        list_tickets_and_alerts_by_category: 'employee/ticket/category/',
         get_ticket_by_id: 'employee/ticket/',
         update_tickets : 'employee/ticket/',
         get_employee_by_id : 'employee/hr/employee/',
