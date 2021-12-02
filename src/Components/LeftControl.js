@@ -86,11 +86,12 @@ const LeftControl = () => {
 
   const capabilities = {
     dashboard: [1, 2, 3, 4, 5, 6],
-    safety: [1, 3, 6],
+    safety: [1, 6],
     create_ticket: [1, 2, 3, 4, 5, 6],
     deparment: [1, 2, 3, 4, 5, 6],
     new_hire_queue: [2, 4],
-    tickets_alerts: [2, 4],
+    new_hire_queue_it: [3],
+    tickets_alerts: [2, 3, 4],
     employees: [2, 4, 5],
     broadcast_message: [2],
     employees_profile: [2, 4],
@@ -111,6 +112,7 @@ const LeftControl = () => {
   //         role: 'itmanager_role',
   //         role_id: 3,
   //         buttons_enabled: ['dashboard', 'create-ticket', 'safety', 'deparment','deparment'],
+  //      safety testing removed as per desings
   //     },
   //     4: {
   //         role: 'hr',
@@ -155,6 +157,20 @@ const LeftControl = () => {
                     className="Liq-NavLinks"
                     className={
                       pathname === "/new-hire-queue" ? "NavSelected" : ""
+                    }
+                  >
+                    <Icon />
+                    New Hire Queue
+                  </Link>
+                </ListItem>
+              )}
+              {capabilities.new_hire_queue_it.includes(role_id) && (
+                <ListItem button className="NewHireIcon">
+                  <Link
+                    to="/new-hire-queue-it"
+                    className="Liq-NavLinks"
+                    className={
+                      pathname === "/new-hire-queue-it" ? "NavSelected" : ""
                     }
                   >
                     <Icon />

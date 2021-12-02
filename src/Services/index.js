@@ -8,6 +8,8 @@ import * as employee from './employee';
 
 import * as broadcast from './broadcast';
 
+import * as IT from './it';
+
 import { Storage } from './storage';
 
 import * as SocketClients from './socket';
@@ -19,6 +21,7 @@ const services = {
     hr,
     employee,
     broadcast,
+    IT,
     Storage,
     ...SocketClients,
 };
