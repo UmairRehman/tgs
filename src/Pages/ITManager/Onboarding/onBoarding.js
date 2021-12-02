@@ -235,6 +235,9 @@ const OnBoarding = () => {
                           InputLabelProps={{
                             shrink: true,
                           }}
+                          inputProps={{
+                            min: new Date(applicantData.AD_od).toISOString().slice(0, 10)
+                          }}
                         />
                       </Grid>
                     </Grid>
@@ -351,6 +354,9 @@ const OnBoarding = () => {
                         InputLabelProps={{
                           shrink: true,
                         }}
+                        inputProps={{
+                          min: new Date(applicantData.computer_od).toISOString().slice(0, 10)
+                        }}
                       />
                     </Grid>
                   </Grid>
@@ -400,15 +406,20 @@ const OnBoarding = () => {
                         <TextField
                           id="cell_phone_cd"
                           type="date"
+                          disabled = { (applicantData.cell_phone_cd) ? true : false}
                           onChange={(e) => {
                             setCell({
                               ...cell,
                               completeDate:e.target.value});
                           }}
                           className="DateTimePicker"
-                          defaultValue="YY-MM-DD"
+                          defaultValue=''
                           InputLabelProps={{
                             shrink: true,
+                          }}
+
+                          inputProps={{
+                            min: new Date(applicantData.cell_phone_od).toISOString().slice(0, 10)
                           }}
                         />
                       </Grid>
@@ -446,7 +457,7 @@ const OnBoarding = () => {
                           // }}
                           className="DateTimePicker"
                           defaultValue="YY-MM-DD"
-                          value={moment(new Date(applicantData.cell_phone_od)).format('DD/MM/YYYY')}
+                          value={moment(new Date(applicantData.company_vehicle_od)).format('DD/MM/YYYY')}
                           InputLabelProps={{
                             shrink: true,
                           }}
@@ -469,6 +480,9 @@ const OnBoarding = () => {
                           defaultValue="YY-MM-DD"
                           InputLabelProps={{
                             shrink: true,
+                          }}
+                          inputProps={{
+                            min: new Date(applicantData.company_vehicle_od).toISOString().slice(0, 10)
                           }}
                         />
                       </Grid>
@@ -509,7 +523,9 @@ const OnBoarding = () => {
                           InputLabelProps={{
                             shrink: true,
                           }}
-                          inputProps={{ min: moment(new Date(applicantData.fuel_card_od)).format('YYYY-MM-DD') }}
+                          inputProps={{
+                            min: new Date(applicantData.fuel_card_od).toISOString().slice(0, 10)
+                          }}
                         />
                       </Grid>
                       <Grid xs={6} className="pl20">
@@ -555,7 +571,6 @@ const OnBoarding = () => {
                       <Grid xs={12} className="mbold">
                         <TextareaAutosize
                           style={{ width: '100%' }}
-                          required={true}
                           id="comment"
                           className="w100p"
                           rowsMin={6}
