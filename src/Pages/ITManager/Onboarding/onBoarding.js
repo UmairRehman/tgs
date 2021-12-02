@@ -224,6 +224,7 @@ const OnBoarding = () => {
                         <TextField
                           id="AD_cd"
                           type="date"
+                          disabled = { (applicantData?.AD_cd) ? true : false }
                           onChange={(e) => {
                             setActiveDirectory({
                               ...activeDirectory,
@@ -344,6 +345,7 @@ const OnBoarding = () => {
                       <TextField
                         id="computer_cd"
                         type="date"
+                        disabled = { (applicantData?.computer_cd) ? true : false }
                         onChange={(e) => {
                           setComputer({
                             ...computer,
@@ -470,6 +472,7 @@ const OnBoarding = () => {
                         <TextField
                           id="cell_phone_cd"
                           type="date"
+                          disabled = { (applicantData?.company_vehicle_cd) ? true : false }
                           onChange={(e) => {
                             setVehicle({
                               ...vehicle,
@@ -535,6 +538,7 @@ const OnBoarding = () => {
                         <TextField
                           id="fuel_card_cd"
                           type="date"
+                          disabled = { (applicantData?.fuel_card_cd) ? true : false }
                           onChange={(e) => {
                             setFuelCard({
                               ...fuelCard,
