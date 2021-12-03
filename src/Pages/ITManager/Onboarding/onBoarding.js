@@ -107,7 +107,7 @@ const OnBoarding = () => {
 
   useEffect(() => {
     let data = location?.state
-    console.log(data);
+    setApplicantData(data);
     setActiveDirectory({
       ...activeDirectory,
       completeDate: data?.AD_cd,
@@ -123,14 +123,21 @@ const OnBoarding = () => {
       completeDate : data?.company_vehicle_cd,
       isChanged : (data?.company_vehicle_cd) ? true : false
     })
-    setApplicantData(data);
-    
+    setCell({
+      ...cell,
+      completeDate:data?.cell_phone_cd,
+      isChanged: (data?.cell_phone_cd) ? true : false
+    })
+    setFuelCard({
+      ...fuelCard,
+      completeDate : data?.fuel_card_cd,
+      isChanged : (data?.fuel_card_cd) ? true : false
+    })
   }, []);
 
   async function onFormSubmit(event) {
     event.preventDefault();
     let data = {}
-    // console.log(activeDirectory.completeDate , !activeDirectory.isChanged, applicantData?.AD_cd==false);
     if (activeDirectory.completeDate && !activeDirectory.isChanged){
       data.AD_cd = activeDirectory.completeDate;
       data.dnUid = activeDirectory.dnUid;  
@@ -148,12 +155,6 @@ const OnBoarding = () => {
     if(fuelCard.completeDate && !fuelCard.isChanged)
       data.fuel_card_cd = fuelCard.completeDate;    
       
-      // AD_cd : activeDirectory.completeDate,
-      // dnUid : (activeDirectory.completeDate) ? activeDirectory.dnUid : null,
-      // computer_cd : computer.completeDate,
-      // cell_phone_cd : cell.completeDate,
-      // company_vehicle_cd : vehicle.completeDate,
-      // fuel_card_cd : fuelCard.completeDate,
     data.ITComment = document.getElementById('comment').value ;
     
     const nullCheck = Object.values(data).reduce(
@@ -161,11 +162,9 @@ const OnBoarding = () => {
       false
     );
 
-    console.log("submit", data)
     if(!nullCheck){
       try {
         let res = await IT.update_it_request({id : applicantData.id , data})
-        console.log(res);
         if(res.httpStatus=200){
           setTimeout(() => {
             history.push('/new-hire-queue-it')
@@ -174,7 +173,6 @@ const OnBoarding = () => {
         }
       } catch (error) {
         return showSnackBar(error.message);
-        console.log(error);
       }
     }
     else{
