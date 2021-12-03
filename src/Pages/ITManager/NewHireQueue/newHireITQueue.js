@@ -88,8 +88,8 @@ const NewHireQueueIT = () => {
       if(data?.httpStatus==200){
         data = data.data.rows; 
         data.forEach(row => {
-          row.name = row.Employee.firstName
-          row.deptName = row.Employee.SubDepartment.name
+          row.name = row?.Employee?.firstName || ''
+          row.deptName = row?.Employee?.SubDepartment?.name || ''
           row.AD_text = (row.AD)?'Yes':'No'
           row.computer_text = (row.computer)?'Yes':'No'
           row.cell_phone_text = (row.cell_phone)?'Yes':'No'
