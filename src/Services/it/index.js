@@ -19,3 +19,14 @@ export const list_it_request = async (payload, headers) => {
         headers
     );
 };
+
+export const update_it_request = async (payload, headers) => {
+    const { id  , data } = payload
+    payload = {...data}
+    return await api.put(
+        routes.it.update_it_request.concat(id),
+        payload,
+        headers
+    );
+};
+
