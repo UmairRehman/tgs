@@ -34,6 +34,7 @@ export const routes = {
     it :{
         list_it_request : 'employee/ITRequest',
         get_it_request  : 'employee/ITRequest/',
+        update_it_request  : 'employee/ITRequest/',
     },
     hr:{
         get_applicant: 'employee/hr/applicant',

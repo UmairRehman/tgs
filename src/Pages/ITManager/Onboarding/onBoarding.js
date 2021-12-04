@@ -32,7 +32,12 @@ import { environment } from "../../../Environments/environment";
 
 /** Local deoendencies & Libraries */
 import Services from "../../../Services";
-const { hr } = Services;
+import Snackbar from '../../../Components/Snackbar';
+import { helpers } from "../../../helpers";
+const { hr, IT } = Services;
+const {
+  showSnackBar,
+} = helpers;
 var moment = require("moment-timezone");
 
 const { apiPath } = environment;
@@ -44,33 +49,41 @@ const OnBoarding = () => {
 
   const [activeDirectory, setActiveDirectory] = useState({
     orderDate: '',
-    completeDate: ''
+    completeDate: null,
+    isChanged : false, 
+    dnUid:null,
+    isChanged:false,
   })
 
   const [email, setEmail] = useState({
     orderDate: '',
-    completeDate: ''
+    completeDate: null,
+    isChanged:false,
   })
 
 
   const [computer, setComputer] = useState({
     orderDate: '',
-    completeDate: ''
+    completeDate: null,
+    isChanged:false,
   })
 
   const [cell, setCell] = useState({
     orderDate: '',
-    completeDate: ''
+    completeDate: null,
+    isChanged:false,
   })
 
   const [vehicle, setVehicle] = useState({
     orderDate: '',
-    completeDate: ''
+    completeDate: null,
+    isChanged:false,
   })
 
   const [fuelCard, setFuelCard] = useState({
     orderDate: '',
-    completeDate: ''
+    completeDate: null,
+    isChanged:false,
   })
 
   const [applicantData, setApplicantData] = useState({
@@ -87,22 +100,84 @@ const OnBoarding = () => {
   })
 
 
-
+  useEffect(() => {
+    console.log(activeDirectory.isChanged)
+    
+  }, [activeDirectory])
 
   useEffect(() => {
     let data = location?.state
-    console.log(data);
     setApplicantData(data);
-    
+    setActiveDirectory({
+      ...activeDirectory,
+      completeDate: data?.AD_cd,
+      isChanged : (data?.AD_cd) ? true : false
+    });
+    setComputer({
+      ...computer,
+      completeDate:data?.computer_cd,
+      isChanged: (data?.computer_cd) ? true : false
+    })
+    setVehicle({
+      ...vehicle,
+      completeDate : data?.company_vehicle_cd,
+      isChanged : (data?.company_vehicle_cd) ? true : false
+    })
+    setCell({
+      ...cell,
+      completeDate:data?.cell_phone_cd,
+      isChanged: (data?.cell_phone_cd) ? true : false
+    })
+    setFuelCard({
+      ...fuelCard,
+      completeDate : data?.fuel_card_cd,
+      isChanged : (data?.fuel_card_cd) ? true : false
+    })
   }, []);
 
   async function onFormSubmit(event) {
     event.preventDefault();
-    let data = {
+    let data = {}
+    if (activeDirectory.completeDate && !activeDirectory.isChanged){
+      data.AD_cd = activeDirectory.completeDate;
+      data.dnUid = activeDirectory.dnUid;  
+    }
+    
+    if(computer.completeDate && !computer.isChanged)
+      data.computer_cd = computer.completeDate ;
 
-    };
+    if(cell.completeDate && !cell.isChanged)
+      data.cell_phone_cd = cell.completeDate; 
+      
+    if(vehicle.completeDate && !vehicle.isChanged)
+      data.company_vehicle_cd = vehicle.completeDate;  
+      
+    if(fuelCard.completeDate && !fuelCard.isChanged)
+      data.fuel_card_cd = fuelCard.completeDate;    
+      
+    data.ITComment = document.getElementById('comment').value ;
+    
+    const nullCheck = Object.values(data).reduce(
+      (total, accumulator) => total || !accumulator,
+      false
+    );
 
-    console.log("submit")
+    if(!nullCheck){
+      try {
+        let res = await IT.update_it_request({id : applicantData.id , data})
+        if(res.httpStatus=200){
+          setTimeout(() => {
+            history.push('/new-hire-queue-it')
+          }, 1500);   
+          return showSnackBar('Form Successfully Submitted');
+        }
+      } catch (error) {
+        return showSnackBar(error.message);
+      }
+    }
+    else{
+      return showSnackBar('Fill Form Correctly');
+    }
 
   }
 
@@ -184,65 +259,113 @@ const OnBoarding = () => {
 
 
                { (applicantData?.AD) &&
-                    (<Grid xs={12} container className="LRM40">
-                    <Grid xs={4} style={{ alignSelf: 'center' }} className="pr20 mt4">
-                      <Grid xs={12}>
-                        <Grid xs={12} className="mbold">
-                          Active Directory
-                        </Grid>
-                        <Grid xs={12} className="mt14">
+                    (
+                    <div>
+                    <Grid xs={12} container className="LRM40">
+                        <Grid xs={4} style={{ alignSelf: 'center' }} className="pr20 mt4">
+                          <Grid xs={12}>
+                            <Grid xs={12} className="mbold">
+                              Active Directory
+                            </Grid>
+                            <Grid xs={12} className="mt14">
 
+                            </Grid>
+                          </Grid>
                         </Grid>
-                      </Grid>
-                    </Grid>
-                    <Grid xs={8} container className="pl20">
-                      <Grid xs={6} className="pr20">
-                        <Grid xs={12} className="mbold mb14">
+                        <Grid xs={8} container className="pl20">
+                          <Grid xs={6} className="pr20">
+                            <Grid xs={12} className="mbold mb14">
 
-                        </Grid>
-                        <TextField
-                          id="AD_od"
-                          disabled
-                          onChange={(e) => {
-                            setActiveDirectory({
-                              ...activeDirectory,
-                              orderDate:e.target.value,
-                            });
-                          }}
-                          className="DateTimePicker"
-                          // defaultValue="YY-MM-DD"
-                          value={moment(new Date(applicantData.AD_od)).format('DD/MM/YYYY')}
-                          InputLabelProps={{
-                            shrink: true,
-                          }}
-                        />
-                      </Grid>
-                      <Grid xs={6} className="pl20">
-                        <Grid xs={12} className="mbold mb14">
+                            </Grid>
+                            <TextField
+                              id="AD_od"
+                              disabled
+                              onChange={(e) => {
+                                setActiveDirectory({
+                                  ...activeDirectory,
+                                  orderDate:e.target.value,
+                                });
+                              }}
+                              className="DateTimePicker"
+                              // defaultValue="YY-MM-DD"
+                              value={moment(new Date(applicantData.AD_od)).format('DD/MM/YYYY')}
+                              InputLabelProps={{
+                                shrink: true,
+                              }}
+                            />
+                          </Grid>
+                          <Grid xs={6} className="pl20">
+                            <Grid xs={12} className="mbold mb14">
 
+                            </Grid>
+                            <TextField
+                              id="AD_cd"
+                              type="date"
+                              disabled = { (applicantData?.AD_cd) ? true : false }
+                              onChange={(e) => {
+                                setActiveDirectory({
+                                  ...activeDirectory,
+                                  completeDate:e.target.value,
+                                  
+                                });
+                              }}
+                              className="DateTimePicker"
+                              value={  (activeDirectory?.completeDate)
+                                ? new Date(activeDirectory.completeDate).toISOString().slice(0, 10)
+                                : 'DD/MM/YYYY' 
+                              }
+                              InputLabelProps={{
+                                shrink: true,
+                              }}
+                              inputProps={{
+                                min: new Date(applicantData.AD_od).toISOString().slice(0, 10)
+                              }}
+                            />
+                          </Grid>
                         </Grid>
-                        <TextField
-                          id="AD_cd"
-                          type="date"
-                          disabled = { (applicantData?.AD_cd) ? true : false }
-                          onChange={(e) => {
-                            setActiveDirectory({
-                              ...activeDirectory,
-                              completeDate:e.target.value,
-                            });
-                          }}
-                          className="DateTimePicker"
-                          defaultValue="YY-MM-DD"
-                          InputLabelProps={{
-                            shrink: true,
-                          }}
-                          inputProps={{
-                            min: new Date(applicantData.AD_od).toISOString().slice(0, 10)
-                          }}
-                        />
-                      </Grid>
                     </Grid>
-                    </Grid>
+                    { (activeDirectory.completeDate) &&
+                      (<Grid xs={12} container className="LRM40">
+                        <Grid xs={4} style={{ alignSelf: 'center' }} className="pr20 mt4">
+                          <Grid xs={12}>
+                            <Grid xs={12} className="mbold">
+                              
+                            </Grid>
+                            <Grid xs={12} className="mt14">
+
+                            </Grid>
+                          </Grid>
+                        </Grid>
+                        <Grid xs={8} container className="pl20">
+                          <Grid xs={6} className="pr20">
+                            <Grid xs={12} className="mbold mb14">
+
+                            </Grid>
+                            <TextField
+                              id="AD_uid"
+                              required = { (! activeDirectory.isChanged) }
+                              disabled = { (activeDirectory.isChanged) }
+                              onChange={(e) => {
+                                setActiveDirectory({
+                                  ...activeDirectory,
+                                  dnUid : e.target.value,
+                                });
+                              }}
+                              className="DateTimePicker"
+                              // defaultValue="YY-MM-DD"
+                              placeholder = {`UID`}
+                              value={
+                                applicantData?.Employee.uid
+                              }
+                              InputLabelProps={{
+                                shrink: true,
+                              }}
+                            />
+                          </Grid>
+                        </Grid>
+                      </Grid>)  
+                    }
+                    </div>     
                 )}
 
 
@@ -345,6 +468,7 @@ const OnBoarding = () => {
                       <TextField
                         id="computer_cd"
                         type="date"
+                        format= "DD/MM/YYYY"
                         disabled = { (applicantData?.computer_cd) ? true : false }
                         onChange={(e) => {
                           setComputer({
@@ -352,7 +476,10 @@ const OnBoarding = () => {
                             completeDate:e.target.value});
                         }}
                         className="DateTimePicker"
-                        defaultValue="YY-MM-DD"
+                        value={  (computer?.completeDate)
+                                    ? new Date(computer.completeDate).toISOString().slice(0, 10)
+                                    : 'DD/MM/YYYY' 
+                                  }
                         InputLabelProps={{
                           shrink: true,
                         }}
@@ -415,7 +542,10 @@ const OnBoarding = () => {
                               completeDate:e.target.value});
                           }}
                           className="DateTimePicker"
-                          defaultValue=''
+                          value={  (cell?.completeDate)
+                            ? new Date(cell.completeDate).toISOString().slice(0, 10)
+                            : 'DD/MM/YYYY' 
+                          }
                           InputLabelProps={{
                             shrink: true,
                           }}
@@ -480,7 +610,10 @@ const OnBoarding = () => {
                             });
                           }}
                           className="DateTimePicker"
-                          defaultValue="YY-MM-DD"
+                          value={  (vehicle?.completeDate)
+                            ? new Date(vehicle.completeDate).toISOString().slice(0, 10)
+                            : 'DD/MM/YYYY' 
+                          }
                           InputLabelProps={{
                             shrink: true,
                           }}
@@ -545,7 +678,10 @@ const OnBoarding = () => {
                               completeDate:e.target.value});
                           }}
                           className="DateTimePicker"
-                          defaultValue="YY-MM-DD"
+                          value={  (applicantData?.fuel_card_cd)
+                            ? new Date(applicantData.fuel_card_cd).toISOString().slice(0, 10)
+                            : 'DD/MM/YYYY' 
+                          }
                           InputLabelProps={{
                             shrink: true,
                           }}
@@ -575,6 +711,7 @@ const OnBoarding = () => {
                       <Grid xs={12} className="mbold">
                         <TextareaAutosize
                           style={{ width: '100%' }}
+                          required
                           id="comment"
                           className="w100p"
                           rowsMin={6}
@@ -603,12 +740,8 @@ const OnBoarding = () => {
 
               </form>
             </Grid>
-
-
+            <Snackbar></Snackbar>
           </Grid>
-
-
-
           {/* Page Start End */}
         </Grid>
       </Grid>
