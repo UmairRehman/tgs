@@ -298,13 +298,13 @@ const NewHireStep1 = () => {
                       <Grid className="w250 bold">Notes For HR</Grid>
                       <Grid xs={3}>{applicantData?.notesForHR}</Grid>
                     </ListItem>
-                    <ListItem container className="p0 pt6 pb20">
+                    {/* <ListItem container className="p0 pt6 pb20">
                       <Grid className="w250 bold">Questionaire</Grid>
                       <Grid className="PDFDownload">
                         <Grid className="FileName">Questionaire</Grid>
                         <Button></Button>
                       </Grid>
-                    </ListItem>
+                    </ListItem> */}
                     <ListItem container className="p0 pt6 pb20">
                       <Grid className="w250 bold">Resume</Grid>
                       <Grid className="PDFDownload">
