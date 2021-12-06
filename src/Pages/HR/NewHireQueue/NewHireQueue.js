@@ -42,25 +42,16 @@ const columns = [
 ];
 
 const employeeStatus = [
-   "Application Pending", //1
-   "Application Approved", //2
-   "Application Rejected", //3
-   "Questionnaire Pending", //4
-   "Questionnaire Approved", //5
-   "Questionnaire Rejected", //6
-   "Documents Submitted", //7
-   "PDF Forms , Submitted", //8
+   "Application For Approval" , //"Application Pending", //1 
+   "Application Approved" , //"Application Approved", //2 
+   "Application Rejected " , //"Application Rejected", //3 
+   "Questionnaire Pending" , //"Questionnaire Pending", //4 
+   "PDF Documents Pending" , //"Questionnaire Approved", //5 
+   "Documents For Approval" , //"Questionnaire Rejected", //6 
+   "Post Conditional Doc Pending" , //"Documents Submitted", //7 
+   "Documents Rejected" , //"PDF Forms , Submitted", //8 
    "Employee" //9
 ]
-
-const rows = [
-  ("1234", "Ryan Westmeyer", "Information Technology", "Houston", "Ryan@tgs.com", "Step 1"),
-  ("324", "John Daniel", "Human Resources", "California", "Singer@tgs.com", "Step 4"),
-  ("554", "Paul Jason", "Operations", "Chicago", "Saim@tgs.com", "Step 3"),
-  ("783", "Donald Jeff", "Safety", "Houston", "Stive@tgs.com", "Step 1"),
-  ("234", "William Anthony", "Safety", "Dallas", "Rocking@tgs.com", "Step 2"),
-  ("5433", "Mark Robert", "Operations", "Florida", "Serial@tgs.com", "Step 4"),
-];
 
 const NewHireQueue = () => {
 
@@ -199,7 +190,7 @@ const NewHireQueue = () => {
                   <TablePagination
                     rowsPerPageOptions={[10, 25, 100]}
                     component="div"
-                    count={rows.length}
+                    count={applicantData.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     onChangePage={handleChangePage}

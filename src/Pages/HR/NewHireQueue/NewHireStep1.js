@@ -22,8 +22,12 @@ import { environment } from "../../../Environments/environment";
 
 /** Local deoendencies & Libraries */
 import Services from "../../../Services";
+import { helpers } from "../../../helpers";
+import Snackbar from "../../../Components/Snackbar";
 
-const { hr } = Services;
+const { showSnackBar } = helpers;
+
+const { hr , employee } = Services;
 var moment = require("moment-timezone");
 
 // import MobileScreen from './Mobile/Enter-RailRoad-Add';
@@ -34,6 +38,11 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const { apiPath } = environment;
 
+const YesNo = [
+  { title : 'Yes' , value:true },
+  { title : 'No' ,  value:false },
+]
+
 const statuses = [
   { id: 1, title: "Approve" ,value:true },
   { id: 2, title: "Reject" , value:false},
@@ -43,45 +52,13 @@ const PositionLevel = [
   { title: "Executive", id: 2 },
   { title: "Labour", id: 3 },
 ];
-const PositionLoc = [
-  { title: "Head office Canda" },
-  { title: "Australia Branch" },
-  { title: "Newzealand Branch" },
-];
-const FullTitle = [
-  { title: "Accounting and finance Manager" },
-  { title: "Accounting and finance Assistant" },
-  { title: "Accounting and finance Junior" },
-];
-const JobCode = [{ title: "0117" }, { title: "1280" }, { title: "5678" }];
-const Paytype = [
-  { title: "hourly" },
-  { title: "monthly" },
-  { title: "weekly" },
-];
-const queueRate = [{ title: "10" }, { title: "20" }, { title: "30" }];
-const Supervisor = [
-  { title: "John Alex" },
-  { title: "Greek Alan" },
-  { title: "Susan John" },
-];
-const ITR1 = ["Yes", "No"];
-const ITR2 = ["Yes", "No"];
-const ITR3 = ["Yes", "No"];
-const ITR4 = ["Yes", "No"];
-const ITR5 = ["Yes", "No"];
-
-const OJE = ["Yes", "No"];
 
 const NewHireStep1 = () => {
   let history = useHistory();
 
   const [applicantData, setApplicantData] = useState({});
-  const [emergencyContact, setEmergencyContact] = useState({});
-  const [files, setFiles] = useState({});
   const [resume, setResume] = useState(null);
-  const [spouse, setSpouse] = useState({});
-
+  
   // states for Form
 
   const [step1, setStep1] = useState({value:false});
@@ -95,7 +72,8 @@ const NewHireStep1 = () => {
   const [partType, setpartType] = useState("");
   const [startDate, setstartDate] = useState(new Date());
   const [subDepartment, setsubDepartment] = useState("");
-  const [supervisor, setSupervisor] = useState("");
+  const [supervisorList, setSupervisorList] = useState({})
+  const [supervisor, setSupervisor] = useState({});
   const [comment, setcomment] = useState("");
   const [computer, setcomputer] = useState("");
   const [active, setactive] = useState("");
@@ -134,7 +112,7 @@ const NewHireStep1 = () => {
     else if(step1.value){
       data = {
         employee_id: holdData?.id,
-        Supervisor_Id: holdData?.SupervisorId == null ? 1 : 1,
+        Supervisor_Id: supervisor.id,
         location_id: positionLocation,
         step1,
         position,
@@ -147,15 +125,13 @@ const NewHireStep1 = () => {
         pay_type: partType,
         SubDepartment_Id: subDepartment,
         start_date: moment(startDate).format("YYYY-MM-DD"),
-        // subDepartment,
-        supervisor,
         comment: document.getElementById("comment1").value,
         IT: {
-          computer: computer == "Yes" ? true : false,
-          AD: active == "Yes" ? true : false,
-          cell_phone: companyCellPhone == "Yes" ? true : false,
-          vehicle: companyVehicle == "Yes" ? true : false,
-          fuel_card: fuelCard == "Yes" ? true : false,
+          computer: computer.value,
+          AD: active.value,
+          cell_phone: companyCellPhone.value,
+          vehicle: companyVehicle.value,
+          fuel_card: fuelCard.value,
           comment: document.getElementById("comment2").value,
         },
       };
@@ -163,12 +139,18 @@ const NewHireStep1 = () => {
     console.log(data);
 
     try {
-      (step1.value) 
-        ? await hr.step1(data)
-        : await hr.reject(data)
-      history.push("/new-hire-queue");
+       
+      let result = (step1.value) ? await hr.step1(data)
+                                  : await hr.reject(data)
+      if(result){
+        setTimeout(() => {
+          history.push('/new-hire-queue')
+        }, 1500);
+        return showSnackBar('Form Successfully Submitted');
+      }
       } catch (exc) {
         console.log(exc);
+        return showSnackBar(exc.message);
       }
 
   }
@@ -183,10 +165,9 @@ const NewHireStep1 = () => {
     try {
       let data = await hr.getAllApplicantsByID(applicantDataHistory);
       setApplicantData(data.employee);
-      setEmergencyContact(data.emergency_contact);
-      setFiles(data.files);
       setResume(data.files[0]);
-      setSpouse(data.spouse);
+      let result = await employee.get_employee_listing();
+      setSupervisorList(result.data)
       console.log(applicantData);
     } catch (exc) {
       console.log(exc);
@@ -411,22 +392,14 @@ const NewHireStep1 = () => {
                               Full Title
                             </Grid>
                             <Grid xs={12} className="mt14">
-                              <Autocomplete
-                                onChange={(e, value) => {
-                                  setfullTitle(value.title);
-                                }}
+                              <TextField
                                 className="w100p"
-                                id="combo-box-demo"
-                                options={FullTitle}
-                                getOptionLabel={(option) => option.title}
-                                renderInput={(params) => (
-                                  <TextField
-                                    required={true}
-                                    {...params}
-                                    label="Select"
-                                    variant="outlined"
-                                  />
-                                )}
+                                id="full-title"
+                                required={true}
+                                label="FullTitle"
+                                variant="outlined"
+                                value={fullTitle}
+                                onChange={(e,v)=> setfullTitle(e.target.value)}
                               />
                             </Grid>
                           </Grid>
@@ -574,6 +547,8 @@ const NewHireStep1 = () => {
                                 variant="outlined"
                                 type="number"
                                 value={rate}
+                                defaultValue = {0}
+                                InputProps={{ inputProps: { min: 0 } }}
                                 onChange={(e,v)=> setrate(e.target.value)}
                                 />
                             </Grid>
@@ -669,12 +644,12 @@ const NewHireStep1 = () => {
                             <Grid xs={12} className="mt14">
                               <Autocomplete
                                 onChange={(e, value) => {
-                                  setSupervisor(value.title);
+                                  setSupervisor(value);
                                 }}
                                 className="w100p"
                                 id="combo-box-demo"
-                                options={Supervisor}
-                                getOptionLabel={(option) => option.title}
+                                options={supervisorList}
+                                getOptionLabel={(option) => option.firstName}
                                 renderInput={(params) => (
                                   <TextField
                                     required={true}
@@ -750,7 +725,8 @@ const NewHireStep1 = () => {
                               onChange={(e, value) => {
                                 setcomputer(value);
                               }}
-                              options={ITR1}
+                              options={YesNo}
+                              getOptionLabel = {(option)=> option.title}
                               className="w100p"
                               renderInput={(params) => (
                                 <TextField
@@ -773,7 +749,8 @@ const NewHireStep1 = () => {
                           <Grid xs={3}>
                             <Autocomplete
                               id="controllable-states-demo"
-                              options={ITR2}
+                              options={YesNo}
+                              getOptionLabel = {(option)=> option.title}
                               onChange={(e, value) => {
                                 setactive(value);
                               }}
@@ -802,7 +779,8 @@ const NewHireStep1 = () => {
                                 setcompanyCellPhone(value);
                               }}
                               id="controllable-states-demo"
-                              options={ITR3}
+                              options={YesNo}
+                              getOptionLabel = {(option)=> option.title}
                               className="w100p"
                               renderInput={(params) => (
                                 <TextField
@@ -828,7 +806,8 @@ const NewHireStep1 = () => {
                               onChange={(e, value) => {
                                 setcompanyVehicle(value);
                               }}
-                              options={ITR4}
+                              options={YesNo}
+                              getOptionLabel = {(option)=> option.title}
                               className="w100p"
                               renderInput={(params) => (
                                 <TextField
@@ -854,7 +833,8 @@ const NewHireStep1 = () => {
                               onChange={(e, value) => {
                                 setfuelCard(value);
                               }}
-                              options={ITR5}
+                              options={YesNo}
+                              getOptionLabel = {(option)=> option.title}
                               className="w100p"
                               renderInput={(params) => (
                                 <TextField
@@ -912,6 +892,7 @@ const NewHireStep1 = () => {
               </Grid>
             </Grid>
           </form>
+          <Snackbar></Snackbar>
           {/* Page Start End */}
         </Grid>
       </Grid>
