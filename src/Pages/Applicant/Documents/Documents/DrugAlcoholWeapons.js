@@ -30,7 +30,7 @@ import Snackbar from "../../../../Components/Snackbar";
 
 const { users, hr, Storage } = Services;
 
-const { showSnackBar } = helpers;
+const { showSnackBar , getGenerator } = helpers;
 
 const {
   styles: { displayNoneStyles: useStyles },
@@ -100,11 +100,27 @@ const DrugAlcoholWeapons = () => {
         setAcknowledged(false);
         return showSnackBar("Kindly fill in all the fields");
       }
-      let canvas = await html2canvas(document.querySelector("#capture"));
-      let image = canvas.toDataURL("image/png");
+      const captureElements = Array.from(
+        document.getElementsByClassName('capture')
+      );
+      
+      const images = [];
+
+      showSnackBar('Generating pdf...');
+
+      for await (let i of getGenerator(captureElements.length)) {
+      const captureElement = captureElements[i];
+        
+        let canvas = await (html2canvas(captureElement));
+
+        let image = (canvas.toDataURL('image/png'));
+
+        images.push(image);
+        console.log(image)
+      }
 
       const resposne = await users.submitForm({
-        image: [image],
+        image: images,
         form: 17,
       });
 
