@@ -73,6 +73,7 @@ export const validators = {
         us_citizen: yup.string()
             .oneOf([
                 'citizen',
+                'us_citizen',
                 'non-citizen',
                 'permanent_residence',
                 'alien_authorized_to_work',
