@@ -71,8 +71,12 @@ const EmployeeHandbook = () => {
     setUserData(data)
   }, [])
 
+  const [initialForm, setInitialForm] = useState(false)
   useEffect(() => {
-    submit();
+      if(initialForm == true)
+        submit();
+      
+      setInitialForm(true)
   }, [isAcknowledged]);
 
   const submit = async () => {
