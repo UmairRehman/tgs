@@ -32,7 +32,8 @@ import Snackbar from '../../../Components/Snackbar';
 console.log(Imports);
 
 const {
-    users
+    users,
+    hr
 } = Services;
 
 
@@ -83,29 +84,20 @@ const MaritalStatus = [
     { title: 'Divorced' },
     { title: 'Widowed' }
 ];
-const JobCategories = [
-    { title: 1, label: 'Business development manager' },
-    { title: 2, label: 'Civil service administrative officer' },
-    { title: 3, label: 'Compliance officer' },
-    { title: 4, label: 'European Union official' },
-    { title: 5, label: 'Health service manager' },
-    { title: 6, label: 'Local government administrative assistant' },
-    { title: 7, label: 'Management consultant' },
-    { title: 8, label: 'Operational researcher' },
-    { title: 9, label: 'Purchasing manager' },
-    { title: 10, label: 'Business analyst' },
-    { title: 11, label: 'Civil service executive officer' },
-];
 
-const ITR1 = ['Yes', 'No'];
-const ITR2 = ['Yes', 'No'];
-const ITR3 = ['Yes', 'No'];
-const ITR4 = ['Yes', 'No'];
-const ITR5 = ['Yes', 'No'];
-
-
-
-const OJE = ['Yes', 'No'];
+// const JobCategories = [
+//     { title: 1, label: 'Business development manager' },
+//     { title: 2, label: 'Civil service administrative officer' },
+//     { title: 3, label: 'Compliance officer' },
+//     { title: 4, label: 'European Union official' },
+//     { title: 5, label: 'Health service manager' },
+//     { title: 6, label: 'Local government administrative assistant' },
+//     { title: 7, label: 'Management consultant' },
+//     { title: 8, label: 'Operational researcher' },
+//     { title: 9, label: 'Purchasing manager' },
+//     { title: 10, label: 'Business analyst' },
+//     { title: 11, label: 'Civil service executive officer' },
+// ];
 
 const Application = () => {
 
@@ -169,7 +161,11 @@ const Application = () => {
         spouse_date_of_birth: new Date(),
         spouse_address: '',
         spouse_phone_number: '',
+        dob: new Date(),
     });
+
+    /** State for Job Category List*/ 
+    const [JobCategories, setJobCategories] = useState([])
 
     const [snackBarMessage, setSnackBarMessage] = useState('');
 
@@ -307,7 +303,15 @@ const Application = () => {
 
     }
 
-    useEffect(() => {
+    useEffect(async() => {
+        let result = await hr.get_job_categories();
+        if(result.httpStatus==200){
+            result.data.map( row =>{
+                row.label = row.title;
+                row.title = row.id
+            })
+            setJobCategories(result.data)
+        }
         window.scrollTo(0, 0);
     }, []);
 
@@ -352,6 +356,7 @@ const Application = () => {
         try {
             const isValidApplicant = await validateApplicant(applicationForm);
 
+            applicationForm.dob = applicationForm.dob.toString();
             /** Transformations */
             if (applicationForm.spouse_date_of_birth)
                 applicationForm.spouse_date_of_birth = applicationForm.spouse_date_of_birth.toString();
@@ -519,6 +524,23 @@ const Application = () => {
                                                     $e,
                                                 )
                                             } />
+                                    </Grid>
+                                    <Grid xs={6} className='mt30 pr20'>
+                                        <Grid xs={12} className="mbold mb14">
+                                            Date of Birth
+                                        </Grid>
+                                        <DatePicker
+                                            onChange={($e) => setStateForFormControl(
+                                                contactInformation,
+                                                'dob',
+                                                $e,
+                                            )}
+                                            value={
+                                                contactInformation[0].dob
+                                            }
+                                            id="dob"
+                                            className="datePickerReact w100p bg-white react-date-picker"
+                                        />
                                     </Grid>
                                 </Grid>
                                 {/* ---------- */}
@@ -941,7 +963,8 @@ const Application = () => {
                                                     getOptionLabel={(option) => option.label}
                                                     renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
                                                     onChange={
-                                                        ($e, values) => setStateForFormControl(
+                                                        ($e, values) => 
+                                                        setStateForFormControl(
                                                             position,
                                                             'category',
                                                             $e,

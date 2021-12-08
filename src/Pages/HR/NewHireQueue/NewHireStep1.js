@@ -269,7 +269,7 @@ const NewHireStep1 = () => {
                     </ListItem>
                     <ListItem container className="p0 pt6 pb20">
                       <Grid className="w250 bold">Job Category</Grid>
-                      <Grid>{applicantData?.JobCategoryId}</Grid>
+                      <Grid>{applicantData?.JobCategory?.name}</Grid>
                     </ListItem>
                     <ListItem
                       container

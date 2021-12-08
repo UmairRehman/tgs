@@ -28,6 +28,7 @@ import LocalPrintshopIcon from "@material-ui/icons/LocalPrintshop";
 import CancelIcon from "@material-ui/icons/Cancel";
 import html2canvas from "html2canvas";
 
+import moment from "moment-timezone";
 /** Local dependencies & Libraries */
 import Services from "../../../../Services";
 
@@ -77,6 +78,9 @@ const PostConditionalJobOffer3 = () => {
       address : res?.employee?.address || '',
       // address1 : res?.employee?.address1 || '',
     }
+    let dateOfBirth = res?.employee?.dateOfBirth || new Date()
+    dateOfBirth = moment(dateOfBirth).format('DD/MM/YYYY')
+    setDob(dateOfBirth)
     setUserData(data)
     console.log(data)
   
@@ -304,14 +308,21 @@ const PostConditionalJobOffer3 = () => {
                   </TableCell>
                   <TableCell className="w50 row pl10">
                     Date of Birth:
-                    <DatePicker
+                    <input
+                      type="text"
+                      name="textfield"
+                      id="jobDetail"
+                      className="w h18 pl8 bn bb input-capitalization"
+                      value={`${dob}`}
+                    />
+                    {/* <DatePicker
                       onChange={(value) => {
                         setDob(value);
                       }}
                       value={dob}
                       id="offerDate"
                       className="datePickerReact"
-                    />
+                    /> */}
                   </TableCell>
                 </TableRow>
                 <TableRow className="w100 mt8">

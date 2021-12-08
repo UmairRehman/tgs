@@ -27,6 +27,7 @@ import { showSnackBar } from "../../../../helpers/showSnackBar";
 import Services from "../../../../Services";
 
 import { Imports } from "../../../../Imports";
+import moment from "moment-timezone";
 
 const { users , hr } = Services;
 
@@ -147,8 +148,11 @@ const PostConditionalJobOffer = () => {
         firstName : res?.employee?.firstName || '',
         middleName : res?.employee?.middleName || '',
         lastName: res?.employee?.lastName || '',
-        ssn : res?.employee?.ssn || ''
+        ssn : res?.employee?.ssn || '',
       }
+      let dob= res?.employee?.dateOfBirth || new Date()
+      dob =  moment(dob).format('DD/MM/YYYY')
+      setDateOfBirth(dob)
       setUserData(data)
       console.log(data)
     } catch (error) {
@@ -301,14 +305,21 @@ const PostConditionalJobOffer = () => {
                     <Table>
                       <TableRow>
                         <TableCell className="pb4">
-                          <DatePicker
+                             <input
+                              type="text"
+                              name="textfield"
+                              id="jobDetail"
+                              className="w h18 pl8 bn bb input-capitalization"
+                              value={`${dateOfBirth}`}
+                            />
+                          {/* <DatePicker
                             onChange={(value) => {
                               setDateOfBirth(value);
                             }}
                             value={dateOfBirth}
                             id="offerDate"
                             className="datePickerReact PosRIght"
-                          />
+                          /> */}
                         </TableCell>
                       </TableRow>
                       <TableRow>
