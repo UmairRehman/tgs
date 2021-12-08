@@ -40,7 +40,7 @@ const DrugAlcoholWeapons = () => {
   const storage = new Storage();
 
   const classes = useStyles();
-
+  const [initialForm, setInitialForm] = useState(false)
   const [isPosting, setPosting] = useState(false);
 
   const [error, setError] = useState("");
@@ -70,7 +70,12 @@ const DrugAlcoholWeapons = () => {
   }, [])
 
   useEffect(() => {
-    submit();
+    if(initialForm == true)
+      submit();
+    
+    
+      setInitialForm(true)
+    
   }, [isAcknowledged]);
 
   const submit = async () => {
