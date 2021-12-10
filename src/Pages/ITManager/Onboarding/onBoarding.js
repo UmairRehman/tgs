@@ -611,7 +611,7 @@ const OnBoarding = () => {
                           }}
                           className="DateTimePicker"
                           value={  (vehicle?.completeDate)
-                            ? new Date(vehicle.completeDate).toISOString().slice(0, 10)
+                            ? new Date(vehicle?.completeDate).toISOString().slice(0, 10)
                             : 'DD/MM/YYYY' 
                           }
                           InputLabelProps={{
@@ -678,8 +678,8 @@ const OnBoarding = () => {
                               completeDate:e.target.value});
                           }}
                           className="DateTimePicker"
-                          value={  (applicantData?.fuel_card_cd)
-                            ? new Date(applicantData.fuel_card_cd).toISOString().slice(0, 10)
+                          value={  (fuelCard?.completeDate)
+                            ? new Date(fuelCard?.completeDate).toISOString().slice(0, 10)
                             : 'DD/MM/YYYY' 
                           }
                           InputLabelProps={{
