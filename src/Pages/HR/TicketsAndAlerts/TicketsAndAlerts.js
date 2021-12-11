@@ -153,7 +153,7 @@ const TicketsAndAlerts = () => {
       <Grid xs={12} md={10} container justify="center" className="PageContent">
         <Grid className="PagesFrame">
           <PageHeader />
-          <Grid id="PageTitle">Alert / Message Queue</Grid>
+          <Grid id="PageTitle">{`Ticket & Alert`}</Grid>
           {/* Page Start */}
           <Grid xs={12} className="ContentPage">
             <Grid xs={12}>
