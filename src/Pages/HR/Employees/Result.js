@@ -23,14 +23,19 @@ import TextField from '@material-ui/core/TextField';
 import PageHeader from "../../../Components/PageHeader";
 import LeftControl from "../../../Components/LeftControl";
 import { useLocation } from 'react-router'
+import { environment } from "../../../Environments/environment";
 import { useHistory } from "react-router-dom";
 /** Local deoendencies & Libraries */
 import Services from '../../../Services';
+
+const { apiPath } = environment;
 
 
 const {
   hr
 } = Services;
+
+const roleFromLocalStorage = localStorage.getItem('role_id')
 
 // import { withRouter } from 'react-router-dom';
 // import MobileScreen from './Mobile/Enter-RailRoad-Add';
@@ -46,6 +51,83 @@ const addresscol = [
   { id: "zip", label: "Zip Code", minWidth: 100, type: "value" },
   { id: "ed", label: "Edit", minWidth: 50, type: "edit" }
 ];
+
+// Second Table
+const PayCol = [
+  { id: "EmployeeId", label: "Employee ID", minWidth: 140, type: "value" },
+  { id: "PayType", label: "Pay Type", minWidth: 160, type: "value" },
+  { id: "Rate", label: "Pay Rate", minWidth: 160, type: "value" },
+  { id: "EffectiveDate", label: "Rate Effective Date", minWidth: 160, type: "value" },
+  // { id: "sp", label: "Supervisor", minWidth: 160, type: "value" },
+  { id: "edi", label: "Edit", minWidth: 50, type: "edit" }
+];
+
+// First Table
+const Positioncol = [
+  { id: "EmployeeId", label: "Employee ID", minWidth: 100, type: "value" },
+  // { id: "lv", label: "Level", minWidth: 100, type: "value" },
+  { id: "FullTitle", label: "Full title", minWidth: 100, type: "value" },
+  { id: "JobCategoryId", label: "Category", minWidth: 100, type: "value" },
+  { id: "TGSLocation.address", label: "Location", minWidth: 100, type: "value" },
+  { id: "departmentName", label: "Department", minWidth: 100, type: "value" },
+  { id: "SubDepartmentName", label: "Sub-Department", minWidth: 100, type: "value" },
+  { id: "SupervisorName", label: "Supervisor", minWidth: 100, type: "value" },
+  { id: "EffectiveDate", label: "Hire Date", minWidth: 100, type: "value" },
+  { id: "ed", label: "Edit", minWidth: 50, type: "edit" }
+];
+
+function PositionData(
+  peid,
+  lv,
+  ft,
+  ct,
+  lc,
+  dp,
+  sd,
+  sp,
+  hd,
+  ed
+) {
+  return {
+    peid,
+    lv,
+    ft,
+    ct,
+    lc,
+    dp,
+    sd,
+    sp,
+    hd,
+    ed
+  };
+}
+
+const Posrows = [
+  PositionData("1011", "Director", "Director of Systems & Technologies", "Management", "Baytown, Texas (Cedar Port)", "IT", "IT Management & Admin", "Jhon Doe", "3/10/2021"),
+];
+
+
+function PayData(
+  eid,
+  pt,
+  pr,
+  red,
+  sp,
+  edi
+) {
+  return {
+    eid,
+    pt,
+    pr,
+    red,
+    sp,
+    edi
+  };
+}
+const Payrows = [
+  PayData("1011", "FT-Hourly", "$15.00", "1/1/2021", "Jhon Doe"),
+];
+
 
 function addcreateData(
   eid,
@@ -127,6 +209,8 @@ const EmployeeResult = () => {
   const [stateName, setStateName] = useState(emplpyeeDetails.state)
   const [zip, setZip] = useState(emplpyeeDetails.zip)
 
+  const [payRate, setPayRate] = useState({})
+
 
   useEffect(async () => {
     window.scrollTo(0, 0);
@@ -150,8 +234,10 @@ const EmployeeResult = () => {
         setCity(applicantDataHistory?.employee[0].city)
         setStreedAddress(applicantDataHistory?.employee[0].address)
         setStreedAddress1(applicantDataHistory?.employee[0].address1)
-      }).catch((err) => { console.log(err) });
 
+        setPayRate(applicantDataHistory?.pay)
+
+      }).catch((err) => { console.log(err) });
 
     }
     catch (exc) {
@@ -193,6 +279,8 @@ const EmployeeResult = () => {
     let data = {
       comment: comment
     }
+
+
 
   }
 
@@ -464,6 +552,143 @@ const EmployeeResult = () => {
                 </Paper>
               </Grid>
 
+
+
+
+
+
+
+
+
+              {roleFromLocalStorage == 3 ?
+                <div>
+
+                  <Grid xs={12} className="LiqTables">
+                    <Grid xs={12} className="mt28 mb14">
+                      <Typography variant="h1" component="h2" className="bold f22">
+                        Position
+                      </Typography>
+                    </Grid>
+                    <Paper>
+                      <TableContainer>
+                        <Table aria-label="table">
+                          <TableHead>
+                            <TableRow>
+                              {Positioncol.map((column) => (
+                                <TableCell
+                                  className="bold f16"
+                                  key={column.id}
+                                  align={column.align}
+                                  style={{ minWidth: column.minWidth }}
+                                >
+                                  {column.label}
+                                </TableCell>
+                              ))}
+                            </TableRow>
+                          </TableHead>
+                          <TableBody>
+                            {position
+                              .map((row) => {
+                                return (
+                                  <TableRow
+                                    hover
+                                    role="checkbox"
+                                    tabIndex={-1}
+                                    key={row.code}
+                                  >
+                                    {Positioncol.map((column) => {
+                                      const value = row[column.id];
+                                      return (
+                                        <TableCell
+                                          key={column.id}
+                                          align={column.align}
+                                        >
+                                          {column.type == "edit" ? (
+                                            <Button onClick={handleClickOpenAdd} className="EditIcon"></Button>
+                                          ) : (
+                                            value
+                                          )}
+                                        </TableCell>
+                                      );
+                                    })}
+                                  </TableRow>
+                                );
+                              })}
+                          </TableBody>
+                        </Table>
+                      </TableContainer>
+                    </Paper>
+                  </Grid>
+
+
+                  <Grid xs={12} className="LiqTables">
+                    <Grid xs={12} className="mt28 mb14">
+                      <Typography variant="h1" component="h2" className="bold f22">
+                        Pay Details
+                      </Typography>
+                    </Grid>
+                    <Paper>
+                      <TableContainer>
+                        <Table aria-label="table">
+                          <TableHead>
+                            <TableRow>
+                              {PayCol.map((column) => (
+                                <TableCell
+                                  className="bold f16"
+                                  key={column.id}
+                                  align={column.align}
+                                  style={{ minWidth: column.minWidth }}
+                                >
+                                  {column.label}
+                                </TableCell>
+                              ))}
+                            </TableRow>
+                          </TableHead>
+                          <TableBody>
+                            {[payRate]
+                              .map((row) => {
+                                return (
+                                  <TableRow
+                                    hover
+                                    role="checkbox"
+                                    tabIndex={-1}
+                                    key={row.code}
+                                  >
+                                    {PayCol.map((column) => {
+                                      const value = row[column.id];
+                                      return (
+                                        <TableCell
+                                          key={column.id}
+                                          align={column.align}
+                                        >
+                                          {column.type == "edit" ? (
+                                            <Button onClick={handleClickOpenCerti} className="EditIcon"></Button>
+                                          ) : (
+                                            value
+                                          )}
+                                        </TableCell>
+                                      );
+                                    })}
+                                  </TableRow>
+                                );
+                              })}
+                          </TableBody>
+                        </Table>
+                      </TableContainer>
+                    </Paper>
+                  </Grid>
+
+
+                  <Grid xs={12} container className="mt40">
+                    <Link to="/employees-profile/termination" className="LinkButton">
+                      Terminate Employee
+                    </Link>
+                  </Grid>
+                </div>
+                : "null"
+              }
+
+
               {/* Add Certificate & License Button */}
               <Grid xs={12} container className="mt40">
                 <label for="selecteSertificate" className="LinkButton">
@@ -486,14 +711,14 @@ const EmployeeResult = () => {
                   </Typography>
                 </Grid>
                 <Grid xs={12} md={8} lg={6} container className="HREmployeeDownloads">
-                  {files.map((src) => (
+                  {files.map((name) => (
                     <Grid className="PDFDownload">
                       <Grid className="FileName">
-
-                        <a href="http://infolab.stanford.edu/pub/papers/google.pdf#toolbar=0&navpanes=0&scrollbar=0" target="_blank">{src}</a>
+                      
+                        <a href={`${apiPath}/employee/applicant/download?id=${emplpyeeDetails?.id}&name=${name}`}target="_blank">{name}</a>
 
                       </Grid>
-                      <Button></Button>
+                      {/* <Button></Button> */}
                     </Grid>
                   ))}
 
@@ -518,7 +743,7 @@ const EmployeeResult = () => {
                   {/* ---------- */}
 
                   <form onSubmit={onSubmitEmploye}>
-                    <Grid xs={12} container>
+                    {/* <Grid xs={12} container>
                       <Grid xs={12} className="mt30 pr40">
                         <Grid xs={12}>
                           <Grid xs={12} className="mbold">
@@ -532,7 +757,7 @@ const EmployeeResult = () => {
                           </Typography>
                         </Grid>
                       </Grid>
-                    </Grid>
+                    </Grid> */}
                     <Grid xs={12} className="mt50 pr70">
                       <Grid xs={12} md={8} lg={6} container justify="space-between">
                         <Link to="/employees" className="LinkButtonBack">Back</Link>
@@ -649,7 +874,7 @@ const EmployeeResult = () => {
 
 
 
-      </Grid>
+      </Grid >
   );
 }
 
