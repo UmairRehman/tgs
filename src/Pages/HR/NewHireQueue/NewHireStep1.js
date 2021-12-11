@@ -18,7 +18,7 @@ import PageHeader from "../../../Components/PageHeader";
 import LeftControl from "../../../Components/LeftControl";
 import { useLocation } from "react-router";
 import { useHistory } from "react-router-dom";
-import { environment } from "../../../Environments/environment";
+import { environment } from "../../../environments/environment";
 
 /** Local deoendencies & Libraries */
 import Services from "../../../Services";

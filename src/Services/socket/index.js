@@ -7,7 +7,7 @@ import { Storage } from '../storage';
 
 
 /** Local imports & Statics */
-import { environment } from '../../Environments/environment';
+import { environment } from '../../environments/environment';
 
 import { Imports } from '../../Imports';
 

@@ -4,7 +4,7 @@ import axios from 'axios';
 /** LOCAL DEPENDENCIES */
 import { Imports } from '../../Imports';
 
-import { environment as env } from '../../Environments/environment';
+import { environment as env } from '../../environments/environment';
 
 
 /** Extracting dependencies for use */

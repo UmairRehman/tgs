@@ -23,7 +23,7 @@ import PageHeader from "../../../Components/PageHeader";
 import LeftControl from "../../../Components/LeftControl";
 import { useHistory } from "react-router-dom";
 import { useLocation } from "react-router";
-import { environment } from "../../../Environments/environment";
+import { environment } from "../../../environments/environment";
 
 
 // import { withRouter } from 'react-router-dom';

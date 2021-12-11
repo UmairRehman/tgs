@@ -5,31 +5,31 @@
  * They might also update with versions.
  * */
 
- export const environment = {
-  production: false,
+const {
+  REACT_APP_production: production,
+  REACT_APP_envName: envName,
+  REACT_APP_port: port,
+  REACT_APP_base: base,
+  REACT_APP_router: router,
+  REACT_APP_socketport: socketport,
+  REACT_APP_socketbase: socketbase,
+  REACT_APP_socketrouter: socketrouter,
+} = process.env;
 
-  envName: 'dev',
+console.log(process.env);
 
+export const environment = {
+  production,
+  envName,
   apiPaths: {
-    // port: 3000,
-    // port: 80,
-    port: 4040,
-    // base: 'http://localhost',
-    // base: 'http://209.64.123.132
-    base: 'http://34.225.30.148',
-    // 3.23.118.71
-    // router: '',
-    router: 'api/'
+    port,
+    base,
+    router,
   },
-  
   socketPaths: {
-    // port: 3000,
-    port: 4040,
-    // base: 'http://localhost',
-    // base: 'http://209.64.123.132',
-    base: 'http://34.225.30.148',
-    // router: 'api/'
-    router: ''
+    port: socketport,
+    base: socketbase,
+    router: socketrouter
   },
 
   get apiPath() {

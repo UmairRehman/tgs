@@ -36,7 +36,7 @@ import Services from '../Services';
 
 
 /** Local Statics & Imports */
-import { environment } from '../Environments/environment';
+import { environment } from '../environments/environment';
 
 
 const {

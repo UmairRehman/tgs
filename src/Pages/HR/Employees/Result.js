@@ -23,7 +23,7 @@ import TextField from '@material-ui/core/TextField';
 import PageHeader from "../../../Components/PageHeader";
 import LeftControl from "../../../Components/LeftControl";
 import { useLocation } from 'react-router'
-import { environment } from "../../../Environments/environment";
+import { environment } from "../../../environments/environment";
 import { useHistory } from "react-router-dom";
 /** Local deoendencies & Libraries */
 import Services from '../../../Services';
