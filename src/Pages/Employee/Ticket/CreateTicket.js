@@ -46,35 +46,6 @@ const {
   showSnackBar,
 } = helpers;
 
-const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
-const checkedIcon = <CheckBoxIcon fontSize="small" />;
-
-const dummyData = {
-  User:{
-    name:'Akram Hanif'
-  },
-  RequestBy : [
-    "James Mary",
-    "Robert Patricia",
-    "John Jennifer" 
-  ],
-   RequestFor : [
-    {id:1, name:'David Afton'},
-    {id:2, name:'Alexandra Daddario'} ,
-    {id:3, name:'Stephen Hartley'} 
-  ],
-   RequestType : [
-    {id:1, name:'IT department'},
-    {id:2, name:'Accounts  department' },
-    {id:3, name:'Management  department'}
-  ],
-   RequestCat : [
-    {id:1, name:'IT'},
-    {id:2, name:'Accounts'} ,
-    {id:3, name:'Management'} 
-  ]
-}
-
 
 const CreateTicket = () => {
   const storage = new Storage ()
@@ -93,7 +64,7 @@ const CreateTicket = () => {
   //data states
   const [ticketData, setTicketData] = useState({
      requestedBy:'',
-     requestedFor:[],
+     requestedFor:'',
      requestedType:'',
      category:'',
      comments:'',
@@ -104,6 +75,9 @@ const CreateTicket = () => {
       let employeeList = await employee.get_employee_listing()
       if(employeeList.httpStatus==200){
         employeeList=employeeList.data;
+        employeeList.map(row=>{
+          row.name = `${row.firstName} ${row.lastName}`
+        })
         console.log(employeeList);
       }
       let typeList = await employee.get_ticket_type_listing()
@@ -184,13 +158,9 @@ const CreateTicket = () => {
 
   const setData = async () =>{
     let comment = document.getElementById('comment').value
-    let requestForID = []
-    ticketData.requestedFor.forEach(row=>{
-      requestForID.push(row.id)
-    })
     let data = {
-      for : ticketData.requestedBy.id,
-      by: requestForID[0],
+      for : ticketData.requestedFor.id,
+      by: ticketData.requestedBy.id,
       type: ticketData.requestedType.id,
       category : ticketData.category.id,
       comment : comment,
@@ -234,7 +204,7 @@ const CreateTicket = () => {
   const resetData =  () =>{
     setTicketData({
       ...ticketData,
-      requestedFor:[],
+      requestedFor:'',
       requestedType:'',
       category:'',
       comments:'',
@@ -291,7 +261,7 @@ const CreateTicket = () => {
                             )}
                             required
                           /> */}
-                          <TextField id="outlined-basic" label="Comment here" value={`${ticketData?.requestedBy?.firstName} ${ticketData?.requestedBy?.middleName} ${ticketData?.requestedBy?.lastName}`} disabled variant="outlined" className="w100p"/>
+                          <TextField id="outlined-basic" label="Comment here" value={`${ticketData?.requestedBy?.firstName} ${ticketData?.requestedBy?.lastName}`} disabled variant="outlined" className="w100p"/>
                       </Grid>
                     </Grid>
                   </Grid>
@@ -302,31 +272,16 @@ const CreateTicket = () => {
                       </Grid>
                       <Grid xs={12} className="mt14">
                         <Autocomplete
-                            multiple
+                            // multiple
                             className="w100p"
                             id="checkboxes-tags-demo"
-                            disableCloseOnSelect
-                            value = { ticketData.requestedFor }
                             options={lists.employees}
-                            getOptionLabel={ option => (`${option.firstName} ${option.middleName} ${option.lastName}`) }
+                            value = { ticketData.requestedFor }
                             onChange={ (event,value) =>{
                               handleSubmitRequested(event,value,2)
-                            }
-                                             }
-                            renderOption={(option, { selected }) => (
-                              <React.Fragment>
-                                <Checkbox
-                                  icon={icon}
-                                  checkedIcon={checkedIcon}
-                                  style={{ marginRight: 8 }}
-                                  checked={selected}
-                                />
-                                {`${option.firstName} ${option.middleName} ${option.lastName}`}
-                              </React.Fragment>
-                            )}
-                            renderInput={(params) => (
-                              <TextField {...params} variant="outlined" placeholder="Please Select" />
-                            )}
+                            }}
+                            getOptionLabel={ option => (option.name) }
+                            renderInput={(params) => <TextField  required={true} {...params} label="Please Select" variant="outlined" />}
                           />
                       </Grid>
                     </Grid>
