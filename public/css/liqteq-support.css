@@ -1501,7 +1501,7 @@ textarea::-ms-input-placeholder { /* Microsoft Edge */
     text-overflow: ellipsis;
     margin-right: 25px;
 }
-.PDFDownload button , .PDFDownload a {
+.PDFDownload button {
     background: url(../assets/Icons/DownloadIcon.svg) no-repeat center center #F6F6F6;
     background-size: 50%;
     min-width: 30px;

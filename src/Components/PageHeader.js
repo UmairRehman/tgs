@@ -310,8 +310,6 @@ const PageHeader = () => {
         const {
           detail: eventObject
         } = event;
-
-        console.log(eventObject);
       });
     }
 

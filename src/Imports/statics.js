@@ -13,5 +13,9 @@ export const statics = {
         form_submitted: 'Form Already Submitted',
         user_not_found_in_db: "User does not exist",
         already_employee: "User is already registered as employee",
+        submit_all_form: 'Kindly submit all forms to continue',
+        pdf_format_required: 'PDF format Required',
+        db_error_incorrect_payload: 'Incorect Payload',
+        not_found: 'Not found',
     }
 }

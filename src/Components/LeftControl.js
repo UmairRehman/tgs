@@ -232,7 +232,7 @@ const LeftControl = () => {
                   </Link>
                 </ListItem>
               )}
-              {capabilities.employees_profile.includes(role_id) && (
+              {/* {capabilities.employees_profile.includes(role_id) && (
                 <ListItem button className="EmployeeIcon">
                   <Link
                     to="/employees-profile"
@@ -242,10 +242,10 @@ const LeftControl = () => {
                     }
                   >
                     <Icon />
-                    Employees Profile
+                    Employees Management
                   </Link>
                 </ListItem>
-              )}
+              )} */}
               {capabilities.broadcast_message.includes(role_id) && (
                 <ListItem button className="MessageIcon">
                   <Link
