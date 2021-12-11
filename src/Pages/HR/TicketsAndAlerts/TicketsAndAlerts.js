@@ -36,13 +36,13 @@ const HR_CATEGORY_ID = 1;
 const IT_CATEGORY_ID = 2;
 
 const columns = [
-  { id: "employeeid", label: "Employee ID", minWidth: 120, type: "value" },
-  { id: "name", label: "Name", minWidth: 155, type: "value" },
-  { id: "alertType", label: "Tickets/Alerts", minWidth: 300, type: "value" },
-  { id: "category", label: "Category", minWidth: 80, maxWidth: 100, type: "value" },
-  { id: "description", label: "Description", minWidth: 300, type: "value" },
-  { id: "id", label: "View", minWidth: 50, type: "edit" },
-  { id: "C", label: "Complete", minWidth: 50, type: "view" },
+  { id: "employeeid", label: "Employee ID", maxWidth: 120, type: "value" },
+  { id: "name", label: "Name", maxWidth: 150, type: "value" },
+  { id: "alertType", label: "Tickets/Alerts", maxWidth: 100, type: "value" },
+  { id: "category", label: "Category", maxWidth: 80, type: "value" },
+  { id: "description", label: "Description", maxWidth: 80, type: "value" },
+  { id: "id", label: "View", maxWidth: 50, type: "edit" },
+  { id: "C", label: "Complete", maxWidth: 50, type: "view" },
 ];
 
 function createData(
@@ -114,7 +114,8 @@ const TicketsAndAlerts = () => {
             name: rows.FEmployee.firstName + " " + rows.FEmployee.middleName + " " + rows.FEmployee.lastName,
             alertType: rows.isAlert ? "Alert" : "Ticket",
             category: rows.TicketType.name,
-            description: rows.creation_comment
+            description: rows.creation_comment,
+            isCompleted : rows.isCompleted
           }))
   
         setTest(setTickets);
@@ -152,7 +153,7 @@ const TicketsAndAlerts = () => {
       <Grid xs={12} md={10} container justify="center" className="PageContent">
         <Grid className="PagesFrame">
           <PageHeader />
-          <Grid id="PageTitle">HR Alert / Message Queue</Grid>
+          <Grid id="PageTitle">Alert / Message Queue</Grid>
           {/* Page Start */}
           <Grid xs={12} className="ContentPage">
             <Grid xs={12}>
@@ -185,27 +186,29 @@ const TicketsAndAlerts = () => {
                             page * rowsPerPage,
                             page * rowsPerPage + rowsPerPage
                           )
-                          .map((test) => {
+                          .map((row) => {
                             return (
                               <TableRow
                                 hover
                                 role="checkbox"
                                 tabIndex={-1}
-                                key={test.code}
+                                key={row.code}
                               >
                                 {columns.map((column) => {
                                   // console.log(column)
-                                  const value = test[column.id];
+                                  const value = row[column.id];
                                   return (
                                     <TableCell
                                       key={column.id}
                                       align={column.align}
                                     >
                                       {column.type == "edit" ? (
-                                        <Button className="ViewIcon" onClick={() => onClickDetail(test)}>
+                                        <Button className="ViewIcon" 
+                                        disabled = {row.isCompleted}
+                                        onClick={() => onClickDetail(row)}>
                                         </Button>
                                       ) : column.type == "view" ? (
-                                        <Grid className="CompleteIcon"></Grid>
+                                        <Grid className={`CompleteIcon ${(row.isCompleted) ? `completeTrue` : `` }`}></Grid>
                                       ) : (
                                         value
                                       )}
