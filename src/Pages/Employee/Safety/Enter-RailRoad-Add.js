@@ -152,7 +152,7 @@ const Railroad = () => {
     let crewMembersData=[]
     crewMembers.forEach((row)=>{
       if(row.name && row.position && row.image)
-        crewMembersData.push({id:row.name.id , position:row.position.title , image:row.image})
+        crewMembersData.push({id:row.name.id , position:row.position.id , image:row.image})
       else 
         throw Error ("Images missing")  
     })
@@ -290,23 +290,41 @@ const Railroad = () => {
     let userList = await employee.get_employee_listing()
     if(userList.httpStatus==200){
       userList=userList.data;
+      userList.map(row=>{
+        row.name = `${row.firstName} ${row.lastName}`
+      })
       console.log(userList);
     }
-    let departmentList = await employee.get_department_listing()
-    if(departmentList.httpStatus==200){
-      departmentList=departmentList.data;
-      console.log(departmentList);
-    }
-    let jobCategoryList = await employee.get_job_category_listing()
-    if(jobCategoryList.httpStatus==200){
-      jobCategoryList=jobCategoryList.data;
-      console.log(jobCategoryList);
-    }
+    // let departmentList = await employee.get_department_listing()
+    // if(departmentList.httpStatus==200){
+    //   departmentList=departmentList.data;
+    //   console.log(departmentList);
+    // }
+    
+    // let jobCategoryList = await employee.get_job_category_listing()
+    // if(jobCategoryList.httpStatus==200){
+    //   jobCategoryList=jobCategoryList.data;
+    //   console.log(jobCategoryList);
+    // }
+    
     let siteList = await employee.get_site_listing()
     if(siteList.httpStatus==200){
       siteList=siteList.data;
       console.log(siteList);
     }
+    let jobCategoryList = [
+      { id : "ENG"  ,  title : "Engineering" },
+      { id : "COND" ,  title : "Conductor" },
+      { id : "BR1"  ,  title : "BR1" },
+      { id : "OTHER" , title : "OTHER" },      
+    ]
+
+    let departmentList = [
+      { id : 'Transportation' , title : 'Transportation' },
+      { id : 'Engineering' , title : 'Engineering' },
+      { id : 'Mechanical' , title : 'Mechanical' }
+    ]
+
     let currentUser = JSON.parse(storage.get('user_profile'))
     setLists({ ...lists, users:userList , positions: jobCategoryList , departments: departmentList ,sites:siteList , currentUser:currentUser})
     return true
@@ -365,7 +383,7 @@ const Railroad = () => {
                             value={railRoad.assisting}
                             onChange={ (event,value) => {handleSubmitData(event, value,4)}}
                             options={lists.users}
-                            getOptionLabel={ option => (`${option.firstName} ${option.middleName} ${option.lastName}`)}
+                            getOptionLabel={ option => (option.name)}
                             renderInput={(params) => (
                               <TextField required={true} {...params} variant="outlined" placeholder="Assisting" />
                             )}
@@ -557,12 +575,12 @@ const Railroad = () => {
                                   id="combo-box-name" 
                                   name = "name"
                                   options={lists.users}
-                                  getOptionLabel={ option => (`${option.firstName} ${option.middleName} ${option.lastName}`)}
                                   // value={`${x.firstName} ${x.middleName} ${x.lastName}`}
                                   value={x.name}
                                   onChange={(e,value) => { 
-                                                handleInputChange('name', value,i)}
-                                              }
+                                    handleInputChange('name', value,i)}
+                                  }
+                                  getOptionLabel={ option => (option.name) }
                                   renderInput={(params) => <TextField required={true} {...params} label="Select" variant="outlined" />}
                                 />
                               </Grid>

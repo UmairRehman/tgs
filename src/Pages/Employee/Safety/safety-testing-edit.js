@@ -107,9 +107,10 @@ const SafetyTestingEdit = () => {
     }  
   }
 
-  const getRulesList = async () =>{
+  const getRulesList = async (dept) =>{
     try {
-      let res = await employee.rules_listing()
+      let Department = (dept) ? dept : "All"
+      let res = await employee.rules_listing({Department})
       if(res.httpStatus ==200)
         return res.data   
     } catch (error) {
@@ -121,7 +122,7 @@ const SafetyTestingEdit = () => {
 
     let eventDetails  = await getEventDetails(eventId)
     let crewList =  eventDetails?.crew?.rows?.map((row)=>{
-      return ({ id: row.Employee.id, name:`${row.Employee.firstName} ${row.Employee.middleName} ${row.Employee.lastName}`, result:'' , comment:'' })
+      return ({ id: row.id, name:`${row.Employee.firstName} ${row.Employee.middleName} ${row.Employee.lastName}`, result:'' , comment:'' })
     })
     setSafetyTesting({ ...safetyTesting, crewList:crewList })  
     let details = { 
@@ -131,7 +132,7 @@ const SafetyTestingEdit = () => {
       jobID : eventDetails.event.jobID,
      }
      setEventDetail(details)
-    let rulesList = await getRulesList()
+    let rulesList = await getRulesList(eventDetails.event.Department)
     setRuleList(rulesList)
     console.log(('data',rulesList));
 
@@ -282,8 +283,8 @@ const SafetyTestingEdit = () => {
                           className="w100p"
                           id="checkboxes-tags-demo"
                           options={ruleList}
-                          disableCloseOnSelect
-                          getOptionLabel={option => option.FullName}
+                          // disableCloseOnSelect
+                          getOptionLabel={option => option.ShortName}
                           value = { safetyTesting.testingRules }
                           onChange={ (event,value) =>handleSubmitData(event,value,1) }
                           renderOption={(option, { selected }) => (
@@ -294,7 +295,7 @@ const SafetyTestingEdit = () => {
                                 style={{ marginRight: 8 }}
                                 checked={selected}
                               />
-                              {option.FullName}
+                              {option.ShortName}
                             </React.Fragment>
                           )}
                           renderInput={(params) => (
