@@ -3,6 +3,7 @@ import { isLoggedIn } from './isLoggedIn';
 import { showSnackBar } from './showSnackBar';
 import { getGenerator } from './getGenerator';
 import { promiseTimeout } from './promiseTimeout';
+import { seriliazeParams } from './seriliazeParams';
 
 export const helpers = {
     capitalize,
@@ -10,4 +11,5 @@ export const helpers = {
     showSnackBar,
     getGenerator,
     promiseTimeout,
+    seriliazeParams,
 }
