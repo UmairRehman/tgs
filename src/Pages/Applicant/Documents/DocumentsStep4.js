@@ -160,11 +160,6 @@ const DocumentsStep4 = () => {
         }
     }
 
-    //   if(isMobile) {
-    //     return (
-    //         <MobileScreen />
-    //     )
-    //   }
     return (
         <Grid container xs={12} className="Liq-Container HRPortal">
             <Grid xs={12} md={2} className="LeftContol" id="LeftContol">
