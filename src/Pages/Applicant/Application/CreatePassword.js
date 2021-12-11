@@ -208,7 +208,7 @@ const CreatePassword = () => {
               />
             </FormControl>
             {error == true ?
-              <h5>Paswword does not match</h5>
+              <h5>Password does not match</h5>
               : ""}
             <Typography xs={12} className="CreateFieldTItle">Verify Password</Typography>
             {/* <TextField placeholder="Password" type="password"/> */}
