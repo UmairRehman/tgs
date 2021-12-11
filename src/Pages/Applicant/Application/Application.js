@@ -164,7 +164,7 @@ const Application = () => {
         dob: new Date(),
     });
 
-    /** State for Job Category List*/ 
+    /** State for Job Category List*/
     const [JobCategories, setJobCategories] = useState([])
 
     const [snackBarMessage, setSnackBarMessage] = useState('');
@@ -303,10 +303,10 @@ const Application = () => {
 
     }
 
-    useEffect(async() => {
+    useEffect(async () => {
         let result = await hr.get_job_categories();
-        if(result.httpStatus==200){
-            result.data.map( row =>{
+        if (result.httpStatus == 200) {
+            result.data.map(row => {
                 row.label = row.title;
                 row.title = row.id
             })
@@ -396,6 +396,28 @@ const Application = () => {
 
             removeHttpErrorListener();
         } catch (exc) {
+            // UX Indicator insertion
+            const element = document.getElementById(exc?.path);
+
+            if (element) {
+                element.scrollIntoView({
+                    behavior: 'smooth'
+                });
+
+                const {
+                    children: [child1, child2, ...rest]
+                } = element;
+                
+                const elementToHighlight = child2 || child1; 
+                
+                elementToHighlight.classList.add('incorrect-field');
+
+                // 3000ms duration for animation
+                setTimeout(() => {
+                    elementToHighlight.classList.remove('incorrect-field');
+                }, 3000);
+            }
+
             console.log(exc);
             console.log(applicationForm)
         }
@@ -489,7 +511,9 @@ const Application = () => {
                                     </Grid>
                                 </Grid>
                                 {/* ---------- */}
-                                <Grid xs={12} container className="LRM40 mt30">
+                                <Grid xs={12} container
+                                    className="LRM40 mt30"
+                                    id="home_phone">
                                     <Grid xs={6} className="pr20">
                                         <Grid xs={12} className="mbold mb14">
                                             Home Phone
@@ -512,7 +536,9 @@ const Application = () => {
                                             }
                                         />
                                     </Grid>
-                                    <Grid xs={6} className="pl20">
+                                    <Grid xs={6}
+                                        className="pl20"
+                                        id="cell_phone">
                                         <Grid xs={12} className="mbold mb14">
                                             Cell Phone
                                         </Grid>
@@ -567,7 +593,9 @@ const Application = () => {
 
                                 {/* ---------- */}
                                 <Grid xs={12} container className="LRM40">
-                                    <Grid xs={6} className="mt30 pr20">
+                                    <Grid xs={6}
+                                        className="mt30 pr20"
+                                        id="street_address1">
                                         <Grid xs={12} className="mbold mb14">
                                             Street Address
                                         </Grid>
@@ -580,7 +608,9 @@ const Application = () => {
                                                 )
                                             } />
                                     </Grid>
-                                    <Grid xs={6} className="mt30 pl20">
+                                    <Grid xs={6}
+                                        className="mt30 pl20"
+                                        id="street_address2">
                                         <Grid xs={12} className="mbold mb14">
                                             Street Address 2
                                         </Grid>
@@ -597,7 +627,9 @@ const Application = () => {
 
                                 {/* ----------- */}
                                 <Grid xs={12} container className="LRM40">
-                                    <Grid xs={4} className="mt30 pr20">
+                                    <Grid xs={4}
+                                        className="mt30 pr20"
+                                        id="city">
                                         <Grid xs={12} className="mbold mb14">
                                             City
                                         </Grid>
@@ -610,7 +642,9 @@ const Application = () => {
                                                 )
                                             } />
                                     </Grid>
-                                    <Grid xs={4} className="mt30 pl20 pr20">
+                                    <Grid xs={4}
+                                        className="mt30 pl20 pr20"
+                                        id="state">
                                         <Grid xs={12} className="mbold mb14">
                                             State
                                         </Grid>
@@ -630,7 +664,9 @@ const Application = () => {
                                             }
                                         />
                                     </Grid>
-                                    <Grid xs={4} className="mt30 pl20">
+                                    <Grid xs={4}
+                                        id="zip"
+                                        className="mt30 pl20">
                                         <Grid xs={12} className="mbold mb14">
                                             Zip
                                         </Grid>
@@ -651,7 +687,9 @@ const Application = () => {
                                                 )
                                             } />
                                     </Grid>
-                                    <Grid xs={12} className="mt30">
+                                    <Grid xs={12}
+                                        id="us_citizen"
+                                        className="mt30">
                                         <Grid xs={12} className="mbold mb14">
                                             US Citizen Status
                                         </Grid>
@@ -675,13 +713,14 @@ const Application = () => {
 
                                 {/* ---------- */}
                                 <Grid xs={12} container className="LRM40">
-                                    <Grid xs={6} className="mt30 pr20">
+                                    <Grid xs={6}
+                                        id="marital_status"
+                                        className="mt30 pr20">
                                         <Grid xs={12} className="mbold mb14">
                                             Marital Status
                                         </Grid>
                                         <Autocomplete
                                             className="w100p"
-                                            id="combo-box-demo"
                                             options={MaritalStatus}
                                             getOptionLabel={(option) => option.title}
                                             renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
@@ -889,7 +928,9 @@ const Application = () => {
 
                                 {/* ---------- */}
                                 <Grid xs={12} container className="LRM40">
-                                    <Grid xs={12} className="mt30">
+                                    <Grid xs={12}
+                                        className="mt30"
+                                        id="phone_number">
                                         <Grid xs={12} className="mbold mb14">
                                             Telephone Number
                                         </Grid>
@@ -963,13 +1004,13 @@ const Application = () => {
                                                     getOptionLabel={(option) => option.label}
                                                     renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
                                                     onChange={
-                                                        ($e, values) => 
-                                                        setStateForFormControl(
-                                                            position,
-                                                            'category',
-                                                            $e,
-                                                            values,
-                                                        )
+                                                        ($e, values) =>
+                                                            setStateForFormControl(
+                                                                position,
+                                                                'category',
+                                                                $e,
+                                                                values,
+                                                            )
                                                     }
                                                 />
                                             </Grid>
@@ -1024,7 +1065,11 @@ const Application = () => {
                                                         : 'text-center'
                                                 }>
                                                     Drop File Here OR <label for="ResumeSelect" className="labelButton">Select Files</label>
-                                                    <input type="file" id="ResumeSelect" className="hide"
+                                                    <input
+                                                        type="file"
+                                                        id="ResumeSelect"
+                                                        className="hide"
+                                                        accept=".pdf"
                                                         onChange={
                                                             ($e) => setStateForFormControl(
                                                                 filesToUpload,
@@ -1062,7 +1107,11 @@ const Application = () => {
                                                         : 'text-center'
                                                 }>
                                                     Drop File Here OR <label for="licenseSelect" className="labelButton">Select Files</label>
-                                                    <input type="file" id="licenseSelect" className="hide"
+                                                    <input
+                                                        type="file"
+                                                        id="licenseSelect"
+                                                        className="hide"
+                                                        accept=".pdf"
                                                         onChange={
                                                             $e => setStateForFormControl(
                                                                 filesToUpload,
