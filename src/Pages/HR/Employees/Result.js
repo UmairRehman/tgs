@@ -718,7 +718,7 @@ const EmployeeResult = () => {
                         <a href={`${apiPath}/employee/applicant/download?id=${emplpyeeDetails?.id}&name=${name}`}target="_blank">{name}</a>
 
                       </Grid>
-                      <Button></Button>
+                      {/* <Button></Button> */}
                     </Grid>
                   ))}
 

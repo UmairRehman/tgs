@@ -228,7 +228,7 @@ const LeftControl = () => {
                     className={pathname === "/employees" ? "NavSelected" : ""}
                   >
                     <Icon />
-                    Employees Lookup
+                    Employees
                   </Link>
                 </ListItem>
               )}
