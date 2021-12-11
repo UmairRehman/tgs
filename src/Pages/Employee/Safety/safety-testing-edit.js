@@ -29,6 +29,7 @@ const {
 
 const {
   showSnackBar,
+  seriliazeParams
 } = helpers;
 
 var moment = require('moment-timezone');
@@ -110,7 +111,8 @@ const SafetyTestingEdit = () => {
   const getRulesList = async (dept) =>{
     try {
       let Department = (dept) ? dept : "All"
-      let res = await employee.rules_listing({Department})
+      let params =  '?'.concat( seriliazeParams({ Department }) )
+      let res = await employee.rules_listing({params})
       if(res.httpStatus ==200)
         return res.data   
     } catch (error) {
