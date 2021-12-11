@@ -33,7 +33,7 @@ const {
 const columns = [
   { id: "id", label: "Employee ID", minWidth: 170, type: "value" },
   { id: "firstName", label: "Name", minWidth: 120, type: "value" },
-  { id: "SubDepartmentId", label: "Department", minWidth: 100, type: "value" },
+  { id: "deptName", label: "Department", minWidth: 100, type: "value" },
   { id: "state", label: "City", minWidth: 100, type: "value" },
   { id: "email", label: "Email", minWidth: 170, type: "value" },
   { id: "employeeStatus", label: "Application Stage", minWidth: 170, type: "value" },
@@ -45,9 +45,10 @@ const employeeStatus = [
    "Application For Approval" , //"Application Pending", //1 
    "Application Approved" , //"Application Approved", //2 
    "Application Rejected " , //"Application Rejected", //3 
-   "Questionnaire Pending" , //"Questionnaire Pending", //4 
-   "PDF Documents Pending" , //"Questionnaire Approved", //5 
-   "Documents For Approval" , //"Questionnaire Rejected", //6 
+   "Questionnaire Submit" , //"Questionnaire Pending", //4 
+   "PDF Documents Submit" , //"Questionnaire Approved", //5 
+   "Documents For Submit" , //"Questionnaire Rejected", //6 
+   "Documents Approve" , //"PDF Forms , Submitted", //8 
    "Post Conditional Doc Pending" , //"Documents Submitted", //7 
    "Documents Rejected" , //"PDF Forms , Submitted", //8 
    "Employee" //9
@@ -78,6 +79,7 @@ const NewHireQueue = () => {
         data = data.data; 
         data.forEach(row => {
           row.employeeStatus = employeeStatus[row.EmployeeStatusId-1]
+          row.deptName = row.SubDepartment.name
         });
         setApplicantData(data);      
       }
@@ -197,7 +199,7 @@ const NewHireQueue = () => {
                     onChangeRowsPerPage={handleChangeRowsPerPage}
                   />
                 </Paper>
-                <Grid xs={12} className="TableSearchBox">
+                {/* <Grid xs={12} className="TableSearchBox">
                   <Grid xs={12}>
                   Search By Employee ID
                   </Grid>
@@ -205,7 +207,7 @@ const NewHireQueue = () => {
                     <Button></Button>
                     <TextField/>
                   </Grid>
-                </Grid>
+                </Grid> */}
               </Grid>
             </Grid> 
           </Grid>

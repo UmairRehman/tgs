@@ -13,8 +13,9 @@ export const get_it_request = async (payload, headers) => {
 };
 
 export const list_it_request = async (payload, headers) => {
+    const { params } = payload
     return await api.get(
-        routes.it.list_it_request,
+        routes.it.list_it_request.concat(params),
         payload,
         headers
     );

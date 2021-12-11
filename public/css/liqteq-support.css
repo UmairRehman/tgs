@@ -1437,6 +1437,11 @@ textarea::-ms-input-placeholder { /* Microsoft Edge */
     background-size: 30% !important;
     transition: all 0.3s ease-in-out;
 }
+
+.completeTrue {
+    background-color: #2ad257 !important;
+}
+
 .LiqTables table tr:hover .CompleteIcon {
     background: url(../assets/Icons/CompleteIcon.svg) no-repeat center center #FFF !important;
     background-size: 30% !important;
@@ -1496,7 +1501,7 @@ textarea::-ms-input-placeholder { /* Microsoft Edge */
     text-overflow: ellipsis;
     margin-right: 25px;
 }
-.PDFDownload button , .PDFDownload a {
+.PDFDownload button {
     background: url(../assets/Icons/DownloadIcon.svg) no-repeat center center #F6F6F6;
     background-size: 50%;
     min-width: 30px;

@@ -83,11 +83,7 @@ const EmployeesProfile = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
-//   if(isMobile) {
-//     return (
-//         <MobileScreen />
-//     )
-//   }
+
   return (
     <Grid container xs={12} className="Liq-Container HRPortal">
       <Grid xs={12} md={2} className="LeftContol" id="LeftContol">
@@ -103,11 +99,11 @@ const EmployeesProfile = () => {
                 <Grid xs={12} md={8} lg={6} container className="HREmSearch">
                     <Grid xs={5}>
                         <Typography>Name</Typography>
-                        <TextField id="outlined-basic" value="Ryan" variant="outlined" className="w100p"/>
+                        <TextField id="outlined-basic" variant="outlined" className="w100p"/>
                     </Grid>
                     <Grid xs={5}>
                         <Typography>Employee ID</Typography>
-                        <TextField id="outlined-basic" value="11001" variant="outlined" className="w100p"/>
+                        <TextField id="outlined-basic" variant="outlined" className="w100p"/>
                     </Grid>
                     <Grid xs={2}>
                         <Typography className="SearchBtnDot">.</Typography>

@@ -108,9 +108,7 @@ export const get_test_event_by_id = async (payload, headers) => {
 };
 
 export const rules_listing = async (payload, headers) => {
-    const { Department } = payload
-    let params = `?Department=${Department}`
-    console.log(Department);
+    const { params } = payload
     return await api.get(
         routes.employee.get_rules_list.concat(params),
         payload,

@@ -24,6 +24,7 @@ import { useHistory } from "react-router-dom";
 
 /** Local deoendencies & Libraries */
 import Services from '../../../Services';
+import { seriliazeParams } from "../../../helpers/seriliazeParams";
 
 
 const {
@@ -83,8 +84,9 @@ const NewHireQueueIT = () => {
   
   useEffect(async() => {
 
+    let params = '?'.concat(seriliazeParams({skip:0, limit:20}))
     try{
-      let data = await IT.list_it_request() ;
+      let data = await IT.list_it_request({params}) ;
       if(data?.httpStatus==200){
         data = data.data.rows; 
         data.forEach(row => {
@@ -170,9 +172,14 @@ const NewHireQueueIT = () => {
                                       align={column.align}
                                     >
                                       {column.type == "edit" ? (
-                                        <Button onClick={()=>onClickView(applicantData)} className="ViewIcon" ></Button>
+                                        <Button 
+                                          onClick={()=>onClickView(applicantData)} 
+                                          className="ViewIcon" 
+                                          disabled={applicantData.complete}  
+                                          >
+                                        </Button>
                                       ) : column.type == "view" ? (
-                                        <Grid className="CompleteIcon"></Grid>
+                                        <Grid className={`CompleteIcon ${(applicantData.complete) ? `completeTrue` : `` }`} ></Grid>
                                       ) : (
                                         value
                                       )}
