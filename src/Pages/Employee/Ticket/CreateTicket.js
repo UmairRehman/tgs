@@ -350,51 +350,7 @@ const CreateTicket = () => {
                     </Grid> */}
                   </Grid>
                   <Grid xs={12} container className="mt50">
-                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                      <Box sx={{ m: 1, position: 'relative' }}>
-                        <Fab
-                          aria-label="save"
-                          color="primary"
-                          // sx={buttonSx}
-                          // onClick={submitData}
-                        >
-                          {success ? <CheckIcon /> : <SaveIcon />}
-                        </Fab>
-                        {loading && (
-                          <CircularProgress
-                            size={68}
-                            sx={{
-                              color: '#2963AD',
-                              position: 'absolute',
-                              top: -6,
-                              left: -6,
-                              zIndex: 1,
-                            }}
-                          />
-                        )}
-                      </Box>
-                      <Box sx={{ m: 1, position: 'relative' }}>
-                        <Button
-                          variant="contained"
-                          // sx={buttonSx}
-                          disabled={loading}
-                          type="submit" className="LinkButton" >Submit</Button>
-                        {loading && (
-                          <CircularProgress
-                            size={24}
-                            sx={{
-                              color: '#2963AD',
-                              position: 'absolute',
-                              top: '50%',
-                              left: '50%',
-                              marginTop: '-12px',
-                              marginLeft: '-12px',
-                            }}
-                          />
-                        )}
-                      </Box>
-                    </Box>
-                    {/* <Button type="submit" className="LinkButton" >Submit</Button> */}
+                    <Button type="submit" className="LinkButton" >Submit</Button>
                   </Grid>
                 </Grid>
               </form>
