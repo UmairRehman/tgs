@@ -1437,6 +1437,11 @@ textarea::-ms-input-placeholder { /* Microsoft Edge */
     background-size: 30% !important;
     transition: all 0.3s ease-in-out;
 }
+
+.completeTrue {
+    background-color: #2963AD !important;
+}
+
 .LiqTables table tr:hover .CompleteIcon {
     background: url(../assets/Icons/CompleteIcon.svg) no-repeat center center #FFF !important;
     background-size: 30% !important;

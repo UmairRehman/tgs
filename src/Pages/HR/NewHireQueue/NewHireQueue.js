@@ -33,7 +33,7 @@ const {
 const columns = [
   { id: "id", label: "Employee ID", minWidth: 170, type: "value" },
   { id: "firstName", label: "Name", minWidth: 120, type: "value" },
-  { id: "SubDepartmentId", label: "Department", minWidth: 100, type: "value" },
+  { id: "deptName", label: "Department", minWidth: 100, type: "value" },
   { id: "state", label: "City", minWidth: 100, type: "value" },
   { id: "email", label: "Email", minWidth: 170, type: "value" },
   { id: "employeeStatus", label: "Application Stage", minWidth: 170, type: "value" },
@@ -78,6 +78,7 @@ const NewHireQueue = () => {
         data = data.data; 
         data.forEach(row => {
           row.employeeStatus = employeeStatus[row.EmployeeStatusId-1]
+          row.deptName = row.SubDepartment.name
         });
         setApplicantData(data);      
       }
@@ -197,7 +198,7 @@ const NewHireQueue = () => {
                     onChangeRowsPerPage={handleChangeRowsPerPage}
                   />
                 </Paper>
-                <Grid xs={12} className="TableSearchBox">
+                {/* <Grid xs={12} className="TableSearchBox">
                   <Grid xs={12}>
                   Search By Employee ID
                   </Grid>
@@ -205,7 +206,7 @@ const NewHireQueue = () => {
                     <Button></Button>
                     <TextField/>
                   </Grid>
-                </Grid>
+                </Grid> */}
               </Grid>
             </Grid> 
           </Grid>
