@@ -172,7 +172,12 @@ const NewHireQueueIT = () => {
                                       align={column.align}
                                     >
                                       {column.type == "edit" ? (
-                                        <Button onClick={()=>onClickView(applicantData)} className="ViewIcon" ></Button>
+                                        <Button 
+                                          onClick={()=>onClickView(applicantData)} 
+                                          className="ViewIcon" 
+                                          disabled={applicantData.complete}  
+                                          >
+                                        </Button>
                                       ) : column.type == "view" ? (
                                         <Grid className={`CompleteIcon ${(applicantData.complete) ? `completeTrue` : `` }`} ></Grid>
                                       ) : (
