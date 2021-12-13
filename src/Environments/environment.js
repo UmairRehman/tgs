@@ -16,8 +16,6 @@ const {
   REACT_APP_socketrouter: socketrouter,
 } = process.env;
 
-console.log(process.env);
-
 export const environment = {
   production,
   envName,
