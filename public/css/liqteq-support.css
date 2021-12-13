@@ -2260,7 +2260,7 @@ video.rounded {
     height: auto !important;
 }
 .datePickerReact.data20h .react-date-picker__wrapper {
-    height: 20px;
+    /* height: 20px; */
 }
 .datePickerReact.PosRIght .react-date-picker__calendar.react-date-picker__calendar--open {
     inset: 100% auto auto -127% !important;

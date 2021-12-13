@@ -532,3 +532,6 @@ span.weldingCutting {
     animation-iteration-count: 1;
     animation-direction: normal;
 }
+.mt-0 {
+    margin-top: 0px!Important;
+}

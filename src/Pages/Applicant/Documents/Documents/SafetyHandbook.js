@@ -3016,7 +3016,7 @@ const SafetyHandbook = () => {
                           />
                           Employee Signature
                         </TableCell>
-                        <TableCell className="w40 mt16 pl20">
+                        <TableCell className="w40 pl20 mt-0">
                           <DatePicker
                             onChange={(value) => {
                               setSignatureDate(value);
@@ -3024,6 +3024,7 @@ const SafetyHandbook = () => {
                             value={SignatureDate}
                             id="offerDate"
                             className="datePickerReact data20h"
+                            disabled
                           />
                           Date
                         </TableCell>
@@ -3035,10 +3036,11 @@ const SafetyHandbook = () => {
                             name="textfield"
                             id="verificationSignature"
                             className="w100 bn bb mt6 signatureClass font-20"
+                            disabled
                           />
                           Supervisor’s Verification
                         </TableCell>
-                        <TableCell className="w40 mt16 pl20">
+                        <TableCell className="w40 pl20 mt-0">
                           <DatePicker
                             onChange={(value) => {
                               setVerificationDate(value);
@@ -3046,6 +3048,7 @@ const SafetyHandbook = () => {
                             value={VerificationDate}
                             id="offerDate"
                             className="datePickerReact data20h"
+                            disabled
                           />
                           Date
                         </TableCell>
