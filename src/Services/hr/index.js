@@ -168,6 +168,51 @@ export const additionalFiles = async (payload, headers) => {
     );
 }
 
+
+
+
+export const getCertificate = async (payload, headers) => {
+    const { id  } = payload;
+    return await api.get(
+        routes.hr.get_certificate.concat(id),
+        payload,
+        headers
+    );
+}
+
+
+
+export const updatePosition = async (payload, headers) => {
+    const { id  } = payload;
+    return await api.put(
+        routes.hr.update_position,
+        payload,
+        headers
+    );
+}
+
+
+
+export const updatePay = async (payload, headers) => {
+    const { id  } = payload;
+    return await api.put(
+        routes.hr.update_pay,
+        payload,
+        headers
+    );
+}
+
+
+
+
+export const terminateEmployee = async (payload , headers) => {
+    return await api.post(
+        routes.hr.terminate,
+        payload,
+        headers
+    );
+}
+
 // @returns {void}
 //  * @param {string} payload.id - Employee Id
 // 

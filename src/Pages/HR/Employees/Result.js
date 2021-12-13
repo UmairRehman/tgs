@@ -18,6 +18,7 @@ import {
   useTheme,
   useMediaQuery
 } from "@material-ui/core";
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import { Link } from "react-router-dom";
 import TextField from '@material-ui/core/TextField';
 import PageHeader from "../../../Components/PageHeader";
@@ -25,21 +26,24 @@ import LeftControl from "../../../Components/LeftControl";
 import { useLocation } from 'react-router'
 import { environment } from "../../../environments/environment";
 import { useHistory } from "react-router-dom";
+import Snackbar from '../../../Components/Snackbar';
+
 /** Local deoendencies & Libraries */
 import Services from '../../../Services';
+
+var moment = require('moment-timezone')
 
 const { apiPath } = environment;
 
 
 const {
-  hr
+  hr,
+  employee
 } = Services;
 
-const roleFromLocalStorage = localStorage.getItem('role_id')
 
-// import { withRouter } from 'react-router-dom';
-// import MobileScreen from './Mobile/Enter-RailRoad-Add';
-// import {isMobile} from 'react-device-detect';
+
+const roleFromLocalStorage = localStorage.getItem('role_id')
 
 
 // First Table
@@ -55,7 +59,7 @@ const addresscol = [
 // Second Table
 const PayCol = [
   { id: "EmployeeId", label: "Employee ID", minWidth: 140, type: "value" },
-  { id: "PayType", label: "Pay Type", minWidth: 160, type: "value" },
+  { id: "PayType.name", label: "Pay Type", minWidth: 160, type: "value" },
   { id: "Rate", label: "Pay Rate", minWidth: 160, type: "value" },
   { id: "EffectiveDate", label: "Rate Effective Date", minWidth: 160, type: "value" },
   // { id: "sp", label: "Supervisor", minWidth: 160, type: "value" },
@@ -68,10 +72,10 @@ const Positioncol = [
   // { id: "lv", label: "Level", minWidth: 100, type: "value" },
   { id: "FullTitle", label: "Full title", minWidth: 100, type: "value" },
   { id: "JobCategoryId", label: "Category", minWidth: 100, type: "value" },
-  { id: "TGSLocation.address", label: "Location", minWidth: 100, type: "value" },
-  { id: "departmentName", label: "Department", minWidth: 100, type: "value" },
-  { id: "SubDepartmentName", label: "Sub-Department", minWidth: 100, type: "value" },
-  { id: "SupervisorName", label: "Supervisor", minWidth: 100, type: "value" },
+  { id: "TGSLocation.name", label: "Location", minWidth: 100, type: "value" },
+  // { id: "departmentName", label: "Department", minWidth: 100, type: "value" },
+  { id: "SubDepartment.name", label: "Sub-Department", minWidth: 100, type: "value" },
+  { id: "Employee.firstName", label: "Supervisor", minWidth: 100, type: "value" },
   { id: "EffectiveDate", label: "Hire Date", minWidth: 100, type: "value" },
   { id: "ed", label: "Edit", minWidth: 50, type: "edit" }
 ];
@@ -153,9 +157,9 @@ const addrows = [
 
 // Second Table
 const CertiCol = [
-  { id: "eid", label: "Employee ID", minWidth: 140, type: "value" },
-  { id: "lc", label: "License Certificate", minWidth: 160, type: "value" },
-  { id: "is", label: "Issue Date", minWidth: 160, type: "value" },
+  { id: "id", label: "ID", minWidth: 140, type: "value" },
+  { id: "name", label: "License Certificate", minWidth: 160, type: "value" },
+  { id: "issue_date", label: "Issue Date", minWidth: 160, type: "value" },
   { id: "ed", label: "Expiry Date", minWidth: 160, type: "value" },
   { id: "edi", label: "Edit", minWidth: 50, type: "edit" }
 ];
@@ -181,8 +185,6 @@ const Crtirows = [
 ];
 const EmployeeResult = () => {
 
-  const [page, setPage] = React.useState(0);
-
   let history = useHistory();
 
   const location = useLocation();
@@ -198,18 +200,204 @@ const EmployeeResult = () => {
   const [department, setDepartment] = useState({})
 
   const [comment, setComment] = useState('')
+
   const [loader, setLoader] = useState(false)
+
   const [componentLoader, setComponentLoader] = useState(false)
 
   const [updateAddress, setUpdateAddress] = useState({})
 
   const [streedAddress, setStreedAddress] = useState(emplpyeeDetails.address)
+
   const [streedAddress1, setStreedAddress1] = useState(emplpyeeDetails.address1)
+
   const [city, setCity] = useState(emplpyeeDetails.city)
+
   const [stateName, setStateName] = useState(emplpyeeDetails.state)
+
   const [zip, setZip] = useState(emplpyeeDetails.zip)
 
-  const [payRate, setPayRate] = useState({})
+  const [updateCertificate, setUpdateCertificate] = useState({})
+
+  const [payRate, setPayRate] = useState([])
+
+  const [certificate, setCertificate] = useState([])
+
+  const [updatedCertificateID, setUpdatedCertificateID] = useState('')
+
+  const [updatedCertificateName, setUpdatedCertificateName] = useState('')
+
+  const [updatedCertificateIssueDate, setUpdatedCertificateIssueDate] = useState('')
+
+  const [updatedCertificateExpiryDate, setUpdatedCertificateExpiryDate] = useState('')
+
+  const [certificateID, setCertificateID] = useState('')
+
+  const [flag, setFlag] = useState(false)
+
+
+
+
+
+  function terminateEmployee() {
+    history.push({
+      pathname: '/employees-profile/termination',
+      state: empData
+    });
+  }
+
+
+
+
+  function onUpdateCertificate(e) {
+    e.preventDefault();
+
+    let data = {
+      name: updatedCertificateName,
+      issue_date: moment(new Date(updatedCertificateIssueDate)).format('YYYY-MM-DD').toString(),
+      expiry_date: moment(new Date(updatedCertificateExpiryDate)).format('YYYY-MM-DD').toString(),
+      employee_id: emplpyeeDetails?.id,
+      id: updatedCertificateID
+    }
+
+    console.log(data)
+
+    try {
+      hr.updateCertificate(data).then((certificateData) => {
+        console.log(certificateData)
+        setFlag(true)
+        setOpenC(!openCerti);
+
+      }).catch((err) => { console.log(err) });
+
+    }
+    catch (exc) {
+      console.log(exc);
+    }
+
+  }
+
+  // update Pay 
+
+  function onUpdatePay(e) {
+    e.preventDefault();
+
+    let data = {
+      position_level: 1,
+      rate: updatePay.rate,
+      pay_type: updatePay.pay_type,
+      employee_id: emplpyeeDetails?.id,
+      start_date: updatePayDate
+    }
+    try {
+      hr.updatePay(data).then((certificateData) => {
+        console.log(certificateData)
+        setFlag(true)
+        setOpenC(!openCerti);
+
+      }).catch((err) => { console.log(err) });
+
+      setOpenPosition(false)
+
+
+    }
+    catch (exc) {
+      console.log(exc);
+
+    }
+
+  }
+
+  // update POsition 
+
+  function onUpdatePosition(e) {
+    e.preventDefault();
+
+    let data = {
+      full_title: updatePositon?.fullTitle,
+      position_level: '1',
+      position_category: updatePositon?.category,
+      location_id: updatePositon?.location,
+      SubDepartment_Id: updatePositon?.subDepartment,
+      Supervisor_Id: updatePositon?.supervisor,
+      employee_id: updatePositon?.employeeId,
+      start_date: startDate
+    }
+
+    console.log(data)
+
+    try {
+      hr.updatePosition(data).then((certificateData) => {
+        console.log(certificateData)
+        setFlag(true)
+        setOpenC(!openCerti);
+
+      }).catch((err) => { console.log(err) });
+
+      setOpenPosition(false)
+
+
+    }
+    catch (exc) {
+      console.log(exc);
+
+    }
+
+  }
+
+  const [paytypeDropdown, setPaytypeDropdown] = useState([]);
+
+
+  const [lists, setLists] = useState({
+    users: [],
+    positions: [],
+    departments: [],
+    sites: []
+  })
+
+  useEffect(async () => {
+
+    let departmentList = await employee.get_department_listing()
+    if (departmentList.httpStatus == 200) {
+      departmentList = departmentList.data;
+      console.log(departmentList);
+    }
+
+
+
+    let jobCategoryList = await employee.get_job_category_listing()
+    if (jobCategoryList.httpStatus == 200) {
+      jobCategoryList = jobCategoryList.data;
+      console.log(jobCategoryList);
+    }
+
+
+
+    let siteList = await employee.get_site_listing()
+    if (siteList.httpStatus == 200) {
+      siteList = siteList.data;
+      console.log(siteList);
+    }
+
+
+    let userList = await employee.get_employee_listing()
+    if (userList.httpStatus == 200) {
+      userList = userList.data;
+      userList.map(row => {
+        row.name = `${row.firstName} ${row.lastName}`
+      })
+    }
+
+    setLists({ ...lists, users: userList, positions: jobCategoryList, departments: departmentList, sites: siteList })
+
+
+    let payLocationData = await hr.pay_type();
+    setPaytypeDropdown(payLocationData.data);
+
+  }, [])
+
+
+  const [empData, setEmpData] = useState({})
 
 
   useEffect(async () => {
@@ -222,11 +410,12 @@ const EmployeeResult = () => {
         console.log(applicantDataHistory)
         setComponentLoader(true)
         setEmplpyeeDetails(applicantDataHistory?.employee[0])
-        console.log(emplpyeeDetails)
+        setEmpData(applicantDataHistory)
         setComponentLoader(false)
         setFiles(applicantDataHistory?.files)
-        console.log(files)
         setPosition(applicantDataHistory?.position)
+        setPayRate(applicantDataHistory.pay)
+
         setTgsLocation(applicantDataHistory?.TGSLocation)
         setDepartment(applicantDataHistory?.employee[0]?.SubDepartment)
         setZip(applicantDataHistory?.employee[0].zip)
@@ -234,8 +423,6 @@ const EmployeeResult = () => {
         setCity(applicantDataHistory?.employee[0].city)
         setStreedAddress(applicantDataHistory?.employee[0].address)
         setStreedAddress1(applicantDataHistory?.employee[0].address1)
-
-        setPayRate(applicantDataHistory?.pay)
 
       }).catch((err) => { console.log(err) });
 
@@ -245,27 +432,117 @@ const EmployeeResult = () => {
     }
 
 
-  }, []);
+
+    // certificate api 
+
+    try {
+      hr.getCertificate({ id }).then((certificateData) => {
+        console.log(certificateData)
+
+        setCertificate(certificateData.data.rows)
 
 
+      }).catch((err) => { console.log(err) });
+
+    }
+    catch (exc) {
+      console.log(exc);
+    }
+
+
+  }, [flag]);
 
 
   // For Modal
   const [openAdd, setOpenA] = React.useState(false);
   const [openCerti, setOpenC] = React.useState(false);
+
+  const [openPosition, setOpenPosition] = React.useState(false);
+
+  const [updatePositon, setUpdatePositon] = useState({
+    employeeId: '',
+    fullTitle: '',
+    category: '',
+    location: '',
+    subDepartment: '',
+    supervisor: ''
+  })
+
+  const [startDate, setStartDate] = useState('')
+  const [updatePayDate, setUpdatePayDate] = useState('')
+
+
+  function editPosiotion(row) {
+    setOpenPosition(true)
+
+    console.log(row)
+
+    setUpdatePositon({ ...updatePositon, employeeId: row.EmployeeId, fullTitle: row.FullTitle, category: row.EmployeeId, location: row.EmployeeId, subDepartment: row.SubDepartment.id, supervisor: row.firstName })
+
+    console.log(updatePositon)
+
+  }
+
+  const [openPay, setOpenPay] = useState(false)
+  const [updatePay, setUpdatePay] = useState({
+    position_level: '',
+    rate: '',
+    pay_type: '',
+    employee_id: '',
+    start_date: ""
+  })
+
+  function editPay(row) {
+    console.log(row)
+    setOpenPay(true)
+    setUpdatePay({ ...updatePay, position_level: '1', rate: row.Rate, pay_type: row.PayType.name, employee_id: row.EmployeeId })
+    console.log("---------------")
+    console.log(updatePay)
+
+  }
+
+  function editPayClose() {
+    setOpenPay(false)
+  }
+
+  function editPosiotionClose() {
+    setOpenPosition(false)
+  }
+
+  useEffect(() => {
+    console.log(updatePositon)
+    return () => {
+
+    }
+  }, [updatePositon])
+
+
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const handleClickOpenAdd = () => {
+  function handleClickOpenAdd(row) {
+
+    console.log(row)
     setOpenA(true);
+
   };
 
   const handleCloseAdd = () => {
     setOpenA(false);
   };
 
-  const handleClickOpenCerti = () => {
+  function getCertificate(row) {
+
+    setUpdateCertificate(row)
+    setUpdatedCertificateID(row.id)
+    setUpdatedCertificateName(row.name)
+    setUpdatedCertificateIssueDate(row.issue_date)
+    setUpdatedCertificateExpiryDate(row.expiry_date)
+
+
+
     setOpenC(true);
+    console.log(row)
   };
 
   const handleCloseCerti = () => {
@@ -319,6 +596,7 @@ const EmployeeResult = () => {
             setFiles(applicantDataHistory?.files)
             console.log(files)
             setPosition(applicantDataHistory?.position)
+
             setTgsLocation(applicantDataHistory?.TGSLocation)
             setDepartment(applicantDataHistory?.employee[0]?.SubDepartment)
             setZip(applicantDataHistory?.employee[0].zip)
@@ -327,6 +605,8 @@ const EmployeeResult = () => {
             setStreedAddress(applicantDataHistory?.employee[0].address)
             setStreedAddress1(applicantDataHistory?.employee[0].address1)
             setLoader(false);
+
+
 
           }).catch((err) => { console.log(err) });
         })
@@ -519,7 +799,7 @@ const EmployeeResult = () => {
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {Crtirows
+                        {certificate
                           .map((row) => {
                             return (
                               <TableRow
@@ -536,7 +816,7 @@ const EmployeeResult = () => {
                                       align={column.align}
                                     >
                                       {column.type == "edit" ? (
-                                        <Button onClick={handleClickOpenCerti} className="EditIcon"></Button>
+                                        <Button onClick={() => getCertificate(row)} className="EditIcon"></Button>
                                       ) : (
                                         value
                                       )}
@@ -597,17 +877,28 @@ const EmployeeResult = () => {
                                     key={row.code}
                                   >
                                     {Positioncol.map((column) => {
-                                      const value = row[column.id];
+                                      var ex = column.id;
+                                      var value = row;
+                                      // const value = row[column.id];
+                                      while (ex.includes(".")) {
+                                        let v = ex.split('.');
+                                        value = value[v[0]];
+                                        ex = v[1];
+                                        // code block to be executed
+                                      }
+                                      value = value[ex];
                                       return (
                                         <TableCell
                                           key={column.id}
                                           align={column.align}
                                         >
                                           {column.type == "edit" ? (
-                                            <Button onClick={handleClickOpenAdd} className="EditIcon"></Button>
-                                          ) : (
-                                            value
-                                          )}
+
+                                            <Button onClick={() => editPosiotion(row)} className="EditIcon"></Button>
+                                          )
+                                            : (
+                                              value
+                                            )}
                                         </TableCell>
                                       );
                                     })}
@@ -645,7 +936,7 @@ const EmployeeResult = () => {
                             </TableRow>
                           </TableHead>
                           <TableBody>
-                            {[payRate]
+                            {payRate
                               .map((row) => {
                                 return (
                                   <TableRow
@@ -655,17 +946,27 @@ const EmployeeResult = () => {
                                     key={row.code}
                                   >
                                     {PayCol.map((column) => {
-                                      const value = row[column.id];
+                                      var ex = column.id;
+                                      var value = row;
+                                      // const value = row[column.id];
+                                      while (ex.includes(".")) {
+                                        let v = ex.split('.');
+                                        value = value[v[0]];
+                                        ex = v[1];
+                                        // code block to be executed
+                                      }
+                                      value = value[ex];
                                       return (
                                         <TableCell
                                           key={column.id}
                                           align={column.align}
                                         >
                                           {column.type == "edit" ? (
-                                            <Button onClick={handleClickOpenCerti} className="EditIcon"></Button>
-                                          ) : (
-                                            value
-                                          )}
+                                            <Button onClick={() => editPay(row)} className="EditIcon"></Button>
+                                          )
+                                            : (
+                                              value
+                                            )}
                                         </TableCell>
                                       );
                                     })}
@@ -680,12 +981,12 @@ const EmployeeResult = () => {
 
 
                   <Grid xs={12} container className="mt40">
-                    <Link to="/employees-profile/termination" className="LinkButton">
+                    <Button onClick={terminateEmployee} className="LinkButton">
                       Terminate Employee
-                    </Link>
+                    </Button>
                   </Grid>
                 </div>
-                : "null"
+                : ""
               }
 
 
@@ -714,8 +1015,8 @@ const EmployeeResult = () => {
                   {files.map((name) => (
                     <Grid className="PDFDownload">
                       <Grid className="FileName">
-                      
-                        <a href={`${apiPath}/employee/applicant/download?id=${emplpyeeDetails?.id}&name=${name}`}target="_blank">{name}</a>
+
+                        <a href={`${apiPath}/employee/applicant/download?id=${emplpyeeDetails?.id}&name=${name}`} target="_blank">{name}</a>
 
                       </Grid>
                       {/* <Button></Button> */}
@@ -743,21 +1044,6 @@ const EmployeeResult = () => {
                   {/* ---------- */}
 
                   <form onSubmit={onSubmitEmploye}>
-                    {/* <Grid xs={12} container>
-                      <Grid xs={12} className="mt30 pr40">
-                        <Grid xs={12}>
-                          <Grid xs={12} className="mbold">
-                            Comments
-                          </Grid>
-                          <Grid xs={12} className="mt14">
-                            <TextareaAutosize onChange={(e) => setComment(e.target.value)} className="w100p" rowsMin={6} placeholder="Comment here" required={true} />
-                          </Grid>
-                          <Typography variant="h6" className="MuiTypography-subtitle2 MuiTypography-colorTextSecondary" component="h6">
-                            Please leave this field empty if you have no comments
-                          </Typography>
-                        </Grid>
-                      </Grid>
-                    </Grid> */}
                     <Grid xs={12} className="mt50 pr70">
                       <Grid xs={12} md={8} lg={6} container justify="space-between">
                         <Link to="/employees" className="LinkButtonBack">Back</Link>
@@ -832,50 +1118,229 @@ const EmployeeResult = () => {
         >
           <Button autoFocus onClick={handleCloseCerti} className="ModalClose">
           </Button>
-          <DialogContent>
-            <Grid xs={12} className="mbold">
-              <Grid xs={12} className="pl14">Employee ID</Grid>
-              <TextField id="outlined-basic" label="Type Here" variant="outlined" className="w100p" />
-            </Grid>
-            <Grid xs={12} className="mbold mt30">
-              <Grid xs={12} className="pl14">License Certificate</Grid>
-              <TextField id="outlined-basic" label="Type Here" variant="outlined" className="w100p" />
-            </Grid>
-            <Grid xs={12} className="mbold mt30 DatePickerCss">
-              <Grid xs={12} className="pl14">Issue Date</Grid>
-              <TextField
-                id="date"
-                type="date"
-                className="DateTimePicker"
-                defaultValue="YY-MM-DD"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
-            </Grid>
-            <Grid xs={12} className="mbold mt30 DatePickerCss">
-              <Grid xs={12} className="pl14">Expiry Date</Grid>
-              <TextField
-                id="date"
-                type="date"
-                className="DateTimePicker"
-                defaultValue="YY-MM-DD"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-              />
-            </Grid>
-            <Grid xs={12} container justify="center" className="mt30">
-              <Button className="LinkButton">Save</Button>
-            </Grid>
-          </DialogContent>
+          <form onSubmit={onUpdateCertificate}>
+            <DialogContent>
+              <Grid xs={12} className="mbold">
+                <Grid xs={12} className="pl14">Employee ID</Grid>
+                <TextField id="outlined-basic" required value={updateCertificate?.id} variant="outlined" className="w100p" />
+              </Grid>
+              <Grid xs={12} className="mbold mt30">
+                <Grid xs={12} className="pl14">License Certificate</Grid>
+                <TextField id="outlined-basic" required value={updatedCertificateName} onChange={(e) => setUpdatedCertificateName(e.target.value)} variant="outlined" className="w100p" />
+              </Grid>
+              <Grid xs={12} className="mbold mt30 DatePickerCss">
+                <Grid xs={12} className="pl14">Issue Date</Grid>
+                <TextField
+                  id="date"
+                  type="date"
+                  className="DateTimePicker"
+                  value={moment(new Date(updatedCertificateIssueDate)).format('DD/MM/YYYY').toString()}
+                  onChange={(e) => setUpdatedCertificateIssueDate(e.target.value)}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </Grid>
+              <Grid xs={12} className="mbold mt30 DatePickerCss">
+                <Grid xs={12} className="pl14">Expiry Date</Grid>
+                {console.log(updatedCertificateExpiryDate)}
+                <TextField
+                  id="date"
+                  type="date"
+                  className="DateTimePicker"
+                  value={moment(new Date(updatedCertificateExpiryDate)).format('MM/DD/YYYY').toString()}
+
+                  onChange={(e) =>
+                    setUpdatedCertificateExpiryDate(e.target.value)}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </Grid>
+              <Grid xs={12} container justify="center" className="mt30">
+                <Button type="submit" className="LinkButton">Save</Button>
+              </Grid>
+            </DialogContent>
+          </form>
         </Dialog>
 
 
+        {/* Modal Position*/}
+        <Dialog
+          fullScreen={fullScreen}
+          open={openPosition}
+          onClose={editPosiotionClose}
+          className="BroadcastMessageModal LiqTables"
+          aria-labelledby="responsive-dialog-title"
+        >
+          <Button autoFocus onClick={editPosiotionClose} className="ModalClose">
+          </Button>
+          <form onSubmit={onUpdatePosition}>
+            <DialogContent>
+              <Grid xs={12} className="mbold">
+                <Grid xs={12} className="pl14">Employee ID</Grid>
+                <TextField id="outlined-basic" required value={updatePositon?.employeeId} variant="outlined" className="w100p" />
+              </Grid>
+              <Grid xs={12} className="mbold mt30">
+                <Grid xs={12} className="pl14">Full title</Grid>
+                <TextField id="outlined-basic" required value={updatePositon.fullTitle} onChange={(e) => setUpdatePositon({ ...updatePositon, fullTitle: e.target.value })} variant="outlined" className="w100p" />
+              </Grid>
 
 
+              <Grid xs={12} className="mbold mt30">
+                <Grid xs={12} className="pl14">Location</Grid>
+
+
+
+                <Autocomplete
+                  className="w100p"
+                  id="checkboxes-tags-demo"
+                  onChange={(event, newValue) => { setUpdatePositon({ ...updatePositon, location: newValue.id }) }}
+                  options={lists.sites}
+                  getOptionLabel={option => (option.title)}
+                  renderInput={(params) => (
+                    <TextField required={true} {...params} variant="outlined" />
+                  )}
+                />
+
+
+              </Grid>
+
+              <Grid xs={12} className="mbold mt30">
+                <Grid xs={12} className="pl14">Sub-Department</Grid>
+
+                <Autocomplete
+                  className="w100p"
+                  id="checkboxes-tags-demo"
+                  onChange={(event, newValue) => { setUpdatePositon({ ...updatePositon, subDepartment: newValue.id }) }}
+                  options={lists.departments}
+                  getOptionLabel={option => (option.title)}
+                  renderInput={(params) => (
+                    <TextField required={true} {...params} variant="outlined" />
+                  )}
+                />
+
+              </Grid>
+
+              <Grid xs={12} className="mbold mt30">
+                <Grid xs={12} className="pl14">Supervisor</Grid>
+
+                <Autocomplete
+                  className="w100p"
+                  id="checkboxes-tags-demo"
+                  value={updatePositon.supervisor}
+                  onChange={(event, newValue) => { setUpdatePositon({ ...updatePositon, supervisor: newValue.id }) }}
+                  options={lists.users}
+                  getOptionLabel={option => (option.name)}
+                  renderInput={(params) => (
+                    <TextField required={true} {...params} variant="outlined" />
+                  )}
+                />
+
+              </Grid>
+
+
+
+              <Grid xs={12} className="mbold mt30">
+                <Grid xs={12} className="pl14">Started Date</Grid>
+                <TextField
+                  required={true}
+                  id="date"
+                  type="date"
+                  className="DateTimePicker"
+                  onChange={(e, value) => setStartDate(e.target.value)}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </Grid>
+
+
+
+              <Grid xs={12} container justify="center" className="mt30">
+                <Button type="submit" className="LinkButton">Save</Button>
+              </Grid>
+            </DialogContent>
+          </form>
+        </Dialog>
+
+        <Snackbar
+        ></Snackbar>
+
+
+
+
+        {/* Modal pay  */}
+        <Dialog
+          fullScreen={fullScreen}
+          open={openPay}
+          onClose={editPayClose}
+          className="BroadcastMessageModal LiqTables"
+          aria-labelledby="responsive-dialog-title"
+        >
+
+
+          <Button autoFocus onClick={editPayClose} className="ModalClose">
+          </Button>
+
+          <form onSubmit={onUpdatePay}>
+            <DialogContent>
+              <Grid xs={12} className="mbold">
+                <Grid xs={12} className="pl14">Employee ID</Grid>
+                <TextField id="outlined-basic" required value={updatePay?.employee_id} variant="outlined" className="w100p" />
+              </Grid>
+              <Grid xs={12} className="mbold mt30">
+                <Grid xs={12} className="pl14">Pay Type</Grid>
+
+                <Autocomplete
+                  className="w100p"
+                  id="combo-box-demo"
+                  // onChange={(e, value) => {
+                  //   setpartType(value.id);
+                  // }}
+                  onChange={(event, newValue) => setUpdatePay({ ...updatePay, pay_type: newValue.id })}
+
+                  options={paytypeDropdown}
+                  getOptionLabel={(option) => option.title}
+                  renderInput={(params) => (
+                    <TextField
+                      required={true}
+                      {...params}
+                      label="Select"
+                      variant="outlined"
+                    />
+                  )}
+                />
+              </Grid>
+
+              <Grid xs={12} className="mbold mt30">
+                <Grid xs={12} className="pl14">Pay Rate</Grid>
+                <TextField id="outlined-basic" required value={updatePay.rate} onChange={(e) => setUpdatePay({ ...updatePay, rate: e.target.value })} variant="outlined" className="w100p" />
+              </Grid>
+
+              <Grid xs={12} className="mbold mt30">
+                <Grid xs={12} className="pl14">Updated Date</Grid>
+                <TextField
+                  required={true}
+                  id="date"
+                  type="date"
+                  className="DateTimePicker"
+                  onChange={(e, value) => setUpdatePayDate(e.target.value)}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </Grid>
+
+              <Grid xs={12} container justify="center" className="mt30">
+                <Button type="submit" className="LinkButton">Save</Button>
+              </Grid>
+            </DialogContent>
+          </form>
+        </Dialog>
       </Grid >
   );
 }
+
 
 export default EmployeeResult;
