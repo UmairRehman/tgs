@@ -22,8 +22,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-
-environments/environment.js
-!environments/environment.example.js
-environments/.env.*
-!environments/.env.example
+src/environments/.env.*
+!src/environments/.env.example
