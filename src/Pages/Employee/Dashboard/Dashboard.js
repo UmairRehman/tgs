@@ -114,22 +114,22 @@ const Dashboard = () => {
               <Typography variant="h6" component="h6">TGS Software</Typography>
               <Grid xs={12} container justify="space-between">
                 <Grid className="DashSoftware DashBI">
-                  <a href="#"></a>
+                  <a target="_blank" href="https://bi.tgsgroup.com/TGSBI_Prod/LogOn/"></a>
                 </Grid>
                 <Grid className="DashSoftware DashSaleforce">
-                  <a href="#"></a>
+                  <a target="_blank" href="https://login.salesforce.com/"></a>
                 </Grid>
                 <Grid className="DashSoftware DashAssetPro">
-                  <a href="#"></a>
+                  <a target="_blank" href="https://xtgs1.maxaccel.com/AssetPro/index.php"></a>
                 </Grid>
                 <Grid className="DashSoftware DashSafeTrack">
-                  <a href="#"></a>
+                  <a target="_blank" href="https://xtgs1.maxaccel.com/SafeTrack/"></a>
                 </Grid>
                 <Grid className="DashSoftware Cedar">
-                  <a href="#"></a>
+                  <a target="_blank" href="https://arms.cedarai.com"></a>
                 </Grid>
                 <Grid className="DashSoftware DashLocstatt">
-                  <a href="#"></a>
+                  <a target="_blank" href="https://locstatt.net/login.html"></a>
                 </Grid>
               </Grid>
             </Grid>

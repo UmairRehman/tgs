@@ -19,3 +19,20 @@ export const getAll = async (payload, headers) => {
         headers
     );
 }
+
+export const getAllSend = async (payload, headers) => {
+    return await api.get(
+        routes.broadcast.getAllSend,
+        payload,
+        headers
+    );
+}
+
+export const messageRead = async (payload, headers) => {
+    const { id } = payload ;
+    return await api.put(
+        routes.broadcast.getAll.concat(`/${id}`),
+        payload,
+        headers
+    );
+}
