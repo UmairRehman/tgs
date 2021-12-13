@@ -50,6 +50,14 @@ export const routes = {
         update_employee_address :'employee/hr/employee',
         //files
         additional_files_uplaod : 'employee/hr/add_files/',
+        get_certificate: 'employee/certificate/employee/',
+        update_certificate: 'employee/certificate/',
+        update_position: 'employee/hr/employee/position',
+        update_pay: 'employee/hr/employee/pay',
+        terminate: 'employee/hr/employee/terminate',
+
+
+
 
         // dropdowns 
         get_job_categories : 'employee/jobCategory',
