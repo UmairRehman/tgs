@@ -264,6 +264,15 @@ const PageHeader = () => {
   const [broadcasts, insertBroadcasts] = useState(
     getBroadcasts()
   );
+  
+  const [message, setMessage] = useState({
+    heading: '',
+    body: '',
+    subject:'',
+    date:'',
+    is_read:'',
+    id:''
+  })
 
   const [notifications, setNotifications] = useState([]);
 
@@ -272,19 +281,24 @@ const PageHeader = () => {
   //  const //theme = useTheme();
   //const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const acknowledgeAndClose = () => {
-    AlertPopOff();
+  const acknowledgeAndClose = async (id) => {
+    let result = await broadcast.messageRead({id})
 
-    setTimeout(() => {
-      const [first, ...rest] = broadcasts;
+    if(result.httpStatus==200){
+      AlertPopOff();
 
-      storage.set('broadcasts', JSON.stringify(rest));
+      setTimeout(() => {
+        const [first, ...rest] = broadcasts;
 
-      insertBroadcasts(rest);
-    }, 0);
+        storage.set('broadcasts', JSON.stringify(rest));
+
+        insertBroadcasts(rest);
+      }, 0);
+    }
   }
 
-  const AlertPop = () => {
+  const AlertPop = (val) => {
+    setMessage(val);
     setAlertOpen(true);
   };
 
@@ -335,7 +349,8 @@ const PageHeader = () => {
               subject,
               message
             },
-            is_read
+            is_read,
+            id
           } = broadcast;
 
           date = new Date(date).toLocaleDateString()
@@ -343,8 +358,10 @@ const PageHeader = () => {
           return {
             heading: dnUsername,
             body: message,
+            subject,
             date,
-            is_read
+            is_read,
+            id
           }
         });
 
@@ -517,7 +534,10 @@ const PageHeader = () => {
                   <List component="nav" aria-label="main mailbox folders" className="HeaderNoti Scrolling AlertNoti">
                     {notifications
                       .map((notification) => {
-                        return <ListItem onClick={AlertPop}
+                        return <ListItem 
+                        onClick={
+                           ()=>AlertPop(notification) 
+                          }
                           className={
                             notification.is_read
                               ? ''
@@ -654,7 +674,7 @@ const PageHeader = () => {
             <Grid xs={12} className="mbold pl14">To</Grid>
             <Grid xs={12} className="AlertPopTextBox">
               {
-                broadcasts?.[0]?.from || broadcasts?.[0]?.sender
+                message?.heading
               }
             </Grid>
           </Grid>
@@ -662,14 +682,14 @@ const PageHeader = () => {
             <Grid xs={12} className="mbold mt30 pl14">Subject</Grid>
             <Grid xs={12} className="AlertPopTextBox">
               {
-                broadcasts?.[0]?.subject
+                message?.subject
               }
             </Grid>
           </Grid>
           <Grid xs={12} className="mt16 AlertPopTextBox AlertPopTextarea">
             Dear recipient,<br />
             {
-              broadcasts?.[0]?.message
+              message?.body
             }
           </Grid>
           <Grid xs={12} container className="mt10">
@@ -682,7 +702,7 @@ const PageHeader = () => {
             </Grid>
           </Grid>
           <Grid xs={12} container justify="center" className="mt30">
-            <Button className="LinkButton" onClick={acknowledgeAndClose}>Acknowledge & Close</Button>
+            <Button className="LinkButton" onClick={()=>acknowledgeAndClose(message.id) }>Acknowledge & Close</Button>
           </Grid>
         </DialogContent>
       </Dialog>
