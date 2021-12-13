@@ -56,7 +56,7 @@ if (!localStorage.getItem('broadcasts'))
 
 
 const columns = [
-  { id: "from", label: "From", minWidth: "200px", type: "value" },
+  // { id: "from", label: "From", minWidth: "200px", type: "value" },
   { id: "to", label: "To", minWidth: "80px", type: "value" },
   { id: "date", label: "Date", minWidth: "120px", type: "value" },
   { id: "subject", label: "Subject", minWidth: "200px", type: "value" },
@@ -142,31 +142,32 @@ const BroadcastMessages = () => {
 
   const retreiveBroadcasts = async () => {
     try {
-      const response = await broadcast.getAll();
+      const response = await broadcast.getAllSend();
 
       const { data } = response;
 
       const broadcastsBuffer = data
         .reverse()
         .map(broadcast => {
-          let {
-            Employee: { dnUsername: from },
-            BroadcastMessage: {
-              SubDepartment: { name: to },
-              createdAt: date,
-              subject,
-              message
-            },
-          } = broadcast;
+          
+          // let {
+          //   // Employee: { dnUsername: from },
+          //   BroadcastMessage: {
+          //     SubDepartment:{ SubDepartment : { name:to }},
+          //     createdAt: date,
+          //     subject,
+          //     message
+          //   },
+          // } = broadcast;
 
-          date = new Date(date).toLocaleDateString()
+          // date = new Date(date).toLocaleDateString()
 
           return {
-            from,
-            to,
-            date,
-            subject,
-            message
+            // from,
+            to:broadcast?.SubDepartment?.name || '',
+            date : new Date(broadcast?.createdAt).toLocaleDateString(),
+            subject:broadcast?.subject,
+            message:broadcast?.message
           }
         });
 

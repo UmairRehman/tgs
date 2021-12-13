@@ -78,8 +78,8 @@ const NewHireQueue = () => {
       if(data?.httpStatus==200){
         data = data.data; 
         data.forEach(row => {
-          row.employeeStatus = employeeStatus[row.EmployeeStatusId-1]
-          row.deptName = row.SubDepartment.name
+          row.employeeStatus = employeeStatus[row.EmployeeStatusId-1] 
+          row.deptName = row?.SubDepartment?.name || ''
         });
         setApplicantData(data);      
       }

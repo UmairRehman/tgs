@@ -60,6 +60,7 @@ export const routes = {
     },
     broadcast:{
         create: 'employee/broadcastMessage/',
+        getAllSend: 'employee/broadcastMessage/send',
         getAll: 'employee/broadcastMessage/recieve',
     }
 }
