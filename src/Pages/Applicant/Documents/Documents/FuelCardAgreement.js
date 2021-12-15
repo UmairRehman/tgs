@@ -208,7 +208,9 @@ useEffect( async () => {
                 <TableRow className="w100 mt20">
                   <TableCell className="font16 row w100">
                     Printed Name:
-                    <input value={`${userData.firstName} ${userData.middleName} ${userData.lastName}`} type="text" name="textfield" id="textfield" className="w h22 pl8 bn bb input-capitalization" />
+                    <input value={`${userData.firstName} ${userData.middleName} ${userData.lastName}`} type="text" name="textfield" id="textfield"
+                      className="w h22 pl8 bn bb input-capitalization"
+                      disabled />
                   </TableCell>
                 </TableRow>
                 <TableRow className="w100 mt20">
@@ -225,6 +227,7 @@ useEffect( async () => {
                       value={date}
                       id="offerDate"
                       className="datePickerReact"
+                      disabled
                     />
                   </TableCell>
                 </TableRow>

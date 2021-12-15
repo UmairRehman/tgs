@@ -250,12 +250,15 @@ const FCRA = () => {
                       </TableCell>
                       <TableCell className="w100 row pl16">
                         Printed Name <input type="text" name="textfield" id="name" className="w pl8 bn bb input-capitalization" 
-                        value={`${userData.firstName} ${userData.middleName} ${userData.lastName}`}/>
+                        value={`${userData.firstName} ${userData.middleName} ${userData.lastName}`}
+                        disabled />
                       </TableCell>
                     </TableRow>
                     <TableRow className="w100 row mt20">
                       <TableCell className="w100 row pr16">
-                        Witness Signature <input type="text" name="textfield" id="witnessSignature" className="w pl8 bn bb signatureClass font-20" />
+                        Witness Signature
+                        <input type="text" name="textfield" id="witnessSignature" className="w pl8 bn bb signatureClass font-20"
+                          disabled />
                       </TableCell>
                       <TableCell className="w100 row pl16">
                         Date
@@ -264,6 +267,7 @@ const FCRA = () => {
                           value={date}
                           id="offerDate"
                           className="datePickerReact"
+                          disabled
                         />
                       </TableCell>
                     </TableRow>

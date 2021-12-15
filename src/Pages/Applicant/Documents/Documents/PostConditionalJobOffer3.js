@@ -261,7 +261,7 @@ const PostConditionalJobOffer3 = () => {
                 </TableRow>
                 {/* --**-- */}
                 <TableRow className="w100 mt10 row">
-                  <TableCell className="w50 row pr10">
+                  <TableCell className="w50 row pr10 d-flex">
                     Name:
                     <input
                       type="text"
@@ -269,6 +269,7 @@ const PostConditionalJobOffer3 = () => {
                       id="name"
                       className="w h18 pl8 bn bb input-capitalization"
                       value={`${userData.firstName} ${userData.middleName} ${userData.lastName}`}
+                      disabled
                     />
                   </TableCell>
                   <TableCell className="w50 row pl10">
@@ -280,6 +281,7 @@ const PostConditionalJobOffer3 = () => {
                       value={date}
                       id="offerDate"
                       className="datePickerReact"
+                      disabled
                     />
                   </TableCell>
                 </TableRow>
@@ -292,6 +294,7 @@ const PostConditionalJobOffer3 = () => {
                       id="address"
                       className="w h18 pl8 bn bb input-capitalization"
                       value={`${userData.address}`}
+                      disabled
                     />
                   </TableCell>
                 </TableRow>
@@ -304,6 +307,7 @@ const PostConditionalJobOffer3 = () => {
                       id="jobDetail"
                       className="w h18 pl8 bn bb input-capitalization"
                       value={`${userData.position}`}
+                      disabled
                     />
                   </TableCell>
                   <TableCell className="w50 row pl10">
@@ -314,6 +318,7 @@ const PostConditionalJobOffer3 = () => {
                       id="jobDetail"
                       className="w h18 pl8 bn bb input-capitalization"
                       value={`${dob}`}
+                      disabled
                     />
                     {/* <DatePicker
                       onChange={(value) => {

@@ -30,7 +30,7 @@ import Snackbar from "../../../../Components/Snackbar";
 
 const { users, hr, Storage } = Services;
 
-const { showSnackBar , getGenerator } = helpers;
+const { showSnackBar, getGenerator } = helpers;
 
 const {
   styles: { displayNoneStyles: useStyles },
@@ -54,28 +54,28 @@ const DrugAlcoholWeapons = () => {
   const [DateSOLUTIONS, setDateSOLUTIONS] = useState(new Date());
 
   const [userData, setUserData] = useState({
-    firstName : '',
-      middleName : '',
-      lastName: '',
+    firstName: '',
+    middleName: '',
+    lastName: '',
   })
-  useEffect( async () => {
-    let userProfile = await  JSON.parse(localStorage.user_profile);
-    let res = await hr.getAllApplicantsByID({ id : userProfile.id})
+  useEffect(async () => {
+    let userProfile = await JSON.parse(localStorage.user_profile);
+    let res = await hr.getAllApplicantsByID({ id: userProfile.id })
     let data = {
-      firstName : res?.employee?.firstName || '',
-      middleName : res?.employee?.middleName || '',
+      firstName: res?.employee?.firstName || '',
+      middleName: res?.employee?.middleName || '',
       lastName: res?.employee?.lastName || '',
-     }
+    }
     setUserData(data)
   }, [])
 
   useEffect(() => {
-    if(initialForm == true)
+    if (initialForm == true)
       submit();
-    
-    
-      setInitialForm(true)
-    
+
+
+    setInitialForm(true)
+
   }, [isAcknowledged]);
 
   const submit = async () => {
@@ -108,14 +108,14 @@ const DrugAlcoholWeapons = () => {
       const captureElements = Array.from(
         document.getElementsByClassName('capture')
       );
-      
+
       const images = [];
 
       showSnackBar('Generating pdf...');
 
       for await (let i of getGenerator(captureElements.length)) {
-      const captureElement = captureElements[i];
-        
+        const captureElement = captureElements[i];
+
         let canvas = await (html2canvas(captureElement));
 
         let image = (canvas.toDataURL('image/png'));
@@ -1966,6 +1966,7 @@ const DrugAlcoholWeapons = () => {
                           value={DateSignature}
                           id="offerDate"
                           className="datePickerReact data20h"
+                          disabled
                         />
                         DATE
                       </TableCell>
@@ -1978,18 +1979,29 @@ const DrugAlcoholWeapons = () => {
                           name="witnessSignature"
                           id="witnessSignature"
                           className="w100 textCenter bn bb mt4  signatureClass font-20"
+                          disabled
                         />
                         SIGNATURE OF SUPERVISOR OR WITNESS
                       </TableCell>
                       <TableCell className="w36 textCenter pl40">
-                        <DatePicker
+                        <input
+                          type="text"
+                          name="offerDate"
+                          id="offerDate"
+                          className="w100 textCenter bn bb mt4  signatureClass font-20"
+                          onChange={($e) => {
+                            setDateWitness($e?.target?.value);
+                          }}
+                          disabled
+                        />
+                        {/* <DatePicker
                           onChange={(value) => {
                             setDateWitness(value);
                           }}
                           value={DateWitness}
                           id="offerDate"
                           className="datePickerReact data20h"
-                        />
+                        /> */}
                         DATE
                       </TableCell>
                     </TableRow>

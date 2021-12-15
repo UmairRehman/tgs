@@ -392,6 +392,10 @@
     display: flex!important;
 }
 
+.align-self-end {
+    align-self: end;
+}
+
 .justify-content-center {
     justify-content: center;
 }

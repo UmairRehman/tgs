@@ -308,6 +308,7 @@ const PostConditionalJobOffer4 = () => {
                       value={date}
                       id="offerDate"
                       className="datePickerReact"
+                      disabled
                     />
                   </TableCell>
                 </TableRow>

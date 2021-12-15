@@ -53,14 +53,14 @@ const ConditionalOffer = () => {
   const classes = useStyles();
 
   const [userData, setUserData] = useState({
-    firstName :  '',
-    middleName :  '',
-    lastName:  '',
-    hireDate :  new Date (), 
-    position:  '',
-    location :  '',
-    pay:  '',
-    deptID :  ''
+    firstName: '',
+    middleName: '',
+    lastName: '',
+    hireDate: new Date(),
+    position: '',
+    location: '',
+    pay: '',
+    deptID: ''
   })
 
   const [startDate, setStartDate] = useState(new Date());
@@ -69,22 +69,22 @@ const ConditionalOffer = () => {
 
   const [PDFimage, setPDFImage] = useState('');
 
-  useEffect( async () => {
-    let userProfile = await  JSON.parse(localStorage.user_profile);
-    let res = await hr.getAllApplicantsByID({ id : userProfile.id})
+  useEffect(async () => {
+    let userProfile = await JSON.parse(localStorage.user_profile);
+    let res = await hr.getAllApplicantsByID({ id: userProfile.id })
     let data = {
-      firstName : res?.employee?.firstName || '',
-      middleName : res?.employee?.middleName || '',
+      firstName: res?.employee?.firstName || '',
+      middleName: res?.employee?.middleName || '',
       lastName: res?.employee?.lastName || '',
-      hireDate : res?.employee?.hireDate || new Date (), 
+      hireDate: res?.employee?.hireDate || new Date(),
       position: res?.position?.FullTitle || '',
-      location : res?.position?.TGSLocation?.name || '',
+      location: res?.position?.TGSLocation?.name || '',
       pay: res?.pay?.Rate || '',
-      deptID : res?.position?.SubDepartmentId || ''
+      deptID: res?.position?.SubDepartmentId || ''
     }
     setUserData(data)
     console.log(data)
-  
+
 
   }, [])
 
@@ -109,18 +109,19 @@ const ConditionalOffer = () => {
       let terms = document.getElementById("terms").value;
       let offeree = document.getElementById("offeree").value;
 
+      /** Disabling checks for pre-filled fields */
       let data = {
-        officersName,
-        position,
-        offerDate,
+        // officersName,
+        // position,
+        // offerDate,
         payRate,
         payType,
         startDate,
-        location,
-        departmentCode,
+        // location,
+        // departmentCode,
         phone,
         laptop,
-        terms,
+        // terms,
         offeree,
       }
 
@@ -129,7 +130,7 @@ const ConditionalOffer = () => {
 
       if (nullCheck) {
         setPosting(false);
-        console.log("data on fail",data);
+        console.log("data on fail", data);
         setError("field must be filed")
         return showSnackBar("Kindly fill in all fields!");
       }
@@ -233,9 +234,10 @@ const ConditionalOffer = () => {
                   <td className="w50 header font14 italic bold row">
                     Offeree’s Name:
                     <input type="text" name="officersName" id="officersName" className="w64 h22 bn bb input-capitalization"
-                    value={
-                      `${userData.firstName} ${userData.middleName} ${userData.lastName}` 
-                    } 
+                      value={
+                        `${userData.firstName} ${userData.middleName} ${userData.lastName}`
+                      }
+                      disabled
                     />
                   </td>
                   <td className="w50 header font14 italic bold row">Offer Date:
@@ -244,6 +246,7 @@ const ConditionalOffer = () => {
                       value={offerDate}
                       id="offerDate"
                       className="datePickerReact"
+                      disabled
                     />
                     {/* <input type="text" name="textfield" id="textfield" className="w20 h22 pl10 pr10 bn bb textCenter" />
                         <span className="font24">/</span>
@@ -268,25 +271,32 @@ const ConditionalOffer = () => {
               <tbody className="w100">
                 <tr className="w100 row">
                   <td className="w50 row">Position:
-                    <input type="text" name="textfield" id="position" className="w80 bn bb input-capitalization" 
-                    value = {`${userData.position}`}
+                    <input type="text" name="textfield" id="position" className="w80 bn bb input-capitalization"
+                      value={`${userData.position}`}
+                      disabled
                     />
-                  
+
                   </td>
                   <td className="w50 row">Pay Rate:
-                      <input type="text" name="textfield" id="payRate" className="w38 bn bb" 
-                      value= {`${userData.pay}`}
-                      /> 
-                    <input type="radio" id="hourly" value="hourly" name="payType" className="ml6 mt4" /> Hourly 
+                    <input type="text" name="textfield" id="payRate" className="w38 bn bb"
+                      value={`${userData.pay}`}
+                      disabled
+                    />
+                    <input type="radio" id="hourly" value="hourly" name="payType" className="ml6 mt4" /> Hourly
                     <input type="radio" id="weekly" value="weekly" name="payType" className="ml10 mt4" /> Bi-Weekly
                   </td>
                 </tr>
                 <tr className="w100 row">
                   <td className="w50 mt10 pt10 row">Location:
-                      <input type="text" name="textfield" id="location" className="w80 bn bb input-capitalization" value={`${userData.location}`}/>
+                    <input type="text" name="textfield" id="location" className="w80 bn bb input-capitalization"
+                      value={`${userData.location}`}
+                      disabled
+                    />
                   </td>
                   <td className="w50 mt10 pt10 row">Department Code:
-                      <input type="text" name="textfield" id="departmentCode" className="w60 bn bb input-capitalization" value={`${userData.deptID}`}/>
+                    <input type="text" name="textfield" id="departmentCode" className="w60 bn bb input-capitalization"
+                      value={`${userData.deptID}`}
+                      disabled />
                   </td>
                 </tr>
               </tbody>
@@ -345,8 +355,14 @@ const ConditionalOffer = () => {
                   <td className="w50">By signing below the Offeree accepts the Offer of Employment made by the TGS, according to the aforementioned terms and conditions.</td>
                 </tr>
                 <tr className="w100 row">
-                  <td className="w50"><input type="text" id="terms" name="textfield" className="w96 bn bb pt10 pb10 signatureClass font-20" /></td>
-                  <td className="w50"><input type="text" id="offeree" name="textfield" className="w100 bn bb pt10 pb10 signatureClass font-20" /></td>
+                  <td className="w50">
+                    <input type="text" id="terms" name="textfield"
+                      className="w96 bn bb pt10 pb10 signatureClass font-20"
+                      disabled />
+                  </td>
+                  <td className="w50">
+                    <input type="text" id="offeree" name="textfield" className="w100 bn bb pt10 pb10 signatureClass font-20" />
+                  </td>
                 </tr>
                 <tr className="w100 row">
                   <td className="w50 bold">Trans-Global Solutions, Inc. Representative</td>

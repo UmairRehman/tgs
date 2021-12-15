@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import {
   Grid,
   TableContainer,
@@ -52,29 +52,29 @@ const SafetyHandbook = () => {
   const [VerificationDate, setVerificationDate] = useState(new Date());
 
   const [userData, setUserData] = useState({
-    firstName : '',
-    middleName : '',
+    firstName: '',
+    middleName: '',
     lastName: '',
     dept: '',
   })
-  useEffect( async () => {
-    let userProfile = await  JSON.parse(localStorage.user_profile);
-    let res = await hr.getAllApplicantsByID({ id : userProfile.id})
+  useEffect(async () => {
+    let userProfile = await JSON.parse(localStorage.user_profile);
+    let res = await hr.getAllApplicantsByID({ id: userProfile.id })
     let data = {
-      firstName : res?.employee?.firstName || '',
-      middleName : res?.employee?.middleName || '',
+      firstName: res?.employee?.firstName || '',
+      middleName: res?.employee?.middleName || '',
       lastName: res?.employee?.lastName || '',
-      dept : res?.employee?.SubDepartment?.name || '',
-     }
+      dept: res?.employee?.SubDepartment?.name || '',
+    }
     setUserData(data)
   }, [])
-  
+
   const [initialForm, setInitialForm] = useState(false)
   useEffect(() => {
-      if(initialForm == true)
-        submit();
-      
-      setInitialForm(true)
+    if (initialForm == true)
+      submit();
+
+    setInitialForm(true)
   }, [isAcknowledged]);
 
   const submit = async () => {
@@ -82,12 +82,13 @@ const SafetyHandbook = () => {
       setPosting(true);
 
       let data = {
-        name: document.getElementById("nameText").value,
-        department: document.getElementById("deptText").value,
-        signature: document.getElementById("nameSignature").value,
-        date: SignatureDate.toISOString(),
+        /** Disabling checks for pre-filled fields */
+        // name: document.getElementById("nameText").value,
+        // department: document.getElementById("deptText").value,
+        // signature: document.getElementById("nameSignature").value,
+        // date: SignatureDate.toISOString(),
         verifcationName: document.getElementById("verificationSignature").value,
-        verificationDate: VerificationDate.toISOString(),
+        // verificationDate: VerificationDate.toISOString(),
       };
 
       const nullCheck = Object.values(data).reduce(
@@ -179,7 +180,7 @@ const SafetyHandbook = () => {
                     <br />
                     All rights reserved.
                   </TableCell>
-                </TableRow>      
+                </TableRow>
               </Table>
             </TableCell>
           </TableRow>
@@ -299,7 +300,7 @@ const SafetyHandbook = () => {
                       Company Safety Policy<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                  <a href="#3">3</a>
+                      <a href="#3">3</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -308,7 +309,7 @@ const SafetyHandbook = () => {
                       Safety – It’s Part of Every Job<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                  <a href="#4">4</a>
+                      <a href="#4">4</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -317,7 +318,7 @@ const SafetyHandbook = () => {
                       General Safety Rules<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                  <a href="#7">7</a>
+                      <a href="#7">7</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -326,7 +327,7 @@ const SafetyHandbook = () => {
                       Dress for the Job<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                  <a href="#8">8</a>
+                      <a href="#8">8</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -335,7 +336,7 @@ const SafetyHandbook = () => {
                       Warning Signs & Barricades<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                  <a href="#10">10</a>
+                      <a href="#10">10</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -353,7 +354,7 @@ const SafetyHandbook = () => {
                       Rules for Using Manual & Powered Hand Tools<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                  <a href="#11">11</a>
+                      <a href="#11">11</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -362,7 +363,7 @@ const SafetyHandbook = () => {
                       Electrical Safety<span></span>
                     </TableCell>
                     <TableCell className="w4">
-                  <a href="#11">11</a>
+                      <a href="#11">11</a>
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -431,18 +432,18 @@ const SafetyHandbook = () => {
                 </Table>
               </TableCell>
             </TableRow>
-            </Table>
+          </Table>
           <Grid className="PageNum">3</Grid>
         </TableContainer>
       </Grid>
 
-{/* ----------- Page 4 ----------- */}
+      {/* ----------- Page 4 ----------- */}
       <Grid xs={12} className="pageBreak capture" id="4">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl60 pr60">
               <TableCell className="w100">
-                <Table className="w100" style={{marginTop: 50}}>
+                <Table className="w100" style={{ marginTop: 50 }}>
                   {/* -*- */}
                   <TableRow className="w100 row mt22 font14">
                     <TableCell className="w94 row PageLIstLine">
@@ -560,12 +561,12 @@ const SafetyHandbook = () => {
                 </Table>
               </TableCell>
             </TableRow>
-            </Table>
+          </Table>
           <Grid className="PageNum">6</Grid>
         </TableContainer>
       </Grid>
 
-{/* ----------- Page 7 ----------- */}
+      {/* ----------- Page 7 ----------- */}
       <Grid xs={12} className="pageBreak capture" id="7">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
@@ -886,12 +887,12 @@ const SafetyHandbook = () => {
                 </Table>
               </TableCell>
             </TableRow>
-            </Table>
+          </Table>
           <Grid className="PageNum">9</Grid>
         </TableContainer>
       </Grid>
 
-{/* ----------- Page 10 ----------- */}
+      {/* ----------- Page 10 ----------- */}
       <Grid xs={12} className="pageBreak capture" id="10">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
@@ -2990,6 +2991,7 @@ const SafetyHandbook = () => {
                             id="nameText"
                             className="w100 h18 bn bb mt6 input-capitalization"
                             value={`${userData.firstName} ${userData.middleName} ${userData.lastName}`}
+                            disabled
                           />
                           Employee Name (PLEASE PRINT)
                         </TableCell>
@@ -3002,6 +3004,7 @@ const SafetyHandbook = () => {
                             id="deptText"
                             className="w100 h18 bn bb mt6 input-capitalization"
                             value={`${userData.dept}`}
+                            disabled
                           />
                           Department
                         </TableCell>
@@ -3041,7 +3044,17 @@ const SafetyHandbook = () => {
                           Supervisor’s Verification
                         </TableCell>
                         <TableCell className="w40 pl20 mt-0">
-                          <DatePicker
+                          <input
+                            type="text"
+                            name="textfield"
+                            id="offerDate"
+                            className="w100 bn bb mt6 signatureClass font-20"
+                            onChange={($e) => {
+                              setVerificationDate($e?.target?.value);
+                            }}
+                            disabled
+                          />
+                          {/* <DatePicker
                             onChange={(value) => {
                               setVerificationDate(value);
                             }}
@@ -3049,7 +3062,7 @@ const SafetyHandbook = () => {
                             id="offerDate"
                             className="datePickerReact data20h"
                             disabled
-                          />
+                          /> */}
                           Date
                         </TableCell>
                       </TableRow>

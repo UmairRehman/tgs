@@ -370,6 +370,7 @@ const ArbitrationAgreement = () => {
                             value={date}
                             id="offerDate"
                             className="datePickerReact data20h" 
+                            disabled
                           />
                         </TableCell>
                       </TableRow>
@@ -378,9 +379,10 @@ const ArbitrationAgreement = () => {
                           Agreed to and acknowledged:
                         </TableCell>
                       </TableRow>
-                      <TableRow className="w100 row mt10">
+                      <TableRow className="w100 row">
                         <TableCell className="w100 pr16">
-                          <input type="text" name="textfield" id="company" className="w100 pl10 bn bb signatureClass font-20" />
+                          <input type="text" name="textfield" id="company" className="w100 pl10 bn bb signatureClass font-20"
+                            disabled />
                           Trans-Global Solutions, Inc. Official:
                         </TableCell>
                         <TableCell className="w100 row pl16">
@@ -390,6 +392,7 @@ const ArbitrationAgreement = () => {
                             value={companyDate}
                             id="offerDate"
                             className="datePickerReact data20h"
+                            disabled
                           />
                         </TableCell>
                       </TableRow>

@@ -232,12 +232,15 @@ const BootCardAgreement = () => {
                   <TableCell className="w50 row pr10">
                     NAME:
                     <input required type="text" id="name" className="w h18 pl8 bn bb input-capitalization" 
-                      value={`${userData.firstName} ${userData.middleName} ${userData.lastName}`} required />
+                      value={`${userData.firstName} ${userData.middleName} ${userData.lastName}`}
+                        required
+                        disabled />
                   </TableCell>
                   <TableCell className="w50 row pl10">
                     SOCIAL SECURITY NO.:
                     <input required type="text" name="textfield" id="securityNumber" className="w h18 pl8 bn bb" 
                       value={`${userData.ssn}`}
+                      disabled
                     />
                   </TableCell>
                 </TableRow>
@@ -246,6 +249,7 @@ const BootCardAgreement = () => {
                     Address:
                     <input required type="text" name="textfield" id="adddress" className="w h18 pl8 bn bb input-capitalization" 
                       value={`${userData.address}`}
+                      disabled
                     />
                   </TableCell>
                 </TableRow>
@@ -486,6 +490,7 @@ const BootCardAgreement = () => {
                       value={formDate}
                       id="offerDate"
                       className="datePickerReact"
+                      disabled
                     />
                     {/* <input required type="text" name="textfield" id="textfield" className="w bn bb textCenter mb5" /> */}
                   </TableCell>

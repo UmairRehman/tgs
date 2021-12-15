@@ -84,8 +84,9 @@ const EmployeeHandbook = () => {
       setPosting(true);
 
       let data = {
-        date: SIGNATUREDate,
-        name: document.getElementById('nametextfield').value,
+        /** Disabling checks for date and name */
+        // date: SIGNATUREDate,
+        // name: document.getElementById('nametextfield').value,
         signature: document.getElementById('signaturetextfield').value,
       };
       console.log(data)
@@ -6266,7 +6267,8 @@ const EmployeeHandbook = () => {
                     <TableCell className="w100 row">
                       EMPLOYEE'S NAME (printed):
                       <input type="text" name="textfield" id="nametextfield"  className="w100 h18 bn bb mt6 input-capitalization"
-                      value={`${userData.firstName} ${userData.middleName} ${userData.lastName}`} />
+                      value={`${userData.firstName} ${userData.middleName} ${userData.lastName}`}
+                      disabled />
                     </TableCell>
                   </TableRow>
                   {/* -*- */}
@@ -6285,6 +6287,7 @@ const EmployeeHandbook = () => {
                         value={SIGNATUREDate}
                         id="offerDate"
                         className="datePickerReact data20h"
+                        disabled
                       />
                     </TableCell>
                   </TableRow>

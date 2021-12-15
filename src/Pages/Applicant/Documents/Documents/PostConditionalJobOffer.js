@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Grid,
   TableContainer,
@@ -29,7 +29,7 @@ import Services from "../../../../Services";
 import { Imports } from "../../../../Imports";
 import moment from "moment-timezone";
 
-const { users , hr } = Services;
+const { users, hr } = Services;
 
 const {
   styles: { displayNoneStyles: useStyles },
@@ -61,7 +61,7 @@ const PostConditionalJobOffer = () => {
 
   const [userData, setUserData] = useState({
     name: '',
-    ssn:''
+    ssn: ''
   })
 
   const [PDFImage, setPDFImage] = useState("");
@@ -74,10 +74,11 @@ const PostConditionalJobOffer = () => {
       let image = canvas.toDataURL("image/png");
       // setPDFImage(image)
 
+      /** Disabling checks for pre-filled fields */
       let data = {
-        name: document.getElementById("name").value,
-        securityNumber: document.getElementById("securityNumber").value,
-        dateOfBirth: dateOfBirth,
+        // name: document.getElementById("name").value,
+        // securityNumber: document.getElementById("securityNumber").value,
+        // dateOfBirth: dateOfBirth,
         health:
           (document.querySelector('input[name="Health"]:checked')?.value == "yes")
             ? document.querySelector('input[name="Health"]:checked')?.value
@@ -85,20 +86,20 @@ const PostConditionalJobOffer = () => {
         eye: document.querySelector('input[name="eye"]:checked')?.value,
         breathing: document.querySelector('input[name="breathing"]:checked')?.value,
         allergies: document.querySelector('input[name="allergies"]:checked')?.value,
-        backNeck : document.querySelector('input[name="backNeck"]:checked')?.value,
+        backNeck: document.querySelector('input[name="backNeck"]:checked')?.value,
         feet: document.querySelector('input[name="feet"]:checked')?.value,
         knees: document.querySelector('input[name="knees"]:checked')?.value,
         mental: document.querySelector('input[name="mental"]:checked')?.value,
         other: document.querySelector('input[name="other"]:checked')?.value,
         disability:
-          document.querySelector('input[name="disability"]:checked')?.value =="no"
+          document.querySelector('input[name="disability"]:checked')?.value == "no"
             ? document.querySelector('input[name="disability"]:checked')?.value
             : document.getElementById("healthComment").value,
         injured: document.querySelector('input[name="injured"]:checked')?.value,
         compensation: document.querySelector('input[name="compensation"]:checked')?.value,
-        natural: (document.querySelector('input[name="natural"]:checked')?.value=="no")
-            ? document.querySelector('input[name="natural"]:checked')?.value
-            : document.getElementById("comment3").value,
+        natural: (document.querySelector('input[name="natural"]:checked')?.value == "no")
+          ? document.querySelector('input[name="natural"]:checked')?.value
+          : document.getElementById("comment3").value,
         signature: document.getElementById("signature").value,
         submitDate: submitDate,
         image,
@@ -140,23 +141,23 @@ const PostConditionalJobOffer = () => {
     alert("Please go step by step");
   }
 
-  useEffect( async () => {
+  useEffect(async () => {
     try {
-      let userProfile = await  JSON.parse(localStorage.user_profile);
-      let res = await hr.getAllApplicantsByID({ id : userProfile.id})
+      let userProfile = await JSON.parse(localStorage.user_profile);
+      let res = await hr.getAllApplicantsByID({ id: userProfile.id })
       let data = {
-        firstName : res?.employee?.firstName || '',
-        middleName : res?.employee?.middleName || '',
+        firstName: res?.employee?.firstName || '',
+        middleName: res?.employee?.middleName || '',
         lastName: res?.employee?.lastName || '',
-        ssn : res?.employee?.ssn || '',
+        ssn: res?.employee?.ssn || '',
       }
-      let dob= res?.employee?.dateOfBirth || new Date()
-      dob =  moment(dob).format('DD/MM/YYYY')
+      let dob = res?.employee?.dateOfBirth || new Date()
+      dob = moment(dob).format('DD/MM/YYYY')
       setDateOfBirth(dob)
       setUserData(data)
       console.log(data)
     } catch (error) {
-      
+
     }
   }, [])
 
@@ -189,7 +190,7 @@ const PostConditionalJobOffer = () => {
           <ListItem className="Active">
             <a
               onClick={() => eventHandle("first")}
-              // to="/documents/post-conditional-job-offer"
+            // to="/documents/post-conditional-job-offer"
             >
               1
             </a>
@@ -197,7 +198,7 @@ const PostConditionalJobOffer = () => {
           <ListItem>
             <a
               onClick={() => eventHandle("second")}
-              // to="/documents/post-conditional-job-offer/2"
+            // to="/documents/post-conditional-job-offer/2"
             >
               2
             </a>
@@ -206,7 +207,7 @@ const PostConditionalJobOffer = () => {
           <ListItem>
             <a
               onClick={() => eventHandle("third")}
-              // to="/documents/post-conditional-job-offer/3"
+            // to="/documents/post-conditional-job-offer/3"
             >
               3
             </a>
@@ -267,8 +268,9 @@ const PostConditionalJobOffer = () => {
                             id="name"
                             className="w100 bn bb input-capitalization"
                             value={
-                              `${userData.firstName} ${userData.middleName} ${userData.lastName}` 
-                            } 
+                              `${userData.firstName} ${userData.middleName} ${userData.lastName}`
+                            }
+                            disabled
                           />
                         </TableCell>
                       </TableRow>
@@ -289,8 +291,9 @@ const PostConditionalJobOffer = () => {
                             id="securityNumber"
                             className="w100 bn bb"
                             value={
-                                `${userData.ssn}` 
-                              } 
+                              `${userData.ssn}`
+                            }
+                            disabled
                           />
                         </TableCell>
                       </TableRow>
@@ -305,13 +308,14 @@ const PostConditionalJobOffer = () => {
                     <Table>
                       <TableRow>
                         <TableCell className="pb4">
-                             <input
-                              type="text"
-                              name="textfield"
-                              id="jobDetail"
-                              className="w h18 pl8 bn bb input-capitalization"
-                              value={`${dateOfBirth}`}
-                            />
+                          <input
+                            type="text"
+                            name="textfield"
+                            id="jobDetail"
+                            className="w h18 pl8 bn bb input-capitalization"
+                            value={`${dateOfBirth}`}
+                            disabled
+                          />
                           {/* <DatePicker
                             onChange={(value) => {
                               setDateOfBirth(value);
@@ -768,7 +772,7 @@ const PostConditionalJobOffer = () => {
                       </TableCell>
                     </TableRow>
                   </TableCell>
-                  <TableCell className="w50 pl30 mt10">
+                  <TableCell className="w50 pl30">
                     <TableRow className="w100">
                       <TableCell className="w100">
                         <DatePicker
@@ -778,6 +782,7 @@ const PostConditionalJobOffer = () => {
                           value={submitDate}
                           id="offerDate"
                           className="datePickerReact"
+                          disabled
                         />
                       </TableCell>
                     </TableRow>

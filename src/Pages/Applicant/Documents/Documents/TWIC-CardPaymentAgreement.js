@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Grid, TableContainer, Table, TableCell, TableRow, List, ListItem, Button
 } from "@material-ui/core";
@@ -64,20 +64,20 @@ const TWICCardPaymentAgreement = () => {
   const [signDate, setSignDate] = useState(new Date())
 
   const [userData, setUserData] = useState({
-    firstName : '',
-      middleName : '',
-      lastName: '',
-      ssn : '',
+    firstName: '',
+    middleName: '',
+    lastName: '',
+    ssn: '',
   })
 
- useEffect( async () => {
-    let userProfile = await  JSON.parse(localStorage.user_profile);
-    let res = await hr.getAllApplicantsByID({ id : userProfile.id})
+  useEffect(async () => {
+    let userProfile = await JSON.parse(localStorage.user_profile);
+    let res = await hr.getAllApplicantsByID({ id: userProfile.id })
     let data = {
-      firstName : res?.employee?.firstName || '',
-      middleName : res?.employee?.middleName || '',
+      firstName: res?.employee?.firstName || '',
+      middleName: res?.employee?.middleName || '',
       lastName: res?.employee?.lastName || '',
-      ssn : res?.employee?.ssn || '',
+      ssn: res?.employee?.ssn || '',
     }
     setUserData(data)
     console.log(data)
@@ -192,21 +192,23 @@ const TWICCardPaymentAgreement = () => {
                       id="offerDate"
                       className="datePickerReact pr0 pl0"
                     />
-                    </TableCell>
+                  </TableCell>
                 </TableRow>
                 <TableRow className="w100 mt10 row">
                   <TableCell className="w100 row">
                     Employee Name:
-                    <input type="text" name="textfield" id="name" className="w h18 pl8 bn bb input-capitalization" 
+                    <input type="text" name="textfield" id="name" className="w h18 pl8 bn bb input-capitalization"
                       value={`${userData.firstName} ${userData.middleName} ${userData.lastName}`}
+                      disabled
                     />
                   </TableCell>
                 </TableRow>
                 <TableRow className="w100 mt10 row">
                   <TableCell className="w100 row">
                     Social Security #:
-                    <input type="text" name="textfield" id="securityNumber" className="w h18 pl8 bn bb" 
+                    <input type="text" name="textfield" id="securityNumber" className="w h18 pl8 bn bb"
                       value={`${userData.ssn}`}
+                      disabled
                     />
                   </TableCell>
                 </TableRow>
@@ -219,26 +221,32 @@ const TWICCardPaymentAgreement = () => {
                 {/* -*- */}
                 <TableRow className="w100 mt20 mb20">
                   <TableCell className="w30">
-                    <input type="text" name="textfield" id="signature" className="w100 pl8 bn bb mb10 signatureClass font-20" />
+                    <input type="text" name="textfield" id="signature" className="w100 pl8 bn bb mb10 signatureClass font-20"
+                      autofocus />
                     Employee Signature
                   </TableCell>
                 </TableRow>
                 {/* -*- */}
                 <TableRow className="w100 mt20 mb20">
                   <TableCell className="w30">
-                    <input type="text" name="textfield" id="representative" className="w100 h18 pl8 bn bb mb10 signatureClass font-20" />
+                    <input type="text" name="textfield" id="representative" className="w100 h18 pl8 bn bb mb10 signatureClass font-20"
+                      disabled />
                     Company Representative
                   </TableCell>
                 </TableRow>
                 {/* -*- */}
                 <TableRow className="w100 mt20 mb20">
                   <TableCell className="w30">
-                    <DatePicker
+                    <input type="text" name="textfield"
+                      id="offerDate" className="w100 h18 pl8 bn bb mb10 signatureClass font-20"
+                      onChange={($e) => { setSignDate($e?.target?.value) }}
+                      disabled />
+                    {/* <DatePicker
                       onChange={(value) => { setSignDate(value) }}
                       value={signDate}
                       id="offerDate"
                       className="datePickerReact mb10"
-                    />
+                    /> */}
                     Date Signed
                   </TableCell>
                 </TableRow>

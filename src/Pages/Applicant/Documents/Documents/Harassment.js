@@ -81,8 +81,9 @@ const Harassment = () => {
       setPosting(true);
 
       let data = {
-        date: DateSignature.toISOString(),
-        name: document.getElementById("nametextfield").value,
+        /** Disabling checks for date and name */
+        // date: DateSignature.toISOString(),
+        // name: document.getElementById("nametextfield").value,
         signature: document.getElementById("signaturetextfield").value,
       };
 
@@ -949,6 +950,7 @@ const Harassment = () => {
                   value={DateSignature}
                   id="offerDate"
                   className="datePickerReact data20h"
+                  disabled
                 />
                 DATE
               </TableCell>
@@ -963,6 +965,7 @@ const Harassment = () => {
                   id="nametextfield"
                   className="w100 h18 bn bb mt6 input-capitalization"
                   value={`${userData.firstName} ${userData.middleName} ${userData.lastName}`}
+                  disabled
                 />
               </TableCell>
             </TableRow>

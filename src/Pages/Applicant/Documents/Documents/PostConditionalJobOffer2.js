@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Grid, TableContainer, Table, TableCell, TableRow, List, ListItem, Button,
 } from "@material-ui/core";
@@ -57,11 +57,11 @@ const PostConditionalJobOffer2 = () => {
   const [pDate, setPDate] = useState(new Date())
 
   const [userData, setUserData] = useState({
-    firstName : '',
-      middleName : '',
-      lastName: '',
-      ssn : '',
-      address : '',
+    firstName: '',
+    middleName: '',
+    lastName: '',
+    ssn: '',
+    address: '',
   })
 
   async function submit() {
@@ -71,9 +71,10 @@ const PostConditionalJobOffer2 = () => {
     let canvas = await (html2canvas(document.querySelector('#capture')));
     let image = (canvas.toDataURL('image/png'))
 
+    /** Disabling checks for pre-filled fields */
     let data = {
-      name: document.getElementById('name').value,
-      seecurityNumber: document.getElementById('seecurityNumber').value,
+      // name: document.getElementById('name').value,
+      // seecurityNumber: document.getElementById('seecurityNumber').value,
       date: date,
       dateOnInjury: document.getElementById('dateOnInjury').value,
       typeOfInjury: document.getElementById('typeOfInjury').value,
@@ -91,9 +92,9 @@ const PostConditionalJobOffer2 = () => {
       injuryAddress: document.getElementById('injuryAddress').value,
       injuryPhone: document.getElementById('injuryPhone').value,
       comment: document.getElementById('comment').value,
-      bills: (document.querySelector('input[name="bills"]:checked')?.value=="no")
-                ?document.querySelector('input[name="bills"]:checked')?.value
-                :document.getElementById('howMuch').value,
+      bills: (document.querySelector('input[name="bills"]:checked')?.value == "no")
+        ? document.querySelector('input[name="bills"]:checked')?.value
+        : document.getElementById('howMuch').value,
       howLong: document.getElementById('howLong').value,
       howMuch2: document.getElementById('howMuch2').value,
       attorney: document.querySelector('input[name="attorney"]:checked')?.value,
@@ -129,20 +130,20 @@ const PostConditionalJobOffer2 = () => {
 
   }
 
-  useEffect( async () => {
-    let userProfile = await  JSON.parse(localStorage.user_profile);
-    let res = await hr.getAllApplicantsByID({ id : userProfile.id})
+  useEffect(async () => {
+    let userProfile = await JSON.parse(localStorage.user_profile);
+    let res = await hr.getAllApplicantsByID({ id: userProfile.id })
     let data = {
-      firstName : res?.employee?.firstName || '',
-      middleName : res?.employee?.middleName || '',
+      firstName: res?.employee?.firstName || '',
+      middleName: res?.employee?.middleName || '',
       lastName: res?.employee?.lastName || '',
-      ssn : res?.employee?.ssn || '',
-      address : res?.employee?.address || '',
+      ssn: res?.employee?.ssn || '',
+      address: res?.employee?.address || '',
       // address1 : res?.employee?.address1 || '',
     }
     setUserData(data)
     console.log(data)
-  
+
   }, [])
 
   async function eventHandle(value) {
@@ -239,30 +240,33 @@ const PostConditionalJobOffer2 = () => {
                   <TableCell className="w4">1.</TableCell>
                   <TableCell className="w50 row pr10">
                     NAME:
-                    <input type="text" name="textfield" id="name" className="w h18 pl8 bn bb input-capitalization" 
-                       value={
-                        `${userData.firstName} ${userData.middleName} ${userData.lastName}` 
-                      } 
+                    <input type="text" name="textfield" id="name" className="w h18 pl8 bn bb input-capitalization"
+                      value={
+                        `${userData.firstName} ${userData.middleName} ${userData.lastName}`
+                      }
+                      disabled
                     />
                   </TableCell>
                   <TableCell className="w50 row pl10">
-                  <TableCell className="w4">2.</TableCell>
+                    <TableCell className="w4">2.</TableCell>
                     SOCIAL SECURITY NO.:
-                    <input type="text" name="textfield" id="seecurityNumber" className="w h18 pl8 bn bb" 
-                       value={
-                        `${userData.ssn}` 
-                      } 
+                    <input type="text" name="textfield" id="seecurityNumber" className="w h18 pl8 bn bb"
+                      value={
+                        `${userData.ssn}`
+                      }
+                      disabled
                     />
                   </TableCell>
                 </TableRow>
                 <TableRow className="w100 mt10 row">
-                <TableCell className="w4">3.</TableCell>
+                  <TableCell className="w4">3.</TableCell>
                   <TableCell className="w100 row">
                     Address:
                     <input type="text" name="textfield" id="dateOnInjury" className="w h18 pl8 bn bb"
-                       value={
-                        `${userData.address}` 
-                      } 
+                      value={
+                        `${userData.address}`
+                      }
+                      disabled
                     />
                   </TableCell>
                 </TableRow>
@@ -277,10 +281,10 @@ const PostConditionalJobOffer2 = () => {
                       className="datePickerReact"
                     />
                   </TableCell>
-                  <TableCell className="w50 row pl10">
-                  <TableCell className="w4">5.</TableCell>
+                  <TableCell className="w50 row pl10 d-flex">
+                    <TableCell className="w4">5.</TableCell>
                     Type of Injury:
-                    <input type="text" name="textfield" id="typeOfInjury" className="w h18 pl8 bn bb" />
+                    <input type="text" name="textfield" id="typeOfInjury" className="w h18 pl8 bn bb align-self-end" />
                   </TableCell>
                 </TableRow>
                 {/* -*- */}
@@ -491,6 +495,7 @@ const PostConditionalJobOffer2 = () => {
                       value={pDate}
                       id="offerDate"
                       className="datePickerReact"
+                      disabled
                     />
                   </TableCell>
                 </TableRow>
