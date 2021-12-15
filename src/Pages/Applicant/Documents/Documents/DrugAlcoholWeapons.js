@@ -83,13 +83,13 @@ const DrugAlcoholWeapons = () => {
       setPosting(true);
 
       let data = {
-        tgsSign: document.getElementById('textfield').value,
-        date: DateSOLUTIONS.toISOString(),
+        // tgsSign: document.getElementById('textfield').value,
+        // date: DateSOLUTIONS.toISOString(),
         name: document.getElementById("name").value,
         signature: document.getElementById("signature").value,
         dateSignature: DateSignature.toISOString(),
-        signatureWitness: document.getElementById("witnessSignature").value,
-        witnessDate: DateWitness.toISOString()
+        // signatureWitness: document.getElementById("witnessSignature").value,
+        // witnessDate: DateWitness.toISOString()
       };
       console.log("data", data);
 
@@ -1840,14 +1840,23 @@ const DrugAlcoholWeapons = () => {
                         (TRANS-GLOBAL SOLUTIONS, INC.)
                       </TableCell>
                       <TableCell className="w100  mt30">
-                        <DatePicker
+                        <input
+                          type="text"
+                          name="textfield"
+                          id="offerDate"
+                          className="w100 bn bb mt6 mb5 signatureClass font-20"
+                          onChange={($e) => {
+                            setDateSOLUTIONS($e.target.value);
+                          }}
+                        />
+                        {/* <DatePicker
                           onChange={(value) => {
                             setDateSOLUTIONS(value);
                           }}
                           value={DateSOLUTIONS}
                           id="offerDate"
                           className="datePickerReact data20h"
-                        />
+                        /> */}
                         Date
                       </TableCell>
                     </TableRow>
@@ -1882,6 +1891,7 @@ const DrugAlcoholWeapons = () => {
                           id="name"
                           className="w h18 bn bb mt6 mb5 input-capitalization"
                           value={`${userData.firstName} ${userData.middleName} ${userData.lastName}`}
+                          disabled
                         />{" "}
                         hereby <b>acknowledge</b> that I have <b>read</b> (or it
                         has been read to me) and <b>understand</b> the Drug,
