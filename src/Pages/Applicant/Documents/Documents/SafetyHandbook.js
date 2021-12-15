@@ -85,9 +85,9 @@ const SafetyHandbook = () => {
         /** Disabling checks for pre-filled fields */
         // name: document.getElementById("nameText").value,
         // department: document.getElementById("deptText").value,
-        // signature: document.getElementById("nameSignature").value,
+        signature: document.getElementById("nameSignature").value,
         // date: SignatureDate.toISOString(),
-        verifcationName: document.getElementById("verificationSignature").value,
+        // verifcationName: document.getElementById("verificationSignature").value,
         // verificationDate: VerificationDate.toISOString(),
       };
 
