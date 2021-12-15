@@ -407,9 +407,9 @@ const Application = () => {
                 const {
                     children: [child1, child2, ...rest]
                 } = element;
-                
-                const elementToHighlight = child2 || child1; 
-                
+
+                const elementToHighlight = child2 || child1;
+
                 elementToHighlight.classList.add('incorrect-field');
 
                 // 3000ms duration for animation
@@ -757,24 +757,28 @@ const Application = () => {
                                 <Grid xs={12} container className="LRM40">
                                     <Grid xs={6} className={
                                         maritalInformation[0].marital_status === 'married'
-                                            ? 'mt30 pr20'
+                                            ? 'mt30 pr20 d-flex flex-column'
                                             : 'd-none'
                                     }>
-                                        <Grid xs={12} className="mbold mb14">
+                                        <Grid xs={12} className="mbold m-0">
                                             Spouse's Date of Birth
                                         </Grid>
-                                        <DatePicker
-                                            onChange={($e) => setStateForFormControl(
-                                                contactInformation,
-                                                'spouse_date_of_birth',
-                                                $e,
-                                            )}
-                                            value={
-                                                contactInformation[0].spouse_date_of_birth
-                                            }
-                                            id="spouse-dob"
-                                            className="datePickerReact w100p bg-white react-date-picker"
-                                        />
+                                        <Grid
+                                            xs={12}
+                                            className="d-flex">
+                                            <DatePicker
+                                                onChange={($e) => setStateForFormControl(
+                                                    contactInformation,
+                                                    'spouse_date_of_birth',
+                                                    $e,
+                                                )}
+                                                value={
+                                                    contactInformation[0].spouse_date_of_birth
+                                                }
+                                                id="spouse-dob"
+                                                className="datePickerReact w100p bg-white react-date-picker align-self-stretch"
+                                            />
+                                        </Grid>
                                     </Grid>
                                     <Grid xs={6} className={
                                         maritalInformation[0].marital_status === 'married'
