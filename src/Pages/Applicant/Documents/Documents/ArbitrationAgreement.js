@@ -70,9 +70,9 @@ const ArbitrationAgreement = () => {
 
       let data = {
         employe: document.getElementById('employe').value,
-        date: date,
-        company: document.getElementById('company').value,
-        companyDate: companyDate
+        // date: date,
+        // company: document.getElementById('company').value,
+        // companyDate: companyDate
       }
 
       const nullCheck = Object.values(data)
