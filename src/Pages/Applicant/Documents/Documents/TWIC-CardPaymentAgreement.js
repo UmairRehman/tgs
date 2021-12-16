@@ -89,11 +89,11 @@ const TWICCardPaymentAgreement = () => {
 
       let data = {
         hireDate: hireDate,
-        name: document.getElementById('name').value,
-        securityNumber: document.getElementById('securityNumber').value,
+        // name: document.getElementById('name').value,
+        // securityNumber: document.getElementById('securityNumber').value,
         signature: document.getElementById('signature').value,
-        representative: document.getElementById('representative').value,
-        signDate: signDate,
+        // representative: document.getElementById('representative').value,
+        // signDate: signDate,
       }
 
 
