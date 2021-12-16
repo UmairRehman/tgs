@@ -86,9 +86,9 @@ const FCRA = () => {
 
       let data = {
         signature: document.getElementById('signature').value,
-        name: document.getElementById('name').value,
-        witnessSignature: document.getElementById('witnessSignature').value,
-        date: date
+        // name: document.getElementById('name').value,
+        // witnessSignature: document.getElementById('witnessSignature').value,
+        // date: date
       }
       const nullCheck = Object.values(data)
         .reduce((total, accumulator) => total || !accumulator, false);
