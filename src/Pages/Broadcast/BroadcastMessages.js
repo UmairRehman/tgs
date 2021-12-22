@@ -203,20 +203,21 @@ const BroadcastMessages = () => {
 
   const sendBroadcasst = async () => {
     try {
-      handleCloseModal();
-
+      
       const { id } = JSON.parse(
         localStorage.user_profile
-      );
-
-      const broadcastMessageObject = {
-        subDepartmentId: toForBroadcast,
-        subject: broadcastSubject,
-        message: broadcastMessage,
-        employee_id: id,
-      }
-
-      const response = await broadcast.sendBroadcast(broadcastMessageObject);
+        );
+        
+        const broadcastMessageObject = {
+          subDepartmentId: toForBroadcast,
+          subject: broadcastSubject,
+          message: broadcastMessage,
+          employee_id: id,
+        }
+        
+        const response = await broadcast.sendBroadcast(broadcastMessageObject);
+        retreiveBroadcasts();
+        handleCloseModal();
 
     } catch (exc) {
       console.log(exc);
