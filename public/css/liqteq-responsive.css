@@ -23,6 +23,17 @@
         font-size: 16px;
     }
 }
+
+/** This was added to remove the extruding existence in the DOM. Debugging
+efforsts were surpassing time for delivery, would be looked into later.
+The original designer is not in the engineering/dev team right now.
+*/
+@media (min-width:1061px) {
+    .MenuCloseBtn {
+        display: none!important;
+    }
+}
+
 @media (max-width: 1060px){
     .PageContent {
         width: 100% !important;
