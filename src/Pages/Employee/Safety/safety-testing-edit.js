@@ -62,8 +62,8 @@ const dummyData = {
   
   Results : [
     { id: 1 , title :  'Pass' },
-    { id: 2 , title :  'Fail' } ,
-    { id: 3 , title :  'Not Available' }
+    { id: 2 , title :  'Coach' } ,
+    { id: 3 , title :  'N/A' }
   ]
 };
 
@@ -90,7 +90,7 @@ const SafetyTestingEdit = () => {
 
   const [safetyTesting, setSafetyTesting] = useState({
     testingRules:[],
-    crewList:[]
+    crewList:[],
   });
   
 
@@ -167,13 +167,20 @@ const SafetyTestingEdit = () => {
       let result = row.result.title
       return ({crew_id:row.id , result,comment})
     })
-    let data = {
-        rule_id : safetyTesting.testingRules.id,
+
+    let data = []
+    safetyTesting.testingRules.map((row)=>{
+     
+      let dataa = {
+        rule_id : row.id,
         event_id : eventId,
         rule_result : rule_result
-    }
+      }
+      data.push(dataa)
+    })
+    
 
-    return [data]
+    return data
   }
 
   const resetData = () => {
@@ -189,33 +196,34 @@ const SafetyTestingEdit = () => {
   const submitBtn = async (event) =>{ 
     
     event.preventDefault();
-    if (!loading) {
+    // if (!loading) {
       setSuccess(false);
       setLoading(true);
 
       let body = await finalData();
       if(body){
-        try {
-          let res = await employee.add_rule_event(body)
-          if(res?.httpStatus == 200)
-          {
-            console.log('result',res);
-            setSuccess(true);
-            resetData()
-            setLoading(false);
-            setTimeout(() => {
-              history.push('/safety-testing')
-            }, 1500);
-            return showSnackBar('Form Successfully Submitted');
-          }  
-        } catch (error) {
-          setSuccess(false);
-          setLoading(false);
-          console.log("error",error);
-          return showSnackBar(`Error Occured while submitting form: ${error}`);
-        }
+        console.log('body',body);
+        // try {
+        //   let res = await employee.add_rule_event(body)
+        //   if(res?.httpStatus == 200)
+        //   {
+        //     console.log('result',res);
+        //     setSuccess(true);
+        //     resetData()
+        //     setLoading(false);
+        //     setTimeout(() => {
+        //       history.push('/safety-testing')
+        //     }, 1500);
+        //     return showSnackBar('Form Successfully Submitted');
+        //   }  
+        // } catch (error) {
+        //   setSuccess(false);
+        //   setLoading(false);
+        //   console.log("error",error);
+        //   return showSnackBar(`Error Occured while submitting form: ${error}`);
+        // }
       }
-    }
+    // }
     return false
   }
 
@@ -282,6 +290,7 @@ const SafetyTestingEdit = () => {
                       </Grid>
                       <Grid xs={12} className="mt14 MultiCheckBox">
                         <Autocomplete
+                          multiple
                           className="w100p"
                           id="checkboxes-tags-demo"
                           options={ruleList}
