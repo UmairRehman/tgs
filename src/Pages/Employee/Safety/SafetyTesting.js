@@ -95,6 +95,9 @@ const SafetyTesting = () => {
               comment: (row?.comment)?row.comment:null
             }
           }) 
+          data.sort((a,b)=>{
+            return (b.id  - a.id)
+          })
           // console.log("data",data);
           setModalData(data)
           setLoading(false) 
