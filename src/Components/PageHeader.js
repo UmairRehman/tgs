@@ -264,29 +264,26 @@ const PageHeader = () => {
   const [broadcasts, insertBroadcasts] = useState(
     getBroadcasts()
   );
-  
-  const [message, setMessage] = useState({
-    heading: '',
-    body: '',
-    subject:'',
-    date:'',
-    is_read:'',
-    id:''
-  })
 
   const [notifications, setNotifications] = useState([]);
 
   // For Modal
   const [aletopen, setAlertOpen] = React.useState(false);
+  const [custom, setCustom] = useState(false);
+  const [customMessage, setCustomMessage] = useState({
+    subject:'',
+    message:''
+  })
   //  const //theme = useTheme();
   //const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   const acknowledgeAndClose = async (id) => {
-    let result = await broadcast.messageRead({id})
+    
 
-    if(result.httpStatus==200){
-      AlertPopOff();
-
+    if(custom && id){
+      const res = await broadcast.messageRead({id})
+    }
+    else{
       setTimeout(() => {
         const [first, ...rest] = broadcasts;
 
@@ -295,10 +292,18 @@ const PageHeader = () => {
         insertBroadcasts(rest);
       }, 0);
     }
+    await retreiveBroadcasts();
+    AlertPopOff();
   }
 
-  const AlertPop = (val) => {
-    setMessage(val);
+  //  isBroadCast true: broadcast socket
+  //  isBroadCast false: notification onClick
+  const AlertPop = ( isBroadCast=true , val={} ) => {
+    console.log("val",val);
+    if(!isBroadCast){
+      setCustom(true);
+      setCustomMessage(val)
+    }
     setAlertOpen(true);
   };
 
@@ -356,15 +361,16 @@ const PageHeader = () => {
           date = new Date(date).toLocaleDateString()
 
           return {
-            heading: dnUsername,
+            heading: to,
             body: message,
             subject,
             date,
+            from,
+            to,
             is_read,
             id
           }
         });
-
       setNotifications(notificationsBuffer);
 
     } catch (exc) {
@@ -379,7 +385,7 @@ const PageHeader = () => {
     storage.set('broadcasts', JSON.stringify(broadcasts));
 
     if (getBroadcasts().length)
-      AlertPop();
+      AlertPop(true);
 
     retreiveBroadcasts();
   }, [broadcasts])
@@ -534,10 +540,7 @@ const PageHeader = () => {
                   <List component="nav" aria-label="main mailbox folders" className="HeaderNoti Scrolling AlertNoti">
                     {notifications
                       .map((notification) => {
-                        return <ListItem 
-                        onClick={
-                           ()=>AlertPop(notification) 
-                          }
+                        return <ListItem onClick={()=>AlertPop(false, notification)}
                           className={
                             notification.is_read
                               ? ''
@@ -546,7 +549,7 @@ const PageHeader = () => {
                           <Grid xs={12}>
                             <FormLabel>{notification.data}</FormLabel>
                             <Typography variant="h6" component="h6">
-                              {notification.heading}
+                              {notification.subject}
                             </Typography>
                             {notification.body}
                           </Grid>
@@ -670,40 +673,49 @@ const PageHeader = () => {
         <Button autoFocus onClick={AlertPopOff} className="ModalClose">
         </Button>
         <DialogContent>
-          <Grid xs={12}>
+          {/* <Grid xs={12}>
             <Grid xs={12} className="mbold pl14">To</Grid>
             <Grid xs={12} className="AlertPopTextBox">
               {
-                message?.heading
+                broadcasts?.[0]?.to
               }
             </Grid>
-          </Grid>
+          </Grid> */}
           <Grid xs={12}>
-            <Grid xs={12} className="mbold mt30 pl14">Subject</Grid>
+            <Grid xs={12} className="mbold mt30 ">Subject</Grid>
             <Grid xs={12} className="AlertPopTextBox">
               {
-                message?.subject
+                (custom) ? customMessage.subject : broadcasts?.[0]?.subject
               }
             </Grid>
           </Grid>
+          <Grid xs={12} className="mbold mt30 ">Message</Grid>
           <Grid xs={12} className="mt16 AlertPopTextBox AlertPopTextarea">
+
             Dear recipient,<br />
             {
-              message?.body
+                (custom) ? customMessage.body : broadcasts?.[0]?.message
             }
           </Grid>
-          <Grid xs={12} container className="mt10">
-            <Grid className="AlertCheckBox">
-              <Checkbox
-                defaultChecked
-                color="primary"
-                inputProps={{ 'aria-label': 'secondary checkbox' }}
-              /> Check here to confirm you have read this message
-            </Grid>
-          </Grid>
-          <Grid xs={12} container justify="center" className="mt30">
-            <Button className="LinkButton" onClick={()=>acknowledgeAndClose(message.id) }>Acknowledge & Close</Button>
-          </Grid>
+          {
+            (custom) &&
+            (<div>
+              <Grid xs={12} container className="mt10">
+                <Grid className="AlertCheckBox">
+                  <Checkbox
+                    defaultChecked
+                    color="primary"
+                    inputProps={{ 'aria-label': 'secondary checkbox' }}
+                  /> Check here to confirm you have read this message
+                </Grid>
+              </Grid>
+              <Grid xs={12} container justify="center" className="mt30">
+                <Button className="LinkButton" 
+                        disabled={customMessage?.is_read || broadcasts?.[0]?.is_read}
+                        onClick={()=>acknowledgeAndClose(customMessage.id)}>Acknowledge & Close</Button>
+              </Grid>
+            </div>)
+          }
         </DialogContent>
       </Dialog>
       {/* Alert Modal Close */}

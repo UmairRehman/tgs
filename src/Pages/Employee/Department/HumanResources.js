@@ -51,7 +51,7 @@ const HumanResources = () => {
     const [rows, setRows] = useState([])
     const getContacts = async ()=>{
       //hr id = 5 but no data right now
-      let data = await employee.department_contact_list({id:1})
+      let data = await employee.department_contact_list({id:5})
       
       return (data?.httpStatus ==200) ? data.data : new Error ('api failed to fetch contacts')
 

@@ -203,20 +203,21 @@ const BroadcastMessages = () => {
 
   const sendBroadcasst = async () => {
     try {
-      handleCloseModal();
-
+      
       const { id } = JSON.parse(
         localStorage.user_profile
-      );
-
-      const broadcastMessageObject = {
-        subDepartmentId: toForBroadcast,
-        subject: broadcastSubject,
-        message: broadcastMessage,
-        employee_id: id,
-      }
-
-      const response = await broadcast.sendBroadcast(broadcastMessageObject);
+        );
+        
+        const broadcastMessageObject = {
+          subDepartmentId: toForBroadcast,
+          subject: broadcastSubject,
+          message: broadcastMessage,
+          employee_id: id,
+        }
+        
+        const response = await broadcast.sendBroadcast(broadcastMessageObject);
+        retreiveBroadcasts();
+        handleCloseModal();
 
     } catch (exc) {
       console.log(exc);
@@ -358,10 +359,11 @@ const BroadcastMessages = () => {
           <Grid xs={12} className="mbold mt30">
             <Grid xs={12} className="pl14">Subject</Grid>
             <TextField id="outlined-basic" label="Type Here" variant="outlined" className="w100p"
+              required={true}
               onChange={handleBroadcastSubject} />
           </Grid>
           <Grid xs={12} className="mt30">
-            <TextareaAutosize className="w100p" rowsMin={6} placeholder="Dear recipient,
+            <TextareaAutosize className="w100p" required={true} rowsMin={6} placeholder="Dear recipient,
 Please note that progress made on last week's event......"
               onChange={handleBroadcastMessage} />
           </Grid>
