@@ -20,10 +20,17 @@ import { useLocation } from 'react-router'
 
 /** Local deoendencies & Libraries */
 import Services from '../../../Services';
+import Snackbar from '../../../Components/Snackbar';
+import { helpers } from "../../../helpers";
 
 const {
     hr
 } = Services;
+
+const {
+    showSnackBar,
+} = helpers;
+
 var moment = require('moment-timezone');
 
 // import MobileScreen from './Mobile/Enter-RailRoad-Add';
@@ -37,11 +44,8 @@ const TicketUpdate = () => {
     const [date, setDate] = useState(new Date())
     const [tickets, setTickets] = useState({})
     const [ticketID, setticketID] = useState('')
-    const [Btickets, setBtickets] = useState({})
-    const [Ftickets, setFtickets] = useState({})
-    const [ticketsCategory, setTicketsCategory] = useState({})
-    const [ticketstype, setTicketstype] = useState({})
-    
+    const [Comment, setComment] = useState('');
+
     useEffect(async() => {
         window.scrollTo(0, 0);
         let ticketData = location?.state
@@ -52,7 +56,7 @@ const TicketUpdate = () => {
             let data = await hr.get_tickets_by_id(ticketData) ;
             console.log(data)
             setTickets(data)
-
+            setComment((data?.data?.close_comment)?data?.data?.close_comment:null)
 
         }
         catch(exc){
@@ -64,23 +68,29 @@ const TicketUpdate = () => {
     }, []);
 
 
-
+function handleComment(value) {
+    setComment(value);
+}
 
  async function onSubmitTicket(event){
     event.preventDefault()
-    console.log("data");
+    console.log("data",Comment);
     let data = {
-        comment: document.getElementById('comment').value, 
+        comment:Comment, 
         id :ticketID.id
     } 
     console.log(data)
     
     try{
         let data1 = await hr.update_tickets(data) ;
-        history.push('/tickets-alerts')
+        setTimeout(() => {
+            history.push('/tickets-alerts')
+          }, 1500);
+        return showSnackBar('Form Successfully Submitted');
     }
     catch(exc){
         console.log(exc);
+        return showSnackBar(`Error Occured while submitting form: ${exc}`);
     }
 
 
@@ -165,10 +175,10 @@ const TicketUpdate = () => {
                         </ListItem>
                         <ListItem container className="p0 pt6 pb20">
                             <Grid className="w250 bold">
-                            Ticket Request
+                            Ticket Category
                             </Grid>
                             <Grid>
-                            Question
+                            {tickets?.data?.TicketCategory?.name}
                             </Grid>
                         </ListItem>
                         <ListItem container className="p0 pt6 pb20">
@@ -176,14 +186,14 @@ const TicketUpdate = () => {
                             Ticket Comments
                             </Grid>
                             <Grid>
-                            401k is deducting wrong amount
+                            {tickets?.data?.creation_comment}
                             </Grid>
                         </ListItem>
                     </List>
                 </Grid>
                 <form className="w-100" onSubmit={onSubmitTicket}>
                 <Grid xs={12} md={6}>
-                    <Grid xs={12} container>
+                    {/* <Grid xs={12} container>
                         <Grid xs={12} className="mt30 pr40">
                             <Grid xs={12}>
                                 <Grid xs={12} className="mbold">
@@ -203,7 +213,7 @@ const TicketUpdate = () => {
                                 </Grid>
                             </Grid>
                         </Grid>
-                    </Grid>
+                    </Grid> */}
                     {/* ---------- */}
                     <Grid xs={12} container>
                         <Grid xs={12} className="mt30 pr40">
@@ -212,7 +222,9 @@ const TicketUpdate = () => {
                                     Closeout Comment
                                 </Grid>
                                 <Grid xs={12} className="mt14">
-                                    <TextareaAutosize id="comment" className="w100p" rowsMin={6} placeholder="Comment here"  required={true}/>
+                                    <TextareaAutosize id="comment" className="w100p" rowsMin={6} placeholder="Comment here"  required={true} onChange={(event,value)=>{handleComment(event.target.value)}}
+                                    disabled={(tickets?.data?.close_comment)?true:false}
+                                    value={Comment}/>
                                 </Grid>
                                 <Typography variant="h6" className="MuiTypography-subtitle2 MuiTypography-colorTextSecondary" component="h6">
                                     Please leave this field empty if you have no comments
@@ -223,11 +235,14 @@ const TicketUpdate = () => {
                     
                     <Grid xs={12} container justify="space-between" className="mt50 pr40">
                         <Link to="/tickets-alerts" className="LinkButtonBack">Back</Link>
-                        <Button type="submit" className="LinkButton">Save & Continue</Button>
+                        <Button type="submit" 
+                        disabled={(tickets?.data?.close_comment)?true:false}
+                        className="LinkButton">Save & Continue</Button>
                     </Grid>
                 </Grid>
                 </form>
             </Grid>
+            <Snackbar></Snackbar>
           </Grid>
           {/* Page Start End */}
         </Grid>
