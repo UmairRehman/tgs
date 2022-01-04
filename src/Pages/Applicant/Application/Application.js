@@ -516,9 +516,10 @@ const Application = () => {
                                     id="home_phone">
                                     <Grid xs={6} className="pr20">
                                         <Grid xs={12} className="mbold mb14">
-                                            Home Phone
+                                            Phone Number
                                         </Grid>
-                                        <TextField id="outlined-basic" placeholder="Type Here" variant="outlined" className="w100p"
+                                        <TextField id="outlined-basic" placeholder="(123) 123-1231" variant="outlined" className="w100p"
+                                            inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
                                             onChange={
                                                 ($e) => setStateForFormControl(
                                                     contactInformation,
@@ -542,7 +543,7 @@ const Application = () => {
                                         <Grid xs={12} className="mbold mb14">
                                             Cell Phone
                                         </Grid>
-                                        <TextField id="outlined-basic" placeholder="Type Here" variant="outlined" className="w100p"
+                                        <TextField id="outlined-basic" placeholder="(123) 123-1231" variant="outlined" className="w100p"
                                             onChange={
                                                 ($e) => setStateForFormControl(
                                                     contactInformation,
@@ -809,7 +810,7 @@ const Application = () => {
                                         <Grid xs={12} className="mbold mb14">
                                             Spouse's Telephone Number
                                         </Grid>
-                                        <TextField id="outlined-basic" placeholder="Type Here" variant="outlined" className="w100p"
+                                        <TextField id="outlined-basic" placeholder="(123) 123-1231" variant="outlined" className="w100p"
                                             onBlur={
                                                 verifyValidations
                                                     .bind(
@@ -938,7 +939,7 @@ const Application = () => {
                                         <Grid xs={12} className="mbold mb14">
                                             Telephone Number
                                         </Grid>
-                                        <TextField id="outlined-basic" placeholder="Type Here" variant="outlined" className="w100p"
+                                        <TextField id="outlined-basic" placeholder="(123) 123-1231" variant="outlined" className="w100p"
                                             onChange={
                                                 ($e) => setStateForFormControl(
                                                     emergency_contact,
