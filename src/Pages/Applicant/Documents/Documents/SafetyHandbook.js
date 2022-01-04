@@ -121,7 +121,7 @@ const SafetyHandbook = () => {
 
         images.push(image);
       }
-      console.log(images.length);
+
       const resposne = await users.submitForm({
         image: images,
         form: 16,

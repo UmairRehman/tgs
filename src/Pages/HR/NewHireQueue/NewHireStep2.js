@@ -504,13 +504,15 @@ const NewHireStep2 = () => {
                 {userFiles.map((name) => (
                   <ListItem container className="p0 pt6 pb20">
                     <Grid className="PDFDownload">
-                      <Grid className="FileName">{name}</Grid>
+                      {/* <Grid className="FileName"></Grid> */}
                       {/* <Button></Button> */}
                       <a
                         className="Button"
                         href={`${apiPath}/employee/applicant/download?id=${applicantData?.id}&name=${name}`}
                         target="_blank"
-                      ></a>
+                      >
+                        {name}
+                      </a>
                     </Grid>
                   </ListItem>
                 ))}
