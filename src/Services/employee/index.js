@@ -12,6 +12,14 @@ export const get_employee_certificates = async (payload, headers) => {
     );
 };
 
+export const add_employee_certificate = async (payload,headers) =>{
+    return await api.post(
+        routes.employee.add_certificate,
+        payload,
+        headers
+    );
+}
+
 export const get_employee_listing = async (payload, headers) => {
     return await api.get(
         routes.employee.get_employee_list,
