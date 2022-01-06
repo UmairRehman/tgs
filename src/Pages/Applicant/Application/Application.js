@@ -361,6 +361,11 @@ const Application = () => {
             if (applicationForm.spouse_date_of_birth)
                 applicationForm.spouse_date_of_birth = applicationForm.spouse_date_of_birth.toString();
 
+                applicationForm.home_phone = applicationForm.home_phone.replace(/[^\d]/g, '');  
+                applicationForm.cell_phone = applicationForm.cell_phone.replace(/[^\d]/g, '');  
+                applicationForm.spouse_phone_number = applicationForm.spouse_phone_number.replace(/[^\d]/g, '');  
+                applicationForm.emergency_contact.phone_number = applicationForm.emergency_contact.phone_number.replace(/[^\d]/g, '');  
+            console.log(applicationForm);  
             const formDataToPush = new FormData();
 
             Object.keys(applicationForm)
@@ -423,6 +428,46 @@ const Application = () => {
         }
     }
 
+    function formatPhoneNumber(value) {
+        // if input value is falsy eg if the user deletes the input, then just return
+        if (!value) return value;
+      
+        // clean the input for any non-digit values.
+        const phoneNumber = value.replace(/[^\d]/g, "");
+      
+        // phoneNumberLength is used to know when to apply our formatting for the phone number
+        const phoneNumberLength = phoneNumber.length;
+      
+        // we need to return the value with no formatting if its less then four digits
+        // this is to avoid weird behavior that occurs if you  format the area code to early
+        if (phoneNumberLength < 4) return phoneNumber;
+      
+        // if phoneNumberLength is greater than 4 and less the 7 we start to return
+        // the formatted number
+        if (phoneNumberLength < 7) {
+          return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
+        }
+      
+        // finally, if the phoneNumberLength is greater then seven, we add the last
+        // bit of formatting and return it.
+        return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(
+          3,
+          6
+        )}-${phoneNumber.slice(6, 10)}`;
+      }
+
+      const handlePhoneNumber = (state,prop,event) =>{
+        let formattedNumber = formatPhoneNumber(event.target.value)
+        event.target.value=formattedNumber
+        setStateForFormControl(
+            state,
+            prop,
+            event
+        )
+      }
+    //   contactInformation,
+    //   'home_phone',
+    //   event,
     return (
         <Grid container xs={12} className="Liq-Container HRPortal">
             <Grid xs={12} md={2} className="LeftContol" id="LeftContol">
@@ -489,6 +534,7 @@ const Application = () => {
                                         </Grid>
                                         <TextField id="outlined-basic" placeholder="Type Here" variant="outlined" className="w100p"
                                             onChange={
+
                                                 ($e) => setStateForFormControl(
                                                     contactInformation,
                                                     'email',
@@ -500,7 +546,7 @@ const Application = () => {
                                         <Grid xs={12} className="mbold mb14">
                                             SSN
                                         </Grid>
-                                        <TextField id="outlined-basic" placeholder="Type Here" variant="outlined" className="w100p"
+                                        <TextField id="outlined-basic" placeholder="(Enter 9 digit ssn)" variant="outlined" className="w100p"
                                             onChange={
                                                 ($e) => setStateForFormControl(
                                                     contactInformation,
@@ -521,11 +567,7 @@ const Application = () => {
                                         <TextField id="outlined-basic" placeholder="(123) 123-1231" variant="outlined" className="w100p"
                                             inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
                                             onChange={
-                                                ($e) => setStateForFormControl(
-                                                    contactInformation,
-                                                    'home_phone',
-                                                    $e,
-                                                )
+                                                (e)=>handlePhoneNumber(contactInformation,'home_phone',e)
                                             }
                                             onBlur={
                                                 verifyValidations
@@ -545,11 +587,7 @@ const Application = () => {
                                         </Grid>
                                         <TextField id="outlined-basic" placeholder="(123) 123-1231" variant="outlined" className="w100p"
                                             onChange={
-                                                ($e) => setStateForFormControl(
-                                                    contactInformation,
-                                                    'cell_phone',
-                                                    $e,
-                                                )
+                                                (e)=>handlePhoneNumber(contactInformation,'cell_phone',e)
                                             } />
                                     </Grid>
                                     <Grid xs={6} className='mt30 pr20'>
@@ -820,11 +858,7 @@ const Application = () => {
                                                     )
                                             }
                                             onChange={
-                                                ($e) => setStateForFormControl(
-                                                    contactInformation,
-                                                    'spouse_telephoneNumber',
-                                                    $e,
-                                                )
+                                                (e)=>handlePhoneNumber(contactInformation,'spouse_telephoneNumber',e)
                                             } />
                                     </Grid>
                                 </Grid>
@@ -941,11 +975,7 @@ const Application = () => {
                                         </Grid>
                                         <TextField id="outlined-basic" placeholder="(123) 123-1231" variant="outlined" className="w100p"
                                             onChange={
-                                                ($e) => setStateForFormControl(
-                                                    emergency_contact,
-                                                    'phone_number',
-                                                    $e,
-                                                )
+                                                (e)=>{ handlePhoneNumber(emergency_contact,'phone_number',e) }
                                             }
                                             onBlur={
                                                 verifyValidations
