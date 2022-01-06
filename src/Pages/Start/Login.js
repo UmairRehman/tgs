@@ -222,6 +222,11 @@ const Login = () => {
                 type={values.showPassword ? 'text' : 'password'}
                 value={values.password}
                 onChange={handleChange('password')}
+                onKeyPress={event => {
+                  if (event.key === 'Enter') {
+                    loginUser()
+                  }
+                }}
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton
