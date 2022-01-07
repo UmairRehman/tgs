@@ -20,6 +20,15 @@ export const add_employee_certificate = async (payload,headers) =>{
     );
 }
 
+export const update_employee_certificate = async (payload,headers) =>{
+    const { id } = payload;
+    return await api.put(
+        routes.employee.update_certificate.concat(id),
+        payload,
+        headers
+    );
+}
+
 export const get_employee_listing = async (payload, headers) => {
     return await api.get(
         routes.employee.get_employee_list,
