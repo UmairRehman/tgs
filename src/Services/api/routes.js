@@ -30,6 +30,8 @@ export const routes = {
         view_test_event_rule:'employee/testEventRuleResult/',
         departments_list: 'employee/department/',
         all_subdepartments: 'employee/department/sub',
+        add_certificate: 'employee/certificate',
+        update_certificate: 'employee/certificate/',
     },
     it :{
         list_it_request : 'employee/ITRequest',
@@ -51,7 +53,6 @@ export const routes = {
         //files
         additional_files_uplaod : 'employee/hr/add_files/',
         get_certificate: 'employee/certificate/employee/',
-        update_certificate: 'employee/certificate/',
         update_position: 'employee/hr/employee/position',
         update_pay: 'employee/hr/employee/pay',
         terminate: 'employee/hr/employee/terminate',

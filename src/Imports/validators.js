@@ -11,7 +11,7 @@ const {
 
 export const patterns = {
     password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-    phoneRegExp: /^[0-9]{10}$/ ,
+    phoneRegExp: /^\(?(\d{3})\)?[' ']?(\d{3})[- ]?(\d{4})$/,
     zip: /^[0-9]{5}$/
     // phoneRegExpOld: /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 }
@@ -48,8 +48,8 @@ export const validators = {
     registerApplicant: yup.object({
         first_name: yup.string()
             .required('first_name'),
-        middle_name: yup.string()
-            .required('middle_name'),
+        // middle_name: yup.string()
+        //     .required('middle_name'),
         last_name: yup.string()
             .required('last_name'),
         email: yup.string().email()
@@ -73,7 +73,6 @@ export const validators = {
         us_citizen: yup.string()
             .oneOf([
                 'citizen',
-                'us_citizen',
                 'non-citizen',
                 'permanent_residence',
                 'alien_authorized_to_work',

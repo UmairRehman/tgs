@@ -160,7 +160,7 @@ const CertiCol = [
   { id: "id", label: "ID", minWidth: 140, type: "value" },
   { id: "name", label: "License Certificate", minWidth: 160, type: "value" },
   { id: "issue_date", label: "Issue Date", minWidth: 160, type: "value" },
-  { id: "ed", label: "Expiry Date", minWidth: 160, type: "value" },
+  { id: "expiry_date", label: "Expiry Date", minWidth: 160, type: "value" },
   { id: "edi", label: "Edit", minWidth: 50, type: "edit" }
 ];
 
@@ -189,7 +189,7 @@ const EmployeeResult = () => {
 
   const location = useLocation();
 
-  const [emplpyeeDetails, setEmplpyeeDetails] = useState({})
+  const [employeeDetails, setEmployeeDetails] = useState({})
 
   const [files, setFiles] = useState([])
 
@@ -207,15 +207,15 @@ const EmployeeResult = () => {
 
   const [updateAddress, setUpdateAddress] = useState({})
 
-  const [streedAddress, setStreedAddress] = useState(emplpyeeDetails.address)
+  const [streedAddress, setStreedAddress] = useState(employeeDetails.address)
 
-  const [streedAddress1, setStreedAddress1] = useState(emplpyeeDetails.address1)
+  const [streedAddress1, setStreedAddress1] = useState(employeeDetails.address1)
 
-  const [city, setCity] = useState(emplpyeeDetails.city)
+  const [city, setCity] = useState(employeeDetails.city)
 
-  const [stateName, setStateName] = useState(emplpyeeDetails.state)
+  const [stateName, setStateName] = useState(employeeDetails.state)
 
-  const [zip, setZip] = useState(emplpyeeDetails.zip)
+  const [zip, setZip] = useState(employeeDetails.zip)
 
   const [updateCertificate, setUpdateCertificate] = useState({})
 
@@ -233,6 +233,8 @@ const EmployeeResult = () => {
 
   const [certificateID, setCertificateID] = useState('')
 
+  const [addCertificate, setAddCertificate] = useState(false);
+
   const [flag, setFlag] = useState(false)
 
 
@@ -249,24 +251,24 @@ const EmployeeResult = () => {
 
 
 
-  function onUpdateCertificate(e) {
-    e.preventDefault();
+  function onUpdateCertificate() {
 
     let data = {
       name: updatedCertificateName,
       issue_date: moment(new Date(updatedCertificateIssueDate)).format('YYYY-MM-DD').toString(),
       expiry_date: moment(new Date(updatedCertificateExpiryDate)).format('YYYY-MM-DD').toString(),
-      employee_id: emplpyeeDetails?.id,
+      employee_id: employeeDetails?.id,
       id: updatedCertificateID
     }
 
     console.log(data)
 
     try {
-      hr.updateCertificate(data).then((certificateData) => {
+      employee.update_employee_certificate(data).then((certificateData) => {
         console.log(certificateData)
         setFlag(true)
         setOpenC(!openCerti);
+        setAddCertificate(false)
 
       }).catch((err) => { console.log(err) });
 
@@ -286,7 +288,7 @@ const EmployeeResult = () => {
       position_level: 1,
       rate: updatePay.rate,
       pay_type: updatePay.pay_type,
-      employee_id: emplpyeeDetails?.id,
+      employee_id: employeeDetails?.id,
       start_date: updatePayDate
     }
     try {
@@ -409,14 +411,14 @@ const EmployeeResult = () => {
       hr.getEmployee({ id }).then((applicantDataHistory) => {
         console.log(applicantDataHistory)
         setComponentLoader(true)
-        setEmplpyeeDetails(applicantDataHistory?.employee[0])
+        setEmployeeDetails(applicantDataHistory?.employee[0])
         setEmpData(applicantDataHistory)
         setComponentLoader(false)
         setFiles(applicantDataHistory?.files)
         setPosition(applicantDataHistory?.position)
         setPayRate(applicantDataHistory.pay)
 
-        setTgsLocation(applicantDataHistory?.TGSLocation)
+        setTgsLocation(applicantDataHistory?.employee[0].TGSLocation)
         setDepartment(applicantDataHistory?.employee[0]?.SubDepartment)
         setZip(applicantDataHistory?.employee[0].zip)
         setStateName(applicantDataHistory?.employee[0].state)
@@ -438,6 +440,10 @@ const EmployeeResult = () => {
     try {
       hr.getCertificate({ id }).then((certificateData) => {
         console.log(certificateData)
+        certificateData.data.rows.forEach(element => {
+          element.issue_date = moment( new Date(element.issue_date) ).format('DD-MM-YYYY')
+          element.expiry_date = moment( new Date(element.expiry_date) ).format('DD-MM-YYYY')
+        });
 
         setCertificate(certificateData.data.rows)
 
@@ -533,6 +539,7 @@ const EmployeeResult = () => {
 
   function getCertificate(row) {
 
+    
     setUpdateCertificate(row)
     setUpdatedCertificateID(row.id)
     setUpdatedCertificateName(row.name)
@@ -545,9 +552,50 @@ const EmployeeResult = () => {
     console.log(row)
   };
 
+  const openCertificateModal = () =>{
+    setAddCertificate(true)
+    setOpenC(true)
+  }
   const handleCloseCerti = () => {
+    setAddCertificate(false)
     setOpenC(false);
   };
+
+  const onAddCertificate = async () => {
+
+    let data = {
+      name: updatedCertificateName,
+      issue_date: moment(new Date(updatedCertificateIssueDate)).format('YYYY-MM-DD').toString(),
+      expiry_date: moment(new Date(updatedCertificateExpiryDate)).format('YYYY-MM-DD').toString(),
+      employee_id: employeeDetails?.id
+    }
+
+    console.log(data)
+
+    try {
+      let result = await employee.add_employee_certificate(data)
+      if(result.httpStatus==200) {
+        console.log(result)
+        setFlag(true)
+        setOpenC(!openCerti);
+        setAddCertificate(false)
+      }
+    }
+    catch (exc) {
+      console.log(exc);
+    }
+  }
+
+  const handleCertificate = (e) =>{
+    e.preventDefault();
+
+    
+    if(addCertificate)
+      onAddCertificate()  
+    else
+      onUpdateCertificate()
+    
+  }
 
 
   function onSubmitEmploye(event) {
@@ -572,7 +620,7 @@ const EmployeeResult = () => {
       address_2: streedAddress1,
       state: stateName,
       zip: zip,
-      employee_id: emplpyeeDetails?.id
+      employee_id: employeeDetails?.id
     }
     console.log(data)
 
@@ -585,19 +633,19 @@ const EmployeeResult = () => {
           setOpenA(false);
 
         }).then(() => {
-          console.log('emp', emplpyeeDetails.id)
-          hr.getEmployee(emplpyeeDetails).then((applicantDataHistory) => {
+          console.log('emp', employeeDetails.id)
+          hr.getEmployee(employeeDetails).then((applicantDataHistory) => {
             setLoader(true);
             console.log(applicantDataHistory)
             setComponentLoader(true)
-            setEmplpyeeDetails(applicantDataHistory?.employee[0])
-            console.log(emplpyeeDetails)
+            setEmployeeDetails(applicantDataHistory?.employee[0])
+            console.log(employeeDetails)
             setComponentLoader(false)
             setFiles(applicantDataHistory?.files)
             console.log(files)
             setPosition(applicantDataHistory?.position)
 
-            setTgsLocation(applicantDataHistory?.TGSLocation)
+            setTgsLocation(applicantDataHistory?.employee[0].TGSLocation)
             setDepartment(applicantDataHistory?.employee[0]?.SubDepartment)
             setZip(applicantDataHistory?.employee[0].zip)
             setStateName(applicantDataHistory?.employee[0].state)
@@ -641,7 +689,7 @@ const EmployeeResult = () => {
                         Employee ID
                       </Grid>
                       <Grid xs={5}>
-                        {emplpyeeDetails?.id}
+                        {employeeDetails?.id}
                       </Grid>
                     </ListItem>
                     <ListItem container className="p0 pt6 pb20">
@@ -649,7 +697,7 @@ const EmployeeResult = () => {
                         First Name
                       </Grid>
                       <Grid xs={5}>
-                        {emplpyeeDetails?.firstName}
+                        {employeeDetails?.firstName}
                       </Grid>
                     </ListItem>
                     <ListItem container className="p0 pt6 pb20">
@@ -657,7 +705,7 @@ const EmployeeResult = () => {
                         Last Name
                       </Grid>
                       <Grid xs={5}>
-                        {emplpyeeDetails?.lastName}
+                        {employeeDetails?.lastName}
 
                       </Grid>
                     </ListItem>
@@ -682,7 +730,7 @@ const EmployeeResult = () => {
                         Supervisor
                       </Grid>
                       <Grid xs={5}>
-                        Westmeyer, Ryan
+                        {`${employeeDetails?.SEmployee?.firstName} ${employeeDetails?.SEmployee?.lastName}`}
                       </Grid>
                     </ListItem>
                     <ListItem container className="p0 pt6 pb20">
@@ -693,22 +741,27 @@ const EmployeeResult = () => {
                         {department?.name}
                       </Grid>
                     </ListItem>
-                    <ListItem container className="p0 pt6 pb20">
+                    {
+                      (employeeDetails?.hireDate) && 
+                      (<ListItem container className="p0 pt6 pb20">
                       <Grid xs={5} className="bold">
                         Hire Date
                       </Grid>
                       <Grid xs={5}>
-                        {emplpyeeDetails?.hireDate}
+                        {employeeDetails?.hireDate}
                       </Grid>
-                    </ListItem>
-                    <ListItem container className="p0 pt6 pb20">
-                      <Grid xs={5} className="bold">
-                        Termination Date
-                      </Grid>
-                      <Grid xs={5}>
-                        {emplpyeeDetails?.terminateDate}
-                      </Grid>
-                    </ListItem>
+                      </ListItem>)
+                    }
+                    { (employeeDetails?.terminateDate) &&
+                      (<ListItem container className="p0 pt6 pb20">
+                        <Grid xs={5} className="bold">
+                          Termination Date
+                        </Grid>
+                        <Grid xs={5}>
+                          {employeeDetails?.terminateDate}
+                        </Grid>
+                      </ListItem>)
+                    }
                   </List>
                 </Grid>
               </Grid>
@@ -739,7 +792,7 @@ const EmployeeResult = () => {
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {[emplpyeeDetails]
+                        {[employeeDetails]
                           .map((row) => {
                             return (
                               <TableRow
@@ -992,10 +1045,10 @@ const EmployeeResult = () => {
 
               {/* Add Certificate & License Button */}
               <Grid xs={12} container className="mt40">
-                <label for="selecteSertificate" className="LinkButton">
+                <Button for="selecteSertificate" className="LinkButton" onClick={openCertificateModal}>
                   Add Certificate & License
-                </label>
-                <input id="selecteSertificate" type="file" className="hide" />
+                </Button>
+                {/* <input id="selecteSertificate" type="file" className="hide" /> */}
               </Grid>
 
 
@@ -1016,7 +1069,7 @@ const EmployeeResult = () => {
                     <Grid className="PDFDownload">
                       <Grid className="FileName">
 
-                        <a href={`${apiPath}/employee/applicant/download?id=${emplpyeeDetails?.id}&name=${name}`} target="_blank">{name}</a>
+                        <a href={`${apiPath}/employee/applicant/download?id=${employeeDetails?.id}&name=${name}`} target="_blank">{name}</a>
 
                       </Grid>
                       {/* <Button></Button> */}
@@ -1077,7 +1130,7 @@ const EmployeeResult = () => {
             <form onSubmit={onSubmitModal}>
               <Grid xs={12} className="mbold">
                 <Grid xs={12} className="pl14">Employee ID</Grid>
-                <TextField id="outlined-basic" label="Type Here" value={emplpyeeDetails?.id} disabled variant="outlined" className="w100p" />
+                <TextField id="outlined-basic" label="Type Here" value={employeeDetails?.id} disabled variant="outlined" className="w100p" />
               </Grid>
               <Grid xs={12} className="mbold mt30">
                 <Grid xs={12} className="pl14">Street Address1</Grid>
@@ -1118,12 +1171,17 @@ const EmployeeResult = () => {
         >
           <Button autoFocus onClick={handleCloseCerti} className="ModalClose">
           </Button>
-          <form onSubmit={onUpdateCertificate}>
+          <form onSubmit={handleCertificate}>
             <DialogContent>
-              <Grid xs={12} className="mbold">
-                <Grid xs={12} className="pl14">Employee ID</Grid>
-                <TextField id="outlined-basic" required value={updateCertificate?.id} variant="outlined" className="w100p" />
-              </Grid>
+              {
+                (!addCertificate)&&
+                (
+                  <Grid xs={12} className="mbold">
+                    <Grid xs={12} className="pl14">Certificate ID</Grid>
+                    <TextField id="outlined-basic" required value={updateCertificate?.id} variant="outlined" className="w100p" />
+                  </Grid>
+                )
+              }
               <Grid xs={12} className="mbold mt30">
                 <Grid xs={12} className="pl14">License Certificate</Grid>
                 <TextField id="outlined-basic" required value={updatedCertificateName} onChange={(e) => setUpdatedCertificateName(e.target.value)} variant="outlined" className="w100p" />
@@ -1134,10 +1192,13 @@ const EmployeeResult = () => {
                   id="date"
                   type="date"
                   className="DateTimePicker"
-                  value={moment(new Date(updatedCertificateIssueDate)).format('DD/MM/YYYY').toString()}
-                  onChange={(e) => setUpdatedCertificateIssueDate(e.target.value)}
+                  value={moment(new Date(updatedCertificateIssueDate)).format('YYYY-MM-DD').toString()}
+                  onChange={(e) => setUpdatedCertificateIssueDate(moment(new Date(e.target.value)).format('YYYY-MM-DD').toString())}
                   InputLabelProps={{
                     shrink: true,
+                  }}
+                  inputProps={{
+                    max: moment(new Date(updatedCertificateExpiryDate)).format('YYYY-MM-DD').toString()
                   }}
                 />
               </Grid>
@@ -1148,17 +1209,20 @@ const EmployeeResult = () => {
                   id="date"
                   type="date"
                   className="DateTimePicker"
-                  value={moment(new Date(updatedCertificateExpiryDate)).format('MM/DD/YYYY').toString()}
+                  value={moment(new Date(updatedCertificateExpiryDate)).format('YYYY-MM-DD').toString()}
 
                   onChange={(e) =>
-                    setUpdatedCertificateExpiryDate(e.target.value)}
+                    setUpdatedCertificateExpiryDate(moment(new Date(e.target.value)).format('YYYY-MM-DD').toString())}
                   InputLabelProps={{
                     shrink: true,
+                  }}
+                  inputProps={{
+                    min: moment(new Date(updatedCertificateIssueDate)).format('YYYY-MM-DD').toString()
                   }}
                 />
               </Grid>
               <Grid xs={12} container justify="center" className="mt30">
-                <Button type="submit" className="LinkButton">Save</Button>
+                <Button type="submit" className="LinkButton" >Save</Button>
               </Grid>
             </DialogContent>
           </form>
