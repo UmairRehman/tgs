@@ -1143,7 +1143,6 @@ const EmployeeResult = () => {
               </Grid>
               <Grid xs={12} className="mbold mt30 DatePickerCss">
                 <Grid xs={12} className="pl14">Expiry Date</Grid>
-                {console.log(updatedCertificateExpiryDate)}
                 <TextField
                   id="date"
                   type="date"

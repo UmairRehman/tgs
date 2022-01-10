@@ -14,6 +14,7 @@ const {
   REACT_APP_socketport: socketport,
   REACT_APP_socketbase: socketbase,
   REACT_APP_socketrouter: socketrouter,
+  REACT_APP_autologoutPeriod: autologoutPeriod,
 } = process.env;
 
 export const environment = {
@@ -29,6 +30,7 @@ export const environment = {
     base: socketbase,
     router: socketrouter
   },
+  autologoutPeriod,
 
   get apiPath() {
     /** Remember Getters and setters are design smells, it's better to not use them

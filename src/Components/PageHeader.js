@@ -22,6 +22,7 @@ import {
   makeStyles,
   Checkbox
 } from '@material-ui/core';
+
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 
@@ -55,7 +56,8 @@ const {
 } = Services;
 
 const {
-  apiPath
+  apiPath,
+  autologoutPeriod,
 } = environment;
 
 
@@ -167,6 +169,8 @@ const PageHeader = () => {
 
   const [savingImage, setSavingImage] = useState(false);
 
+  const [logoutTimeout, setLogoutTimeout] = useState(null);
+
   const [displayPicture, setDisplayPicture] = useState(
     storage.get('displayPicture')
   );
@@ -175,10 +179,65 @@ const PageHeader = () => {
     localStorage.getItem('access_jwt') || ''
   )
 
+  const [loggingOut, setLoggingOut] = useState(false);
+
   useEffect(() => {
     let clone = document.querySelector('#PageTitle').cloneNode(true);
     document.querySelector('h1').appendChild(clone);
   }, []);
+
+  useEffect(() => {
+    console.clear();
+
+    triggerLogoutTimeout();
+
+    document.addEventListener('keypress', triggerLogoutTimeout);
+
+    document.addEventListener('mousemove', triggerLogoutTimeout);
+  }, []);
+
+  useEffect(() => {
+  }, [loggingOut]);
+
+  const triggerLogoutTimeout = ($e) => {
+    // if (!loggingOut)
+    //   return false;
+
+    clearTimeout(logoutTimeout);
+
+    console.log('resetting logout timer');
+
+    setTimeout(() => {
+      console.log('logging out in', autologoutPeriod);
+    }, 6);
+
+    setLogoutTimeout(
+      setTimeout(() => {
+        // document.removeEventListener('')
+        setLoggingOut(false);
+        logout();
+        clearTimeout(logoutTimeout);
+
+        logoutHandler($e);
+
+      }, autologoutPeriod)
+    )
+  }
+
+  const logoutHandler = ($e) => {
+    if (logoutTimeout) {
+      clearTimeout(logoutTimeout);
+      setLoggingOut(false);
+    }
+
+    if (loggingOut)
+      return false;
+
+    document.removeEventListener('keypress', triggerLogoutTimeout);
+    document.removeEventListener('mousemove', triggerLogoutTimeout);
+
+    setLoggingOut(true);
+  };
 
   const MenuOpen = (event) => {
     var element = document.getElementById("LeftContol");
@@ -271,19 +330,19 @@ const PageHeader = () => {
   const [aletopen, setAlertOpen] = React.useState(false);
   const [custom, setCustom] = useState(false);
   const [customMessage, setCustomMessage] = useState({
-    subject:'',
-    message:''
+    subject: '',
+    message: ''
   })
   //  const //theme = useTheme();
   //const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   const acknowledgeAndClose = async (id) => {
-    
 
-    if(custom && id){
-      const res = await broadcast.messageRead({id})
+
+    if (custom && id) {
+      const res = await broadcast.messageRead({ id })
     }
-    else{
+    else {
       setTimeout(() => {
         const [first, ...rest] = broadcasts;
 
@@ -298,9 +357,9 @@ const PageHeader = () => {
 
   //  isBroadCast true: broadcast socket
   //  isBroadCast false: notification onClick
-  const AlertPop = ( isBroadCast=true , val={} ) => {
-    console.log("val",val);
-    if(!isBroadCast){
+  const AlertPop = (isBroadCast = true, val = {}) => {
+    console.log("val", val);
+    if (!isBroadCast) {
       setCustom(true);
       setCustomMessage(val)
     }
@@ -540,7 +599,7 @@ const PageHeader = () => {
                   <List component="nav" aria-label="main mailbox folders" className="HeaderNoti Scrolling AlertNoti">
                     {notifications
                       .map((notification) => {
-                        return <ListItem onClick={()=>AlertPop(false, notification)}
+                        return <ListItem onClick={() => AlertPop(false, notification)}
                           className={
                             notification.is_read
                               ? ''
@@ -694,7 +753,7 @@ const PageHeader = () => {
 
             Dear recipient,<br />
             {
-                (custom) ? customMessage.body : broadcasts?.[0]?.message
+              (custom) ? customMessage.body : broadcasts?.[0]?.message
             }
           </Grid>
           {
@@ -710,9 +769,9 @@ const PageHeader = () => {
                 </Grid>
               </Grid>
               <Grid xs={12} container justify="center" className="mt30">
-                <Button className="LinkButton" 
-                        disabled={customMessage?.is_read || broadcasts?.[0]?.is_read}
-                        onClick={()=>acknowledgeAndClose(customMessage.id)}>Acknowledge & Close</Button>
+                <Button className="LinkButton"
+                  disabled={customMessage?.is_read || broadcasts?.[0]?.is_read}
+                  onClick={() => acknowledgeAndClose(customMessage.id)}>Acknowledge & Close</Button>
               </Grid>
             </div>)
           }
