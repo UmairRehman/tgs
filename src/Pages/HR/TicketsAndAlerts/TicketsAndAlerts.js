@@ -25,6 +25,7 @@ import { useHistory } from "react-router-dom";
 
 /** Local deoendencies & Libraries */
 import Services from '../../../Services';
+import { seriliazeParams } from "../../../helpers/seriliazeParams";
 
 
 const {
@@ -83,6 +84,11 @@ const TicketsAndAlerts = () => {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleChangePage = (event, newPage) => {
+    
+    let offset = newPage*1*10
+    let limit = (offset +10)
+    console.log("Page",newPage, offset,limit);
+    retrieveListing(offset,limit)
     setPage(newPage);
   };
 
@@ -91,18 +97,17 @@ const TicketsAndAlerts = () => {
     setPage(0);
   };
 
-  const [loader, setLoader] = useState(false)
-  const [ticket, setTicket] = useState({})
-  const [test, setTest] = useState([])
-  useEffect(async () => {
+
+  const retrieveListing = async (offset=0, limit=10) => {
     let userProfile = await JSON.parse(localStorage.user_profile);
+    let params = '?'.concat(seriliazeParams({offset,limit}))
     try {
       setLoader(true)
       if(userProfile)
       {
         console.log(userProfile.role_id , userProfile.role_id==3);
         let categoryId = (userProfile.role_id == 3) ? IT_CATEGORY_ID : HR_CATEGORY_ID
-        let response = await hr.listTicketByCategory({roleId:categoryId});
+        let response = await hr.listTicketByCategory({roleId:categoryId,params});
   
         const { data } = response;
   
@@ -124,7 +129,13 @@ const TicketsAndAlerts = () => {
     catch (exc) {
       console.log(exc);
     }
+  }
 
+  const [loader, setLoader] = useState(false)
+  const [ticket, setTicket] = useState({})
+  const [test, setTest] = useState([])
+  useEffect(async () => {
+    retrieveListing()
   }, [])
 
   function onClickDetail(value) {
@@ -182,10 +193,6 @@ const TicketsAndAlerts = () => {
                       </TableHead>
                       <TableBody>
                         {test
-                          .slice(
-                            page * rowsPerPage,
-                            page * rowsPerPage + rowsPerPage
-                          )
                           .map((row) => {
                             return (
                               <TableRow
@@ -222,9 +229,9 @@ const TicketsAndAlerts = () => {
                     </Table>
                   </TableContainer>
                   <TablePagination
-                    rowsPerPageOptions={[10, 25, 100]}
+                    rowsPerPageOptions={10}
                     component="div"
-                    count={rows.length}
+                    count={10000}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     onChangePage={handleChangePage}
