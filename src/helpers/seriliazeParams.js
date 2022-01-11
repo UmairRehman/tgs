@@ -5,12 +5,8 @@
  * @returns {string} queryparams
  */
  export const seriliazeParams = (obj = {}) => {
-    
-    // var queryString = Object.keys(obj).map((key) => {
-    //     return encodeURIComponent(key) + '=' + encodeURIComponent(obj[key])
-    // }).join('&');
-    var queryString = JSON.stringify(obj)
-    // console.log(queryString);
-    
+    var queryString = Object.keys(obj).map((key) => {
+        return encodeURIComponent(key) + '=' + encodeURIComponent(obj[key])
+    }).join('&');
     return queryString
 }
