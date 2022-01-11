@@ -6,8 +6,9 @@ const {
 } = apiExports;
 
 export const getAllApplicants = async (payload, headers) => {
+    const { params } = payload;
     return await api.get(
-        routes.hr.get_applicant,
+        routes.hr.get_applicant.concat(params),
         payload,
         headers
     );
@@ -58,9 +59,10 @@ export const get_tickets = async (payload, headers) => {
 }
 
 export const listTicketByCategory = async (payload, headers) => {
-    const { roleId } = payload;
+    const { roleId,params } = payload;
+    console.log(routes.hr.list_tickets_and_alerts_by_category.concat(roleId,params));
     return await api.get(
-        routes.hr.list_tickets_and_alerts_by_category.concat(roleId),
+        routes.hr.list_tickets_and_alerts_by_category.concat(roleId,params),
         payload,
         headers
     );

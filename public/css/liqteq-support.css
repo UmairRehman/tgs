@@ -167,13 +167,13 @@ li.DepartmentIcon {
 .f30{font-size:30px!important;}.tcenter{text-align:center;}
 .LoginLogo {
     display: flex;
-    width: 140px;
-    height: 150px;
+    width: 130px;
+    height: 140px;
     background: url(../assets/TGS_Logo.svg) no-repeat center center;
     background-size: auto 80%;
     position: absolute;
-    left: 15%;
-    top: 8%;
+    /* left: 15%; */
+    /* top: 8%; */
 }
 .LoginText {
     width: 100%;

@@ -25,6 +25,7 @@ import { useHistory } from "react-router-dom";
 
 /** Local deoendencies & Libraries */
 import Services from '../../../Services';
+import { seriliazeParams } from "../../../helpers/seriliazeParams";
 
 
 const {
@@ -36,7 +37,7 @@ const HR_CATEGORY_ID = 1;
 const IT_CATEGORY_ID = 2;
 
 const columns = [
-  { id: "employeeid", label: "Employee ID", maxWidth: 120, type: "value" },
+  { id: "id", label: "Ticket ID", maxWidth: 120, type: "value" },
   { id: "name", label: "Name", maxWidth: 150, type: "value" },
   { id: "alertType", label: "Tickets/Alerts", maxWidth: 100, type: "value" },
   { id: "category", label: "Category", maxWidth: 80, type: "value" },
@@ -83,6 +84,11 @@ const TicketsAndAlerts = () => {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleChangePage = (event, newPage) => {
+    
+    let offset = newPage*1*10
+    let limit = (offset +10)
+    console.log("Page",newPage, offset,limit);
+    retrieveListing(offset,limit)
     setPage(newPage);
   };
 
@@ -91,23 +97,21 @@ const TicketsAndAlerts = () => {
     setPage(0);
   };
 
-  const [loader, setLoader] = useState(false)
-  const [ticket, setTicket] = useState({})
-  const [test, setTest] = useState([])
-  useEffect(async () => {
+
+  const retrieveListing = async (offset=0, limit=10) => {
     let userProfile = await JSON.parse(localStorage.user_profile);
+    let params = '?'.concat(seriliazeParams({offset,limit}))
     try {
       setLoader(true)
       if(userProfile)
       {
         console.log(userProfile.role_id , userProfile.role_id==3);
         let categoryId = (userProfile.role_id == 3) ? IT_CATEGORY_ID : HR_CATEGORY_ID
-        let response = await hr.listTicketByCategory({roleId:categoryId});
+        let response = await hr.listTicketByCategory({roleId:categoryId,params});
   
         const { data } = response;
   
         const setTickets = data
-          .reverse()
           .map((rows) => ({
             id: rows.id,
             employeeid: rows.FEmployee.id,
@@ -124,7 +128,13 @@ const TicketsAndAlerts = () => {
     catch (exc) {
       console.log(exc);
     }
+  }
 
+  const [loader, setLoader] = useState(false)
+  const [ticket, setTicket] = useState({})
+  const [test, setTest] = useState([])
+  useEffect(async () => {
+    retrieveListing()
   }, [])
 
   function onClickDetail(value) {
@@ -182,10 +192,6 @@ const TicketsAndAlerts = () => {
                       </TableHead>
                       <TableBody>
                         {test
-                          .slice(
-                            page * rowsPerPage,
-                            page * rowsPerPage + rowsPerPage
-                          )
                           .map((row) => {
                             return (
                               <TableRow
@@ -222,9 +228,9 @@ const TicketsAndAlerts = () => {
                     </Table>
                   </TableContainer>
                   <TablePagination
-                    rowsPerPageOptions={[10, 25, 100]}
+                    rowsPerPageOptions={10}
                     component="div"
-                    count={rows.length}
+                    count={10000}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     onChangePage={handleChangePage}
