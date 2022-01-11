@@ -37,7 +37,7 @@ const HR_CATEGORY_ID = 1;
 const IT_CATEGORY_ID = 2;
 
 const columns = [
-  { id: "employeeid", label: "Employee ID", maxWidth: 120, type: "value" },
+  { id: "id", label: "Ticket ID", maxWidth: 120, type: "value" },
   { id: "name", label: "Name", maxWidth: 150, type: "value" },
   { id: "alertType", label: "Tickets/Alerts", maxWidth: 100, type: "value" },
   { id: "category", label: "Category", maxWidth: 80, type: "value" },
@@ -112,7 +112,6 @@ const TicketsAndAlerts = () => {
         const { data } = response;
   
         const setTickets = data
-          .reverse()
           .map((rows) => ({
             id: rows.id,
             employeeid: rows.FEmployee.id,
