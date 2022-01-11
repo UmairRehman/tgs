@@ -29,6 +29,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 /** Third party packages & Dependencies */
 import Webcam from "react-webcam";
 
+import { useIdleTimer } from 'react-idle-timer';
+
 
 /** Local Libraries, functions & dependencies */
 import { helpers } from '../helpers';
@@ -179,65 +181,21 @@ const PageHeader = () => {
     localStorage.getItem('access_jwt') || ''
   )
 
-  const [loggingOut, setLoggingOut] = useState(false);
-
   useEffect(() => {
     let clone = document.querySelector('#PageTitle').cloneNode(true);
     document.querySelector('h1').appendChild(clone);
   }, []);
 
-  useEffect(() => {
-    console.clear();
+  const logout = () => {
+    let employee = !!storage.get('role_id');
 
-    triggerLogoutTimeout();
+    storage.clear();
 
-    document.addEventListener('keypress', triggerLogoutTimeout);
+    if (employee)
+      return history.push('/login');
 
-    document.addEventListener('mousemove', triggerLogoutTimeout);
-  }, []);
-
-  useEffect(() => {
-  }, [loggingOut]);
-
-  const triggerLogoutTimeout = ($e) => {
-    // if (!loggingOut)
-    //   return false;
-
-    clearTimeout(logoutTimeout);
-
-    console.log('resetting logout timer');
-
-    setTimeout(() => {
-      console.log('logging out in', autologoutPeriod);
-    }, 6);
-
-    setLogoutTimeout(
-      setTimeout(() => {
-        // document.removeEventListener('')
-        setLoggingOut(false);
-        logout();
-        clearTimeout(logoutTimeout);
-
-        logoutHandler($e);
-
-      }, autologoutPeriod)
-    )
+    history.push('/');
   }
-
-  const logoutHandler = ($e) => {
-    if (logoutTimeout) {
-      clearTimeout(logoutTimeout);
-      setLoggingOut(false);
-    }
-
-    if (loggingOut)
-      return false;
-
-    document.removeEventListener('keypress', triggerLogoutTimeout);
-    document.removeEventListener('mousemove', triggerLogoutTimeout);
-
-    setLoggingOut(true);
-  };
 
   const MenuOpen = (event) => {
     var element = document.getElementById("LeftContol");
@@ -481,17 +439,18 @@ const PageHeader = () => {
 
 
   /********************************************************** */
+  
+  /****** IDLE / INACTIVITY AUTOLOGOUT *************************************** */
+  
+  const { getRemainingTime, getLastActiveTime } = useIdleTimer({
+    timeout: autologoutPeriod,
+    onIdle: logout,
+    onActive: (() => { }),
+    onAction: (() => { }),
+    debounce: 500
+  });
 
-  const logout = () => {
-    let employee = !!storage.get('role_id');
-
-    storage.clear();
-
-    if (employee)
-      return history.push('/login');
-
-    history.push('/');
-  }
+  /********************************************************** */
 
   return (
     <Grid>
