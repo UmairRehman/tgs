@@ -72,6 +72,9 @@ const NewHireQueueIT = () => {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleChangePage = (event, newPage) => {
+    let offset = newPage*1*10
+    let limit = (offset +10)
+    retrieveListing(offset,limit)
     setPage(newPage);
   };
 
@@ -82,9 +85,8 @@ const NewHireQueueIT = () => {
 
   const [applicantData, setApplicantData] = useState([])
   
-  useEffect(async() => {
-
-    let params = '?'.concat(seriliazeParams({skip:0, limit:20}))
+  const retrieveListing =async (offset=0,limit=10) => {
+    let params = '?'.concat(seriliazeParams({offset,limit}))
     try{
       let data = await IT.list_it_request({params}) ;
       if(data?.httpStatus==200){
@@ -105,6 +107,10 @@ const NewHireQueueIT = () => {
     catch(exc){
       console.log(exc);
     }
+  }
+
+  useEffect(async() => {
+    retrieveListing();
   }, [])
 
 
@@ -155,10 +161,6 @@ const NewHireQueueIT = () => {
                       </TableHead>
                       <TableBody>
                         {applicantData
-                          .slice(
-                            page * rowsPerPage,
-                            page * rowsPerPage + rowsPerPage
-                          )
                           .map((applicantData) => {
                             return (
                               <TableRow
@@ -193,9 +195,9 @@ const NewHireQueueIT = () => {
                     </Table>
                   </TableContainer>
                   <TablePagination
-                    rowsPerPageOptions={[10, 25, 100]}
+                    rowsPerPageOptions={10}
                     component="div"
-                    count={rows.length}
+                    count={100000}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     onChangePage={handleChangePage}
