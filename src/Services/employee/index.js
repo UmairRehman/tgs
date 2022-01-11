@@ -100,8 +100,9 @@ export const get_site_listing = async (payload, headers) => {
 };
 
 export const get_test_event_listing = async (payload, headers) => {
+    const { params } = payload
     return await api.get(
-        routes.employee.get_test_event_list,
+        routes.employee.get_test_event_list.concat(params),
         payload,
         headers
     );

@@ -24,6 +24,7 @@ import { useHistory } from "react-router-dom";
 
 /** Local deoendencies & Libraries */
 import Services from '../../../Services';
+import { seriliazeParams } from '../../../helpers/seriliazeParams';
 
 
 const {
@@ -61,6 +62,9 @@ const NewHireQueue = () => {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleChangePage = (event, newPage) => {
+    let offset = newPage*1*10
+    let limit = (offset +10)
+    retrieveListing(offset,limit)
     setPage(newPage);
   };
 
@@ -70,11 +74,11 @@ const NewHireQueue = () => {
   };
 
   const [applicantData, setApplicantData] = useState([])
-  
-  useEffect(async() => {
 
+  const retrieveListing = async (offset=0,limit=10) => {
+    let params = '?'.concat(seriliazeParams({offset, limit}))
     try{
-      let data = await hr.getAllApplicants() ;
+      let data = await hr.getAllApplicants({params}) ;
       if(data?.httpStatus==200){
         data = data.data; 
         data.forEach(row => {
@@ -87,6 +91,10 @@ const NewHireQueue = () => {
     catch(exc){
       console.log(exc);
     }
+  }
+
+  useEffect(async() => {
+    retrieveListing();
   }, [])
 
 
@@ -148,10 +156,6 @@ const NewHireQueue = () => {
                       </TableHead>
                       <TableBody>
                         {applicantData
-                          .slice(
-                            page * rowsPerPage,
-                            page * rowsPerPage + rowsPerPage
-                          )
                           .map((applicantData) => {
                             return (
                               <TableRow
@@ -190,13 +194,13 @@ const NewHireQueue = () => {
                     </Table>
                   </TableContainer>
                   <TablePagination
-                    rowsPerPageOptions={[10, 25, 100]}
-                    component="div"
-                    count={applicantData.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    onChangePage={handleChangePage}
-                    onChangeRowsPerPage={handleChangeRowsPerPage}
+                   rowsPerPageOptions={10}
+                   component="div"
+                   count={10000}
+                   rowsPerPage={rowsPerPage}
+                   page={page}
+                   onChangePage={handleChangePage}
+                   onChangeRowsPerPage={handleChangeRowsPerPage}
                   />
                 </Paper>
                 {/* <Grid xs={12} className="TableSearchBox">

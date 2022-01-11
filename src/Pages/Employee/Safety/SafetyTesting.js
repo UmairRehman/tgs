@@ -35,6 +35,7 @@ const {
 
 const {
   showSnackBar,
+  seriliazeParams
 } = helpers;
 
 const columns = [
@@ -64,6 +65,9 @@ const SafetyTesting = () => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const handleChangePage = (event, newPage) => {
+    let offset =  newPage*10 ;
+    let limit = 10 ;
+    getlistEvents(offset,limit);
     setPage(newPage);
   };
 
@@ -123,9 +127,10 @@ const SafetyTesting = () => {
 
   const [rows, setRows] = useState([]) 
  
-  const getlistEvents =async () =>{
+  const getlistEvents =async (offset=0,limit=10) =>{
+    let params = '?'.concat(seriliazeParams({offset,limit}))
     try {
-      let data = await employee.get_test_event_listing()
+      let data = await employee.get_test_event_listing({params})
       console.log(data);
       if(data.httpStatus==200){
         data= data.data
@@ -193,10 +198,6 @@ const SafetyTesting = () => {
                       </TableHead>
                       <TableBody>
                         {rows
-                          .slice(
-                            page * rowsPerPage,
-                            page * rowsPerPage + rowsPerPage
-                          )
                           .map((row) => {
                             return (
                               <TableRow
@@ -240,9 +241,9 @@ const SafetyTesting = () => {
                     </Table>
                   </TableContainer>
                   <TablePagination
-                    rowsPerPageOptions={[10, 25, 100]}
+                    rowsPerPageOptions={10}
                     component="div"
-                    count={rows.length}
+                    count={10000}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     onChangePage={handleChangePage}
