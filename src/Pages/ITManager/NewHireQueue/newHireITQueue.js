@@ -32,7 +32,7 @@ const {
 } = Services;
 
 const columns = [
-  { id: "id", label: "Employee ID", minWidth: 50, type: "value" },
+  { id: "id", label: "Ticket ID", minWidth: 50, type: "value" },
   { id: "name", label: "Name", minWidth: 120, type: "value" },
   { id: "deptName", label: "Department", minWidth: 80, type: "value" },
   { id: "AD_text", label: "AD", minWidth: 50, type: "value" },
