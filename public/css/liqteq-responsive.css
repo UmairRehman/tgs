@@ -346,8 +346,8 @@ The original designer is not in the engineering/dev team right now.
         background-size: 100%;
     }
     .LoginLogo {
-        width: 100%;
-        height: 120px;
+        width: 15%;
+        height: 20%;
         position: unset;
         padding-top: 30px;
         background: url(../assets/TGS_Logo.svg) no-repeat center bottom;
