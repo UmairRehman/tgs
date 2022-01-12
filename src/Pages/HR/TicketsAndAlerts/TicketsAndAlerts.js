@@ -237,7 +237,7 @@ const TicketsAndAlerts = () => {
                     onChangeRowsPerPage={handleChangeRowsPerPage}
                   />
                 </Paper>
-                <Grid xs={12} className="TableSearchBox">
+                {/* <Grid xs={12} className="TableSearchBox">
                   <Grid xs={12}>
                     Search By Employee ID
                   </Grid>
@@ -245,7 +245,7 @@ const TicketsAndAlerts = () => {
                     <Button></Button>
                     <TextField />
                   </Grid>
-                </Grid>
+                </Grid> */}
               </Grid>
             </Grid>
           </Grid>
