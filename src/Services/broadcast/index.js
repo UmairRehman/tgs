@@ -21,8 +21,9 @@ export const getAll = async (payload, headers) => {
 }
 
 export const getAllSend = async (payload, headers) => {
+    const { params } = payload
     return await api.get(
-        routes.broadcast.getAllSend,
+        routes.broadcast.getAllSend.concat(params),
         payload,
         headers
     );
