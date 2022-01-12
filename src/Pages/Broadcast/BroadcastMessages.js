@@ -31,6 +31,8 @@ import { Imports } from '../../Imports';
 
 /** Local dependencies & Libraries */
 import Services from '../../Services';
+import helpers from '../../helpers';
+import { seriliazeParams } from "../../helpers/seriliazeParams";
 
 
 let {
@@ -43,7 +45,6 @@ const {
   BroadcastClient,
   users,
 } = Services;
-
 
 /** Pre-req configuration */
 // const roles = Object.values(role);
@@ -104,6 +105,9 @@ const BroadcastMessages = () => {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleChangePage = (event, newPage) => {
+    let offset = newPage*1*10
+    let limit = (offset +10)
+    retreiveBroadcasts(offset,limit)
     setPage(newPage);
   };
 
@@ -140,28 +144,15 @@ const BroadcastMessages = () => {
 
   const [useBroadcasts, setBroadcasts] = useState(rows);
 
-  const retreiveBroadcasts = async () => {
+  const retreiveBroadcasts = async (offset=0, limit=10) => {
+    let params = '?'.concat(seriliazeParams({offset,limit}))
     try {
-      const response = await broadcast.getAllSend();
+      const response = await broadcast.getAllSend({params});
 
       const { data } = response;
 
       const broadcastsBuffer = data
-        .reverse()
         .map(broadcast => {
-          
-          // let {
-          //   // Employee: { dnUsername: from },
-          //   BroadcastMessage: {
-          //     SubDepartment:{ SubDepartment : { name:to }},
-          //     createdAt: date,
-          //     subject,
-          //     message
-          //   },
-          // } = broadcast;
-
-          // date = new Date(date).toLocaleDateString()
-
           return {
             // from,
             to:broadcast?.SubDepartment?.name || '',
@@ -274,10 +265,6 @@ const BroadcastMessages = () => {
                       </TableHead>
                       <TableBody>
                         {useBroadcasts
-                          .slice(
-                            page * rowsPerPage,
-                            page * rowsPerPage + rowsPerPage
-                          )
                           .map((row) => {
                             return (
                               <TableRow
@@ -307,9 +294,9 @@ const BroadcastMessages = () => {
                     </Table>
                   </TableContainer>
                   <TablePagination
-                    rowsPerPageOptions={[10, 25, 100]}
+                    rowsPerPageOptions={10}
                     component="div"
-                    count={rows.length}
+                    count={100000}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     onChangePage={handleChangePage}

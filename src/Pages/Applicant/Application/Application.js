@@ -1214,7 +1214,7 @@ const Application = () => {
                                 <Grid xs={12} container className="LRM40">
                                     <Grid xs={6} className="mt30 pr20">
                                         <Grid xs={12} className="mbold mb14">
-                                            Job ID (Optional)
+                                            Job ID
                                         </Grid>
                                         <TextField id="outlined-basic" placeholder="Type Here" variant="outlined" className="w100p"
                                             onChange={
@@ -1227,7 +1227,7 @@ const Application = () => {
                                     </Grid>
                                     <Grid xs={6} className="mt30 pl20">
                                         <Grid xs={12} className="mbold mb14">
-                                            Job Description (Optional)
+                                            Job Description
                                         </Grid>
                                         <TextField id="outlined-basic" placeholder="Type Here" variant="outlined" className="w100p"
                                             onChange={
