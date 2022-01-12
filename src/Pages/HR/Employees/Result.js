@@ -709,14 +709,16 @@ const EmployeeResult = () => {
 
                       </Grid>
                     </ListItem>
-                    <ListItem container className="p0 pt6 pb20">
-                      <Grid xs={5} className="bold">
-                        Full title
-                      </Grid>
-                      <Grid xs={5}>
-                        Director of Systems
-                      </Grid>
-                    </ListItem>
+                    { (employeeDetails?.fullTitle) && 
+                      (<ListItem container className="p0 pt6 pb20">
+                        <Grid xs={5} className="bold">
+                          Full title
+                        </Grid>
+                        <Grid xs={5}>
+                          Director of Systems
+                        </Grid>
+                      </ListItem>)
+                    }
                     <ListItem container className="p0 pt6 pb20">
                       <Grid xs={5} className="bold">
                         Location
