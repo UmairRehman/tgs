@@ -578,7 +578,7 @@ const Application = () => {
                 applicationForm.spouse_date_of_birth = applicationForm.spouse_date_of_birth.toString();
 
                 applicationForm.home_phone = applicationForm.home_phone.replace(/[^\d]/g, '');  
-                applicationForm.cell_phone = applicationForm.cell_phone.replace(/[^\d]/g, '');  
+                // applicationForm.cell_phone = applicationForm.cell_phone.replace(/[^\d]/g, '');  
                 applicationForm.spouse_phone_number = applicationForm.spouse_phone_number.replace(/[^\d]/g, '');  
                 applicationForm.emergency_contact.phone_number = applicationForm.emergency_contact.phone_number.replace(/[^\d]/g, '');  
             console.log(applicationForm);  
@@ -799,7 +799,7 @@ const Application = () => {
                                         className="pl20"
                                         id="cell_phone">
                                         <Grid xs={12} className="mbold mb14">
-                                            Cell Phone
+                                            Cell Phone (Optional) 
                                         </Grid>
                                         <TextField id="outlined-basic" placeholder="(123) 123-1231" variant="outlined" className="w100p"
                                             onChange={
@@ -867,7 +867,7 @@ const Application = () => {
                                         className="mt30 pl20"
                                         id="street_address2">
                                         <Grid xs={12} className="mbold mb14">
-                                            Street Address 2
+                                            Street Address 2 (Optional) 
                                         </Grid>
                                         <TextField id="outlined-basic" placeholder="Type Here" variant="outlined" className="w100p"
                                             onChange={
@@ -1214,7 +1214,7 @@ const Application = () => {
                                 <Grid xs={12} container className="LRM40">
                                     <Grid xs={6} className="mt30 pr20">
                                         <Grid xs={12} className="mbold mb14">
-                                            Job ID
+                                            Job ID (Optional) 
                                         </Grid>
                                         <TextField id="outlined-basic" placeholder="Type Here" variant="outlined" className="w100p"
                                             onChange={
@@ -1227,7 +1227,7 @@ const Application = () => {
                                     </Grid>
                                     <Grid xs={6} className="mt30 pl20">
                                         <Grid xs={12} className="mbold mb14">
-                                            Job Description
+                                            Job Description (Optional)
                                         </Grid>
                                         <TextField id="outlined-basic" placeholder="Type Here" variant="outlined" className="w100p"
                                             onChange={
@@ -1273,7 +1273,7 @@ const Application = () => {
                                     <Grid xs={12} className="mt30">
                                         <Grid xs={12}>
                                             <Grid xs={12} className="mbold">
-                                                Notes for HR
+                                                Notes for HR (Optional) 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
                                                 <TextareaAutosize className="w100p" rowsMin={6} placeholder="Comment here"
@@ -1305,7 +1305,20 @@ const Application = () => {
                                                         ? 'd-flex p-3 m-0 justify-content-center flex-column align-items-center'
                                                         : 'd-none'
                                                 }>
+                                                    <Grid style = {{display:'flex'}}>
                                                     <Grid className="task-done"></Grid>
+                                                    <button
+                                                        className="dustbinBtn"
+                                                        onClick={
+                                                            (e) =>{ 
+                                                            e.target.value=''
+                                                            setStateForFormControl(
+                                                                filesToUpload,
+                                                                'resume',
+                                                                e,
+                                                            )}
+                                                        }></button>
+                                                    </Grid>
                                                     <Typography>
                                                         Resume has been uploaded
                                                     </Typography>
@@ -1315,7 +1328,7 @@ const Application = () => {
                                                         ? 'd-none'
                                                         : 'text-center'
                                                 }>
-                                                    Drop File Here OR <label for="ResumeSelect" className="labelButton">Select Files</label>
+                                                    <label for="ResumeSelect" className="labelButton">Select Files</label>
                                                     <input
                                                         type="file"
                                                         id="ResumeSelect"
@@ -1347,7 +1360,20 @@ const Application = () => {
                                                         ? 'd-flex p-3 m-0 justify-content-center flex-column align-items-center'
                                                         : 'd-none'
                                                 }>
+                                                    <Grid style = {{display:'flex'}}>
                                                     <Grid className="task-done"></Grid>
+                                                    <button
+                                                        className="dustbinBtn"
+                                                        onClick={
+                                                            (e) =>{ 
+                                                            e.target.value=''
+                                                            setStateForFormControl(
+                                                                filesToUpload,
+                                                                'state_driver_license',
+                                                                e,
+                                                            )}
+                                                        }></button>
+                                                    </Grid>
                                                     <Typography>
                                                         State Driver's License has been uploaded
                                                     </Typography>
@@ -1357,12 +1383,12 @@ const Application = () => {
                                                         ? 'd-none'
                                                         : 'text-center'
                                                 }>
-                                                    Drop File Here OR <label for="licenseSelect" className="labelButton">Select Files</label>
+                                                    <label for="licenseSelect" className="labelButton">Select Files</label>
                                                     <input
                                                         type="file"
                                                         id="licenseSelect"
                                                         className="hide"
-                                                        accept=".pdf"
+                                                        accept=".pdf,.jpeg,"
                                                         onChange={
                                                             $e => setStateForFormControl(
                                                                 filesToUpload,

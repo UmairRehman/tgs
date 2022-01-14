@@ -21,8 +21,8 @@ export const home_phone = yup.string()
     .required('home_phone');
 
 export const cell_phone = yup.string()
-    .matches(patterns.phoneRegExp, 'cell_phone')
-    .required('cell_phone');
+    // .matches(patterns.phoneRegExp, 'cell_phone')
+    // .required('cell_phone');
 
 export const zip = yup.string()
     .matches(patterns.zip, 'zip (5 digits)')
