@@ -578,7 +578,7 @@ const Application = () => {
                 applicationForm.spouse_date_of_birth = applicationForm.spouse_date_of_birth.toString();
 
                 applicationForm.home_phone = applicationForm.home_phone.replace(/[^\d]/g, '');  
-                applicationForm.cell_phone = applicationForm.cell_phone.replace(/[^\d]/g, '');  
+                // applicationForm.cell_phone = applicationForm.cell_phone.replace(/[^\d]/g, '');  
                 applicationForm.spouse_phone_number = applicationForm.spouse_phone_number.replace(/[^\d]/g, '');  
                 applicationForm.emergency_contact.phone_number = applicationForm.emergency_contact.phone_number.replace(/[^\d]/g, '');  
             console.log(applicationForm);  
@@ -1388,7 +1388,7 @@ const Application = () => {
                                                         type="file"
                                                         id="licenseSelect"
                                                         className="hide"
-                                                        accept=".pdf,.png,.jpeg,"
+                                                        accept=".pdf,.jpeg,"
                                                         onChange={
                                                             $e => setStateForFormControl(
                                                                 filesToUpload,
