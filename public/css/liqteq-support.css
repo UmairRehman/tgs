@@ -2198,38 +2198,52 @@ video.rounded {
 .position-relative {
     position: relative;
 }
-  .removeBtn {
-      font-size: 0px;
-      display: block;
-      width: 55px;
-      height: 55px;
-      background: url(../assets/closeIco.png) no-repeat center center white;
-      background-size: 70%;
-      border: none;
-      border-radius: 8px;
-  }
 
-  .removeBtn:hover {
-    background-color: #2963AD;
-    }
+.dustbinBtn {
+    display: block;
+    width: 30px;
+    height: 30px;
+    background: url(../assets/dustbin.png) no-repeat center center white;
+    background-size: 70%;
+    border: none;
+    border-radius: 8px;
+}
+.dustbinBtn:hover{
+    background-color: #81b2f1;
+}
 
-    .GetBtn {
-        font-size: 0px;
-        display: block;
-        width: 55px;
-        height: 55px;
-        margin-left: 20px !important;
-        color: black;
-        background:  white !important;
-        font-weight: bold;
-        border: none;
-        border-radius: 8px;
+.removeBtn {
+    font-size: 0px;
+    display: block;
+    width: 55px;
+    height: 55px;
+    background: url(../assets/closeIco.png) no-repeat center center white;
+    background-size: 70%;
+    border: none;
+    border-radius: 8px;
+}
+
+.removeBtn:hover {
+background-color: #2963AD;
+}
+
+.GetBtn {
+    font-size: 0px;
+    display: block;
+    width: 55px;
+    height: 55px;
+    margin-left: 20px !important;
+    color: black;
+    background:  white !important;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+}
+
+.GetBtn:hover {
+    color: white;
+background-color: #2963AD !important;
     }
-  
-    .GetBtn:hover {
-        color: white;
-    background-color: #2963AD !important;
-      }
 .justifyBetween {
     display: flex;
     flex-wrap: wrap;

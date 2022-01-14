@@ -1305,7 +1305,20 @@ const Application = () => {
                                                         ? 'd-flex p-3 m-0 justify-content-center flex-column align-items-center'
                                                         : 'd-none'
                                                 }>
+                                                    <Grid style = {{display:'flex'}}>
                                                     <Grid className="task-done"></Grid>
+                                                    <button
+                                                        className="dustbinBtn"
+                                                        onClick={
+                                                            (e) =>{ 
+                                                            e.target.value=''
+                                                            setStateForFormControl(
+                                                                filesToUpload,
+                                                                'resume',
+                                                                e,
+                                                            )}
+                                                        }></button>
+                                                    </Grid>
                                                     <Typography>
                                                         Resume has been uploaded
                                                     </Typography>
@@ -1315,7 +1328,7 @@ const Application = () => {
                                                         ? 'd-none'
                                                         : 'text-center'
                                                 }>
-                                                    Drop File Here OR <label for="ResumeSelect" className="labelButton">Select Files</label>
+                                                    <label for="ResumeSelect" className="labelButton">Select Files</label>
                                                     <input
                                                         type="file"
                                                         id="ResumeSelect"
@@ -1347,7 +1360,20 @@ const Application = () => {
                                                         ? 'd-flex p-3 m-0 justify-content-center flex-column align-items-center'
                                                         : 'd-none'
                                                 }>
+                                                    <Grid style = {{display:'flex'}}>
                                                     <Grid className="task-done"></Grid>
+                                                    <button
+                                                        className="dustbinBtn"
+                                                        onClick={
+                                                            (e) =>{ 
+                                                            e.target.value=''
+                                                            setStateForFormControl(
+                                                                filesToUpload,
+                                                                'state_driver_license',
+                                                                e,
+                                                            )}
+                                                        }></button>
+                                                    </Grid>
                                                     <Typography>
                                                         State Driver's License has been uploaded
                                                     </Typography>
@@ -1357,12 +1383,12 @@ const Application = () => {
                                                         ? 'd-none'
                                                         : 'text-center'
                                                 }>
-                                                    Drop File Here OR <label for="licenseSelect" className="labelButton">Select Files</label>
+                                                    <label for="licenseSelect" className="labelButton">Select Files</label>
                                                     <input
                                                         type="file"
                                                         id="licenseSelect"
                                                         className="hide"
-                                                        accept=".pdf"
+                                                        accept=".pdf,.png,.jpeg,"
                                                         onChange={
                                                             $e => setStateForFormControl(
                                                                 filesToUpload,
