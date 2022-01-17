@@ -570,6 +570,7 @@ const Application = () => {
 
     const registerApplicant = async () => {
         try {
+
             const isValidApplicant = await validateApplicant(applicationForm);
 
             applicationForm.dob = applicationForm.dob.toString();
@@ -603,6 +604,9 @@ const Application = () => {
 
             console.log(formDataToPush);
 
+            showSnackBar('Submission in Progress')
+
+
             let response = await users.register(
                 formDataToPush,
                 {
@@ -613,7 +617,8 @@ const Application = () => {
 
             localStorage.setItem('access_jwt', response?.token);
 
-            history.push("/create-password");
+            showSnackBar('Form Submitted')
+            setTimeout(()=> {history.push("/create-password");},3000);
 
             removeHttpErrorListener();
         } catch (exc) {
