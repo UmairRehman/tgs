@@ -97,6 +97,14 @@ export const update_tickets = async (payload, headers) => {
 
 
 // dropdowns
+export const getPositionLevel = async (payload, headers) => {
+    return await api.get(
+        routes.hr.position_level,
+        payload,
+        headers
+    );
+}
+
 export const get_job_categories = async (payload, headers) => {
     return await api.get(
         routes.hr.get_job_categories,
