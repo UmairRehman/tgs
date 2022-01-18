@@ -722,7 +722,7 @@ const Application = () => {
                                     </Grid>
                                     <Grid xs={4} className="mt30 pl20 pr20">
                                         <Grid xs={12} className="mbold mb14">
-                                            Middle Name
+                                            Middle Name (Optional)
                                         </Grid>
                                         <TextField id="outlined-basic" placeholder="Type Here" variant="outlined" className="w100p"
                                             onChange={
