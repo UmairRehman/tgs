@@ -47,11 +47,6 @@ const statuses = [
   { id: 1, title: "Approve" ,value:true },
   { id: 2, title: "Reject" , value:false},
 ];
-const PositionLevel = [
-  { title: "Managment", id: 1 },
-  { title: "Executive", id: 2 },
-  { title: "Labour", id: 3 },
-];
 
 const NewHireStep1 = () => {
   let history = useHistory();
@@ -94,6 +89,7 @@ const NewHireStep1 = () => {
   const [paytypeDropdown, setPaytypeDropdown] = useState([]);
   const [departmentDropdown, setDepartmentDropdown] = useState([]);
   const [SubDepartmentDropdown, setSubDepartmentDropdown] = useState([]);
+  const [PositionLevel, setPositionLevel] = useState([])
 
   const location = useLocation();
   const [holdData, setHoldData] = useState({});
@@ -177,6 +173,9 @@ const NewHireStep1 = () => {
     try {
       let jobCategory = await hr.get_job_categories();
       setJobCategoriesOption(jobCategory.data);
+
+      let position_level = await hr.getPositionLevel();
+      setPositionLevel(position_level.data);
 
       let locationData = await hr.location();
       setLocationDropdown(locationData.data);
@@ -370,10 +369,10 @@ const NewHireStep1 = () => {
                                 className="w100p"
                                 id="combo-box-demo"
                                 onChange={(e, value) => {
-                                  setPosition(value.title);
+                                  setPosition(value.name);
                                 }}
                                 options={PositionLevel}
-                                getOptionLabel={(option) => option.title}
+                                getOptionLabel={(option) => option.name}
                                 renderInput={(params) => (
                                   <TextField
                                     required={true}
