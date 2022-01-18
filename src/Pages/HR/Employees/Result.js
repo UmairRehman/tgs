@@ -42,9 +42,12 @@ const {
 } = Services;
 
 
+const userProfile = JSON.parse(localStorage.getItem("user_profile"));
 
-const roleFromLocalStorage = localStorage.getItem('role_id')
-
+if (userProfile) {
+  var { EmployeeStatusId, role_id } = userProfile;
+  var roleFromLocalStorage = role_id;
+}
 
 // First Table
 const addresscol = [
@@ -760,7 +763,7 @@ const EmployeeResult = () => {
                           Termination Date
                         </Grid>
                         <Grid xs={5}>
-                          {employeeDetails?.terminateDate}
+                          {moment(employeeDetails?.terminateDate).format('YYYY-MM-DD')}
                         </Grid>
                       </ListItem>)
                     }
@@ -888,7 +891,13 @@ const EmployeeResult = () => {
               </Grid>
 
 
-
+              {/* Add Certificate & License Button */}
+              <Grid xs={12} container className="mt40">
+                <Button for="selecteSertificate" className="LinkButton" onClick={openCertificateModal}>
+                  Add Certificate & License
+                </Button>
+                {/* <input id="selecteSertificate" type="file" className="hide" /> */}
+              </Grid>
 
 
 
@@ -1036,27 +1045,14 @@ const EmployeeResult = () => {
 
 
                   <Grid xs={12} container className="mt40">
-                    <Button onClick={terminateEmployee} className="LinkButton">
+                    <Button onClick={terminateEmployee} className="LinkButton"
+                    disabled={employeeDetails?.terminate}>
                       Terminate Employee
                     </Button>
                   </Grid>
                 </div>
                 : ""
               }
-
-
-              {/* Add Certificate & License Button */}
-              <Grid xs={12} container className="mt40">
-                <Button for="selecteSertificate" className="LinkButton" onClick={openCertificateModal}>
-                  Add Certificate & License
-                </Button>
-                {/* <input id="selecteSertificate" type="file" className="hide" /> */}
-              </Grid>
-
-
-
-
-
 
 
               {/* Employee Document */}
