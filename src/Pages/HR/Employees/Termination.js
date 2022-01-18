@@ -19,6 +19,7 @@ import Snackbar from '../../../Components/Snackbar';
 import Services from '../../../Services';
 
 import { useLocation } from 'react-router'
+import { showSnackBar } from "../../../helpers/showSnackBar";
 
 
 const {
@@ -80,8 +81,13 @@ const Termination = () => {
         try {
             hr.terminateEmployee(data).then((certificateData) => {
                 console.log(certificateData)
-
-                history.push("/employees");
+                showSnackBar('Employee Has been Terminated');
+                setTimeout(() => {
+                    history.push({
+                        pathname: "/employees/result",
+                        state: data?.id
+                    })
+                }, 2000);    
             }).catch((err) => { console.log(err) });
 
         }
@@ -157,7 +163,7 @@ const Termination = () => {
                                             Location
                                         </Grid>
                                         <Grid xs={5}>
-                                            {a?.position[0]?.TGSLocation?.name}
+                                            {a?.employee[0]?.TGSLocation?.name}
 
                                         </Grid>
                                     </ListItem>
@@ -166,8 +172,7 @@ const Termination = () => {
                                             Sub Department
                                         </Grid>
                                         <Grid xs={5}>
-                                            {/* {empData?.position[0]?.SubDepartment?.name} */}
-
+                                            {a?.employee[0]?.SubDepartment?.name}
                                         </Grid>
                                     </ListItem>
                                   
