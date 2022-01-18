@@ -61,6 +61,7 @@ export const routes = {
 
 
         // dropdowns 
+        position_level : 'employee/level/',
         get_job_categories : 'employee/jobCategory',
         department : 'employee/department',
         location : '/employee/location',
