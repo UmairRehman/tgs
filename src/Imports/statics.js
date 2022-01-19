@@ -17,5 +17,6 @@ export const statics = {
         pdf_format_required: 'PDF format Required',
         db_error_incorrect_payload: 'Incorect Payload',
         not_found: 'Not found',
+        user_not_found: 'User Not Found',
     }
 }
