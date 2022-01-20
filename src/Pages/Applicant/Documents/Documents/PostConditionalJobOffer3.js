@@ -268,7 +268,7 @@ const PostConditionalJobOffer3 = () => {
                       name="textfield"
                       id="name"
                       className="w h18 pl8 bn bb input-capitalization"
-                      value={`${userData.firstName} ${userData.middleName} ${userData.lastName}`}
+                      value={`${userData.firstName} ${userData.lastName}`}
                       disabled
                     />
                   </TableCell>

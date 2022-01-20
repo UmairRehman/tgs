@@ -115,7 +115,7 @@ const TicketsAndAlerts = () => {
           .map((rows) => ({
             id: rows.id,
             employeeid: rows.FEmployee.id,
-            name: rows.FEmployee.firstName + " " + rows.FEmployee.middleName + " " + rows.FEmployee.lastName,
+            name: rows.FEmployee.firstName +" "+ rows.FEmployee.lastName,
             alertType: rows.isAlert ? "Alert" : "Ticket",
             category: rows.TicketType.name,
             description: rows.creation_comment,

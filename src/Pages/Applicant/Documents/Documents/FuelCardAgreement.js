@@ -71,7 +71,7 @@ useEffect( async () => {
       lastName: res?.employee?.lastName || '',
     }
     setUserData(data)
-    setPrintedName(`${userData.firstName} ${userData.middleName} ${userData.lastName}`)
+    setPrintedName(`${userData.firstName} ${userData.lastName}`)
     console.log(data)
   
   }, [])
@@ -208,7 +208,7 @@ useEffect( async () => {
                 <TableRow className="w100 mt20">
                   <TableCell className="font16 row w100">
                     Printed Name:
-                    <input value={`${userData.firstName} ${userData.middleName} ${userData.lastName}`} type="text" name="textfield" id="textfield"
+                    <input value={`${userData.firstName} ${userData.lastName}`} type="text" name="textfield" id="textfield"
                       className="w h22 pl8 bn bb input-capitalization"
                       disabled />
                   </TableCell>
