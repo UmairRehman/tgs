@@ -265,7 +265,7 @@ const EmployeeAgreement = () => {
                       name="textfield"
                       id="nametextfield"
                       className="w100 h18 bn bb mt6 input-capitalization"
-                      value={`${userData.firstName} ${userData.middleName} ${userData.lastName}`}
+                      value={`${userData.firstName} ${userData.lastName}`}
                       disabled
                     />
                   </TableCell>

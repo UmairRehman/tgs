@@ -1890,7 +1890,7 @@ const DrugAlcoholWeapons = () => {
                           name="name"
                           id="name"
                           className="w h18 bn bb mt6 mb5 input-capitalization"
-                          value={`${userData.firstName} ${userData.middleName} ${userData.lastName}`}
+                          value={`${userData.firstName} ${userData.lastName}`}
                           disabled
                         />{" "}
                         hereby <b>acknowledge</b> that I have <b>read</b> (or it

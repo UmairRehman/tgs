@@ -268,7 +268,7 @@ const PostConditionalJobOffer = () => {
                             id="name"
                             className="w100 bn bb input-capitalization"
                             value={
-                              `${userData.firstName} ${userData.middleName} ${userData.lastName}`
+                              `${userData.firstName} ${userData.lastName}`
                             }
                             disabled
                           />
