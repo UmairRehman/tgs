@@ -367,7 +367,7 @@ const Railroad = () => {
                         Primary
                       </Grid>
                       <Grid xs={12} className="mt14">
-                        <TextField required={true} id="outlined-basic" label="Comment here" value={`${lists?.currentUser?.firstName} ${lists?.currentUser?.middleName} ${lists?.currentUser?.lastName}`} disabled variant="outlined" className="w100p"/>
+                        <TextField required={true} id="outlined-basic" label="Comment here" value={`${lists?.currentUser?.firstName} ${lists?.currentUser?.lastName}`} disabled variant="outlined" className="w100p"/>
                       </Grid>
                     </Grid>
                   </Grid>
@@ -575,7 +575,6 @@ const Railroad = () => {
                                   id="combo-box-name" 
                                   name = "name"
                                   options={lists.users}
-                                  // value={`${x.firstName} ${x.middleName} ${x.lastName}`}
                                   value={x.name}
                                   onChange={(e,value) => { 
                                     handleInputChange('name', value,i)}

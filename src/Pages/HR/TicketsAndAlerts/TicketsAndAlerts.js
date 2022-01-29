@@ -106,7 +106,7 @@ const TicketsAndAlerts = () => {
       if(userProfile)
       {
         console.log(userProfile.role_id , userProfile.role_id==3);
-        let categoryId = (userProfile.role_id == 3) ? IT_CATEGORY_ID : HR_CATEGORY_ID
+        let categoryId = (userProfile.role_id == 2 || 3) ? IT_CATEGORY_ID : HR_CATEGORY_ID
         let response = await hr.listTicketByCategory({roleId:categoryId,params});
   
         const { data } = response;
@@ -115,7 +115,7 @@ const TicketsAndAlerts = () => {
           .map((rows) => ({
             id: rows.id,
             employeeid: rows.FEmployee.id,
-            name: rows.FEmployee.firstName + " " + rows.FEmployee.middleName + " " + rows.FEmployee.lastName,
+            name: rows.FEmployee.firstName +" "+ rows.FEmployee.lastName,
             alertType: rows.isAlert ? "Alert" : "Ticket",
             category: rows.TicketType.name,
             description: rows.creation_comment,

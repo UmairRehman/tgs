@@ -17,5 +17,7 @@ export const statics = {
         pdf_format_required: 'PDF format Required',
         db_error_incorrect_payload: 'Incorect Payload',
         not_found: 'Not found',
+        token_invalid: 'Invalid Token',
+        user_not_found: 'User Not Exist',
     }
 }

@@ -86,50 +86,50 @@ const LeftControl = () => {
 
   const capabilities = {
     dashboard: [1, 2, 3, 4, 5, 6],
-    safety: [1, 6],
+    safety: [1, 2],
     create_ticket: [1, 2, 3, 4, 5, 6],
     deparment: [1, 2, 3, 4, 5, 6],
     new_hire_queue: [2, 4, 5],
-    new_hire_queue_it: [3],
+    new_hire_queue_it: [2,3],
     tickets_alerts: [2, 3, 4, 5],
     employees: [2, 4, 5],
     broadcast_message: [2],
     employees_profile: [2, 4],
   };
 
-  //   const sideBarRoleBasedButtons = {
-  //     1: {
-  //         role: 'general_role',
-  //         role_id: 1,
-  //         buttons_enabled: ['dashboard', 'create-ticket', 'safety', 'deparment'],
-  //     },
-  //     2: {
-  //         role: 'systemadmin_role',
-  //         role_id: 2,
-  //         buttons_enabled: ['dashboard','new-hire-queue','tickets-alerts', 'create-ticket', 'employees', 'broadcast-message','deparment'],
-  //     },
-  //     3: {
-  //         role: 'itmanager_role',
-  //         role_id: 3,
-  //         buttons_enabled: ['dashboard', 'create-ticket', 'safety', 'deparment','deparment'],
-  //      safety testing removed as per desings
-  //     },
-  //     4: {
-  //         role: 'hr',
-  //         role_id: 4,
-  //         buttons_enabled: ['dashboard','new-hire-queue','tickets-alerts', 'create-ticket', 'employees','deparment'],
-  //     },
-  //     5: {
-  //         role: 'hrAdmin',
-  //         role_id: 5,
-  //         buttons_enabled: ['dashboard', 'create-ticket', 'new-hire-queue','tickets-alerts','employees','deparment'],
-  //     },
-  //     6: {
-  //         role: 'safetytesting_role',
-  //         role_id: 6,
-  //         buttons_enabled: ['dashboard', 'create-ticket', 'safety', 'deparment'],
-  //     },
-  // }
+  /** Update Roles and Permissions */
+//   const sideBarRoleBasedButtons = {
+//     1: {
+//         role: ‘general_role’,
+//         role_id: 1,
+//         buttons_enabled: [‘dashboard’, ‘create-ticket’, ‘deparment’],
+//     },
+//     2: {
+//         role: ‘systemadmin_role’,
+//         role_id: 2,
+//         buttons_enabled: [‘dashboard’,‘new-hire-queue’,‘tickets-alerts’, ‘create-ticket’, ‘employees’, ‘broadcast-message’, ‘safety’, ‘deparment’],
+//     },
+//     3: {
+//         role: ‘itmanager_role’,
+//         role_id: 3,
+//         buttons_enabled: [‘dashboard’, ‘create-ticket’,  ‘deparment’],
+//     },
+//     4: {
+//         role: ‘hr’,
+//         role_id: 4,
+//         buttons_enabled: [‘dashboard’,‘new-hire-queue’,‘tickets-alerts’, ‘create-ticket’, ‘employees’,‘deparment’],
+//     },
+//     5: {
+//         role: ‘hrAdmin’,
+//         role_id: 5,
+//         buttons_enabled: [‘dashboard’, ‘create-ticket’, ‘new-hire-queue’,‘tickets-alerts’,‘employees’,‘deparment’],
+//     },
+//     6: {
+//         role: ‘safetytesting_role’,
+//         role_id: 6,
+//         buttons_enabled: [‘dashboard’, ‘create-ticket’, ‘safety’, ‘deparment’],
+//     },
+// }
 
   return (
     <Grid xs={12} className="LeftMenuCol">
@@ -174,7 +174,7 @@ const LeftControl = () => {
                     }
                   >
                     <Icon />
-                    New Hire Queue
+                    New Hire Queue IT
                   </Link>
                 </ListItem>
               )}

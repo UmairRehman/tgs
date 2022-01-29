@@ -196,7 +196,7 @@ const OnBoarding = () => {
             <List>
               <ListItem container className="p0 pt6 pb20">
                 <Grid className="w250 bold">New Hire Name</Grid>
-                <Grid>{`${applicantData?.Employee?.firstName} ${applicantData?.Employee?.middleName} ${applicantData?.Employee?.lastName}`}</Grid>
+                <Grid>{`${applicantData?.Employee?.firstName} ${applicantData?.Employee?.lastName}`}</Grid>
               </ListItem>
             </List>
           </Grid>

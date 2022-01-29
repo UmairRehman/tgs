@@ -235,7 +235,7 @@ const ConditionalOffer = () => {
                     Offeree’s Name:
                     <input type="text" name="officersName" id="officersName" className="w64 h22 bn bb input-capitalization"
                       value={
-                        `${userData.firstName} ${userData.middleName} ${userData.lastName}`
+                        `${userData.firstName} ${userData.lastName}`
                       }
                       disabled
                     />

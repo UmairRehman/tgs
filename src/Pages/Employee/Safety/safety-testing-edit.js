@@ -124,7 +124,7 @@ const SafetyTestingEdit = () => {
 
     let eventDetails  = await getEventDetails(eventId)
     let crewList =  eventDetails?.crew?.rows?.map((row)=>{
-      return ({ id: row.id, name:`${row.Employee.firstName} ${row.Employee.middleName} ${row.Employee.lastName}`, result:'' , comment:'' })
+      return ({ id: row.id, name:`${row.Employee.firstName} ${row.Employee.lastName}`, result:'' , comment:'' })
     })
     setSafetyTesting({ ...safetyTesting, crewList:crewList })  
     let details = { 
