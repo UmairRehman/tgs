@@ -151,7 +151,7 @@ const Railroad = () => {
     let { crewMembers } = railRoad
     let crewMembersData=[]
     crewMembers.forEach((row)=>{
-      if(row.name && row.position && row.image)
+      if(row.name && row.position)
         crewMembersData.push({id:row.name.id , position:row.position.id , image:row.image})
       else 
         throw Error ("Images missing")  
@@ -606,7 +606,7 @@ const Railroad = () => {
                                 <Grid xs={5} container justify="space-between" className="pl20">
                                   <label className={(x.image=='')?"PickBtn":"PickBtnFileUploaded"} for={`crew${i}`} ></label>
                                   <input 
-                                      required
+                                      // required
                                       type="file" 
                                       id={`crew${i}`} 
                                       name="image" 
