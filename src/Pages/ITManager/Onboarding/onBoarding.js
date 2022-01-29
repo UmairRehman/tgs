@@ -228,6 +228,24 @@ const OnBoarding = () => {
             </List>
           </Grid>
 
+          <Grid xs={12}>
+            <List>
+              <ListItem container className="p0 pt6 pb20">
+                <Grid className="w250 bold">HR Comment</Grid>
+                <Grid>{`${(applicantData?.HRComment)? (applicantData?.HRComment) : ''}`}</Grid>
+              </ListItem>
+            </List>
+          </Grid>
+
+          <Grid xs={12}>
+            <List>
+              <ListItem container className="p0 pt6 pb20">
+                <Grid className="w250 bold">Previous IT Comment</Grid>
+                <Grid>{`${(applicantData?.ITComment)? (applicantData?.ITComment) : ''}`}</Grid>
+              </ListItem>
+            </List>
+          </Grid>
+
 
 
           <Grid style={{ margin: '0' }} xs={12} className="ContentPage BlueHeadTable FormTableArea">
