@@ -53,6 +53,7 @@ const NewHireStep1 = () => {
 
   const [applicantData, setApplicantData] = useState({});
   const [resume, setResume] = useState(null);
+  const [drivingLicense, setDrivingLicense] = useState(null);
   
   // states for Form
 
@@ -162,29 +163,8 @@ const NewHireStep1 = () => {
       let data = await hr.getAllApplicantsByID(applicantDataHistory);
       setApplicantData(data.employee);
       setResume(data.files[0]);
-      let result = await employee.get_employee_listing();
-      setSupervisorList(result.data)
+      setDrivingLicense(data.files[1]);
       console.log(applicantData);
-    } catch (exc) {
-      console.log(exc);
-    }
-
-    // get job catrgories options
-    try {
-      let jobCategory = await hr.get_job_categories();
-      setJobCategoriesOption(jobCategory.data);
-
-      let position_level = await hr.getPositionLevel();
-      setPositionLevel(position_level.data);
-
-      let locationData = await hr.location();
-      setLocationDropdown(locationData.data);
-
-      let payLocationData = await hr.pay_type();
-      setPaytypeDropdown(payLocationData.data);
-
-      let departmentData = await hr.department();
-      setDepartmentDropdown(departmentData.data);
     } catch (exc) {
       console.log(exc);
     }
@@ -211,6 +191,31 @@ const NewHireStep1 = () => {
       date: moment(new Date()).format("DD-MM-YYYY"),
       time: moment(new Date()).format("hh:mm a"),
     });
+    console.log(status.value)
+     // get job catrgories options
+    if(status.value){
+      try {
+        let jobCategory = await hr.get_job_categories();
+        setJobCategoriesOption(jobCategory.data);
+
+        let position_level = await hr.getPositionLevel();
+        setPositionLevel(position_level.data);
+
+        let locationData = await hr.location();
+        setLocationDropdown(locationData.data);
+
+        let payLocationData = await hr.pay_type();
+        setPaytypeDropdown(payLocationData.data);
+
+        let departmentData = await hr.department();
+        setDepartmentDropdown(departmentData.data);
+
+        let supervisorData = await employee.get_employee_listing();
+        setSupervisorList(supervisorData.data);
+      } catch (exc) {
+        console.log(exc);
+      }
+    }
   };
 
   return (
@@ -296,6 +301,18 @@ const NewHireStep1 = () => {
                         ></a>
                       </Grid>
                     </ListItem>
+
+                    {/* <ListItem container className="p0 pt6 pb20">
+                      <Grid className="w250 bold">Drivers License</Grid>
+                      <Grid className="PDFDownload">
+                        <Grid className="FileName">Drivers License</Grid>
+                        <a
+                          className="Button"
+                          href={`${apiPath}/employee/applicant/download?id=${applicantData?.id}&name=${drivingLicense}`}
+                          target="_blank"
+                        ></a>
+                      </Grid>
+                    </ListItem> */}
                   </List>
                 </Grid>
                 <Grid xs={12} md={8} lg={6}>
@@ -648,7 +665,7 @@ const NewHireStep1 = () => {
                                 className="w100p"
                                 id="combo-box-demo"
                                 options={supervisorList}
-                                getOptionLabel={(option) => option.firstName}
+                                getOptionLabel={(option) => option.firstName + ' ' +  option.lastName}
                                 renderInput={(params) => (
                                   <TextField
                                     required={true}
