@@ -106,7 +106,7 @@ const TicketsAndAlerts = () => {
       if(userProfile)
       {
         console.log(userProfile.role_id , userProfile.role_id==3);
-        let categoryId = (userProfile.role_id == 2 || 3) ? IT_CATEGORY_ID : HR_CATEGORY_ID
+        let categoryId = (userProfile.role_id == 2 || userProfile.role_id == 3) ? IT_CATEGORY_ID : HR_CATEGORY_ID
         let response = await hr.listTicketByCategory({roleId:categoryId,params});
   
         const { data } = response;
