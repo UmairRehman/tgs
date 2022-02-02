@@ -94,7 +94,7 @@ const SafetyTesting = () => {
               id:row.id,
               eventID:(row?.TestEventRule?.TestEventId)?row.TestEventRule.TestEventId:null,
               rule_NBR:(row?.TestEventRule?.Rule?.RuleNo)?row.TestEventRule.Rule.RuleNo:null,
-              crew_member:(row?.TestEventTeam?.Employee?.firstName)?`${row.TestEventTeam?.Employee.firstName} ${row.TestEventTeam?.Employee.lastName}`:null,
+              crew_member:(row?.Employee?.firstName)?`${row?.Employee.firstName} ${row?.Employee.lastName}`:null,
               result: (row?.result)?row.result:null,
               comment: (row?.comment)?row.comment:null
             }
