@@ -321,14 +321,14 @@ const ConditionalOffer = () => {
                 </tr>
               </tbody>
             </table>
-            <table className="w100 boldBBorder pb12 mb20">
+            {/* <table className="w100 boldBBorder pb12 mb20">
               <tbody className="w100">
                 <tr className="w100 row">
                   <td className="w50"><input type="checkbox" id="phone" name="phone" value="cellphone" className="mr5" /> Company cell phone</td>
                   <td className="w50"><input type="checkbox" id="laptop" value="laptop" className="mr5" /> Company Laptop</td>
                 </tr>
               </tbody>
-            </table>
+            </table> */}
             <table className="w100">
               <tbody>
                 <tr>
