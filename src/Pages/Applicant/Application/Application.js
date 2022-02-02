@@ -521,14 +521,14 @@ const Application = () => {
 
     useEffect(async () => {
         let result = await hr.get_job_categories();
-        if (result.httpStatus == 200) {
+        if (result && result.httpStatus == 200) {
             result.data.map(row => {
                 row.label = row.title;
                 row.title = row.id
             })
             setJobCategories(result.data)
         }
-        window.scrollTo(0, 0);
+        // window.scrollTo(0, 0);
     }, []);
 
     //   if(isMobile) {
@@ -577,10 +577,12 @@ const Application = () => {
             /** Transformations */
             if (applicationForm.spouse_date_of_birth)
                 applicationForm.spouse_date_of_birth = applicationForm.spouse_date_of_birth.toString();
+            if (applicationForm.spouse_telephoneNumber)
+                applicationForm.spouse_telephoneNumber = applicationForm.spouse_telephoneNumber.replace(/[^\d]/g, '');  
+            if (applicationForm.cell_phone)
+                applicationForm.cell_phone = applicationForm.cell_phone.replace(/[^\d]/g, '');  
 
                 applicationForm.home_phone = applicationForm.home_phone.replace(/[^\d]/g, '');  
-                // applicationForm.cell_phone = applicationForm.cell_phone.replace(/[^\d]/g, '');  
-                applicationForm.spouse_phone_number = applicationForm.spouse_phone_number.replace(/[^\d]/g, '');  
                 applicationForm.emergency_contact.phone_number = applicationForm.emergency_contact.phone_number.replace(/[^\d]/g, '');  
             console.log(applicationForm);  
             const formDataToPush = new FormData();
@@ -722,9 +724,9 @@ const Application = () => {
                                     </Grid>
                                     <Grid xs={4} className="mt30 pl20 pr20">
                                         <Grid xs={12} className="mbold mb14">
-                                            Middle Name (Optional)
+                                            Middle Name
                                         </Grid>
-                                        <TextField id="outlined-basic" placeholder="Type Here" variant="outlined" className="w100p"
+                                        <TextField id="outlined-basic" placeholder="Optional" variant="outlined" className="w100p"
                                             onChange={
                                                 ($e) => setStateForFormControl(
                                                     contactInformation,
