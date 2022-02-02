@@ -127,18 +127,18 @@ function handleComment(value) {
                     <List>
                         <ListItem container className="p0 pt6 pb20">
                             <Grid className="w250 bold">
-                            Ticket Entered By
+                            Ticket Requested For
                             </Grid>
                             <Grid>
-                                {tickets?.data?.BEmployee?.firstName + tickets?.data?.BEmployee?.lastName}
+                                {tickets?.data?.BEmployee?.firstName + ' ' + tickets?.data?.BEmployee?.lastName}
                             </Grid>
                         </ListItem>
                         <ListItem container className="p0 pt6 pb20">
                             <Grid className="w250 bold">
-                            Ticket Entered For
+                            Ticket Requested By
                             </Grid>
                             <Grid>
-                            {tickets?.data?.FEmployee?.firstName + tickets?.data?.FEmployee?.lastName}
+                            {tickets?.data?.FEmployee?.firstName + ' ' + tickets?.data?.FEmployee?.lastName}
                             </Grid>
                         </ListItem>
                         <ListItem container className="p0 pt6 pb20">
