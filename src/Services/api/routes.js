@@ -32,6 +32,7 @@ export const routes = {
         all_subdepartments: 'employee/department/sub',
         add_certificate: 'employee/certificate',
         update_certificate: 'employee/certificate/',
+        get_crew_user_list: 'employee/employee/crew'
     },
     it :{
         list_it_request : 'employee/ITRequest',
