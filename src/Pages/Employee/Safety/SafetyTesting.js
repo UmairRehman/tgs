@@ -61,10 +61,6 @@ const columnsForView = [
   "Comments"
 ];
 
-const tabDetails = [
-  {label: 'Check Rides', content: 'Under Progress'}
-];
-
 
 const SafetyTesting = () => {
   const history = useHistory();
@@ -135,6 +131,12 @@ const SafetyTesting = () => {
     setOpen(false);
   };
 
+  const handleAddEvent = (event, tabIndex) => {
+    setTabValue(tabIndex);
+
+    history.push(event);
+  }
+
   const [rows, setRows] = useState([])
 
   const getlistEvents = async (offset = 0, limit = 10) => {
@@ -163,7 +165,7 @@ const SafetyTesting = () => {
     await getlistEvents()
   }, []);
 
-  const tableContainer = (
+  const tableContainer = (columns) => (
     <TableContainer>
       <Table aria-label="table">
         <TableHead>
@@ -226,16 +228,6 @@ const SafetyTesting = () => {
     </TableContainer>
   );
 
-
-  useEffect(() => {
-    tabDetails.push(
-      {
-        label: 'Testing Events',
-        content: tableContainer
-      }
-    )
-  }, []);
-
   if (isMobile) {
     return (
       <MobileScreen />
@@ -255,9 +247,16 @@ const SafetyTesting = () => {
           <Grid xs={12} className="ContentPage">
             {/* TGS Softwares */}
             <Grid xs={12}>
-              <Link to="/enter-railroad-event" className="LinkButton">
+              <button
+                onClick={handleAddEvent.bind(null, 'enter-railroad-event', 0)}
+                class="LinkButton mx-2 safety-testing-add-button">
                 Enter Railroad Test Event
-              </Link>
+              </button>
+              <button
+                onClick={handleAddEvent.bind(null, 'enter-railroad-event', 1)}
+                class="LinkButton mx-2 safety-testing-add-button">
+                Enter Checkride
+              </button>
               <Grid
                 xs={12}
                 container
@@ -267,7 +266,10 @@ const SafetyTesting = () => {
                 <Paper>
                   <TabsComponent
                     tabState={tabState}
-                    tabDetails={tabDetails}
+                    tabDetails={[
+                      { label: 'Testing Events', content: tableContainer(columns) },
+                      { label: 'Check Rides', content: 'Under Progress' }
+                    ]}
                   ></TabsComponent>
                   <TablePagination
                     rowsPerPageOptions={10}
