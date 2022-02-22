@@ -616,9 +616,9 @@ const Railroad = () => {
                                 </Grid>
                                 
                                 <Grid xs={5} container justify="space-between" className="pl20">
-                                  <label className={(x.image=='')?"PickBtn":"PickBtnFileUploaded"} for={`crew${i}`} ></label>
+                                  <label className={(x.image=='')?"PickBtn":"PickBtnFileUploaded"} style={{color:'red'}} for={`crew${i}`} >*</label>
                                   <input 
-                                      // required
+                                      required
                                       type="file" 
                                       id={`crew${i}`} 
                                       name="image" 
