@@ -149,7 +149,7 @@ const DocumentsStep4 = () => {
                     applyToStorage: {
                         user_profile: {
                             ...user_profile,
-                            EmployeeStatusId: 4,
+                            EmployeeStatusId: 9,
                         }
                     }
                 }
@@ -171,12 +171,12 @@ const DocumentsStep4 = () => {
                     <Grid id="PageTitle" className="f16">Complete Onboarding Document</Grid>
                     {/* Page Start */}
                     <Grid xs={12} className="ContentPage ApplicantForms">
-                        <Grid xs={12} className="StepsLine Step2Line Step3Line">
+                        <Grid xs={12} className="StepsLine Step2Line Step4Line">
                             <List>
                                 <ListItem className="StepComplete">Step 1</ListItem>
                                 <ListItem className="StepComplete">Step 2</ListItem>
                                 <ListItem className="StepComplete">Step 3</ListItem>
-                                <ListItem>Step 4</ListItem>
+                                <ListItem className="StepComplete">Step 4</ListItem>
                             </List>
                         </Grid>
                         <Grid xs={12}>
@@ -185,7 +185,7 @@ const DocumentsStep4 = () => {
                                     You're required to fill out the following documents to complete your application
                                 </Typography>
                                 <Typography variant="h1" component="h2" className="bold f16 mt40">
-                                    Section 3
+                                    Section 4
                                 </Typography>
 
                                 <Link to="/documents/employee-agreement" target="_blank" className="DocDownload">
