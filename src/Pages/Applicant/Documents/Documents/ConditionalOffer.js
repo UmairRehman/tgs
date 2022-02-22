@@ -104,8 +104,8 @@ const ConditionalOffer = () => {
       let payType = document.querySelector('input[name="payType"]:checked')?.value;
       let location = document.getElementById("location").value;
       let departmentCode = document.getElementById("departmentCode").value;
-      let phone = document.getElementById("phone").value;
-      let laptop = document.getElementById("laptop").value;
+      // let phone = document.getElementById("phone").value;
+      // let laptop = document.getElementById("laptop").value;
       let terms = document.getElementById("terms").value;
       let offeree = document.getElementById("offeree").value;
 
@@ -119,8 +119,8 @@ const ConditionalOffer = () => {
         startDate,
         // location,
         // departmentCode,
-        phone,
-        laptop,
+        // phone,
+        // laptop,
         // terms,
         offeree,
       }
