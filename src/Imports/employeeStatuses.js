@@ -26,14 +26,15 @@ export const employeeStatuses = [
     {
         id: 4,
         name: "Step 2 approve",
-        path: '/documents/step/3',
-        params: { status: 1, step: 2 }
+        path: '/submission',
+        params: { status: 1, step: 2, nextStep : '/documents/step/3' }
     },
+    //rejection step 2 
     {
         id: 5,
         name: "Step 2 Sumit",
-        path: '/documents/step/4',
-        params: { status: 1, step: 3, nextStep: '/submission' }
+        path: '/submission',
+        params: { status: 0, step: 3 }
     },
     {
         id: 6,
@@ -47,6 +48,7 @@ export const employeeStatuses = [
         path: '/submission',
         params: { status: 1, step: 4, nextStep: '/documents/step/4' },
     },
+    //rejection step 3 
     {
         id: 8,
         name: "Step 4 Submit",
