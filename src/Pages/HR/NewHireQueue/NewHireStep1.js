@@ -255,7 +255,7 @@ const NewHireStep1 = () => {
       <Grid xs={12} md={10} container justify="center" className="PageContent">
         <Grid className="PagesFrame">
           <PageHeader />
-          <Grid id="PageTitle">New Applicant - Step 1 Approval</Grid>
+          <Grid id="PageTitle">Applicant - 1st Approval</Grid>
           {/* Page Start */}
           <form
             id="applicationForm"
