@@ -150,7 +150,7 @@
 }
 .LiqForms-Container .MainTable {
 	width:770px;
-    height: max-content;
+    min-height: 100vh;
     overflow: hidden;
 	border: none;
 	margin: auto;
