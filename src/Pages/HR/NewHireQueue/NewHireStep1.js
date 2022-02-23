@@ -27,7 +27,7 @@ import Snackbar from "../../../Components/Snackbar";
 
 const { showSnackBar } = helpers;
 
-const { hr , employee } = Services;
+const { hr, employee } = Services;
 var moment = require("moment-timezone");
 
 // import MobileScreen from './Mobile/Enter-RailRoad-Add';
@@ -39,13 +39,13 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
 const { apiPath } = environment;
 
 const YesNo = [
-  { title : 'Yes' , value:true },
-  { title : 'No' ,  value:false },
+  { title: 'Yes', value: true },
+  { title: 'No', value: false },
 ]
 
 const statuses = [
-  { id: 1, title: "Approve" ,value:true },
-  { id: 2, title: "Reject" , value:false},
+  { id: 1, title: "Approve", value: true },
+  { id: 2, title: "Reject", value: false },
 ];
 
 const NewHireStep1 = () => {
@@ -54,10 +54,11 @@ const NewHireStep1 = () => {
   const [applicantData, setApplicantData] = useState({});
   const [resume, setResume] = useState(null);
   const [drivingLicense, setDrivingLicense] = useState(null);
-  
+  const [isSaveButtonDisabled, toggleSaveButton] = useState(true);
+
   // states for Form
 
-  const [step1, setStep1] = useState({value:false});
+  const [step1, setStep1] = useState({ value: false });
   const [position, setPosition] = useState("");
   const [jobCode, setjobCode] = useState("");
   const [rate, setrate] = useState("");
@@ -96,18 +97,43 @@ const NewHireStep1 = () => {
   const location = useLocation();
   const [holdData, setHoldData] = useState({});
 
+  const validFormCheck = () => {
+    const state = {
+      step1,
+      position,
+      fullTitle,
+      positionCategory,
+      positionLocation,
+      jobCode: document.getElementById("jobIDText").value,
+      partType,
+      rate,
+      department,
+      subDepartment,
+      Supervisor_Id: supervisor.id,
+      computer: computer.value,
+      active: active.value,
+      companyCellPhone: companyCellPhone.value,
+      companyVehicle: companyVehicle.value,
+      fuelCard: fuelCard.value,
+    };
+
+    console.log(state);
+  }
+
   async function onformSubmit(event) {
     event.preventDefault();
-    let data ={};
-    if(! step1.value) 
-    {
-      data= {
-            employee_id : holdData?.id,
-            step : 0,
-            comment : document.getElementById("comment1").value,
-        }
+
+    return validFormCheck();
+
+    let data = {};
+    if (!step1.value) {
+      data = {
+        employee_id: holdData?.id,
+        step: 0,
+        comment: document.getElementById("comment1").value,
+      }
     }
-    else if(step1.value){
+    else if (step1.value) {
       data = {
         employee_id: holdData?.id,
         Supervisor_Id: supervisor.id,
@@ -133,23 +159,23 @@ const NewHireStep1 = () => {
           comment: document.getElementById("comment2").value,
         },
       };
-    }  
+    }
     console.log(data);
 
     try {
-       
+
       let result = (step1.value) ? await hr.step1(data)
-                                  : await hr.reject(data)
-      if(result){
+        : await hr.reject(data)
+      if (result) {
         setTimeout(() => {
           history.push('/new-hire-queue')
         }, 1500);
         return showSnackBar('Form Successfully Submitted');
       }
-      } catch (exc) {
-        console.log(exc);
-        return showSnackBar(exc.message);
-      }
+    } catch (exc) {
+      console.log(exc);
+      return showSnackBar(exc.message);
+    }
 
   }
 
@@ -195,8 +221,8 @@ const NewHireStep1 = () => {
       time: moment(new Date()).format("hh:mm a"),
     });
     console.log(status.value)
-     // get job catrgories options
-    if(status.value){
+    // get job catrgories options
+    if (status.value) {
       try {
         let jobCategory = await hr.get_job_categories();
         setJobCategoriesOption(jobCategory.data);
@@ -231,7 +257,9 @@ const NewHireStep1 = () => {
           <PageHeader />
           <Grid id="PageTitle">Applicant - 1st Approval</Grid>
           {/* Page Start */}
-          <form onSubmit={onformSubmit}>
+          <form
+            id="applicationForm"
+            onSubmit={onformSubmit}>
             <Grid xs={12} className="ContentPage FormTableArea">
               <Grid xs={12} container>
                 <Grid xs={12}>
@@ -269,10 +297,10 @@ const NewHireStep1 = () => {
                     <ListItem container className="p0 pt6 pb20">
                       <Grid className="w250 bold">Job ID / Description</Grid>
                       <Grid>{
-                        (applicantData?.jobId || applicantData?.jobDescription) 
-                          ?` ${applicantData?.jobId} / ${applicantData?.jobDescription}`
-                          :`Not Available`
-                        }</Grid>
+                        (applicantData?.jobId || applicantData?.jobDescription)
+                          ? ` ${applicantData?.jobId} / ${applicantData?.jobDescription}`
+                          : `Not Available`
+                      }</Grid>
                     </ListItem>
                     <ListItem container className="p0 pt6 pb20">
                       <Grid className="w250 bold">Job Category</Grid>
@@ -331,6 +359,9 @@ const NewHireStep1 = () => {
                             id="combo-box-demo"
                             options={statuses}
                             onChange={(e, value) => {
+                              const formValid = document.getElementById('applicationForm').checkValidity();
+                              if (formValid)
+                                toggleSaveButton(false);
                               setStatus(value);
                             }}
                             getOptionLabel={(option) => option.title}
@@ -389,6 +420,9 @@ const NewHireStep1 = () => {
                                 className="w100p"
                                 id="combo-box-demo"
                                 onChange={(e, value) => {
+                                  const formValid = document.getElementById('applicationForm').checkValidity();
+                                  if (formValid)
+                                    toggleSaveButton(false);
                                   setPosition(value.name);
                                 }}
                                 options={PositionLevel}
@@ -418,7 +452,12 @@ const NewHireStep1 = () => {
                                 label="FullTitle"
                                 variant="outlined"
                                 value={fullTitle}
-                                onChange={(e,v)=> setfullTitle(e.target.value)}
+                                onChange={(e, v) => {
+                                  const formValid = document.getElementById('applicationForm').checkValidity();
+                                  if (formValid)
+                                    toggleSaveButton(false);
+                                  setfullTitle(e.target.value)
+                                }}
                               />
                             </Grid>
                           </Grid>
@@ -436,6 +475,9 @@ const NewHireStep1 = () => {
                                 className="w100p"
                                 id="combo-box-demo"
                                 onChange={(e, value) => {
+                                  const formValid = document.getElementById('applicationForm').checkValidity();
+                                  if (formValid)
+                                    toggleSaveButton(false);
                                   setpositionCategory(value.id);
                                 }}
                                 options={jobCategoriesOption}
@@ -461,6 +503,9 @@ const NewHireStep1 = () => {
                               <Autocomplete
                                 className="w100p"
                                 onChange={(e, value) => {
+                                  const formValid = document.getElementById('applicationForm').checkValidity();
+                                  if (formValid)
+                                    toggleSaveButton(false);
                                   setpositionLocation(value.id);
                                 }}
                                 id="combo-box-demo"
@@ -494,12 +539,20 @@ const NewHireStep1 = () => {
                                 label="jobID"
                                 variant="outlined"
                                 value={jobCode}
-                                onChange={(e,v)=> setjobCode(e.target.value)}
+                                onChange={(e, v) => {
+                                  const formValid = document.getElementById('applicationForm').checkValidity();
+                                  if (formValid)
+                                    toggleSaveButton(false);
+                                  setjobCode(e.target.value)
+                                }}
                               />
                               {/* <Autocomplete
                                         className="w100p"
                                         id="combo-box-demo"
                                         onChange={(e, value)=>{setjobCode(value.title)}}
+                                        const formValid = document.getElementById('applicationForm').checkValidity();
+                                        if(formValid)
+                                        toggleSaveButton(false);
                                         options={JobCode}
                                         getOptionLabel={(option) => option.title}
                                         renderInput={(params) => <TextField required={true}  {...params} label="Select" variant="outlined" />}
@@ -517,6 +570,9 @@ const NewHireStep1 = () => {
                                 className="w100p"
                                 id="combo-box-demo"
                                 onChange={(e, value) => {
+                                  const formValid = document.getElementById('applicationForm').checkValidity();
+                                  if (formValid)
+                                    toggleSaveButton(false);
                                   setpartType(value.id);
                                 }}
                                 options={paytypeDropdown}
@@ -546,6 +602,9 @@ const NewHireStep1 = () => {
                                 className="w100p"
                                 id="combo-box-demo"
                                 onChange={(e, value) => {
+                                  const formValid = document.getElementById('applicationForm').checkValidity();
+                                  if(formValid)
+                                  toggleSaveButton(false);
                                   setrate(value.title);
                                 }}
                                 options={queueRate}
@@ -559,17 +618,22 @@ const NewHireStep1 = () => {
                                   />
                                 )}
                               /> */}
-                              <TextField  className="w100p"
+                              <TextField className="w100p"
                                 id="rateID"
                                 required={true}
                                 label="Rate"
                                 variant="outlined"
                                 type="number"
                                 value={rate}
-                                defaultValue = {0}
+                                defaultValue={0}
                                 InputProps={{ inputProps: { min: 0 } }}
-                                onChange={(e,v)=> setrate(e.target.value)}
-                                />
+                                onChange={(e, v) => {
+                                  const formValid = document.getElementById('applicationForm').checkValidity();
+                                  if (formValid)
+                                    toggleSaveButton(false);
+                                  setrate(e.target.value)
+                                }}
+                              />
                             </Grid>
                           </Grid>
                         </Grid>
@@ -581,6 +645,9 @@ const NewHireStep1 = () => {
                             <Grid xs={12} className="mt14">
                               <DatePicker
                                 onChange={(value) => {
+                                  const formValid = document.getElementById('applicationForm').checkValidity();
+                                  if (formValid)
+                                    toggleSaveButton(false);
                                   setstartDate(value);
                                 }}
                                 value={startDate}
@@ -602,8 +669,12 @@ const NewHireStep1 = () => {
                             <Grid xs={12} className="mt14">
                               <Autocomplete
                                 className="w100p"
-                                onChange={(e, value) =>
+                                onChange={(e, value) => {
+                                  const formValid = document.getElementById('applicationForm').checkValidity();
+                                  if (formValid)
+                                    toggleSaveButton(false);
                                   onDepartmentChange(e, value)
+                                }
                                 }
                                 // onChange={(e, value)=>{setdepartment(value.id)}}
                                 id="combo-box-demo"
@@ -631,6 +702,9 @@ const NewHireStep1 = () => {
                                 key={subDeprtmentText}
                                 className="w100p"
                                 onChange={(e, value) => {
+                                  const formValid = document.getElementById('applicationForm').checkValidity();
+                                  if (formValid)
+                                    toggleSaveButton(false);
                                   setsubDepartment(value.id);
                                 }}
                                 id="combo-box-demo"
@@ -663,12 +737,15 @@ const NewHireStep1 = () => {
                             <Grid xs={12} className="mt14">
                               <Autocomplete
                                 onChange={(e, value) => {
+                                  const formValid = document.getElementById('applicationForm').checkValidity();
+                                  if (formValid)
+                                    toggleSaveButton(false);
                                   setSupervisor(value);
                                 }}
                                 className="w100p"
                                 id="combo-box-demo"
                                 options={supervisorList}
-                                getOptionLabel={(option) => option.firstName + ' ' +  option.lastName}
+                                getOptionLabel={(option) => option.firstName + ' ' + option.lastName}
                                 renderInput={(params) => (
                                   <TextField
                                     required={true}
@@ -694,7 +771,7 @@ const NewHireStep1 = () => {
                         </Grid>
                         <Grid xs={12} className="mt14">
                           <TextareaAutosize
-                            required={(! step1.value) ? true : false}
+                            required={(!step1.value) ? true : false}
                             id="comment1"
                             className="w100p"
                             rowsMin={6}
@@ -742,10 +819,13 @@ const NewHireStep1 = () => {
                             <Autocomplete
                               id="controllable-states-demo"
                               onChange={(e, value) => {
+                                const formValid = document.getElementById('applicationForm').checkValidity();
+                                if (formValid)
+                                  toggleSaveButton(false);
                                 setcomputer(value);
                               }}
                               options={YesNo}
-                              getOptionLabel = {(option)=> option.title}
+                              getOptionLabel={(option) => option.title}
                               className="w100p"
                               renderInput={(params) => (
                                 <TextField
@@ -769,8 +849,11 @@ const NewHireStep1 = () => {
                             <Autocomplete
                               id="controllable-states-demo"
                               options={YesNo}
-                              getOptionLabel = {(option)=> option.title}
+                              getOptionLabel={(option) => option.title}
                               onChange={(e, value) => {
+                                const formValid = document.getElementById('applicationForm').checkValidity();
+                                if (formValid)
+                                  toggleSaveButton(false);
                                 setactive(value);
                               }}
                               className="w100p"
@@ -795,11 +878,14 @@ const NewHireStep1 = () => {
                           <Grid xs={3}>
                             <Autocomplete
                               onChange={(e, value) => {
+                                const formValid = document.getElementById('applicationForm').checkValidity();
+                                if (formValid)
+                                  toggleSaveButton(false);
                                 setcompanyCellPhone(value);
                               }}
                               id="controllable-states-demo"
                               options={YesNo}
-                              getOptionLabel = {(option)=> option.title}
+                              getOptionLabel={(option) => option.title}
                               className="w100p"
                               renderInput={(params) => (
                                 <TextField
@@ -823,10 +909,13 @@ const NewHireStep1 = () => {
                             <Autocomplete
                               id="controllable-states-demo"
                               onChange={(e, value) => {
+                                const formValid = document.getElementById('applicationForm').checkValidity();
+                                if (formValid)
+                                  toggleSaveButton(false);
                                 setcompanyVehicle(value);
                               }}
                               options={YesNo}
-                              getOptionLabel = {(option)=> option.title}
+                              getOptionLabel={(option) => option.title}
                               className="w100p"
                               renderInput={(params) => (
                                 <TextField
@@ -850,10 +939,13 @@ const NewHireStep1 = () => {
                             <Autocomplete
                               id="controllable-states-demo"
                               onChange={(e, value) => {
+                                const formValid = document.getElementById('applicationForm').checkValidity();
+                                if (formValid)
+                                  toggleSaveButton(false);
                                 setfuelCard(value);
                               }}
                               options={YesNo}
-                              getOptionLabel = {(option)=> option.title}
+                              getOptionLabel={(option) => option.title}
                               className="w100p"
                               renderInput={(params) => (
                                 <TextField
@@ -901,7 +993,11 @@ const NewHireStep1 = () => {
                     <Link to="/new-hire-queue" className="LinkButtonBack">
                       Back
                     </Link>
-                    <Button type="submit">
+                    <Button
+                      type="submit"
+                      className="LinkButton"
+                      disabled={isSaveButtonDisabled}
+                    >
                       {/* <Link to="/new-hire-queue/details/approval" className="LinkButton"> */}
                       Save & Continue
                       {/* </Link> */}
