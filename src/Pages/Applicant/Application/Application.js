@@ -578,13 +578,13 @@ const Application = () => {
             if (applicationForm.spouse_date_of_birth)
                 applicationForm.spouse_date_of_birth = applicationForm.spouse_date_of_birth.toString();
             if (applicationForm.spouse_telephoneNumber)
-                applicationForm.spouse_telephoneNumber = applicationForm.spouse_telephoneNumber.replace(/[^\d]/g, '');  
+                applicationForm.spouse_telephoneNumber = applicationForm.spouse_telephoneNumber.replace(/[^\d]/g, '');
             if (applicationForm.cell_phone)
-                applicationForm.cell_phone = applicationForm.cell_phone.replace(/[^\d]/g, '');  
+                applicationForm.cell_phone = applicationForm.cell_phone.replace(/[^\d]/g, '');
 
-                applicationForm.home_phone = applicationForm.home_phone.replace(/[^\d]/g, '');  
-                applicationForm.emergency_contact.phone_number = applicationForm.emergency_contact.phone_number.replace(/[^\d]/g, '');  
-            console.log(applicationForm);  
+            applicationForm.home_phone = applicationForm.home_phone.replace(/[^\d]/g, '');
+            applicationForm.emergency_contact.phone_number = applicationForm.emergency_contact.phone_number.replace(/[^\d]/g, '');
+            console.log(applicationForm);
             const formDataToPush = new FormData();
 
             Object.keys(applicationForm)
@@ -620,7 +620,7 @@ const Application = () => {
             localStorage.setItem('access_jwt', response?.token);
 
             showSnackBar('Form Submitted')
-            setTimeout(()=> {history.push("/create-password");},3000);
+            setTimeout(() => { history.push("/create-password"); }, 3000);
 
             removeHttpErrorListener();
         } catch (exc) {
@@ -654,40 +654,40 @@ const Application = () => {
     function formatPhoneNumber(value) {
         // if input value is falsy eg if the user deletes the input, then just return
         if (!value) return value;
-      
+
         // clean the input for any non-digit values.
         const phoneNumber = value.replace(/[^\d]/g, "");
-      
+
         // phoneNumberLength is used to know when to apply our formatting for the phone number
         const phoneNumberLength = phoneNumber.length;
-      
+
         // we need to return the value with no formatting if its less then four digits
         // this is to avoid weird behavior that occurs if you  format the area code to early
         if (phoneNumberLength < 4) return phoneNumber;
-      
+
         // if phoneNumberLength is greater than 4 and less the 7 we start to return
         // the formatted number
         if (phoneNumberLength < 7) {
-          return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
+            return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
         }
-      
+
         // finally, if the phoneNumberLength is greater then seven, we add the last
         // bit of formatting and return it.
         return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(
-          3,
-          6
+            3,
+            6
         )}-${phoneNumber.slice(6, 10)}`;
-      }
+    }
 
-      const handlePhoneNumber = (state,prop,event) =>{
+    const handlePhoneNumber = (state, prop, event) => {
         let formattedNumber = formatPhoneNumber(event.target.value)
-        event.target.value=formattedNumber
+        event.target.value = formattedNumber
         setStateForFormControl(
             state,
             prop,
             event
         )
-      }
+    }
     //   contactInformation,
     //   'home_phone',
     //   event,
@@ -790,7 +790,7 @@ const Application = () => {
                                         <TextField id="outlined-basic" placeholder="(123) 123-1231" variant="outlined" className="w100p"
                                             inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
                                             onChange={
-                                                (e)=>handlePhoneNumber(contactInformation,'home_phone',e)
+                                                (e) => handlePhoneNumber(contactInformation, 'home_phone', e)
                                             }
                                             onBlur={
                                                 verifyValidations
@@ -806,11 +806,11 @@ const Application = () => {
                                         className="pl20"
                                         id="cell_phone">
                                         <Grid xs={12} className="mbold mb14">
-                                            Cell Phone (Optional) 
+                                            Cell Phone (Optional)
                                         </Grid>
                                         <TextField id="outlined-basic" placeholder="(123) 123-1231" variant="outlined" className="w100p"
                                             onChange={
-                                                (e)=>handlePhoneNumber(contactInformation,'cell_phone',e)
+                                                (e) => handlePhoneNumber(contactInformation, 'cell_phone', e)
                                             } />
                                     </Grid>
                                     <Grid xs={6} className='mt30 pr20'>
@@ -874,7 +874,7 @@ const Application = () => {
                                         className="mt30 pl20"
                                         id="street_address2">
                                         <Grid xs={12} className="mbold mb14">
-                                            Street Address 2 (Optional) 
+                                            Street Address 2 (Optional)
                                         </Grid>
                                         <TextField id="outlined-basic" placeholder="Type Here" variant="outlined" className="w100p"
                                             onChange={
@@ -1081,7 +1081,7 @@ const Application = () => {
                                                     )
                                             }
                                             onChange={
-                                                (e)=>handlePhoneNumber(contactInformation,'spouse_telephoneNumber',e)
+                                                (e) => handlePhoneNumber(contactInformation, 'spouse_telephoneNumber', e)
                                             } />
                                     </Grid>
                                 </Grid>
@@ -1198,7 +1198,7 @@ const Application = () => {
                                         </Grid>
                                         <TextField id="outlined-basic" placeholder="(123) 123-1231" variant="outlined" className="w100p"
                                             onChange={
-                                                (e)=>{ handlePhoneNumber(emergency_contact,'phone_number',e) }
+                                                (e) => { handlePhoneNumber(emergency_contact, 'phone_number', e) }
                                             }
                                             onBlur={
                                                 verifyValidations
@@ -1221,7 +1221,7 @@ const Application = () => {
                                 <Grid xs={12} container className="LRM40">
                                     <Grid xs={6} className="mt30 pr20">
                                         <Grid xs={12} className="mbold mb14">
-                                            Job ID (Optional) 
+                                            Job ID (Optional)
                                         </Grid>
                                         <TextField id="outlined-basic" placeholder="Type Here" variant="outlined" className="w100p"
                                             onChange={
@@ -1280,7 +1280,7 @@ const Application = () => {
                                     <Grid xs={12} className="mt30">
                                         <Grid xs={12}>
                                             <Grid xs={12} className="mbold">
-                                                Notes for HR (Optional) 
+                                                Notes for HR (Optional)
                                             </Grid>
                                             <Grid xs={12} className="mt14">
                                                 <TextareaAutosize className="w100p" rowsMin={6} placeholder="Comment here"
@@ -1312,19 +1312,27 @@ const Application = () => {
                                                         ? 'd-flex p-3 m-0 justify-content-center flex-column align-items-center'
                                                         : 'd-none'
                                                 }>
-                                                    <Grid style = {{display:'flex'}}>
-                                                    <Grid className="task-done"></Grid>
-                                                    <button
-                                                        className="dustbinBtn"
-                                                        onClick={
-                                                            (e) =>{ 
-                                                            e.target.value=''
-                                                            setStateForFormControl(
-                                                                filesToUpload,
-                                                                'resume',
-                                                                e,
-                                                            )}
-                                                        }></button>
+                                                    <Grid style={{ display: 'flex' }}>
+                                                        <Grid className="task-done"></Grid>
+                                                        <button
+                                                            className="dustbinBtn"
+                                                            onClick={
+                                                                (e) => {
+                                                                    e.target.value = '';
+
+                                                                    let previousFiles = filesToUpload[0];
+                                                                    filesToUpload.resume = null;
+                                                                    // Clearing out this file
+                                                                    filesToUpload[1](filesToUpload);
+                                                                    document.getElementById('ResumeSelect').value = '';
+
+                                                                    setStateForFormControl(
+                                                                        filesToUpload,
+                                                                        'resume',
+                                                                        e,
+                                                                    )
+                                                                }
+                                                            }></button>
                                                     </Grid>
                                                     <Typography>
                                                         Resume has been uploaded
@@ -1367,19 +1375,27 @@ const Application = () => {
                                                         ? 'd-flex p-3 m-0 justify-content-center flex-column align-items-center'
                                                         : 'd-none'
                                                 }>
-                                                    <Grid style = {{display:'flex'}}>
-                                                    <Grid className="task-done"></Grid>
-                                                    <button
-                                                        className="dustbinBtn"
-                                                        onClick={
-                                                            (e) =>{ 
-                                                            e.target.value=''
-                                                            setStateForFormControl(
-                                                                filesToUpload,
-                                                                'state_driver_license',
-                                                                e,
-                                                            )}
-                                                        }></button>
+                                                    <Grid style={{ display: 'flex' }}>
+                                                        <Grid className="task-done"></Grid>
+                                                        <button
+                                                            className="dustbinBtn"
+                                                            onClick={
+                                                                (e) => {
+                                                                    e.target.value = '';
+
+                                                                    let previousFiles = filesToUpload[0];
+                                                                    filesToUpload.state_driver_license = null;
+                                                                    // Clearing out this file
+                                                                    filesToUpload[1](filesToUpload);
+                                                                    document.getElementById('licenseSelect').value = '';
+
+                                                                    setStateForFormControl(
+                                                                        filesToUpload,
+                                                                        'state_driver_license',
+                                                                        e,
+                                                                    )
+                                                                }
+                                                            }></button>
                                                     </Grid>
                                                     <Typography>
                                                         State Driver's License has been uploaded
