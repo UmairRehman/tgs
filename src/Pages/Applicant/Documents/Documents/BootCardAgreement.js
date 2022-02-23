@@ -361,11 +361,11 @@ const BootCardAgreement = () => {
                     Medical Bills
                   </TableCell>
                   <TableCell className="w10 row">
-                    <input required value="yes" id="bills" type="radio" name="mb" className="mr6 mt2" />
+                    <input required value="yes" id="bills" type="radio" name="medicalBills" className="mr6 mt2" />
                     Yes
                   </TableCell>
                   <TableCell className="w10 row">
-                    <input required value="No" id="bills" type="radio" name="mb" className="mr6 mt2" />
+                    <input required value="No" id="bills" type="radio" name="medicalBills" className="mr6 mt2" />
                     No
                   </TableCell>
                   <TableCell className="w row">
