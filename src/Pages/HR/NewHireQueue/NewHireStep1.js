@@ -79,6 +79,7 @@ const NewHireStep1 = () => {
   const [fuelCard, setfuelCard] = useState("");
   const [ITComment, setITComment] = useState("");
   const [locationID, setLocationID] = useState("");
+  const [subDeprtmentText, setSubDeprtmentText] = useState(false);
   const [statusDateTime, setStatusDateTime] = useState({
     date: moment(new Date()).format("DD-MM-YYYY"),
     time: moment(new Date()).format("hh:mm a"),
@@ -203,9 +204,11 @@ const NewHireStep1 = () => {
         id: value.id,
       };
       let jobSubCategory = await hr.subDepartment(data);
-      console.log(jobSubCategory?.data);
-      setSubDepartmentDropdown(jobSubCategory?.data);
-      console.log(SubDepartmentDropdown);
+      if(jobSubCategory.data && (jobSubCategory.data.length > 0) ){
+        setSubDepartmentDropdown(jobSubCategory?.data);
+        setsubDepartment(jobSubCategory?.data[0].id)
+        setSubDeprtmentText(!subDeprtmentText)
+      }
     } catch (exc) {
       console.log(exc);
     }
@@ -696,29 +699,29 @@ const NewHireStep1 = () => {
                             </Grid>
                             <Grid xs={12} className="mt14">
                               <Autocomplete
+                                key={subDeprtmentText}
                                 className="w100p"
-                                // onChange={(e,value)=>onChangeSubDepartment(e,value)}
-                              onChange={(e, value) => {
-                                const formValid = document.getElementById('applicationForm').checkValidity();
-                                if (formValid)
-                                  toggleSaveButton(false);
-                                setsubDepartment(value.id);
-                              }}
-                              id="combo-box-demo"
-                              options={
-                                SubDepartmentDropdown == null
-                                  ? null
-                                  : SubDepartmentDropdown
-                              }
-                              getOptionLabel={(option) => option.title}
-                              renderInput={(params) => (
-                                <TextField
-                                  required={true}
-                                  {...params}
-                                  label="Select"
-                                  variant="outlined"
-                                />
-                              )}
+                                onChange={(e, value) => {
+                                  const formValid = document.getElementById('applicationForm').checkValidity();
+                                  if (formValid)
+                                    toggleSaveButton(false);
+                                  setsubDepartment(value.id);
+                                }}
+                                id="combo-box-demo"
+                                options={
+                                  SubDepartmentDropdown || {}
+                                }
+                                getOptionLabel={(option) => option.title}
+                                renderInput={(params) => (
+                                  <TextField
+                                    id='subDeprtmentText'
+                                    name='subDeprtmentText'
+                                    required={true}
+                                    {...params}
+                                    label="Select"
+                                    variant="outlined"
+                                  />
+                                )}
                               />
                             </Grid>
                           </Grid>

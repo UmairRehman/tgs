@@ -57,11 +57,11 @@ const employeeStatus = [
    "Questionnaire & Docs Submit" , //"Application Approved", //2 
    "Application for Approval" , //"Application Rejected", //3 
    "Application Approved" , //"Questionnaire Pending", //4 
-   "Conditional Docs Pending" , //"Questionnaire Approved", //5 
-   "Conditional Docs for Approval" , //"Questionnaire Rejected", //6 
-   "PDF Docs Pending" , //"PDF Forms , Submitted", //7 
-   "PDF Docs Submitted" , //"Documents Submitted", //8 
-   "Documents Rejected" , //"PDF Forms , Submitted", //9 
+   "Application Rejected", //5
+   "Conditional Docs Pending" , //"Questionnaire Approved", //6 
+   "Conditional Docs for Approval" , //"Questionnaire Rejected", //7 
+   "PDF Docs Pending" , //"PDF Forms , Submitted", //8 
+   "Conditional Docs Rejected" , //"Documents Submitted", //9 
    "Employee" //10
 ]
 

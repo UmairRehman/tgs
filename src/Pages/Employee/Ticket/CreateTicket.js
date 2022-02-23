@@ -54,6 +54,8 @@ const CreateTicket = () => {
   const [loading, setLoading] = React.useState(false);
   const [success, setSuccess] = React.useState(false);
 
+  const [subDepartmentText, setSubDepartmentText] = useState(false);
+
   //list state
   const [lists, setLists] = useState({
     employees:[],
@@ -134,6 +136,7 @@ const CreateTicket = () => {
           try {
             setTicketData({...ticketData,requestedType:value})
             setCategoryList(value.id)
+            setSubDepartmentText(!subDepartmentText)
           } catch (error) {
             console.log(error);
           }
@@ -313,11 +316,12 @@ const CreateTicket = () => {
                       </Grid>
                       <Grid xs={12} className="mt14">
                           <Autocomplete
+                            key={subDepartmentText}
                             className="w100p"
                             id="combo-box-demo"
                             disabled={(! ticketData.requestedType)?true:false}
-                            options={lists.categories}
-                            value = { ticketData.category }
+                            options={lists.categories || {} }
+                            // value = { ticketData.category }
                             onChange={ (event,value) =>handleSubmitRequested(event,value,4) }
                             getOptionLabel={ option => option.name}
                             renderInput={(params) => <TextField   required={true} {...params} label="Please Select" variant="outlined" />}
