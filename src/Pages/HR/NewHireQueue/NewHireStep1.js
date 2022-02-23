@@ -123,8 +123,6 @@ const NewHireStep1 = () => {
   async function onformSubmit(event) {
     event.preventDefault();
 
-    return validFormCheck();
-
     let data = {};
     if (!step1.value) {
       data = {
