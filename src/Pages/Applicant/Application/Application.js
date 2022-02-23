@@ -493,7 +493,7 @@ const Application = () => {
 
         if (typeof title === 'string')
             title = title
-                .split()
+                .split(' ')
                 .join('_')
                 .toLowerCase();
 
