@@ -184,7 +184,7 @@ const NewHireStep2 = () => {
       <Grid xs={12} md={10} container justify="center" className="PageContent">
         <Grid className="PagesFrame">
           <PageHeader />
-          <Grid id="PageTitle">New Applicant - Step 3</Grid>
+          <Grid id="PageTitle">Applicant - 2nd Approval</Grid>
           {/* Page Start */}
           <Grid xs={12} className="ContentPage BlueHeadTable FormTableArea">
             <Grid xs={12} className="LiqTables">
