@@ -124,7 +124,7 @@ const Documents = () => {
               applyToStorage: {
                   user_profile: {
                       ...data,
-                      EmployeeStatusId: 4,
+                      EmployeeStatusId: 3,
                   }
               }
           }
