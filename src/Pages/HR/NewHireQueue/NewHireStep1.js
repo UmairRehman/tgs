@@ -97,6 +97,178 @@ const NewHireStep1 = () => {
   const location = useLocation();
   const [holdData, setHoldData] = useState({});
 
+
+  useEffect(() => {
+    const formValid = document.getElementById('applicationForm').checkValidity();
+    if (formValid)
+      toggleSaveButton(false);
+  }, [applicantData]);
+  useEffect(() => {
+    const formValid = document.getElementById('applicationForm').checkValidity();
+    if (formValid)
+      toggleSaveButton(false);
+  }, [resume]);
+  useEffect(() => {
+    const formValid = document.getElementById('applicationForm').checkValidity();
+    if (formValid)
+      toggleSaveButton(false);
+  }, [drivingLicense]);
+  useEffect(() => {
+    const formValid = document.getElementById('applicationForm').checkValidity();
+    if (formValid)
+      toggleSaveButton(false);
+  }, [isSaveButtonDisabled]);
+  useEffect(() => {
+    const formValid = document.getElementById('applicationForm').checkValidity();
+    if (formValid)
+      toggleSaveButton(false);
+  }, [step1]);
+  useEffect(() => {
+    const formValid = document.getElementById('applicationForm').checkValidity();
+    if (formValid)
+      toggleSaveButton(false);
+  }, [position]);
+  useEffect(() => {
+    const formValid = document.getElementById('applicationForm').checkValidity();
+    if (formValid)
+      toggleSaveButton(false);
+  }, [jobCode]);
+  useEffect(() => {
+    const formValid = document.getElementById('applicationForm').checkValidity();
+    if (formValid)
+      toggleSaveButton(false);
+  }, [rate]);
+  useEffect(() => {
+    const formValid = document.getElementById('applicationForm').checkValidity();
+    if (formValid)
+      toggleSaveButton(false);
+  }, [department]);
+  useEffect(() => {
+    const formValid = document.getElementById('applicationForm').checkValidity();
+    if (formValid)
+      toggleSaveButton(false);
+  }, [fullTitle]);
+  useEffect(() => {
+    const formValid = document.getElementById('applicationForm').checkValidity();
+    if (formValid)
+      toggleSaveButton(false);
+  }, [positionCategory]);
+  useEffect(() => {
+    const formValid = document.getElementById('applicationForm').checkValidity();
+    if (formValid)
+      toggleSaveButton(false);
+  }, [positionLocation]);
+  useEffect(() => {
+    const formValid = document.getElementById('applicationForm').checkValidity();
+    if (formValid)
+      toggleSaveButton(false);
+  }, [partType]);
+  useEffect(() => {
+    const formValid = document.getElementById('applicationForm').checkValidity();
+    if (formValid)
+      toggleSaveButton(false);
+  }, [startDate]);
+  useEffect(() => {
+    const formValid = document.getElementById('applicationForm').checkValidity();
+    if (formValid)
+      toggleSaveButton(false);
+  }, [subDepartment]);
+  useEffect(() => {
+    const formValid = document.getElementById('applicationForm').checkValidity();
+    if (formValid)
+      toggleSaveButton(false);
+  }, [supervisorList]);
+  useEffect(() => {
+    const formValid = document.getElementById('applicationForm').checkValidity();
+    if (formValid)
+      toggleSaveButton(false);
+  }, [supervisor]);
+  useEffect(() => {
+    const formValid = document.getElementById('applicationForm').checkValidity();
+    if (formValid)
+      toggleSaveButton(false);
+  }, [comment]);
+  useEffect(() => {
+    const formValid = document.getElementById('applicationForm').checkValidity();
+    if (formValid)
+      toggleSaveButton(false);
+  }, [computer]);
+  useEffect(() => {
+    const formValid = document.getElementById('applicationForm').checkValidity();
+    if (formValid)
+      toggleSaveButton(false);
+  }, [active]);
+  useEffect(() => {
+    const formValid = document.getElementById('applicationForm').checkValidity();
+    if (formValid)
+      toggleSaveButton(false);
+  }, [companyCellPhone]);
+  useEffect(() => {
+    const formValid = document.getElementById('applicationForm').checkValidity();
+    if (formValid)
+      toggleSaveButton(false);
+  }, [companyVehicle]);
+  useEffect(() => {
+    const formValid = document.getElementById('applicationForm').checkValidity();
+    if (formValid)
+      toggleSaveButton(false);
+  }, [fuelCard]);
+  useEffect(() => {
+    const formValid = document.getElementById('applicationForm').checkValidity();
+    if (formValid)
+      toggleSaveButton(false);
+  }, [ITComment]);
+  useEffect(() => {
+    const formValid = document.getElementById('applicationForm').checkValidity();
+    if (formValid)
+      toggleSaveButton(false);
+  }, [locationID]);
+  useEffect(() => {
+    const formValid = document.getElementById('applicationForm').checkValidity();
+    if (formValid)
+      toggleSaveButton(false);
+  }, [subDeprtmentText]);
+  useEffect(() => {
+    const formValid = document.getElementById('applicationForm').checkValidity();
+    if (formValid)
+      toggleSaveButton(false);
+  }, [statusDateTime]);
+  useEffect(() => {
+    const formValid = document.getElementById('applicationForm').checkValidity();
+    if (formValid)
+      toggleSaveButton(false);
+  }, [jobCategoriesOption]);
+  useEffect(() => {
+    const formValid = document.getElementById('applicationForm').checkValidity();
+    if (formValid)
+      toggleSaveButton(false);
+  }, [locationDropdown]);
+  useEffect(() => {
+    const formValid = document.getElementById('applicationForm').checkValidity();
+    if (formValid)
+      toggleSaveButton(false);
+  }, [paytypeDropdown]);
+  useEffect(() => {
+    const formValid = document.getElementById('applicationForm').checkValidity();
+    if (formValid)
+      toggleSaveButton(false);
+  }, [departmentDropdown]);
+  useEffect(() => {
+    const formValid = document.getElementById('applicationForm').checkValidity();
+    if (formValid)
+      toggleSaveButton(false);
+  }, [SubDepartmentDropdown]);
+  useEffect(() => {
+    const formValid = document.getElementById('applicationForm').checkValidity();
+    if (formValid)
+      toggleSaveButton(false);
+  }, [PositionLevel]);
+  useEffect(() => {
+    const formValid = document.getElementById('applicationForm').checkValidity();
+    if (formValid)
+      toggleSaveButton(false);
+  }, [holdData]);
+
   const validFormCheck = () => {
     const state = {
       step1,
@@ -202,7 +374,7 @@ const NewHireStep1 = () => {
         id: value.id,
       };
       let jobSubCategory = await hr.subDepartment(data);
-      if(jobSubCategory.data && (jobSubCategory.data.length > 0) ){
+      if (jobSubCategory.data && (jobSubCategory.data.length > 0)) {
         setSubDepartmentDropdown(jobSubCategory?.data);
         setsubDepartment(jobSubCategory?.data[0].id)
         setSubDeprtmentText(!subDeprtmentText)
