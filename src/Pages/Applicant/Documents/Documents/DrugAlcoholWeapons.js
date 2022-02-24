@@ -156,7 +156,7 @@ const DrugAlcoholWeapons = () => {
 
   return (
     <Grid id="capture" container xs={12} className="LiqForms-Container">
-      <TableContainer className="MainTable capture">
+      <TableContainer className="MainTable">
         <Table className="SecondMainTable">
           <TableRow>
             <TableCell>
@@ -198,7 +198,7 @@ const DrugAlcoholWeapons = () => {
       </TableContainer>
 
       {/* ----------- Page 2 ----------- */}
-      <Grid xs={12} className="pageBreak capture">
+      <Grid xs={12} className="pageBreak">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl60 mt30 pr60">
@@ -237,7 +237,7 @@ const DrugAlcoholWeapons = () => {
         </TableContainer>
 
         {/* ----------- Page 2 ----------- */}
-        <Grid xs={12} className="pageBreak capture">
+        <Grid xs={12} className="pageBreak">
           <TableContainer className="MainTable">
             <Table className="SecondMainTable">
               <TableRow className="w100 pl60 mt30 pr60">
@@ -368,7 +368,7 @@ const DrugAlcoholWeapons = () => {
         </Grid>
 
         {/* ----------- Page 3 1 ----------- */}
-        <Grid xs={12} className="pageBreak capture" id="1">
+        <Grid xs={12} className="pageBreak" id="1">
           <TableContainer className="MainTable">
             <Table className="SecondMainTable">
               <TableRow className="w100 pl60 pr60">
@@ -418,7 +418,7 @@ const DrugAlcoholWeapons = () => {
         </Grid>
 
         {/* ----------- Page 4 2 ----------- */}
-        <Grid xs={12} className="pageBreak capture" id="2">
+        <Grid xs={12} className="pageBreak" id="2">
           <TableContainer className="MainTable">
             <Table className="SecondMainTable">
               <TableRow className="w100 pl60 pr60">
@@ -459,7 +459,7 @@ const DrugAlcoholWeapons = () => {
         </Grid>
 
         {/* ----------- Page 5 3 ----------- */}
-        <Grid xs={12} className="pageBreak capture" id="3">
+        <Grid xs={12} className="pageBreak" id="3">
           <TableContainer className="MainTable">
             <Table className="SecondMainTable">
               <TableRow className="w100 pl60 pr60">
@@ -479,7 +479,7 @@ const DrugAlcoholWeapons = () => {
         </Grid>
 
         {/* ----------- Page 3 1 ----------- */}
-        <Grid xs={12} className="pageBreak capture" id="1">
+        <Grid xs={12} className="pageBreak" id="1">
           <TableContainer className="MainTable">
             <Table className="SecondMainTable">
               <TableRow className="w100 pl60 pr60">
@@ -557,7 +557,7 @@ const DrugAlcoholWeapons = () => {
         </Grid>
 
         {/* ----------- Page 6 4 ----------- */}
-        <Grid xs={12} className="pageBreak capture" id="4">
+        <Grid xs={12} className="pageBreak" id="4">
           <TableContainer className="MainTable">
             <Table className="SecondMainTable">
               <TableRow className="w100 pl60 pr60">
@@ -578,7 +578,7 @@ const DrugAlcoholWeapons = () => {
         </Grid>
 
         {/* ----------- Page 4 2 ----------- */}
-        <Grid xs={12} className="pageBreak capture" id="2">
+        <Grid xs={12} className="pageBreak" id="2">
           <TableContainer className="MainTable">
             <Table className="SecondMainTable">
               <TableRow className="w100 pl60 pr60">
@@ -698,7 +698,7 @@ const DrugAlcoholWeapons = () => {
         </Grid>
 
         {/* ----------- Page 7 5 ----------- */}
-        <Grid xs={12} className="pageBreak capture" id="5">
+        <Grid xs={12} className="pageBreak" id="5">
           <TableContainer className="MainTable">
             <Table className="SecondMainTable">
               <TableRow className="w100 mt30 pl60 pr60">
@@ -790,7 +790,7 @@ const DrugAlcoholWeapons = () => {
         </Grid>
 
         {/* ----------- Page 8 6 ----------- */}
-        <Grid xs={12} className="pageBreak capture" id="6">
+        <Grid xs={12} className="pageBreak" id="6">
           <TableContainer className="MainTable">
             <Table className="SecondMainTable">
               <TableRow className="w100 mt30 pl60 pr60">
@@ -865,7 +865,7 @@ const DrugAlcoholWeapons = () => {
         </Grid>
 
         {/* ----------- Page 9 7 ----------- */}
-        <Grid xs={12} className="pageBreak capture" id="7">
+        <Grid xs={12} className="pageBreak" id="7">
           <TableContainer className="MainTable">
             <Table className="SecondMainTable">
               <TableRow className="w100 mt30 pl60 pr60">
@@ -941,7 +941,7 @@ const DrugAlcoholWeapons = () => {
         </Grid>
 
         {/* ----------- Page 10 8 ----------- */}
-        <Grid xs={12} className="pageBreak capture" id="8">
+        <Grid xs={12} className="pageBreak" id="8">
           <TableContainer className="MainTable">
             <Table className="SecondMainTable">
               <TableRow className="w100 pl60 pr60">
@@ -1083,7 +1083,7 @@ const DrugAlcoholWeapons = () => {
         </Grid>
 
         {/* ----------- Page 11 9 ----------- */}
-        <Grid xs={12} className="pageBreak capture" id="9">
+        <Grid xs={12} className="pageBreak" id="9">
           <TableContainer className="MainTable">
             <Table className="SecondMainTable">
               <TableRow className="w100 pl60 pr60">
@@ -1168,7 +1168,7 @@ const DrugAlcoholWeapons = () => {
         </Grid>
 
         {/* ----------- Page 12 10 ----------- */}
-        <Grid xs={12} className="pageBreak capture" id="10">
+        <Grid xs={12} className="pageBreak" id="10">
           <TableContainer className="MainTable">
             <Table className="SecondMainTable">
               <TableRow className="w100 pl60 pr60">
@@ -1232,7 +1232,7 @@ const DrugAlcoholWeapons = () => {
         </Grid>
 
         {/* ----------- Page 13 11 ----------- */}
-        <Grid xs={12} className="pageBreak capture" id="11">
+        <Grid xs={12} className="pageBreak" id="11">
           <TableContainer className="MainTable">
             <Table className="SecondMainTable">
               <TableRow className="w100 pl60 pr60">
@@ -1333,7 +1333,7 @@ const DrugAlcoholWeapons = () => {
         </Grid>
 
         {/* ----------- Page 14 12 ----------- */}
-        <Grid xs={12} className="pageBreak capture" id="12">
+        <Grid xs={12} className="pageBreak" id="12">
           <TableContainer className="MainTable">
             <Table className="SecondMainTable">
               <TableRow className="w100 mt30 pl60 pr60">
@@ -1418,7 +1418,7 @@ const DrugAlcoholWeapons = () => {
         </Grid>
 
         {/* ----------- Page 15 13 ----------- */}
-        <Grid xs={12} className="pageBreak capture" id="13">
+        <Grid xs={12} className="pageBreak" id="13">
           <TableContainer className="MainTable">
             <Table className="SecondMainTable">
               <TableRow className="w100 pl60 pr60">
@@ -1528,7 +1528,7 @@ const DrugAlcoholWeapons = () => {
         </Grid>
 
         {/* ----------- Page 16 14 ----------- */}
-        <Grid xs={12} className="pageBreak capture" id="14">
+        <Grid xs={12} className="pageBreak" id="14">
           <TableContainer className="MainTable">
             <Table className="SecondMainTable">
               <TableRow className="w100 pl60 pr60">
@@ -1589,7 +1589,7 @@ const DrugAlcoholWeapons = () => {
         </Grid>
 
         {/* ----------- Page 17 15 ----------- */}
-        <Grid xs={12} className="pageBreak capture" id="15">
+        <Grid xs={12} className="pageBreak" id="15">
           <TableContainer className="MainTable">
             <Table className="SecondMainTable">
               <TableRow className="w100 pl60 pr60">
@@ -1667,7 +1667,7 @@ const DrugAlcoholWeapons = () => {
         </Grid>
 
         {/* ----------- Page 18 16 ----------- */}
-        <Grid xs={12} className="pageBreak capture" id="16">
+        <Grid xs={12} className="pageBreak" id="16">
           <TableContainer className="MainTable">
             <Table className="SecondMainTable">
               <TableRow className="w100 pl60 pr60">
@@ -1726,7 +1726,7 @@ const DrugAlcoholWeapons = () => {
         </Grid>
 
         {/* ----------- Page 19 17 ----------- */}
-        <Grid xs={12} className="pageBreak capture" id="17">
+        <Grid xs={12} className="pageBreak" id="17">
           <TableContainer className="MainTable">
             <Table className="SecondMainTable">
               <TableRow className="w100 pl60 pr60">
