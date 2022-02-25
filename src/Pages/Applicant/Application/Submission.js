@@ -168,8 +168,10 @@ const Submission = () => {
 
   console.log(submissionStatus)
 
+  console.log(status);
+
   const proceedSectionClassName = (
-    status > 0
+    status > 0 && EmployeeStatusId !== 9
   )
     ? classes.SubmissionProcess
     : classes.DisplayNone;
