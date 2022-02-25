@@ -32,6 +32,7 @@ const {
 
 const {
   showSnackBar,
+  getGenerator,
 } = helpers;
 
 const {
@@ -87,12 +88,25 @@ const ArbitrationAgreement = () => {
         return showSnackBar("Kindly fill in all the fields")
       }
       // console.log("clickerd")
-      let canvas = await (html2canvas(document.querySelector('#capture')));
-      let image = (canvas.toDataURL('image/png'));
 
+      const captureElements = Array.from(
+        document.getElementsByClassName('capture')
+      );
+
+      const images = [];
+
+      for await (let i of getGenerator(captureElements.length)) {
+        const captureElement = captureElements[i];
+
+        let canvas = await (html2canvas(captureElement));
+
+        let image = (canvas.toDataURL('image/png'));
+
+        images.push(image);
+       }
 
       const resposne = await users.submitForm({
-        image: [image],
+        image: images,
         form: 12,
       });
 
@@ -119,7 +133,7 @@ const ArbitrationAgreement = () => {
   }
 
   return (
-    <Grid id="capture" container xs={12} className="LiqForms-Container">
+    <Grid container xs={12} className="LiqForms-Container">
       <Grid className={isPosting ? classes.DisplayNone : 'FormsHeader'}>
         <List>
           <ListItem>
@@ -143,7 +157,7 @@ const ArbitrationAgreement = () => {
         </List>
       </Grid>
 
-      <TableContainer className="MainTable">
+      <TableContainer className="MainTable capture">
         <Table className="SecondMainTable">
           <TableRow>
             <TableCell>
@@ -266,7 +280,7 @@ const ArbitrationAgreement = () => {
       </TableContainer>
 
       {/* -------------------------------------------- Page 2 ---------------------------------------------- */}
-      <Grid xs={12} className="pageBreak">
+      <Grid xs={12} className="pageBreak capture">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100">
@@ -369,7 +383,7 @@ const ArbitrationAgreement = () => {
                             onChange={(value) => { setDate(value) }}
                             value={date}
                             id="offerDate"
-                            className="datePickerReact data20h" 
+                            className="datePickerReact data20h"
                             disabled
                           />
                         </TableCell>
