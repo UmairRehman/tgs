@@ -121,7 +121,6 @@ const DrugAlcoholWeapons = () => {
         let image = (canvas.toDataURL('image/png'));
 
         images.push(image);
-        console.log(image)
       }
 
       const resposne = await users.submitForm({
