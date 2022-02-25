@@ -37,6 +37,7 @@ const {
 
 const {
   showSnackBar,
+  getGenerator,
 } = helpers;
 
 const {
@@ -135,14 +136,28 @@ const ConditionalOffer = () => {
         return showSnackBar("Kindly fill in all fields!");
       }
 
-      let canvas = await (html2canvas(document.querySelector('#capture')));
-      let image = (canvas.toDataURL('image/png'));
-      setPDFImage(image);
+      const captureElements = Array.from(
+        document.getElementsByClassName('capture')
+      );
+
+      const images = [];
+
+      for await (let i of getGenerator(captureElements.length)) {
+        const captureElement = captureElements[i];
+
+        let canvas = await (html2canvas(captureElement));
+
+        let image = (canvas.toDataURL('image/png'));
+
+        images.push(image);
+      }
+
+      setPDFImage(images);
 
       setPosting(false);
 
       const resposne = await users.submitForm({
-        image: [image],
+        image: images,
         form: 5,
       });
 
@@ -177,7 +192,7 @@ const ConditionalOffer = () => {
   }
 
   return (
-    <Grid id="capture" container xs={12} className="LiqForms-Container">
+    <Grid container xs={12} className="LiqForms-Container">
       <Snackbar></Snackbar>
       {/* <FormHeader/> */}
       <Grid className={isPosting ? classes.DisplayNone : 'FormsHeader'}>
@@ -202,7 +217,7 @@ const ConditionalOffer = () => {
           </ListItem>
         </List>
       </Grid>
-      <table id="tablePrint" className="MainTable">
+      <table id="tablePrint" className="MainTable capture">
         <tr className="w100">
           <td className="w100">
             <table className="SecondMainTable">
