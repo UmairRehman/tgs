@@ -398,11 +398,22 @@ const NewHireStep2 = () => {
                           <TextField
                             id="date"
                             type="date"
+                            minDate={new Date()}
                             onChange={(e) => {
                               sethireDate(e.target.value);
                             }}
                             className="DateTimePicker"
                             defaultValue="YY-MM-DD"
+                            InputProps={
+                              {
+                                inputProps: {
+                                  min: new Date()
+                                    .toISOString()
+                                    .split('T')
+                                    .shift()
+                                }
+                              }
+                            }
                             InputLabelProps={{
                               shrink: true,
                             }}
