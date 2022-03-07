@@ -327,6 +327,7 @@ const Application = () => {
     const filesToUpload = useState({
         resume: null,
         state_driver_license: null,
+        ssc: null,
     });
 
     /** State for EmergencyContact */
@@ -1367,7 +1368,7 @@ const Application = () => {
                                     <Grid xs={12} className="mt30">
                                         <Grid xs={12}>
                                             <Grid xs={12} className="mbold">
-                                                Social Security Card
+                                                Driver's License
                                             </Grid>
                                             <Grid xs={12} id="Step2DragFile" className="Step2DragFile mt14">
                                                 <Grid className={
@@ -1416,6 +1417,68 @@ const Application = () => {
                                                             $e => setStateForFormControl(
                                                                 filesToUpload,
                                                                 'state_driver_license',
+                                                                $e
+                                                            )
+                                                        }
+                                                    />
+                                                </Grid>
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                                <Grid xs={12} container>
+                                    <Grid xs={12} className="mt30">
+                                        <Grid xs={12}>
+                                            <Grid xs={12} className="mbold">
+                                                Social Security Card
+                                            </Grid>
+                                            <Grid xs={12} id="Step2DragFile" className="Step2DragFile mt14">
+                                                <Grid className={
+                                                    filesToUpload[0].ssc
+                                                        ? 'd-flex p-3 m-0 justify-content-center flex-column align-items-center'
+                                                        : 'd-none'
+                                                }>
+                                                    <Grid style={{ display: 'flex' }}>
+                                                        <Grid className="task-done"></Grid>
+                                                        <button
+                                                            className="dustbinBtn"
+                                                            onClick={
+                                                                (e) => {
+                                                                    e.target.value = '';
+
+                                                                    let previousFiles = filesToUpload[0];
+                                                                    filesToUpload.ssc = null;
+                                                                    // Clearing out this file
+                                                                    filesToUpload[1](filesToUpload);
+                                                                    document.getElementById('SsnSelect').value = '';
+
+                                                                    setStateForFormControl(
+                                                                        filesToUpload,
+                                                                        'ssc',
+                                                                        e,
+                                                                    )
+                                                                }
+                                                            }></button>
+                                                    </Grid>
+                                                    <Typography>
+                                                        Social Security Card has been uploaded
+                                                    </Typography>
+                                                </Grid>
+                                                <Grid xs={12} className={
+                                                    filesToUpload[0].ssc
+                                                        ? 'd-none'
+                                                        : 'text-center'
+                                                }>
+                                                    <label for="SsnSelect" className="labelButton">Select Files</label>
+                                                    <input
+                                                        type="file"
+                                                        id="SsnSelect"
+                                                        className="hide"
+                                                        accept=".pdf,.jpeg,"
+                                                        onChange={
+                                                            $e => setStateForFormControl(
+                                                                filesToUpload,
+                                                                'ssc',
                                                                 $e
                                                             )
                                                         }
