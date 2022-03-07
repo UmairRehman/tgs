@@ -373,9 +373,16 @@ const ConditionalOffer = () => {
                   <td className="w50">
                     <input type="text" id="terms" name="textfield"
                       value={
-                        JSON.parse(
-                          localStorage.user_profile || {}
-                        ).ApproverId || ''
+                        (() => {
+                          const { AEmployee: {
+                            firstName = '',
+                            lastName = '',
+                          } } = JSON.parse(
+                            localStorage.user_profile || {}
+                          );
+
+                          return `${firstName} ${lastName}`;
+                        })() || ''
                       }
                       className="w96 bn bb pt10 pb10 signatureClass font-20"
                       disabled />
