@@ -821,9 +821,8 @@ const NewHireStep1 = () => {
                                   setstartDate(value);
                                 }}
                                 value={startDate}
-                                className="DateTimePicker"
+                                className="DateTimePicker datePickerReact"
                                 id="date"
-                                className="datePickerReact"
                               />
                             </Grid>
                           </Grid>
