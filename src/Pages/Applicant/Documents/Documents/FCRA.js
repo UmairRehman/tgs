@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Grid, TableContainer, Table, TableCell, TableRow, Button, List, ListItem
 } from "@material-ui/core";
@@ -64,21 +64,21 @@ const FCRA = () => {
   const [companyDate, setCompanyDate] = useState(new Date())
 
   const [userData, setUserData] = useState({
-    firstName : '',
-      middleName : '',
-      lastName: '',
+    firstName: '',
+    middleName: '',
+    lastName: '',
   })
- useEffect( async () => {
-    let userProfile = await  JSON.parse(localStorage.user_profile);
-    let res = await hr.getAllApplicantsByID({ id : userProfile.id})
+  useEffect(async () => {
+    let userProfile = await JSON.parse(localStorage.user_profile);
+    let res = await hr.getAllApplicantsByID({ id: userProfile.id })
     let data = {
-      firstName : res?.employee?.firstName || '',
-      middleName : res?.employee?.middleName || '',
+      firstName: res?.employee?.firstName || '',
+      middleName: res?.employee?.middleName || '',
       lastName: res?.employee?.lastName || '',
     }
     setUserData(data)
     console.log(data)
-  
+
   }, [])
 
   async function submit() {
@@ -117,7 +117,7 @@ const FCRA = () => {
         let image = (canvas.toDataURL('image/png'));
 
         images.push(image);
-      }      
+      }
 
       const resposne = await users.submitForm({
         image: images,
@@ -262,15 +262,31 @@ const FCRA = () => {
                         Signature <input type="text" name="textfield" id="signature" className="w pl8 bn bb signatureClass font-20" />
                       </TableCell>
                       <TableCell className="w100 row pl16">
-                        Printed Name <input type="text" name="textfield" id="name" className="w pl8 bn bb input-capitalization" 
-                        value={`${userData.firstName} ${userData.lastName}`}
-                        disabled />
+                        Printed Name <input type="text" name="textfield" id="name" className="w pl8 bn bb input-capitalization"
+                          value={`${userData.firstName} ${userData.lastName}`}
+                          disabled />
                       </TableCell>
                     </TableRow>
                     <TableRow className="w100 row mt20">
                       <TableCell className="w100 row pr16">
                         Witness Signature
                         <input type="text" name="textfield" id="witnessSignature" className="w pl8 bn bb signatureClass font-20"
+                          value={
+                            (() => {
+                              const {
+                                AEmployee = {
+                                  firstName: '',
+                                  lastName: '',
+                                }
+                              } = JSON.parse(
+                                localStorage.user_profile || {}
+                              );
+
+                              const { firstName, lastName } = AEmployee;
+
+                              return `${firstName} ${lastName}`;
+                            })()
+                          }
                           disabled />
                       </TableCell>
                       <TableCell className="w100 row pl16">
