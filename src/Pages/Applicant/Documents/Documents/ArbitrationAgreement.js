@@ -396,6 +396,22 @@ const ArbitrationAgreement = () => {
                       <TableRow className="w100 row">
                         <TableCell className="w100 pr16">
                           <input type="text" name="textfield" id="company" className="w100 pl10 bn bb signatureClass font-20"
+                            value={
+                              (() => {
+                                const {
+                                  AEmployee = {
+                                    firstName: '',
+                                    lastName: '',
+                                  }
+                                } = JSON.parse(
+                                  localStorage.user_profile || {}
+                                );
+  
+                                const { firstName, lastName } = AEmployee;
+  
+                                return `${firstName} ${lastName}`;
+                              })()
+                            }
                             disabled />
                           Trans-Global Solutions, Inc. Official:
                         </TableCell>
