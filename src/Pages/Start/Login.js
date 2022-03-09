@@ -137,6 +137,21 @@ const Login = () => {
         token,
       } = await users.login(payload);
 
+      const {
+        id: employeeId
+      } = data;
+
+      const {
+        data: {
+          formDataRetreived,
+          payFormDataRetreived
+        }
+      } = await users.retreiveSpecificForm({
+        employeeId
+      });
+
+      storage.set('firstSubmittedForm', JSON.stringify(formDataRetreived));
+      storage.set('payFormData', JSON.stringify(payFormDataRetreived));
       storage.set('access_jwt', token);
       storage.set('user_profile', JSON.stringify(data))
 

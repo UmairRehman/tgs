@@ -7,7 +7,8 @@ export const routes = {
         step2: 'employee/applicant/step/2',
         step3: 'employee/applicant/step/3',
         step3Forms: 'employee/applicant/form/',
-        submitStep4: 'employee/applicant/step/4'
+        submitStep4: 'employee/applicant/step/4',
+        retreiveForm: '/employee/applicant/retreiveform/'
     },
     employee: {
         employee_login: 'employee/employee/login',

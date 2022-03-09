@@ -86,7 +86,26 @@ const ConditionalOffer = () => {
     setUserData(data)
     console.log(data)
 
+    const { payFormData } = localStorage;
 
+    if (payFormData) {
+      const {
+        PayType: { name }
+      } = JSON.parse(payFormData);
+
+      const [
+        hourlyRadioElement,
+        salaryRadioElement,
+      ] = Array.from(
+        document.querySelectorAll('input[name="payType"]')
+      );
+
+      if (name.toLowerCase() === 'salary') {
+        salaryRadioElement.checked = true;
+      } else {
+        hourlyRadioElement.checked = true;
+      }
+    }
   }, [])
 
   const [error, setError] = useState('');
@@ -297,8 +316,8 @@ const ConditionalOffer = () => {
                       value={`${userData.pay}`}
                       disabled
                     />
-                    <input type="radio" id="hourly" value="hourly" name="payType" className="ml6 mt4" /> Hourly
-                    <input type="radio" id="weekly" value="weekly" name="payType" className="ml10 mt4" /> Bi-Weekly
+                    <input type="radio" id="hourly" value="hourly" name="payType" className="custom-radio-disabled ml6 mt4" disabled /> Hourly
+                    <input type="radio" id="weekly" value="weekly" name="payType" className="custom-radio-disabled ml10 mt4" disabled /> Bi-Weekly
                   </td>
                 </tr>
                 <tr className="w100 row">
