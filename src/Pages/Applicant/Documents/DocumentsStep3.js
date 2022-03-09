@@ -322,7 +322,7 @@ const DocumentsStep3 = () => {
                                     </Grid>
                                     <Button></Button>
                                 </a>
-                                <a href="/assets/forms/DISA_Final" target="blank" className="PDFDownload">
+                                <a href="/assets/forms/DISA_Final.pdf" target="blank" className="PDFDownload">
                                     <Grid className="FileName">
                                         DISA Forms
                                     </Grid>
