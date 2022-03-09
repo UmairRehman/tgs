@@ -86,12 +86,17 @@ const ConditionalOffer = () => {
     setUserData(data)
     console.log(data)
 
-    const { payFormData } = localStorage;
+    const { payDetails } = localStorage;
 
-    if (payFormData) {
+    if (payDetails) {
       const {
-        PayType: { name }
-      } = JSON.parse(payFormData);
+        pay: {
+          PayType: { name: salaryType }
+        },
+        position: {
+          EffectiveDate
+        }
+      } = JSON.parse(payDetails);
 
       const [
         hourlyRadioElement,
@@ -100,11 +105,15 @@ const ConditionalOffer = () => {
         document.querySelectorAll('input[name="payType"]')
       );
 
-      if (name.toLowerCase() === 'salary') {
+      if (salaryType.toLowerCase() === 'salary') {
         salaryRadioElement.checked = true;
       } else {
         hourlyRadioElement.checked = true;
       }
+
+      setStartDate(
+        new Date(EffectiveDate)
+      );
     }
   }, [])
 
@@ -344,6 +353,7 @@ const ConditionalOffer = () => {
                       value={startDate}
                       id="startDate"
                       className="datePickerReact"
+                      disabled
                     />
                     {/* <input type="text" name="textfield" id="textfield" className="w22 h22 bn bb textCenter" />
                       <span className="font12">/</span>

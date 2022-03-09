@@ -51,6 +51,7 @@ import { helpers } from '../../helpers';
 
 const {
   users,
+  hr,
   Storage,
 } = Services;
 
@@ -93,6 +94,7 @@ const Login = () => {
   });
 
 
+  Object.assign(window, { gt: hr.getAllApplicantsByID });
 
   /**
    * @param {string} password - Password to validate 
@@ -141,17 +143,18 @@ const Login = () => {
         id: employeeId
       } = data;
 
-      const {
-        data: {
-          formDataRetreived,
-          payFormDataRetreived
-        }
-      } = await users.retreiveSpecificForm({
-        employeeId
-      });
+      const [
+        applicantPayDetails
+      ] = await Promise.all([
+        hr.getAllApplicantsByID(
+          { id: employeeId },
+          {
+            Authorization: token
+          }
+        )
+      ]);
 
-      storage.set('firstSubmittedForm', JSON.stringify(formDataRetreived));
-      storage.set('payFormData', JSON.stringify(payFormDataRetreived));
+      storage.set('payDetails', JSON.stringify(applicantPayDetails));
       storage.set('access_jwt', token);
       storage.set('user_profile', JSON.stringify(data))
 

@@ -86,11 +86,13 @@ const HTTPClientFunctionsWrapper = async (method, ...args) => {
 
         let [payload = {}, headers = {}] = rest;
 
-        const Authorization = localStorage.getItem('access_jwt');
+        const AuthorizationExtracted = localStorage.getItem('access_jwt');
+
+        const { Authorization: AuthorizationPassed } = headers;
 
         headers = {
             ...headers,
-            Authorization
+            Authorization: AuthorizationPassed || AuthorizationExtracted
         };
 
         const requestArguments = [
