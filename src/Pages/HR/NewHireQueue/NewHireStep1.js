@@ -1,3 +1,4 @@
+/** Core dependencies */
 import React, { useState, useEffect } from "react";
 import {
   Grid,
@@ -20,15 +21,22 @@ import { useLocation } from "react-router";
 import { useHistory } from "react-router-dom";
 import { environment } from "../../../environments/environment";
 
-/** Local deoendencies & Libraries */
+
+/** Local dependencies & Libraries */
 import Services from "../../../Services";
 import { helpers } from "../../../helpers";
 import Snackbar from "../../../Components/Snackbar";
 
+
+/** Third party packages */
+import { jsPDF } from "jspdf";
+
+var moment = require("moment-timezone");
+
+
 const { showSnackBar } = helpers;
 
 const { hr, employee } = Services;
-var moment = require("moment-timezone");
 
 // import MobileScreen from './Mobile/Enter-RailRoad-Add';
 // import {isMobile} from 'react-device-detect';
@@ -54,6 +62,7 @@ const NewHireStep1 = () => {
   const [applicantData, setApplicantData] = useState({});
   const [resume, setResume] = useState(null);
   const [drivingLicense, setDrivingLicense] = useState(null);
+  const [questionnaire, setQuestionnaire] = useState(null);
   const [isSaveButtonDisabled, toggleSaveButton] = useState(true);
 
   // states for Form
@@ -358,10 +367,23 @@ const NewHireStep1 = () => {
 
     try {
       let data = await hr.getAllApplicantsByID(applicantDataHistory);
-      setApplicantData(data.employee);
-      setResume(data.files[0]);
-      setDrivingLicense(data.files[1]);
-      console.log(applicantData);
+
+      const {
+        employee: employeeData,
+        files: [
+          resumeFileName,
+          sscFileName,
+          drivingLicenseFileName,
+        ],
+        extra: {
+          metadata: questionnaireData
+        }
+      } = data;
+
+      setApplicantData(employeeData);
+      setResume(resumeFileName);
+      setDrivingLicense(drivingLicenseFileName);
+      setQuestionnaire(questionnaireData);
     } catch (exc) {
       console.log(exc);
     }
@@ -416,6 +438,116 @@ const NewHireStep1 = () => {
       }
     }
   };
+
+  const downloadQuestionnaire = (event) => {
+    // return console.log(questionnaire);
+
+    const {
+      hairTest,
+      drugTest,
+      prison,
+      accommodation,
+      availability,
+      language,
+      bilingual,
+      overTime,
+      shift,
+      holidays,
+      workWeekends,
+      travels,
+      relocate,
+      tgsComment,
+      workBefore,
+      comment,
+      bilingualLanguage,
+    } = questionnaire;
+
+    const doc = new jsPDF();
+
+    doc.setFontSize(10);
+
+    let yOffset = 10;
+    let xOffset = 10;
+    let offsetExtension = 5;
+    let offsetTranslation = 30;
+
+    doc.text("Hair Test:", xOffset, yOffset);
+    doc.text(hairTest ? 'Yes' : 'No', xOffset, yOffset + offsetExtension);
+    yOffset += offsetTranslation;
+
+    doc.text("Drug Test:", xOffset, yOffset);
+    doc.text(drugTest ? 'Yes' : 'No', xOffset, yOffset + offsetExtension);
+    yOffset += offsetTranslation;
+
+    doc.text("Been to prison:", xOffset, yOffset);
+    doc.text(prison ? 'Yes' : 'No', xOffset, yOffset + offsetExtension);
+    yOffset += offsetTranslation;
+
+    doc.text("Require's Accomodation:", xOffset, yOffset);
+    doc.text(accommodation ? 'Yes' : 'No', xOffset, yOffset + offsetExtension);
+    yOffset += offsetTranslation;
+
+    if (!accommodation) {
+      doc.text("Does not require Accomodation:", xOffset, yOffset);
+      doc.text(comment ? 'Yes' : 'No', xOffset, yOffset + offsetExtension);
+      yOffset += offsetTranslation;
+    }
+
+    doc.text("Expected Availability:", xOffset, yOffset);
+    doc.text(new Date(availability).toDateString(), xOffset, yOffset + offsetExtension);
+    yOffset += offsetTranslation;
+
+    doc.text("Speaks English", xOffset, yOffset);
+    doc.text(language ? 'Yes' : 'No', xOffset, yOffset + offsetExtension);
+    yOffset += offsetTranslation;
+
+    doc.text("Is Bilingual:", xOffset, yOffset);
+    doc.text(bilingual ? 'Yes' : 'No', xOffset, yOffset + offsetExtension);
+    yOffset += offsetTranslation;
+
+    doc.text("Second Language", xOffset, yOffset);
+    doc.text(bilingualLanguage, xOffset, yOffset + offsetExtension);
+    yOffset += offsetTranslation;
+
+    doc.text("Works Overtime:", xOffset, yOffset);
+    doc.text(overTime ? 'Yes' : 'No', xOffset, yOffset + offsetExtension);
+    yOffset += offsetTranslation;
+
+    doc.text("Preferred Shift:", xOffset, yOffset);
+    doc.text(shift, xOffset, yOffset + offsetExtension);
+    yOffset += offsetTranslation;
+
+    doc.addPage();
+    yOffset = 10;
+    xOffset = 10;
+    offsetExtension = 5;
+    offsetTranslation = 30;
+
+    doc.text("Works Holidays:", xOffset, yOffset);
+    doc.text(holidays ? 'Yes' : 'No', xOffset, yOffset + offsetExtension);
+    yOffset += offsetTranslation;
+
+    doc.text("Works Weekends:", xOffset, yOffset);
+    doc.text(workWeekends ? 'Yes' : 'No', xOffset, yOffset + offsetExtension);
+    yOffset += offsetTranslation;
+
+    doc.text("Requires Travel:", xOffset, yOffset);
+    doc.text(travels ? 'Yes' : 'No', xOffset, yOffset + offsetExtension);
+    yOffset += offsetTranslation;
+
+    doc.text("Requires relocation:", xOffset, yOffset);
+    doc.text(relocate ? 'Yes' : 'No', xOffset, yOffset + offsetExtension);
+    yOffset += offsetTranslation;
+
+    doc.text("Heard about TGS:", xOffset, yOffset);
+    doc.text(tgsComment ? 'Yes' : 'No', xOffset, yOffset + offsetExtension);
+    yOffset += offsetTranslation;
+
+    doc.text("Worked for TGS Before:", xOffset, yOffset);
+    doc.text(workBefore ? 'Yes' : 'No', xOffset, yOffset + offsetExtension);
+
+    doc.save("questionnaire.pdf");
+  }
 
   return (
     <Grid container xs={12} className="Liq-Container HRPortal">
@@ -500,6 +632,27 @@ const NewHireStep1 = () => {
                           href={`${apiPath}/employee/applicant/download?id=${applicantData?.id}&name=${resume}`}
                           target="_blank"
                         ></a>
+                      </Grid>
+                    </ListItem>
+                    <ListItem container className="p0 pt6 pb20">
+                      <Grid className="w250 bold">Driver's License</Grid>
+                      <Grid className="PDFDownload">
+                        <Grid className="FileName">Driver's License</Grid>
+                        <a
+                          className="Button"
+                          href={`${apiPath}/employee/applicant/download?id=${applicantData?.id}&name=${drivingLicense}`}
+                          target="_blank"
+                        ></a>
+                      </Grid>
+                    </ListItem>
+                    <ListItem container className="p0 pt6 pb20">
+                      <Grid className="w250 bold">Questionaire</Grid>
+                      <Grid className="PDFDownload">
+                        <Grid className="FileName">Questionaire</Grid>
+                        <Button
+                          className="Button"
+                          onClick={downloadQuestionnaire}
+                        ></Button>
                       </Grid>
                     </ListItem>
 
