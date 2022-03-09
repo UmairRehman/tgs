@@ -117,8 +117,6 @@ useEffect( async () => {
         images.push(image);
       }
 
-      return console.log(images);
-
       const resposne = await users.submitForm({
         image: images,
         form: 7,
