@@ -16,10 +16,21 @@ export const getAllApplicants = async (payload, headers) => {
 
 export const getAllApplicantsByID = async (payload, headers) => {
     const { id } = payload;
-    
+
     return await api.get(
         routes.hr.get_applicant_by_id
             .concat(id),
+        payload,
+        headers
+    );
+}
+
+export const getAllApplicantsByName = async (payload, headers) => {
+    const { name } = payload;
+
+    return await api.get(
+        routes.hr.get_applicants_by_name
+            .concat(`?name=${name}`),
         payload,
         headers
     );
@@ -42,7 +53,7 @@ export const step2 = async (payload, headers) => {
     );
 }
 
-export const reject = async (payload , headers) => {
+export const reject = async (payload, headers) => {
     return await api.post(
         routes.hr.reject,
         payload,
@@ -59,10 +70,10 @@ export const get_tickets = async (payload, headers) => {
 }
 
 export const listTicketByCategory = async (payload, headers) => {
-    const { roleId,params } = payload;
-    console.log(routes.hr.list_tickets_and_alerts_by_category.concat(roleId,params));
+    const { roleId, params } = payload;
+    console.log(routes.hr.list_tickets_and_alerts_by_category.concat(roleId, params));
     return await api.get(
-        routes.hr.list_tickets_and_alerts_by_category.concat(roleId,params),
+        routes.hr.list_tickets_and_alerts_by_category.concat(roleId, params),
         payload,
         headers
     );
@@ -73,7 +84,7 @@ export const listTicketByCategory = async (payload, headers) => {
 
 export const get_tickets_by_id = async (payload, headers) => {
     const { id } = payload;
-    
+
     return await api.get(
         routes.hr.get_ticket_by_id
             .concat(id),
@@ -87,7 +98,7 @@ export const update_tickets = async (payload, headers) => {
     console.log(id);
     return await api.put(
         routes.hr.update_tickets
-        .concat(id),
+            .concat(id),
         payload,
         headers
     );
@@ -143,7 +154,7 @@ export const subDepartment = async (payload, headers) => {
     const { id } = payload;
     return await api.get(
         routes.hr.subDepartment
-        .concat(id),
+            .concat(id),
         payload,
         headers
     );
@@ -153,7 +164,7 @@ export const getEmployee = async (payload, headers) => {
     const { id } = payload;
     return await api.get(
         routes.hr.get_employee_by_id
-        .concat(id),
+            .concat(id),
         payload,
         headers
     );
@@ -170,7 +181,7 @@ export const updateEmployeeAddress = async (payload, headers) => {
 }
 
 export const additionalFiles = async (payload, headers) => {
-    const { id , formData } = payload;
+    const { id, formData } = payload;
     return await api.put(
         routes.hr.additional_files_uplaod.concat(id),
         formData,
@@ -182,7 +193,7 @@ export const additionalFiles = async (payload, headers) => {
 
 
 export const getCertificate = async (payload, headers) => {
-    const { id  } = payload;
+    const { id } = payload;
     return await api.get(
         routes.hr.get_certificate.concat(id),
         payload,
@@ -193,7 +204,7 @@ export const getCertificate = async (payload, headers) => {
 
 
 export const updatePosition = async (payload, headers) => {
-    const { id  } = payload;
+    const { id } = payload;
     return await api.put(
         routes.hr.update_position,
         payload,
@@ -204,7 +215,7 @@ export const updatePosition = async (payload, headers) => {
 
 
 export const updatePay = async (payload, headers) => {
-    const { id  } = payload;
+    const { id } = payload;
     return await api.put(
         routes.hr.update_pay,
         payload,
@@ -215,7 +226,7 @@ export const updatePay = async (payload, headers) => {
 
 
 
-export const terminateEmployee = async (payload , headers) => {
+export const terminateEmployee = async (payload, headers) => {
     return await api.post(
         routes.hr.terminate,
         payload,

@@ -43,6 +43,7 @@ export const routes = {
     hr:{
         get_applicant: 'employee/hr/applicant',
         get_applicant_by_id : 'employee/hr/applicant/',
+        get_applicants_by_name: 'employee/hr/search/employee',
         step1 : 'employee/hr/step/0/approve',
         step2 : 'employee/hr/step/1/approve',
         reject : 'employee/hr/step/reject',
@@ -58,10 +59,6 @@ export const routes = {
         update_position: 'employee/hr/employee/position',
         update_pay: 'employee/hr/employee/pay',
         terminate: 'employee/hr/employee/terminate',
-
-
-
-
         // dropdowns 
         position_level : 'employee/level/',
         get_job_categories : 'employee/jobCategory',

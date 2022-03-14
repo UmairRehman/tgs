@@ -11,7 +11,8 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Paper
+  Paper,
+  ListItem,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import TextField from '@material-ui/core/TextField';
@@ -103,23 +104,72 @@ const FailPass = [
 const EmployeeLookup = () => {
 
   let history = useHistory();
-  const [name, setName] = useState('')
-  const [id, setId] = useState('')
-  const [error, setError] = useState(false)
+  const [name, setName] = useState('');
+  const [id, setId] = useState('');
+  const [employeeName, setEmployeeName] = useState('');
+  const [isLoadingEmployees, setIsLoadingEmployees] = useState(false);
+  const [isRetreivingForThrottling, setIsRetreivingForThrottling] = useState(false);
+  const [retreivingEmployee, setRetreivingEmployee] = useState(false);
+  const [error, setError] = useState(false);
+  const [employeesList, setEmployeesList] = useState([]);
+
+  const timeouts = {
+    employeesRetreival: null
+  }
 
   const [page, setPage] = React.useState(0);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  useEffect(() => {
+    (async () => {
+      if (!employeeName) {
+        setIsLoadingEmployees(false);
+        setEmployeesList([]);
+        return false;
+      }
 
-  async function onSubmit(event) {
-    event.preventDefault()
-    if (id.length > 0) {
+      // if (timeouts.employeesRetreival && isLoadingEmployees)
+      //   clearTimeout(timeouts.employeesRetreival);
 
+
+      try {
+        // if (isRetreivingForThrottling)
+        //   return false;
+
+        setIsRetreivingForThrottling(true);
+        // setEmployeesList([]);
+
+        const list = await hr.getAllApplicantsByName({ name: employeeName });
+
+        const { employee: employeesList } = list;
+
+        setEmployeesList(employeesList);
+
+        clearTimeout(timeouts.employeesRetreival);
+
+        setTimeout(() => {
+          setIsLoadingEmployees(false);
+        }, 0);
+
+        setIsRetreivingForThrottling(false);
+      } catch (exc) {
+        console.log(exc);
+      }
+    })();
+  }, [employeeName]);
+
+  async function onSubmit(event, forcedIdParam = '') {
+    if (event)
+      event.preventDefault();
+
+    const useId = (id || forcedIdParam).toString();
+
+    if (useId) {
 
       let data = {
-        id: id,
+        id: useId,
       }
 
       console.log(data)
@@ -176,6 +226,57 @@ const EmployeeLookup = () => {
                     <TextField id="outlined-basic" value={id} onChange={(e) => { setId(e.target.value) }} variant="outlined" className="w100p" />
                     <p style={{ display: error == true ? "block" : "none" }}>Id is required</p>
                   </Grid>
+                  <Grid style={{ marginTop: '10px' }} xs={5}>
+                    <Typography>Employee Name: (Search by name)</Typography>
+                    <TextField id="outlined-basic" onChange={(e) => {
+                      setIsLoadingEmployees(true);
+                      setEmployeeName(e.target.value);
+                    }} variant="outlined" className="w100p" />
+                  </Grid>
+                  {
+                    (isLoadingEmployees)
+                      ? (
+                        <Grid>
+                          Retreiving List ...
+                        </Grid>
+                      )
+                      : <Grid></Grid>
+
+                    // Showing employees list if retreived
+                  }
+
+                  {
+                    (!isLoadingEmployees && employeesList.length)
+                      ? <Grid className='employees-list'>
+                        {
+                          // Show employees
+                          employeesList.map(employee => {
+                            return (
+                              <ListItem style={{
+                                'box-shadow': '1px 1px 15px -10px #555'
+                              }}>
+                                <Typography style={{ flex: 1 }}>ID: {employee.id}</Typography>
+                                <Typography style={{ flex: 6 }}>{employee.firstName} {employee.lastName}</Typography>
+                                <Button style={{
+                                  flex: 1,
+                                  background: '#2963AD',
+                                  color: 'white',
+                                }}
+                                  type="submit"
+                                  onClick={(event) => {
+                                    setRetreivingEmployee(true);
+                                    setId(employee.id);
+                                    onSubmit(event, employee.id);
+                                  }}>
+                                  View
+                                </Button>
+                              </ListItem>
+                            )
+                          })
+                        }
+                      </Grid>
+                      : <Grid></Grid>
+                  }
                   <Grid xs={2}>
                     <Typography className="SearchBtnDot">.</Typography>
                     <Button style={{ background: '#2963AD', color: 'white' }} type='submit' >Search</Button>
