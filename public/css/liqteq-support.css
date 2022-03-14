@@ -2295,3 +2295,10 @@ background-color: #2963AD !important;
 .input-capitalization {
     text-transform: capitalize !important;
 }
+
+.employees-list {
+    border: 2px dotted gray;
+    border-radius: 5px;
+    padding: 1rem;
+    margin: 1rem 0px;
+}
