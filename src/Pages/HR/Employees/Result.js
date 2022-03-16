@@ -186,7 +186,9 @@ function createData(
 const Crtirows = [
   createData("1011", "Backhoe", "3/10/2021", "6/10/2021"),
 ];
-const EmployeeResult = () => {
+const EmployeeResult = (props) => {
+
+  console.log(props);
 
   let history = useHistory();
 
@@ -194,7 +196,9 @@ const EmployeeResult = () => {
 
   const [employeeDetails, setEmployeeDetails] = useState({})
 
-  const [files, setFiles] = useState([])
+  const [files, setFiles] = useState([]);
+
+  const [additionalFiles, setAdditionalFiles] = useState([]);
 
   const [position, setPosition] = useState([])
 
@@ -241,8 +245,22 @@ const EmployeeResult = () => {
   const [flag, setFlag] = useState(false)
 
 
+  useEffect(() => {
+    if (!additionalFiles.length) {
+      const additionalFilesInput = document.getElementById('additional-files-input');
 
+      if (!additionalFiles.length)
+        return false;
 
+      clearAdditionalFiles();
+    }
+  }, [additionalFiles]);
+
+  const clearAdditionalFiles = () => {
+    additionalFiles.value = null;
+
+    setAdditionalFiles([]);
+  }
 
   function terminateEmployee() {
     history.push({
@@ -408,29 +426,10 @@ const EmployeeResult = () => {
   useEffect(async () => {
     window.scrollTo(0, 0);
 
-    let id = location?.state;
+    let id = location?.state?.employee?.[0]?.id;
 
     try {
-      hr.getEmployee({ id }).then((applicantDataHistory) => {
-        console.log(applicantDataHistory)
-        setComponentLoader(true)
-        setEmployeeDetails(applicantDataHistory?.employee[0])
-        setEmpData(applicantDataHistory)
-        setComponentLoader(false)
-        setFiles(applicantDataHistory?.files)
-        setPosition(applicantDataHistory?.position)
-        setPayRate(applicantDataHistory.pay)
-
-        setTgsLocation(applicantDataHistory?.employee[0].TGSLocation)
-        setDepartment(applicantDataHistory?.employee[0]?.SubDepartment)
-        setZip(applicantDataHistory?.employee[0].zip)
-        setStateName(applicantDataHistory?.employee[0].state)
-        setCity(applicantDataHistory?.employee[0].city)
-        setStreedAddress(applicantDataHistory?.employee[0].address)
-        setStreedAddress1(applicantDataHistory?.employee[0].address1)
-
-      }).catch((err) => { console.log(err) });
-
+      getEmployeeDetails({ id });
     }
     catch (exc) {
       console.log(exc);
@@ -444,8 +443,8 @@ const EmployeeResult = () => {
       hr.getCertificate({ id }).then((certificateData) => {
         console.log(certificateData)
         certificateData.data.rows.forEach(element => {
-          element.issue_date = moment( new Date(element.issue_date) ).format('DD-MM-YYYY')
-          element.expiry_date = moment( new Date(element.expiry_date) ).format('DD-MM-YYYY')
+          element.issue_date = moment(new Date(element.issue_date)).format('DD-MM-YYYY')
+          element.expiry_date = moment(new Date(element.expiry_date)).format('DD-MM-YYYY')
         });
 
         setCertificate(certificateData.data.rows)
@@ -542,7 +541,7 @@ const EmployeeResult = () => {
 
   function getCertificate(row) {
 
-    
+
     setUpdateCertificate(row)
     setUpdatedCertificateID(row.id)
     setUpdatedCertificateName(row.name)
@@ -555,7 +554,7 @@ const EmployeeResult = () => {
     console.log(row)
   };
 
-  const openCertificateModal = () =>{
+  const openCertificateModal = () => {
     setAddCertificate(true)
     setOpenC(true)
   }
@@ -577,7 +576,7 @@ const EmployeeResult = () => {
 
     try {
       let result = await employee.add_employee_certificate(data)
-      if(result.httpStatus==200) {
+      if (result.httpStatus == 200) {
         console.log(result)
         setFlag(true)
         setOpenC(!openCerti);
@@ -589,25 +588,45 @@ const EmployeeResult = () => {
     }
   }
 
-  const handleCertificate = (e) =>{
+  const handleCertificate = (e) => {
     e.preventDefault();
 
-    
-    if(addCertificate)
-      onAddCertificate()  
+
+    if (addCertificate)
+      onAddCertificate()
     else
       onUpdateCertificate()
-    
+
   }
 
 
-  function onSubmitEmploye(event) {
-    event.preventDefault()
+  async function onSubmitEmploye(event) {
+    try {
+      event.preventDefault()
 
-    let data = {
-      comment: comment
+      let data = {
+        comment,
+      }
+
+      const formData = new FormData();
+      const { id } = employeeDetails;
+
+
+      Array.from(additionalFiles)
+        .forEach(file => {
+          formData.append('file', file);
+        });
+
+      const response = await hr.additionalFiles({
+        id,
+        formData,
+      });
+
+      await getEmployeeDetails();
+      clearAdditionalFiles();
+    } catch (exc) {
+      console.log(exc);
     }
-
 
 
   }
@@ -636,30 +655,7 @@ const EmployeeResult = () => {
           setOpenA(false);
 
         }).then(() => {
-          console.log('emp', employeeDetails.id)
-          hr.getEmployee(employeeDetails).then((applicantDataHistory) => {
-            setLoader(true);
-            console.log(applicantDataHistory)
-            setComponentLoader(true)
-            setEmployeeDetails(applicantDataHistory?.employee[0])
-            console.log(employeeDetails)
-            setComponentLoader(false)
-            setFiles(applicantDataHistory?.files)
-            console.log(files)
-            setPosition(applicantDataHistory?.position)
-
-            setTgsLocation(applicantDataHistory?.employee[0].TGSLocation)
-            setDepartment(applicantDataHistory?.employee[0]?.SubDepartment)
-            setZip(applicantDataHistory?.employee[0].zip)
-            setStateName(applicantDataHistory?.employee[0].state)
-            setCity(applicantDataHistory?.employee[0].city)
-            setStreedAddress(applicantDataHistory?.employee[0].address)
-            setStreedAddress1(applicantDataHistory?.employee[0].address1)
-            setLoader(false);
-
-
-
-          }).catch((err) => { console.log(err) });
+          getEmployeeDetails();
         })
         .catch(err => {
           console.log(err)
@@ -668,6 +664,44 @@ const EmployeeResult = () => {
       console.log(exc);
     }
 
+  }
+
+  const getEmployeeDetails = async (forcedParams = {}) => {
+    try {
+      const applicantDataHistory = await hr.getEmployee({
+        ...(employeeDetails || {}),
+        ...forcedParams,
+      })
+      setLoader(true);
+      console.log(applicantDataHistory)
+      setComponentLoader(true)
+      setEmployeeDetails(applicantDataHistory?.employee[0])
+      console.log(employeeDetails)
+      setComponentLoader(false)
+      setFiles(applicantDataHistory?.files)
+      console.log(files)
+      setPosition(applicantDataHistory?.position)
+
+      setTgsLocation(applicantDataHistory?.employee[0].TGSLocation)
+      setDepartment(applicantDataHistory?.employee[0]?.SubDepartment)
+      setZip(applicantDataHistory?.employee[0].zip)
+      setStateName(applicantDataHistory?.employee[0].state)
+      setCity(applicantDataHistory?.employee[0].city)
+      setStreedAddress(applicantDataHistory?.employee[0].address)
+      setStreedAddress1(applicantDataHistory?.employee[0].address1)
+      setLoader(false);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  const removeFile = (fileIndexToOptOut) => {
+    const files = Array.from(
+      additionalFiles
+    )
+      .filter((files, fileIndex) => fileIndex !== fileIndexToOptOut);
+
+    setAdditionalFiles(files);
   }
 
   return (
@@ -712,7 +746,7 @@ const EmployeeResult = () => {
 
                       </Grid>
                     </ListItem>
-                    { (employeeDetails?.fullTitle) && 
+                    {(employeeDetails?.fullTitle) &&
                       (<ListItem container className="p0 pt6 pb20">
                         <Grid xs={5} className="bold">
                           Full title
@@ -747,17 +781,17 @@ const EmployeeResult = () => {
                       </Grid>
                     </ListItem>
                     {
-                      (employeeDetails?.hireDate) && 
+                      (employeeDetails?.hireDate) &&
                       (<ListItem container className="p0 pt6 pb20">
-                      <Grid xs={5} className="bold">
-                        Hire Date
-                      </Grid>
-                      <Grid xs={5}>
-                        {employeeDetails?.hireDate}
-                      </Grid>
+                        <Grid xs={5} className="bold">
+                          Hire Date
+                        </Grid>
+                        <Grid xs={5}>
+                          {employeeDetails?.hireDate}
+                        </Grid>
                       </ListItem>)
                     }
-                    { (employeeDetails?.terminateDate) &&
+                    {(employeeDetails?.terminateDate) &&
                       (<ListItem container className="p0 pt6 pb20">
                         <Grid xs={5} className="bold">
                           Termination Date
@@ -1046,7 +1080,7 @@ const EmployeeResult = () => {
 
                   <Grid xs={12} container className="mt40">
                     <Button onClick={terminateEmployee} className="LinkButton"
-                    disabled={employeeDetails?.terminate}>
+                      disabled={employeeDetails?.terminate}>
                       Terminate Employee
                     </Button>
                   </Grid>
@@ -1059,20 +1093,26 @@ const EmployeeResult = () => {
               <Grid xs={12} className="mt30">
                 <Grid xs={12} className="mb10">
                   <Typography className="bold">
-                    Employee Document
+                    Employee Documents
                   </Typography>
                 </Grid>
                 <Grid xs={12} md={8} lg={6} container className="HREmployeeDownloads">
-                  {files.map((name) => (
-                    <Grid className="PDFDownload">
-                      <Grid className="FileName">
+                  {
+                    (files.length)
+                      ? files.map((name) => (
+                        <Grid className="PDFDownload">
+                          <Grid className="FileName">
 
-                        <a href={`${apiPath}/employee/applicant/download?id=${employeeDetails?.id}&name=${name}`} target="_blank">{name}</a>
+                            <a href={`${apiPath}/employee/applicant/download?id=${employeeDetails?.id}&name=${name}`} target="_blank">{name}</a>
 
-                      </Grid>
-                      {/* <Button></Button> */}
-                    </Grid>
-                  ))}
+                          </Grid>
+                          {/* <Button></Button> */}
+                        </Grid>
+                      ))
+                      : (<Grid>
+                        No files found
+                      </Grid>)
+                  }
 
                 </Grid>
               </Grid>
@@ -1082,23 +1122,72 @@ const EmployeeResult = () => {
                   {/* ---------- */}
                   <Grid xs={12} container>
                     <Grid xs={12} className="mt30 pr40">
-                      <Grid xs={12}>
-                        <Grid xs={12} className="mbold">
-                          Attach Additional Files
-                        </Grid>
-                        <Grid xs={12} id="Step2DragFile" className="Step2DragFile mt14">
-                          Drop File Here OR <Button>Select Files</Button>
-                        </Grid>
-                      </Grid>
+                      {
+                        !additionalFiles.length
+                          ? (
+                            <Grid xs={12}>
+                              <Grid xs={12} className="mbold">
+                                Attach Additional Files
+                              </Grid>
+                              <Grid xs={12} id="Step2DragFile" className="Step2DragFile mt14">
+                                Drop File Here OR
+                                <Button
+                                  onClick={($event) => {
+                                    const input = document.getElementById('additional-files-input');
+
+                                    input.click();
+                                  }}>Select Files</Button>
+                              </Grid>
+                              <input
+                                id="additional-files-input"
+                                type="file"
+                                multiple="multiple"
+                                hidden="true"
+                                onChange={($event) => {
+                                  setAdditionalFiles($event.target.files);
+                                }}
+                              />
+                            </Grid>
+                          )
+                          : (
+                            <Grid className="Step2DragFile files-tag-container">
+                              {
+                                Array
+                                  .from(additionalFiles)
+                                  .map(
+                                    (file, fileIndex) => (
+                                      <Grid className="files-tag position-relative">
+                                        <Grid className="d-flex justify-content-end position-absolute r-0">
+                                          <Button
+                                            className="dustbinBtn min-width-auto dustbinBtn-size-auto-100"
+                                            onClick={
+                                              $e => {
+                                                removeFile(fileIndex)
+                                              }
+                                            }></Button>
+                                        </Grid>
+                                        <Typography>
+                                          {file.name}
+                                        </Typography>
+                                      </Grid>
+                                    )
+                                  )
+                              }
+                            </Grid>
+                          )
+                      }
                     </Grid>
                   </Grid>
                   {/* ---------- */}
 
                   <form onSubmit={onSubmitEmploye}>
-                    <Grid xs={12} className="mt50 pr70">
+                    <Grid xs={12} className="mt12 pr70">
                       <Grid xs={12} md={8} lg={6} container justify="space-between">
                         <Link to="/employees" className="LinkButtonBack">Back</Link>
-                        <Button type='submit' className="LinkButton">Save & Continue</Button>
+                        <Button
+                          type='submit'
+                          className="LinkButton"
+                          disabled={!additionalFiles.length}>Save & Continue</Button>
                         {/* to="/employees/result"  */}
                       </Grid>
                     </Grid>
@@ -1172,7 +1261,7 @@ const EmployeeResult = () => {
           <form onSubmit={handleCertificate}>
             <DialogContent>
               {
-                (!addCertificate)&&
+                (!addCertificate) &&
                 (
                   <Grid xs={12} className="mbold">
                     <Grid xs={12} className="pl14">Certificate ID</Grid>

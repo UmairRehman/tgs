@@ -180,7 +180,7 @@ const EmployeeLookup = () => {
 
         history.push({
           pathname: "/employees/result",
-          state: data1?.employee[0]?.id
+          state: data1,
         });
 
       }
