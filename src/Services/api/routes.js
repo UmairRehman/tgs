@@ -5,9 +5,10 @@ export const routes = {
         create_password : 'employee/applicant/password',
         step1: 'employee/applicant/step/1',
         step2: 'employee/applicant/step/2',
-        step3: 'employee/applicant/step/4',
+        step3: 'employee/applicant/step/3',
         step3Forms: 'employee/applicant/form/',
-        submitStep4: 'employee/applicant/step/3'
+        submitStep4: 'employee/applicant/step/4',
+        retreiveForm: '/employee/applicant/retreiveform/'
     },
     employee: {
         employee_login: 'employee/employee/login',
@@ -32,6 +33,7 @@ export const routes = {
         all_subdepartments: 'employee/department/sub',
         add_certificate: 'employee/certificate',
         update_certificate: 'employee/certificate/',
+        get_crew_user_list: 'employee/employee/crew'
     },
     it :{
         list_it_request : 'employee/ITRequest',
@@ -41,6 +43,7 @@ export const routes = {
     hr:{
         get_applicant: 'employee/hr/applicant',
         get_applicant_by_id : 'employee/hr/applicant/',
+        get_applicants_by_name: 'employee/hr/search/employee',
         step1 : 'employee/hr/step/0/approve',
         step2 : 'employee/hr/step/1/approve',
         reject : 'employee/hr/step/reject',
@@ -56,10 +59,6 @@ export const routes = {
         update_position: 'employee/hr/employee/position',
         update_pay: 'employee/hr/employee/pay',
         terminate: 'employee/hr/employee/terminate',
-
-
-
-
         // dropdowns 
         position_level : 'employee/level/',
         get_job_categories : 'employee/jobCategory',

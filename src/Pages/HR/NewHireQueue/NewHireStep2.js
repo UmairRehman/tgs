@@ -184,7 +184,7 @@ const NewHireStep2 = () => {
       <Grid xs={12} md={10} container justify="center" className="PageContent">
         <Grid className="PagesFrame">
           <PageHeader />
-          <Grid id="PageTitle">New Applicant - Step 3</Grid>
+          <Grid id="PageTitle">Applicant - 2nd Approval</Grid>
           {/* Page Start */}
           <Grid xs={12} className="ContentPage BlueHeadTable FormTableArea">
             <Grid xs={12} className="LiqTables">
@@ -398,11 +398,22 @@ const NewHireStep2 = () => {
                           <TextField
                             id="date"
                             type="date"
+                            minDate={new Date()}
                             onChange={(e) => {
                               sethireDate(e.target.value);
                             }}
                             className="DateTimePicker"
                             defaultValue="YY-MM-DD"
+                            InputProps={
+                              {
+                                inputProps: {
+                                  min: new Date()
+                                    .toISOString()
+                                    .split('T')
+                                    .shift()
+                                }
+                              }
+                            }
                             InputLabelProps={{
                               shrink: true,
                             }}

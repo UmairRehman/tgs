@@ -5,7 +5,7 @@ import EmployeeLogin from '../Pages/Start/EmployeeLogin';
 import Dashboard from '../Pages/Employee/Dashboard/Dashboard';
 import SafetyTesting from '../Pages/Employee/Safety/SafetyTesting';
 import SafetyTestingEdit from '../Pages/Employee/Safety/safety-testing-edit';
-import Reilroad from '../Pages/Employee/Safety/Enter-RailRoad-Add';
+import Railroad from '../Pages/Employee/Safety/Enter-RailRoad-Add';
 import CreateTicket from '../Pages/Employee/Ticket/CreateTicket';
 import BroadcastMessages from '../Pages/Broadcast/BroadcastMessages';
 
@@ -66,7 +66,7 @@ const Routing = () => (
 
     <Route exact path="/safety-testing" component={()=><SafetyTesting/>}/>
     <Route exact path="/add-event-rules" component={()=><SafetyTestingEdit/>}/>
-    <Route exact path="/enter-railroad-event" component={()=><Reilroad/>}/>
+    <Route exact path="/enter-railroad-event" component={()=><Railroad/>}/>
     
     <Route exact path="/create-ticket" component={()=><CreateTicket/>}/>
     

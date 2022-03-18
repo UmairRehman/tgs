@@ -188,7 +188,7 @@ const EmployeeHandbook = () => {
       </TableContainer>
 
       {/* ----------- Page 2 ----------- */}
-      <Grid xs={12} className="pageBreak capture">
+      <Grid xs={12} className="pageBreak">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -468,7 +468,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 3 ----------- */}
-      <Grid xs={12} className="pageBreak capture">
+      <Grid xs={12} className="pageBreak">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -774,7 +774,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 4 ----------- */}
-      <Grid xs={12} className="pageBreak capture">
+      <Grid xs={12} className="pageBreak">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -1174,7 +1174,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 5 ----------- */}
-      <Grid xs={12} className="pageBreak capture">
+      <Grid xs={12} className="pageBreak">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -1393,7 +1393,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 6 WELCOME NEW EMPLOYEE (v) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="v">
+      <Grid xs={12} className="pageBreak" id="v">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -1447,7 +1447,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 7 INTRODUCTORY STATEMENT (vi) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="vi">
+      <Grid xs={12} className="pageBreak" id="vi">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -1512,7 +1512,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 8 CUSTOMER RELATIONS (vii) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="vii">
+      <Grid xs={12} className="pageBreak" id="vii">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -1559,7 +1559,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 9 ENVIRONMENT, HEALTH AND SAFETY POLICY STATEMENT (viii) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="viii">
+      <Grid xs={12} className="pageBreak" id="viii">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -1629,7 +1629,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 10 101 Nature of Employment (1) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="1">
+      <Grid xs={12} className="pageBreak" id="1">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -1709,7 +1709,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 11 103 Equal Employment Opportunity (2) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="2">
+      <Grid xs={12} className="pageBreak" id="2">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -1802,7 +1802,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 12 105 Personal Relationships in the Workplace (3) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="3">
+      <Grid xs={12} className="pageBreak" id="3">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -1898,7 +1898,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 13 107 Immigration Law Compliance (4) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="4">
+      <Grid xs={12} className="pageBreak" id="4">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -1995,7 +1995,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 14  (5) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="5">
+      <Grid xs={12} className="pageBreak" id="5">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -2062,7 +2062,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 15 110 Outside Employment (6) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="6">
+      <Grid xs={12} className="pageBreak" id="6">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -2156,7 +2156,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 16 114 Disability Accommodation (7) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="7">
+      <Grid xs={12} className="pageBreak" id="7">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -2247,7 +2247,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 17 202 Access to Personnel Files (8) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="8">
+      <Grid xs={12} className="pageBreak" id="8">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -2333,7 +2333,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 18 203 Employment Reference Checks (9) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="9">
+      <Grid xs={12} className="pageBreak" id="9">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -2436,7 +2436,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 19 208 Employment Applications (10) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="10">
+      <Grid xs={12} className="pageBreak" id="10">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -2543,7 +2543,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 20 301 Employee Benefits (11) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="11">
+      <Grid xs={12} className="pageBreak" id="11">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -2633,7 +2633,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 21 303 Vacation Benefits (12) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="12">
+      <Grid xs={12} className="pageBreak" id="12">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -2727,7 +2727,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 22 305 Holidays (13) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="13">
+      <Grid xs={12} className="pageBreak" id="13">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -2833,7 +2833,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 23 307 Sick Leave Benefits (14) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="14">
+      <Grid xs={12} className="pageBreak" id="14">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -2923,7 +2923,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 24 307 Sick Leave Benefits (15) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="15">
+      <Grid xs={12} className="pageBreak" id="15">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -3017,7 +3017,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 25 311 Jury Duty (16) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="16">
+      <Grid xs={12} className="pageBreak" id="16">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -3114,7 +3114,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 26 312 Witness Duty (17) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="17">
+      <Grid xs={12} className="pageBreak" id="17">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -3211,7 +3211,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 27 316 Benefits Continuation (COBRA) (18) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="18">
+      <Grid xs={12} className="pageBreak" id="18">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -3312,7 +3312,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 28 320 401(k) Savings Plan (19) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="19">
+      <Grid xs={12} className="pageBreak" id="19">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -3408,7 +3408,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 29 403 Paydays (20) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="20">
+      <Grid xs={12} className="pageBreak" id="20">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -3483,7 +3483,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 30 409 Administrative Pay Corrections (21) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="21">
+      <Grid xs={12} className="pageBreak" id="21">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -3560,7 +3560,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 31 502 Work Schedules (22) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="22">
+      <Grid xs={12} className="pageBreak" id="22">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -3639,7 +3639,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 32 505 Smoking (23) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="23">
+      <Grid xs={12} className="pageBreak" id="23">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -3713,7 +3713,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 33 508 Use of Equipment and Computer Systems (24) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="24">
+      <Grid xs={12} className="pageBreak" id="24">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -3787,7 +3787,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 34 510 Emergency Closings (25) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="25">
+      <Grid xs={12} className="pageBreak" id="25">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -3858,7 +3858,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 35 514 Visitors in the Workplace (26) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="26">
+      <Grid xs={12} className="pageBreak" id="26">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -3936,7 +3936,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 36 517 Internet Usage (27) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="27">
+      <Grid xs={12} className="pageBreak" id="27">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -4010,7 +4010,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 37 Trans-Global Solutions, (28) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="28">
+      <Grid xs={12} className="pageBreak" id="28">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -4087,7 +4087,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 38 518 Workplace Monitoring (29) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="29">
+      <Grid xs={12} className="pageBreak" id="29">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -4167,7 +4167,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 39 526 Cellular Phone and Handheld Radio Usage (30) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="30">
+      <Grid xs={12} className="pageBreak" id="30">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -4244,7 +4244,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 40 602 Family and Medical Leave (31) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="31">
+      <Grid xs={12} className="pageBreak" id="31">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -4313,7 +4313,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 41 (32) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="32">
+      <Grid xs={12} className="pageBreak" id="32">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -4385,7 +4385,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 42 (33) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="33">
+      <Grid xs={12} className="pageBreak" id="33">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -4459,7 +4459,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 43 (34) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="34">
+      <Grid xs={12} className="pageBreak" id="34">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -4526,7 +4526,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 44 (35) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="35">
+      <Grid xs={12} className="pageBreak" id="35">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -4600,7 +4600,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 45 (36) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="36">
+      <Grid xs={12} className="pageBreak" id="36">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -4671,7 +4671,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 46 (37) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="37">
+      <Grid xs={12} className="pageBreak" id="37">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -4749,7 +4749,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 47 (38) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="38">
+      <Grid xs={12} className="pageBreak" id="38">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -4822,7 +4822,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 48 (39) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="39">
+      <Grid xs={12} className="pageBreak" id="39">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -4897,7 +4897,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 49 (40) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="40">
+      <Grid xs={12} className="pageBreak" id="40">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -4953,7 +4953,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 50 (41) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="41">
+      <Grid xs={12} className="pageBreak" id="41">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -5024,7 +5024,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 51 (42) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="42">
+      <Grid xs={12} className="pageBreak" id="42">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -5093,7 +5093,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 52 (43) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="43">
+      <Grid xs={12} className="pageBreak" id="43">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -5161,7 +5161,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 53 (44) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="44">
+      <Grid xs={12} className="pageBreak" id="44">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -5234,7 +5234,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 54 (45) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="45">
+      <Grid xs={12} className="pageBreak" id="45">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -5307,7 +5307,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 55 (46) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="46">
+      <Grid xs={12} className="pageBreak" id="46">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -5377,7 +5377,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 56 (47) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="47">
+      <Grid xs={12} className="pageBreak" id="47">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -5446,7 +5446,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 57 (48) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="48">
+      <Grid xs={12} className="pageBreak" id="48">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -5510,7 +5510,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 58 (49) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="49">
+      <Grid xs={12} className="pageBreak" id="49">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -5576,7 +5576,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 59 (50) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="50">
+      <Grid xs={12} className="pageBreak" id="50">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -5650,7 +5650,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 60 (51) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="51">
+      <Grid xs={12} className="pageBreak" id="51">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -5726,7 +5726,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 61 (52) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="52">
+      <Grid xs={12} className="pageBreak" id="52">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -5805,7 +5805,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 62 (53) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="53">
+      <Grid xs={12} className="pageBreak" id="53">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -5883,7 +5883,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 63 (54) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="54">
+      <Grid xs={12} className="pageBreak" id="54">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -5958,7 +5958,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 64 (55) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="55">
+      <Grid xs={12} className="pageBreak" id="55">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -6032,7 +6032,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 65 (56) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="56">
+      <Grid xs={12} className="pageBreak" id="56">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -6106,7 +6106,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 66 (57) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="57">
+      <Grid xs={12} className="pageBreak" id="57">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
@@ -6184,7 +6184,7 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 67 880 Asset Protection Help Line (58) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="58">
+      <Grid xs={12} className="pageBreak" id="58">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">

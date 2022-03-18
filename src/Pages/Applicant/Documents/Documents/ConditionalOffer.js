@@ -37,6 +37,7 @@ const {
 
 const {
   showSnackBar,
+  getGenerator,
 } = helpers;
 
 const {
@@ -85,7 +86,35 @@ const ConditionalOffer = () => {
     setUserData(data)
     console.log(data)
 
+    const { payDetails } = localStorage;
 
+    if (payDetails) {
+      const {
+        pay: {
+          PayType: { name: salaryType }
+        },
+        position: {
+          EffectiveDate
+        }
+      } = JSON.parse(payDetails);
+
+      const [
+        hourlyRadioElement,
+        salaryRadioElement,
+      ] = Array.from(
+        document.querySelectorAll('input[name="payType"]')
+      );
+
+      if (salaryType.toLowerCase() === 'salary') {
+        salaryRadioElement.checked = true;
+      } else {
+        hourlyRadioElement.checked = true;
+      }
+
+      setStartDate(
+        new Date(EffectiveDate)
+      );
+    }
   }, [])
 
   const [error, setError] = useState('');
@@ -104,8 +133,8 @@ const ConditionalOffer = () => {
       let payType = document.querySelector('input[name="payType"]:checked')?.value;
       let location = document.getElementById("location").value;
       let departmentCode = document.getElementById("departmentCode").value;
-      let phone = document.getElementById("phone").value;
-      let laptop = document.getElementById("laptop").value;
+      // let phone = document.getElementById("phone").value;
+      // let laptop = document.getElementById("laptop").value;
       let terms = document.getElementById("terms").value;
       let offeree = document.getElementById("offeree").value;
 
@@ -119,8 +148,8 @@ const ConditionalOffer = () => {
         startDate,
         // location,
         // departmentCode,
-        phone,
-        laptop,
+        // phone,
+        // laptop,
         // terms,
         offeree,
       }
@@ -135,14 +164,28 @@ const ConditionalOffer = () => {
         return showSnackBar("Kindly fill in all fields!");
       }
 
-      let canvas = await (html2canvas(document.querySelector('#capture')));
-      let image = (canvas.toDataURL('image/png'));
-      setPDFImage(image);
+      const captureElements = Array.from(
+        document.getElementsByClassName('capture')
+      );
+
+      const images = [];
+
+      for await (let i of getGenerator(captureElements.length)) {
+        const captureElement = captureElements[i];
+
+        let canvas = await (html2canvas(captureElement));
+
+        let image = (canvas.toDataURL('image/png'));
+
+        images.push(image);
+      }
+
+      setPDFImage(images);
 
       setPosting(false);
 
       const resposne = await users.submitForm({
-        image: [image],
+        image: images,
         form: 5,
       });
 
@@ -177,7 +220,7 @@ const ConditionalOffer = () => {
   }
 
   return (
-    <Grid id="capture" container xs={12} className="LiqForms-Container">
+    <Grid container xs={12} className="LiqForms-Container">
       <Snackbar></Snackbar>
       {/* <FormHeader/> */}
       <Grid className={isPosting ? classes.DisplayNone : 'FormsHeader'}>
@@ -202,7 +245,7 @@ const ConditionalOffer = () => {
           </ListItem>
         </List>
       </Grid>
-      <table id="tablePrint" className="MainTable">
+      <table id="tablePrint" className="MainTable capture">
         <tr className="w100">
           <td className="w100">
             <table className="SecondMainTable">
@@ -282,8 +325,8 @@ const ConditionalOffer = () => {
                       value={`${userData.pay}`}
                       disabled
                     />
-                    <input type="radio" id="hourly" value="hourly" name="payType" className="ml6 mt4" /> Hourly
-                    <input type="radio" id="weekly" value="weekly" name="payType" className="ml10 mt4" /> Bi-Weekly
+                    <input type="radio" id="hourly" value="hourly" name="payType" className="custom-radio-disabled ml6 mt4" disabled /> Hourly
+                    <input type="radio" id="weekly" value="weekly" name="payType" className="custom-radio-disabled ml10 mt4" disabled /> Bi-Weekly
                   </td>
                 </tr>
                 <tr className="w100 row">
@@ -310,6 +353,7 @@ const ConditionalOffer = () => {
                       value={startDate}
                       id="startDate"
                       className="datePickerReact"
+                      disabled
                     />
                     {/* <input type="text" name="textfield" id="textfield" className="w22 h22 bn bb textCenter" />
                       <span className="font12">/</span>
@@ -321,14 +365,14 @@ const ConditionalOffer = () => {
                 </tr>
               </tbody>
             </table>
-            <table className="w100 boldBBorder pb12 mb20">
+            {/* <table className="w100 boldBBorder pb12 mb20">
               <tbody className="w100">
                 <tr className="w100 row">
                   <td className="w50"><input type="checkbox" id="phone" name="phone" value="cellphone" className="mr5" /> Company cell phone</td>
                   <td className="w50"><input type="checkbox" id="laptop" value="laptop" className="mr5" /> Company Laptop</td>
                 </tr>
               </tbody>
-            </table>
+            </table> */}
             <table className="w100">
               <tbody>
                 <tr>
@@ -357,6 +401,18 @@ const ConditionalOffer = () => {
                 <tr className="w100 row">
                   <td className="w50">
                     <input type="text" id="terms" name="textfield"
+                      value={
+                        (() => {
+                          const { AEmployee: {
+                            firstName = '',
+                            lastName = '',
+                          } } = JSON.parse(
+                            localStorage.user_profile || {}
+                          );
+
+                          return `${firstName} ${lastName}`;
+                        })() || ''
+                      }
                       className="w96 bn bb pt10 pb10 signatureClass font-20"
                       disabled />
                   </td>

@@ -37,6 +37,14 @@ export const get_employee_listing = async (payload, headers) => {
     );
 };
 
+export const get_crew_user_listing = async (payload, headers) => {
+    return await api.get(
+        routes.employee.get_crew_user_list,
+        payload,
+        headers
+    );
+};
+
 export const get_department_listing = async (payload, headers) => {
     return await api.get(
         routes.employee.get_department_list,

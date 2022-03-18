@@ -41,7 +41,7 @@ export const environment = {
       apiPaths: { base, router, port },
     } = this;
 
-    return `${base}:${port}/${router}`;
+    return `${base}/${router}`;
   },
 
   get socketPath() {
@@ -53,7 +53,7 @@ export const environment = {
       socketPath: { base, router, port },
     } = this;
 
-    return `${base}:${port}/${router}`;
+    return `${base}/${router}`;
   },
 
   externalLinks: {

@@ -62,8 +62,7 @@ const Railroad = () => {
     jobId: '', //12
     crewMembers: [
       { name: '', position: '', image: '' }
-    ], //13
-    stopTest: false,
+    ] //13
   })
 
 
@@ -111,9 +110,6 @@ const Railroad = () => {
         setRailRoad({ ...railRoad, time: value })
         break;
 
-      case 12:
-        setRailRoad({ ...railRoad, stopTest: value })
-        break;
 
 
       default:
@@ -288,17 +284,28 @@ const Railroad = () => {
     users: [],
     positions: [],
     departments: [],
-    sites: []
+    sites: [],
+    crews: [],
+    assistants: []
   })
 
   const setListData = async () => {
-    let userList = await employee.get_employee_listing()
+    let userList = await employee.get_employee_listing();
     if (userList.httpStatus == 200) {
       userList = userList.data;
       userList.map(row => {
         row.name = `${row.firstName} ${row.lastName}`
       })
       console.log(userList);
+    }
+
+    let assistingCrewList = await employee.get_crew_user_listing();
+    if (assistingCrewList.httpStatus == 200) {
+      assistingCrewList = assistingCrewList.data.rows;
+      assistingCrewList.map(row => {
+        row.name = `${row.firstName} ${row.lastName}`
+      })
+      console.log(assistingCrewList);
     }
     // let departmentList = await employee.get_department_listing()
     // if(departmentList.httpStatus==200){
@@ -325,13 +332,14 @@ const Railroad = () => {
     ]
 
     let departmentList = [
+      { id: 'All', title: 'All' },
       { id: 'Transportation', title: 'Transportation' },
       { id: 'Engineering', title: 'Engineering' },
       { id: 'Mechanical', title: 'Mechanical' }
     ]
 
     let currentUser = JSON.parse(storage.get('user_profile'))
-    setLists({ ...lists, users: userList, positions: jobCategoryList, departments: departmentList, sites: siteList, currentUser: currentUser })
+    setLists({ ...lists, users: userList, crews: assistingCrewList, assistants: assistingCrewList, positions: jobCategoryList, departments: departmentList, sites: siteList, currentUser: currentUser })
     return true
   }
   useEffect(async () => {
@@ -387,10 +395,12 @@ const Railroad = () => {
                           id="checkboxes-tags-demo"
                           value={railRoad.assisting}
                           onChange={(event, value) => { handleSubmitData(event, value, 4) }}
-                          options={lists.users}
+                          options={lists.assistants}
                           getOptionLabel={option => (option.name)}
                           renderInput={(params) => (
-                            <TextField required={true} {...params} variant="outlined" placeholder="Assisting" />
+                            <TextField
+                              // required={true} 
+                              {...params} variant="outlined" placeholder="Assisting" />
                           )}
                         />
                       </Grid>
@@ -603,7 +613,7 @@ const Railroad = () => {
                                   className="w100p"
                                   id="combo-box-name"
                                   name="name"
-                                  options={lists.users}
+                                  options={lists.crews}
                                   value={x.name}
                                   onChange={(e, value) => {
                                     handleInputChange('name', value, i)
@@ -634,9 +644,9 @@ const Railroad = () => {
                                 </Grid>
 
                                 <Grid xs={5} container justify="space-between" className="pl20">
-                                  <label className={(x.image == '') ? "PickBtn" : "PickBtnFileUploaded"} for={`crew${i}`} ></label>
+                                  <label className={(x.image == '') ? "PickBtn" : "PickBtnFileUploaded"} style={{ color: 'red' }} for={`crew${i}`} >*</label>
                                   <input
-                                    // required
+                                    required
                                     type="file"
                                     id={`crew${i}`}
                                     name="image"

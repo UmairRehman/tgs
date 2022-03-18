@@ -116,7 +116,21 @@ const Documents = () => {
         JSON.stringify(data)
       );
 
-      history.push('/documents/step/4');
+      history.push({
+          pathname: '/submission',
+          state: {
+              approved: false,
+              step: 1,
+              applyToStorage: {
+                  user_profile: {
+                      ...data,
+                      EmployeeStatusId: 3,
+                  }
+              }
+          }
+        })
+
+      // history.push('/submission');
     } catch (exc) {
       console.log(exc);
     }

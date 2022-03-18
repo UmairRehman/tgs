@@ -150,7 +150,7 @@
 }
 .LiqForms-Container .MainTable {
 	width:770px;
-    height: 1135px;
+    min-height: 100vh;
     overflow: hidden;
 	border: none;
 	margin: auto;
@@ -542,4 +542,16 @@ span.weldingCutting {
 }
 .mt-0 {
     margin-top: 0px!Important;
+}
+
+.custom-radio-disabled {
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border: 1px solid #888;
+    border-radius: 8px;
+}
+
+.custom-radio-disabled:checked {
+    background-color: #2963AD;
 }

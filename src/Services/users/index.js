@@ -111,3 +111,14 @@ export const allSubDepartmentsList = async (payload, headers) => {
         headers,
     )
 }
+
+export const retreiveSpecificForm = async (payload, headers) => {
+    const { employeeId } = payload;
+
+    return await api.get(
+        routes.applicant.retreiveForm
+            .concat(employeeId),
+        payload,
+        headers,
+    )
+}

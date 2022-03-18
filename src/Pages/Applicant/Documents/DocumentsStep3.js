@@ -207,12 +207,12 @@ const DocumentsStep3 = () => {
                     <Grid id="PageTitle" className="f16">Complete Onboarding Document</Grid>
                     {/* Page Start */}
                     <Grid xs={12} className="ContentPage ApplicantForms">
-                    <Grid xs={12} className="StepsLine Step2Line Step4Line">
+                    <Grid xs={12} className="StepsLine Step2Line Step3Line">
                             <List>
                                 <ListItem className="StepComplete">Step 1</ListItem>
                                 <ListItem className="StepComplete">Step 2</ListItem>
                                 <ListItem className="StepComplete">Step 3</ListItem>
-                                <ListItem className="StepComplete">Step 4</ListItem>
+                                <ListItem >Step 4</ListItem>
                             </List>
                         </Grid>
                         <Grid xs={12}>
@@ -221,7 +221,7 @@ const DocumentsStep3 = () => {
                                     You're required to fill out the following documents to complete your application
                                 </Typography>
                                 <Typography variant="h1" component="h2" className="bold f16 mt40">
-                                    Section 4
+                                    Section 3
                                 </Typography>
 
                                 <Link to="/documents/conditional-offer" target="_blank" className="DocDownload">
@@ -322,7 +322,7 @@ const DocumentsStep3 = () => {
                                     </Grid>
                                     <Button></Button>
                                 </a>
-                                <a href="/assets/forms/DISA_Final" target="blank" className="PDFDownload">
+                                <a href="/assets/forms/DISA_Final.pdf" target="blank" className="PDFDownload">
                                     <Grid className="FileName">
                                         DISA Forms
                                     </Grid>

@@ -34,6 +34,7 @@ const {
 
 const {
   showSnackBar,
+  getGenerator,
 } = helpers;
 
 const {
@@ -130,12 +131,24 @@ const DirectDeposit = () => {
       }
 
       // console.log("clickerd")
-      let canvas = await (html2canvas(document.querySelector('#capture')));
-      let image = (canvas.toDataURL('image/png'));
+      const captureElements = Array.from(
+        document.getElementsByClassName('capture')
+      );
 
+      const images = [];
+
+      for await (let i of getGenerator(captureElements.length)) {
+        const captureElement = captureElements[i];
+
+        let canvas = await (html2canvas(captureElement));
+
+        let image = (canvas.toDataURL('image/png'));
+
+        images.push(image);
+      }
 
       const resposne = await users.submitForm({
-        image: [image],
+        image: images,
         form: 10,
       });
 
@@ -162,7 +175,7 @@ const DirectDeposit = () => {
 
 
   return (
-    <Grid id="capture" container xs={12} className="LiqForms-Container">
+    <Grid container xs={12} className="LiqForms-Container">
       <Grid className={isPosting ? classes.DisplayNone : 'FormsHeader'}>
         <List>
           <ListItem>
@@ -185,7 +198,7 @@ const DirectDeposit = () => {
           </ListItem>
         </List>
       </Grid>
-      <TableContainer className="MainTable">
+      <TableContainer className="MainTable capture">
         <Table className="SecondMainTable">
           <TableRow>
             <TableCell>

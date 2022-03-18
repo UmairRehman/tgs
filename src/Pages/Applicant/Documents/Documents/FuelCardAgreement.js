@@ -33,6 +33,7 @@ const {
 
 const {
   showSnackBar,
+  getGenerator
 } = helpers;
 
 const {
@@ -94,17 +95,30 @@ useEffect( async () => {
       const nullCheck = Object.values(requiredFields)
         .reduce((total, accumulator) => total || !accumulator, false);
 
-      if (nullCheck) {
-        setPosting(true);
-        setError("field must be filed")
-        return showSnackBar("Kindly fill in all fields!");
+      // if (nullCheck) {
+      //   setPosting(true);
+      //   setError("field must be filed")
+      //   return showSnackBar("Kindly fill in all fields!");
+      // }
+
+      const captureElements = Array.from(
+        document.getElementsByClassName('capture')
+      );
+
+      const images = [];
+
+      for await (let i of getGenerator(captureElements.length)) {
+        const captureElement = captureElements[i];
+
+        let canvas = await (html2canvas(captureElement));
+
+        let image = (canvas.toDataURL('image/png'));
+
+        images.push(image);
       }
 
-      let canvas = await (html2canvas(document.querySelector('#capture')));
-      let image = (canvas.toDataURL('image/png'));
-
       const resposne = await users.submitForm({
-        image: [image],
+        image: images,
         form: 7,
       });
 
@@ -131,7 +145,7 @@ useEffect( async () => {
   }
 
   return (
-    <Grid id="capture" container xs={12} className="LiqForms-Container">
+    <Grid container xs={12} className="LiqForms-Container">
       {/* <FormHeader/> */}
       <Grid className={isPosting ? classes.DisplayNone : 'FormsHeader'}>
         <List>
@@ -155,7 +169,7 @@ useEffect( async () => {
           </ListItem>
         </List>
       </Grid>
-      <TableContainer className="MainTable">
+      <TableContainer className="MainTable capture">
         <Table className="SecondMainTable">
           <TableRow>
             <TableCell>

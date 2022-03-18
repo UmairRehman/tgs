@@ -43,16 +43,26 @@ const columns = [
 ];
 
 const employeeStatus = [
-   "Application For Approval" , //"Application Pending", //1 
-   "Application Approved" , //"Application Approved", //2 
-   "Application Rejected " , //"Application Rejected", //3 
-   "Questionnaire Submit" , //"Questionnaire Pending", //4 
-   "PDF Documents Submit" , //"Questionnaire Approved", //5 
-   "Documents For Submit" , //"Questionnaire Rejected", //6 
-   "Documents Approve" , //"PDF Forms , Submitted", //8 
-   "Post Conditional Doc Pending" , //"Documents Submitted", //7 
-   "Documents Rejected" , //"PDF Forms , Submitted", //8 
-   "Employee" //9
+  //  "Application For Approval" , //"Application Pending", //1 
+  //  "Application Approved" , //"Application Approved", //2 
+  //  "Application Rejected " , //"Application Rejected", //3 
+  //  "Questionnaire Submit" , //"Questionnaire Pending", //4 
+  //  "PDF Documents Submit" , //"Questionnaire Approved", //5 
+  //  "Documents For Submit" , //"Questionnaire Rejected", //6 
+  //  "Documents Approve" , //"PDF Forms , Submitted", //8 
+  //  "Post Conditional Doc Pending" , //"Documents Submitted", //7 
+  //  "Documents Rejected" , //"PDF Forms , Submitted", //8 
+  //  "Employee" //9
+   "Application Submit" , //"Application Pending", //1 
+   "Questionnaire & Docs Submit" , //"Application Approved", //2 
+   "Application for Approval" , //"Application Rejected", //3 
+   "Application Approved" , //"Questionnaire Pending", //4 
+   "Application Rejected", //5
+   "Conditional Docs Pending" , //"Questionnaire Approved", //6 
+   "Conditional Docs for Approval" , //"Questionnaire Rejected", //7 
+   "PDF Docs Pending" , //"PDF Forms , Submitted", //8 
+   "Conditional Docs Rejected" , //"Documents Submitted", //9 
+   "Employee" //10
 ]
 
 const NewHireQueue = () => {
@@ -100,7 +110,7 @@ const NewHireQueue = () => {
 
   function onClickView(value){
 
-    if(value.EmployeeStatusId == 1){
+    if(value.EmployeeStatusId == 3){
       history.push({
         pathname : "/new-hire-queue/details",
         state: value
@@ -176,7 +186,7 @@ const NewHireQueue = () => {
                                         ? column.format(value)
                                         : value} */}
                                       {column.type == "edit" ? (
-                                        applicantData?.EmployeeStatusId == 1 || applicantData?.EmployeeStatusId == 6 ?
+                                        applicantData?.EmployeeStatusId == 3 || applicantData?.EmployeeStatusId == 6 ?
                                         <Button onClick={()=>onClickView(applicantData)} className="ViewIcon" ></Button>
                                         :null
                                       ) : column.type == "view" ? (

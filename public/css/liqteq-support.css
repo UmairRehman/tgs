@@ -2301,6 +2301,56 @@ background-color: #2963AD !important;
     text-transform: capitalize !important;
 }
 
-.safety-testing-add-button {
-    width: 18rem!important;
+.employees-list {
+    border: 2px dotted gray;
+    border-radius: 5px;
+    padding: 1rem;
+    margin: 1rem 0px;
+}
+
+.files-tag-container {
+    flex-direction: row!important;
+    justify-content: start!important;
+    align-items: flex-start!important;
+}
+
+.files-tag {
+    height: 50px;
+    border: 1px dotted #000;
+    width: 200px;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 5px;
+    box-shadow: 1px 1px 8px -4px #000;
+    cursor: pointer!important;
+    transition: box-shadow 300ms;
+    text-overflow: ellipsis!important;
+    border: 1px solid;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.files-tag:hover {
+    box-shadow: 1px 1px 5px -6px #000;
+}
+
+.justify-content-end {
+    justify-content: end!important;
+}
+
+.min-width-auto {
+    min-width: auto!important;
+}
+
+.dustbinBtn-size-auto-100 {
+    height: 20px!important;
+    width: 20px!important;
+}
+
+.position-absolute {
+    position: absolute;
+}
+
+.r-0 {
+    right: 0px;
 }

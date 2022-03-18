@@ -80,7 +80,23 @@ const TWICCardPaymentAgreement = () => {
       ssn: res?.employee?.ssn || '',
     }
     setUserData(data)
-    console.log(data)
+
+    const { payDetails } = localStorage;
+
+    if (payDetails) {
+      const {
+        pay: {
+          PayType: { name: salaryType }
+        },
+        position: {
+          EffectiveDate
+        }
+      } = JSON.parse(payDetails);
+
+      setHireDate(
+        new Date(EffectiveDate)
+      );
+    }
   }, [])
 
   async function submit() {
@@ -191,6 +207,7 @@ const TWICCardPaymentAgreement = () => {
                       value={hireDate}
                       id="offerDate"
                       className="datePickerReact pr0 pl0"
+                      disabled
                     />
                   </TableCell>
                 </TableRow>
@@ -230,6 +247,22 @@ const TWICCardPaymentAgreement = () => {
                 <TableRow className="w100 mt20 mb20">
                   <TableCell className="w30">
                     <input type="text" name="textfield" id="representative" className="w100 h18 pl8 bn bb mb10 signatureClass font-20"
+                      value={
+                        (() => {
+                          const {
+                            AEmployee = {
+                              firstName: '',
+                              lastName: '',
+                            }
+                          } = JSON.parse(
+                            localStorage.user_profile || {}
+                          );
+
+                          const { firstName, lastName } = AEmployee;
+
+                          return `${firstName} ${lastName}`;
+                        })() || ''
+                      }
                       disabled />
                     Company Representative
                   </TableCell>
@@ -239,6 +272,7 @@ const TWICCardPaymentAgreement = () => {
                   <TableCell className="w30">
                     <input type="text" name="textfield"
                       id="offerDate" className="w100 h18 pl8 bn bb mb10 signatureClass font-20"
+                      value={signDate}
                       onChange={($e) => { setSignDate($e?.target?.value) }}
                       disabled />
                     {/* <DatePicker

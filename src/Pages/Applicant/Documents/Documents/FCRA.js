@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Grid, TableContainer, Table, TableCell, TableRow, Button, List, ListItem
 } from "@material-ui/core";
@@ -34,6 +34,7 @@ const {
 
 const {
   showSnackBar,
+  getGenerator
 } = helpers;
 
 const {
@@ -63,21 +64,21 @@ const FCRA = () => {
   const [companyDate, setCompanyDate] = useState(new Date())
 
   const [userData, setUserData] = useState({
-    firstName : '',
-      middleName : '',
-      lastName: '',
+    firstName: '',
+    middleName: '',
+    lastName: '',
   })
- useEffect( async () => {
-    let userProfile = await  JSON.parse(localStorage.user_profile);
-    let res = await hr.getAllApplicantsByID({ id : userProfile.id})
+  useEffect(async () => {
+    let userProfile = await JSON.parse(localStorage.user_profile);
+    let res = await hr.getAllApplicantsByID({ id: userProfile.id })
     let data = {
-      firstName : res?.employee?.firstName || '',
-      middleName : res?.employee?.middleName || '',
+      firstName: res?.employee?.firstName || '',
+      middleName: res?.employee?.middleName || '',
       lastName: res?.employee?.lastName || '',
     }
     setUserData(data)
     console.log(data)
-  
+
   }, [])
 
   async function submit() {
@@ -102,12 +103,24 @@ const FCRA = () => {
         return showSnackBar("Kindly fill in all the fields")
       }
       // console.log("clickerd")
-      let canvas = await (html2canvas(document.querySelector('#capture')));
-      let image = (canvas.toDataURL('image/png'));
+      const captureElements = Array.from(
+        document.getElementsByClassName('capture')
+      );
 
+      const images = [];
+
+      for await (let i of getGenerator(captureElements.length)) {
+        const captureElement = captureElements[i];
+
+        let canvas = await (html2canvas(captureElement));
+
+        let image = (canvas.toDataURL('image/png'));
+
+        images.push(image);
+      }
 
       const resposne = await users.submitForm({
-        image: [image],
+        image: images,
         form: 11,
       });
 
@@ -133,7 +146,7 @@ const FCRA = () => {
   }
 
   return (
-    <Grid id="capture" container xs={12} className="LiqForms-Container">
+    <Grid container xs={12} className="LiqForms-Container">
       <Grid className={isPosting ? classes.DisplayNone : 'FormsHeader'}>
         <List>
           <ListItem>
@@ -156,7 +169,7 @@ const FCRA = () => {
           </ListItem>
         </List>
       </Grid>
-      <TableContainer className="MainTable">
+      <TableContainer className="MainTable table capture">
         <Table className="SecondMainTable">
           <TableRow>
             <TableCell>
@@ -249,15 +262,31 @@ const FCRA = () => {
                         Signature <input type="text" name="textfield" id="signature" className="w pl8 bn bb signatureClass font-20" />
                       </TableCell>
                       <TableCell className="w100 row pl16">
-                        Printed Name <input type="text" name="textfield" id="name" className="w pl8 bn bb input-capitalization" 
-                        value={`${userData.firstName} ${userData.lastName}`}
-                        disabled />
+                        Printed Name <input type="text" name="textfield" id="name" className="w pl8 bn bb input-capitalization"
+                          value={`${userData.firstName} ${userData.lastName}`}
+                          disabled />
                       </TableCell>
                     </TableRow>
                     <TableRow className="w100 row mt20">
                       <TableCell className="w100 row pr16">
                         Witness Signature
                         <input type="text" name="textfield" id="witnessSignature" className="w pl8 bn bb signatureClass font-20"
+                          value={
+                            (() => {
+                              const {
+                                AEmployee = {
+                                  firstName: '',
+                                  lastName: '',
+                                }
+                              } = JSON.parse(
+                                localStorage.user_profile || {}
+                              );
+
+                              const { firstName, lastName } = AEmployee;
+
+                              return `${firstName} ${lastName}`;
+                            })()
+                          }
                           disabled />
                       </TableCell>
                       <TableCell className="w100 row pl16">
@@ -287,7 +316,7 @@ const FCRA = () => {
       </TableContainer>
 
       {/* ------------------------------------------------------------------------------------------ */}
-      <Grid xs={12} className="pageBreak">
+      <Grid xs={12} className="pageBreak capture">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 mt20">
@@ -394,7 +423,7 @@ const FCRA = () => {
       </Grid>
 
       {/* ------------------------------------------------------------------------------------------ */}
-      <Grid xs={12} className="pageBreak">
+      <Grid xs={12} className="pageBreak capture">
         <TableContainer className="MainTable">
           <Table className="SecondMainTable">
             <TableRow className="w100 mt20">

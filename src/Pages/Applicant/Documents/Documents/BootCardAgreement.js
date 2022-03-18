@@ -33,6 +33,7 @@ const {
 
 const {
   showSnackBar,
+  getGenerator
 } = helpers;
 
 const {
@@ -98,11 +99,21 @@ const BootCardAgreement = () => {
     try {
       setPosting(true);
 
-      // console.log("clickerd")
-      let canvas = await (html2canvas(document.querySelector('#capture')));
-      let image = (canvas.toDataURL('image/png'))
-      setPDFImage(image)
-      // console.log(image)
+      const captureElements = Array.from(
+        document.getElementsByClassName('capture')
+      );
+
+      const images = [];
+
+      for await (let i of getGenerator(captureElements.length)) {
+        const captureElement = captureElements[i];
+
+        let canvas = await (html2canvas(captureElement));
+
+        let image = (canvas.toDataURL('image/png'));
+
+        images.push(image);
+      }
 
       let data = {
         id: "id",
@@ -132,7 +143,7 @@ const BootCardAgreement = () => {
         confedential: document.getElementById('confedential').value,
         signature: document.getElementById('signature').value,
         formDate: formDate,
-        PDFimage: image
+        PDFimage: images
       }
 
       const nullCheck = Object.values(data)
@@ -147,7 +158,7 @@ const BootCardAgreement = () => {
       }
 
       const resposne = await users.submitForm({
-        image: [image],
+        image: images,
         form: 8,
       });
 
@@ -179,7 +190,7 @@ const BootCardAgreement = () => {
 
 
   return (
-    <Grid id="capture" container xs={12} className="LiqForms-Container">
+    <Grid container xs={12} className="LiqForms-Container">
       {/* <form 
         method="get"
         action={submit} 
@@ -210,7 +221,7 @@ const BootCardAgreement = () => {
           </ListItem>
         </List>
       </Grid>
-      <TableContainer className="MainTable">
+      <TableContainer className="MainTable capture">
         <Table className="SecondMainTable">
           <TableRow>
             <TableCell>
@@ -361,11 +372,11 @@ const BootCardAgreement = () => {
                     Medical Bills
                   </TableCell>
                   <TableCell className="w10 row">
-                    <input required value="yes" id="bills" type="radio" name="mb" className="mr6 mt2" />
+                    <input required value="yes" id="bills" type="radio" name="medicalBills" className="mr6 mt2" />
                     Yes
                   </TableCell>
                   <TableCell className="w10 row">
-                    <input required value="No" id="bills" type="radio" name="mb" className="mr6 mt2" />
+                    <input required value="No" id="bills" type="radio" name="medicalBills" className="mr6 mt2" />
                     No
                   </TableCell>
                   <TableCell className="w row">
