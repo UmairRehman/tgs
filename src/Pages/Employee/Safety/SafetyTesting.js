@@ -164,6 +164,70 @@ const SafetyTesting = () => {
   useEffect(async () => {
     await getlistEvents()
   }, []);
+  const tableCheckRides = (columns) => (
+    <TableContainer>
+      <Table aria-label="table">
+        <TableHead>
+          <TableRow>
+            {columns.map((column) => (
+              <TableCell
+                className="bold f16"
+                key={column.id}
+                align={column.align}
+                style={{ minWidth: column.minWidth }}
+              >
+                {column.label}
+              </TableCell>
+            ))}
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {rows
+            .map((row) => {
+              return (
+                <TableRow
+                  hover
+                  role="checkbox"
+                  tabIndex={-1}
+                  key={row.code}
+                >
+                  {columns.map((column) => {
+                    const value = row[column.id];
+                    return (
+                      <TableCell
+                        key={column.id}
+                        align={column.align}
+                      >
+                        {/* {column.format &&
+                      typeof value === "number"
+                        ? column.format(value)
+                        : value} */}
+                        {column.type == "edit" ? (
+                          <Link
+                            // onClick={()=>handleAddRule(row.id)} 
+                            to={{
+                              pathname: "/add-event-rules",
+                              state: { eventID: row.id }
+                            }}
+                            className="EditIcon">
+                          </Link>
+                        ) : column.type == "view" ? (
+                          <Button onClick={() => handleClickOpen(row.id)} className="ViewIcon"></Button>
+                        ) : (
+                          value
+                        )}
+                      </TableCell>
+                    );
+                  })}
+                </TableRow>
+              );
+            })}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+
+
 
   const tableContainer = (columns) => (
     <TableContainer>
@@ -253,7 +317,7 @@ const SafetyTesting = () => {
                 Enter Railroad Test Event
               </button>
               <button
-                onClick={handleAddEvent.bind(null, 'enter-railroad-event', 1)}
+                onClick={handleAddEvent.bind(null, 'enter-check-ride', 1)}
                 class="LinkButton mx-2 safety-testing-add-button">
                 Enter Checkride
               </button>
@@ -268,7 +332,7 @@ const SafetyTesting = () => {
                     tabState={tabState}
                     tabDetails={[
                       { label: 'Testing Events', content: tableContainer(columns) },
-                      { label: 'Check Rides', content: 'Under Progress' }
+                      { label: 'Check Rides', content: tableCheckRides(columns) }
                     ]}
                   ></TabsComponent>
                   <TablePagination

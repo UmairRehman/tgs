@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Select from 'react-select';
 import {
   Grid,
   Button,
@@ -58,6 +59,29 @@ const addresscol = [
   { id: "zip", label: "Zip Code", minWidth: 100, type: "value" },
   { id: "ed", label: "Edit", minWidth: 50, type: "edit" }
 ];
+
+const Lisencecertificate=[
+  { label: "Conductor", value: 1 },
+  { label: "Student Engineer", value: 2 },
+  { label: "Engineer", value: 3 },
+  { label: "Qualified Engineer", value: 4 },
+  { label: "Aerial Lift", value: 5 },
+  { label: "Backhoe", value: 6 },
+  { label: "Backhoe with Forks", value: 7 },
+  { label: "Compactor", value: 8 },
+  { label: "Dozer", value: 9 },
+  { label: "Drump Truck", value: 10 },
+  { label: "Excavator", value: 11},
+  { label: "Forklift", value: 12 },
+  { label: "FrontEnd Loader", value: 13 },
+  { label: "FrontEnd Loader with Forks", value: 14 },
+  { label: "Grader", value: 15 },
+  { label: "Regualator", value: 16 },
+  { label: "Rigger", value: 17 },
+  { label: "Tamper", value: 18 },
+  { label: "Truck Mounted Services Crane", value: 19 },
+
+]
 
 // Second Table
 const PayCol = [
@@ -1273,6 +1297,17 @@ const EmployeeResult = (props) => {
                 <Grid xs={12} className="pl14">License Certificate</Grid>
                 <TextField id="outlined-basic" required value={updatedCertificateName} onChange={(e) => setUpdatedCertificateName(e.target.value)} variant="outlined" className="w100p" />
               </Grid>
+
+              <Grid xs={12} className="mbold mt30">
+                <Grid xs={12} className="pl14">License Certificate List</Grid>
+                <Grid xs={12} className="mt14">
+                 <Select options={Lisencecertificate}/>
+                </Grid>
+                {/* <TextField id="outlined-basic" required value={updatedCertificateName} onChange={(e) => setUpdatedCertificateName(e.target.value)} variant="outlined" className="w100p" /> */}
+              </Grid>
+
+
+
               <Grid xs={12} className="mbold mt30 DatePickerCss">
                 <Grid xs={12} className="pl14">Issue Date</Grid>
                 <TextField
