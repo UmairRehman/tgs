@@ -988,6 +988,23 @@ li.LogOutIcon:hover:before {
     text-decoration: none !important;
     cursor: pointer;
 }
+
+
+.ButtonLink {
+    border: 0px;
+    min-width: 160px !important;
+    border-radius: 8px !important;
+    padding: 16px 40px !important;
+    background: #2963AD !important;
+    color: white !important;
+    text-decoration: none !important;
+    cursor: pointer;
+    margin-right: 20px!important;
+}
+.icon-size{
+    font-size: 20px;
+    margin-left: 5px;
+}
 .LinkButton:disabled {
     background-color: #ddd!important;
     color: #222!important;

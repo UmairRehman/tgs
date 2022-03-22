@@ -161,9 +161,33 @@ const SafetyTesting = () => {
 
     }
   }
+  const getcheckRide = async (offset = 0, limit = 10) => {
+    let params = '?'.concat(seriliazeParams({ offset, limit }))
+    try {
+      let data = await employee.get_checkride_table({ params });
+      if (process.env.NODE_ENV === 'development')
+        console.log(data);;
+
+      if (data.httpStatus == 200) {
+        data = data.data
+        data.forEach(element => {
+          element.date = moment(new Date(element.date)).format('DD-MM-YYYY')
+          element.time = element.time.slice(0, -3)
+          element.locationAdded = element.TGSLocation.name
+          element.rulesCount = element.TestEventRules.length
+        });
+        setRows(data)
+      }
+    } catch (error) {
+      console.log(error);
+
+    }
+  }
   useEffect(async () => {
     await getlistEvents()
+    await getcheckRide()
   }, []);
+  
   const tableCheckRides = (columns) => (
     <TableContainer>
       <Table aria-label="table">

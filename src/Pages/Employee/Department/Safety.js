@@ -1,4 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
+import {DownloadOutlined } from '@ant-design/icons';
+import { Row, Col } from 'antd';
 import {
   Grid,
   Table,
@@ -16,7 +18,7 @@ import { Link } from "react-router-dom";
 import PageHeader from '../../../Components/PageHeader';
 import LeftControl from '../../../Components/LeftControl';
 import MobileScreen from './Mobile/Safety';
-import {isMobile} from 'react-device-detect';
+import { isMobile } from 'react-device-detect';
 import Services from '../../../Services'
 
 const {
@@ -36,47 +38,49 @@ const Safety = () => {
   };
 
   const [rows, setRows] = useState([])
-  const getContacts = async ()=>{
+  const getContacts = async () => {
     //hr id = 5 but no data right now
-    let data = await employee.department_contact_list({id:1})
-    
-    return (data?.httpStatus ==200) ? data.data : new Error ('api failed to fetch contacts')
+    let data = await employee.department_contact_list({ id: 1 })
+
+    return (data?.httpStatus == 200) ? data.data : new Error('api failed to fetch contacts')
 
   }
   useEffect(() => {
     console.log(rows)
   }, [rows])
-  useEffect( async () => {
+  useEffect(async () => {
     try {
       let result = await getContacts()
-      if(result)
+      if (result)
         setRows(result)
     } catch (error) {
       console.log(error);
     }
   }, [])
 
-  if(isMobile) {
+  if (isMobile) {
     return (
-        <MobileScreen />
+      <MobileScreen />
     )
   }
   return (
-    <Grid container xs={12} className="Liq-Container">
+    <Grid container xs={12} md={24} className="Liq-Container">
       <Grid xs={12} md={2} className="LeftContol" id="LeftContol">
         <LeftControl />
       </Grid>
-      <Grid xs={12} md={10} container justify="center" className="PageContent">
+
+
+      <Grid xs={10} md={10} container justify="center" className="PageContent">
         <Grid className="PagesFrame">
           <PageHeader />
           <Grid id="PageTitle">Department</Grid>
           {/* Page Start */}
           <Grid xs={12} className="ContentPage FormTableArea">
             <Grid xs={12} sm={12} md={6} lg={6}>
-              
+
               <Grid xs={12} container>
                 <Grid xs={6} className="mbold">
-                Safety
+                  Safety
                 </Grid>
                 {/* <Grid xs={6} container justify="flex-end">
                   <Button aria-controls="ContactSubMenu" className="MoreLinkIcon" aria-haspopup="true" onClick={handleClick}>
@@ -104,34 +108,63 @@ const Safety = () => {
                 </Grid> */}
               </Grid>
               <Grid xs={12} className="mt14 ContactTable">
-              <Paper>
+                <Paper>
                   <TableContainer>
                     <Table>
                       <TableHead>
                         <TableRow>
-                            <TableCell>Name</TableCell>
-                            <TableCell>Title</TableCell>
-                            <TableCell>Number</TableCell>
+                          <TableCell>Name</TableCell>
+                          <TableCell>Title</TableCell>
+                          <TableCell>Number</TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                             {
-                                (rows) &&
-                                rows.map(row=>{
-                                  return(
-                                    <TableRow>
-                                      <TableCell>
-                                        {`${row.name}`}
-                                      </TableCell>
-                                      <TableCell>
-                                      {`${row.title}`}
-                                      </TableCell>
-                                      <TableCell>
-                                      {`${row.phone}`}
-                                      </TableCell>
-                                  </TableRow>
-                                )})
-                              }
+                        {
+                          (rows) &&
+                          rows.map(row => {
+                            return (
+                              <TableRow>
+                                <TableCell>
+                                  {`${row.name}`}
+                                </TableCell>
+                                <TableCell>
+                                  {`${row.title}`}
+                                </TableCell>
+                                <TableCell>
+                                  {`${row.phone}`}
+                                </TableCell>
+                              </TableRow>
+                            )
+                          })
+                        }
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+                </Paper>
+              </Grid>
+            </Grid>
+
+
+            <Grid xs={12} sm={12} md={5} lg={5}>
+
+              <Grid xs={12} container>
+                <Grid xs={6} className="mbold">
+                  Download PDF file
+                </Grid>
+  
+              </Grid>
+              <Grid xs={12} className="mt14 ContactTable">
+                <Paper>
+                  <TableContainer>
+                    <Table>
+                      <TableHead>
+                        <TableRow>
+                        
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                       <Button  className='ButtonLink' > Transportation Rule Book  <DownloadOutlined className='icon-size'  /></Button>
+                       <Button className='ButtonLink' >Engineering Rule Book <DownloadOutlined className='icon-size'  /> </Button>
                       </TableBody>
                     </Table>
                   </TableContainer>
@@ -140,9 +173,25 @@ const Safety = () => {
             </Grid>
           </Grid>
           {/* Page Start End */}
+
+
+
+          {/* Page Start */}
+
+          {/* Page Start End */}
         </Grid>
       </Grid>
+
+
+
+
+
+
+
+
     </Grid>
+
+
   );
 }
 
