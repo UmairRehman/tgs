@@ -148,18 +148,88 @@ const EnterCheckRide = () => {
     const apiBody = async () => {
         let EngineerId = railRoad.engineerId
         let locomotiveConsist = document.getElementById('locomotiveConsist').value
-        console.log(EngineerId , locomotiveConsist)
+       
         let TCLoads= document.getElementById('TCLoads').value
+        let TCEmpties= document.getElementById('TCEmpties').value
+        let TCTotalTonage= document.getElementById('TCTotalTonage').value
+        let TMTraveled= document.getElementById('TMTraveled').value
+        let LLOA= document.getElementById('LLOA').value
+        let LLOB= document.getElementById('LLOB').value
+        let LLOC= document.getElementById('LLOC').value
+        let ABOA= document.getElementById('ABOA').value
+        let ABOB= document.getElementById('ABOB').value
+        let ABOC= document.getElementById('ABOC').value
+        let ABOD= document.getElementById('ABOD').value
+        let DBOA= document.getElementById('DBOA').value
+        let DBOB= document.getElementById('DBOB').value
+        let DBOC= document.getElementById('DBOC').value
+        let IBA= document.getElementById('IBA').value
+        let IBB= document.getElementById('IBB').value
+        let MA= document.getElementById('MA').value
+        let MB= document.getElementById('MB').value
+        let RTA= document.getElementById('RTA').value
+        let RTB= document.getElementById('RTB').value
+        let RTC= document.getElementById('RTC').value
+        let DPA= document.getElementById('DPA').value
+        let DPB= document.getElementById('DPB').value
+        let DPC= document.getElementById('DPC').value
+        let DICS= document.getElementById('DICS').value
+        let LMA= document.getElementById('LMA').value
+        let LMB= document.getElementById('LMB').value
+        let LMC= document.getElementById('LMC').value
+        let LMD= document.getElementById('LMD').value
+        let LME= document.getElementById('LME').value
+        let LMF= document.getElementById('LMF').value
+        let ORA= document.getElementById('ORA').value
+        let ORB= document.getElementById('ORB').value
+        let ORC= document.getElementById('ORC').value
+        let ORD= document.getElementById('ORD').value
+        let ORE= document.getElementById('ORE').value
+        let ORF= document.getElementById('ORF').value
+        let ORG= document.getElementById('ORG').value
+        let ORH= document.getElementById('ORH').value
+        let ORI= document.getElementById('ORI').value
+        let ORJ= document.getElementById('ORJ').value
+        let THA= document.getElementById('THA').value
+        let THB= document.getElementById('THB').value
+        let THC= document.getElementById('THC').value
+        let THD= document.getElementById('THD').value
+        let THE= document.getElementById('THE').value
+        let THF= document.getElementById('THF').value
+        let THG= document.getElementById('THG').value
+        let THH= document.getElementById('THH').value
+        let THI= document.getElementById('THI').value
+        let THJ= document.getElementById('THJ').value
+        let THK= document.getElementById('THK').value
+        let THL= document.getElementById('THL').value
+        let THM= document.getElementById('THM').value
+        let THN= document.getElementById('THN').value
+        let THO= document.getElementById('THO').value
+        let THP= document.getElementById('THP').value
+        let Comments= document.getElementById('Comments').value
+        let date= document.getElementById('date').value
+        let time= document.getElementById('time').value
+
+
+
+
+
+
+        console.log(EngineerId , locomotiveConsist,TCLoads,TCEmpties,TCTotalTonage,TMTraveled,
+            LLOA,LLOB,LLOC,ABOA,ABOB,ABOC,ABOD,DBOA,DBOB,DBOC,IBA,IBB,MA,MB.RTA,RTB,RTC,DPA,DPB,DPC,DICS,
+            LMA,LMB,LMC,LMD,LME,LMF,ORA,ORB,ORC,ORD,ORE,ORF,ORG,ORH,ORI,ORJ,THA,THB,THC,THD,THE,THF,THG,THH,THI,
+            THJ,THK,THL,THM.THN.THO,THP,Comments,date,time,IBB,THP)
+
         // let [latitude, longitude] = GPS.split(',')
         // let jobId = document.getElementById('jobId').value
         // let { crewMembers } = railRoad
         // let crewMembersData = []
         // crewMembers.forEach((row) => {
-        //     if (row.name && row.position)
-        //         crewMembersData.push({ id: row.name.id, position: row.position.id, image: row.image })
-        //     else
-        //         throw Error("Images missing")
-        // })
+            //     if (row.name && row.position)
+            //         crewMembersData.push({ id: row.name.id, position: row.position.id, image: row.image })
+            //     else
+            //         throw Error("Images missing")
+            // })
         // let data = {
         //     primaryId: lists.currentUser.id,
         //     assistingId: railRoad.assisting.id,
@@ -445,7 +515,7 @@ const EnterCheckRide = () => {
                                             </Grid>
                                             <Grid xs={12} className="mt14">
 
-                                                <TextField required={false} id="outlined-basic" type='number' label="" variant="outlined" className="w100p" />
+                                                <TextField required={false} id="TCEmpties" type='number' label="" variant="outlined" className="w100p" />
                                             </Grid>
                                         </Grid>
                                     </Grid>
@@ -458,7 +528,7 @@ const EnterCheckRide = () => {
                                             </Grid>
                                             <Grid xs={12} className="mt14">
 
-                                                <TextField required={false} id="outlined-basic" type='number' label="" variant="outlined" className="w100p" />
+                                                <TextField required={false} id="TCTotalTonage" type='number' label="" variant="outlined" className="w100p" />
                                             </Grid>
                                         </Grid>
                                     </Grid>
@@ -471,7 +541,7 @@ const EnterCheckRide = () => {
                                             </Grid>
                                             <Grid xs={12} className="mt14">
 
-                                                <TextField required={false} id="outlined-basic" type='number' label="" variant="outlined" className="w100p" />
+                                                <TextField required={false} id="TMTraveled" type='number' label="" variant="outlined" className="w100p" />
                                             </Grid>
                                         </Grid>
                                     </Grid>
@@ -486,9 +556,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="LLOA" value='YES' type="radio" name='' /> Yes
+                                                <input id="LLOA" value='NO' type="radio" name='' /> No
+                                                <input id="LLOA" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -503,9 +573,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="LLOB" value='YES' type="radio" name='' /> Yes
+                                                <input id="LLOB" value='NO' type="radio" name='' /> No
+                                                <input id="LLOB" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -520,9 +590,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="LLOC" value='YES' type="radio" name='' /> Yes
+                                                <input id="LLOC" value='NO' type="radio" name='' /> No
+                                                <input id="LLOC" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -537,9 +607,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="ABOA" value='YES' type="radio" name='' /> Yes
+                                                <input id="ABOA" value='NO' type="radio" name='' /> No
+                                                <input id="ABOA" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -553,9 +623,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="ABOB" value='YES' type="radio" name='' /> Yes
+                                                <input id="ABOB" value='NO' type="radio" name='' /> No
+                                                <input id="ABOB" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -571,30 +641,14 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="ABOC" value='YES' type="radio" name='' /> Yes
+                                                <input id="ABOC" value='NO' type="radio" name='' /> No
+                                                <input id="ABOC" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
                                     </Grid>
 
-
-                                    <Grid xs={12}>
-                                        <Grid xs={12} className="mt30">
-                                            <Grid xs={12} className="mbold">
-
-                                                Automatic Brake Ops-C) Release Procedure
-
-                                            </Grid>
-                                            <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
-
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
 
 
                                     <Grid xs={12}>
@@ -605,9 +659,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="ABOD" value='YES' type="radio" name='' /> Yes
+                                                <input id="ABOD" value='NO' type="radio" name='' /> No
+                                                <input id="ABOD" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -621,9 +675,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="DBOA" value='YES' type="radio" name='' /> Yes
+                                                <input id="DBOA" value='NO' type="radio" name='' /> No
+                                                <input id="DBOA" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -638,9 +692,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="DBOB" value='YES' type="radio" name='' /> Yes
+                                                <input id="DBOB" value='NO' type="radio" name='' /> No
+                                                <input id="DBOB" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -655,9 +709,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="DBOC" value='YES' type="radio" name='' /> Yes
+                                                <input id="DBOC" value='NO' type="radio" name='' /> No
+                                                <input id="DBOC" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -669,13 +723,13 @@ const EnterCheckRide = () => {
                                             <Grid xs={12} className="mbold">
 
                                                 Independent Brake-A) Application (1 pt)
-                                                Independent Brake-B) Release (1 pt)
+                                                
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="IBA" value='YES' type="radio" name='' /> Yes
+                                                <input id="IBA" value='NO' type="radio" name='' /> No
+                                                <input id="IBA" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -690,30 +744,16 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="IBB" value='YES' type="radio" name='' /> Yes
+                                                <input id="IBB" value='NO' type="radio" name='' /> No
+                                                <input id="IBB" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
                                     </Grid>
 
 
-                                    <Grid xs={12}>
-                                        <Grid xs={12} className="mt30">
-                                            <Grid xs={12} className="mbold">
-
-                                                Independent Brake-B) Release (1 pt)
-
-                                            </Grid>
-                                            <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
-
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
+                        
 
 
                                     <Grid xs={12}>
@@ -724,9 +764,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="MA" value='YES' type="radio" name='' /> Yes
+                                                <input id="MA" value='NO' type="radio" name='' /> No
+                                                <input id="MA" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -742,9 +782,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="MB" value='YES' type="radio" name='' /> Yes
+                                                <input id="MB" value='NO' type="radio" name='' /> No
+                                                <input id="MB" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -760,9 +800,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="RTA" value='YES' type="radio" name='' /> Yes
+                                                <input  id="RTA" value='NO' type="radio" name='' /> No
+                                                <input id="RTA" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -777,9 +817,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="RTB"value='YES' type="radio" name='' /> Yes
+                                                <input id="RTB" value='NO' type="radio" name='' /> No
+                                                <input id="RTB" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -795,9 +835,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="RTC" value='YES' type="radio" name='' /> Yes
+                                                <input id="RTC" value='NO' type="radio" name='' /> No
+                                                <input id="RTC" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -814,15 +854,12 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="DPA" value='YES' type="radio" name='' /> Yes
+                                                <input id="DPA" value='NO' type="radio" name='' /> No
+                                                <input id="DPA" value='N/A' type="radio" name='' /> N/A
 
 
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
-
+                                                
                                             </Grid>
                                         </Grid>
                                     </Grid>
@@ -837,9 +874,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="DPB" value='YES' type="radio" name='' /> Yes
+                                                <input id="DPB" value='NO' type="radio" name='' /> No
+                                                <input id="DPB "value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -855,9 +892,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="DPC" value='YES' type="radio" name='' /> Yes
+                                                <input id="DPC" value='NO' type="radio" name='' /> No
+                                                <input id="DPC" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -872,9 +909,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="DICS" value='YES' type="radio" name='' /> Yes
+                                                <input id="DICS" value='NO' type="radio" name='' /> No
+                                                <input id="DICS" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -888,9 +925,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="LMA" value='YES' type="radio" name='' /> Yes
+                                                <input id="LMA" value='NO' type="radio" name='' /> No
+                                                <input id="LMA" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -904,9 +941,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="LMB" value='YES' type="radio" name='' /> Yes
+                                                <input id="LMB" value='NO' type="radio" name='' /> No
+                                                <input id="LMB" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -917,13 +954,13 @@ const EnterCheckRide = () => {
                                             <Grid xs={12} className="mbold">
 
                                                 Locomotive Management – C) Sand (1 pt)
-                                                Locomotive Management – D) Short Time Rating (1 pt)
+                                              
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="LMC" value='YES' type="radio" name='' /> Yes
+                                                <input id="LMC" value='NO' type="radio" name='' /> No
+                                                <input id="LMC" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -938,9 +975,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="LMD" value='YES' type="radio" name='' /> Yes
+                                                <input id="LMD" value='NO' type="radio" name='' /> No
+                                                <input id="LMD" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -955,9 +992,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="LME" value='YES' type="radio" name='' /> Yes
+                                                <input id="LME" value='NO' type="radio" name='' /> No
+                                                <input id="LME" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -972,9 +1009,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="LMF" value='YES' type="radio" name='' /> Yes
+                                                <input id="LMF" value='NO' type="radio" name='' /> No
+                                                <input id="LMF" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -989,9 +1026,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="ORA" value='YES' type="radio" name='' /> Yes
+                                                <input id="ORA" value='NO' type="radio" name='' /> No
+                                                <input id="ORA" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1007,9 +1044,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="ORB" value='YES' type="radio" name='' /> Yes
+                                                <input id="ORB" value='NO' type="radio" name='' /> No
+                                                <input id="ORB" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1026,9 +1063,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="ORC" value='YES' type="radio" name='' /> Yes
+                                                <input id="ORC" value='NO' type="radio" name='' /> No
+                                                <input id="ORC" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1045,9 +1082,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="ORD" value='YES' type="radio" name='' /> Yes
+                                                <input id="ORD" value='NO' type="radio" name='' /> No
+                                                <input id="ORD" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1063,9 +1100,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="ORE" value='YES' type="radio" name='' /> Yes
+                                                <input id="ORE" value='NO' type="radio" name='' /> No
+                                                <input id="ORE" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1082,9 +1119,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="ORF" value='YES' type="radio" name='' /> Yes
+                                                <input id="ORF" value='NO' type="radio" name='' /> No
+                                                <input id="ORF" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1100,9 +1137,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="ORH" value='YES' type="radio" name='' /> Yes
+                                                <input id="ORH"value='NO' type="radio" name='' /> No
+                                                <input id="ORH" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1118,9 +1155,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="ORI" value='YES' type="radio" name='' /> Yes
+                                                <input id="ORI" value='NO' type="radio" name='' /> No
+                                                <input id="ORI" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1137,9 +1174,9 @@ const EnterCheckRide = () => {
                                                 . Train Handling – A) Starting (1 pt)
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="ORJ" value='YES' type="radio" name='' /> Yes
+                                                <input id="ORJ" value='NO' type="radio" name='' /> No
+                                                <input id="ORJ" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1153,9 +1190,9 @@ const EnterCheckRide = () => {
                                                 Train Handling – A) Starting (1 pt)
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="THA" value='YES' type="radio" name='' /> Yes
+                                                <input id="THA" value='NO' type="radio" name='' /> No
+                                                <input id="THA" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1169,9 +1206,9 @@ const EnterCheckRide = () => {
                                                 Train Handling – B) Accelerating (2 pt)
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="THB" value='YES' type="radio" name='' /> Yes
+                                                <input id="THB" value='NO' type="radio" name='' /> No
+                                                <input id="THB" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1185,9 +1222,9 @@ const EnterCheckRide = () => {
                                                 Train Handling – C) Deceleration (3 pt)
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="THC" value='YES' type="radio" name='' /> Yes
+                                                <input id="THC" value='NO' type="radio" name='' /> No
+                                                <input  id="THC" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1201,9 +1238,9 @@ const EnterCheckRide = () => {
                                                 Train Handling – D) Cresting Grade (2 pt)
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="THD"value='YES' type="radio" name='' /> Yes
+                                                <input id="THD" value='NO' type="radio" name='' /> No
+                                                <input id="THD" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1217,9 +1254,9 @@ const EnterCheckRide = () => {
                                                 Train Handling – E) Power Braking (1 pt)
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="THE" value='YES' type="radio" name='' /> Yes
+                                                <input id="THE" value='NO' type="radio" name='' /> No
+                                                <input id="THE" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1233,9 +1270,9 @@ const EnterCheckRide = () => {
                                                 Train Handling – F) Familiarity with Terrain (5 pt)
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="THF" value='YES' type="radio" name='' /> Yes
+                                                <input id="THF" value='NO' type="radio" name='' /> No
+                                                <input id="THF" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1248,9 +1285,9 @@ const EnterCheckRide = () => {
                                                 Train Handling – G) Judgment Location of Train (6 pt)
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="THG" value='YES' type="radio" name='' /> Yes
+                                                <input id="THG" value='NO' type="radio" name='' /> No
+                                                <input id="THG" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1263,9 +1300,9 @@ const EnterCheckRide = () => {
                                                 Train Handling – H) Plans Movements ahead (3 pt)
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="THH" value='YES' type="radio" name='' /> Yes
+                                                <input id="THH" value='NO' type="radio" name='' /> No
+                                                <input id="THH" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1278,9 +1315,9 @@ const EnterCheckRide = () => {
                                                 Train Handling – I) Properly controls slack (2 pt)
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="THI" value='YES' type="radio" name='' /> Yes
+                                                <input id="THI" value='NO' type="radio" name='' /> No
+                                                <input id="THI" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1294,9 +1331,9 @@ const EnterCheckRide = () => {
                                                 Train Handling – K) Speed Control (3 pt)
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="THK" value='YES' type="radio" name='' /> Yes
+                                                <input id="THK" value='NO' type="radio" name='' /> No
+                                                <input id="THK" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1309,9 +1346,9 @@ const EnterCheckRide = () => {
                                                 . Train Handling – L) Judgement in Stopping (2 pt)
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="THL" value='YES' type="radio" name='' /> Yes
+                                                <input id="THL" value='NO' type="radio" name='' /> No
+                                                <input id="THL" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1325,9 +1362,9 @@ const EnterCheckRide = () => {
                                                 Train Handling – M) Yarded Train-control in-train forces (1 pt)
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="THM" value='YES' type="radio" name='' /> Yes
+                                                <input id="THM"value='NO' type="radio" name='' /> No
+                                                <input id="THM" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1340,9 +1377,9 @@ const EnterCheckRide = () => {
                                                 Train Handling – N) Detaching from train (1 pt)
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="THN" value='YES' type="radio" name='' /> Yes
+                                                <input id="THN" value='NO' type="radio" name='' /> No
+                                                <input id="THN" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1355,9 +1392,9 @@ const EnterCheckRide = () => {
                                                 Train Handling – O) Undesired Emergency (1 pt)
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="THO" value='YES' type="radio" name='' /> Yes
+                                                <input id="THO" value='NO' type="radio" name='' /> No
+                                                <input id="THO"  value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1369,9 +1406,9 @@ const EnterCheckRide = () => {
                                                 Train Handling –P) Proper Coupling Speed (1 pt)
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input value='YES' type="radio" name='' /> Yes
-                                                <input value='NO' type="radio" name='' /> No
-                                                <input value='N/A' type="radio" name='' /> N/A
+                                                <input id="THP" value='YES' type="radio" name='' /> Yes
+                                                <input id="THP" value='NO' type="radio" name='' /> No
+                                                <input id="THP" value='N/A' type="radio" name='' /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1387,7 +1424,7 @@ const EnterCheckRide = () => {
                                             </Grid>
                                             <Grid xs={12} className="mt14" >
 
-                                                <TextField required={false} id="outlined-basic" type='number' label="" variant="outlined" className="w100p" />
+                                                <TextField required={false} id="Comments" type='number' label="" variant="outlined" className="w100p" />
                                             </Grid>
                                         </Grid>
                                     </Grid>
@@ -1431,7 +1468,7 @@ const EnterCheckRide = () => {
 
 
 
-                                    <Grid xs={12} className="mt30">
+                                    <Grid  xs={12} className="mt30">
                                         Location & Date/Time
                                     </Grid>
                                     <Grid xs={12}>
