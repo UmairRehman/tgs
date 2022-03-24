@@ -40,6 +40,8 @@ const {
   seriliazeParams
 } = helpers;
 
+
+
 const columns = [
   { id: "id", label: "Event ID", minWidth: 170, type: "value" },
   { id: "date", label: "Date", minWidth: 120, type: "value" },
@@ -51,6 +53,18 @@ const columns = [
   { id: "viewrules", label: "View Rules", minWidth: 50, type: "view" },
 ];
 
+
+
+const checkRideColumns= [
+  { id: "EngineerId", label: "EngineerId", minWidth: 170, type: "value" },
+  { id: "locomotiveConsist", label: "locomotiveConsist", minWidth: 120, type: "value" },
+  { id: "TCLoads", label: "TCLoads", minWidth: 100, type: "value" },
+  { id: "TCEmpties", label: "TCEmpties", minWidth: 100, type: "value" },
+  { id: "TCTotalTonage", label: "TCTotalTonage", minWidth: 170, type: "value" },
+  { id: "TMTraveled", label: "Total Miles Traveled", minWidth: 170, type: "value" },
+  
+  { id: "", label: "Action", minWidth: 50, type: "view" },
+];
 
 const columnsForView = [
   "ID",
@@ -76,6 +90,7 @@ const SafetyTesting = () => {
     let limit = 10;
     getlistEvents(offset, limit);
     setPage(newPage);
+    console.log(event, newPage)
   };
 
   const handleChangeRowsPerPage = (event) => {
@@ -139,6 +154,9 @@ const SafetyTesting = () => {
 
   const [rows, setRows] = useState([])
 
+  const [rowsRider, setRowsRider] = useState([])
+
+
   const getlistEvents = async (offset = 0, limit = 10) => {
     let params = '?'.concat(seriliazeParams({ offset, limit }))
     try {
@@ -173,10 +191,11 @@ const SafetyTesting = () => {
         data.forEach(element => {
           element.date = moment(new Date(element.date)).format('DD-MM-YYYY')
           element.time = element.time.slice(0, -3)
-          element.locationAdded = element.TGSLocation.name
-          element.rulesCount = element.TestEventRules.length
+          // element.locationAdded = element.TGSLocation.name
+          // element.rulesCount = element.TestEventRules.length
         });
-        setRows(data)
+        // setRows(data)
+        setRowsRider(data)
       }
     } catch (error) {
       console.log(error);
@@ -188,12 +207,12 @@ const SafetyTesting = () => {
     await getcheckRide()
   }, []);
   
-  const tableCheckRides = (columns) => (
+  const tableCheckRides = (checkRideColumns) => (
     <TableContainer>
       <Table aria-label="table">
         <TableHead>
           <TableRow>
-            {columns.map((column) => (
+            {checkRideColumns.map((column) => (
               <TableCell
                 className="bold f16"
                 key={column.id}
@@ -206,16 +225,17 @@ const SafetyTesting = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows
+          {rowsRider
             .map((row) => {
               return (
+                
                 <TableRow
                   hover
                   role="checkbox"
                   tabIndex={-1}
                   key={row.code}
-                >
-                  {columns.map((column) => {
+                > {console.log(row)}
+                  {checkRideColumns.map((column) => {
                     const value = row[column.id];
                     return (
                       <TableCell
@@ -235,9 +255,12 @@ const SafetyTesting = () => {
                             }}
                             className="EditIcon">
                           </Link>
-                        ) : column.type == "view" ? (
-                          <Button onClick={() => handleClickOpen(row.id)} className="ViewIcon"></Button>
-                        ) : (
+                        ) 
+                        //action view
+                        // : column.type == "view" ? (
+                        //   <Button onClick={() => handleClickOpen(row.id)} className="ViewIcon"></Button>
+                        // ) 
+                        : (
                           value
                         )}
                       </TableCell>
@@ -356,7 +379,7 @@ const SafetyTesting = () => {
                     tabState={tabState}
                     tabDetails={[
                       { label: 'Testing Events', content: tableContainer(columns) },
-                      { label: 'Check Rides', content: tableCheckRides(columns) }
+                      { label: 'Check Rides', content: tableCheckRides(checkRideColumns) }
                     ]}
                   ></TabsComponent>
                   <TablePagination

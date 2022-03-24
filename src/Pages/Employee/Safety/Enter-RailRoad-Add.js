@@ -177,7 +177,7 @@ const Railroad = () => {
   }
 
   const submitBtn = async (event) => {
-
+    console.log('asasas')
     event.preventDefault();
     if (!loading) {
       setSuccess(false);
@@ -380,7 +380,14 @@ const Railroad = () => {
                         Primary
                       </Grid>
                       <Grid xs={12} className="mt14">
-                        <TextField required={true} id="outlined-basic" label="Comment here" value={`${lists?.currentUser?.firstName} ${lists?.currentUser?.lastName}`} disabled variant="outlined" className="w100p" />
+                        <TextField
+                          required={true}
+                          id="outlined-basic"
+                          label="Comment here"
+                          value={`${lists?.currentUser?.firstName} ${lists?.currentUser?.lastName}`}
+                          disabled
+                          variant="outlined"
+                          className="w100p" />
                       </Grid>
                     </Grid>
                   </Grid>
