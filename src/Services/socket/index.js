@@ -46,7 +46,7 @@ export class SocketClient {
             return false;
 
         this.client = io(
-            `${base}:${port}/${namespace}`,
+            `${base}/${namespace}`,
             {
                 query: {
                     token
