@@ -522,9 +522,6 @@ const Questionnaire = () => {
                                                 disabled={
                                                     !bilingual || !getRelativeBooleanFromOptionsMap(bilingual)
                                                 } />
-                                            <Typography variant="h6" className="MuiTypography-subtitle2 MuiTypography-colorTextSecondary" component="h6">
-                                                Please leave this field empty if you have no comments
-                                            </Typography>
                                         </Grid>
                                     </Grid>
                                     : null}
