@@ -501,7 +501,7 @@ const NewHireStep2 = () => {
                       Back
                     </Link> */}
                     <Button className="LinkButton" type="submit">
-                      Save & Continue
+                      Submit Application
                     </Button>
                     {/* <Link to="/new-hire-queue/step/1" className="LinkButton"> */}
                   </Grid>
