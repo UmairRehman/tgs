@@ -157,9 +157,9 @@ const Documents = () => {
             </Grid>
             <Grid xs={12}>
               <Grid xs={12} md={8} lg={6}>
-                <Typography variant="h1" component="h2" className="bold f16">
+                {/* <Typography variant="h1" component="h2" className="bold f16">
                   You're required to fill out the following documents to complete your application
-                </Typography>
+                </Typography> */}
                 <Typography variant="h1" component="h2" className="bold f16 mt40">
                   Section 2
                 </Typography>
@@ -176,12 +176,12 @@ const Documents = () => {
                   </Grid>
                   <Button></Button>
                 </Typography>
-                <Typography style={{marginTop:'20px'}} to="" className="DocDownload">
+                {/* <Typography style={{marginTop:'20px'}} to="" className="DocDownload">
                   <Grid className="FileName">
                     Driver License
                   </Grid>
                   <Button></Button>
-                </Typography>
+                </Typography> */}
 
               </Grid>
               <Grid style={{marginTop:'20px'}} xs={12} className="mt50">
