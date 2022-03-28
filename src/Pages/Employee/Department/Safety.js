@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {DownloadOutlined } from '@ant-design/icons';
+import { DownloadOutlined } from '@ant-design/icons';
 import { Row, Col } from 'antd';
 import {
   Grid,
@@ -20,6 +20,8 @@ import LeftControl from '../../../Components/LeftControl';
 import MobileScreen from './Mobile/Safety';
 import { isMobile } from 'react-device-detect';
 import Services from '../../../Services'
+import EDRulebook from '../../../assets/pdf/EDRulebook.pdf';
+import TransportationRuleBook from '../../../assets/pdf/TransportationRuleBook.pdf';
 
 const {
   employee,
@@ -149,9 +151,9 @@ const Safety = () => {
 
               <Grid xs={12} container>
                 <Grid xs={6} className="mbold">
-                  Download PDF file
+                  Download Rule Book 
                 </Grid>
-  
+
               </Grid>
               <Grid xs={12} className="mt14 ContactTable">
                 <Paper>
@@ -159,12 +161,22 @@ const Safety = () => {
                     <Table>
                       <TableHead>
                         <TableRow>
-                        
+
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                       <Button  className='ButtonLink' > Transportation Rule Book  <DownloadOutlined className='icon-size'  /></Button>
-                       <Button className='ButtonLink' >Engineering Rule Book <DownloadOutlined className='icon-size'  /> </Button>
+                        <Button >
+                          <a href={EDRulebook} className='ButtonLink' target="_blank" download >Engineering Rule Book  <DownloadOutlined/> </a>
+                        </Button>
+
+                        <Button >
+                          <a href={TransportationRuleBook} className='ButtonLink' target="_blank" download >Transportation Rule Book   <DownloadOutlined/> </a>
+                        </Button>
+                        {/* 
+                      <Button>
+                      <Link to=".././../../../public/assets/pdf/public/assets/pdf/TransportationRuleBook.pdf" className='ButtonLink'   target="_blank" download >Transportation Rule Book <DownloadOutlined/></Link>
+                      </Button> */}
+
                       </TableBody>
                     </Table>
                   </TableContainer>
