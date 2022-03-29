@@ -4,11 +4,13 @@ import React, { useState, useEffect, useRef } from "react";
 import {
     Grid,
     Button,
+   
     TextareaAutosize,
     Typography
 } from "@material-ui/core";
 import { Link, useHistory } from "react-router-dom";
 import TextField from '@material-ui/core/TextField';
+
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
@@ -20,6 +22,7 @@ import Snackbar from '../../../Components/Snackbar';
 import { helpers } from "../../../helpers";
 import MobileScreen from './Mobile/Enter-RailRoad-Add';
 import { isMobile } from 'react-device-detect';
+
 
 /** Local deoendencies & Libraries */
 import Services from '../../../Services';
@@ -88,7 +91,7 @@ const EnterCheckRide = () => {
         ORE: '',
         ORG: '',
         ORF: '',
-        // ORG: '',
+        ORG: '',
         ORH: '',
         ORI: '',
         ORJ: '',
@@ -112,12 +115,11 @@ const EnterCheckRide = () => {
         THG: '',
         THH: '',
         THI: '',
-        // THJ: '',
+   
         THK: '',
         THL: '',
         THM: '',
         THN: '',
-        // THO: '',
         THP: '',
         Comments: '',
         date: '',
@@ -132,7 +134,7 @@ const EnterCheckRide = () => {
         //     engineerId: '',
         //     oje: false, //2
         //     ojeComment: '', //3
-        assisting: [], //4
+        // assisting: [], //4
         //     joinTest: false, //5
         //     assisting_comment: '', //6
         //     department: '', //7
@@ -149,11 +151,11 @@ const EnterCheckRide = () => {
 
 
     const handleSubmitDataRide = (event, value, key) => {
-        console.log(value);
 
         switch (key) {
             case 2:
                 setCride({ ...cride, EngineerId: value.id })
+            
                 break;
 
             case 3:
@@ -376,39 +378,38 @@ const EnterCheckRide = () => {
     };
 
     const resetData = () => {
-        document.getElementById('ojeComment').value = ''
-        document.getElementById('assisting_comment').value = ''
-        document.getElementById('GPS').value = ''
-        document.getElementById('jobId').value = ''
+        // document.getElementById('ojeComment').value = ''
+        // document.getElementById('assisting_comment').value = ''
+        // document.getElementById('GPS').value = ''
+        // document.getElementById('jobId').value = ''
 
-        setCride({
-            assisting: [],
-            oje: false, //2
-            ojeComment: '', //3
-            assisting: [], //4
-            joinTest: false, //5
-            assisting_comment: '', //6
-            department: '', //7
-            site: '', //8
-            GPS: '', //9
-            date: moment(new Date()).format('YY-MM-DD'), //10
-            // date : new Date(), //10
-            time: moment(new Date()).format('HH:mm:ss a'), //11
-            jobId: '', //12
-            crewMembers: [
-                { name: '', position: '', image: '' }
-            ] //13
-        })
+        // setCride({
+          
+        //     oje: false, //2
+        //     ojeComment: '', //3
+        //     assisting: [], //4
+        //     joinTest: false, //5
+        //     assisting_comment: '', //6
+        //     department: '', //7
+        //     site: '', //8
+        //     GPS: '', //9
+        //     date: moment(new Date()).format('YY-MM-DD'), //10
+        //     // date : new Date(), //10
+        //     time: moment(new Date()).format('HH:mm:ss a'), //11
+        //     jobId: '', //12
+        //     crewMembers: [
+        //         { name: '', position: '', image: '' }
+        //     ] //13
+        // })
 
     }
     const apiBody = async () => {
         let EngineerId = cride.EngineerId
-        let locomotiveConsist = document.getElementById('locomotiveConsist').value
-
-        let TCLoads = document.getElementById('TCLoads').value
-        let TCEmpties = document.getElementById('TCEmpties').value
-        let TCTotalTonage = document.getElementById('TCTotalTonage').value
-        let TMTraveled = document.getElementById('TMTraveled').value
+        let locomotiveConsist = +(document.getElementById('locomotiveConsist').value)
+        let TCLoads = +(document.getElementById('TCLoads').value)
+        let TCEmpties = +(document.getElementById('TCEmpties').value)
+        let TCTotalTonage = +(document.getElementById('TCTotalTonage').value)
+        let TMTraveled = +(document.getElementById('TMTraveled').value)
         let LLOA = document.getElementById('LLOA').value
         let LLOB = document.getElementById('LLOB').value
         let LLOC = document.getElementById('LLOC').value
@@ -467,18 +468,14 @@ const EnterCheckRide = () => {
         let time = document.getElementById('time').value
 
 
-
-
-
-
-
-        return ({
-            EngineerId, locomotiveConsist, TCLoads, TCEmpties, TCTotalTonage, TMTraveled,
-            LLOA, LLOB, LLOC, ABOA, ABOB, ABOC, ABOD, DBOA, DBOB, DBOC, IBA, IBB, MA, MB, RTA, RTB,
-            RTC, DPA, DPB, DPC, DICS, LMA, LMB, LMC, LMD, LME, LMF, ORA, ORB, ORC,
-            ORD, ORE, ORF, ORH, ORI, ORJ, THA, THB, THC, THD, THE, THF, THG, THH, THI,
-            THK, THL, THM, THN, THO, THP, Comments, date, time, IBB, THP
-        }
+        return (
+            {
+                EngineerId, locomotiveConsist, TCLoads, TCEmpties, TCTotalTonage, TMTraveled,
+                LLOA, LLOB, LLOC, ABOA, ABOB, ABOC, ABOD, DBOA, DBOB, DBOC, IBA, IBB, MA, MB, RTA, RTB,
+                RTC, DPA, DPB, DPC, DICS, LMA,LMB, LMC, LMD, LME, LMF, ORA, ORB, ORC,
+                ORD, ORE, ORF, ORH, ORI,ORG, ORJ, THA, THB, THC, THD, THE, THF, THG, THH, THI,THJ,
+                THK, THL, THM, THN, THO, THP, Comments, date, time
+            }
         );
 
     }
@@ -496,7 +493,7 @@ const EnterCheckRide = () => {
                 console.log(data)
                 let result = await employee.checkride_table_submit(data)
                 if (result?.httpStatus == 200) {
-                    console.log('result', result);
+                   console.log('result', result);
 
                     setSuccess(true);
                     setLoading(false);
@@ -506,7 +503,8 @@ const EnterCheckRide = () => {
 
                     setTimeout(() => {
                         history.push('/safety-testing')
-                    }, 1000);
+                        console.log('push to safety');
+                    }, 1500);
                     return showSnackBar('Form Successfully Submitted');
                 }
 
@@ -605,7 +603,7 @@ const EnterCheckRide = () => {
             userList.map(row => {
                 row.name = `${row.firstName} ${row.lastName}`
             })
-            console.log(userList);
+            // console.log(userList);
         }
 
         let assistingCrewList = await employee.get_crew_user_listing();
@@ -614,7 +612,7 @@ const EnterCheckRide = () => {
             assistingCrewList.map(row => {
                 row.name = `${row.firstName} ${row.lastName}`
             })
-            console.log(assistingCrewList);
+            // console.log(assistingCrewList);
         }
         // let departmentList = await employee.get_department_listing()
         // if(departmentList.httpStatus==200){
@@ -631,7 +629,7 @@ const EnterCheckRide = () => {
         let siteList = await employee.get_site_listing()
         if (siteList.httpStatus == 200) {
             siteList = siteList.data;
-            console.log(siteList);
+            // console.log(siteList);
         }
         // let jobCategoryList = [
         //     { id: "ENG", title: "Engineering" },
@@ -648,7 +646,7 @@ const EnterCheckRide = () => {
         // ]
 
         let currentUser = JSON.parse(storage.get('user_profile'))
-        console.log(currentUser);
+        
         setLists({ ...lists, users: userList, currentUser: currentUser, assistants: assistingCrewList, assistants: assistingCrewList })
         return true
     }
@@ -687,7 +685,7 @@ const EnterCheckRide = () => {
                                     <Grid xs={12}>
                                         <Grid xs={12} className="mt30">
                                             <Grid xs={12} className="mbold">
-                                                Primary
+                                                Evaluators ID
                                             </Grid>
                                             <Grid xs={12} className="mt14">
                                                 <TextField
@@ -709,13 +707,28 @@ const EnterCheckRide = () => {
                                                 Engineer Id
                                             </Grid>
                                             <Grid xs={12} className="mt14">
+                                                {/* <Autocomplete
+                                                className="w100p"
+                                                id="combo-box-demo"
+                                                options={addressstate}
+                                                getOptionLabel={(option) => option.title}
+                                                renderInput={(params) => <TextField {...params} label="Select" variant="outlined" />}
+                                                onChange={
+                                                    ($e, values) => setStateForFormControl(
+                                                        homeAddress,
+                                                        'state',
+                                                        $e,
+                                                        values,
+                                                    )
+                                                }
+                                            /> */}
                                                 <Autocomplete
                                                     className="w100p"
                                                     id="EngineerId"
-                                                    value={cride.assisting}
-                                                    onChange={(event, value) => { handleSubmitDataRide(event, value, 2) }}
+                                                    // value={cride.assisting}
                                                     options={lists.assistants}
                                                     getOptionLabel={option => (option.name)}
+                                                    onChange={(event, value) => { handleSubmitDataRide(event, value, 2) }}
                                                     renderInput={(params) => (
                                                         <TextField
                                                             // required={true} 
@@ -735,7 +748,13 @@ const EnterCheckRide = () => {
                                             </Grid>
                                             <Grid xs={12} className="mt14">
 
-                                                <TextField required={false} id="locomotiveConsist" type='number' label="" onChange={(event, value) => { handleSubmitDataRide(event, value, 3) }} variant="outlined" className="w100p" />
+                                                <TextField required={false} id="locomotiveConsist" type='number'
+                                                InputProps={{
+                                                    inputProps: { 
+                                                        max: 100, min: 1 
+                                                    }
+                                                }}
+                                                 label="" onChange={(event, value) => { handleSubmitDataRide(event, value, 3) }} variant="outlined" className="w100p" />
                                             </Grid>
                                         </Grid>
                                     </Grid>
@@ -748,7 +767,14 @@ const EnterCheckRide = () => {
                                             </Grid>
                                             <Grid xs={12} className="mt14">
 
-                                                <TextField required={false} id="TCLoads" type='number' label="" variant="outlined" onChange={(event, value) => { handleSubmitDataRide(event, value, 4) }} className="w100p" />
+                                                <TextField required={false} id="TCLoads"
+                                                 type='number'
+                                                 InputProps={{
+                                                    inputProps: { 
+                                                        max: 100, min: 1 
+                                                    }
+                                                }}
+                                                 label="" variant="outlined" onChange={(event, value) => { handleSubmitDataRide(event, value, 4) }} className="w100p" />
                                             </Grid>
                                         </Grid>
                                     </Grid>
@@ -761,7 +787,13 @@ const EnterCheckRide = () => {
                                             </Grid>
                                             <Grid xs={12} className="mt14">
 
-                                                <TextField required={false} id="TCEmpties" type='number' label="" variant="outlined" onChange={(event, value) => { handleSubmitDataRide(event, value, 5) }} className="w100p" />
+                                                <TextField required={false} id="TCEmpties" type='number' 
+                                                InputProps={{
+                                                    inputProps: { 
+                                                        max: 100, min: 1 
+                                                    }
+                                                }}
+                                                label="" variant="outlined" onChange={(event, value) => { handleSubmitDataRide(event, value, 5) }} className="w100p" />
                                             </Grid>
                                         </Grid>
                                     </Grid>
@@ -774,7 +806,13 @@ const EnterCheckRide = () => {
                                             </Grid>
                                             <Grid xs={12} className="mt14">
 
-                                                <TextField required={false} id="TCTotalTonage" type='number' label="" variant="outlined" onChange={(event, value) => { handleSubmitDataRide(event, value, 6) }} className="w100p" />
+                                                <TextField required={false} id="TCTotalTonage" type='number'
+                                                InputProps={{
+                                                    inputProps: { 
+                                                        max: 100, min: 1 
+                                                    }
+                                                }}
+                                                label="" variant="outlined" onChange={(event, value) => { handleSubmitDataRide(event, value, 6) }} className="w100p" />
                                             </Grid>
                                         </Grid>
                                     </Grid>
@@ -787,7 +825,13 @@ const EnterCheckRide = () => {
                                             </Grid>
                                             <Grid xs={12} className="mt14">
 
-                                                <TextField required={false} id="TMTraveled" type='number' label="" variant="outlined" onChange={(event, value) => { handleSubmitDataRide(event, value, 7) }} className="w100p" />
+                                                <TextField required={false} id="TMTraveled" type='number' 
+                                                InputProps={{
+                                                    inputProps: { 
+                                                        max: 100, min: 1 
+                                                    }
+                                                }}
+                                                label="" variant="outlined" onChange={(event, value) => { handleSubmitDataRide(event, value, 7) }} className="w100p" />
                                             </Grid>
                                         </Grid>
                                     </Grid>
@@ -798,13 +842,13 @@ const EnterCheckRide = () => {
                                         <Grid xs={12} className="mt30">
                                             <Grid xs={12} className="mbold">
 
-                                                Total Miles Traveled  – A) Brake Tests
+                                                Light Locomotive Operation  – A) Brake Tests
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="LLOA" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 8) }} /> Yes
-                                                <input id="LLOA" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 8) }} /> No
-                                                <input id="LLOA" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 8) }} /> N/A
+                                                <input id="LLOA" value='YES' type="radio" name='LLOA' onChange={(event, value) => { handleSubmitDataRide(event, value, 8) }} /> Yes
+                                                <input id="LLOA" value='NO' type="radio" name='LLOA' onChange={(event, value) => { handleSubmitDataRide(event, value, 8) }} /> No
+                                                <input id="LLOA" value='N/A' type="radio" name='LLOA' onChange={(event, value) => { handleSubmitDataRide(event, value, 8) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -819,9 +863,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="LLOB" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 9) }} /> Yes
-                                                <input id="LLOB" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 9) }} /> No
-                                                <input id="LLOB" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 9) }} /> N/A
+                                                <input id="LLOB" value='YES' type="radio" name='LLOB' onChange={(event, value) => { handleSubmitDataRide(event, value, 9) }} /> Yes
+                                                <input id="LLOB" value='NO' type="radio" name='LLOB' onChange={(event, value) => { handleSubmitDataRide(event, value, 9) }} /> No
+                                                <input id="LLOB" value='N/A' type="radio" name='LLOB' onChange={(event, value) => { handleSubmitDataRide(event, value, 9) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -836,9 +880,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="LLOC" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 10) }} /> Yes
-                                                <input id="LLOC" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 10) }} /> No
-                                                <input id="LLOC" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 10) }} /> N/A
+                                                <input id="LLOC" value='YES' type="radio" name='LLOC' onChange={(event, value) => { handleSubmitDataRide(event, value, 10) }} /> Yes
+                                                <input id="LLOC" value='NO' type="radio" name='LLOC' onChange={(event, value) => { handleSubmitDataRide(event, value, 10) }} /> No
+                                                <input id="LLOC" value='N/A' type="radio" name='LLOC' onChange={(event, value) => { handleSubmitDataRide(event, value, 10) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -853,9 +897,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="ABOA" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 11) }} /> Yes
-                                                <input id="ABOA" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 11) }} /> No
-                                                <input id="ABOA" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 11) }} /> N/A
+                                                <input id="ABOA" value='YES' type="radio" name='ABOA' onChange={(event, value) => { handleSubmitDataRide(event, value, 11) }} /> Yes
+                                                <input id="ABOA" value='NO' type="radio" name='ABOA' onChange={(event, value) => { handleSubmitDataRide(event, value, 11) }} /> No
+                                                <input id="ABOA" value='N/A' type="radio" name='ABOA' onChange={(event, value) => { handleSubmitDataRide(event, value, 11) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -869,47 +913,15 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="ABOB" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 12) }} /> Yes
-                                                <input id="ABOB" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 12) }} /> No
-                                                <input id="ABOB" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 12) }} /> N/A
+                                                <input id="ABOB" value='YES' type="radio" name='ABOB' onChange={(event, value) => { handleSubmitDataRide(event, value, 12) }} /> Yes
+                                                <input id="ABOB" value='NO' type="radio" name='ABOB' onChange={(event, value) => { handleSubmitDataRide(event, value, 12) }} /> No
+                                                <input id="ABOB" value='N/A' type="radio" name='ABOB' onChange={(event, value) => { handleSubmitDataRide(event, value, 12) }} /> N/A
 
                                             </Grid>
                                         </Grid>
                                     </Grid>
 
 
-                                    <Grid xs={12}>
-                                        <Grid xs={12} className="mt30">
-                                            <Grid xs={12} className="mbold">
-
-                                                Automatic Brake Ops-j) Total Reduction
-
-                                            </Grid>
-                                            <Grid xs={12} className="mt14">
-                                                <input id="THJ" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 12) }} /> Yes
-                                                <input id="THJ" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 12) }} /> No
-                                                <input id="THJ" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 12) }} /> N/A
-
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
-
-
-                                    <Grid xs={12}>
-                                        <Grid xs={12} className="mt30">
-                                            <Grid xs={12} className="mbold">
-
-                                                Automatic Brake Ops-j) Total Reduction
-
-                                            </Grid>
-                                            <Grid xs={12} className="mt14">
-                                                <input id="ORG" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 12) }} /> Yes
-                                                <input id="ORG" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 12) }} /> No
-                                                <input id="ORG" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 12) }} /> N/A
-
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
 
 
 
@@ -921,9 +933,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="ABOC" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 13) }} /> Yes
-                                                <input id="ABOC" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 13) }} /> No
-                                                <input id="ABOC" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 13) }} /> N/A
+                                                <input id="ABOC" value='YES' type="radio" name='ABOC' onChange={(event, value) => { handleSubmitDataRide(event, value, 13) }} /> Yes
+                                                <input id="ABOC" value='NO' type="radio" name='ABOC' onChange={(event, value) => { handleSubmitDataRide(event, value, 13) }} /> No
+                                                <input id="ABOC" value='N/A' type="radio" name='ABOC' onChange={(event, value) => { handleSubmitDataRide(event, value, 13) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -939,9 +951,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="ABOD" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 14) }} /> Yes
-                                                <input id="ABOD" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 14) }} /> No
-                                                <input id="ABOD" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 14) }} /> N/A
+                                                <input id="ABOD" value='YES' type="radio" name='ABOD' onChange={(event, value) => { handleSubmitDataRide(event, value, 14) }} /> Yes
+                                                <input id="ABOD" value='NO' type="radio" name='ABOD' onChange={(event, value) => { handleSubmitDataRide(event, value, 14) }} /> No
+                                                <input id="ABOD" value='N/A' type="radio" name='ABOD' onChange={(event, value) => { handleSubmitDataRide(event, value, 14) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -955,9 +967,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="DBOA" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 15) }} /> Yes
-                                                <input id="DBOA" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 15) }} /> No
-                                                <input id="DBOA" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 15) }} /> N/A
+                                                <input id="DBOA" value='YES' type="radio" name='DBOA' onChange={(event, value) => { handleSubmitDataRide(event, value, 15) }} /> Yes
+                                                <input id="DBOA" value='NO' type="radio" name='DBOA' onChange={(event, value) => { handleSubmitDataRide(event, value, 15) }} /> No
+                                                <input id="DBOA" value='N/A' type="radio" name='DBOA' onChange={(event, value) => { handleSubmitDataRide(event, value, 15) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -972,9 +984,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="DBOB" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 16) }} /> Yes
-                                                <input id="DBOB" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 16) }} /> No
-                                                <input id="DBOB" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 16) }} /> N/A
+                                                <input id="DBOB" value='YES' type="radio" name='DBOB' onChange={(event, value) => { handleSubmitDataRide(event, value, 16) }} /> Yes
+                                                <input id="DBOB" value='NO' type="radio" name='DBOB' onChange={(event, value) => { handleSubmitDataRide(event, value, 16) }} /> No
+                                                <input id="DBOB" value='N/A' type="radio" name='DBOB' onChange={(event, value) => { handleSubmitDataRide(event, value, 16) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -989,9 +1001,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="DBOC" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 17) }} /> Yes
-                                                <input id="DBOC" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 17) }} /> No
-                                                <input id="DBOC" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 17) }} /> N/A
+                                                <input id="DBOC" value='YES' type="radio" name='DBOC' onChange={(event, value) => { handleSubmitDataRide(event, value, 17) }} /> Yes
+                                                <input id="DBOC" value='NO' type="radio" name='DBOC' onChange={(event, value) => { handleSubmitDataRide(event, value, 17) }} /> No
+                                                <input id="DBOC" value='N/A' type="radio" name='DBOC' onChange={(event, value) => { handleSubmitDataRide(event, value, 17) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1007,9 +1019,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="IBA" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 18) }} /> Yes
-                                                <input id="IBA" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 18) }} /> No
-                                                <input id="IBA" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 18) }} /> N/A
+                                                <input id="IBA" value='YES' type="radio" name='IBA' onChange={(event, value) => { handleSubmitDataRide(event, value, 18) }} /> Yes
+                                                <input id="IBA" value='NO' type="radio" name='IBA' onChange={(event, value) => { handleSubmitDataRide(event, value, 18) }} /> No
+                                                <input id="IBA" value='N/A' type="radio" name='IBA' onChange={(event, value) => { handleSubmitDataRide(event, value, 18) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1024,9 +1036,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="IBB" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 19) }} /> Yes
-                                                <input id="IBB" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 19) }} /> No
-                                                <input id="IBB" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 19) }} /> N/A
+                                                <input id="IBB" value='YES' type="radio" name='IBB' onChange={(event, value) => { handleSubmitDataRide(event, value, 19) }} /> Yes
+                                                <input id="IBB" value='NO' type="radio" name='IBB' onChange={(event, value) => { handleSubmitDataRide(event, value, 19) }} /> No
+                                                <input id="IBB" value='N/A' type="radio" name='IBB' onChange={(event, value) => { handleSubmitDataRide(event, value, 19) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1044,9 +1056,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="MA" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 20) }} /> Yes
-                                                <input id="MA" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 20) }} /> No
-                                                <input id="MA" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 20) }} /> N/A
+                                                <input id="MA" value='YES' type="radio" name='MA' onChange={(event, value) => { handleSubmitDataRide(event, value, 20) }} /> Yes
+                                                <input id="MA" value='NO' type="radio" name='MA' onChange={(event, value) => { handleSubmitDataRide(event, value, 20) }} /> No
+                                                <input id="MA" value='N/A' type="radio" name='MA' onChange={(event, value) => { handleSubmitDataRide(event, value, 20) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1062,9 +1074,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="MB" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 21) }} /> Yes
-                                                <input id="MB" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 21) }} /> No
-                                                <input id="MB" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 21) }} /> N/A
+                                                <input id="MB" value='YES' type="radio" name='MB' onChange={(event, value) => { handleSubmitDataRide(event, value, 21) }} /> Yes
+                                                <input id="MB" value='NO' type="radio" name='MB' onChange={(event, value) => { handleSubmitDataRide(event, value, 21) }} /> No
+                                                <input id="MB" value='N/A' type="radio" name='MB' onChange={(event, value) => { handleSubmitDataRide(event, value, 21) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1080,9 +1092,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="RTA" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 22) }} /> Yes
-                                                <input id="RTA" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 22) }} /> No
-                                                <input id="RTA" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 22) }} /> N/A
+                                                <input id="RTA" value='YES' type="radio" name='RTA' onChange={(event, value) => { handleSubmitDataRide(event, value, 22) }} /> Yes
+                                                <input id="RTA" value='NO' type="radio" name='RTA' onChange={(event, value) => { handleSubmitDataRide(event, value, 22) }} /> No
+                                                <input id="RTA" value='N/A' type="radio" name='RTA' onChange={(event, value) => { handleSubmitDataRide(event, value, 22) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1097,9 +1109,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="RTB" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 23) }} /> Yes
-                                                <input id="RTB" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 23) }} /> No
-                                                <input id="RTB" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 23) }} /> N/A
+                                                <input id="RTB" value='YES' type="radio" name='RTB' onChange={(event, value) => { handleSubmitDataRide(event, value, 23) }} /> Yes
+                                                <input id="RTB" value='NO' type="radio" name='RTB' onChange={(event, value) => { handleSubmitDataRide(event, value, 23) }} /> No
+                                                <input id="RTB" value='N/A' type="radio" name='RTB' onChange={(event, value) => { handleSubmitDataRide(event, value, 23) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1115,9 +1127,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="RTC" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 24) }} /> Yes
-                                                <input id="RTC" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 24) }} /> No
-                                                <input id="RTC" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 24) }} /> N/A
+                                                <input id="RTC" value='YES' type="radio" name='RTC' onChange={(event, value) => { handleSubmitDataRide(event, value, 24) }} /> Yes
+                                                <input id="RTC" value='NO' type="radio" name='RTC' onChange={(event, value) => { handleSubmitDataRide(event, value, 24) }} /> No
+                                                <input id="RTC" value='N/A' type="radio" name='RTC' onChange={(event, value) => { handleSubmitDataRide(event, value, 24) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1134,9 +1146,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="DPA" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 25) }} /> Yes
-                                                <input id="DPA" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 25) }} /> No
-                                                <input id="DPA" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 25) }} /> N/A
+                                                <input id="DPA" value='YES' type="radio" name='DPA' onChange={(event, value) => { handleSubmitDataRide(event, value, 25) }} /> Yes
+                                                <input id="DPA" value='NO' type="radio" name='DPA' onChange={(event, value) => { handleSubmitDataRide(event, value, 25) }} /> No
+                                                <input id="DPA" value='N/A' type="radio" name='DPA' onChange={(event, value) => { handleSubmitDataRide(event, value, 25) }} /> N/A
 
 
 
@@ -1154,9 +1166,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="DPB" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 26) }} /> Yes
-                                                <input id="DPB" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 26) }} /> No
-                                                <input id="DPB " value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 26) }} /> N/A
+                                                <input id="DPB" value='YES' type="radio" name='DPB' onChange={(event, value) => { handleSubmitDataRide(event, value, 26) }} /> Yes
+                                                <input id="DPB" value='NO' type="radio" name='DPB' onChange={(event, value) => { handleSubmitDataRide(event, value, 26) }} /> No
+                                                <input id="DPB " value='N/A' type="radio" name='DPB' onChange={(event, value) => { handleSubmitDataRide(event, value, 26) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1172,9 +1184,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="DPC" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 27) }} /> Yes
-                                                <input id="DPC" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 27) }} /> No
-                                                <input id="DPC" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 27) }} /> N/A
+                                                <input id="DPC" value='YES' type="radio" name='DPC' onChange={(event, value) => { handleSubmitDataRide(event, value, 27) }} /> Yes
+                                                <input id="DPC" value='NO' type="radio" name='DPC' onChange={(event, value) => { handleSubmitDataRide(event, value, 27) }} /> No
+                                                <input id="DPC" value='N/A' type="radio" name='DPC' onChange={(event, value) => { handleSubmitDataRide(event, value, 27) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1189,9 +1201,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="DICS" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 28) }} /> Yes
-                                                <input id="DICS" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 28) }} /> No
-                                                <input id="DICS" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 28) }} /> N/A
+                                                <input id="DICS" value='YES' type="radio" name='DICS' onChange={(event, value) => { handleSubmitDataRide(event, value, 28) }} /> Yes
+                                                <input id="DICS" value='NO' type="radio" name='DICS' onChange={(event, value) => { handleSubmitDataRide(event, value, 28) }} /> No
+                                                <input id="DICS" value='N/A' type="radio" name='DICS' onChange={(event, value) => { handleSubmitDataRide(event, value, 28) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1205,9 +1217,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="LMA" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 29) }} /> Yes
-                                                <input id="LMA" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 29) }} /> No
-                                                <input id="LMA" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 29) }} /> N/A
+                                                <input id="LMA" value='YES' type="radio" name='LMA' onChange={(event, value) => { handleSubmitDataRide(event, value, 28) }} /> Yes
+                                                <input id="LMA" value='NO' type="radio" name='LMA' onChange={(event, value) => { handleSubmitDataRide(event, value, 28) }} /> No
+                                                <input id="LMA" value='N/A' type="radio" name='LMA' onChange={(event, value) => { handleSubmitDataRide(event, value, 28) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1221,9 +1233,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="LMB" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 30) }} /> Yes
-                                                <input id="LMB" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 30) }} /> No
-                                                <input id="LMB" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 30) }} /> N/A
+                                                <input id="LMB" value='YES' type="radio" name='LMB' onChange={(event, value) => { handleSubmitDataRide(event, value, 30) }} /> Yes
+                                                <input id="LMB" value='NO' type="radio" name='LMB' onChange={(event, value) => { handleSubmitDataRide(event, value, 30) }} /> No
+                                                <input id="LMB" value='N/A' type="radio" name='LMB' onChange={(event, value) => { handleSubmitDataRide(event, value, 30) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1238,9 +1250,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="LMC" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 31) }} /> Yes
-                                                <input id="LMC" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 31) }} /> No
-                                                <input id="LMC" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 31) }} /> N/A
+                                                <input id="LMC" value='YES' type="radio" name='LMC' onChange={(event, value) => { handleSubmitDataRide(event, value, 31) }} /> Yes
+                                                <input id="LMC" value='NO' type="radio" name='LMC' onChange={(event, value) => { handleSubmitDataRide(event, value, 31) }} /> No
+                                                <input id="LMC" value='N/A' type="radio" name='LMC' onChange={(event, value) => { handleSubmitDataRide(event, value, 31) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1255,9 +1267,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="LMD" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 32) }} /> Yes
-                                                <input id="LMD" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 32) }} /> No
-                                                <input id="LMD" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 32) }} /> N/A
+                                                <input id="LMD" value='YES' type="radio" name='LMD' onChange={(event, value) => { handleSubmitDataRide(event, value, 32) }} /> Yes
+                                                <input id="LMD" value='NO' type="radio" name='LMD' onChange={(event, value) => { handleSubmitDataRide(event, value, 32) }} /> No
+                                                <input id="LMD" value='N/A' type="radio" name='LMD' onChange={(event, value) => { handleSubmitDataRide(event, value, 32) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1272,9 +1284,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="LME" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 33) }} /> Yes
-                                                <input id="LME" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 33) }} /> No
-                                                <input id="LME" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 33) }} /> N/A
+                                                <input id="LME" value='YES' type="radio" name='LME' onChange={(event, value) => { handleSubmitDataRide(event, value, 33) }} /> Yes
+                                                <input id="LME" value='NO' type="radio" name='LME' onChange={(event, value) => { handleSubmitDataRide(event, value, 33) }} /> No
+                                                <input id="LME" value='N/A' type="radio" name='LME' onChange={(event, value) => { handleSubmitDataRide(event, value, 33) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1289,9 +1301,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="LMF" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 34) }} /> Yes
-                                                <input id="LMF" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 34) }} /> No
-                                                <input id="LMF" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 34) }} /> N/A
+                                                <input id="LMF" value='YES' type="radio" name='LMF' onChange={(event, value) => { handleSubmitDataRide(event, value, 34) }} /> Yes
+                                                <input id="LMF" value='NO' type="radio" name='LMF' onChange={(event, value) => { handleSubmitDataRide(event, value, 34) }} /> No
+                                                <input id="LMF" value='N/A' type="radio" name='LMF' onChange={(event, value) => { handleSubmitDataRide(event, value, 34) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1306,9 +1318,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="ORA" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 35) }} /> Yes
-                                                <input id="ORA" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 35) }} /> No
-                                                <input id="ORA" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 35) }} /> N/A
+                                                <input id="ORA" value='YES' type="radio" name='ORA' onChange={(event, value) => { handleSubmitDataRide(event, value, 35) }} /> Yes
+                                                <input id="ORA" value='NO' type="radio" name='ORA' onChange={(event, value) => { handleSubmitDataRide(event, value, 35) }} /> No
+                                                <input id="ORA" value='N/A' type="radio" name='ORA' onChange={(event, value) => { handleSubmitDataRide(event, value, 35) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1324,9 +1336,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="ORB" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 36) }} /> Yes
-                                                <input id="ORB" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 36) }} /> No
-                                                <input id="ORB" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 36) }} /> N/A
+                                                <input id="ORB" value='YES' type="radio" name='ORB' onChange={(event, value) => { handleSubmitDataRide(event, value, 36) }} /> Yes
+                                                <input id="ORB" value='NO' type="radio" name='ORB' onChange={(event, value) => { handleSubmitDataRide(event, value, 36) }} /> No
+                                                <input id="ORB" value='N/A' type="radio" name='ORB' onChange={(event, value) => { handleSubmitDataRide(event, value, 36) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1343,9 +1355,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="ORC" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 37) }} /> Yes
-                                                <input id="ORC" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 37) }} /> No
-                                                <input id="ORC" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 37) }} /> N/A
+                                                <input id="ORC" value='YES' type="radio" name='ORC' onChange={(event, value) => { handleSubmitDataRide(event, value, 37) }} /> Yes
+                                                <input id="ORC" value='NO' type="radio" name='ORC' onChange={(event, value) => { handleSubmitDataRide(event, value, 37) }} /> No
+                                                <input id="ORC" value='N/A' type="radio" name='ORC' onChange={(event, value) => { handleSubmitDataRide(event, value, 37) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1362,9 +1374,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="ORD" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 38) }} /> Yes
-                                                <input id="ORD" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 38) }} /> No
-                                                <input id="ORD" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 38) }} /> N/A
+                                                <input id="ORD" value='YES' type="radio" name='ORD' onChange={(event, value) => { handleSubmitDataRide(event, value, 38) }} /> Yes
+                                                <input id="ORD" value='NO' type="radio" name='ORD' onChange={(event, value) => { handleSubmitDataRide(event, value, 38) }} /> No
+                                                <input id="ORD" value='N/A' type="radio" name='ORD' onChange={(event, value) => { handleSubmitDataRide(event, value, 38) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1380,9 +1392,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="ORE" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 39) }} /> Yes
-                                                <input id="ORE" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 39) }} /> No
-                                                <input id="ORE" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 39) }} /> N/A
+                                                <input id="ORE" value='YES' type="radio" name='ORE' onChange={(event, value) => { handleSubmitDataRide(event, value, 39) }} /> Yes
+                                                <input id="ORE" value='NO' type="radio" name='ORE' onChange={(event, value) => { handleSubmitDataRide(event, value, 39) }} /> No
+                                                <input id="ORE" value='N/A' type="radio" name='ORE' onChange={(event, value) => { handleSubmitDataRide(event, value, 39) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1399,14 +1411,30 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="ORF" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 40) }} /> Yes
-                                                <input id="ORF" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 40) }} /> No
-                                                <input id="ORF" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 40) }} /> N/A
+                                                <input id="ORF" value='YES' type="radio" name='ORF' onChange={(event, value) => { handleSubmitDataRide(event, value, 40) }} /> Yes
+                                                <input id="ORF" value='NO' type="radio" name='ORF' onChange={(event, value) => { handleSubmitDataRide(event, value, 40) }} /> No
+                                                <input id="ORF" value='N/A' type="radio" name='ORF' onChange={(event, value) => { handleSubmitDataRide(event, value, 40) }} /> N/A
 
                                             </Grid>
                                         </Grid>
                                     </Grid>
 
+
+                                    <Grid xs={12}>
+                                        <Grid xs={12} className="mt30">
+                                            <Grid xs={12} className="mbold">
+
+                                                Operating Rules - G) Knowledge of Special InstructionS (2 pt)
+
+                                            </Grid>
+                                            <Grid xs={12} className="mt14">
+                                                <input id="ORG" value='YES' type="radio" name='ORG' onChange={(event, value) => { handleSubmitDataRide(event, value, 40) }} /> Yes
+                                                <input id="ORG" value='NO' type="radio" name='ORG' onChange={(event, value) => { handleSubmitDataRide(event, value, 40) }} /> No
+                                                <input id="ORG" value='N/A' type="radio" name='ORG' onChange={(event, value) => { handleSubmitDataRide(event, value, 40) }} /> N/A
+
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
 
 
                                     <Grid xs={12}>
@@ -1417,9 +1445,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="ORH" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 41) }} /> Yes
-                                                <input id="ORH" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 41) }} /> No
-                                                <input id="ORH" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 41) }} /> N/A
+                                                <input id="ORH" value='YES' type="radio" name='ORH' onChange={(event, value) => { handleSubmitDataRide(event, value, 41) }} /> Yes
+                                                <input id="ORH" value='NO' type="radio" name='ORH' onChange={(event, value) => { handleSubmitDataRide(event, value, 41) }} /> No
+                                                <input id="ORH" value='N/A' type="radio" name='ORH' onChange={(event, value) => { handleSubmitDataRide(event, value, 41) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1435,9 +1463,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="ORI" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 42) }} /> Yes
-                                                <input id="ORI" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 42) }} /> No
-                                                <input id="ORI" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 42) }} /> N/A
+                                                <input id="ORI" value='YES' type="radio" name='ORI' onChange={(event, value) => { handleSubmitDataRide(event, value, 42) }} /> Yes
+                                                <input id="ORI" value='NO' type="radio" name='ORI' onChange={(event, value) => { handleSubmitDataRide(event, value, 42) }} /> No
+                                                <input id="ORI" value='N/A' type="radio" name='ORI' onChange={(event, value) => { handleSubmitDataRide(event, value, 42) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1451,12 +1479,12 @@ const EnterCheckRide = () => {
 
                                                 Operating Rules – J) Possession of Required Publications (5 pt)
 
-                                                . Train Handling – A) Starting (1 pt)
+                                                .
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="ORJ" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 43) }} /> Yes
-                                                <input id="ORJ" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 43) }} /> No
-                                                <input id="ORJ" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 43) }} /> N/A
+                                                <input id="ORJ" value='YES' type="radio" name="ORJ" onChange={(event, value) => { handleSubmitDataRide(event, value, 43) }} /> Yes
+                                                <input id="ORJ" value='NO' type="radio" name="ORJ" onChange={(event, value) => { handleSubmitDataRide(event, value, 43) }} /> No
+                                                <input id="ORJ" value='N/A' type="radio" name="ORJ" onChange={(event, value) => { handleSubmitDataRide(event, value, 43) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1470,9 +1498,9 @@ const EnterCheckRide = () => {
                                                 Train Handling – A) Starting (1 pt)
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="THA" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 44) }} /> Yes
-                                                <input id="THA" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 44) }} /> No
-                                                <input id="THA" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 44) }} /> N/A
+                                                <input id="THA" value='YES' type="radio" name="THA" onChange={(event, value) => { handleSubmitDataRide(event, value, 44) }} /> Yes
+                                                <input id="THA" value='NO' type="radio" name="THA" onChange={(event, value) => { handleSubmitDataRide(event, value, 44) }} /> No
+                                                <input id="THA" value='N/A' type="radio" name="THA" onChange={(event, value) => { handleSubmitDataRide(event, value, 44) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1486,9 +1514,9 @@ const EnterCheckRide = () => {
                                                 Train Handling – B) Accelerating (2 pt)
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="THB" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 45) }} /> Yes
-                                                <input id="THB" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 45) }} /> No
-                                                <input id="THB" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 45) }} /> N/A
+                                                <input id="THB" value='YES' type="radio" name='THB' onChange={(event, value) => { handleSubmitDataRide(event, value, 45) }} /> Yes
+                                                <input id="THB" value='NO' type="radio" name='THB' onChange={(event, value) => { handleSubmitDataRide(event, value, 45) }} /> No
+                                                <input id="THB" value='N/A' type="radio" name='THB' onChange={(event, value) => { handleSubmitDataRide(event, value, 45) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1502,9 +1530,9 @@ const EnterCheckRide = () => {
                                                 Train Handling – C) Deceleration (3 pt)
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="THC" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 46) }} /> Yes
-                                                <input id="THC" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 46) }} /> No
-                                                <input id="THC" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 46) }} /> N/A
+                                                <input id="THC" value='YES' type="radio" name='THC' onChange={(event, value) => { handleSubmitDataRide(event, value, 46) }} /> Yes
+                                                <input id="THC" value='NO' type="radio" name='THC' onChange={(event, value) => { handleSubmitDataRide(event, value, 46) }} /> No
+                                                <input id="THC" value='N/A' type="radio" name='THC' onChange={(event, value) => { handleSubmitDataRide(event, value, 46) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1518,9 +1546,9 @@ const EnterCheckRide = () => {
                                                 Train Handling – D) Cresting Grade (2 pt)
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="THD" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 47) }} /> Yes
-                                                <input id="THD" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 47) }} /> No
-                                                <input id="THD" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 47) }} /> N/A
+                                                <input id="THD" value='YES' type="radio" name='THD' onChange={(event, value) => { handleSubmitDataRide(event, value, 47) }} /> Yes
+                                                <input id="THD" value='NO' type="radio" name='THD' onChange={(event, value) => { handleSubmitDataRide(event, value, 47) }} /> No
+                                                <input id="THD" value='N/A' type="radio" name='THD' onChange={(event, value) => { handleSubmitDataRide(event, value, 47) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1534,9 +1562,9 @@ const EnterCheckRide = () => {
                                                 Train Handling – E) Power Braking (1 pt)
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="THE" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 48) }} /> Yes
-                                                <input id="THE" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 48) }} /> No
-                                                <input id="THE" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 48) }} /> N/A
+                                                <input id="THE" value='YES' type="radio" name='THE' onChange={(event, value) => { handleSubmitDataRide(event, value, 48) }} /> Yes
+                                                <input id="THE" value='NO' type="radio" name='THE' onChange={(event, value) => { handleSubmitDataRide(event, value, 48) }} /> No
+                                                <input id="THE" value='N/A' type="radio" name='THE' onChange={(event, value) => { handleSubmitDataRide(event, value, 48) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1550,9 +1578,9 @@ const EnterCheckRide = () => {
                                                 Train Handling – F) Familiarity with Terrain (5 pt)
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="THF" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 49) }} /> Yes
-                                                <input id="THF" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 49) }} /> No
-                                                <input id="THF" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 49) }} /> N/A
+                                                <input id="THF" value='YES' type="radio" name='THF' onChange={(event, value) => { handleSubmitDataRide(event, value, 49) }} /> Yes
+                                                <input id="THF" value='NO' type="radio" name='THF' onChange={(event, value) => { handleSubmitDataRide(event, value, 49) }} /> No
+                                                <input id="THF" value='N/A' type="radio" name='THF' onChange={(event, value) => { handleSubmitDataRide(event, value, 49) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1565,9 +1593,9 @@ const EnterCheckRide = () => {
                                                 Train Handling – G) Judgment Location of Train (6 pt)
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="THG" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 50) }} /> Yes
-                                                <input id="THG" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 50) }} /> No
-                                                <input id="THG" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 50) }} /> N/A
+                                                <input id="THG" value='YES' type="radio" name='THG' onChange={(event, value) => { handleSubmitDataRide(event, value, 50) }} /> Yes
+                                                <input id="THG" value='NO' type="radio" name='THG' onChange={(event, value) => { handleSubmitDataRide(event, value, 50) }} /> No
+                                                <input id="THG" value='N/A' type="radio" name='THG' onChange={(event, value) => { handleSubmitDataRide(event, value, 50) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1580,9 +1608,9 @@ const EnterCheckRide = () => {
                                                 Train Handling – H) Plans Movements ahead (3 pt)
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="THH" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 51) }} /> Yes
-                                                <input id="THH" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 51) }} /> No
-                                                <input id="THH" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 51) }} /> N/A
+                                                <input id="THH" value='YES' type="radio" name='THH' onChange={(event, value) => { handleSubmitDataRide(event, value, 51) }} /> Yes
+                                                <input id="THH" value='NO' type="radio" name='THH' onChange={(event, value) => { handleSubmitDataRide(event, value, 51) }} /> No
+                                                <input id="THH" value='N/A' type="radio" name='THH' onChange={(event, value) => { handleSubmitDataRide(event, value, 51) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1595,9 +1623,26 @@ const EnterCheckRide = () => {
                                                 Train Handling – I) Properly controls slack (2 pt)
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="THI" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 52) }} /> Yes
-                                                <input id="THI" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 52) }} /> No
-                                                <input id="THI" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 52) }} /> N/A
+                                                <input id="THI" value='YES' type="radio" name='THI' onChange={(event, value) => { handleSubmitDataRide(event, value, 52) }} /> Yes
+                                                <input id="THI" value='NO' type="radio" name='THI' onChange={(event, value) => { handleSubmitDataRide(event, value, 52) }} /> No
+                                                <input id="THI" value='N/A' type="radio" name='THI' onChange={(event, value) => { handleSubmitDataRide(event, value, 52) }} /> N/A
+
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+
+
+
+                                    <Grid xs={12}>
+                                        <Grid xs={12} className="mt30">
+                                            <Grid xs={12} className="mbold">
+
+                                                Train Handling – J) Procedures for Set-Off and Pick-Ups (2 pt)
+                                            </Grid>
+                                            <Grid xs={12} className="mt14">
+                                                <input id="THJ" value='YES' type="radio" name='THJ' onChange={(event, value) => { handleSubmitDataRide(event, value, 52) }} /> Yes
+                                                <input id="THJ" value='NO' type="radio" name='THJ' onChange={(event, value) => { handleSubmitDataRide(event, value, 52) }} /> No
+                                                <input id="THJ" value='N/A' type="radio" name='THJ' onChange={(event, value) => { handleSubmitDataRide(event, value, 52) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1611,9 +1656,9 @@ const EnterCheckRide = () => {
                                                 Train Handling – K) Speed Control (3 pt)
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="THK" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 53) }} /> Yes
-                                                <input id="THK" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 53) }} /> No
-                                                <input id="THK" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 53) }} /> N/A
+                                                <input id="THK" value='YES' type="radio" name='THK' onChange={(event, value) => { handleSubmitDataRide(event, value, 53) }} /> Yes
+                                                <input id="THK" value='NO' type="radio" name='THK' onChange={(event, value) => { handleSubmitDataRide(event, value, 53) }} /> No
+                                                <input id="THK" value='N/A' type="radio" name='THK' onChange={(event, value) => { handleSubmitDataRide(event, value, 53) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1626,9 +1671,9 @@ const EnterCheckRide = () => {
                                                 . Train Handling – L) Judgement in Stopping (2 pt)
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="THL" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 54) }} /> Yes
-                                                <input id="THL" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 54) }} /> No
-                                                <input id="THL" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 54) }} /> N/A
+                                                <input id="THL" value='YES' type="radio" name='THL' onChange={(event, value) => { handleSubmitDataRide(event, value, 54) }} /> Yes
+                                                <input id="THL" value='NO' type="radio" name='THL' onChange={(event, value) => { handleSubmitDataRide(event, value, 54) }} /> No
+                                                <input id="THL" value='N/A' type="radio" name='THL' onChange={(event, value) => { handleSubmitDataRide(event, value, 54) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1642,9 +1687,9 @@ const EnterCheckRide = () => {
                                                 Train Handling – M) Yarded Train-control in-train forces (1 pt)
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="THM" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 55) }} /> Yes
-                                                <input id="THM" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 55) }} /> No
-                                                <input id="THM" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 55) }} /> N/A
+                                                <input id="THM" value='YES' type="radio" name='THM' onChange={(event, value) => { handleSubmitDataRide(event, value, 55) }} /> Yes
+                                                <input id="THM" value='NO' type="radio" name='THM' onChange={(event, value) => { handleSubmitDataRide(event, value, 55) }} /> No
+                                                <input id="THM" value='N/A' type="radio" name='THM' onChange={(event, value) => { handleSubmitDataRide(event, value, 55) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1657,9 +1702,9 @@ const EnterCheckRide = () => {
                                                 Train Handling – N) Detaching from train (1 pt)
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="THN" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 56) }} /> Yes
-                                                <input id="THN" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 56) }} /> No
-                                                <input id="THN" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 56) }} /> N/A
+                                                <input id="THN" value='YES' type="radio" name='THN' onChange={(event, value) => { handleSubmitDataRide(event, value, 56) }} /> Yes
+                                                <input id="THN" value='NO' type="radio" name='THN' onChange={(event, value) => { handleSubmitDataRide(event, value, 56) }} /> No
+                                                <input id="THN" value='N/A' type="radio" name='THN' onChange={(event, value) => { handleSubmitDataRide(event, value, 56) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1672,9 +1717,9 @@ const EnterCheckRide = () => {
                                                 Train Handling – O) Undesired Emergency (1 pt)
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="THO" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 57) }} /> Yes
-                                                <input id="THO" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 57) }} /> No
-                                                <input id="THO" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 57) }} /> N/A
+                                                <input id="THO" value='YES' type="radio" name='THO' onChange={(event, value) => { handleSubmitDataRide(event, value, 57) }} /> Yes
+                                                <input id="THO" value='NO' type="radio" name='THO' onChange={(event, value) => { handleSubmitDataRide(event, value, 57) }} /> No
+                                                <input id="THO" value='N/A' type="radio" name='THO' onChange={(event, value) => { handleSubmitDataRide(event, value, 57) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1686,9 +1731,9 @@ const EnterCheckRide = () => {
                                                 Train Handling –P) Proper Coupling Speed (1 pt)
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="THP" value='YES' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 58) }} /> Yes
-                                                <input id="THP" value='NO' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 58) }} /> No
-                                                <input id="THP" value='N/A' type="radio" name='' onChange={(event, value) => { handleSubmitDataRide(event, value, 58) }} /> N/A
+                                                <input id="THP" value='YES' type="radio" name='THP' onChange={(event, value) => { handleSubmitDataRide(event, value, 58) }} /> Yes
+                                                <input id="THP" value='NO' type="radio" name='THP' onChange={(event, value) => { handleSubmitDataRide(event, value, 58) }} /> No
+                                                <input id="THP" value='N/A' type="radio" name='THP' onChange={(event, value) => { handleSubmitDataRide(event, value, 58) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1704,7 +1749,14 @@ const EnterCheckRide = () => {
                                             </Grid>
                                             <Grid xs={12} className="mt14" >
 
-                                                <TextField required={false} id="Comments" type='number' label="" variant="outlined" className="w100p" onChange={(event, value) => { handleSubmitDataRide(event, value, 59) }} />
+                                                <TextField
+                                                // type="text"
+                                                    id="Comments"
+                                                    label={'Comment here'}
+                                                    variant="outlined"
+                                                    className="w100p"
+                                                    // onChange={(event, value) => { handleSubmitDataRide(event, value, 59) }} 
+                                                    />
                                             </Grid>
                                         </Grid>
                                     </Grid>

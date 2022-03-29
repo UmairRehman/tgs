@@ -74,6 +74,6 @@ export const routes = {
     },
     checkride:{
         create:'/employee/checkRide/',
-        checkride_table:'employee/checkRide/'
+        checkride_table:'employee/checkRide'
     }
 }

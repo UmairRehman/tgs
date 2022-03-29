@@ -385,7 +385,7 @@ const SafetyTesting = () => {
                   <TablePagination
                     rowsPerPageOptions={10}
                     component="div"
-                    count={10000}
+                    count={1000}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     onChangePage={handleChangePage}
