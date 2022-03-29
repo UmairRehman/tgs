@@ -4,11 +4,13 @@ import React, { useState, useEffect, useRef } from "react";
 import {
     Grid,
     Button,
+   
     TextareaAutosize,
     Typography
 } from "@material-ui/core";
 import { Link, useHistory } from "react-router-dom";
 import TextField from '@material-ui/core/TextField';
+
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
@@ -20,6 +22,7 @@ import Snackbar from '../../../Components/Snackbar';
 import { helpers } from "../../../helpers";
 import MobileScreen from './Mobile/Enter-RailRoad-Add';
 import { isMobile } from 'react-device-detect';
+
 
 /** Local deoendencies & Libraries */
 import Services from '../../../Services';
@@ -745,7 +748,13 @@ const EnterCheckRide = () => {
                                             </Grid>
                                             <Grid xs={12} className="mt14">
 
-                                                <TextField required={false} id="locomotiveConsist" type='number' label="" onChange={(event, value) => { handleSubmitDataRide(event, value, 3) }} variant="outlined" className="w100p" />
+                                                <TextField required={false} id="locomotiveConsist" type='number'
+                                                InputProps={{
+                                                    inputProps: { 
+                                                        max: 100, min: 1 
+                                                    }
+                                                }}
+                                                 label="" onChange={(event, value) => { handleSubmitDataRide(event, value, 3) }} variant="outlined" className="w100p" />
                                             </Grid>
                                         </Grid>
                                     </Grid>
@@ -758,7 +767,14 @@ const EnterCheckRide = () => {
                                             </Grid>
                                             <Grid xs={12} className="mt14">
 
-                                                <TextField required={false} id="TCLoads" type='number' label="" variant="outlined" onChange={(event, value) => { handleSubmitDataRide(event, value, 4) }} className="w100p" />
+                                                <TextField required={false} id="TCLoads"
+                                                 type='number'
+                                                 InputProps={{
+                                                    inputProps: { 
+                                                        max: 100, min: 1 
+                                                    }
+                                                }}
+                                                 label="" variant="outlined" onChange={(event, value) => { handleSubmitDataRide(event, value, 4) }} className="w100p" />
                                             </Grid>
                                         </Grid>
                                     </Grid>
@@ -771,7 +787,13 @@ const EnterCheckRide = () => {
                                             </Grid>
                                             <Grid xs={12} className="mt14">
 
-                                                <TextField required={false} id="TCEmpties" type='number' label="" variant="outlined" onChange={(event, value) => { handleSubmitDataRide(event, value, 5) }} className="w100p" />
+                                                <TextField required={false} id="TCEmpties" type='number' 
+                                                InputProps={{
+                                                    inputProps: { 
+                                                        max: 100, min: 1 
+                                                    }
+                                                }}
+                                                label="" variant="outlined" onChange={(event, value) => { handleSubmitDataRide(event, value, 5) }} className="w100p" />
                                             </Grid>
                                         </Grid>
                                     </Grid>
@@ -784,7 +806,13 @@ const EnterCheckRide = () => {
                                             </Grid>
                                             <Grid xs={12} className="mt14">
 
-                                                <TextField required={false} id="TCTotalTonage" type='number' label="" variant="outlined" onChange={(event, value) => { handleSubmitDataRide(event, value, 6) }} className="w100p" />
+                                                <TextField required={false} id="TCTotalTonage" type='number'
+                                                InputProps={{
+                                                    inputProps: { 
+                                                        max: 100, min: 1 
+                                                    }
+                                                }}
+                                                label="" variant="outlined" onChange={(event, value) => { handleSubmitDataRide(event, value, 6) }} className="w100p" />
                                             </Grid>
                                         </Grid>
                                     </Grid>
@@ -797,7 +825,13 @@ const EnterCheckRide = () => {
                                             </Grid>
                                             <Grid xs={12} className="mt14">
 
-                                                <TextField required={false} id="TMTraveled" type='number' label="" variant="outlined" onChange={(event, value) => { handleSubmitDataRide(event, value, 7) }} className="w100p" />
+                                                <TextField required={false} id="TMTraveled" type='number' 
+                                                InputProps={{
+                                                    inputProps: { 
+                                                        max: 100, min: 1 
+                                                    }
+                                                }}
+                                                label="" variant="outlined" onChange={(event, value) => { handleSubmitDataRide(event, value, 7) }} className="w100p" />
                                             </Grid>
                                         </Grid>
                                     </Grid>
