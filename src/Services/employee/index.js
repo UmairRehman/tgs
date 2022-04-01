@@ -158,4 +158,33 @@ export const view_rule_event = async (payload, headers) => {
         payload,
         headers
     );
+
+};
+
+
+export const get_checkride_table = async (payload, headers) => {
+    return await api.get(
+        routes.checkride.checkride_table,
+        payload,
+        headers
+    );
+};
+
+
+
+export const checkride_table = async (payload, headers) => {
+    return await api.get(
+        routes.checkride.checkride_table,
+        payload,
+        headers
+    );
+};
+
+
+export const checkride_table_submit = async (payload, headers) => {
+    return await api.post(
+        routes.checkride.checkride_table,
+        payload,
+        headers
+    );
 };

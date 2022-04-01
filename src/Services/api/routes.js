@@ -71,5 +71,9 @@ export const routes = {
         create: 'employee/broadcastMessage/',
         getAllSend: 'employee/broadcastMessage/send',
         getAll: 'employee/broadcastMessage/recieve',
+    },
+    checkride:{
+        create:'/employee/checkRide/',
+        checkride_table:'employee/checkRide'
     }
 }

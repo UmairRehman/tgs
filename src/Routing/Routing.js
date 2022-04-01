@@ -55,6 +55,7 @@ import Search from '../Pages/HrAdmin/search';
 import Details from '../Pages/HrAdmin/details';
 import OnBoarding from '../Pages/ITManager/Onboarding/onBoarding';
 import NewHireQueueIT from '../Pages/ITManager/NewHireQueue/newHireITQueue';
+import EnterCheckRide from '../Pages/Employee/Safety/Enter-CheckRide';
 
 const Routing = () => (
   <Router>
@@ -67,6 +68,7 @@ const Routing = () => (
     <Route exact path="/safety-testing" component={()=><SafetyTesting/>}/>
     <Route exact path="/add-event-rules" component={()=><SafetyTestingEdit/>}/>
     <Route exact path="/enter-railroad-event" component={()=><Railroad/>}/>
+    <Route exact path="/enter-check-ride" component={()=><EnterCheckRide/>}/>
     
     <Route exact path="/create-ticket" component={()=><CreateTicket/>}/>
     
