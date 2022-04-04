@@ -47,6 +47,7 @@ const Railroad = () => {
 
   const [railRoad, setRailRoad] = useState({
     primary: '', //1
+
     oje: false, //2
     ojeComment: '', //3
     assisting: [], //4
@@ -176,7 +177,7 @@ const Railroad = () => {
   }
 
   const submitBtn = async (event) => {
-
+    console.log('asasas')
     event.preventDefault();
     if (!loading) {
       setSuccess(false);
@@ -379,7 +380,14 @@ const Railroad = () => {
                         Primary
                       </Grid>
                       <Grid xs={12} className="mt14">
-                        <TextField required={true} id="outlined-basic" label="Comment here" value={`${lists?.currentUser?.firstName} ${lists?.currentUser?.lastName}`} disabled variant="outlined" className="w100p" />
+                        <TextField
+                          required={true}
+                          id="outlined-basic"
+                          label="Comment here"
+                          value={`${lists?.currentUser?.firstName} ${lists?.currentUser?.lastName}`}
+                          disabled
+                          variant="outlined"
+                          className="w100p" />
                       </Grid>
                     </Grid>
                   </Grid>
@@ -506,6 +514,30 @@ const Railroad = () => {
                   </Grid>
                 </Grid>
                 <Grid xs={12} md={7}>
+                  {/* Stop Test */}
+                  <Grid xs={12} className="mt30">
+                    <Grid xs={12} className="mbold">
+                      <Typography variant="h5" className="mbold f16" component="h6">
+                        Stop Test
+                      </Typography>
+                    </Grid>
+                    <Grid xs={12} container>
+                      <Grid xs={3} className="mt14 pr40">
+                        <Switch checked={railRoad.stopTest} onChange={(event, value) => handleSubmitData(event, value, 12)} />
+                      </Grid>
+                      <Grid xs={9} className="mt14 fieldSubText">
+                        <TextField
+                          id="stopTest"
+                          label={'Comment here'}
+                          variant="outlined"
+                          className="w100p"
+                        />
+                        <Typography variant="h6" className="MuiTypography-subtitle2 MuiTypography-colorTextSecondary" component="h6">
+                          Please leave this field empty if you have no comments
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                  </Grid>
                   {/* OJE */}
                   <Grid xs={12} className="mt30">
                     <Grid xs={12} className="mbold">

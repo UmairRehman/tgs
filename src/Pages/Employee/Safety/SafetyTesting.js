@@ -1,4 +1,4 @@
-import React , { useState ,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Grid,
   Button,
@@ -14,16 +14,18 @@ import {
   DialogContentText,
   Dialog,
   useMediaQuery,
-  useTheme
+  useTheme,
 } from "@material-ui/core";
+
 import { Link } from "react-router-dom";
 import PageHeader from "../../../Components/PageHeader";
 import LeftControl from "../../../Components/LeftControl";
 import MobileScreen from './Mobile/SafetyTesting';
-import {isMobile} from 'react-device-detect';
+import { isMobile } from 'react-device-detect';
 import Services from '../../../Services'
 import { useHistory } from "react-router-dom";
 
+import TabsComponent from '../../../Components/Tabs';
 import Snackbar from '../../../Components/Snackbar';
 import { helpers } from "../../../helpers";
 
@@ -38,6 +40,8 @@ const {
   seriliazeParams
 } = helpers;
 
+
+
 const columns = [
   { id: "id", label: "Event ID", minWidth: 170, type: "value" },
   { id: "date", label: "Date", minWidth: 120, type: "value" },
@@ -50,6 +54,18 @@ const columns = [
 ];
 
 
+
+const checkRideColumns= [
+  { id: "EngineerId", label: "EngineerId", minWidth: 170, type: "value" },
+  { id: "locomotiveConsist", label: "locomotiveConsist", minWidth: 120, type: "value" },
+  { id: "TCLoads", label: "TCLoads", minWidth: 100, type: "value" },
+  { id: "TCEmpties", label: "TCEmpties", minWidth: 100, type: "value" },
+  { id: "TCTotalTonage", label: "TCTotalTonage", minWidth: 170, type: "value" },
+  { id: "TMTraveled", label: "Total Miles Traveled", minWidth: 170, type: "value" },
+  
+  { id: "", label: "Action", minWidth: 50, type: "view" },
+];
+
 const columnsForView = [
   "ID",
   "Event_ID",
@@ -59,16 +75,22 @@ const columnsForView = [
   "Comments"
 ];
 
+
 const SafetyTesting = () => {
   const history = useHistory();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+  // state lifiting to for tab component
+  const tabState = useState(0);
+
+  const [tabValue, setTabValue] = tabState;
 
   const handleChangePage = (event, newPage) => {
-    let offset =  newPage*10 ;
-    let limit = 10 ;
-    getlistEvents(offset,limit);
+    let offset = newPage * 10;
+    let limit = 10;
+    getlistEvents(offset, limit);
     setPage(newPage);
+    console.log(event, newPage)
   };
 
   const handleChangeRowsPerPage = (event) => {
@@ -86,35 +108,34 @@ const SafetyTesting = () => {
   const handleClickOpen = async (value) => {
     try {
       setLoading(true)
-      let data = await employee.view_rule_event({ id:value })
-      if(data.httpStatus==200)
-      {
-         data = data?.data.map(row=>{
-            return{
-              id:row.id,
-              eventID:(row?.TestEventRule?.TestEventId)?row.TestEventRule.TestEventId:null,
-              rule_NBR:(row?.TestEventRule?.Rule?.RuleNo)?row.TestEventRule.Rule.RuleNo:null,
-              crew_member:(row?.Employee?.firstName)?`${row?.Employee.firstName} ${row?.Employee.lastName}`:null,
-              result: (row?.result)?row.result:null,
-              comment: (row?.comment)?row.comment:null
-            }
-          }) 
-          data.sort((a,b)=>{
-            return (b.id  - a.id)
-          })
-          // console.log("data",data);
-          setModalData(data)
-          setLoading(false) 
+      let data = await employee.view_rule_event({ id: value })
+      if (data.httpStatus == 200) {
+        data = data?.data.map(row => {
+          return {
+            id: row.id,
+            eventID: (row?.TestEventRule?.TestEventId) ? row.TestEventRule.TestEventId : null,
+            rule_NBR: (row?.TestEventRule?.Rule?.RuleNo) ? row.TestEventRule.Rule.RuleNo : null,
+            crew_member: (row?.Employee?.firstName) ? `${row?.Employee.firstName} ${row?.Employee.lastName}` : null,
+            result: (row?.result) ? row.result : null,
+            comment: (row?.comment) ? row.comment : null
+          }
+        })
+        data.sort((a, b) => {
+          return (b.id - a.id)
+        })
+        // console.log("data",data);
+        setModalData(data)
+        setLoading(false)
       }
     } catch (error) {
-      console.log("Error",error);
+      console.log("Error", error);
       return showSnackBar(`Please Try  Again \n Error Occured while fetching data: ${error}`);
     }
     setOpen(true);
   };
-  
-  const handleAddRule =(value) =>{
-    console.log("value",value);
+
+  const handleAddRule = (value) => {
+    console.log("value", value);
     // history.push({
     //   pathname : "/add-event-rules",
     //   state: {eventID: value}
@@ -125,18 +146,29 @@ const SafetyTesting = () => {
     setOpen(false);
   };
 
-  const [rows, setRows] = useState([]) 
- 
-  const getlistEvents =async (offset=0,limit=10) =>{
-    let params = '?'.concat(seriliazeParams({offset,limit}))
+  const handleAddEvent = (event, tabIndex) => {
+    setTabValue(tabIndex);
+
+    history.push(event);
+  }
+
+  const [rows, setRows] = useState([])
+
+  const [rowsRider, setRowsRider] = useState([])
+
+
+  const getlistEvents = async (offset = 0, limit = 10) => {
+    let params = '?'.concat(seriliazeParams({ offset, limit }))
     try {
-      let data = await employee.get_test_event_listing({params})
-      console.log(data);
-      if(data.httpStatus==200){
-        data= data.data
+      let data = await employee.get_test_event_listing({ params });
+      if (process.env.NODE_ENV === 'development')
+        console.log(data);;
+
+      if (data.httpStatus == 200) {
+        data = data.data
         data.forEach(element => {
-          element.date = moment( new Date(element.date) ).format('DD-MM-YYYY')
-          element.time = element.time.slice(0,-3)
+          element.date = moment(new Date(element.date)).format('DD-MM-YYYY')
+          element.time = element.time.slice(0, -3)
           element.locationAdded = element.TGSLocation.name
           element.rulesCount = element.TestEventRules.length
         });
@@ -144,16 +176,172 @@ const SafetyTesting = () => {
       }
     } catch (error) {
       console.log(error);
-      
+
+    }
+  }
+  const getcheckRide = async (offset = 0, limit = 10) => {
+    let params = '?'.concat(seriliazeParams({ offset, limit }))
+    try {
+      let data = await employee.get_checkride_table({ params });
+      if (process.env.NODE_ENV === 'development')
+        console.log(data);;
+
+      if (data.httpStatus == 200) {
+        data = data.data
+        data.forEach(element => {
+          element.date = moment(new Date(element.date)).format('DD-MM-YYYY')
+          element.time = element.time.slice(0, -3)
+          // element.locationAdded = element.TGSLocation.name
+          // element.rulesCount = element.TestEventRules.length
+        });
+        // setRows(data)
+        setRowsRider(data)
+      }
+    } catch (error) {
+      console.log(error);
+
     }
   }
   useEffect(async () => {
     await getlistEvents()
-  }, [])
+    await getcheckRide()
+  }, []);
+  
+  const tableCheckRides = (checkRideColumns) => (
+    <TableContainer>
+      <Table aria-label="table">
+        <TableHead>
+          <TableRow>
+            {checkRideColumns.map((column) => (
+              <TableCell
+                className="bold f16"
+                key={column.id}
+                align={column.align}
+                style={{ minWidth: column.minWidth }}
+              >
+                {column.label}
+              </TableCell>
+            ))}
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {rowsRider
+            .map((row) => {
+              return (
+                
+                <TableRow
+                  hover
+                  role="checkbox"
+                  tabIndex={-1}
+                  key={row.code}
+                > {console.log(row)}
+                  {checkRideColumns.map((column) => {
+                    const value = row[column.id];
+                    return (
+                      <TableCell
+                        key={column.id}
+                        align={column.align}
+                      >
+                        {/* {column.format &&
+                      typeof value === "number"
+                        ? column.format(value)
+                        : value} */}
+                        {column.type == "edit" ? (
+                          <Link
+                            // onClick={()=>handleAddRule(row.id)} 
+                            to={{
+                              pathname: "/add-event-rules",
+                              state: { eventID: row.id }
+                            }}
+                            className="EditIcon">
+                          </Link>
+                        ) 
+                        //action view
+                        // : column.type == "view" ? (
+                        //   <Button onClick={() => handleClickOpen(row.id)} className="ViewIcon"></Button>
+                        // ) 
+                        : (
+                          value
+                        )}
+                      </TableCell>
+                    );
+                  })}
+                </TableRow>
+              );
+            })}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
 
-  if(isMobile) {
+
+
+  const tableContainer = (columns) => (
+    <TableContainer>
+      <Table aria-label="table">
+        <TableHead>
+          <TableRow>
+            {columns.map((column) => (
+              <TableCell
+                className="bold f16"
+                key={column.id}
+                align={column.align}
+                style={{ minWidth: column.minWidth }}
+              >
+                {column.label}
+              </TableCell>
+            ))}
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {rows
+            .map((row) => {
+              return (
+                <TableRow
+                  hover
+                  role="checkbox"
+                  tabIndex={-1}
+                  key={row.code}
+                >
+                  {columns.map((column) => {
+                    const value = row[column.id];
+                    return (
+                      <TableCell
+                        key={column.id}
+                        align={column.align}
+                      >
+                        {/* {column.format &&
+                      typeof value === "number"
+                        ? column.format(value)
+                        : value} */}
+                        {column.type == "edit" ? (
+                          <Link
+                            // onClick={()=>handleAddRule(row.id)} 
+                            to={{
+                              pathname: "/add-event-rules",
+                              state: { eventID: row.id }
+                            }}
+                            className="EditIcon">
+                          </Link>
+                        ) : column.type == "view" ? (
+                          <Button onClick={() => handleClickOpen(row.id)} className="ViewIcon"></Button>
+                        ) : (
+                          value
+                        )}
+                      </TableCell>
+                    );
+                  })}
+                </TableRow>
+              );
+            })}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+
+  if (isMobile) {
     return (
-        <MobileScreen />
+      <MobileScreen />
     )
   }
 
@@ -170,9 +358,16 @@ const SafetyTesting = () => {
           <Grid xs={12} className="ContentPage">
             {/* TGS Softwares */}
             <Grid xs={12}>
-              <Link to="/enter-railroad-event" className="LinkButton">
+              <button
+                onClick={handleAddEvent.bind(null, 'enter-railroad-event', 0)}
+                class="LinkButton mx-2 safety-testing-add-button">
                 Enter Railroad Test Event
-              </Link>
+              </button>
+              <button
+                onClick={handleAddEvent.bind(null, 'enter-check-ride', 1)}
+                class="LinkButton mx-2 safety-testing-add-button">
+                Enter Checkride
+              </button>
               <Grid
                 xs={12}
                 container
@@ -180,70 +375,17 @@ const SafetyTesting = () => {
                 className="LiqTables SafetyTable"
               >
                 <Paper>
-                  <TableContainer>
-                    <Table aria-label="table">
-                      <TableHead>
-                        <TableRow>
-                          {columns.map((column) => (
-                            <TableCell
-                              className="bold f16"
-                              key={column.id}
-                              align={column.align}
-                              style={{ minWidth: column.minWidth }}
-                            >
-                              {column.label}
-                            </TableCell>
-                          ))}
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {rows
-                          .map((row) => {
-                            return (
-                              <TableRow
-                                hover
-                                role="checkbox"
-                                tabIndex={-1}
-                                key={row.code}
-                              >
-                                {columns.map((column) => {
-                                  const value = row[column.id];
-                                  return (
-                                    <TableCell
-                                      key={column.id}
-                                      align={column.align}
-                                    >
-                                      {/* {column.format &&
-                                      typeof value === "number"
-                                        ? column.format(value)
-                                        : value} */}
-                                      {column.type == "edit" ? (
-                                        <Link 
-                                          // onClick={()=>handleAddRule(row.id)} 
-                                          to={{
-                                            pathname : "/add-event-rules",
-                                            state: {eventID: row.id}
-                                          }}
-                                          className="EditIcon">
-                                         </Link>
-                                      ) : column.type == "view" ? (
-                                        <Button  onClick={()=>handleClickOpen(row.id)} className="ViewIcon"></Button>
-                                      ) : (
-                                        value
-                                      )}
-                                    </TableCell>
-                                  );
-                                })}
-                              </TableRow>
-                            );
-                          })}
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
+                  <TabsComponent
+                    tabState={tabState}
+                    tabDetails={[
+                      { label: 'Testing Events', content: tableContainer(columns) },
+                      { label: 'Check Rides', content: tableCheckRides(checkRideColumns) }
+                    ]}
+                  ></TabsComponent>
                   <TablePagination
                     rowsPerPageOptions={10}
                     component="div"
-                    count={10000}
+                    count={1000}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     onChangePage={handleChangePage}
@@ -251,7 +393,7 @@ const SafetyTesting = () => {
                   />
                 </Paper>
               </Grid>
-            </Grid> 
+            </Grid>
           </Grid>
           {/* Page Start End */}
         </Grid>
@@ -271,15 +413,15 @@ const SafetyTesting = () => {
         </Button>
         <DialogContent>
           {
-            (modalData.length>0)?
-            <Grid xs={12} className="mb20">
+            (modalData.length > 0) ?
+              <Grid xs={12} className="mb20">
                 <TableContainer>
                   <Table>
                     <TableHead>
                       <TableRow>
                         {
                           // (columnsForView) && 
-                          columnsForView.map((row)=>{
+                          columnsForView.map((row) => {
                             return (
                               <TableCell>{`${row}`}</TableCell>
                             );
@@ -287,11 +429,11 @@ const SafetyTesting = () => {
                         }
                       </TableRow>
                     </TableHead>
-                    
+
                     <TableBody>
                       {
-                        modalData.map(row=>{
-                          return(
+                        modalData.map(row => {
+                          return (
                             <TableRow>
                               <TableCell>{`${row.id}`}</TableCell>
                               <TableCell>{`${row.eventID}`}</TableCell>
@@ -307,24 +449,24 @@ const SafetyTesting = () => {
                   </Table>
                 </TableContainer>
               </Grid>
-            :
+              :
               <Grid xs={12}>
                 <TableContainer>
-                    <Table>
-                      <TableHead>
-                        <TableRow>
-                          <TableCell className="pt0 pb6">No Rules Found</TableCell>
-                        </TableRow>
-                      </TableHead>
-                    </Table>
-                  </TableContainer>
-                </Grid>
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell className="pt0 pb6">No Rules Found</TableCell>
+                      </TableRow>
+                    </TableHead>
+                  </Table>
+                </TableContainer>
+              </Grid>
           }
-          
-          
+
+
         </DialogContent>
       </Dialog>
-      
+
 
 
 
