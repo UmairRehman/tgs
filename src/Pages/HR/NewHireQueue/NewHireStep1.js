@@ -1318,7 +1318,8 @@ const NewHireStep1 = () => {
                     <Button
                       type="submit"
                       className="LinkButton"
-                      
+
+                      // disabled={isSaveButtonDisabled}
                     >
                       {/* <Link to="/new-hire-queue/details/approval" className="LinkButton"> */}
                       Save & Continue
