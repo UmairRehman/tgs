@@ -47,7 +47,6 @@ const userProfile = JSON.parse(localStorage.getItem("user_profile"));
 
 if (userProfile) {
   var { EmployeeStatusId, role_id } = userProfile;
-  var roleFromLocalStorage = role_id;
 }
 
 // First Table
@@ -213,8 +212,6 @@ const Crtirows = [
 const EmployeeResult = (props) => {
 
   console.log(props);
-  console.log(roleFromLocalStorage);
-  console.log(roleFromLocalStorage === 5);
 
 
   let history = useHistory();
@@ -927,9 +924,12 @@ const EmployeeResult = (props) => {
                                 tabIndex={-1}
                                 key={row.code}
                               >
+
                                 {CertiCol.map((column) => {
                                   const value = row[column.id];
                                   return (
+
+
                                     <TableCell
                                       key={column.id}
                                       align={column.align}
@@ -953,20 +953,24 @@ const EmployeeResult = (props) => {
 
 
               {/* Add Certificate & License Button */}
-              <Grid xs={12} container className="mt40">
-                <Button for="selecteSertificate" className="LinkButton" onClick={openCertificateModal}>
-                  Add Certificate & License
-                </Button>
-                {/* <input id="selecteSertificate" type="file" className="hide" /> */}
-              </Grid>
+
+              {
+                (role_id == 2 || role_id == 5) ?
 
 
+                  <Grid xs={12} container className="mt40">
+                    <Button for="selecteSertificate" className="LinkButton" onClick={openCertificateModal}>
+                      Add Certificate & License
+                    </Button>
+                    {/* <input id="selecteSertificate" type="file" className="hide" /> */}
+                  </Grid>
+                  : ""
 
-
+              }
 
 
               {
-                (roleFromLocalStorage === 5)
+                (role_id == 2 || role_id == 5)
                   ? (
                     <div>
 
@@ -1138,94 +1142,108 @@ const EmployeeResult = (props) => {
 
 
               {/* Employee Document */}
-              <Grid xs={12} className="mt30">
-                <Grid xs={12} className="mb10">
-                  <Typography className="bold">
-                    Employee Documents
-                  </Typography>
-                </Grid>
-                <Grid xs={12} md={8} lg={6} container className="HREmployeeDownloads">
-                  {
-                    (files.length)
-                      ? files.map((name) => (
-                        <Grid className="PDFDownload">
-                          <Grid className="FileName">
+              {
+                (role_id == 2 || role_id == 5) ?
 
-                            <a href={`${apiPath}/employee/applicant/download?id=${employeeDetails?.id}&name=${name}`} target="_blank">{name}</a>
+                  (<Grid xs={12} className="mt30">
+                    <Grid xs={12} className="mb10">
+                      <Typography className="bold">
+                        Employee Documents
+                      </Typography>
+                    </Grid>
+                    <Grid xs={12} md={8} lg={6} container className="HREmployeeDownloads">
+                      {
+                        (files.length)
+                          ? files.map((name) => (
+                            <Grid className="PDFDownload">
+                              <Grid className="FileName">
 
-                          </Grid>
-                          {/* <Button></Button> */}
-                        </Grid>
-                      ))
-                      : (<Grid>
-                        No files found
-                      </Grid>)
-                  }
+                                <a href={`${apiPath}/employee/applicant/download?id=${employeeDetails?.id}&name=${name}`} target="_blank">{name}</a>
 
-                </Grid>
-              </Grid>
+                              </Grid>
+                              {/* <Button></Button> */}
+                            </Grid>
+                          ))
+                          : (<Grid>
+                            No files found
+                          </Grid>)
+                      }
+
+                    </Grid>
+                  </Grid>)
+                  : ''
+              }
+
+              {/*attachment fle*/}
+
+
+
+
               <Grid xs={12} container>
 
                 <Grid xs={12} md={8} lg={6}>
                   {/* ---------- */}
-                  <Grid xs={12} container>
-                    <Grid xs={12} className="mt30 pr40">
-                      {
-                        !additionalFiles.length
-                          ? (
-                            <Grid xs={12}>
-                              <Grid xs={12} className="mbold">
-                                Attach Additional Files
-                              </Grid>
-                              <Grid xs={12} id="Step2DragFile" className="Step2DragFile mt14">
-                                Drop File Here OR
-                                <Button
-                                  onClick={($event) => {
-                                    const input = document.getElementById('additional-files-input');
+                  {
+                    (role_id == 2 || role_id == 5) ?
+                      <Grid xs={12} container>
+                        <Grid xs={12} className="mt30 pr40">
+                          {
+                            !additionalFiles.length
+                              ? (
+                                <Grid xs={12}>
+                                  <Grid xs={12} className="mbold">
+                                    Attach Additional Files
+                                  </Grid>
+                                  <Grid xs={12} id="Step2DragFile" className="Step2DragFile mt14">
+                                    Drop File Here OR
+                                    <Button
+                                      onClick={($event) => {
+                                        const input = document.getElementById('additional-files-input');
 
-                                    input.click();
-                                  }}>Select Files</Button>
-                              </Grid>
-                              <input
-                                id="additional-files-input"
-                                type="file"
-                                multiple="multiple"
-                                hidden="true"
-                                onChange={($event) => {
-                                  setAdditionalFiles($event.target.files);
-                                }}
-                              />
-                            </Grid>
-                          )
-                          : (
-                            <Grid className="Step2DragFile files-tag-container">
-                              {
-                                Array
-                                  .from(additionalFiles)
-                                  .map(
-                                    (file, fileIndex) => (
-                                      <Grid className="files-tag position-relative">
-                                        <Grid className="d-flex justify-content-end position-absolute r-0">
-                                          <Button
-                                            className="dustbinBtn min-width-auto dustbinBtn-size-auto-100"
-                                            onClick={
-                                              $e => {
-                                                removeFile(fileIndex)
-                                              }
-                                            }></Button>
-                                        </Grid>
-                                        <Typography>
-                                          {file.name}
-                                        </Typography>
-                                      </Grid>
-                                    )
-                                  )
-                              }
-                            </Grid>
-                          )
-                      }
-                    </Grid>
-                  </Grid>
+                                        input.click();
+                                      }}>Select Files</Button>
+                                  </Grid>
+                                  <input
+                                    id="additional-files-input"
+                                    type="file"
+                                    multiple="multiple"
+                                    hidden="true"
+                                    onChange={($event) => {
+                                      setAdditionalFiles($event.target.files);
+                                    }}
+                                  />
+                                </Grid>
+                              )
+                              : (
+                                <Grid className="Step2DragFile files-tag-container">
+                                  {
+                                    Array
+                                      .from(additionalFiles)
+                                      .map(
+                                        (file, fileIndex) => (
+                                          <Grid className="files-tag position-relative">
+                                            <Grid className="d-flex justify-content-end position-absolute r-0">
+                                              <Button
+                                                className="dustbinBtn min-width-auto dustbinBtn-size-auto-100"
+                                                onClick={
+                                                  $e => {
+                                                    removeFile(fileIndex)
+                                                  }
+                                                }></Button>
+                                            </Grid>
+                                            <Typography>
+                                              {file.name}
+                                            </Typography>
+                                          </Grid>
+                                        )
+                                      )
+                                  }
+                                </Grid>
+                              )
+                          }
+                        </Grid>
+                      </Grid> : ""
+                  }
                   {/* ---------- */}
 
                   <form onSubmit={onSubmitEmploye}>
@@ -1244,6 +1262,8 @@ const EmployeeResult = (props) => {
 
 
               </Grid>
+                  
+              
             </Grid>
             {/* Page Start End */}
           </Grid>

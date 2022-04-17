@@ -1347,9 +1347,11 @@ const Application = () => {
                                                     <label for="ResumeSelect" className="labelButton">Select Files</label>
                                                     <input
                                                         type="file"
+                                                       
                                                         id="ResumeSelect"
                                                         className="hide"
                                                         accept=".pdf"
+                                                        
                                                         onChange={
                                                             ($e) => setStateForFormControl(
                                                                 filesToUpload,

@@ -19,5 +19,6 @@ export const statics = {
         not_found: 'Not found',
         token_invalid: 'Invalid Token',
         user_not_found: 'User Not Exist',
+        all_files_not_found: "Kindly upload all of the files",
     }
 }
