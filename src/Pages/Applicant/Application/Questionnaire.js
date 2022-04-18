@@ -223,7 +223,7 @@ const Questionnaire = () => {
             workWeekends,
             travels,
             relocate,
-            tgsComment,
+            // tgsComment,
             workBefore,
         ]
     );
