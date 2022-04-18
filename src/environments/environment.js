@@ -41,7 +41,7 @@ export const environment = {
       apiPaths: { base, router, port },
     } = this;
 
-    return `${base}/${router}`;
+    return `${base}:${port}/${router}`;
   },
 
   get socketPath() {
