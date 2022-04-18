@@ -213,6 +213,7 @@ const EmployeeResult = (props) => {
 
   console.log(props);
 
+
   let history = useHistory();
 
   const location = useLocation();
@@ -255,7 +256,7 @@ const EmployeeResult = (props) => {
 
   const [updatedCertificateID, setUpdatedCertificateID] = useState('')
 
-  const [updatedCertificateName, setUpdatedCertificateName] = useState('')
+  const [updatedCertificateName, setUpdatedCertificateName] = useState('default_license')
 
   const [updatedCertificateIssueDate, setUpdatedCertificateIssueDate] = useState('')
 
@@ -968,155 +969,175 @@ const EmployeeResult = (props) => {
               }
 
 
+              {
+                (role_id == 2 || role_id == 5)
+                  ? (
+                    <div>
 
-              {(role_id == 5 ||role_id ==2) ?
-                <div>
+                      <Grid xs={12} className="LiqTables">
+                        <Grid xs={12} className="mt28 mb14">
+                          <Typography variant="h1" component="h2" className="bold f22">
+                            Position
+                          </Typography>
+                        </Grid>
+                        <Paper>
+                          <TableContainer>
+                            <Table aria-label="table">
+                              <TableHead>
+                                <TableRow>
+                                  {Positioncol.map((column) => (
+                                    <TableCell
+                                      className="bold f16"
+                                      key={column.id}
+                                      align={column.align}
+                                      style={{ minWidth: column.minWidth }}
+                                    >
+                                      {column.label}
+                                    </TableCell>
+                                  ))}
+                                </TableRow>
+                              </TableHead>
+                              <TableBody>
+                                {
+                                  (position.length)
+                                    ? (
+                                      position
+                                        .map((row) => {
+                                          return (
+                                            <TableRow
+                                              hover
+                                              role="checkbox"
+                                              tabIndex={-1}
+                                              key={row.code}
+                                            >
+                                              {Positioncol.map((column) => {
+                                                var ex = column.id;
+                                                var value = row;
+                                                // const value = row[column.id];
+                                                while (ex.includes(".")) {
+                                                  let v = ex.split('.');
+                                                  value = value[v[0]];
+                                                  ex = v[1];
+                                                  // code block to be executed
+                                                }
+                                                value = value[ex];
+                                                return (
+                                                  <TableCell
+                                                    key={column.id}
+                                                    align={column.align}
+                                                  >
+                                                    {column.type == "edit" ? (
 
-                  <Grid xs={12} className="LiqTables">
-                    <Grid xs={12} className="mt28 mb14">
-                      <Typography variant="h1" component="h2" className="bold f22">
-                        Position
-                      </Typography>
-                    </Grid>
-                    <Paper>
-                      <TableContainer>
-                        <Table aria-label="table">
-                          <TableHead>
-                            <TableRow>
-                              {Positioncol.map((column) => (
-                                <TableCell
-                                  className="bold f16"
-                                  key={column.id}
-                                  align={column.align}
-                                  style={{ minWidth: column.minWidth }}
-                                >
-                                  {column.label}
-                                </TableCell>
-                              ))}
-                            </TableRow>
-                          </TableHead>
-                          <TableBody>
-                            {position
-                              .map((row) => {
-                                return (
-                                  <TableRow
-                                    hover
-                                    role="checkbox"
-                                    tabIndex={-1}
-                                    key={row.code}
-                                  >
-                                    {Positioncol.map((column) => {
-                                      var ex = column.id;
-                                      var value = row;
-                                      // const value = row[column.id];
-                                      while (ex.includes(".")) {
-                                        let v = ex.split('.');
-                                        value = value[v[0]];
-                                        ex = v[1];
-                                        // code block to be executed
-                                      }
-                                      value = value[ex];
-                                      return (
-                                        <TableCell
-                                          key={column.id}
-                                          align={column.align}
-                                        >
-                                          {column.type == "edit" ? (
-
-                                            <Button onClick={() => editPosiotion(row)} className="EditIcon"></Button>
-                                          )
-                                            : (
-                                              value
-                                            )}
-                                        </TableCell>
-                                      );
-                                    })}
-                                  </TableRow>
-                                );
-                              })}
-                          </TableBody>
-                        </Table>
-                      </TableContainer>
-                    </Paper>
-                  </Grid>
-
-
-                  <Grid xs={12} className="LiqTables">
-                    <Grid xs={12} className="mt28 mb14">
-                      <Typography variant="h1" component="h2" className="bold f22">
-                        Pay Details
-                      </Typography>
-                    </Grid>
-                    <Paper>
-                      <TableContainer>
-                        <Table aria-label="table">
-                          <TableHead>
-                            <TableRow>
-                              {PayCol.map((column) => (
-                                <TableCell
-                                  className="bold f16"
-                                  key={column.id}
-                                  align={column.align}
-                                  style={{ minWidth: column.minWidth }}
-                                >
-                                  {column.label}
-                                </TableCell>
-                              ))}
-                            </TableRow>
-                          </TableHead>
-                          <TableBody>
-                            {payRate
-                              .map((row) => {
-                                return (
-                                  <TableRow
-                                    hover
-                                    role="checkbox"
-                                    tabIndex={-1}
-                                    key={row.code}
-                                  >
-                                    {PayCol.map((column) => {
-                                      var ex = column.id;
-                                      var value = row;
-                                      // const value = row[column.id];
-                                      while (ex.includes(".")) {
-                                        let v = ex.split('.');
-                                        value = value[v[0]];
-                                        ex = v[1];
-                                        // code block to be executed
-                                      }
-                                      value = value[ex];
-                                      return (
-                                        <TableCell
-                                          key={column.id}
-                                          align={column.align}
-                                        >
-                                          {column.type == "edit" ? (
-                                            <Button onClick={() => editPay(row)} className="EditIcon"></Button>
-                                          )
-                                            : (
-                                              value
-                                            )}
-                                        </TableCell>
-                                      );
-                                    })}
-                                  </TableRow>
-                                );
-                              })}
-                          </TableBody>
-                        </Table>
-                      </TableContainer>
-                    </Paper>
-                  </Grid>
+                                                      <Button onClick={() => editPosiotion(row)} className="EditIcon"></Button>
+                                                    )
+                                                      : (
+                                                        value
+                                                      )}
+                                                  </TableCell>
+                                                );
+                                              })}
+                                            </TableRow>
+                                          );
+                                        })
+                                    )
+                                    : (
+                                      <Grid xs={12}>
+                                        No data found
+                                      </Grid>
+                                    )
+                                }
+                              </TableBody>
+                            </Table>
+                          </TableContainer>
+                        </Paper>
+                      </Grid>
 
 
-                  <Grid xs={12} container className="mt40">
-                    <Button onClick={terminateEmployee} className="LinkButton"
-                      disabled={employeeDetails?.terminate}>
-                      Terminate Employee
-                    </Button>
-                  </Grid>
-                </div>
-                : ""
+                      <Grid xs={12} className="LiqTables">
+                        <Grid xs={12} className="mt28 mb14">
+                          <Typography variant="h1" component="h2" className="bold f22">
+                            Pay Details
+                          </Typography>
+                        </Grid>
+                        <Paper>
+                          <TableContainer>
+                            <Table aria-label="table">
+                              <TableHead>
+                                <TableRow>
+                                  {PayCol.map((column) => (
+                                    <TableCell
+                                      className="bold f16"
+                                      key={column.id}
+                                      align={column.align}
+                                      style={{ minWidth: column.minWidth }}
+                                    >
+                                      {column.label}
+                                    </TableCell>
+                                  ))}
+                                </TableRow>
+                              </TableHead>
+                              <TableBody>
+                                {
+                                  (payRate.length)
+                                    ? (payRate
+                                      .map((row) => {
+                                        return (
+                                          <TableRow
+                                            hover
+                                            role="checkbox"
+                                            tabIndex={-1}
+                                            key={row.code}
+                                          >
+                                            {PayCol.map((column) => {
+                                              var ex = column.id;
+                                              var value = row;
+                                              // const value = row[column.id];
+                                              while (ex.includes(".")) {
+                                                let v = ex.split('.');
+                                                value = value[v[0]];
+                                                ex = v[1];
+                                                // code block to be executed
+                                              }
+                                              value = value[ex];
+                                              return (
+                                                <TableCell
+                                                  key={column.id}
+                                                  align={column.align}
+                                                >
+                                                  {column.type == "edit" ? (
+                                                    <Button onClick={() => editPay(row)} className="EditIcon"></Button>
+                                                  )
+                                                    : (
+                                                      value
+                                                    )}
+                                                </TableCell>
+                                              );
+                                            })}
+                                          </TableRow>
+                                        );
+                                      }))
+                                    : (
+                                      <Grid xs={12}>
+                                        No data found
+                                      </Grid>
+                                    )
+                                }
+                              </TableBody>
+                            </Table>
+                          </TableContainer>
+                        </Paper>
+                      </Grid>
+
+
+                      <Grid xs={12} container className="mt40">
+                        <Button onClick={terminateEmployee} className="LinkButton"
+                          disabled={employeeDetails?.terminate}>
+                          Terminate Employee
+                        </Button>
+                      </Grid>
+                    </div>
+                  )
+                  : ""
               }
 
 
@@ -1316,10 +1337,10 @@ const EmployeeResult = (props) => {
                   </Grid>
                 )
               }
-              <Grid xs={12} className="mbold mt30">
+              {/* <Grid xs={12} className="mbold mt30">
                 <Grid xs={12} className="pl14">License Certificate</Grid>
                 <TextField id="outlined-basic" required value={updatedCertificateName} onChange={(e) => setUpdatedCertificateName(e.target.value)} variant="outlined" className="w100p" />
-              </Grid>
+              </Grid> */}
 
               <Grid xs={12} className="mbold mt30">
                 <Grid xs={12} className="pl14">License Certificate List</Grid>
