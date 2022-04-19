@@ -459,8 +459,6 @@ const EmployeeResult = (props) => {
       console.log(exc);
     }
 
-
-
     // certificate api 
 
     try {
@@ -565,14 +563,11 @@ const EmployeeResult = (props) => {
 
   function getCertificate(row) {
 
-
     setUpdateCertificate(row)
     setUpdatedCertificateID(row.id)
     setUpdatedCertificateName(row.name)
     setUpdatedCertificateIssueDate(row.issue_date)
     setUpdatedCertificateExpiryDate(row.expiry_date)
-
-
 
     setOpenC(true);
     console.log(row)
@@ -969,9 +964,9 @@ const EmployeeResult = (props) => {
               }
 
 
-              {
+              {/* {
                 (role_id == 2 || role_id == 5)
-                  ? (
+                  ? ( */}
                     <div>
 
                       <Grid xs={12} className="LiqTables">
@@ -1136,9 +1131,9 @@ const EmployeeResult = (props) => {
                         </Button>
                       </Grid>
                     </div>
-                  )
+                  {/* )
                   : ""
-              }
+              } */}
 
 
               {/* Employee Document */}
@@ -1345,7 +1340,7 @@ const EmployeeResult = (props) => {
               <Grid xs={12} className="mbold mt30">
                 <Grid xs={12} className="pl14">License Certificate List</Grid>
                 <Grid xs={12} className="mt14">
-                  <Select options={Lisencecertificate} />
+                  <Select onChange={(e)=> setUpdatedCertificateName(e.label)} options={Lisencecertificate} />
                 </Grid>
                 {/* <TextField id="outlined-basic" required value={updatedCertificateName} onChange={(e) => setUpdatedCertificateName(e.target.value)} variant="outlined" className="w100p" /> */}
               </Grid>
