@@ -439,9 +439,9 @@ const PageHeader = () => {
 
 
   /********************************************************** */
-  
+
   /****** IDLE / INACTIVITY AUTOLOGOUT *************************************** */
-  
+
   const { getRemainingTime, getLastActiveTime } = useIdleTimer({
     timeout: autologoutPeriod,
     onIdle: logout,
@@ -556,23 +556,33 @@ const PageHeader = () => {
               <Button className="HeadAlert">
                 <Grid className="HeaderNotification">
                   <List component="nav" aria-label="main mailbox folders" className="HeaderNoti Scrolling AlertNoti">
-                    {notifications
-                      .map((notification) => {
-                        return <ListItem onClick={() => AlertPop(false, notification)}
-                          className={
-                            notification.is_read
-                              ? ''
-                              : 'UnreadAlert'
-                          }>
-                          <Grid xs={12}>
-                            <FormLabel>{notification.data}</FormLabel>
-                            <Typography variant="h6" component="h6">
-                              {notification.subject}
-                            </Typography>
-                            {notification.body}
+                    {
+                      notifications.length
+                        ? notifications
+                          .map((notification) => {
+                            return <ListItem onClick={() => AlertPop(false, notification)}
+                              className={
+                                notification.is_read
+                                  ? ''
+                                  : 'UnreadAlert'
+                              }>
+                              <Grid xs={12}>
+                                <FormLabel>{notification.data}</FormLabel>
+                                <Typography variant="h6" component="h6">
+                                  {notification.subject}
+                                </Typography>
+                                {notification.body}
+                              </Grid>
+                            </ListItem>
+                          })
+                        : (
+                          <Grid
+                            style={{
+                              margin: '1rem 0px'
+                            }}>
+                            No broadcasts available
                           </Grid>
-                        </ListItem>
-                      })
+                        )
                     }
                   </List>
                 </Grid>

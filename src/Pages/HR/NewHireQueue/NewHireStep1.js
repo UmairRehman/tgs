@@ -380,7 +380,6 @@ const NewHireStep1 = () => {
         }
       } = data;
 
-      setApplicantData(employeeData);
       setResume(resumeFileName);
       setDrivingLicense(drivingLicenseFileName);
       setQuestionnaire(questionnaireData);
@@ -517,9 +516,9 @@ const NewHireStep1 = () => {
     doc.text(shift, xOffset, yOffset + offsetExtension);
     yOffset += offsetTranslation;
 
-    doc.addPage();
+    // doc.addPage();
     yOffset = 10;
-    xOffset = 10;
+    xOffset = 100;
     offsetExtension = 5;
     offsetTranslation = 30;
 
@@ -568,7 +567,7 @@ const NewHireStep1 = () => {
                   <List>
                     <ListItem container className="p0 pt6 pb20">
                       <Grid className="w250 bold">Applicant Name</Grid>
-                      <Grid>{applicantData?.firstName}</Grid>
+                      <Grid>{applicantData?.firstName} {applicantData?.middleName} {applicantData?.lastName}</Grid>
                     </ListItem>
                     <ListItem container className="p0 pt6 pb20">
                       <Grid className="w250 bold">Employee ID</Grid>
@@ -578,14 +577,14 @@ const NewHireStep1 = () => {
                       <Grid className="w250 bold">Date of Application</Grid>
                       <Grid>
                         {moment(new Date(applicantData?.updatedAt)).format(
-                          "DD-MM-YYYY"
+                          "MM-DD-YYYY"
                         )}
                       </Grid>
                     </ListItem>
                     <ListItem container className="p0 pt6 pb20">
                       <Grid className="w250 bold">Home City, St</Grid>
                       <Grid>
-                        {applicantData?.address}, {applicantData?.address1}
+                        {applicantData?.city}, {applicantData?.state}
                       </Grid>
                     </ListItem>
                     <ListItem container className="p0 pt6 pb20">
@@ -599,9 +598,7 @@ const NewHireStep1 = () => {
                     <ListItem container className="p0 pt6 pb20">
                       <Grid className="w250 bold">Job ID / Description</Grid>
                       <Grid>{
-                        (applicantData?.jobId || applicantData?.jobDescription)
-                          ? ` ${applicantData?.jobId} / ${applicantData?.jobDescription}`
-                          : `Not Available`
+                        `${(applicantData?.jobId) || 'Null'} / ${(applicantData?.jobDescription)  || 'Null'}`
                       }</Grid>
                     </ListItem>
                     <ListItem container className="p0 pt6 pb20">

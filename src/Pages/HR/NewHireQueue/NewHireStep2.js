@@ -497,11 +497,11 @@ const NewHireStep2 = () => {
                     justify="space-between"
                     className="mt50"
                   >
-                    <Link to="/new-hire-queue/234" className="LinkButtonBack">
+                    {/* <Link to="/new-hire-queue/234" className="LinkButtonBack">
                       Back
-                    </Link>
+                    </Link> */}
                     <Button className="LinkButton" type="submit">
-                      Save & Continue
+                      Submit Application
                     </Button>
                     {/* <Link to="/new-hire-queue/step/1" className="LinkButton"> */}
                   </Grid>
