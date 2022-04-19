@@ -203,6 +203,16 @@ export const getCertificate = async (payload, headers) => {
 
 
 
+export const getCertificateType = async (payload, headers) => {
+    return await api.get(
+        routes.hr.get_certificate_type,
+        // payload,
+        headers
+    );
+}
+
+
+
 export const updatePosition = async (payload, headers) => {
     const { id } = payload;
     return await api.put(
