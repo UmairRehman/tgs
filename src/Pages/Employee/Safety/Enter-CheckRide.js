@@ -751,7 +751,7 @@ const EnterCheckRide = () => {
                                                 <TextField required={false} id="locomotiveConsist" type='number'
                                                 InputProps={{
                                                     inputProps: { 
-                                                        max: 100, min: 1 
+                                                        max: 100, min: 1
                                                     }
                                                 }}
                                                  label="" onChange={(event, value) => { handleSubmitDataRide(event, value, 3) }} variant="outlined" className="w100p" />
@@ -771,7 +771,7 @@ const EnterCheckRide = () => {
                                                  type='number'
                                                  InputProps={{
                                                     inputProps: { 
-                                                        max: 100, min: 1 
+                                                        max: 100, min: 0 
                                                     }
                                                 }}
                                                  label="" variant="outlined" onChange={(event, value) => { handleSubmitDataRide(event, value, 4) }} className="w100p" />
@@ -790,7 +790,7 @@ const EnterCheckRide = () => {
                                                 <TextField required={false} id="TCEmpties" type='number' 
                                                 InputProps={{
                                                     inputProps: { 
-                                                        max: 100, min: 1 
+                                                        max: 100, min: 0 
                                                     }
                                                 }}
                                                 label="" variant="outlined" onChange={(event, value) => { handleSubmitDataRide(event, value, 5) }} className="w100p" />
@@ -809,7 +809,7 @@ const EnterCheckRide = () => {
                                                 <TextField required={false} id="TCTotalTonage" type='number'
                                                 InputProps={{
                                                     inputProps: { 
-                                                        max: 100, min: 1 
+                                                        max: 10000, min: 1 
                                                     }
                                                 }}
                                                 label="" variant="outlined" onChange={(event, value) => { handleSubmitDataRide(event, value, 6) }} className="w100p" />

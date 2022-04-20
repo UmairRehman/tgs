@@ -221,7 +221,7 @@ const CreatePassword = () => {
                   <ListItemText primary="Must be eight or more characters long" />
                 </ListItem>
                 <ListItem>
-                  <ListItemText primary="Password must contain two of the following four categories" />
+                  <ListItemText primary="Password must contain two of the following three categories" />
                 </ListItem>
                 <ListItem>
                   <List component="nav" aria-label="secondary mailbox folders">

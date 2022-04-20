@@ -223,7 +223,7 @@ const Questionnaire = () => {
             workWeekends,
             travels,
             relocate,
-            tgsComment,
+            // tgsComment,
             workBefore,
         ]
     );
@@ -245,7 +245,7 @@ const Questionnaire = () => {
             workWeekends,
             travels,
             relocate,
-            tgsComment,
+            // tgsComment,
             workBefore,
         };
 
@@ -635,13 +635,7 @@ const Questionnaire = () => {
                                         <Grid xs={12} className="mb14">
                                             How did you hear about TGS
                                         </Grid>
-                                        <TextField
-                                            id="outlined-basic"
-                                            onChange={(e) => setTgsComment(e.target.value)}
-                                            placeholder="Type here"
-                                            variant="outlined"
-                                            className="w100p"
-                                        />
+                                        <TextField id="outlined-basic" onChange={(e) => setTgsComment(e.target.value)} placeholder="Type here" variant="outlined" className="w100p" rules={[{ required: false }]} />
                                         <Typography variant="h6" className="MuiTypography-subtitle2 MuiTypography-colorTextSecondary" component="h6">
                                             Please leave this field empty if you have no comments
                                         </Typography>
