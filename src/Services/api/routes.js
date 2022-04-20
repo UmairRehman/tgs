@@ -57,6 +57,7 @@ export const routes = {
         //files
         additional_files_uplaod : 'employee/hr/add_files/',
         get_certificate: 'employee/certificate/employee/',
+        get_certificate_type: 'employee/certificate/type',
         update_position: 'employee/hr/employee/position',
         update_pay: 'employee/hr/employee/pay',
         terminate: 'employee/hr/employee/terminate',

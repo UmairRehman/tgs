@@ -47,6 +47,7 @@ const userProfile = JSON.parse(localStorage.getItem("user_profile"));
 
 if (userProfile) {
   var { EmployeeStatusId, role_id } = userProfile;
+  console.log(userProfile)
 }
 
 // First Table
@@ -300,6 +301,7 @@ const EmployeeResult = (props) => {
 
     let data = {
       name: updatedCertificateName,
+      type: selectedCertificateType,
       issue_date: moment(new Date(updatedCertificateIssueDate)).format('YYYY-MM-DD').toString(),
       expiry_date: moment(new Date(updatedCertificateExpiryDate)).format('YYYY-MM-DD').toString(),
       employee_id: employeeDetails?.id,
@@ -362,7 +364,7 @@ const EmployeeResult = (props) => {
 
     let data = {
       full_title: updatePositon?.fullTitle,
-      position_level: '1',
+      position_level: updatePositon.positionLevelId,
       position_category: updatePositon?.category,
       location_id: updatePositon?.location,
       SubDepartment_Id: updatePositon?.subDepartment,
@@ -393,6 +395,10 @@ const EmployeeResult = (props) => {
   }
 
   const [paytypeDropdown, setPaytypeDropdown] = useState([]);
+
+  const [certificateType, setCertificateType] = useState([])
+
+  const [selectedCertificateType, setSelectedCertificateType] = useState('')
 
 
   const [lists, setLists] = useState({
@@ -459,8 +465,6 @@ const EmployeeResult = (props) => {
       console.log(exc);
     }
 
-
-
     // certificate api 
 
     try {
@@ -472,6 +476,21 @@ const EmployeeResult = (props) => {
         });
 
         setCertificate(certificateData.data.rows)
+
+
+      }).catch((err) => { console.log(err) });
+
+    }
+    catch (exc) {
+      console.log(exc);
+    }
+
+    // get certificate type 
+    try {
+      hr.getCertificateType().then((certificateData) => {
+        console.log(certificateData.data.rows)
+
+        setCertificateType(certificateData.data.rows)
 
 
       }).catch((err) => { console.log(err) });
@@ -497,7 +516,8 @@ const EmployeeResult = (props) => {
     category: '',
     location: '',
     subDepartment: '',
-    supervisor: ''
+    supervisor: '',
+    updatePositon: ''
   })
 
   const [startDate, setStartDate] = useState('')
@@ -509,7 +529,7 @@ const EmployeeResult = (props) => {
 
     console.log(row)
 
-    setUpdatePositon({ ...updatePositon, employeeId: row.EmployeeId, fullTitle: row.FullTitle, category: row.EmployeeId, location: row.EmployeeId, subDepartment: row.SubDepartment.id, supervisor: row.firstName })
+    setUpdatePositon({ ...updatePositon, employeeId: row.EmployeeId, fullTitle: row.FullTitle, category: row.JobCategoryId, location: row.EmployeeId, subDepartment: row.SubDepartment.id, supervisor: row.firstName, positionLevelId: row.PositionLevelId })
 
     console.log(updatePositon)
 
@@ -565,14 +585,11 @@ const EmployeeResult = (props) => {
 
   function getCertificate(row) {
 
-
     setUpdateCertificate(row)
     setUpdatedCertificateID(row.id)
     setUpdatedCertificateName(row.name)
     setUpdatedCertificateIssueDate(row.issue_date)
     setUpdatedCertificateExpiryDate(row.expiry_date)
-
-
 
     setOpenC(true);
     console.log(row)
@@ -591,6 +608,7 @@ const EmployeeResult = (props) => {
 
     let data = {
       name: updatedCertificateName,
+      type: selectedCertificateType,
       issue_date: moment(new Date(updatedCertificateIssueDate)).format('YYYY-MM-DD').toString(),
       expiry_date: moment(new Date(updatedCertificateExpiryDate)).format('YYYY-MM-DD').toString(),
       employee_id: employeeDetails?.id
@@ -602,7 +620,7 @@ const EmployeeResult = (props) => {
       let result = await employee.add_employee_certificate(data)
       if (result.httpStatus == 200) {
         console.log(result)
-        setFlag(true)
+        setFlag(!flag)
         setOpenC(!openCerti);
         setAddCertificate(false)
       }
@@ -1262,8 +1280,8 @@ const EmployeeResult = (props) => {
 
 
               </Grid>
-                  
-              
+
+
             </Grid>
             {/* Page Start End */}
           </Grid>
@@ -1345,11 +1363,35 @@ const EmployeeResult = (props) => {
               <Grid xs={12} className="mbold mt30">
                 <Grid xs={12} className="pl14">License Certificate List</Grid>
                 <Grid xs={12} className="mt14">
-                  <Select options={Lisencecertificate} />
+                  <Select onChange={(e) => setUpdatedCertificateName(e.label)} options={Lisencecertificate} />
                 </Grid>
                 {/* <TextField id="outlined-basic" required value={updatedCertificateName} onChange={(e) => setUpdatedCertificateName(e.target.value)} variant="outlined" className="w100p" /> */}
               </Grid>
 
+
+
+
+              <Grid xs={12} className="mbold mt30">
+                <Grid xs={12} className="pl14">License Type</Grid>
+                <Grid xs={12} className="mt14">
+                  <Autocomplete
+                    className="w100p"
+                    id="combo-box-demo"
+                    onChange={(event, newValue) => setSelectedCertificateType(newValue.id)}
+                    options={certificateType}
+                    getOptionLabel={(option) => option.name}
+                    renderInput={(params) => (
+                      <TextField
+                        required={true}
+                        {...params}
+                        label="Select"
+                        variant="outlined"
+                      />
+                    )}
+                  />
+                </Grid>
+                {/* <TextField id="outlined-basic" required value={updatedCertificateName} onChange={(e) => setUpdatedCertificateName(e.target.value)} variant="outlined" className="w100p" /> */}
+              </Grid>
 
 
               <Grid xs={12} className="mbold mt30 DatePickerCss">
