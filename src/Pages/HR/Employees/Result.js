@@ -587,7 +587,7 @@ const EmployeeResult = (props) => {
 
     setUpdateCertificate(row)
     setUpdatedCertificateID(row.id)
-    setUpdatedCertificateName(row.name)
+    // setUpdatedCertificateName(row.name)
     setUpdatedCertificateIssueDate(row.issue_date)
     setUpdatedCertificateExpiryDate(row.expiry_date)
 
@@ -1360,13 +1360,13 @@ const EmployeeResult = (props) => {
                 <TextField id="outlined-basic" required value={updatedCertificateName} onChange={(e) => setUpdatedCertificateName(e.target.value)} variant="outlined" className="w100p" />
               </Grid> */}
 
-              <Grid xs={12} className="mbold mt30">
+              {/* <Grid xs={12} className="mbold mt30">
                 <Grid xs={12} className="pl14">License Certificate List</Grid>
                 <Grid xs={12} className="mt14">
                   <Select onChange={(e) => setUpdatedCertificateName(e.label)} options={Lisencecertificate} />
                 </Grid>
-                {/* <TextField id="outlined-basic" required value={updatedCertificateName} onChange={(e) => setUpdatedCertificateName(e.target.value)} variant="outlined" className="w100p" /> */}
-              </Grid>
+              </Grid> */}
+              {/* <TextField id="outlined-basic" required value={updatedCertificateName} onChange={(e) => setUpdatedCertificateName(e.target.value)} variant="outlined" className="w100p" /> */}
 
 
 
@@ -1377,7 +1377,12 @@ const EmployeeResult = (props) => {
                   <Autocomplete
                     className="w100p"
                     id="combo-box-demo"
-                    onChange={(event, newValue) => setSelectedCertificateType(newValue.id)}
+                    onChange={(event, newValue) => {
+                      const {id, name} = newValue;
+
+                      setSelectedCertificateType(id);
+                      setUpdatedCertificateName(name);
+                    }}
                     options={certificateType}
                     getOptionLabel={(option) => option.name}
                     renderInput={(params) => (

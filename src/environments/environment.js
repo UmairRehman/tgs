@@ -5,7 +5,7 @@
  * They might also update with versions.
  * */
 
- const {
+const {
   REACT_APP_production: production,
   REACT_APP_envName: envName,
   REACT_APP_port: port,
@@ -16,6 +16,9 @@
   REACT_APP_socketrouter: socketrouter,
   REACT_APP_autologoutPeriod: autologoutPeriod,
 } = process.env;
+
+
+const [HTTP_PORT, HTTPS_PORT] = [80, 443];
 
 export const environment = {
   production,
@@ -40,6 +43,9 @@ export const environment = {
     const {
       apiPaths: { base, router, port },
     } = this;
+
+    if ([HTTP_PORT, HTTPS_PORT].includes(+port))
+      return `${base}/${router}`;
 
     return `${base}:${port}/${router}`;
   },
