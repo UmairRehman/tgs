@@ -290,7 +290,7 @@ const EmployeeResult = (props) => {
   function terminateEmployee() {
     history.push({
       pathname: '/employees-profile/termination',
-      state: empData
+      state: employeeData
     });
   }
 
@@ -450,7 +450,7 @@ const EmployeeResult = (props) => {
   }, [])
 
 
-  const [empData, setEmpData] = useState({})
+  const [employeeData, setEmployeeData] = useState(location?.state || {});
 
 
   useEffect(async () => {
@@ -1378,7 +1378,7 @@ const EmployeeResult = (props) => {
                     className="w100p"
                     id="combo-box-demo"
                     onChange={(event, newValue) => {
-                      const {id, name} = newValue;
+                      const { id, name } = newValue;
 
                       setSelectedCertificateType(id);
                       setUpdatedCertificateName(name);

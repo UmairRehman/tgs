@@ -84,7 +84,7 @@ const Termination = () => {
                 showSnackBar('Employee Has been Terminated');
                 setTimeout(() => {
                     history.push({
-                        pathname: "/employees/result",
+                        pathname: "/employees",
                         state: data?.id
                     })
                 }, 2000);    
@@ -137,7 +137,7 @@ const Termination = () => {
                                             First Name
                                         </Grid>
                                         <Grid xs={5}>
-                                            {a?.employee[0]?.firstName}
+                                            {a?.employee?.[0]?.firstName}
                                         </Grid>
                                     </ListItem>
                                     <ListItem container className="p0 pt6 pb20">
@@ -145,7 +145,7 @@ const Termination = () => {
                                             Last Name
                                         </Grid>
                                         <Grid xs={5}>
-                                            {a?.employee[0]?.lastName}
+                                            {a?.employee?.[0]?.lastName}
 
                                         </Grid>
                                     </ListItem>
