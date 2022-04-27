@@ -518,7 +518,7 @@ const ProfileResult = () => {
                 className="DateTimePicker"
                 defaultValue="YY-MM-DD"
                 InputLabelProps={{
-                    shrink: true,
+                    shrink: false,
                 }}
             />
           </Grid>

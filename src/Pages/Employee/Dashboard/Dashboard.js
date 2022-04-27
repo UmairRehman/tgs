@@ -30,7 +30,7 @@ const columns = [
   { id: "EmployeeId", label: "Employee ID", minWidth: 50, type: "value" },
   { id: "name", label: "License Certificate", minWidth: 100, type: "value" },
   { id: "issue_date", label: "Issue Date", minWidth: 50, type: "value" },
-  { id: "expiry_date", label: "Expire Date", minWidth: 50, type: "value" },
+  { id: "expiry_date", label: "Expiry Date", minWidth: 50, type: "value" },
 ];
 
 // table dummy data
@@ -75,8 +75,8 @@ const Dashboard = () => {
         if(data){
           //data = data.data.rows
           data.data.rows.forEach(row=>{
-            row.issue_date = moment( new Date(row.issue_date) ).format('YYYY-MM-DD')
-            row.expiry_date = moment( new Date(row.expiry_date) ).format('YYYY-MM-DD')
+            row.issue_date = moment( new Date(row.issue_date) ).format('MM-DD-YYYY')
+            row.expiry_date = moment( new Date(row.expiry_date) ).format('MM-DD-YYYY')
           });
           setRows(data.data.rows)
         }
