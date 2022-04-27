@@ -175,6 +175,9 @@ const Termination = () => {
                                             {a?.employee[0]?.SubDepartment?.name}
                                         </Grid>
                                     </ListItem>
+
+
+                                    
                                   
                                 </List>
                             </Grid>

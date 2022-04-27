@@ -325,7 +325,7 @@ const Railroad = () => {
       console.log(siteList);
     }
     let jobCategoryList = [
-      { id: "ENG", title: "Engineering" },
+      { id: "ENG", title: "Engineer" },
       { id: "COND", title: "Conductor" },
       { id: "BR1", title: "BR1" },
       { id: "OTHER", title: "OTHER" },

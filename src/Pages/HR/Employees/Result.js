@@ -186,7 +186,7 @@ const CertiCol = [
   { id: "id", label: "ID", minWidth: 140, type: "value" },
   { id: "name", label: "License Certificate", minWidth: 160, type: "value" },
   { id: "issue_date", label: "Issue Date", minWidth: 160, type: "value" },
-  { id: "expiry_date", label: "Expiry Date", minWidth: 160, type: "value" },
+  { id: "expiry_date", label: "Expire Date", minWidth: 160, type: "value" },
   { id: "edi", label: "Edit", minWidth: 50, type: "edit" }
 ];
 
@@ -209,6 +209,16 @@ function createData(
 const Crtirows = [
   createData("1011", "Backhoe", "3/10/2021", "6/10/2021"),
 ];
+
+
+const permission = {
+  showPosition: [2, 5],
+  showPay: [2, 5],
+  showTerminate: [2, 5],
+  hrAdminOrSystemAdmin: [2, 5],
+  attachfile:[2,5]
+};
+
 const EmployeeResult = (props) => {
 
   console.log(props);
@@ -728,6 +738,7 @@ const EmployeeResult = (props) => {
     setAdditionalFiles(files);
   }
 
+
   return (
     loader ? <div>Loading...</div> :
       <Grid container xs={12} className="Liq-Container HRPortal EmployeeResult">
@@ -954,132 +965,47 @@ const EmployeeResult = (props) => {
 
               {/* Add Certificate & License Button */}
 
-              {
-                (role_id == 2 || role_id == 5) ?
-
-
-                  <Grid xs={12} container className="mt40">
-                    <Button for="selecteSertificate" className="LinkButton" onClick={openCertificateModal}>
-                      Add Certificate & License
-                    </Button>
-                    {/* <input id="selecteSertificate" type="file" className="hide" /> */}
-                  </Grid>
-                  : ""
-
-              }
+              <Grid xs={12} container className="mt40">
+                <Button for="selecteSertificate" className="LinkButton" onClick={openCertificateModal}>
+                  Add Certificate & License
+                </Button>
+                {/* <input id="selecteSertificate" type="file" className="hide" /> */}
+              </Grid>
 
 
               {
-                (role_id == 2 || role_id == 5)
-                  ? (
-                    <div>
+                permission?.position?.includes(+role_id) && (
 
-                      <Grid xs={12} className="LiqTables">
-                        <Grid xs={12} className="mt28 mb14">
-                          <Typography variant="h1" component="h2" className="bold f22">
-                            Position
-                          </Typography>
-                        </Grid>
-                        <Paper>
-                          <TableContainer>
-                            <Table aria-label="table">
-                              <TableHead>
-                                <TableRow>
-                                  {Positioncol.map((column) => (
-                                    <TableCell
-                                      className="bold f16"
-                                      key={column.id}
-                                      align={column.align}
-                                      style={{ minWidth: column.minWidth }}
-                                    >
-                                      {column.label}
-                                    </TableCell>
-                                  ))}
-                                </TableRow>
-                              </TableHead>
-                              <TableBody>
-                                {
-                                  (position.length)
-                                    ? (
-                                      position
-                                        .map((row) => {
-                                          return (
-                                            <TableRow
-                                              hover
-                                              role="checkbox"
-                                              tabIndex={-1}
-                                              key={row.code}
-                                            >
-                                              {Positioncol.map((column) => {
-                                                var ex = column.id;
-                                                var value = row;
-                                                // const value = row[column.id];
-                                                while (ex.includes(".")) {
-                                                  let v = ex.split('.');
-                                                  value = value[v[0]];
-                                                  ex = v[1];
-                                                  // code block to be executed
-                                                }
-                                                value = value[ex];
-                                                return (
-                                                  <TableCell
-                                                    key={column.id}
-                                                    align={column.align}
-                                                  >
-                                                    {column.type == "edit" ? (
+                  <div>
 
-                                                      <Button onClick={() => editPosiotion(row)} className="EditIcon"></Button>
-                                                    )
-                                                      : (
-                                                        value
-                                                      )}
-                                                  </TableCell>
-                                                );
-                                              })}
-                                            </TableRow>
-                                          );
-                                        })
-                                    )
-                                    : (
-                                      <Grid xs={12}>
-                                        No data found
-                                      </Grid>
-                                    )
-                                }
-                              </TableBody>
-                            </Table>
-                          </TableContainer>
-                        </Paper>
+                    <Grid xs={12} className="LiqTables">
+                      <Grid xs={12} className="mt28 mb14">
+                        <Typography variant="h1" component="h2" className="bold f22">
+                          Position
+                        </Typography>
                       </Grid>
-
-
-                      <Grid xs={12} className="LiqTables">
-                        <Grid xs={12} className="mt28 mb14">
-                          <Typography variant="h1" component="h2" className="bold f22">
-                            Pay Details
-                          </Typography>
-                        </Grid>
-                        <Paper>
-                          <TableContainer>
-                            <Table aria-label="table">
-                              <TableHead>
-                                <TableRow>
-                                  {PayCol.map((column) => (
-                                    <TableCell
-                                      className="bold f16"
-                                      key={column.id}
-                                      align={column.align}
-                                      style={{ minWidth: column.minWidth }}
-                                    >
-                                      {column.label}
-                                    </TableCell>
-                                  ))}
-                                </TableRow>
-                              </TableHead>
-                              <TableBody>
-                                {
-                                  (payRate.length)
-                                    ? (payRate
+                      <Paper>
+                        <TableContainer>
+                          <Table aria-label="table">
+                            <TableHead>
+                              <TableRow>
+                                {Positioncol.map((column) => (
+                                  <TableCell
+                                    className="bold f16"
+                                    key={column.id}
+                                    align={column.align}
+                                    style={{ minWidth: column.minWidth }}
+                                  >
+                                    {column.label}
+                                  </TableCell>
+                                ))}
+                              </TableRow>
+                            </TableHead>
+                            <TableBody>
+                              {
+                                (position.length)
+                                  ? (
+                                    position
                                       .map((row) => {
                                         return (
                                           <TableRow
@@ -1088,7 +1014,7 @@ const EmployeeResult = (props) => {
                                             tabIndex={-1}
                                             key={row.code}
                                           >
-                                            {PayCol.map((column) => {
+                                            {Positioncol.map((column) => {
                                               var ex = column.id;
                                               var value = row;
                                               // const value = row[column.id];
@@ -1105,7 +1031,8 @@ const EmployeeResult = (props) => {
                                                   align={column.align}
                                                 >
                                                   {column.type == "edit" ? (
-                                                    <Button onClick={() => editPay(row)} className="EditIcon"></Button>
+
+                                                    <Button onClick={() => editPosiotion(row)} className="EditIcon"></Button>
                                                   )
                                                     : (
                                                       value
@@ -1115,35 +1042,111 @@ const EmployeeResult = (props) => {
                                             })}
                                           </TableRow>
                                         );
-                                      }))
-                                    : (
-                                      <Grid xs={12}>
-                                        No data found
-                                      </Grid>
-                                    )
-                                }
-                              </TableBody>
-                            </Table>
-                          </TableContainer>
-                        </Paper>
-                      </Grid>
+                                      })
+                                  )
+                                  : (
+                                    <Grid xs={12}>
+                                      No data found
+                                    </Grid>
+                                  )
+                              }
+                            </TableBody>
+                          </Table>
+                        </TableContainer>
+                      </Paper>
+                    </Grid>
 
 
-                      <Grid xs={12} container className="mt40">
-                        <Button onClick={terminateEmployee} className="LinkButton"
-                          disabled={employeeDetails?.terminate}>
-                          Terminate Employee
-                        </Button>
+                    <Grid xs={12} className="LiqTables">
+                      <Grid xs={12} className="mt28 mb14">
+                        <Typography variant="h1" component="h2" className="bold f22">
+                          Pay Details
+                        </Typography>
                       </Grid>
-                    </div>
-                  )
-                  : ""
+                      <Paper>
+                        <TableContainer>
+                          <Table aria-label="table">
+                            <TableHead>
+                              <TableRow>
+                                {PayCol.map((column) => (
+                                  <TableCell
+                                    className="bold f16"
+                                    key={column.id}
+                                    align={column.align}
+                                    style={{ minWidth: column.minWidth }}
+                                  >
+                                    {column.label}
+                                  </TableCell>
+                                ))}
+                              </TableRow>
+                            </TableHead>
+                            <TableBody>
+                              {
+                                (payRate.length)
+                                  ? (payRate
+                                    .map((row) => {
+                                      return (
+                                        <TableRow
+                                          hover
+                                          role="checkbox"
+                                          tabIndex={-1}
+                                          key={row.code}
+                                        >
+                                          {PayCol.map((column) => {
+                                            var ex = column.id;
+                                            var value = row;
+                                            // const value = row[column.id];
+                                            while (ex.includes(".")) {
+                                              let v = ex.split('.');
+                                              value = value[v[0]];
+                                              ex = v[1];
+                                              // code block to be executed
+                                            }
+                                            value = value[ex];
+                                            return (
+                                              <TableCell
+                                                key={column.id}
+                                                align={column.align}
+                                              >
+                                                {column.type == "edit" ? (
+                                                  <Button onClick={() => editPay(row)} className="EditIcon"></Button>
+                                                )
+                                                  : (
+                                                    value
+                                                  )}
+                                              </TableCell>
+                                            );
+                                          })}
+                                        </TableRow>
+                                      );
+                                    }))
+                                  : (
+                                    <Grid xs={12}>
+                                      No data found
+                                    </Grid>
+                                  )
+                              }
+                            </TableBody>
+                          </Table>
+                        </TableContainer>
+                      </Paper>
+                    </Grid>
+
+
+                    <Grid xs={12} container className="mt40">
+                      <Button onClick={terminateEmployee} className="LinkButton"
+                        disabled={employeeDetails?.terminate}>
+                        Terminate Employee
+                      </Button>
+                    </Grid>
+                  </div>
+                )
               }
 
 
               {/* Employee Document */}
               {
-                (role_id == 2 || role_id == 5) ?
+                (permission.hrAdminOrSystemAdmin.includes(+role_id)) ?
 
                   (<Grid xs={12} className="mt30">
                     <Grid xs={12} className="mb10">
@@ -1184,7 +1187,7 @@ const EmployeeResult = (props) => {
                 <Grid xs={12} md={8} lg={6}>
                   {/* ---------- */}
                   {
-                    (role_id == 2 || role_id == 5) ?
+                    (permission.attachfile.includes(+role_id)) ?
                       <Grid xs={12} container>
                         <Grid xs={12} className="mt30 pr40">
                           {
@@ -1262,8 +1265,8 @@ const EmployeeResult = (props) => {
 
 
               </Grid>
-                  
-              
+
+
             </Grid>
             {/* Page Start End */}
           </Grid>
@@ -1369,7 +1372,7 @@ const EmployeeResult = (props) => {
                 />
               </Grid>
               <Grid xs={12} className="mbold mt30 DatePickerCss">
-                <Grid xs={12} className="pl14">Expiry Date</Grid>
+                <Grid xs={12} className="pl14">Expire Date</Grid>
                 <TextField
                   id="date"
                   type="date"
