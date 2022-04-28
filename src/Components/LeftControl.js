@@ -92,7 +92,7 @@ const LeftControl = () => {
     new_hire_queue: [2, 4, 5],
     new_hire_queue_it: [2, 3],
     tickets_alerts: [2, 3, 4, 5],
-    employees: [2, 4, 5],
+    employees: [2, 4, 5,6],
     broadcast_message: [2],
     employees_profile: [2, 4],
   };

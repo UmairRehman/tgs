@@ -215,7 +215,7 @@ const permission = {
   showPosition: [2, 5],
   showPay: [2, 5],
   showTerminate: [2, 5],
-  hrAdminOrSystemAdmin: [2, 5],
+  hrAdminOrSystemAdmin: [2, 5,6],
   attachfile:[2,5]
 };
 
