@@ -47,6 +47,7 @@ const userProfile = JSON.parse(localStorage.getItem("user_profile"));
 
 if (userProfile) {
   var { EmployeeStatusId, role_id } = userProfile;
+  console.log(userProfile)
 }
 
 // First Table
@@ -296,7 +297,7 @@ const EmployeeResult = (props) => {
   function terminateEmployee() {
     history.push({
       pathname: '/employees-profile/termination',
-      state: empData
+      state: employeeData
     });
   }
 
@@ -307,6 +308,7 @@ const EmployeeResult = (props) => {
 
     let data = {
       name: updatedCertificateName,
+      type: selectedCertificateType,
       issue_date: moment(new Date(updatedCertificateIssueDate)).format('YYYY-MM-DD').toString(),
       expiry_date: moment(new Date(updatedCertificateExpiryDate)).format('YYYY-MM-DD').toString(),
       employee_id: employeeDetails?.id,
@@ -366,7 +368,7 @@ const EmployeeResult = (props) => {
 
     let data = {
       full_title: updatePositon?.fullTitle,
-      position_level: '1',
+      position_level: updatePositon.positionLevelId,
       position_category: updatePositon?.category,
       location_id: updatePositon?.location,
       SubDepartment_Id: updatePositon?.subDepartment,
@@ -395,6 +397,10 @@ const EmployeeResult = (props) => {
   }
 
   const [paytypeDropdown, setPaytypeDropdown] = useState([]);
+
+  const [certificateType, setCertificateType] = useState([])
+
+  const [selectedCertificateType, setSelectedCertificateType] = useState('')
 
 
   const [lists, setLists] = useState({
@@ -443,7 +449,7 @@ const EmployeeResult = (props) => {
   }, [])
 
 
-  const [empData, setEmpData] = useState({})
+  const [employeeData, setEmployeeData] = useState(location?.state || {});
 
 
   useEffect(async () => {
@@ -458,8 +464,6 @@ const EmployeeResult = (props) => {
       console.log(exc);
     }
 
-
-
     // certificate api 
 
     try {
@@ -470,6 +474,21 @@ const EmployeeResult = (props) => {
         });
 
         setCertificate(certificateData.data.rows)
+
+
+      }).catch((err) => { console.log(err) });
+
+    }
+    catch (exc) {
+      console.log(exc);
+    }
+
+    // get certificate type 
+    try {
+      hr.getCertificateType().then((certificateData) => {
+        console.log(certificateData.data.rows)
+
+        setCertificateType(certificateData.data.rows)
 
 
       }).catch((err) => { console.log(err) });
@@ -495,7 +514,8 @@ const EmployeeResult = (props) => {
     category: '',
     location: '',
     subDepartment: '',
-    supervisor: ''
+    supervisor: '',
+    updatePositon: ''
   })
 
   const [startDate, setStartDate] = useState('')
@@ -506,7 +526,7 @@ const EmployeeResult = (props) => {
     setOpenPosition(true)
 
 
-    setUpdatePositon({ ...updatePositon, employeeId: row.EmployeeId, fullTitle: row.FullTitle, category: row.EmployeeId, location: row.EmployeeId, subDepartment: row.SubDepartment.id, supervisor: row.firstName })
+    setUpdatePositon({ ...updatePositon, employeeId: row.EmployeeId, fullTitle: row.FullTitle, category: row.JobCategoryId, location: row.EmployeeId, subDepartment: row.SubDepartment.id, supervisor: row.firstName, positionLevelId: row.PositionLevelId })
 
 
   }
@@ -557,14 +577,11 @@ const EmployeeResult = (props) => {
 
   function getCertificate(row) {
 
-
     setUpdateCertificate(row)
     setUpdatedCertificateID(row.id)
-    setUpdatedCertificateName(row.name)
+    // setUpdatedCertificateName(row.name)
     setUpdatedCertificateIssueDate(row.issue_date)
     setUpdatedCertificateExpiryDate(row.expiry_date)
-
-
 
     setOpenC(true);
     console.log(row)
@@ -583,6 +600,7 @@ const EmployeeResult = (props) => {
 
     let data = {
       name: updatedCertificateName,
+      type: selectedCertificateType,
       issue_date: moment(new Date(updatedCertificateIssueDate)).format('YYYY-MM-DD').toString(),
       expiry_date: moment(new Date(updatedCertificateExpiryDate)).format('YYYY-MM-DD').toString(),
       employee_id: employeeDetails?.id
@@ -1328,14 +1346,43 @@ const EmployeeResult = (props) => {
                 <TextField id="outlined-basic" required value={updatedCertificateName} onChange={(e) => setUpdatedCertificateName(e.target.value)} variant="outlined" className="w100p" />
               </Grid> */}
 
-              <Grid xs={12} className="mbold mt30">
+              {/* <Grid xs={12} className="mbold mt30">
                 <Grid xs={12} className="pl14">License Certificate List</Grid>
                 <Grid xs={12} className="mt14">
-                  <Select options={Lisencecertificate} />
+                  <Select onChange={(e) => setUpdatedCertificateName(e.label)} options={Lisencecertificate} />
+                </Grid>
+              </Grid> */}
+              {/* <TextField id="outlined-basic" required value={updatedCertificateName} onChange={(e) => setUpdatedCertificateName(e.target.value)} variant="outlined" className="w100p" /> */}
+
+
+
+
+              <Grid xs={12} className="mbold mt30">
+                <Grid xs={12} className="pl14">License Type</Grid>
+                <Grid xs={12} className="mt14">
+                  <Autocomplete
+                    className="w100p"
+                    id="combo-box-demo"
+                    onChange={(event, newValue) => {
+                      const { id, name } = newValue;
+
+                      setSelectedCertificateType(id);
+                      setUpdatedCertificateName(name);
+                    }}
+                    options={certificateType}
+                    getOptionLabel={(option) => option.name}
+                    renderInput={(params) => (
+                      <TextField
+                        required={true}
+                        {...params}
+                        label="Select"
+                        variant="outlined"
+                      />
+                    )}
+                  />
                 </Grid>
                 {/* <TextField id="outlined-basic" required value={updatedCertificateName} onChange={(e) => setUpdatedCertificateName(e.target.value)} variant="outlined" className="w100p" /> */}
               </Grid>
-
 
 
               <Grid xs={12} className="mbold mt30 DatePickerCss">

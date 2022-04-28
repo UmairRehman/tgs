@@ -17,8 +17,8 @@ const {
   REACT_APP_autologoutPeriod: autologoutPeriod,
 } = process.env;
 
-const HTTP_PORT = 80;
-const HTTPS_PORT = 443;
+
+const [HTTP_PORT, HTTPS_PORT] = [80, 443];
 
 export const environment = {
   production,
@@ -44,7 +44,7 @@ export const environment = {
       apiPaths: { base, router, port },
     } = this;
 
-    if (port === HTTP_PORT)
+    if ([HTTP_PORT, HTTPS_PORT].includes(+port))
       return `${base}/${router}`;
 
     return `${base}:${port}/${router}`;
@@ -59,10 +59,7 @@ export const environment = {
       socketPath: { base, router, port },
     } = this;
 
-    if (port === HTTP_PORT)
-      return `${base}/${router}`;
-
-    return `${base}:${port}/${router}`;
+    return `${base}/${router}`;
   },
 
   externalLinks: {
