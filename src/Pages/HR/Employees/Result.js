@@ -971,8 +971,7 @@ const EmployeeResult = (props) => {
                 </Button>
                 {/* <input id="selecteSertificate" type="file" className="hide" /> */}
               </Grid>
-
-
+ {/**/}
               {
                 permission?.showPosition?.includes(+role_id) && (
 
