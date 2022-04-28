@@ -216,13 +216,10 @@ const permission = {
   showPay: [2, 5],
   showTerminate: [2, 5],
   hrAdminOrSystemAdmin: [2, 5],
-  attachfile:[2,5]
+  attachfile: [2, 5]
 };
 
 const EmployeeResult = (props) => {
-
-  console.log(props);
-
 
   let history = useHistory();
 
@@ -316,11 +313,9 @@ const EmployeeResult = (props) => {
       id: updatedCertificateID
     }
 
-    console.log(data)
 
     try {
       employee.update_employee_certificate(data).then((certificateData) => {
-        console.log(certificateData)
         setFlag(true)
         setOpenC(!openCerti);
         setAddCertificate(false)
@@ -348,7 +343,6 @@ const EmployeeResult = (props) => {
     }
     try {
       hr.updatePay(data).then((certificateData) => {
-        console.log(certificateData)
         setFlag(true)
         setOpenC(!openCerti);
 
@@ -381,11 +375,9 @@ const EmployeeResult = (props) => {
       start_date: startDate
     }
 
-    console.log(data)
 
     try {
       hr.updatePosition(data).then((certificateData) => {
-        console.log(certificateData)
         setFlag(true)
         setOpenC(!openCerti);
 
@@ -417,7 +409,6 @@ const EmployeeResult = (props) => {
     let departmentList = await employee.get_department_listing()
     if (departmentList.httpStatus == 200) {
       departmentList = departmentList.data;
-      console.log(departmentList);
     }
 
 
@@ -425,7 +416,6 @@ const EmployeeResult = (props) => {
     let jobCategoryList = await employee.get_job_category_listing()
     if (jobCategoryList.httpStatus == 200) {
       jobCategoryList = jobCategoryList.data;
-      console.log(jobCategoryList);
     }
 
 
@@ -433,7 +423,6 @@ const EmployeeResult = (props) => {
     let siteList = await employee.get_site_listing()
     if (siteList.httpStatus == 200) {
       siteList = siteList.data;
-      console.log(siteList);
     }
 
 
@@ -475,7 +464,6 @@ const EmployeeResult = (props) => {
 
     try {
       hr.getCertificate({ id }).then((certificateData) => {
-        console.log(certificateData)
         certificateData.data.rows.forEach(element => {
           element.issue_date = moment(new Date(element.issue_date)).format('DD-MM-YYYY')
           element.expiry_date = moment(new Date(element.expiry_date)).format('DD-MM-YYYY')
@@ -517,11 +505,9 @@ const EmployeeResult = (props) => {
   function editPosiotion(row) {
     setOpenPosition(true)
 
-    console.log(row)
 
     setUpdatePositon({ ...updatePositon, employeeId: row.EmployeeId, fullTitle: row.FullTitle, category: row.EmployeeId, location: row.EmployeeId, subDepartment: row.SubDepartment.id, supervisor: row.firstName })
 
-    console.log(updatePositon)
 
   }
 
@@ -535,11 +521,8 @@ const EmployeeResult = (props) => {
   })
 
   function editPay(row) {
-    console.log(row)
     setOpenPay(true)
     setUpdatePay({ ...updatePay, position_level: '1', rate: row.Rate, pay_type: row.PayType.name, employee_id: row.EmployeeId })
-    console.log("---------------")
-    console.log(updatePay)
 
   }
 
@@ -552,7 +535,6 @@ const EmployeeResult = (props) => {
   }
 
   useEffect(() => {
-    console.log(updatePositon)
     return () => {
 
     }
@@ -606,12 +588,10 @@ const EmployeeResult = (props) => {
       employee_id: employeeDetails?.id
     }
 
-    console.log(data)
 
     try {
       let result = await employee.add_employee_certificate(data)
       if (result.httpStatus == 200) {
-        console.log(result)
         setFlag(true)
         setOpenC(!openCerti);
         setAddCertificate(false)
@@ -678,13 +658,11 @@ const EmployeeResult = (props) => {
       zip: zip,
       employee_id: employeeDetails?.id
     }
-    console.log(data)
 
     try {
       hr.updateEmployeeAddress(data)
         .then((update) => {
           setUpdateAddress(update);
-          console.log(update)
 
           setOpenA(false);
 
@@ -707,13 +685,10 @@ const EmployeeResult = (props) => {
         ...forcedParams,
       })
       setLoader(true);
-      console.log(applicantDataHistory)
       setComponentLoader(true)
       setEmployeeDetails(applicantDataHistory?.employee[0])
-      console.log(employeeDetails)
       setComponentLoader(false)
       setFiles(applicantDataHistory?.files)
-      console.log(files)
       setPosition(applicantDataHistory?.position)
 
       setTgsLocation(applicantDataHistory?.employee[0].TGSLocation)
@@ -737,6 +712,15 @@ const EmployeeResult = (props) => {
 
     setAdditionalFiles(files);
   }
+
+  const [role_id, setRole_id] = useState()
+  useEffect(() => {
+    const userProfile = JSON.parse(localStorage.getItem("user_profile"));
+
+    
+    setRole_id(userProfile.role_id)
+
+  }, [])
 
 
   return (
@@ -971,10 +955,10 @@ const EmployeeResult = (props) => {
                 </Button>
                 {/* <input id="selecteSertificate" type="file" className="hide" /> */}
               </Grid>
- {/**/}
+              {/**/}
+
               {
                 permission?.showPosition?.includes(+role_id) && (
-
                   <div>
 
                     <Grid xs={12} className="LiqTables">
@@ -1145,7 +1129,7 @@ const EmployeeResult = (props) => {
 
               {/* Employee Document */}
               {
-                (permission?.hrAdminOrSystemAdmin?.includes(+role_id))&&(
+                (permission?.hrAdminOrSystemAdmin?.includes(+role_id)) && (
 
                   (<Grid xs={12} className="mt30">
                     <Grid xs={12} className="mb10">
