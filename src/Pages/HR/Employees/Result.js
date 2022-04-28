@@ -989,10 +989,9 @@ const EmployeeResult = (props) => {
                 </Button>
                 {/* <input id="selecteSertificate" type="file" className="hide" /> */}
               </Grid>
-
-
+ {/**/}
               {
-                permission?.position?.includes(+role_id) && (
+                permission?.showPosition?.includes(+role_id) && (
 
                   <div>
 
@@ -1164,7 +1163,7 @@ const EmployeeResult = (props) => {
 
               {/* Employee Document */}
               {
-                (permission.hrAdminOrSystemAdmin.includes(+role_id)) ?
+                (permission?.hrAdminOrSystemAdmin?.includes(+role_id))&&(
 
                   (<Grid xs={12} className="mt30">
                     <Grid xs={12} className="mb10">
@@ -1192,7 +1191,7 @@ const EmployeeResult = (props) => {
 
                     </Grid>
                   </Grid>)
-                  : ''
+                )
               }
 
               {/*attachment fle*/}
