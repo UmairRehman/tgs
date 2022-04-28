@@ -215,7 +215,7 @@ const permission = {
   showPosition: [2, 5],
   showPay: [2, 5],
   showTerminate: [2, 5],
-  hrAdminOrSystemAdmin: [2, 5,6],
+  hrAdminOrSystemAdmin: [2, 5],
   attachfile:[2,5]
 };
 
@@ -974,7 +974,7 @@ const EmployeeResult = (props) => {
 
 
               {
-                permission?.position?.includes(+role_id) && (
+                permission?.showPosition?.includes(+role_id) && (
 
                   <div>
 
