@@ -117,7 +117,7 @@ const Railroad = () => {
     }
 
   };
-
+/*document.getElementById( 'ojeComment').value = '')*/
   const resetData = () => {
     document.getElementById('ojeComment').value = ''
     document.getElementById('assisting_comment').value = ''
