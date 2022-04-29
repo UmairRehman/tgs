@@ -483,10 +483,14 @@ const Railroad = () => {
                             className="DateTimePicker"
                             defaultValue={railRoad.date}
                             value={railRoad.date}
+                           
                             onChange={(e, value) => { handleSubmitData('x', e.target.value, 10) }}
                             InputLabelProps={{
                               shrink: true,
                             }}
+                            onKeyDown={(e) => {
+                              e.preventDefault();
+                           }}
                           />
                         </Grid>
                       </Grid>
