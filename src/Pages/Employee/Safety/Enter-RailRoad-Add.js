@@ -117,7 +117,7 @@ const Railroad = () => {
     }
 
   };
-
+/*document.getElementById( 'ojeComment').value = '')*/
   const resetData = () => {
     document.getElementById('ojeComment').value = ''
     document.getElementById('assisting_comment').value = ''
@@ -332,7 +332,7 @@ const Railroad = () => {
     ]
 
     let departmentList = [
-      { id: 'All', title: 'All' },
+      // { id: 'All', title: 'All' },
       { id: 'Transportation', title: 'Transportation' },
       { id: 'Engineering', title: 'Engineering' },
       { id: 'Mechanical', title: 'Mechanical' }
@@ -483,10 +483,14 @@ const Railroad = () => {
                             className="DateTimePicker"
                             defaultValue={railRoad.date}
                             value={railRoad.date}
+                           
                             onChange={(e, value) => { handleSubmitData('x', e.target.value, 10) }}
                             InputLabelProps={{
                               shrink: true,
                             }}
+                            onKeyDown={(e) => {
+                              e.preventDefault();
+                           }}
                           />
                         </Grid>
                       </Grid>

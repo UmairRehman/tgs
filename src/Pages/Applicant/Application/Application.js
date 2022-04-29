@@ -827,6 +827,9 @@ const Application = () => {
                                             value={
                                                 contactInformation[0].dob
                                             }
+                                            onKeyDown={(e) => {
+                                                e.preventDefault();
+                                             }}
                                             id="dob"
                                             className="datePickerReact w100p bg-white react-date-picker"
                                         />

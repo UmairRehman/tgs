@@ -44,7 +44,7 @@ const {
 
 const columns = [
   { id: "id", label: "Event ID", minWidth: 170, type: "value" },
-  { id: "date", label: "Date", minWidth: 120, type: "value" },
+  { id: "date", label: "Date", minWidth: 120, type: "date" },
   { id: "time", label: "Time", minWidth: 100, type: "value" },
   { id: "locationAdded", label: "Location", minWidth: 100, type: "value" },
   { id: "jobID", label: "Job ID", minWidth: 170, type: "value" },
