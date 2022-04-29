@@ -332,7 +332,7 @@ const Railroad = () => {
     ]
 
     let departmentList = [
-      { id: 'All', title: 'All' },
+      // { id: 'All', title: 'All' },
       { id: 'Transportation', title: 'Transportation' },
       { id: 'Engineering', title: 'Engineering' },
       { id: 'Mechanical', title: 'Mechanical' }
