@@ -90,6 +90,7 @@ const JobCategories = [
 ];
 
 const Follicle = ['No', 'Yes'];
+
 const ITR2 = ['Yes', 'No'];
 const ITR3 = ['Yes', 'No'];
 const ITR4 = ['Yes', 'No'];
@@ -223,14 +224,14 @@ const Questionnaire = () => {
             workWeekends,
             travels,
             relocate,
-            // tgsComment,
+            tgsComment,
             workBefore,
         ]
     );
 
 
     async function onSubmit() {
-        console.log("error")
+
         let data = {
             hairTest,
             drugTest,
@@ -245,7 +246,7 @@ const Questionnaire = () => {
             workWeekends,
             travels,
             relocate,
-            // tgsComment,
+            tgsComment,
             workBefore,
         };
 
@@ -284,11 +285,25 @@ const Questionnaire = () => {
         }
 
         // Unrequired and sequentially checked (dependent) fields
-        data = {
-            ...data,
-            comment,
-            bilingualLanguage
+
+
+        console.log("accommodation" , accommodation)
+        console.log("bilingual", bilingual)
+
+
+        if (accommodation == 'No') {
+            data = {
+                ...data,
+                comment,
+            }
         }
+        if (bilingual == "Yes") {
+            data = {
+                ...data,
+                bilingualLanguage
+            }
+        }
+        console.log("bilingual")
 
         try {
             const response = await users.postStep1(data);
