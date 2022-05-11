@@ -52,37 +52,37 @@ const BootCardAgreement = () => {
 
   const [isPosting, setPosting] = useState(false);
 
-  const [dateofInjury, setDateofInjury] = useState(new Date () )
+  const [dateofInjury, setDateofInjury] = useState(new Date())
 
-  const [dateOfRelease, setDateOfRelease] = useState(new Date () )
+  const [dateOfRelease, setDateOfRelease] = useState(new Date())
 
-  const [formDate, setFormDate] = useState(new Date ())
+  const [formDate, setFormDate] = useState(new Date())
 
   const [error, setError] = useState('')
 
   const [PDFimage, setPDFImage] = useState('')
 
   const [userData, setUserData] = useState({
-    firstName : '',
-      middleName : '',
-      lastName: '',
-      ssn : '',
-      address : '',
+    firstName: '',
+    middleName: '',
+    lastName: '',
+    ssn: '',
+    address: '',
   })
- useEffect( async () => {
-    let userProfile = await  JSON.parse(localStorage.user_profile);
-    let res = await hr.getAllApplicantsByID({ id : userProfile.id})
+  useEffect(async () => {
+    let userProfile = await JSON.parse(localStorage.user_profile);
+    let res = await hr.getAllApplicantsByID({ id: userProfile.id })
     let data = {
-      firstName : res?.employee?.firstName || '',
-      middleName : res?.employee?.middleName || '',
+      firstName: res?.employee?.firstName || '',
+      middleName: res?.employee?.middleName || '',
       lastName: res?.employee?.lastName || '',
-      ssn : res?.employee?.ssn || '',
-      address : res?.employee?.address || '',
+      ssn: res?.employee?.ssn || '',
+      address: res?.employee?.address || '',
       // address1 : res?.employee?.address1 || '',
     }
     setUserData(data)
     console.log(data)
-  
+
   }, [])
 
   const CloseTab = () => {
@@ -95,7 +95,101 @@ const BootCardAgreement = () => {
   const count = 0;
 
   // convert into SVG using DOM
-  async function submit() {
+  // async function submit() {
+  //   try {
+  //     setPosting(true);
+
+  //     const captureElements = Array.from(
+  //       document.getElementsByClassName('capture')
+  //     );
+
+  //     const images = [];
+
+  //     for await (let i of getGenerator(captureElements.length)) {
+  //       const captureElement = captureElements[i];
+
+  //       let canvas = await (html2canvas(captureElement));
+
+  //       let image = (canvas.toDataURL('image/png'));
+
+  //       images.push(image);
+  //     }
+
+  //     let data = {
+  //       id: "id",
+  //       name: document.getElementById('name').value,
+  //       securityNumber: document.getElementById('securityNumber').value,
+  //       Address: document.getElementById('adddress').value,
+  // dateofInjury: dateofInjury,
+  //       typeOfInjury: document.getElementById('typeOfInjury').value,
+  //       doctorName: document.getElementById('doctorName').value,
+  //       doctorAddress: document.getElementById('doctorAddress').value,
+  //       DoctorPhone: document.getElementById('DoctorPhone').value,
+  //       locationName: document.getElementById('locationName').value,
+  //       locationAddress: document.getElementById('locationAddress').value,
+  //       locationPhone: document.getElementById('locationPhone').value,
+  //       injuryDetail: document.getElementById('injuryDetail').value,
+  //       bills: document.getElementById('bills').value == "Yes" ? 'Yes' : 'No',
+  //       howMuch: document.getElementById('howMuch').value,
+  //       howLong: document.getElementById('howLong').value,
+  //       howMuch: document.getElementById('howMuch').value,
+  //       attorny: document.getElementById('attorny').value,
+  //       settelment: document.getElementById('settelment').value,
+  //       dateOfRelease: dateOfRelease,
+  //       limitaion: document.getElementById('limitaion').value,
+  //       limitaionDoctorName: document.getElementById('limitaionDoctorName').value,
+  //       limitaionAddress: document.getElementById('limitaionAddress').value,
+  //       limitaionPhone: document.getElementById('limitaionPhone').value,
+  //       confedential: document.getElementById('confedential').value,
+  //       signature: document.getElementById('signature').value,
+  //       formDate: formDate,
+  //       PDFimage: images
+  //     }
+
+  //     const nullCheck = Object.values(data)
+  //       .reduce((total, accumulator) => total || !accumulator, false);
+
+  //     if (nullCheck == false) {
+  //       console.log(data)
+  //     } else {
+  //       setPosting(false);
+  //       setError("field must be filed")
+  //       return showSnackBar('Kindly fill in all the fields');
+  //     }
+
+  //     const resposne = await users.submitForm({
+  //       image: images,
+  //       form: 8,
+  //     });
+
+  //     const step3FormsSubmitted = JSON.parse(storage.get('step-3-form-bootCard')) || true;
+
+  //     storage.set('step-3-form-bootCard', JSON.stringify(step3FormsSubmitted));
+
+  //     const step3FormPosted = new BroadcastChannel('step3form_posted');
+
+  //     step3FormPosted.postMessage({ topic: 'form-updated', message: {} })
+
+  //     showSnackBar('Form has been submitted!');
+
+  //     setPosting(false);
+
+  //     window.self.close();
+
+  //   } catch (exc) {
+  //     console.log(exc);
+  //     setPosting(false);
+  //     setError("field must be filed")
+  //     return showSnackBar(exc.message);
+  //   }
+  // }
+
+
+
+
+
+  // convert into SVG using DOM
+  async function onSubmitButton() {
     try {
       setPosting(true);
 
@@ -117,30 +211,11 @@ const BootCardAgreement = () => {
 
       let data = {
         id: "id",
-        name: document.getElementById('name').value,
-        securityNumber: document.getElementById('securityNumber').value,
-        Address: document.getElementById('adddress').value,
-        dateofInjury: dateofInjury,
-        typeOfInjury: document.getElementById('typeOfInjury').value,
-        doctorName: document.getElementById('doctorName').value,
-        doctorAddress: document.getElementById('doctorAddress').value,
-        DoctorPhone: document.getElementById('DoctorPhone').value,
-        locationName: document.getElementById('locationName').value,
-        locationAddress: document.getElementById('locationAddress').value,
-        locationPhone: document.getElementById('locationPhone').value,
-        injuryDetail: document.getElementById('injuryDetail').value,
-        bills: document.getElementById('bills').value == "Yes" ? 'Yes' : 'No',
-        howMuch: document.getElementById('howMuch').value,
-        howLong: document.getElementById('howLong').value,
-        howMuch: document.getElementById('howMuch').value,
-        attorny: document.getElementById('attorny').value,
-        settelment: document.getElementById('settelment').value,
-        dateOfRelease: dateOfRelease,
-        limitaion: document.getElementById('limitaion').value,
-        limitaionDoctorName: document.getElementById('limitaionDoctorName').value,
-        limitaionAddress: document.getElementById('limitaionAddress').value,
-        limitaionPhone: document.getElementById('limitaionPhone').value,
-        confedential: document.getElementById('confedential').value,
+        employeeName: userData.firstName,
+        socialSecurityName: document.getElementById('socialSecurityName').value,
+        company: document.getElementById('company').value,
+        hireDate: dateofInjury,
+        dataSigned: dateOfRelease,
         signature: document.getElementById('signature').value,
         formDate: formDate,
         PDFimage: images
@@ -177,14 +252,12 @@ const BootCardAgreement = () => {
       window.self.close();
 
     } catch (exc) {
-        console.log(exc);
-        setPosting(false);
-        setError("field must be filed")
-        return showSnackBar(exc.message);
+      console.log(exc);
+      setPosting(false);
+      setError("field must be filed")
+      return showSnackBar(exc.message);
     }
   }
-
-
 
 
 
@@ -201,14 +274,25 @@ const BootCardAgreement = () => {
           <ListItem>
             <Grid className="FormMenuLogo"></Grid>
           </ListItem>
+
           <ListItem>
+            <button
+              onClick={onSubmitButton}
+            // type="submit"
+            >
+              <SaveIcon />
+            </button>
+          </ListItem>
+
+          {/* <ListItem>
             <button
               onClick={submit}
             // type="submit"
             >
               <SaveIcon />
             </button>
-          </ListItem>
+          </ListItem> */}
+
           <ListItem>
             <Button onClick={() => window.print()}>
               <LocalPrintshopIcon />
@@ -221,7 +305,7 @@ const BootCardAgreement = () => {
           </ListItem>
         </List>
       </Grid>
-      <TableContainer className="MainTable capture">
+      {/* <TableContainer className="MainTable capture">
         <Table className="SecondMainTable">
           <TableRow>
             <TableCell>
@@ -238,18 +322,18 @@ const BootCardAgreement = () => {
                 </TableRow>
               </Table>
               <Table className="mt10">
-                {/* --**-- */}
+
                 <TableRow className="w100 mt10 row">
                   <TableCell className="w50 row pr10">
                     NAME:
-                    <input required type="text" id="name" className="w h18 pl8 bn bb input-capitalization" 
+                    <input required type="text" id="name" className="w h18 pl8 bn bb input-capitalization"
                       value={`${userData.firstName} ${userData.middleName} ${userData.lastName}`}
-                        required
-                        disabled />
+                      required
+                      disabled />
                   </TableCell>
                   <TableCell className="w50 row pl10">
                     SOCIAL SECURITY NO.:
-                    <input required type="text" name="textfield" id="securityNumber" className="w h18 pl8 bn bb" 
+                    <input required type="text" name="textfield" id="securityNumber" className="w h18 pl8 bn bb"
                       value={`${userData.ssn}`}
                       disabled
                     />
@@ -258,7 +342,7 @@ const BootCardAgreement = () => {
                 <TableRow className="w100 mt10 row">
                   <TableCell className="w100 row">
                     Address:
-                    <input required type="text" name="textfield" id="adddress" className="w h18 pl8 bn bb input-capitalization" 
+                    <input required type="text" name="textfield" id="adddress" className="w h18 pl8 bn bb input-capitalization"
                       value={`${userData.address}`}
                       disabled
                     />
@@ -274,14 +358,14 @@ const BootCardAgreement = () => {
                       id="offerDate"
                       className="datePickerReact"
                     />
-                    {/* <input type="text" name="textfield" id="textfield" className="w h18 pl8 bn bb" /> */}
                   </TableCell>
                   <TableCell className="w50 row pl10">
                     Type of Injury:
                     <input required type="text" name="textfield" id="typeOfInjury" className="w h18 pl8 bn bb" />
                   </TableCell>
                 </TableRow>
-                {/* -*- */}
+
+
                 <TableRow className="w100 mt10 row">
                   <TableCell className="w4">7.</TableCell>
                   <TableCell className="w100 row pr10">
@@ -303,22 +387,6 @@ const BootCardAgreement = () => {
                     (Phone)
                   </TableCell>
                 </TableRow>
-                {/* <TableRow className="w100 mt10 row">
-                    <TableCell className="w4"></TableCell>
-                    <TableCell className="w30 pr20 textCenter">
-                      <input required type="text" name="textfield" id="textfield" className="w100 bn bb textCenter mb5" />
-                      (Name)
-                    </TableCell>
-                    <TableCell className="w40 pr10 textCenter">
-                      <input required type="text" name="textfield" id="textfield" className="w100 bn bb textCenter mb5" />
-                      (Address)
-                    </TableCell>
-                    <TableCell className="w30 pl20 textCenter">
-                      <input required type="text" name="textfield" id="textfield" className="w100 bn bb textCenter mb5" />
-                      (Phone)
-                    </TableCell>
-                  </TableRow> */}
-                {/* -*- */}
                 <TableRow className="w100 mt10 row">
                   <TableCell className="w4">8.</TableCell>
                   <TableCell className="w100 row pr10">
@@ -340,7 +408,7 @@ const BootCardAgreement = () => {
                     (Phone)
                   </TableCell>
                 </TableRow>
-                {/* -*- */}
+
                 <TableRow className="w100 mt10 row">
                   <TableCell className="w4">9.</TableCell>
                   <TableCell className="w100 row pr10">
@@ -351,15 +419,10 @@ const BootCardAgreement = () => {
                   <TableCell className="w4"></TableCell>
                   <TableCell className="w100">
                     <textarea required id='injuryDetail' className="w100 bn bb bt bl br mt8" />
-
-
-                    {/* <input type="text" name="textfield" id="textfield" className="w100 bn bb mt8" />
-                    <input type="text" name="textfield" id="textfield" className="w100 bn bb mt8" />
-                    <input type="text" name="textfield" id="textfield" className="w100 bn bb mt8" />
-                    <input type="text" name="textfield" id="textfield" className="w100 bn bb mt8" /> */}
                   </TableCell>
                 </TableRow>
-                {/* -*- */}
+
+
                 <TableRow className="w100 mt10 row">
                   <TableCell className="w4">10.</TableCell>
                   <TableCell className="w100 row pr10">
@@ -426,7 +489,7 @@ const BootCardAgreement = () => {
                     No
                   </TableCell>
                 </TableRow>
-                {/* -*- */}
+
                 <TableRow className="w100 mt10 row">
                   <TableCell className="w4">11.</TableCell>
                   <TableCell className="w100 row">
@@ -437,10 +500,10 @@ const BootCardAgreement = () => {
                       id="offerDate"
                       className="datePickerReact"
                     />
-                    {/* <input required type="text" name="textfield" id="textfield" className="w bn bb" /> */}
+
                   </TableCell>
                 </TableRow>
-                {/* -*- */}
+
                 <TableRow className="w100 mt10 row">
                   <TableCell className="w4">12.</TableCell>
                   <TableCell className="w40 row pr10">
@@ -473,7 +536,7 @@ const BootCardAgreement = () => {
                     (Phone)
                   </TableCell>
                 </TableRow>
-                {/* --**-- */}
+
                 <TableRow className="w100 mt10 row">
                   <TableCell className="w4">13.</TableCell>
                   <TableCell className="w60">
@@ -488,7 +551,7 @@ const BootCardAgreement = () => {
                     No
                   </TableCell>
                 </TableRow>
-                {/* --**-- */}
+
                 <TableRow className="w100 mt50 row">
                   <TableCell className="w50 row pr10">
                     YOUR SIGNATURE:
@@ -503,11 +566,9 @@ const BootCardAgreement = () => {
                       className="datePickerReact"
                       disabled
                     />
-                    {/* <input required type="text" name="textfield" id="textfield" className="w bn bb textCenter mb5" /> */}
                   </TableCell>
                 </TableRow>
               </Table>
-              {/* --**-- */}
 
 
             </TableCell>
@@ -520,8 +581,170 @@ const BootCardAgreement = () => {
             </TableCell>
           </TableRow>
         </Table>
+      </TableContainer> */}
+
+
+
+
+
+
+
+
+
+
+
+
+
+      {/* This is new form  (Change Request) */}
+
+      <TableContainer className="MainTable capture">
+        <Table className="SecondMainTable">
+          <TableRow>
+            <TableCell>
+              <Table className="w100">
+                <TableRow className="w100 mb10 mt10 row justify-center">
+                  <TableCell>
+                    <Avatar alt="TGS" className="TGSLogoSVG" src="https://tgs.liquidtechnologies.pk/assets/TGS_Logo2.svg" />
+                  </TableCell>
+                </TableRow>
+                <TableRow className="w100">
+                  <TableCell className="w100 textCenter font20 bold">
+                    Boot Cost Payment Agreement
+                  </TableCell>
+                </TableRow>
+              </Table>
+              <Table className="mt10">
+                {/* --**-- */}
+                <TableRow className="w100 mt10 row">
+
+                  <TableCell className="w50 row pr10">
+                    Hire Date:
+                    <DatePicker
+                      onChange={(value) => { setDateofInjury(value) }}
+                      value={dateofInjury}
+                      id="hireDate"
+                      className="datePickerReact"
+                    />
+                    {/* <input type="text" name="textfield" id="textfield" className="w h18 pl8 bn bb" /> */}
+                  </TableCell>
+
+                </TableRow>
+
+                <TableRow style={{ height: "10px" }}>
+
+                </TableRow>
+                <TableRow className="w100 mt10 row">
+                  <TableCell className="w100 row">
+                    Employee Name
+                    <input required type="text" name="textfield" id="empName" className="w h18 pl8 bn bb input-capitalization"
+                      value={`${userData.firstName}`}
+                      disabled
+                    />
+                  </TableCell>
+                </TableRow>
+                {console.log(userData)}
+
+
+                <TableRow style={{ height: "10px" }}>
+
+                </TableRow>
+
+                <TableRow className="w100 mt10 row">
+                  <TableCell className="w100 row">
+                    Social Security #:
+                    <input required type="text" name="textfield" id="socialSecurityName" className="w h18 pl8 bn bb input-capitalization"
+                    />
+                  </TableCell>
+                </TableRow>
+
+
+
+                <TableRow style={{ height: "10px" }}>
+
+                </TableRow>
+
+
+
+                <TableRow>
+                  If for any reason I am terminated or resign from Trans-Global Solutions, Inc. within six (6) months from the date of my initial hire I agree to pay for any training and for the full cost of my work boots and any other personal protective equipment that Trans-Global Solutions, Inc. (TGS) may purchase for me.
+
+                  I authorize that the full cost of training and any personal protective equipment be deducted from my final paycheck if I am terminated/resign within six (6) months of my initial hire date.
+
+                </TableRow>
+
+
+                <TableRow style={{ height: "10px" }}>
+
+                </TableRow>
+
+
+                <TableRow style={{ height: "20px" }}>
+
+                  <TableCell className="w50 row pr10">
+                    YOUR SIGNATURE:
+                    <input required type="text" name="textfield" id="signature" className="w bn bb textCenter signatureClass font-20" />
+                  </TableCell>
+
+                </TableRow>
+
+
+
+                <TableRow style={{ height: "10px" }}>
+
+                </TableRow>
+
+
+                <TableRow style={{ height: "20px" }}>
+
+
+                  <TableRow className="w100 mt10 row">
+                    <TableCell className="w100 row">
+                      Company Representative
+                      <input required type="text" name="textfield" id="company" className="w h18 pl8 bn bb input-capitalization"
+                      />
+                    </TableCell>
+                  </TableRow>
+                </TableRow>
+
+
+
+
+                <TableRow className="w100 mt10 row">
+                  <TableCell className="w4">11.</TableCell>
+                  <TableCell className="w100 row">
+                    Date Released By Doctor To Go Back To Work:
+                    <DatePicker
+                      onChange={(value) => { setDateOfRelease(value) }}
+                      value={dateOfRelease}
+                      id="offerDate"
+                      className="datePickerReact"
+                    />
+
+                  </TableCell>
+                </TableRow>
+
+              </Table>
+              {/* --**-- */}
+
+
+            </TableCell>
+          </TableRow>
+
+        </Table>
       </TableContainer>
-      {/* </form> */}
+
+
+
+
+
+
+
+
+
+
+
+
+
       <Snackbar></Snackbar>
     </Grid>
   );
