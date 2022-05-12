@@ -364,6 +364,7 @@ const NewHireStep1 = () => {
     let applicantDataHistory = location?.state;
     setHoldData(applicantDataHistory);
     console.log(applicantDataHistory);
+    setApplicantData(applicantDataHistory)
 
     try {
       let data = await hr.getAllApplicantsByID(applicantDataHistory);
