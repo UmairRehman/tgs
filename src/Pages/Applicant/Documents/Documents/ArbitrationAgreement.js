@@ -103,7 +103,7 @@ const ArbitrationAgreement = () => {
         let image = (canvas.toDataURL('image/png'));
 
         images.push(image);
-       }
+      }
 
       const resposne = await users.submitForm({
         image: images,
@@ -406,9 +406,9 @@ const ArbitrationAgreement = () => {
                                 } = JSON.parse(
                                   localStorage.user_profile || {}
                                 );
-  
+
                                 const { firstName, lastName } = AEmployee;
-  
+
                                 return `${firstName} ${lastName}`;
                               })()
                             }
