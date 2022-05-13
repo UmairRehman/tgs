@@ -169,7 +169,16 @@ const EmployeeLogin = () => {
       const role = Imports.role[role_id];
 
       if (role) {
-        history.push(role.navigateTo)
+        // history.push(role.navigateTo)
+
+
+
+        history.push({
+          pathname: role.navigateTo,
+          state: {
+            broaCast: true
+          }
+        })
       } else {
         history.push('/login')
       }

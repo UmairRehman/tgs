@@ -307,6 +307,8 @@ const PageHeader = () => {
         storage.set('broadcasts', JSON.stringify(rest));
 
         insertBroadcasts(rest);
+
+
       }, 0);
     }
     await retreiveBroadcasts();
@@ -354,6 +356,7 @@ const PageHeader = () => {
 
   const retreiveBroadcasts = async () => {
     try {
+      console.log("retreiveBroadcasts")
       if (!storage.get('access_jwt'))
         return;
       const response = await broadcast.getAll();
@@ -388,6 +391,7 @@ const PageHeader = () => {
             id
           }
         });
+
       setNotifications(notificationsBuffer);
 
     } catch (exc) {
@@ -395,18 +399,76 @@ const PageHeader = () => {
     }
   }
 
+  const retreiveBroadcasts2 = async () => {
+    try {
+      console.log("retreiveBroadcasts")
+      if (!storage.get('access_jwt'))
+        return;
+      const response = await broadcast.getAll();
+
+      const { data } = response;
+
+      const notificationsBuffer = data
+        .reverse()
+        .map(broadcast => {
+          let {
+            Employee: { dnUsername: from },
+            BroadcastMessage: {
+              SubDepartment: { name: to },
+              createdAt: date,
+              subject,
+              message
+            },
+            is_read,
+            id
+          } = broadcast;
+
+          date = new Date(date).toLocaleDateString()
+
+          return {
+            heading: to,
+            body: message,
+            subject,
+            date,
+            from,
+            to,
+            is_read,
+            id
+          }
+        });
+      const flter = notificationsBuffer.filter((data) => data.is_read == false)
+      console.log(flter)
+      if (flter.length > 0)
+        AlertPop(false, flter[0])
+
+    } catch (exc) {
+      console.log(exc);
+    }
+  }
   useEffect(() => {
     if (!isEmployee)
       return;
 
     storage.set('broadcasts', JSON.stringify(broadcasts));
-
-    if (getBroadcasts().length)
+    console.log(getBroadcasts().length)
+    if (getBroadcasts().length) {
       AlertPop(true);
+      console.log("----------")
+
+    }
 
     retreiveBroadcasts();
+    console.log("avhajhvsjajsvasajvs")
   }, [broadcasts])
 
+
+
+  useEffect(() => {
+    
+    if (history?.location?.state?.broaCast == true)
+      retreiveBroadcasts2()
+
+  }, [])
 
   /** Retreiving user profile information, cached in localstorage.
    * TO APPLY - state service later
