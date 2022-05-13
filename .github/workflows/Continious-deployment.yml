@@ -22,4 +22,4 @@ jobs:
          port: 22
          script: |
              whoami
-             ssh ep@209.64.123.132 "sh script.sh"
+             ssh epprod@209.64.123.133 "sh script.sh"
