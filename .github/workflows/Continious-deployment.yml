@@ -21,4 +21,4 @@ jobs:
          key: ${{ secrets.PRIVATE_KEY }}
          port: 22
          script: |
-             ssh epprod@209.64.123.132 "sh script.sh"
+             ssh ep@209.64.123.132 "sh script.sh"
