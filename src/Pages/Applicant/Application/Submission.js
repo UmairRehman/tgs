@@ -207,7 +207,7 @@ const Submission = () => {
 
             <Grid className={proceedSectionClassName}>
               <Link to={linkToUse}>Proceed to next step</Link>
-              This   option  will  be  available  after  your  profile  is  approved by HR. You will receive an  email  to  continue with the next steps of the process.
+             <h4> This   option  will  be  available  after  your  profile  is  approved by HR. You will receive an  email  to  continue with the next steps of the process.</h4>
             </Grid>
           </Grid>
 
