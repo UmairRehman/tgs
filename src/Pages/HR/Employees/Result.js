@@ -1199,7 +1199,7 @@ const EmployeeResult = (props) => {
                                     Attach Additional Files
                                   </Grid>
                                   <Grid xs={12} id="Step2DragFile" className="Step2DragFile mt14">
-                                    Drop File Here OR
+                                  
                                     <Button
                                       onClick={($event) => {
                                         const input = document.getElementById('additional-files-input');
