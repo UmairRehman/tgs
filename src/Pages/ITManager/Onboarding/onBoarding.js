@@ -562,7 +562,7 @@ const OnBoarding = () => {
                           className="DateTimePicker"
                           value={  (cell?.completeDate)
                             ? new Date(cell.completeDate).toISOString().slice(0, 10)
-                            : 'DD/MM/YYYY' 
+                            : 'MM/DD/YYYY' 
                           }
                           InputLabelProps={{
                             shrink: true,
@@ -630,7 +630,7 @@ const OnBoarding = () => {
                           className="DateTimePicker"
                           value={  (vehicle?.completeDate)
                             ? new Date(vehicle?.completeDate).toISOString().slice(0, 10)
-                            : 'DD/MM/YYYY' 
+                            : 'MM/DD/YYYY' 
                           }
                           InputLabelProps={{
                             shrink: true,

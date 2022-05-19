@@ -490,7 +490,6 @@ const EmployeeResult = (props) => {
 
         setCertificateType(certificateData.data.rows)
 
-
       }).catch((err) => { console.log(err) });
 
     }
@@ -579,6 +578,10 @@ const EmployeeResult = (props) => {
 
     setUpdateCertificate(row)
     setUpdatedCertificateID(row.id)
+    console.log(row)
+    setSelectedCertificateType(row.CertificateTypeId);
+    setUpdatedCertificateName(row.name);
+
     // setUpdatedCertificateName(row.name)
     setUpdatedCertificateIssueDate(row.issue_date)
     setUpdatedCertificateExpiryDate(row.expiry_date)
@@ -1363,6 +1366,7 @@ const EmployeeResult = (props) => {
                   <Autocomplete
                     className="w100p"
                     id="combo-box-demo"
+                    defaultValue={ certificateType[updateCertificate?.CertificateTypeId -1] }
                     onChange={(event, newValue) => {
                       const { id, name } = newValue;
 
