@@ -596,6 +596,13 @@ const NewHireStep1 = () => {
                       <Grid className="w250 bold">Email Address</Grid>
                       <Grid>{applicantData?.email}</Grid>
                     </ListItem>
+
+                    <ListItem container className="p0 pt6 pb20">
+                      <Grid className="w250 bold">SSN</Grid>
+                      <Grid>{applicantData?.ssn}</Grid>
+                    </ListItem>
+
+
                     <ListItem container className="p0 pt6 pb20">
                       <Grid className="w250 bold">Job ID / Description</Grid>
                       <Grid>{
