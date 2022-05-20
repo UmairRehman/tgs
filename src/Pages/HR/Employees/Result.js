@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Select from 'react-select';
+
 import {
   Grid,
   Button,
@@ -31,6 +32,7 @@ import Snackbar from '../../../Components/Snackbar';
 
 /** Local deoendencies & Libraries */
 import Services from '../../../Services';
+import DatePicker from "react-date-picker";
 
 var moment = require('moment-timezone')
 
@@ -738,7 +740,7 @@ const EmployeeResult = (props) => {
   useEffect(() => {
     const userProfile = JSON.parse(localStorage.getItem("user_profile"));
 
-    
+
     setRole_id(userProfile.role_id)
 
   }, [])
@@ -1202,7 +1204,7 @@ const EmployeeResult = (props) => {
                                     Attach Additional Files
                                   </Grid>
                                   <Grid xs={12} id="Step2DragFile" className="Step2DragFile mt14">
-                                  
+
                                     <Button
                                       onClick={($event) => {
                                         const input = document.getElementById('additional-files-input');
@@ -1366,7 +1368,7 @@ const EmployeeResult = (props) => {
                   <Autocomplete
                     className="w100p"
                     id="combo-box-demo"
-                    defaultValue={ certificateType[updateCertificate?.CertificateTypeId -1] }
+                    defaultValue={certificateType[updateCertificate?.CertificateTypeId - 1]}
                     onChange={(event, newValue) => {
                       const { id, name } = newValue;
 
@@ -1391,37 +1393,34 @@ const EmployeeResult = (props) => {
 
               <Grid xs={12} className="mbold mt30 DatePickerCss">
                 <Grid xs={12} className="pl14">Issue Date</Grid>
-                <TextField
-                  id="date"
-                  type="date"
-                  className="DateTimePicker"
-                  value={moment(new Date(updatedCertificateIssueDate)).format('YYYY-MM-DD').toString()}
-                  onChange={(e) => setUpdatedCertificateIssueDate(moment(new Date(e.target.value)).format('YYYY-MM-DD').toString())}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  inputProps={{
-                    max: moment(new Date(updatedCertificateExpiryDate)).format('YYYY-MM-DD').toString()
-                  }}
+
+                <DatePicker
+                  value={updatedCertificateIssueDate}
+                  onChange={(e) => setUpdatedCertificateIssueDate(e)}
+                  id="dob"
+                  // onKeyDown={(e) => {
+                  //     e.preventDefault();
+                  //  }}
+                  className="datePickerReact w100p bg-white react-date-picker"
                 />
+
               </Grid>
               <Grid xs={12} className="mbold mt30 DatePickerCss">
                 <Grid xs={12} className="pl14">Expire Date</Grid>
-                <TextField
-                  id="date"
+               
+                <DatePicker
+                  id="date1"
                   type="date"
-                  className="DateTimePicker"
-                  value={moment(new Date(updatedCertificateExpiryDate)).format('YYYY-MM-DD').toString()}
-
-                  onChange={(e) =>
-                    setUpdatedCertificateExpiryDate(moment(new Date(e.target.value)).format('YYYY-MM-DD').toString())}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  inputProps={{
-                    min: moment(new Date(updatedCertificateIssueDate)).format('YYYY-MM-DD').toString()
-                  }}
+                  // onChange={(e)=>console.log(e)}
+                  value={updatedCertificateExpiryDate}
+                  onChange={(e) => setUpdatedCertificateExpiryDate(e)}
+                  className="datePickerReact w100p bg-white react-date-picker"
                 />
+
+
+
+
+
               </Grid>
               <Grid xs={12} container justify="center" className="mt30">
                 <Button type="submit" className="LinkButton" >Save</Button>
