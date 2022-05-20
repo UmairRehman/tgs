@@ -1786,9 +1786,10 @@ const EnterCheckRide = () => {
                                                         InputLabelProps={{
                                                             shrink: true,
                                                         }}
-                                                        onKeyDown={(e) => {
-                                                            e.preventDefault();
-                                                         }}
+                                                        // onKeyDown={(e) => {
+                                                        //     // console.log("here");
+                                                        //     // e.preventDefault();
+                                                        //  }}
                                                     />
                                                 </Grid>
                                             </Grid>
