@@ -484,7 +484,7 @@ const NewHireStep2 = () => {
                                 onChange={handleAttachements}
                                 style={{ display: "none" }}
                               />
-                              Drop File Here OR Select Files
+                              Select Files
                             </label>
                           </Grid>
                         </Grid>

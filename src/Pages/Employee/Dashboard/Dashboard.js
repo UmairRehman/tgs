@@ -39,7 +39,7 @@ const columns = [
   { id: "EmployeeId", label: "Employee ID", minWidth: 50, type: "value" },
   { id: "name", label: "License Certificate", minWidth: 100, type: "value" },
   { id: "issue_date", label: "Issue Date", minWidth: 50, type: "value" },
-  { id: "expiry_date", label: "Expiry Date", minWidth: 50, type: "value" },
+  { id: "expiry_date", label: "Expire Date", minWidth: 50, type: "value" },
 ];
 
 // table dummy data
