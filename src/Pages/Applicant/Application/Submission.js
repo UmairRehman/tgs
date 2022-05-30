@@ -198,7 +198,7 @@ const Submission = () => {
           <PageHeader />
           <Grid id="PageTitle">Profile Submission</Grid>
           {/* Page Start */}
-          <Grid xs={12} className="Submission">
+          <Grid xs={12} md={8} className="Submission">
             <Grid xs={12} className="SubmissionTable">
               <Grid xs={12} md={6} lg={4}>
                 Thank you for applying to TGS, Our HR Team will review your application & get back to you.

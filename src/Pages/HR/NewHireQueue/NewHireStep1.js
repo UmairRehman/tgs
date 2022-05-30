@@ -505,9 +505,11 @@ const NewHireStep1 = () => {
     doc.text(bilingual ? 'Yes' : 'No', xOffset, yOffset + offsetExtension);
     yOffset += offsetTranslation;
 
-    doc.text("Second Language", xOffset, yOffset);
-    doc.text(bilingualLanguage, xOffset, yOffset + offsetExtension);
-    yOffset += offsetTranslation;
+    if (bilingual){
+      doc.text("Second Language", xOffset, yOffset);
+      doc.text(bilingualLanguage, xOffset, yOffset + offsetExtension);
+      yOffset += offsetTranslation;
+    }
 
     doc.text("Works Overtime:", xOffset, yOffset);
     doc.text(overTime ? 'Yes' : 'No', xOffset, yOffset + offsetExtension);
