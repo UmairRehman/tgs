@@ -70,7 +70,7 @@ const PostConditionalJobOffer2 = () => {
 
     let canvas = await (html2canvas(document.querySelector('#capture')));
     let image = (canvas.toDataURL('image/png'))
-
+    let nullCheck= false
     /** Disabling checks for pre-filled fields */
     let data = {
       // name: document.getElementById('name').value,
@@ -105,13 +105,14 @@ const PostConditionalJobOffer2 = () => {
       drAddress: document.getElementById('drAddress').value,
       drPhone: document.getElementById('drPhone').value,
       confidential: document.querySelector('input[name="confidential"]:checked')?.value,
-      signature: document.getElementById('signature').value,
+      signature: document.getElementById('signature').value.length >0 ? document.getElementById('signature').value : nullCheck = true,
       pDate: pDate,
       image: image
     }
     console.log(data)
-    const nullCheck = Object.values(data)
-      .reduce((total, accumulator) => total || !accumulator, false);
+    
+    // const nullCheck = Object.values(data)
+    //   .reduce((total, accumulator) => total || !accumulator, false);
 
     setPosting(false);
 
