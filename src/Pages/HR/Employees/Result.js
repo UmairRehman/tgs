@@ -318,6 +318,7 @@ const EmployeeResult = (props) => {
     }
 
 
+
     try {
       employee.update_employee_certificate(data).then((certificateData) => {
         setFlag(true)
@@ -471,8 +472,8 @@ const EmployeeResult = (props) => {
     try {
       hr.getCertificate({ id }).then((certificateData) => {
         certificateData.data.rows.forEach(element => {
-          element.issue_date = moment(new Date(element.issue_date)).format('DD-MM-YYYY')
-          element.expiry_date = moment(new Date(element.expiry_date)).format('DD-MM-YYYY')
+          element.issue_date = moment(new Date(element.issue_date)).format('MM-DD-YYYY')
+          element.expiry_date = moment(new Date(element.expiry_date)).format('MM-DD-YYYY')
         });
 
         setCertificate(certificateData.data.rows)
@@ -580,16 +581,15 @@ const EmployeeResult = (props) => {
 
     setUpdateCertificate(row)
     setUpdatedCertificateID(row.id)
-    console.log(row)
     setSelectedCertificateType(row.CertificateTypeId);
     setUpdatedCertificateName(row.name);
+    
 
-    // setUpdatedCertificateName(row.name)
     setUpdatedCertificateIssueDate(row.issue_date)
     setUpdatedCertificateExpiryDate(row.expiry_date)
+    
 
     setOpenC(true);
-    console.log(row)
   };
 
   const openCertificateModal = () => {
@@ -612,6 +612,7 @@ const EmployeeResult = (props) => {
     }
 
 
+
     try {
       let result = await employee.add_employee_certificate(data)
       if (result.httpStatus == 200) {
@@ -623,6 +624,7 @@ const EmployeeResult = (props) => {
     catch (exc) {
       console.log(exc);
     }
+
   }
 
   const handleCertificate = (e) => {
@@ -741,7 +743,7 @@ const EmployeeResult = (props) => {
     const userProfile = JSON.parse(localStorage.getItem("user_profile"));
 
 
-    setRole_id(userProfile.role_id)
+    setRole_id(userProfile?.role_id)
 
   }, [])
 
@@ -829,7 +831,7 @@ const EmployeeResult = (props) => {
                           Hire Date
                         </Grid>
                         <Grid xs={5}>
-                          {employeeDetails?.hireDate}
+                          {moment(employeeDetails?.hireDate).format('MM-DD-YYYY')}
                         </Grid>
                       </ListItem>)
                     }
@@ -1394,7 +1396,7 @@ const EmployeeResult = (props) => {
               <Grid xs={12} className="mbold mt30 DatePickerCss">
                 <Grid xs={12} className="pl14">Issue Date</Grid>
 
-                <DatePicker
+                {/* <DatePicker
                   value={updatedCertificateIssueDate}
                   onChange={(e) => setUpdatedCertificateIssueDate(e)}
                   id="dob"
@@ -1402,23 +1404,31 @@ const EmployeeResult = (props) => {
                   //     e.preventDefault();
                   //  }}
                   className="datePickerReact w100p bg-white react-date-picker"
+                /> */}
+
+                <TextField
+                  required={false}
+                  id="dob"
+                  type="date"
+                  className="DateTimePicker"
+                  value={updatedCertificateIssueDate} 
+                  onChange={(e) => { setUpdatedCertificateIssueDate(e.target.value) }}
+                  formatDate={(date) => moment(date).format('MM-DD-YYYY')}
                 />
 
               </Grid>
               <Grid xs={12} className="mbold mt30 DatePickerCss">
                 <Grid xs={12} className="pl14">Expire Date</Grid>
-               
-                <DatePicker
+
+                <TextField
+                  required={false}
                   id="date1"
                   type="date"
-                  // onChange={(e)=>console.log(e)}
-                  value={updatedCertificateExpiryDate}
-                  onChange={(e) => setUpdatedCertificateExpiryDate(e)}
-                  className="datePickerReact w100p bg-white react-date-picker"
+                  className="DateTimePicker"
+                  value={updatedCertificateExpiryDate} 
+                  onChange={(e) => setUpdatedCertificateExpiryDate(e.target.value)}
+                  formatDate={(date) => moment(date).format('MM-DD-YYYY')}
                 />
-
-
-
 
 
               </Grid>

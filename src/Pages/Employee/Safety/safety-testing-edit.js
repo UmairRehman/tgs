@@ -83,7 +83,7 @@ const SafetyTestingEdit = () => {
   const [ruleList, setRuleList] = useState([])
   const [eventDetail, setEventDetail] = useState({
     eventID : "",
-    date : moment(new Date()).format("dd-mm-yyyy"),
+    date : moment(new Date()).format("MM-DD-YYYY"),
     time : moment(new Date()).format("hh:mm:ss a"),
     jobID : ""
   })
@@ -134,7 +134,7 @@ const SafetyTestingEdit = () => {
     setSafetyTesting({ ...safetyTesting, crewList:crewList })  
     let details = { 
       eventID : eventDetails.event.id,
-      date : moment(new Date(eventDetails.event.date)).format("DD-MM-YYYY"),
+      date : moment(new Date(eventDetails?.event?.date)).format("MM-DD-YYYY"),
       time : eventDetails.event.time.slice(0,-3),
       jobID : eventDetails.event.jobID,
      }

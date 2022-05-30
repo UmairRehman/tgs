@@ -75,7 +75,7 @@ const NewHireStep2 = () => {
   const [hireDate, sethireDate] = useState("");
   const [loader, setLoader] = useState("");
   const [statusDateTime, setStatusDateTime] = useState({
-    date: moment(new Date()).format("DD-MM-YYYY"),
+    date: moment(new Date()).format("MM-DD-YYYY"),
     time: moment(new Date()).format("hh:mm a"),
   });
 
@@ -138,7 +138,7 @@ const NewHireStep2 = () => {
   const setStatus = async (status) => {
     setapproval(status);
     setStatusDateTime({
-      date: moment(new Date()).format("DD-MM-YYYY"),
+      date: moment(new Date()).format("MM-DD-YYYY"),
       time: moment(new Date()).format("hh:mm a"),
     });
   };
@@ -152,10 +152,8 @@ const NewHireStep2 = () => {
 
     try {
       let data = await hr.getAllApplicantsByID(applicantDataHistory);
-      setApplicantData(data.employee);
-      console.log(applicantData);
+      setApplicantData({...data.employee, createdAt: moment(data.employee).format('MM-DD-YYYY')});
       setUserFiles(data.files)
-      console.log(data.files)
     } catch (exc) {
       console.log(exc);
     }
@@ -265,7 +263,7 @@ const NewHireStep2 = () => {
                       </Grid>
                       <TextField
                         id="statusDate"
-                        value={statusDateTime.date}
+                        value={statusDateTime?.date}
                         label="3/10/2021"
                         disabled
                         variant="outlined"

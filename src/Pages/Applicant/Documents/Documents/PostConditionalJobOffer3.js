@@ -79,7 +79,7 @@ const PostConditionalJobOffer3 = () => {
       // address1 : res?.employee?.address1 || '',
     }
     let dateOfBirth = res?.employee?.dateOfBirth || new Date()
-    dateOfBirth = moment(dateOfBirth).format('DD/MM/YYYY')
+    dateOfBirth = moment(dateOfBirth).format('MM-DD-YYYY')
     setDob(dateOfBirth)
     setUserData(data)
     console.log(data)

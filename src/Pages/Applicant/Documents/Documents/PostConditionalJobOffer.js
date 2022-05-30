@@ -152,7 +152,7 @@ const PostConditionalJobOffer = () => {
         ssn: res?.employee?.ssn || '',
       }
       let dob = res?.employee?.dateOfBirth || new Date()
-      dob = moment(dob).format('DD/MM/YYYY')
+      dob = moment(dob).format('MM/DD/YYYY')
       setDateOfBirth(dob)
       setUserData(data)
       console.log(data)
@@ -783,6 +783,8 @@ const PostConditionalJobOffer = () => {
                           id="offerDate"
                           className="datePickerReact"
                           disabled
+                          formatDate={(date) => moment(date).format('MM-DD-YYYY')}
+
                         />
                       </TableCell>
                     </TableRow>
