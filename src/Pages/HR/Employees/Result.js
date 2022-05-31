@@ -100,11 +100,13 @@ const Positioncol = [
   { id: "EmployeeId", label: "Employee ID", minWidth: 100, type: "value" },
   // { id: "lv", label: "Level", minWidth: 100, type: "value" },
   { id: "FullTitle", label: "Full title", minWidth: 100, type: "value" },
-  { id: "JobCategoryId", label: "Category", minWidth: 100, type: "value" },
+  { id: "JobCategory.name", label: "Category", minWidth: 100, type: "value" },
   { id: "TGSLocation.name", label: "Location", minWidth: 100, type: "value" },
   // { id: "departmentName", label: "Department", minWidth: 100, type: "value" },
   { id: "SubDepartment.name", label: "Sub-Department", minWidth: 100, type: "value" },
-  { id: "Employee.firstName", label: "Supervisor", minWidth: 100, type: "value" },
+  { id: "newPair.supervisorFullname", label: "Supervisor", minWidth: 100, type: "value" },
+  // { id: "Employee.lastName", label: "Supervisor Lastname", minWidth: 100, type: "value" },
+
   { id: "EffectiveDate", label: "Hire Date", minWidth: 100, type: "value" },
   { id: "ed", label: "Edit", minWidth: 50, type: "edit" }
 ];
@@ -583,11 +585,11 @@ const EmployeeResult = (props) => {
     setUpdatedCertificateID(row.id)
     setSelectedCertificateType(row.CertificateTypeId);
     setUpdatedCertificateName(row.name);
-    
+
 
     setUpdatedCertificateIssueDate(row.issue_date)
     setUpdatedCertificateExpiryDate(row.expiry_date)
-    
+
 
     setOpenC(true);
   };
@@ -714,8 +716,11 @@ const EmployeeResult = (props) => {
       setEmployeeDetails(applicantDataHistory?.employee[0])
       setComponentLoader(false)
       setFiles(applicantDataHistory?.files)
-      setPosition(applicantDataHistory?.position)
-
+      setPosition(() => applicantDataHistory?.position)
+      let newPair = { supervisorFullname: applicantDataHistory?.position[0].Employee.firstName + " " + applicantDataHistory?.position[0].Employee.lastName }
+      position[0]= {...position[0], newPair }
+      console.log(position[0])
+      setPosition(position)
       setTgsLocation(applicantDataHistory?.employee[0].TGSLocation)
       setDepartment(applicantDataHistory?.employee[0]?.SubDepartment)
       setZip(applicantDataHistory?.employee[0].zip)
@@ -1411,7 +1416,7 @@ const EmployeeResult = (props) => {
                   id="dob"
                   type="date"
                   className="DateTimePicker"
-                  value={updatedCertificateIssueDate} 
+                  value={updatedCertificateIssueDate}
                   onChange={(e) => { setUpdatedCertificateIssueDate(e.target.value) }}
                   formatDate={(date) => moment(date).format('MM-DD-YYYY')}
                 />
@@ -1425,7 +1430,7 @@ const EmployeeResult = (props) => {
                   id="date1"
                   type="date"
                   className="DateTimePicker"
-                  value={updatedCertificateExpiryDate} 
+                  value={updatedCertificateExpiryDate}
                   onChange={(e) => setUpdatedCertificateExpiryDate(e.target.value)}
                   formatDate={(date) => moment(date).format('MM-DD-YYYY')}
                 />

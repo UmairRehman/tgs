@@ -298,7 +298,7 @@ const NewHireStep1 = () => {
       fuelCard: fuelCard.value,
     };
 
-    console.log(state);
+    // console.log(state);
   }
 
   async function onformSubmit(event) {
