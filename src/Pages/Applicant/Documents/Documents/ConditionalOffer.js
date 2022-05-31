@@ -72,7 +72,7 @@ const ConditionalOffer = () => {
 
   useEffect(async () => {
     let userProfile = await JSON.parse(localStorage.user_profile);
-    let res = await hr.getAllApplicantsByID({ id: userProfile.id })
+    let res = await hr.getAllApplicantsByID({ id: userProfile?.id})
     let data = {
       firstName: res?.employee?.firstName || '',
       middleName: res?.employee?.middleName || '',
@@ -278,7 +278,7 @@ const ConditionalOffer = () => {
                     Offeree’s Name:
                     <input type="text" name="officersName" id="officersName" className="w64 h22 bn bb input-capitalization"
                       value={
-                        `${userData.firstName} ${userData.lastName}`
+                        `${userData?.firstName} ${userData?.lastName}`
                       }
                       disabled
                     />
