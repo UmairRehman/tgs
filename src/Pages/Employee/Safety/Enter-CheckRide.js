@@ -1786,10 +1786,7 @@ const EnterCheckRide = () => {
                                                         InputLabelProps={{
                                                             shrink: true,
                                                         }}
-                                                        // onKeyDown={(e) => {
-                                                        //     // console.log("here");
-                                                        //     // e.preventDefault();
-                                                        //  }}
+                                                        formatDate={(date) => moment(date).format('MM-DD-YYYY')}
                                                     />
                                                 </Grid>
                                             </Grid>

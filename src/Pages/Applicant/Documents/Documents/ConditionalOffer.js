@@ -73,7 +73,9 @@ const ConditionalOffer = () => {
 
   useEffect(async () => {
     let userProfile = await JSON.parse(localStorage.user_profile);
-    let res = await hr.getAllApplicantsByID({ id: userProfile?.id})
+    let res = await hr.getAllApplicantsByID({ id: userProfile.id })
+
+
     let data = {
       firstName: res?.employee?.firstName || '',
       middleName: res?.employee?.middleName || '',
@@ -82,11 +84,9 @@ const ConditionalOffer = () => {
       position: res?.position?.FullTitle || '',
       location: res?.position?.TGSLocation?.name || '',
       pay: res?.pay?.Rate || '',
-      deptID: res?.position?.SubDepartmentId || '',
-      //jobID: res?.getAllApplicantsByID?.jobID || '',
+      deptID: res?.employee?.jobId || ''
     }
     setUserData(data)
-    console.log(data)
 
     const { payDetails } = localStorage;
 
@@ -319,14 +319,14 @@ const ConditionalOffer = () => {
                 <tr className="w100 row">
                   <td className="w50 row">Position:
                     <input type="text" name="textfield" id="position" className="w80 bn bb input-capitalization"
-                      value={`${userData.position}`}
+                      value={`${userData?.position}`}
                       disabled
                     />
 
                   </td>
                   <td className="w50 row">Pay Rate:
                     <input type="text" name="textfield" id="payRate" className="w38 bn bb"
-                      value={`${userData.pay}`}
+                      value={`${userData?.pay}`}
                       disabled
                     />
                     <input type="radio" id="hourly" value="hourly" name="payType" className="custom-radio-disabled ml6 mt4" disabled /> Hourly
@@ -336,13 +336,13 @@ const ConditionalOffer = () => {
                 <tr className="w100 row">
                   <td className="w50 mt10 pt10 row">Location:
                     <input type="text" name="textfield" id="location" className="w80 bn bb input-capitalization"
-                      value={`${userData.location}`}
+                      value={`${userData?.location}`}
                       disabled
                     />
                   </td>
                   <td className="w50 mt10 pt10 row">Department Code:
                     <input type="text" name="textfield" id="departmentCode" className="w60 bn bb input-capitalization"
-                      value={`${userData.deptID}`}
+                      value={`${userData?.deptID}`}
                       disabled />
                   </td>
 

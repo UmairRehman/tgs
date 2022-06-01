@@ -483,8 +483,8 @@ const Railroad = () => {
                             className="DateTimePicker"
                             defaultValue={railRoad.date}
                             value={railRoad.date}
-                           
                             onChange={(e, value) => { handleSubmitData('x', e.target.value, 10) }}
+                            formatDate={(date) => moment(date).format('MM-DD-YYYY')}
                             InputLabelProps={{
                               shrink: true,
                             }}

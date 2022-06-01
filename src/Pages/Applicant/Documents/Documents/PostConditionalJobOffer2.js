@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
-  Grid, TableContainer, Table, TableCell, TableRow, List, ListItem, Button,
+  Grid, TableContainer, Table, TableCell, TableRow, List, ListItem, Button, TextField,
 } from "@material-ui/core";
 import SaveIcon from '@material-ui/icons/Save';
 import Avatar from '@material-ui/core/Avatar';
@@ -18,6 +18,7 @@ import CancelIcon from '@material-ui/icons/Cancel';
 import Services from '../../../../Services';
 
 import { Imports } from '../../../../Imports';
+import { Text } from "@react-pdf/renderer";
 
 
 const {
@@ -33,6 +34,9 @@ const {
 
 
 const PostConditionalJobOffer2 = () => {
+
+  var moment = require('moment-timezone');
+
 
   const classes = useStyles();
 
@@ -70,7 +74,7 @@ const PostConditionalJobOffer2 = () => {
 
     let canvas = await (html2canvas(document.querySelector('#capture')));
     let image = (canvas.toDataURL('image/png'))
-    let nullCheck= false
+    let nullCheck = false
     /** Disabling checks for pre-filled fields */
     let data = {
       // name: document.getElementById('name').value,
@@ -105,12 +109,12 @@ const PostConditionalJobOffer2 = () => {
       drAddress: document.getElementById('drAddress').value,
       drPhone: document.getElementById('drPhone').value,
       confidential: document.querySelector('input[name="confidential"]:checked')?.value,
-      signature: document.getElementById('signature').value.length >0 ? document.getElementById('signature').value : nullCheck = true,
+      signature: document.getElementById('signature').value.length > 0 ? document.getElementById('signature').value : nullCheck = true,
       pDate: pDate,
       image: image
     }
     console.log(data)
-    
+
     // const nullCheck = Object.values(data)
     //   .reduce((total, accumulator) => total || !accumulator, false);
 
@@ -280,6 +284,7 @@ const PostConditionalJobOffer2 = () => {
                       value={date}
                       id="offerDate"
                       className="datePickerReact"
+                      format="MM-dd-yyyy"
                     />
                   </TableCell>
                   <TableCell className="w50 row pl10 d-flex">
@@ -497,6 +502,7 @@ const PostConditionalJobOffer2 = () => {
                       id="offerDate"
                       className="datePickerReact"
                       disabled
+                      format="MM-dd-yyyy"
                     />
                   </TableCell>
                 </TableRow>
