@@ -462,6 +462,9 @@ const NewHireStep1 = () => {
       bilingualLanguage,
     } = questionnaire;
 
+    console.log("Console; ",questionnaire)
+
+
     const doc = new jsPDF();
 
     doc.setFontSize(10);
@@ -630,7 +633,7 @@ const NewHireStep1 = () => {
                         <Button></Button>
                       </Grid>
                     </ListItem> */}
-                    <ListItem container className="p0 pt6 pb20">
+                   { resume != null && <ListItem container className="p0 pt6 pb20">
                       <Grid className="w250 bold">Resume</Grid>
                       <Grid className="PDFDownload">
                         <Grid className="FileName">Resume</Grid>
@@ -640,8 +643,8 @@ const NewHireStep1 = () => {
                           target="_blank"
                         ></a>
                       </Grid>
-                    </ListItem>
-                    <ListItem container className="p0 pt6 pb20">
+                    </ListItem>}
+                  { drivingLicense != null && <ListItem container className="p0 pt6 pb20">
                       <Grid className="w250 bold">Driver's License</Grid>
                       <Grid className="PDFDownload">
                         <Grid className="FileName">Driver's License</Grid>
@@ -651,8 +654,8 @@ const NewHireStep1 = () => {
                           target="_blank"
                         ></a>
                       </Grid>
-                    </ListItem>
-                    <ListItem container className="p0 pt6 pb20">
+                    </ListItem>}
+                    { questionnaire != null &&  <ListItem container className="p0 pt6 pb20">
                       <Grid className="w250 bold">Questionaire</Grid>
                       <Grid className="PDFDownload">
                         <Grid className="FileName">Questionaire</Grid>
@@ -661,7 +664,7 @@ const NewHireStep1 = () => {
                           onClick={downloadQuestionnaire}
                         ></Button>
                       </Grid>
-                    </ListItem>
+                    </ListItem>}
 
                     {/* <ListItem container className="p0 pt6 pb20">
                       <Grid className="w250 bold">Drivers License</Grid>

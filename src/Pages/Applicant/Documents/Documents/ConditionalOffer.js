@@ -61,7 +61,8 @@ const ConditionalOffer = () => {
     position: '',
     location: '',
     pay: '',
-    deptID: ''
+    deptID: '',
+    // jobID:'',
   })
 
   const [startDate, setStartDate] = useState(new Date());
@@ -81,7 +82,8 @@ const ConditionalOffer = () => {
       position: res?.position?.FullTitle || '',
       location: res?.position?.TGSLocation?.name || '',
       pay: res?.pay?.Rate || '',
-      deptID: res?.position?.SubDepartmentId || ''
+      deptID: res?.position?.SubDepartmentId || '',
+      //jobID: res?.getAllApplicantsByID?.jobID || '',
     }
     setUserData(data)
     console.log(data)
@@ -133,6 +135,7 @@ const ConditionalOffer = () => {
       let payType = document.querySelector('input[name="payType"]:checked')?.value;
       let location = document.getElementById("location").value;
       let departmentCode = document.getElementById("departmentCode").value;
+      let JobCode = document.getElementById("jobCode").value;
       // let phone = document.getElementById("phone").value;
       // let laptop = document.getElementById("laptop").value;
       let terms = document.getElementById("terms").value;
@@ -152,6 +155,7 @@ const ConditionalOffer = () => {
         // laptop,
         // terms,
         offeree,
+        
       }
 
       const nullCheck = Object.values(data)
@@ -341,6 +345,12 @@ const ConditionalOffer = () => {
                       value={`${userData.deptID}`}
                       disabled />
                   </td>
+
+                  {/* <td className="w50 mt10 pt10 row">Job code:
+                    <input type="text" name="textfield" id="departmentCode" className="w60 bn bb input-capitalization"
+                      value={`${userData.jobID}`}
+                      disabled />
+                  </td> */}
                 </tr>
               </tbody>
             </table>
