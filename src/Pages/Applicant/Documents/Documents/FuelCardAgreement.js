@@ -48,8 +48,9 @@ const FuelCardAgreement = () => {
 
   const classes = useStyles();
 
-
   const [error, setError] = useState('');
+
+  var moment = require('moment-timezone');
 
   const [isPosting, setPosting] = useState(false);
 
@@ -242,6 +243,7 @@ useEffect( async () => {
                       id="offerDate"
                       className="datePickerReact"
                       disabled
+                      formatDate={(date) => moment(date).format('MM-DD-YYYY')}
                     />
                   </TableCell>
                 </TableRow>

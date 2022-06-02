@@ -198,7 +198,7 @@ const Submission = () => {
           <PageHeader />
           <Grid id="PageTitle">Profile Submission</Grid>
           {/* Page Start */}
-          <Grid xs={12} className="Submission">
+          <Grid xs={12} md={8} className="Submission">
             <Grid xs={12} className="SubmissionTable">
               <Grid xs={12} md={6} lg={4}>
                 Thank you for applying to TGS, Our HR Team will review your application & get back to you.
@@ -206,8 +206,10 @@ const Submission = () => {
             </Grid>
 
             <Grid className={proceedSectionClassName}>
-              <Link to={linkToUse}>Proceed to next step</Link>
-             <h4> This   option  will  be  available  after  your  profile  is  approved by HR. You will receive an  email  to  continue with the next steps of the process.</h4>
+              <Link  to={linkToUse}>
+                <h2>Proceed to next step</h2>
+                </Link>
+             <h2> This   option  will  be  available  after  your  profile  is  approved by HR. You will receive an  email  to  continue with the next steps of the process.</h2>
             </Grid>
           </Grid>
 

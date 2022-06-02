@@ -61,7 +61,8 @@ const ConditionalOffer = () => {
     position: '',
     location: '',
     pay: '',
-    deptID: ''
+    deptID: '',
+    // jobID:'',
   })
 
   const [startDate, setStartDate] = useState(new Date());
@@ -73,6 +74,8 @@ const ConditionalOffer = () => {
   useEffect(async () => {
     let userProfile = await JSON.parse(localStorage.user_profile);
     let res = await hr.getAllApplicantsByID({ id: userProfile.id })
+
+
     let data = {
       firstName: res?.employee?.firstName || '',
       middleName: res?.employee?.middleName || '',
@@ -81,10 +84,9 @@ const ConditionalOffer = () => {
       position: res?.position?.FullTitle || '',
       location: res?.position?.TGSLocation?.name || '',
       pay: res?.pay?.Rate || '',
-      deptID: res?.position?.SubDepartmentId || ''
+      deptID: res?.employee?.jobId || ''
     }
     setUserData(data)
-    console.log(data)
 
     const { payDetails } = localStorage;
 
@@ -133,9 +135,10 @@ const ConditionalOffer = () => {
       let payType = document.querySelector('input[name="payType"]:checked')?.value;
       let location = document.getElementById("location").value;
       let departmentCode = document.getElementById("departmentCode").value;
+      
       // let phone = document.getElementById("phone").value;
       // let laptop = document.getElementById("laptop").value;
-      let terms = document.getElementById("terms").value;
+      // let terms = document.getElementById("terms").value;
       let offeree = document.getElementById("offeree").value;
 
       /** Disabling checks for pre-filled fields */
@@ -152,6 +155,7 @@ const ConditionalOffer = () => {
         // laptop,
         // terms,
         offeree,
+        
       }
 
       const nullCheck = Object.values(data)
@@ -163,6 +167,7 @@ const ConditionalOffer = () => {
         setError("field must be filed")
         return showSnackBar("Kindly fill in all fields!");
       }
+      console.log(data)
 
       const captureElements = Array.from(
         document.getElementsByClassName('capture')
@@ -278,7 +283,7 @@ const ConditionalOffer = () => {
                     Offeree’s Name:
                     <input type="text" name="officersName" id="officersName" className="w64 h22 bn bb input-capitalization"
                       value={
-                        `${userData.firstName} ${userData.lastName}`
+                        `${userData?.firstName} ${userData?.lastName}`
                       }
                       disabled
                     />
@@ -290,6 +295,7 @@ const ConditionalOffer = () => {
                       id="offerDate"
                       className="datePickerReact"
                       disabled
+                      format="MM-dd-yyyy"
                     />
                     {/* <input type="text" name="textfield" id="textfield" className="w20 h22 pl10 pr10 bn bb textCenter" />
                         <span className="font24">/</span>
@@ -315,14 +321,14 @@ const ConditionalOffer = () => {
                 <tr className="w100 row">
                   <td className="w50 row">Position:
                     <input type="text" name="textfield" id="position" className="w80 bn bb input-capitalization"
-                      value={`${userData.position}`}
+                      value={`${userData?.position}`}
                       disabled
                     />
 
                   </td>
                   <td className="w50 row">Pay Rate:
                     <input type="text" name="textfield" id="payRate" className="w38 bn bb"
-                      value={`${userData.pay}`}
+                      value={`${userData?.pay}`}
                       disabled
                     />
                     <input type="radio" id="hourly" value="hourly" name="payType" className="custom-radio-disabled ml6 mt4" disabled /> Hourly
@@ -332,15 +338,21 @@ const ConditionalOffer = () => {
                 <tr className="w100 row">
                   <td className="w50 mt10 pt10 row">Location:
                     <input type="text" name="textfield" id="location" className="w80 bn bb input-capitalization"
-                      value={`${userData.location}`}
+                      value={`${userData?.location}`}
                       disabled
                     />
                   </td>
-                  <td className="w50 mt10 pt10 row">Department Code:
+                  <td className="w50 mt10 pt10 row">Job Code:
                     <input type="text" name="textfield" id="departmentCode" className="w60 bn bb input-capitalization"
-                      value={`${userData.deptID}`}
+                      value={`${userData?.deptID}`}
                       disabled />
                   </td>
+
+                  {/* <td className="w50 mt10 pt10 row">Job code:
+                    <input type="text" name="textfield" id="departmentCode" className="w60 bn bb input-capitalization"
+                      value={`${userData.jobID}`}
+                      disabled />
+                  </td> */}
                 </tr>
               </tbody>
             </table>
@@ -354,6 +366,7 @@ const ConditionalOffer = () => {
                       id="startDate"
                       className="datePickerReact"
                       disabled
+                      format="MM-dd-yyyy"
                     />
                     {/* <input type="text" name="textfield" id="textfield" className="w22 h22 bn bb textCenter" />
                       <span className="font12">/</span>

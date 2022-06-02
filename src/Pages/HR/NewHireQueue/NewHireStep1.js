@@ -90,7 +90,7 @@ const NewHireStep1 = () => {
   const [locationID, setLocationID] = useState("");
   const [subDeprtmentText, setSubDeprtmentText] = useState(false);
   const [statusDateTime, setStatusDateTime] = useState({
-    date: moment(new Date()).format("DD-MM-YYYY"),
+    date: moment(new Date()).format("MM-DD-YYYY"),
     time: moment(new Date()).format("hh:mm a"),
   });
 
@@ -298,7 +298,7 @@ const NewHireStep1 = () => {
       fuelCard: fuelCard.value,
     };
 
-    console.log(state);
+    // console.log(state);
   }
 
   async function onformSubmit(event) {
@@ -339,7 +339,6 @@ const NewHireStep1 = () => {
         },
       };
     }
-    console.log(data);
 
     try {
 
@@ -409,7 +408,7 @@ const NewHireStep1 = () => {
   const setStatus = async (status) => {
     setStep1(status);
     setStatusDateTime({
-      date: moment(new Date()).format("DD-MM-YYYY"),
+      date: moment(new Date()).format("MM-DD-YYYY"),
       time: moment(new Date()).format("hh:mm a"),
     });
     console.log(status.value)
@@ -462,6 +461,9 @@ const NewHireStep1 = () => {
       bilingualLanguage,
     } = questionnaire;
 
+    console.log("Console; ",questionnaire)
+
+
     const doc = new jsPDF();
 
     doc.setFontSize(10);
@@ -505,9 +507,11 @@ const NewHireStep1 = () => {
     doc.text(bilingual ? 'Yes' : 'No', xOffset, yOffset + offsetExtension);
     yOffset += offsetTranslation;
 
-    doc.text("Second Language", xOffset, yOffset);
-    doc.text(bilingualLanguage, xOffset, yOffset + offsetExtension);
-    yOffset += offsetTranslation;
+    if (bilingual){
+      doc.text("Second Language", xOffset, yOffset);
+      doc.text(bilingualLanguage, xOffset, yOffset + offsetExtension);
+      yOffset += offsetTranslation;
+    }
 
     doc.text("Works Overtime:", xOffset, yOffset);
     doc.text(overTime ? 'Yes' : 'No', xOffset, yOffset + offsetExtension);
@@ -606,7 +610,7 @@ const NewHireStep1 = () => {
                     <ListItem container className="p0 pt6 pb20">
                       <Grid className="w250 bold">Job ID / Description</Grid>
                       <Grid>{
-                        `${(applicantData?.jobId) || 'Null'} / ${(applicantData?.jobDescription)  || 'Null'}`
+                        `${(applicantData?.jobId) || 'Null'} / ${(applicantData?.jobDescription) || 'Null'}`
                       }</Grid>
                     </ListItem>
                     <ListItem container className="p0 pt6 pb20">
@@ -628,7 +632,7 @@ const NewHireStep1 = () => {
                         <Button></Button>
                       </Grid>
                     </ListItem> */}
-                    <ListItem container className="p0 pt6 pb20">
+                   { resume != null && <ListItem container className="p0 pt6 pb20">
                       <Grid className="w250 bold">Resume</Grid>
                       <Grid className="PDFDownload">
                         <Grid className="FileName">Resume</Grid>
@@ -638,8 +642,8 @@ const NewHireStep1 = () => {
                           target="_blank"
                         ></a>
                       </Grid>
-                    </ListItem>
-                    <ListItem container className="p0 pt6 pb20">
+                    </ListItem>}
+                  { drivingLicense != null && <ListItem container className="p0 pt6 pb20">
                       <Grid className="w250 bold">Driver's License</Grid>
                       <Grid className="PDFDownload">
                         <Grid className="FileName">Driver's License</Grid>
@@ -649,8 +653,8 @@ const NewHireStep1 = () => {
                           target="_blank"
                         ></a>
                       </Grid>
-                    </ListItem>
-                    <ListItem container className="p0 pt6 pb20">
+                    </ListItem>}
+                    { questionnaire != null &&  <ListItem container className="p0 pt6 pb20">
                       <Grid className="w250 bold">Questionaire</Grid>
                       <Grid className="PDFDownload">
                         <Grid className="FileName">Questionaire</Grid>
@@ -659,7 +663,7 @@ const NewHireStep1 = () => {
                           onClick={downloadQuestionnaire}
                         ></Button>
                       </Grid>
-                    </ListItem>
+                    </ListItem>}
 
                     {/* <ListItem container className="p0 pt6 pb20">
                       <Grid className="w250 bold">Drivers License</Grid>
@@ -971,17 +975,32 @@ const NewHireStep1 = () => {
                               Start Date
                             </Grid>
                             <Grid xs={12} className="mt14">
-                              <DatePicker
-                                onChange={(value) => {
+                              {/* <DatePicker
+                                onChange={(event) => {
                                   const formValid = document.getElementById('applicationForm').checkValidity();
                                   if (formValid)
                                     toggleSaveButton(false);
-                                  setstartDate(value);
+                                  setstartDate(event.target.value);
                                 }}
                                 value={startDate}
                                 className="DateTimePicker datePickerReact"
                                 id="date"
+                              /> */}
+                              <TextField
+                                required={false}
+                                id="date1"
+                                type="date"
+                                className="DateTimePicker"
+                                value={startDate}
+                                onChange={(event) => {
+                                  const formValid = document.getElementById('applicationForm').checkValidity();
+                                  if (formValid)
+                                    toggleSaveButton(false);
+                                  setstartDate(event.target.value);
+                                }}
+                                formatDate={(date) => moment(date).format('MM-DD-YYYY')}
                               />
+
                             </Grid>
                           </Grid>
                         </Grid>
@@ -1324,7 +1343,7 @@ const NewHireStep1 = () => {
                       type="submit"
                       className="LinkButton"
 
-                      // disabled={isSaveButtonDisabled}
+                    // disabled={isSaveButtonDisabled}
                     >
                       {/* <Link to="/new-hire-queue/details/approval" className="LinkButton"> */}
                       Save & Continue

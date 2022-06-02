@@ -82,7 +82,7 @@ const PostConditionalJobOffer = () => {
         health:
           (document.querySelector('input[name="Health"]:checked')?.value == "yes")
             ? document.querySelector('input[name="Health"]:checked')?.value
-            : document.getElementById("comment").value,
+            : document.getElementById("comment").value?.length > 0 ? document.getElementById("comment").value :'no',
         eye: document.querySelector('input[name="eye"]:checked')?.value,
         breathing: document.querySelector('input[name="breathing"]:checked')?.value,
         allergies: document.querySelector('input[name="allergies"]:checked')?.value,
@@ -152,7 +152,7 @@ const PostConditionalJobOffer = () => {
         ssn: res?.employee?.ssn || '',
       }
       let dob = res?.employee?.dateOfBirth || new Date()
-      dob = moment(dob).format('DD/MM/YYYY')
+      dob = moment(dob).format('MM/DD/YYYY')
       setDateOfBirth(dob)
       setUserData(data)
       console.log(data)
@@ -348,6 +348,7 @@ const PostConditionalJobOffer = () => {
                       value="yes"
                       name="Health"
                       className="mr5"
+                      required="false"
                     />{" "}
                     Yes
                   </TableCell>
@@ -368,7 +369,8 @@ const PostConditionalJobOffer = () => {
                     <input
                       name="comment"
                       type="text"
-                      name="textfield"
+                      Name="textfield"
+                      required="false"
                       id="comment"
                       className="w78 bn bb"
                     />
@@ -783,6 +785,8 @@ const PostConditionalJobOffer = () => {
                           id="offerDate"
                           className="datePickerReact"
                           disabled
+                          formatDate={(date) => moment(date).format('MM-DD-YYYY')}
+
                         />
                       </TableCell>
                     </TableRow>

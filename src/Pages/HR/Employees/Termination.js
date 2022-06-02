@@ -18,7 +18,7 @@ import Snackbar from '../../../Components/Snackbar';
 /** Local deoendencies & Libraries */
 import Services from '../../../Services';
 
-import { useLocation } from 'react-router'
+import { useLocation } from 'react-router-dom'
 import { showSnackBar } from "../../../helpers/showSnackBar";
 
 
@@ -59,6 +59,7 @@ const Termination = () => {
 
     let a = location?.state;
 
+
     const [form, setForm] = useState({
         terminationDate: '',
         terminationReason: '',
@@ -74,9 +75,7 @@ const Termination = () => {
             date: form.terminationDate,
             comment: form.comment,
             reason: form.terminationReason,
-            // reason: 'umair'
         }
-        console.log(data)
 
         try {
             hr.terminateEmployee(data).then((certificateData) => {
@@ -205,7 +204,7 @@ const Termination = () => {
                                                     onChange={(e) => { setForm({ ...form, terminationDate: e.target.value }) }}
 
                                                     className="DateTimePicker"
-                                                    defaultValue="YY-MM-DD"
+                                                    defaultValue="MM-DD-YYYY"
                                                     InputLabelProps={{
                                                         shrink: true,
                                                     }}
