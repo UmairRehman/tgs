@@ -135,10 +135,10 @@ const ConditionalOffer = () => {
       let payType = document.querySelector('input[name="payType"]:checked')?.value;
       let location = document.getElementById("location").value;
       let departmentCode = document.getElementById("departmentCode").value;
-      let JobCode = document.getElementById("jobCode").value;
+      
       // let phone = document.getElementById("phone").value;
       // let laptop = document.getElementById("laptop").value;
-      let terms = document.getElementById("terms").value;
+      // let terms = document.getElementById("terms").value;
       let offeree = document.getElementById("offeree").value;
 
       /** Disabling checks for pre-filled fields */
@@ -167,6 +167,7 @@ const ConditionalOffer = () => {
         setError("field must be filed")
         return showSnackBar("Kindly fill in all fields!");
       }
+      console.log(data)
 
       const captureElements = Array.from(
         document.getElementsByClassName('capture')
@@ -294,6 +295,7 @@ const ConditionalOffer = () => {
                       id="offerDate"
                       className="datePickerReact"
                       disabled
+                      format="MM-dd-yyyy"
                     />
                     {/* <input type="text" name="textfield" id="textfield" className="w20 h22 pl10 pr10 bn bb textCenter" />
                         <span className="font24">/</span>
@@ -340,7 +342,7 @@ const ConditionalOffer = () => {
                       disabled
                     />
                   </td>
-                  <td className="w50 mt10 pt10 row">Department Code:
+                  <td className="w50 mt10 pt10 row">Job Code:
                     <input type="text" name="textfield" id="departmentCode" className="w60 bn bb input-capitalization"
                       value={`${userData?.deptID}`}
                       disabled />
@@ -364,6 +366,7 @@ const ConditionalOffer = () => {
                       id="startDate"
                       className="datePickerReact"
                       disabled
+                      format="MM-dd-yyyy"
                     />
                     {/* <input type="text" name="textfield" id="textfield" className="w22 h22 bn bb textCenter" />
                       <span className="font12">/</span>

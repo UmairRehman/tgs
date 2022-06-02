@@ -303,7 +303,7 @@ const Questionnaire = () => {
 
             let formData = {
                 ...data,
-                tgsComment
+                tgsComment: tgsComment?.length > 0 ? tgsComment : '',
             }
             const response = await users.postStep1(formData);
 
