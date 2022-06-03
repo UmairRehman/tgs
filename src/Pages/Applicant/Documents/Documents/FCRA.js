@@ -316,8 +316,8 @@ const FCRA = () => {
       </TableContainer>
 
       {/* ------------------------------------------------------------------------------------------ */}
-      <Grid xs={12} className="pageBreak capture">
-        <TableContainer className="MainTable">
+      <Grid xs={12} className="pageBreak ">
+        <TableContainer className="MainTable capture">
           <Table className="SecondMainTable">
             <TableRow className="w100 mt20">
               <TableCell>
@@ -423,8 +423,8 @@ const FCRA = () => {
       </Grid>
 
       {/* ------------------------------------------------------------------------------------------ */}
-      <Grid xs={12} className="pageBreak capture">
-        <TableContainer className="MainTable">
+      <Grid xs={12} className="pageBreak ">
+        <TableContainer className="MainTable capture">
           <Table className="SecondMainTable">
             <TableRow className="w100 mt20">
               <TableCell>

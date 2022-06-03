@@ -126,7 +126,8 @@ const TWICCardPaymentAgreement = () => {
       }
 
       // console.log("clickerd")
-      let canvas = await (html2canvas(document.querySelector('#capture')));
+      let canvas = await (html2canvas(document.querySelector('#mainTable')));
+
       let image = (canvas.toDataURL('image/png'));
 
 
@@ -181,7 +182,7 @@ const TWICCardPaymentAgreement = () => {
           </ListItem>
         </List>
       </Grid>
-      <TableContainer className="MainTable">
+      <TableContainer id="mainTable" className="MainTable">
         <Table className="SecondMainTable">
           <TableRow>
             <TableCell>

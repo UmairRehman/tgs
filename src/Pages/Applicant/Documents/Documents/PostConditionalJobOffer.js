@@ -70,7 +70,7 @@ const PostConditionalJobOffer = () => {
     try {
       setPosting(true);
 
-      let canvas = await html2canvas(document.querySelector("#capture"));
+      let canvas = await html2canvas(document.querySelector("#mainTable"));
       let image = canvas.toDataURL("image/png");
       // setPDFImage(image)
 
@@ -162,7 +162,7 @@ const PostConditionalJobOffer = () => {
   }, [])
 
   return (
-    <Grid id="capture" container xs={12} className="LiqForms-Container font11">
+    <Grid style={{minWidth: "100% !important"}} id="capture" container xs={12} className="LiqForms-Container font11">
       <Grid className={isPosting ? classes.displayNone : "FormsHeader"}>
         <List>
           <ListItem>
@@ -218,7 +218,7 @@ const PostConditionalJobOffer = () => {
           </ListItem>
         </List>
       </Grid>
-      <TableContainer className="MainTable">
+      <TableContainer className="MainTable" id="mainTable">
         <Table className="SecondMainTable">
           <TableRow>
             <TableCell>
