@@ -79,7 +79,7 @@ const BootCardAgreement = () => {
       lastName: res?.employee?.lastName || '',
       ssn: res?.employee?.ssn || '',
       address: res?.employee?.address || '',
-      hireDate: res?.employee?.hireDate || ''
+      hireDate: res?.employee?.joiningDate || ''
       // address1 : res?.employee?.address1 || '',
     }
     setUserData(data)
@@ -624,9 +624,10 @@ const BootCardAgreement = () => {
                     Hire Date:
                     <DatePicker
                       onChange={(value) => { setDateofInjury(value) }}
-                      value={dateofInjury}
+                      value={userData?.hireDate}
                       id="hireDate"
                       className="datePickerReact"
+                      disabled
                     />
                     {/* <input type="text" name="textfield" id="textfield" className="w h18 pl8 bn bb" /> */}
                   </TableCell>
@@ -715,7 +716,7 @@ const BootCardAgreement = () => {
                 <TableRow className="w100 mt10 row">
                   <TableCell className="w4">11.</TableCell>
                   <TableCell className="w100 row">
-                    Date Released By Doctor To Go Back To Work:
+                    Date Signed:
                     <DatePicker
                       onChange={(value) => { setDateOfRelease(value) }}
                       value={dateOfRelease}
