@@ -102,7 +102,6 @@ const NewHireStep1 = () => {
   const [departmentDropdown, setDepartmentDropdown] = useState([]);
   const [SubDepartmentDropdown, setSubDepartmentDropdown] = useState([]);
   const [PositionLevel, setPositionLevel] = useState([])
-
   const location = useLocation();
   const [holdData, setHoldData] = useState({});
 
@@ -461,7 +460,7 @@ const NewHireStep1 = () => {
       bilingualLanguage,
     } = questionnaire;
 
-    console.log("Console; ",questionnaire)
+    console.log({questionnaire})
 
 
     const doc = new jsPDF();
