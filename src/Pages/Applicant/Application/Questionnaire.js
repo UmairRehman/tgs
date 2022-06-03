@@ -250,6 +250,7 @@ const Questionnaire = () => {
         };
 
 
+
         if (accommodation == 'No') {
             if (!data.accommodation && !comment)
                 return showSnackBar('PLease fill in comments for accomodation');
@@ -297,6 +298,9 @@ const Questionnaire = () => {
                 bilingualLanguage
             }
         }
+
+        console.log(data)
+
 
 
         try {
