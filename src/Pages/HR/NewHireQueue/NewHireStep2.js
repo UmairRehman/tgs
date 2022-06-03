@@ -216,7 +216,7 @@ const NewHireStep2 = () => {
                               const value = applicantData[column.id];
                               return (
                                 <TableCell key={column.id} align={column.align}>
-                                  {value}
+                                  {value === applicantData.firstName ? applicantData.firstName + " " + applicantData.lastName : value}
                                 </TableCell>
                               );
                             })}
