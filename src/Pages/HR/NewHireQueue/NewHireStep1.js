@@ -63,6 +63,7 @@ const NewHireStep1 = () => {
   const [resume, setResume] = useState(null);
   const [drivingLicense, setDrivingLicense] = useState(null);
   const [questionnaire, setQuestionnaire] = useState(null);
+  const [socialsecurity, setSocialsecurity] = useState(null);
   const [isSaveButtonDisabled, toggleSaveButton] = useState(true);
 
   // states for Form
@@ -102,6 +103,7 @@ const NewHireStep1 = () => {
   const [departmentDropdown, setDepartmentDropdown] = useState([]);
   const [SubDepartmentDropdown, setSubDepartmentDropdown] = useState([]);
   const [PositionLevel, setPositionLevel] = useState([])
+
   const location = useLocation();
   const [holdData, setHoldData] = useState({});
 
@@ -121,6 +123,12 @@ const NewHireStep1 = () => {
     if (formValid)
       toggleSaveButton(false);
   }, [drivingLicense]);
+
+  useEffect(() => {
+    const formValid = document.getElementById('applicationForm').checkValidity();
+    if (formValid)
+      toggleSaveButton(false);
+  }, [socialsecurity]);
   useEffect(() => {
     const formValid = document.getElementById('applicationForm').checkValidity();
     if (formValid)
@@ -382,6 +390,7 @@ const NewHireStep1 = () => {
       setResume(resumeFileName);
       setDrivingLicense(drivingLicenseFileName);
       setQuestionnaire(questionnaireData);
+      setSocialsecurity(sscFileName);
     } catch (exc) {
       console.log(exc);
     }
@@ -460,7 +469,7 @@ const NewHireStep1 = () => {
       bilingualLanguage,
     } = questionnaire;
 
-    console.log({questionnaire})
+    console.log("Console; ",questionnaire)
 
 
     const doc = new jsPDF();
@@ -661,6 +670,20 @@ const NewHireStep1 = () => {
                           className="Button"
                           onClick={downloadQuestionnaire}
                         ></Button>
+                      </Grid>
+                    </ListItem>}
+
+
+
+                    { socialsecurity != null && <ListItem container className="p0 pt6 pb20">
+                      <Grid className="w250 bold">Soical Security Document </Grid>
+                      <Grid className="PDFDownload">
+                        <Grid className="FileName">Soical Security Document</Grid>
+                        <a
+                          className="Button"
+                          href={`${apiPath}/employee/applicant/download?id=${applicantData?.id}&name=${socialsecurity}`}
+                          target="_blank"
+                        ></a>
                       </Grid>
                     </ListItem>}
 
