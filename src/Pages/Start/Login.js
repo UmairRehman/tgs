@@ -216,12 +216,12 @@ const Login = () => {
 
   return (
     <Grid container xs={12}>
-      <Grid className="LoginImageBG">
-        <Grid className="LoginImage">
-          <Grid className="LoginLogo"></Grid>
-          <Grid className="LoginText">
+      <Grid className="applicantImageBG">
+        <Grid className="applicantImage">
+          {/* <Grid className="LoginLogo"></Grid> */}
+          {/* <Grid className="LoginText">
             TGS Portal
-          </Grid>
+          </Grid> */}
         </Grid>
       </Grid>
       <Grid className="LoginFormPlace">
