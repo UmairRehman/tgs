@@ -750,7 +750,21 @@ const EmployeeResult = (props) => {
 
   }, [])
 
-  const dateToday =  moment(new Date()).format('MM-DD-YYYY').split('-')
+  const dateToday = moment(new Date()).format('MM-DD-YYYY').split('-')
+
+  const getValidation = (today, expire) => {
+
+    if (expire[0] - today[0] == 1) {
+      if (expire[1] - today[1] < 0) return false
+      else return true
+    }
+    if (expire[0] - today[0] > 1) return true
+    if ((expire[0] - today[0]) < 1) {
+      if (expire[1] - today[1] < 0) return false
+    }
+  }
+
+
 
   return (
     loader ? <div>Loading...</div> :
@@ -960,7 +974,9 @@ const EmployeeResult = (props) => {
                                       {column.type == "edit" ? (
                                         <Button onClick={() => getCertificate(row)} className="EditIcon"></Button>
                                       ) : (
-                                       column.id === 'expiry_date' && value === row?.expiry_date && row?.expiry_date.split('-')[2] === dateToday[2] && row?.expiry_date.split('-')[1] - dateToday[1] <= 1 ? <p className="testExpiry">{value}</p> : value
+                                        //  column.id === 'expiry_date' && value === row?.expiry_date && row?.expiry_date.split('-')[2] === dateToday[2] && row?.expiry_date.split('-')[1] - dateToday[1]  < 1 && row?.expiry_date.split('-')[0] - dateToday[0] < 30 ? <p className="testExpiry">{value}</p> : value
+                                        column.id === 'expiry_date' && value === row?.expiry_date && row?.expiry_date.split('-')[2] === dateToday[2] && getValidation(dateToday, row?.expiry_date.split('-')) == false ? <p className="testExpiry">{value}</p> : value
+
                                       )}
                                     </TableCell>
                                   );
