@@ -188,7 +188,7 @@ const addrows = [
 // Second Table
 const CertiCol = [
   { id: "id", label: "ID", minWidth: 140, type: "value" },
-  { id: "name", label: "License Certificate", minWidth: 160, type: "value" },
+  { id: "name", label: "License", minWidth: 160, type: "value" },
   { id: "issue_date", label: "Issue Date", minWidth: 160, type: "value" },
   { id: "expiry_date", label: "Expire Date", minWidth: 160, type: "value" },
   { id: "edi", label: "Edit", minWidth: 50, type: "edit" }
@@ -322,7 +322,7 @@ const EmployeeResult = (props) => {
 
     try {
       employee.update_employee_certificate(data).then((certificateData) => {
-        setFlag(true)
+        setFlag(!flag)
         setOpenC(!openCerti);
         setAddCertificate(false)
 
@@ -490,7 +490,7 @@ const EmployeeResult = (props) => {
     // get certificate type 
     try {
       hr.getCertificateType().then((certificateData) => {
-        console.log(certificateData.data.rows)
+        // console.log(certificateData.data.rows)
 
         setCertificateType(certificateData.data.rows)
 
@@ -636,7 +636,6 @@ const EmployeeResult = (props) => {
       onAddCertificate()
     else
       onUpdateCertificate()
-
   }
 
 
@@ -750,6 +749,21 @@ const EmployeeResult = (props) => {
     setRole_id(userProfile?.role_id)
 
   }, [])
+
+  const dateToday = moment(new Date()).format('MM-DD-YYYY').split('-')
+
+  const getValidation = (today, expire) => {
+
+    if (expire[0] - today[0] == 1) {
+      if (expire[1] - today[1] < 0) return false
+      else return true
+    }
+    if (expire[0] - today[0] > 1) return true
+    if ((expire[0] - today[0]) < 1) {
+      if (expire[1] - today[1] < 0) return false
+    }
+  }
+
 
 
   return (
@@ -918,7 +932,7 @@ const EmployeeResult = (props) => {
               <Grid xs={12} className="LiqTables">
                 <Grid xs={12} className="mt28 mb14">
                   <Typography variant="h1" component="h2" className="bold f22">
-                    Certificates & Licenses
+                    Certifications & Licenses
                   </Typography>
                 </Grid>
                 <Paper>
@@ -948,7 +962,6 @@ const EmployeeResult = (props) => {
                                 tabIndex={-1}
                                 key={row.code}
                               >
-
                                 {CertiCol.map((column) => {
                                   const value = row[column.id];
                                   return (
@@ -961,7 +974,9 @@ const EmployeeResult = (props) => {
                                       {column.type == "edit" ? (
                                         <Button onClick={() => getCertificate(row)} className="EditIcon"></Button>
                                       ) : (
-                                        value
+                                        //  column.id === 'expiry_date' && value === row?.expiry_date && row?.expiry_date.split('-')[2] === dateToday[2] && row?.expiry_date.split('-')[1] - dateToday[1]  < 1 && row?.expiry_date.split('-')[0] - dateToday[0] < 30 ? <p className="testExpiry">{value}</p> : value
+                                        column.id === 'expiry_date' && value === row?.expiry_date && row?.expiry_date.split('-')[2] === dateToday[2] && getValidation(dateToday, row?.expiry_date.split('-')) == false ? <p className="testExpiry">{value}</p> : value
+
                                       )}
                                     </TableCell>
                                   );
@@ -1051,16 +1066,16 @@ const EmployeeResult = (props) => {
                                                 </TableCell>
                                               );
                                             })}
-                                          </TableRow> 
+                                          </TableRow>
 
                                         );
                                       })
-                              )
-                              : (
-                              <Grid xs={12}>
-                                No data found
-                              </Grid>
-                              )
+                                  )
+                                  : (
+                                    <Grid xs={12}>
+                                      No data found
+                                    </Grid>
+                                  )
                               }
                             </TableBody>
                           </Table>
