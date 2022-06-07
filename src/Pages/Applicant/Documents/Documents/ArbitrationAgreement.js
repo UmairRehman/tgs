@@ -11,7 +11,6 @@ import LocalPrintshopIcon from '@material-ui/icons/LocalPrintshop';
 import CancelIcon from '@material-ui/icons/Cancel';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import DatePicker from 'react-date-picker';
-
 /** Third party dependencies */
 import html2canvas from 'html2canvas';
 
@@ -103,7 +102,11 @@ const ArbitrationAgreement = () => {
         let image = (canvas.toDataURL('image/png'));
 
         images.push(image);
+
       }
+
+
+
 
       const resposne = await users.submitForm({
         image: images,
@@ -133,7 +136,7 @@ const ArbitrationAgreement = () => {
   }
 
   return (
-    <Grid container xs={12} className="LiqForms-Container">
+    <Grid container xs={12} className="LiqForms-Container ">
       <Grid className={isPosting ? classes.DisplayNone : 'FormsHeader'}>
         <List>
           <ListItem>
@@ -164,7 +167,8 @@ const ArbitrationAgreement = () => {
               <Table className="w100">
                 <TableRow className="w100 mb10 mt10 row justify-center">
                   <TableCell>
-                    <Avatar alt="TGS" className="TGSLogoSVG" src="https://tgs.liquidtechnologies.pk/assets/TGS_Logo2.svg" />
+                    <div className="logoImageTGS"></div>
+                    {/* <Avatar alt="TGS" className="TGSLogoSVG" src="https://tgs.liquidtechnologies.pk/assets/TGS_Logo2.svg" /> */}
                   </TableCell>
                 </TableRow>
                 <TableRow className="w100">

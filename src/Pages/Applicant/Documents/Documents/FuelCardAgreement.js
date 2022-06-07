@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Grid, TableContainer, Table, TableCell, TableRow, List, ListItem, Button
 } from "@material-ui/core";
@@ -58,24 +58,24 @@ const FuelCardAgreement = () => {
 
   const [signature, setSignature] = useState('')
 
-  const [date, setDate] = useState(new Date ())
+  const [date, setDate] = useState(new Date())
   const [userData, setUserData] = useState({
-    firstName :  '',
-    middleName :  '',
-    lastName:  '',
+    firstName: '',
+    middleName: '',
+    lastName: '',
   })
-useEffect( async () => {
-    let userProfile = await  JSON.parse(localStorage.user_profile);
-    let res = await hr.getAllApplicantsByID({ id : userProfile.id})
+  useEffect(async () => {
+    let userProfile = await JSON.parse(localStorage.user_profile);
+    let res = await hr.getAllApplicantsByID({ id: userProfile.id })
     let data = {
-      firstName : res?.employee?.firstName || '',
-      middleName : res?.employee?.middleName || '',
+      firstName: res?.employee?.firstName || '',
+      middleName: res?.employee?.middleName || '',
       lastName: res?.employee?.lastName || '',
     }
     setUserData(data)
     setPrintedName(`${userData.firstName} ${userData.lastName}`)
     console.log(data)
-  
+
   }, [])
 
   async function submit() {
@@ -177,7 +177,9 @@ useEffect( async () => {
               <Table className="w100">
                 <TableRow className="w100 mb10 mt10 row justify-center">
                   <TableCell>
-                    <Avatar alt="TGS" className="TGSLogoSVG" src="https://tgs.liquidtechnologies.pk/assets/TGS_Logo2.svg" />
+                    {/* <Avatar alt="TGS" className="TGSLogoSVG" src="https://tgs.liquidtechnologies.pk/assets/TGS_Logo2.svg" /> */}
+                    <div className="logoImageTGS"></div>
+
                   </TableCell>
                 </TableRow>
                 <TableRow className="w100">

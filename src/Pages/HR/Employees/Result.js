@@ -912,7 +912,7 @@ const EmployeeResult = (props) => {
                                       {column.type == "edit" ? (
                                         <Button onClick={handleClickOpenAdd} className="EditIcon"></Button>
                                       ) : (
-                                        value
+                                        value === row.city ? value + ", " + row.state : value
                                       )}
                                     </TableCell>
                                   );

@@ -6224,8 +6224,8 @@ const EmployeeHandbook = () => {
       </Grid>
 
       {/* ----------- Page 68 880 Asset Protection Help Line (59) ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="59">
-        <TableContainer className="MainTable">
+      <Grid xs={12} className="pageBreak " id="59">
+        <TableContainer className="MainTable capture">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl30 pr30">
               <TableCell className="w100">
