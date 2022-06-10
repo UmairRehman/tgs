@@ -72,12 +72,14 @@ const BootCardAgreement = () => {
   useEffect(async () => {
     let userProfile = await JSON.parse(localStorage.user_profile);
     let res = await hr.getAllApplicantsByID({ id: userProfile.id })
+    console.log("Here: ",res)
     let data = {
       firstName: res?.employee?.firstName || '',
       middleName: res?.employee?.middleName || '',
       lastName: res?.employee?.lastName || '',
       ssn: res?.employee?.ssn || '',
       address: res?.employee?.address || '',
+      hireDate: res?.employee?.joiningDate || ''
       // address1 : res?.employee?.address1 || '',
     }
     setUserData(data)
@@ -220,6 +222,7 @@ const BootCardAgreement = () => {
         formDate: formDate,
         PDFimage: images
       }
+
 
       const nullCheck = Object.values(data)
         .reduce((total, accumulator) => total || !accumulator, false);
@@ -621,9 +624,10 @@ const BootCardAgreement = () => {
                     Hire Date:
                     <DatePicker
                       onChange={(value) => { setDateofInjury(value) }}
-                      value={dateofInjury}
+                      value={userData?.hireDate}
                       id="hireDate"
                       className="datePickerReact"
+                      disabled
                     />
                     {/* <input type="text" name="textfield" id="textfield" className="w h18 pl8 bn bb" /> */}
                   </TableCell>
@@ -637,7 +641,7 @@ const BootCardAgreement = () => {
                   <TableCell className="w100 row">
                     Employee Name
                     <input required type="text" name="textfield" id="empName" className="w h18 pl8 bn bb input-capitalization"
-                      value={`${userData.firstName}`}
+                      value={`${userData?.firstName + ' ' + userData?.lastName}`}
                       disabled
                     />
                   </TableCell>
@@ -652,7 +656,7 @@ const BootCardAgreement = () => {
                 <TableRow className="w100 mt10 row">
                   <TableCell className="w100 row">
                     Social Security #:
-                    <input required type="text" name="textfield" id="socialSecurityName" className="w h18 pl8 bn bb input-capitalization"
+                    <input required value={userData?.ssn} type="text" name="textfield" id="socialSecurityName" className="w h18 pl8 bn bb input-capitalization"
                     />
                   </TableCell>
                 </TableRow>
@@ -712,7 +716,7 @@ const BootCardAgreement = () => {
                 <TableRow className="w100 mt10 row">
                   <TableCell className="w4">11.</TableCell>
                   <TableCell className="w100 row">
-                    Date Released By Doctor To Go Back To Work:
+                    Date Signed:
                     <DatePicker
                       onChange={(value) => { setDateOfRelease(value) }}
                       value={dateOfRelease}

@@ -280,8 +280,8 @@ const ArbitrationAgreement = () => {
       </TableContainer>
 
       {/* -------------------------------------------- Page 2 ---------------------------------------------- */}
-      <Grid xs={12} className="pageBreak capture">
-        <TableContainer className="MainTable">
+      <Grid xs={12} className="pageBreak ">
+        <TableContainer className="MainTable capture">
           <Table className="SecondMainTable">
             <TableRow className="w100">
               <TableCell>

@@ -79,7 +79,7 @@ const PostConditionalJobOffer3 = () => {
       // address1 : res?.employee?.address1 || '',
     }
     let dateOfBirth = res?.employee?.dateOfBirth || new Date()
-    dateOfBirth = moment(dateOfBirth).format('DD/MM/YYYY')
+    dateOfBirth = moment(dateOfBirth).format('MM/DD/YYYY')
     setDob(dateOfBirth)
     setUserData(data)
     console.log(data)
@@ -89,7 +89,8 @@ const PostConditionalJobOffer3 = () => {
   async function submit() {
     setPosting(true);
 
-    let canvas = await html2canvas(document.querySelector("#capture"));
+    // let canvas = await html2canvas(document.querySelector("#capture"));
+    let canvas = await html2canvas(document.querySelector("#mainTable"));
     let image = canvas.toDataURL("image/png");
 
     let data = {
@@ -138,7 +139,7 @@ const PostConditionalJobOffer3 = () => {
   }
 
   return (
-    <Grid id="capture" container xs={12} className="LiqForms-Container">
+    <Grid style={{minWidth: "100% !important"}} id="capture" container xs={12} className="LiqForms-Container">
       <Grid className={isPosting ? classes.displayNone : "FormsHeader"}>
         <List>
           <ListItem>
@@ -194,7 +195,7 @@ const PostConditionalJobOffer3 = () => {
           </ListItem>
         </List>
       </Grid>
-      <TableContainer className="MainTable">
+      <TableContainer id="mainTable" className="MainTable">
         <Table className="SecondMainTable">
           <TableRow>
             <TableCell>

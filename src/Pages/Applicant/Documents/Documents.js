@@ -186,7 +186,7 @@ const Documents = () => {
               </Grid>
               <Grid style={{marginTop:'20px'}} xs={12} className="mt50">
                 <Grid xs={12} md={8} lg={6} container justify="space-between">
-                  <Link to="/questionnaire" className="LinkButtonBack">Back</Link>
+                  {/* <Link to="/questionnaire" className="LinkButtonBack">Back</Link> */}
                   <Button className="LinkButton"
                     onClick={submitStep2}>Submit Application To HR</Button>
                 </Grid>

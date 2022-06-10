@@ -152,7 +152,7 @@ const AlartUpdate = () => {
                             Alert Date
                             </Grid>
                             <Grid>
-                            { moment(tickets?.data?.createdAt).format('YYYY-MM-DD') }
+                            { moment(tickets?.data?.createdAt).format('MM-DD-YYYY') }
                             </Grid>
                         </ListItem>
                     </List>

@@ -224,7 +224,7 @@ const Questionnaire = () => {
             workWeekends,
             travels,
             relocate,
-            tgsComment,
+            // tgsComment,
             workBefore,
         ]
     );
@@ -246,9 +246,9 @@ const Questionnaire = () => {
             workWeekends,
             travels,
             relocate,
-            tgsComment,
             workBefore,
         };
+
 
 
         if (accommodation == 'No') {
@@ -286,11 +286,6 @@ const Questionnaire = () => {
 
         // Unrequired and sequentially checked (dependent) fields
 
-
-        console.log("accommodation" , accommodation)
-        console.log("bilingual", bilingual)
-
-
         if (accommodation == 'No') {
             data = {
                 ...data,
@@ -303,10 +298,18 @@ const Questionnaire = () => {
                 bilingualLanguage
             }
         }
-        console.log("bilingual")
+
+        console.log(data)
+
+
 
         try {
-            const response = await users.postStep1(data);
+
+            let formData = {
+                ...data,
+                tgsComment: tgsComment?.length > 0 ? tgsComment : '',
+            }
+            const response = await users.postStep1(formData);
 
             const user_profile = JSON.parse(storage.get('user_profile'));
 

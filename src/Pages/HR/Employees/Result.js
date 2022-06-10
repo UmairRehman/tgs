@@ -100,11 +100,12 @@ const Positioncol = [
   { id: "EmployeeId", label: "Employee ID", minWidth: 100, type: "value" },
   // { id: "lv", label: "Level", minWidth: 100, type: "value" },
   { id: "FullTitle", label: "Full title", minWidth: 100, type: "value" },
-  { id: "JobCategoryId", label: "Category", minWidth: 100, type: "value" },
+  { id: "JobCategory.name", label: "Category", minWidth: 100, type: "value" },
   { id: "TGSLocation.name", label: "Location", minWidth: 100, type: "value" },
   // { id: "departmentName", label: "Department", minWidth: 100, type: "value" },
   { id: "SubDepartment.name", label: "Sub-Department", minWidth: 100, type: "value" },
   { id: "Employee.firstName", label: "Supervisor", minWidth: 100, type: "value" },
+
   { id: "EffectiveDate", label: "Hire Date", minWidth: 100, type: "value" },
   { id: "ed", label: "Edit", minWidth: 50, type: "edit" }
 ];
@@ -187,7 +188,7 @@ const addrows = [
 // Second Table
 const CertiCol = [
   { id: "id", label: "ID", minWidth: 140, type: "value" },
-  { id: "name", label: "License Certificate", minWidth: 160, type: "value" },
+  { id: "name", label: "License", minWidth: 160, type: "value" },
   { id: "issue_date", label: "Issue Date", minWidth: 160, type: "value" },
   { id: "expiry_date", label: "Expire Date", minWidth: 160, type: "value" },
   { id: "edi", label: "Edit", minWidth: 50, type: "edit" }
@@ -318,9 +319,10 @@ const EmployeeResult = (props) => {
     }
 
 
+
     try {
       employee.update_employee_certificate(data).then((certificateData) => {
-        setFlag(true)
+        setFlag(!flag)
         setOpenC(!openCerti);
         setAddCertificate(false)
 
@@ -471,8 +473,8 @@ const EmployeeResult = (props) => {
     try {
       hr.getCertificate({ id }).then((certificateData) => {
         certificateData.data.rows.forEach(element => {
-          element.issue_date = moment(new Date(element.issue_date)).format('DD-MM-YYYY')
-          element.expiry_date = moment(new Date(element.expiry_date)).format('DD-MM-YYYY')
+          element.issue_date = moment(new Date(element.issue_date)).format('MM-DD-YYYY')
+          element.expiry_date = moment(new Date(element.expiry_date)).format('MM-DD-YYYY')
         });
 
         setCertificate(certificateData.data.rows)
@@ -488,7 +490,7 @@ const EmployeeResult = (props) => {
     // get certificate type 
     try {
       hr.getCertificateType().then((certificateData) => {
-        console.log(certificateData.data.rows)
+        // console.log(certificateData.data.rows)
 
         setCertificateType(certificateData.data.rows)
 
@@ -580,16 +582,15 @@ const EmployeeResult = (props) => {
 
     setUpdateCertificate(row)
     setUpdatedCertificateID(row.id)
-    console.log(row)
     setSelectedCertificateType(row.CertificateTypeId);
     setUpdatedCertificateName(row.name);
 
-    // setUpdatedCertificateName(row.name)
+
     setUpdatedCertificateIssueDate(row.issue_date)
     setUpdatedCertificateExpiryDate(row.expiry_date)
 
+
     setOpenC(true);
-    console.log(row)
   };
 
   const openCertificateModal = () => {
@@ -612,6 +613,7 @@ const EmployeeResult = (props) => {
     }
 
 
+
     try {
       let result = await employee.add_employee_certificate(data)
       if (result.httpStatus == 200) {
@@ -623,6 +625,7 @@ const EmployeeResult = (props) => {
     catch (exc) {
       console.log(exc);
     }
+
   }
 
   const handleCertificate = (e) => {
@@ -633,7 +636,6 @@ const EmployeeResult = (props) => {
       onAddCertificate()
     else
       onUpdateCertificate()
-
   }
 
 
@@ -713,6 +715,9 @@ const EmployeeResult = (props) => {
       setComponentLoader(false)
       setFiles(applicantDataHistory?.files)
       setPosition(applicantDataHistory?.position)
+      console.log(applicantDataHistory?.position)
+
+
 
       setTgsLocation(applicantDataHistory?.employee[0].TGSLocation)
       setDepartment(applicantDataHistory?.employee[0]?.SubDepartment)
@@ -741,9 +746,24 @@ const EmployeeResult = (props) => {
     const userProfile = JSON.parse(localStorage.getItem("user_profile"));
 
 
-    setRole_id(userProfile.role_id)
+    setRole_id(userProfile?.role_id)
 
   }, [])
+
+  const dateToday = moment(new Date()).format('MM-DD-YYYY').split('-')
+
+  const getValidation = (today, expire) => {
+
+    if (expire[0] - today[0] == 1) {
+      if (expire[1] - today[1] < 0) return false
+      else return true
+    }
+    if (expire[0] - today[0] > 1) return true
+    if ((expire[0] - today[0]) < 1) {
+      if (expire[1] - today[1] < 0) return false
+    }
+  }
+
 
 
   return (
@@ -829,7 +849,7 @@ const EmployeeResult = (props) => {
                           Hire Date
                         </Grid>
                         <Grid xs={5}>
-                          {employeeDetails?.hireDate}
+                          {moment(employeeDetails?.hireDate).format('MM-DD-YYYY')}
                         </Grid>
                       </ListItem>)
                     }
@@ -912,7 +932,7 @@ const EmployeeResult = (props) => {
               <Grid xs={12} className="LiqTables">
                 <Grid xs={12} className="mt28 mb14">
                   <Typography variant="h1" component="h2" className="bold f22">
-                    Certificates & Licenses
+                    Certifications & Licenses
                   </Typography>
                 </Grid>
                 <Paper>
@@ -942,7 +962,6 @@ const EmployeeResult = (props) => {
                                 tabIndex={-1}
                                 key={row.code}
                               >
-
                                 {CertiCol.map((column) => {
                                   const value = row[column.id];
                                   return (
@@ -955,7 +974,9 @@ const EmployeeResult = (props) => {
                                       {column.type == "edit" ? (
                                         <Button onClick={() => getCertificate(row)} className="EditIcon"></Button>
                                       ) : (
-                                        value
+                                        //  column.id === 'expiry_date' && value === row?.expiry_date && row?.expiry_date.split('-')[2] === dateToday[2] && row?.expiry_date.split('-')[1] - dateToday[1]  < 1 && row?.expiry_date.split('-')[0] - dateToday[0] < 30 ? <p className="testExpiry">{value}</p> : value
+                                        column.id === 'expiry_date' && value === row?.expiry_date && row?.expiry_date.split('-')[2] === dateToday[2] && getValidation(dateToday, row?.expiry_date.split('-')) == false ? <p className="testExpiry">{value}</p> : value
+
                                       )}
                                     </TableCell>
                                   );
@@ -1035,18 +1056,18 @@ const EmployeeResult = (props) => {
                                                 <TableCell
                                                   key={column.id}
                                                   align={column.align}
-                                                >
-                                                  {column.type == "edit" ? (
+                                                >  {column.type == "edit" ? (
+                                                  <Button onClick={() => editPosiotion(row)} className="EditIcon"></Button>
+                                                )
+                                                  : (
+                                                    value === row.EffectiveDate ? moment(value).format('MM-DD-YYYY') : value === row?.Employee?.firstName ? row?.Employee.firstName + " " + row?.Employee.lastName : value
+                                                  )}
 
-                                                    <Button onClick={() => editPosiotion(row)} className="EditIcon"></Button>
-                                                  )
-                                                    : (
-                                                      value
-                                                    )}
                                                 </TableCell>
                                               );
                                             })}
                                           </TableRow>
+
                                         );
                                       })
                                   )
@@ -1394,7 +1415,7 @@ const EmployeeResult = (props) => {
               <Grid xs={12} className="mbold mt30 DatePickerCss">
                 <Grid xs={12} className="pl14">Issue Date</Grid>
 
-                <DatePicker
+                {/* <DatePicker
                   value={updatedCertificateIssueDate}
                   onChange={(e) => setUpdatedCertificateIssueDate(e)}
                   id="dob"
@@ -1402,23 +1423,31 @@ const EmployeeResult = (props) => {
                   //     e.preventDefault();
                   //  }}
                   className="datePickerReact w100p bg-white react-date-picker"
+                /> */}
+
+                <TextField
+                  required={false}
+                  id="dob"
+                  type="date"
+                  className="DateTimePicker"
+                  value={updatedCertificateIssueDate}
+                  onChange={(e) => { setUpdatedCertificateIssueDate(e.target.value) }}
+                  formatDate={(date) => moment(date).format('MM-DD-YYYY')}
                 />
 
               </Grid>
               <Grid xs={12} className="mbold mt30 DatePickerCss">
                 <Grid xs={12} className="pl14">Expire Date</Grid>
-               
-                <DatePicker
+
+                <TextField
+                  required={false}
                   id="date1"
                   type="date"
-                  // onChange={(e)=>console.log(e)}
+                  className="DateTimePicker"
                   value={updatedCertificateExpiryDate}
-                  onChange={(e) => setUpdatedCertificateExpiryDate(e)}
-                  className="datePickerReact w100p bg-white react-date-picker"
+                  onChange={(e) => setUpdatedCertificateExpiryDate(e.target.value)}
+                  formatDate={(date) => moment(date).format('MM-DD-YYYY')}
                 />
-
-
-
 
 
               </Grid>
