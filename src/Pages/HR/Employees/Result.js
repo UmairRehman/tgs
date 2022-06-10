@@ -384,8 +384,8 @@ const EmployeeResult = (props) => {
 
     try {
       hr.updatePosition(data).then((certificateData) => {
-        setFlag(true)
-        setOpenC(!openCerti);
+        setFlag(!flag)
+        // setOpenC(!openCerti);
 
       }).catch((err) => { console.log(err) });
 
@@ -416,7 +416,12 @@ const EmployeeResult = (props) => {
 
   useEffect(async () => {
 
-    let departmentList = await employee.get_department_listing()
+    // let departmentList = await employee.get_department_listing()
+    // if (departmentList.httpStatus == 200) {
+    //   departmentList = departmentList.data;
+    // }
+
+    let departmentList = await employee.get_subDepartment_listing()
     if (departmentList.httpStatus == 200) {
       departmentList = departmentList.data;
     }
@@ -712,6 +717,7 @@ const EmployeeResult = (props) => {
       setLoader(true);
       setComponentLoader(true)
       setEmployeeDetails(applicantDataHistory?.employee[0])
+      console.log("Here",applicantDataHistory?.employee[0])
       setComponentLoader(false)
       setFiles(applicantDataHistory?.files)
       setPosition(applicantDataHistory?.position)
@@ -1032,7 +1038,7 @@ const EmployeeResult = (props) => {
                               {
                                 (position.length)
                                   ? (
-                                    position
+                                    position.slice(0).reverse()
                                       .map((row) => {
                                         return (
                                           <TableRow

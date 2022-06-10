@@ -53,6 +53,14 @@ export const get_department_listing = async (payload, headers) => {
     );
 };
 
+export const get_subDepartment_listing = async (payload, headers) => {
+    return await api.get(
+        routes.employee.all_subdepartments,
+        payload,
+        headers
+    );
+};
+
 export const get_ticket_type_listing = async (payload, headers) => {
     return await api.get(
         routes.employee.get_ticket_type_list,
