@@ -2398,3 +2398,7 @@ background-color: #2963AD !important;
     color: red !important;
     font-weight: bold;
 }
+
+.disabled-link {
+    pointer-events: none;
+  }
