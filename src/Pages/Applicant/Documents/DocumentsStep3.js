@@ -224,7 +224,7 @@ const DocumentsStep3 = () => {
                                     Section 3
                                 </Typography>
 
-                                <Link to="/documents/conditional-offer" target="_blank" className="DocDownload">
+                                <Link to="/documents/conditional-offer" target="_blank" className={`DocDownload ${storage.get('step-3-form-conditionalOffer') && 'disabled-link'}`}>
                                     <Grid className="FileName">
                                         Conditional Offer
                                     </Grid>
@@ -234,7 +234,7 @@ const DocumentsStep3 = () => {
                                             : 'graytick'
                                     }></Button>
                                 </Link>
-                                <Link to="/documents/post-conditional-job-offer" target="_blank" className="DocDownload">
+                                <Link to="/documents/post-conditional-job-offer" target="_blank" className={`DocDownload ${storage.get('step-3-form-postConditionalOffer') && 'disabled-link'}`}>
                                     <Grid className="FileName">
                                         Post Conditional Job offer Question
                                     </Grid>
@@ -244,7 +244,7 @@ const DocumentsStep3 = () => {
                                             : 'graytick'
                                     }></Button>
                                 </Link>
-                                <Link to="/documents/fuel-card-agreement" target="_blank" className="DocDownload">
+                                <Link to="/documents/fuel-card-agreement" target="_blank" className={`DocDownload ${storage.get('step-3-form-fuelCardAgreement') && 'disabled-link'}`}>
                                     <Grid className="FileName">
                                         Fuel Card Agreement
                                     </Grid>
@@ -254,7 +254,7 @@ const DocumentsStep3 = () => {
                                             : 'graytick'
                                     }></Button>
                                 </Link>
-                                <Link to="/documents/boot-card-agreement" target="_blank" className="DocDownload">
+                                <Link to="/documents/boot-card-agreement" target="_blank" className={`DocDownload ${storage.get('step-3-form-bootCard') && 'disabled-link'}`}>
                                     <Grid className="FileName">
                                         Boot Cost Agreement
                                     </Grid>
@@ -264,7 +264,7 @@ const DocumentsStep3 = () => {
                                             : 'graytick'
                                     }></Button>
                                 </Link>
-                                <Link to="/documents/twic-card-payment-agreement" target="_blank" className="DocDownload">
+                                <Link to="/documents/twic-card-payment-agreement" target="_blank" className={`DocDownload ${storage.get('step-3-form-twic') && 'disabled-link'}`}>
                                     <Grid className="FileName">
                                         TWIC Card Payment Agreement
                                     </Grid>
@@ -274,7 +274,7 @@ const DocumentsStep3 = () => {
                                             : 'graytick'
                                     }></Button>
                                 </Link>
-                                <Link to="/documents/direct-deposit" target="_blank" className="DocDownload">
+                                <Link to="/documents/direct-deposit" target="_blank" className={`DocDownload ${storage.get('step-3-form-directDeposit') && 'disabled-link'}`}>
                                     <Grid className="FileName">
                                         Direct Deposit
                                     </Grid>
@@ -284,7 +284,7 @@ const DocumentsStep3 = () => {
                                             : 'graytick'
                                     }></Button>
                                 </Link>
-                                <Link to="/documents/fcra" target="_blank" className="DocDownload">
+                                <Link to="/documents/fcra" target="_blank" className={`DocDownload ${storage.get('step-3-form-fcra') && 'disabled-link'}`}>
                                     <Grid className="FileName">
                                         FCRA
                                     </Grid>
@@ -294,7 +294,7 @@ const DocumentsStep3 = () => {
                                             : 'graytick'
                                     }></Button>
                                 </Link>
-                                <Link to="/documents/arbitration-agreement" target="_blank" className="DocDownload">
+                                <Link to="/documents/arbitration-agreement" target="_blank" className={`DocDownload ${storage.get('step-3-form-arbitration') && 'disabled-link'}`}>
                                     <Grid className="FileName">
                                         Arbitration Agreement
                                     </Grid>

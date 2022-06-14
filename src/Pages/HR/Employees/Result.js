@@ -309,6 +309,7 @@ const EmployeeResult = (props) => {
 
   function onUpdateCertificate() {
 
+
     let data = {
       name: updatedCertificateName,
       type: selectedCertificateType,
@@ -317,7 +318,6 @@ const EmployeeResult = (props) => {
       employee_id: employeeDetails?.id,
       id: updatedCertificateID
     }
-
 
 
     try {
@@ -384,8 +384,8 @@ const EmployeeResult = (props) => {
 
     try {
       hr.updatePosition(data).then((certificateData) => {
-        setFlag(true)
-        setOpenC(!openCerti);
+        setFlag(!flag)
+        // setOpenC(!openCerti);
 
       }).catch((err) => { console.log(err) });
 
@@ -416,7 +416,12 @@ const EmployeeResult = (props) => {
 
   useEffect(async () => {
 
-    let departmentList = await employee.get_department_listing()
+    // let departmentList = await employee.get_department_listing()
+    // if (departmentList.httpStatus == 200) {
+    //   departmentList = departmentList.data;
+    // }
+
+    let departmentList = await employee.get_subDepartment_listing()
     if (departmentList.httpStatus == 200) {
       departmentList = departmentList.data;
     }
@@ -586,8 +591,8 @@ const EmployeeResult = (props) => {
     setUpdatedCertificateName(row.name);
 
 
-    setUpdatedCertificateIssueDate(row.issue_date)
-    setUpdatedCertificateExpiryDate(row.expiry_date)
+    setUpdatedCertificateIssueDate(new Date(row.issue_date))
+    setUpdatedCertificateExpiryDate(new Date(row.expiry_date))
 
 
     setOpenC(true);
@@ -703,6 +708,7 @@ const EmployeeResult = (props) => {
 
   }
 
+
   const getEmployeeDetails = async (forcedParams = {}) => {
     try {
       const applicantDataHistory = await hr.getEmployee({
@@ -712,13 +718,10 @@ const EmployeeResult = (props) => {
       setLoader(true);
       setComponentLoader(true)
       setEmployeeDetails(applicantDataHistory?.employee[0])
+      console.log("Here", applicantDataHistory?.employee[0])
       setComponentLoader(false)
       setFiles(applicantDataHistory?.files)
       setPosition(applicantDataHistory?.position)
-      console.log(applicantDataHistory?.position)
-
-
-
       setTgsLocation(applicantDataHistory?.employee[0].TGSLocation)
       setDepartment(applicantDataHistory?.employee[0]?.SubDepartment)
       setZip(applicantDataHistory?.employee[0].zip)
@@ -731,6 +734,9 @@ const EmployeeResult = (props) => {
       console.log(err);
     }
   }
+
+
+
 
   const removeFile = (fileIndexToOptOut) => {
     const files = Array.from(
@@ -1032,7 +1038,9 @@ const EmployeeResult = (props) => {
                               {
                                 (position.length)
                                   ? (
-                                    position
+                                    position.sort((a, b) => (
+                                      new Date(a.updatedAt) - new Date(b.updatedAt)
+                                    )).reverse()
                                       .map((row) => {
                                         return (
                                           <TableRow
@@ -1415,17 +1423,18 @@ const EmployeeResult = (props) => {
               <Grid xs={12} className="mbold mt30 DatePickerCss">
                 <Grid xs={12} className="pl14">Issue Date</Grid>
 
-                {/* <DatePicker
+                <DatePicker
                   value={updatedCertificateIssueDate}
-                  onChange={(e) => setUpdatedCertificateIssueDate(e)}
+                  onChange={(value) => setUpdatedCertificateIssueDate(value)}
+                  // onChange={(value) => console.log(value)}
                   id="dob"
                   // onKeyDown={(e) => {
                   //     e.preventDefault();
                   //  }}
                   className="datePickerReact w100p bg-white react-date-picker"
-                /> */}
+                />
 
-                <TextField
+                {/* <TextField
                   required={false}
                   id="dob"
                   type="date"
@@ -1433,13 +1442,13 @@ const EmployeeResult = (props) => {
                   value={updatedCertificateIssueDate}
                   onChange={(e) => { setUpdatedCertificateIssueDate(e.target.value) }}
                   formatDate={(date) => moment(date).format('MM-DD-YYYY')}
-                />
+                /> */}
 
               </Grid>
               <Grid xs={12} className="mbold mt30 DatePickerCss">
                 <Grid xs={12} className="pl14">Expire Date</Grid>
 
-                <TextField
+                {/* <TextField
                   required={false}
                   id="date1"
                   type="date"
@@ -1447,6 +1456,16 @@ const EmployeeResult = (props) => {
                   value={updatedCertificateExpiryDate}
                   onChange={(e) => setUpdatedCertificateExpiryDate(e.target.value)}
                   formatDate={(date) => moment(date).format('MM-DD-YYYY')}
+                /> */}
+
+                <DatePicker
+                  value={updatedCertificateExpiryDate}
+                  onChange={(value) => setUpdatedCertificateExpiryDate(value)}
+                  id="dob"
+                  // onKeyDown={(e) => {
+                  //     e.preventDefault();
+                  //  }}
+                  className="datePickerReact w100p bg-white react-date-picker"
                 />
 
 
