@@ -258,7 +258,7 @@ const Railroad = () => {
 
       console.log('latitude', latitude);
       console.log('longitude', longitude);
-      let gps = `${longitude},${latitude}`
+      let gps = `${latitude},${longitude}`
       // document.getElementById('GPS').value=gps
       setRailRoad({ ...railRoad, GPS: gps })
 

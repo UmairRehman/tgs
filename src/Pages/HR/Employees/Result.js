@@ -107,7 +107,7 @@ const Positioncol = [
   { id: "Employee.firstName", label: "Supervisor", minWidth: 100, type: "value" },
 
   { id: "EffectiveDate", label: "Hire Date", minWidth: 100, type: "value" },
-  { id: "ed", label: "Edit", minWidth: 50, type: "edit" }
+  // { id: "ed", label: "Edit", minWidth: 50, type: "edit" }
 ];
 
 function PositionData(
@@ -370,14 +370,15 @@ const EmployeeResult = (props) => {
   function onUpdatePosition(e) {
     e.preventDefault();
 
+
     let data = {
-      full_title: updatePositon?.fullTitle,
-      position_level: updatePositon.positionLevelId,
-      position_category: updatePositon?.category,
+      full_title: updatePositon?.fullTitle, 
+      position_level: employeeInitialData?.PositionLevelId,
+      position_category: employeeInitialData?.JobCategoryId,
       location_id: updatePositon?.location,
       SubDepartment_Id: updatePositon?.subDepartment,
       Supervisor_Id: updatePositon?.supervisor,
-      employee_id: updatePositon?.employeeId,
+      employee_id: employeeDetails?.id,
       start_date: startDate
     }
 
@@ -532,12 +533,10 @@ const EmployeeResult = (props) => {
 
   function editPosiotion(row) {
     setOpenPosition(true)
-
-
-    setUpdatePositon({ ...updatePositon, employeeId: row.EmployeeId, fullTitle: row.FullTitle, category: row.JobCategoryId, location: row.EmployeeId, subDepartment: row.SubDepartment.id, supervisor: row.firstName, positionLevelId: row.PositionLevelId })
-
-
+    // setUpdatePositon({ ...updatePositon, employeeId: row.EmployeeId, fullTitle: row.FullTitle, category: row.JobCategoryId, location: row.EmployeeId, subDepartment: row.SubDepartment.id, supervisor: row.firstName, positionLevelId: row.PositionLevelId })
   }
+
+
 
   const [openPay, setOpenPay] = useState(false)
   const [updatePay, setUpdatePay] = useState({
@@ -708,6 +707,8 @@ const EmployeeResult = (props) => {
 
   }
 
+  const [employeeInitialData, setEmployeeInitialData] = useState()
+
 
   const getEmployeeDetails = async (forcedParams = {}) => {
     try {
@@ -718,10 +719,14 @@ const EmployeeResult = (props) => {
       setLoader(true);
       setComponentLoader(true)
       setEmployeeDetails(applicantDataHistory?.employee[0])
-      console.log("Here", applicantDataHistory?.employee[0])
+      // console.log("Here", applicantDataHistory?.employee[0])
       setComponentLoader(false)
       setFiles(applicantDataHistory?.files)
       setPosition(applicantDataHistory?.position)
+      setEmployeeInitialData(applicantDataHistory?.position[0])
+      console.log("Position: ",applicantDataHistory?.position[0])
+
+      // console.log(applicantDataHistory?.position[0])
       setTgsLocation(applicantDataHistory?.employee[0].TGSLocation)
       setDepartment(applicantDataHistory?.employee[0]?.SubDepartment)
       setZip(applicantDataHistory?.employee[0].zip)
@@ -812,6 +817,14 @@ const EmployeeResult = (props) => {
                       <Grid xs={5}>
                         {employeeDetails?.lastName}
 
+                      </Grid>
+                    </ListItem>
+                    <ListItem container className="p0 pt6 pb20">
+                      <Grid xs={5} className="bold">
+                        Phone Number
+                      </Grid>
+                      <Grid xs={5}>
+                        {employeeDetails?.cellPhone?.length ? employeeDetails?.cellPhone : employeeDetails?.homePhone}
                       </Grid>
                     </ListItem>
                     {(employeeDetails?.fullTitle) &&
@@ -1039,7 +1052,7 @@ const EmployeeResult = (props) => {
                                 (position.length)
                                   ? (
                                     position.sort((a, b) => (
-                                      new Date(a.updatedAt) - new Date(b.updatedAt)
+                                      new Date(a.EffectiveDate) - new Date(b.EffectiveDate)
                                     )).reverse()
                                       .map((row) => {
                                         return (
@@ -1064,12 +1077,9 @@ const EmployeeResult = (props) => {
                                                 <TableCell
                                                   key={column.id}
                                                   align={column.align}
-                                                >  {column.type == "edit" ? (
-                                                  <Button onClick={() => editPosiotion(row)} className="EditIcon"></Button>
-                                                )
-                                                  : (
-                                                    value === row.EffectiveDate ? moment(value).format('MM-DD-YYYY') : value === row?.Employee?.firstName ? row?.Employee.firstName + " " + row?.Employee.lastName : value
-                                                  )}
+                                                >   {(
+                                                  value === row.EffectiveDate ? moment(value).format('MM-DD-YYYY') : value === row?.Employee?.firstName ? row?.Employee.firstName + " " + row?.Employee.lastName : value
+                                                )}
 
                                                 </TableCell>
                                               );
@@ -1089,6 +1099,7 @@ const EmployeeResult = (props) => {
                           </Table>
                         </TableContainer>
                       </Paper>
+                      <Button className="LinkButton" onClick={() => setOpenPosition(true)}>Add new position</Button>
                     </Grid>
 
 
@@ -1492,7 +1503,7 @@ const EmployeeResult = (props) => {
             <DialogContent>
               <Grid xs={12} className="mbold">
                 <Grid xs={12} className="pl14">Employee ID</Grid>
-                <TextField id="outlined-basic" required value={updatePositon?.employeeId} variant="outlined" className="w100p" />
+                <TextField id="outlined-basic" disabled required value={employeeDetails?.id} variant="outlined" className="w100p" />
               </Grid>
               <Grid xs={12} className="mbold mt30">
                 <Grid xs={12} className="pl14">Full title</Grid>
@@ -1541,15 +1552,14 @@ const EmployeeResult = (props) => {
                 <Autocomplete
                   className="w100p"
                   id="checkboxes-tags-demo"
-                  value={updatePositon.supervisor}
-                  onChange={(event, newValue) => { setUpdatePositon({ ...updatePositon, supervisor: newValue.id }) }}
+                  onChange={(event, newValue) => setUpdatePositon({ ...updatePositon, supervisor: newValue.id })}
                   options={lists.users}
                   getOptionLabel={option => (option.name)}
                   renderInput={(params) => (
                     <TextField required={true} {...params} variant="outlined" />
                   )}
                 />
-
+            
               </Grid>
 
 
