@@ -5,17 +5,17 @@ const Login = () => {
   const gotoDashBoard = () => {
     window.location = '/dashboard';
   };
-  useEffect(() => {
-    setTimeout(function(){
-        document.getElementById("splashscreen").classList.remove('splash');
-        document.getElementById("splashscreen").classList.add('splashHide'); 
-    }, 1000);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(function(){
+  //       document.getElementById("splashscreen").classList.remove('splash');
+  //       document.getElementById("splashscreen").classList.add('splashHide'); 
+  //   }, 1000);
+  // }, []);
   return (
     <Grid container xs={12} className="Device LoginScreen">
-        <Grid id="splashscreen" className="splash">
+        {/* <Grid id="splashscreen" className="splash">
             <Grid className="LoginLogo"></Grid>
-        </Grid>
+        </Grid> */}
         <Grid xs={12} className="pt40 ml40">
             <Typography variant="h4" className="bold" component="h4">Welcome to</Typography>
             Trans-Global Solutions, Inc

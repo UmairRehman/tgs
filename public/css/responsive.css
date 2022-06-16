@@ -1,5 +1,5 @@
 
-@media (max-device-width: 1600px) {
+@media (max-width: 1600px) {
     body {
         box-sizing: border-box !important;
     }
@@ -516,7 +516,7 @@
     }
 
 }
-@media (max-device-width: 900px){
+@media (max-width: 900px){
     .DashCertificatsBox {
         width: 100%;
     }
@@ -536,7 +536,7 @@
     }
     
 }
-@media (max-device-width: 450px){
+@media (max-width: 450px){
     .DashAnalytics {
         background: url(../assets/latestAnalytics.png) no-repeat 90% 115px #FFFFFF;
         background-size: 30%;
@@ -548,7 +548,7 @@
         font-size: 14px;
     }
 }
-@media (max-device-width: 380px) {
+@media (max-width: 380px) {
     .HeaderNotification {
         top: 42px;
     }
@@ -601,7 +601,7 @@
     }
     
 }
-@media (max-device-width: 338px) {
+@media (max-width: 338px) {
     .LinkButton {
         font-size: 12px !important;
     }
@@ -615,7 +615,7 @@
         order: 2;
     }
 }
-@media (max-device-width: 330px) {
+@media (max-width: 330px) {
     .HeaderSearchBox {
         max-width: 100% !important;
         min-width: 150px !important;
@@ -630,7 +630,7 @@
 
 
 }
-@media (max-device-width: 305px) {
+@media (max-width: 305px) {
     .HeaderSearchBox {
         min-width: 130px !important;
     }

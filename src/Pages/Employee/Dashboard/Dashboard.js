@@ -143,11 +143,11 @@ const Dashboard = () => {
   }, [])
 
 
-  if (isMobile) {
-    return (
-      <MobileScreen />
-    )
-  }
+  // if (isMobile) {
+  //   return (
+  //     <MobileScreen />
+  //   )
+  // }
 
   const style = {
     position: 'absolute',
