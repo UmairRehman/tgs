@@ -49,7 +49,7 @@ const userProfile = JSON.parse(localStorage.getItem("user_profile"));
 
 if (userProfile) {
   var { EmployeeStatusId, role_id } = userProfile;
-  console.log(userProfile)
+  // console.log(userProfile)
 }
 
 // First Table
@@ -372,7 +372,7 @@ const EmployeeResult = (props) => {
 
 
     let data = {
-      full_title: updatePositon?.fullTitle, 
+      full_title: updatePositon?.fullTitle,
       position_level: employeeInitialData?.PositionLevelId,
       position_category: employeeInitialData?.JobCategoryId,
       location_id: updatePositon?.location,
@@ -719,14 +719,11 @@ const EmployeeResult = (props) => {
       setLoader(true);
       setComponentLoader(true)
       setEmployeeDetails(applicantDataHistory?.employee[0])
-      // console.log("Here", applicantDataHistory?.employee[0])
       setComponentLoader(false)
       setFiles(applicantDataHistory?.files)
       setPosition(applicantDataHistory?.position)
-      setEmployeeInitialData(applicantDataHistory?.position[0])
-      console.log("Position: ",applicantDataHistory?.position[0])
-
-      // console.log(applicantDataHistory?.position[0])
+      if (applicantDataHistory?.position.length) setEmployeeInitialData(applicantDataHistory?.position[0])
+      if (!applicantDataHistory?.position.length) setEmployeeInitialData(applicantDataHistory?.employee[0])
       setTgsLocation(applicantDataHistory?.employee[0].TGSLocation)
       setDepartment(applicantDataHistory?.employee[0]?.SubDepartment)
       setZip(applicantDataHistory?.employee[0].zip)
@@ -1559,7 +1556,7 @@ const EmployeeResult = (props) => {
                     <TextField required={true} {...params} variant="outlined" />
                   )}
                 />
-            
+
               </Grid>
 
 
