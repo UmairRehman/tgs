@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 import { Link, useHistory } from "react-router-dom";
 
-import { isMobile } from 'react-device-detect';
+// import { isMobile } from 'react-device-detect';
 
 
 
@@ -35,7 +35,7 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 
 /** Local Dependencies */
-import MobileScreen from './Mobile/Login';
+// import MobileScreen from './Mobile/Login';
 
 
 
@@ -209,11 +209,11 @@ const EmployeeLogin = () => {
 
 
 
-  if (isMobile) {
-    return (
-      <MobileScreen />
-    )
-  }
+  // if (isMobile) {
+  //   return (
+  //     <MobileScreen />
+  //   )
+  // }
 
   return (
     <Grid container xs={12}>

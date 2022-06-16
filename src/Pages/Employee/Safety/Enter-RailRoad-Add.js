@@ -350,11 +350,11 @@ const Railroad = () => {
   // const [value, setValue] = useState(dummyData.OJE[0]);
 
 
-  if (isMobile) {
-    return (
-      <MobileScreen />
-    )
-  }
+  // if (isMobile) {
+  //   return (
+  //     <MobileScreen />
+  //   )
+  // }
   return (
     <Grid container xs={12} className="Liq-Container">
       <Grid xs={12} md={2} className="LeftContol" id="LeftContol">

@@ -722,8 +722,8 @@ const EmployeeResult = (props) => {
       setComponentLoader(false)
       setFiles(applicantDataHistory?.files)
       setPosition(applicantDataHistory?.position)
-      if (applicantDataHistory?.position.length) setEmployeeInitialData(applicantDataHistory?.position[0])
-      if (!applicantDataHistory?.position.length) setEmployeeInitialData(applicantDataHistory?.employee[0])
+      if (applicantDataHistory?.position?.length) setEmployeeInitialData(applicantDataHistory?.position[0])
+      if (!applicantDataHistory?.position?.length) setEmployeeInitialData({...applicantDataHistory?.employee[0], JobCategoryId: 1})
       setTgsLocation(applicantDataHistory?.employee[0].TGSLocation)
       setDepartment(applicantDataHistory?.employee[0]?.SubDepartment)
       setZip(applicantDataHistory?.employee[0].zip)
@@ -1096,7 +1096,7 @@ const EmployeeResult = (props) => {
                           </Table>
                         </TableContainer>
                       </Paper>
-                      <Button className="LinkButton" onClick={() => setOpenPosition(true)}>Add new position</Button>
+                      <Button style={{marginTop: "20px"}} className="LinkButton" onClick={() => setOpenPosition(true)}>Add new position</Button>
                     </Grid>
 
 
