@@ -56,7 +56,7 @@ const PostConditionalJobOffer2 = () => {
 
   const [error, setError] = useState('')
 
-  const [date, setDate] = useState(new Date())
+  const [date, setDate] = useState(null)
 
   const [pDate, setPDate] = useState(new Date())
 

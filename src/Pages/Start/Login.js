@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 import { Link } from "react-router-dom";
 
-import { isMobile } from 'react-device-detect';
+// import { isMobile } from 'react-device-detect';
 
 import { useHistory } from "react-router-dom";
 
@@ -36,7 +36,7 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 
 /** Local Dependencies */
-import MobileScreen from '../Start/Mobile/Login';
+// import MobileScreen from '../Start/Mobile/Login';
 
 
 /** Local Static Imports & Objects */
@@ -267,9 +267,9 @@ const Login = () => {
                   inputProps={{ 'aria-label': 'secondary checkbox' }}
                 />Remember me
               </Grid>
-              <Grid className="LoginForget">
+              {/* <Grid className="LoginForget">
                 <Link to="/dashboard">Forget Password</Link>
-              </Grid>
+              </Grid> */}
             </Grid>
             <Grid xs={12} container justify="center" className="mt26">
               <Button className="LoginBtn"
