@@ -2936,8 +2936,8 @@ const SafetyHandbook = () => {
       </Grid>
 
       {/* ----------- Page 28 ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="28">
-        <TableContainer className="MainTable">
+      <Grid xs={12} className="pageBreak " id="28">
+        <TableContainer className="MainTable capture">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl60 pr60 mt22">
               <TableCell className="w100">

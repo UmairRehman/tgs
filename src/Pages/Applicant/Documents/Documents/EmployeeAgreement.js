@@ -132,8 +132,8 @@ const EmployeeAgreement = () => {
   };
 
   return (
-    <Grid id="capture" container xs={12} className="LiqForms-Container">
-      <TableContainer className="MainTable">
+    <Grid  container xs={12} className="LiqForms-Container">
+      <TableContainer id="capture" className="MainTable">
         <Table className="SecondMainTable pos-rela">
           <Grid className="PreEmploymentFile">PERSONNEL FILE</Grid>
           <TableRow>
