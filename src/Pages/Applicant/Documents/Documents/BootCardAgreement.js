@@ -698,7 +698,7 @@ const BootCardAgreement = () => {
                 </TableRow>
 
 
-                <TableRow style={{ height: "20px" }}>
+              {/* {  <TableRow style={{ height: "20px" }}>
 
 
                   <TableRow className="w100 mt10 row">
@@ -708,7 +708,7 @@ const BootCardAgreement = () => {
                       />
                     </TableCell>
                   </TableRow>
-                </TableRow>
+                </TableRow>} */}
 
 
 
