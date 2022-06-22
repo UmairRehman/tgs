@@ -75,14 +75,13 @@ const PostConditionalJobOffer3 = () => {
       middleName : res?.employee?.middleName || '',
       lastName: res?.employee?.lastName || '',
       position : res?.position?.FullTitle || '',
-      address : res?.employee?.address || '',
+      address : res?.employee?.address +  ", " + res?.employee?.city + ", " + res?.employee?.state || '',
       // address1 : res?.employee?.address1 || '',
     }
     let dateOfBirth = res?.employee?.dateOfBirth || new Date()
     dateOfBirth = moment(dateOfBirth).format('MM/DD/YYYY')
     setDob(dateOfBirth)
     setUserData(data)
-    console.log(data)
   
   }, [])
 
@@ -294,7 +293,7 @@ const PostConditionalJobOffer3 = () => {
                       name="textfield"
                       id="address"
                       className="w h18 pl8 bn bb input-capitalization"
-                      value={`${userData.address}`}
+                      value={`${userData?.address}`}
                       disabled
                     />
                   </TableCell>

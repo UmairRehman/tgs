@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Grid, TableContainer, Table, TableCell, TableRow, Button, ListItem, List
 } from "@material-ui/core";
@@ -53,26 +53,26 @@ const DirectDeposit = () => {
   const [isPosting, setPosting] = useState(false);
 
   const [userData, setUserData] = useState({
-    firstName : '',
-      middleName : '',
-      lastName: '',
-      ssn : '',
-      address : '',
+    firstName: '',
+    middleName: '',
+    lastName: '',
+    ssn: '',
+    address: '',
   })
- useEffect( async () => {
-    let userProfile = await  JSON.parse(localStorage.user_profile);
-    let res = await hr.getAllApplicantsByID({ id : userProfile.id})
+  useEffect(async () => {
+    let userProfile = await JSON.parse(localStorage.user_profile);
+    let res = await hr.getAllApplicantsByID({ id: userProfile.id })
     let data = {
-      firstName : res?.employee?.firstName || '',
-      middleName : res?.employee?.middleName || '',
+      firstName: res?.employee?.firstName || '',
+      middleName: res?.employee?.middleName || '',
       lastName: res?.employee?.lastName || '',
-      ssn : res?.employee?.ssn || '',
-      address : res?.employee?.address || '',
+      ssn: res?.employee?.ssn || '',
+      address: res?.employee?.address || '',
       // address1 : res?.employee?.address1 || '',
     }
     setUserData(data)
     console.log(data)
-  
+
   }, [])
 
   const CloseTab = () => {
@@ -205,7 +205,9 @@ const DirectDeposit = () => {
               <Table className="w100">
                 <TableRow className="w100 mb10 mt10 row justify-center">
                   <TableCell>
-                    <Avatar alt="TGS" className="TGSLogoSVG" src="https://tgs.liquidtechnologies.pk/assets/TGS_Logo2.svg" />
+                    {/* <Avatar alt="TGS" className="TGSLogoSVG" src="https://tgs.liquidtechnologies.pk/assets/TGS_Logo2.svg" /> */}
+                    <div className="logoImageTGS"></div>
+
                   </TableCell>
                 </TableRow>
                 <TableRow className="w100">
@@ -240,21 +242,21 @@ const DirectDeposit = () => {
                   <TableCell className="w60">
                     <TableRow className="w100">
                       <TableCell className="w100 row">
-                        Employee Name: <input type="text" name="textfield" id="name" className="w h18 pl8 bn bb input-capitalization" 
-                         value={`${userData.firstName} ${userData.lastName}`}
-                         disabled />
+                        Employee Name: <input type="text" name="textfield" id="name" className="w h18 pl8 bn bb input-capitalization"
+                          value={`${userData.firstName} ${userData.lastName}`}
+                          disabled />
                       </TableCell>
                       <TableCell className="w100 mt16 row">
                         Address:
-                        <input type="text" name="textfield" id="address" className="w h18 pl8 bn bb input-capitalization" 
-                         value={`${userData.address}`}
-                         disabled
+                        <input type="text" name="textfield" id="address" className="w h18 pl8 bn bb input-capitalization"
+                          value={`${userData.address}`}
+                          disabled
                         />
                       </TableCell>
                       <TableCell className="w100 mt16 row">
-                        Social Security#: <input type="text" name="textfield" id="securityNumber" className="w h18 pl8 bn bb" 
-                         value={`${userData.ssn}`}
-                         disabled
+                        Social Security#: <input type="text" name="textfield" id="securityNumber" className="w h18 pl8 bn bb"
+                          value={`${userData.ssn}`}
+                          disabled
                         />
                       </TableCell>
                     </TableRow>

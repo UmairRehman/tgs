@@ -115,7 +115,7 @@ const PostConditionalJobOffer2 = () => {
       pDate: pDate,
       image: image
     }
-    console.log(data)
+    // console.log(data)
 
     // const nullCheck = Object.values(data)
     //   .reduce((total, accumulator) => total || !accumulator, false);
@@ -149,7 +149,7 @@ const PostConditionalJobOffer2 = () => {
       // address1 : res?.employee?.address1 || '',
     }
     setUserData(data)
-    console.log(data)
+    // console.log(data)
 
   }, [])
 
