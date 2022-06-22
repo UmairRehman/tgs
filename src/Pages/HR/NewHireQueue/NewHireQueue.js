@@ -192,7 +192,7 @@ const NewHireQueue = () => {
                                       ) : column.type == "view" ? (
                                         <Grid className="CompleteIcon"></Grid>
                                       ) : (
-                                        value
+                                        value == applicantData.firstName ? applicantData.firstName + " " + applicantData.lastName : value
                                       )}
                                     </TableCell>
                                   );

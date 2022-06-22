@@ -262,28 +262,31 @@ const SafetyTestingEdit = () => {
       setLoading(true);
 
       let body = await finalData();
-      
+      console.log("Here: ",body[0].rule_result[0])
       if(body){
+
+      
+
         console.log('body',body);
-        try {
-          let res = await employee.add_rule_event(body)
-          if(res?.httpStatus == 200)
-          {
-            console.log('result',res);
-            setSuccess(true);
-            // resetData()
-            setLoading(false);
-            setTimeout(() => {
-              history.push('/safety-testing')
-            }, 1500);
-            return showSnackBar('Form Successfully Submitted');
-          }  
-        } catch (error) {
-          setSuccess(false);
-          setLoading(false);
-          console.log("error",error);
-          return showSnackBar(`Error Occured while submitting form: ${error}`);
-        }
+        // try {
+        //   let res = await employee.add_rule_event(body)
+        //   if(res?.httpStatus == 200)
+        //   {
+        //     console.log('result',res);
+        //     setSuccess(true);
+        //     // resetData()
+        //     setLoading(false);
+        //     setTimeout(() => {
+        //       history.push('/safety-testing')
+        //     }, 1500);
+        //     return showSnackBar('Form Successfully Submitted');
+        //   }  
+        // } catch (error) {
+        //   setSuccess(false);
+        //   setLoading(false);
+        //   console.log("error",error);
+        //   return showSnackBar(`Error Occured while submitting form: ${error}`);
+        // }
       }
     }
     return false

@@ -605,49 +605,49 @@ const Application = () => {
                     );
                 });
 
-            console.log(formDataToPush);
+            console.log({formDataToPush});
 
-            showSnackBar('Submission in Progress')
-
-
-            let response = await users.register(
-                formDataToPush,
-                {
-                    'Content-Type': 'multipart/form-data'
-                },
-            );
+            // showSnackBar('Submission in Progress')
 
 
-            localStorage.setItem('access_jwt', response?.token);
+            // let response = await users.register(
+            //     formDataToPush,
+            //     {
+            //         'Content-Type': 'multipart/form-data'
+            //     },
+            // );
 
-            showSnackBar('Form Submitted')
-            setTimeout(() => { history.push("/create-password"); }, 3000);
 
-            removeHttpErrorListener();
+            // localStorage.setItem('access_jwt', response?.token);
+
+            // showSnackBar('Form Submitted')
+            // setTimeout(() => { history.push("/create-password"); }, 3000);
+
+            // removeHttpErrorListener();
         } catch (exc) {
-            // UX Indicator insertion
-            const element = document.getElementById(exc?.path);
+            // // UX Indicator insertion
+            // const element = document.getElementById(exc?.path);
 
-            if (element) {
-                element.scrollIntoView({
-                    behavior: 'smooth'
-                });
+            // if (element) {
+            //     element.scrollIntoView({
+            //         behavior: 'smooth'
+            //     });
 
-                const {
-                    children: [child1, child2, ...rest]
-                } = element;
+            //     const {
+            //         children: [child1, child2, ...rest]
+            //     } = element;
 
-                const elementToHighlight = child2 || child1;
+            //     const elementToHighlight = child2 || child1;
 
-                elementToHighlight.classList.add('incorrect-field');
+            //     elementToHighlight.classList.add('incorrect-field');
 
-                // 3000ms duration for animation
-                setTimeout(() => {
-                    elementToHighlight.classList.remove('incorrect-field');
-                }, 3000);
-            }
+            //     // 3000ms duration for animation
+            //     setTimeout(() => {
+            //         elementToHighlight.classList.remove('incorrect-field');
+            //     }, 3000);
+            // }
 
-            console.log(exc);
+            // console.log(exc);
             console.log(applicationForm)
         }
     }

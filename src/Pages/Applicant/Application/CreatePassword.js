@@ -92,7 +92,7 @@ const CreatePassword = () => {
 
         const createPassword = await users.createPassword(data)
         if (createPassword?.httpStatus == 200)
-            history.push("/");
+          history.push("/");
       }
       catch (exc) {
         console.log(exc);
@@ -149,6 +149,8 @@ const CreatePassword = () => {
   //         <MobileScreen />
   //     )
   //   }
+
+  const divStyles = { display: "flex", alignItems: "center", backgroundColor: "white", padding: "0px 10px", borderRadius: "10px" }
   return (
     <Grid container xs={12}>
       <Grid className="LoginImageBG">
@@ -166,46 +168,44 @@ const CreatePassword = () => {
             <Typography xs={12} className="CreateFieldTItle">Create Password</Typography>
             <FormControl className="LoginPwd">
               {/* <InputLabel htmlFor="standard-adornment-password">Password</InputLabel> */}
-              <Input
-                placeholder="Password"
-                id="standard-adornment-password"
-                type={values.showPassword ? 'text' : 'password'}
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                    >
-                      {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment>
-                }
-              />
+              <div style={divStyles}>
+                <Input
+                  placeholder="Password"
+                  id="standard-adornment-password"
+                  type={values.showPassword ? 'text' : 'password'}
+                  style={{width: "100%"}}
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                  
+                />
+                {values.showPassword ? <Visibility style={{cursor: "pointer"}} onClick={handleClickShowPasswordV} /> : <VisibilityOff style={{cursor: "pointer"}} onClick={handleClickShowPasswordV} />}
+              </div>
             </FormControl>
             <Typography xs={12} className="CreateFieldTItle">Verify Password</Typography>
             <FormControl className="LoginPwd">
               {/* <InputLabel htmlFor="standard-adornment-password">Password</InputLabel> */}
-              <Input
-                placeholder="Verify Password"
-                id="standard-adornment-password"
-                type={values.showPassword ? 'text' : 'password'}
-                value={confirmPassword}
-                onChange={e => setConfirmPassword(e.target.value)}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPasswordV}
-                      onMouseDown={handleMouseDownPasswordV}
-                    >
-                      {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
-                  </InputAdornment>
-                }
-              />
+              <div style={divStyles}>
+                <Input
+                  placeholder="Verify Password"
+                  id="standard-adornment-password"
+                  type={values.showPassword ? 'text' : 'password'}
+                  value={confirmPassword}
+                  onChange={e => setConfirmPassword(e.target.value)}
+                  style={{ width: "100%" }}
+                // endAdornment={
+                //   <InputAdornment position="end">
+                //     <IconButton
+                //       aria-label="toggle password visibility"
+                //       onClick={handleClickShowPasswordV}
+                //       onMouseDown={handleMouseDownPasswordV}
+                //     >
+                //       {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                //     </IconButton>
+                //   </InputAdornment>
+                // }
+                />
+                {values.showPassword ? <Visibility style={{cursor: "pointer"}} onClick={handleClickShowPasswordV} /> : <VisibilityOff style={{cursor: "pointer"}} onClick={handleClickShowPasswordV} />}
+              </div>
             </FormControl>
             {error == true ?
               <h5>Password does not match</h5>
