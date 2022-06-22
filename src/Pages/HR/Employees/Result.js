@@ -106,7 +106,7 @@ const Positioncol = [
   { id: "SubDepartment.name", label: "Sub-Department", minWidth: 100, type: "value" },
   { id: "Employee.firstName", label: "Supervisor", minWidth: 100, type: "value" },
 
-  { id: "EffectiveDate", label: "Hire Date", minWidth: 100, type: "value" },
+  { id: "EffectiveDate", label: "Start Date", minWidth: 100, type: "value" },
   // { id: "ed", label: "Edit", minWidth: 50, type: "edit" }
 ];
 

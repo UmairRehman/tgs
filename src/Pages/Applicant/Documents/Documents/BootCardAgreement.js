@@ -215,7 +215,7 @@ const BootCardAgreement = () => {
         id: "id",
         employeeName: userData.firstName,
         socialSecurityName: document.getElementById('socialSecurityName').value,
-        company: document.getElementById('company').value,
+        // company: document.getElementById('company').value,
         hireDate: dateofInjury,
         dataSigned: dateOfRelease,
         signature: document.getElementById('signature').value,
@@ -698,7 +698,7 @@ const BootCardAgreement = () => {
                 </TableRow>
 
 
-                <TableRow style={{ height: "20px" }}>
+              {/* {  <TableRow style={{ height: "20px" }}>
 
 
                   <TableRow className="w100 mt10 row">
@@ -708,7 +708,7 @@ const BootCardAgreement = () => {
                       />
                     </TableCell>
                   </TableRow>
-                </TableRow>
+                </TableRow>} */}
 
 
 

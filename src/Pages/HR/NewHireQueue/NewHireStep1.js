@@ -602,7 +602,7 @@ const NewHireStep1 = () => {
                     </ListItem>
                     <ListItem container className="p0 pt6 pb20">
                       <Grid className="w250 bold">Phone Number</Grid>
-                      <Grid>{applicantData?.cellPhone}</Grid>
+                      <Grid>{applicantData?.homePhone}</Grid>
                     </ListItem>
                     <ListItem container className="p0 pt6 pb20">
                       <Grid className="w250 bold">Email Address</Grid>
