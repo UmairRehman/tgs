@@ -300,13 +300,12 @@ const Railroad = () => {
     }
 
     let assistingCrewList = await employee.get_crew_user_listing();
-    let assistingMembers = await employee.get_crew_user_listing();
+    let assistingMembers = await employee.get_assisting_member_listing();
     if (assistingCrewList.httpStatus == 200) {
       assistingCrewList = assistingCrewList.data.rows;
       assistingCrewList?.map(row => {
         row.name = `${row.firstName} ${row.lastName}`
       })
-      assistingCrewList?.sort((a, b) => a.firstName.localeCompare(b.firstName))
       console.log(assistingCrewList);
     }
     if (assistingMembers.httpStatus == 200) {
@@ -314,7 +313,6 @@ const Railroad = () => {
       assistingMembers?.map(row => {
         row.name = `${row.firstName} ${row.lastName}`
       })
-      assistingMembers?.sort((a, b) => a.firstName.localeCompare(b.firstName))
       console.log(assistingMembers);
     }
     // let departmentList = await employee.get_department_listing()
