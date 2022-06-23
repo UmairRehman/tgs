@@ -214,6 +214,9 @@ const Login = () => {
   //   )
   // }
 
+  const divStyles = { display: "flex", alignItems: "center", backgroundColor: "white", paddingRight: "10px", borderRadius: "10px" }
+
+
   return (
     <Grid container xs={12}>
       <Grid className="applicantImageBG">
@@ -234,7 +237,7 @@ const Login = () => {
             <FormControl
               className="LoginPwd">
               {/* <InputLabel htmlFor="standard-adornment-password">Password</InputLabel> */}
-              <Input
+              {/* <Input
                 placeholder="Password"
                 id="standard-adornment-password"
                 type={values.showPassword ? 'text' : 'password'}
@@ -256,7 +259,23 @@ const Login = () => {
                     </IconButton>
                   </InputAdornment>
                 }
-              />
+              /> */}
+              <div style={divStyles}>
+                <Input
+                  placeholder="Password"
+                  id="standard-adornment-password"
+                  type={values.showPassword ? 'text' : 'password'}
+                  style={{ width: "100%" }}
+                  value={values.password}
+                  onChange={handleChange('password')}
+                  onKeyPress={event => {
+                    if (event.key === 'Enter') {
+                      loginUser()
+                    }
+                  }}
+                />
+                {values.showPassword ? <Visibility style={{ cursor: "pointer", backgroundColor: "transparent" }} onClick={handleClickShowPassword} /> : <VisibilityOff  style={{ cursor: "pointer",  backgroundColor: "transparent" }} onClick={handleClickShowPassword} />}
+              </div>
             </FormControl>
 
             <Grid xs={12} container className="mt16">

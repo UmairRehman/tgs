@@ -300,12 +300,20 @@ const Railroad = () => {
     }
 
     let assistingCrewList = await employee.get_crew_user_listing();
+    let assistingMembers = await employee.get_crew_user_listing();
     if (assistingCrewList.httpStatus == 200) {
       assistingCrewList = assistingCrewList.data.rows;
       assistingCrewList.map(row => {
         row.name = `${row.firstName} ${row.lastName}`
       })
       console.log(assistingCrewList);
+    }
+    if (assistingMembers.httpStatus == 200) {
+      assistingMembers = assistingMembers?.data?.rows;
+      assistingMembers.map(row => {
+        row.name = `${row.firstName} ${row.lastName}`
+      })
+      console.log(assistingMembers);
     }
     // let departmentList = await employee.get_department_listing()
     // if(departmentList.httpStatus==200){
@@ -339,7 +347,7 @@ const Railroad = () => {
     ]
 
     let currentUser = JSON.parse(storage.get('user_profile'))
-    setLists({ ...lists, users: userList, crews: assistingCrewList, assistants: assistingCrewList, positions: jobCategoryList, departments: departmentList, sites: siteList, currentUser: currentUser })
+    setLists({ ...lists, users: userList, crews: assistingCrewList, assistants: assistingMembers, positions: jobCategoryList, departments: departmentList, sites: siteList, currentUser: currentUser })
     return true
   }
   useEffect(async () => {
