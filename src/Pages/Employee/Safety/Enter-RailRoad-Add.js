@@ -303,16 +303,18 @@ const Railroad = () => {
     let assistingMembers = await employee.get_crew_user_listing();
     if (assistingCrewList.httpStatus == 200) {
       assistingCrewList = assistingCrewList.data.rows;
-      assistingCrewList.map(row => {
+      assistingCrewList?.map(row => {
         row.name = `${row.firstName} ${row.lastName}`
       })
+      assistingCrewList?.sort((a, b) => a.firstName.localeCompare(b.firstName))
       console.log(assistingCrewList);
     }
     if (assistingMembers.httpStatus == 200) {
       assistingMembers = assistingMembers?.data?.rows;
-      assistingMembers.map(row => {
+      assistingMembers?.map(row => {
         row.name = `${row.firstName} ${row.lastName}`
       })
+      assistingMembers?.sort((a, b) => a.firstName.localeCompare(b.firstName))
       console.log(assistingMembers);
     }
     // let departmentList = await employee.get_department_listing()
