@@ -145,7 +145,7 @@ const PostConditionalJobOffer2 = () => {
       middleName: res?.employee?.middleName || '',
       lastName: res?.employee?.lastName || '',
       ssn: res?.employee?.ssn || '',
-      address: res?.employee?.address || '',
+      address: res?.employee?.address +  ", " + res?.employee?.city + ", " + res?.employee?.state || '',
       // address1 : res?.employee?.address1 || '',
     }
     setUserData(data)
@@ -271,7 +271,7 @@ const PostConditionalJobOffer2 = () => {
                     Address:
                     <input type="text" name="textfield" id="dateOnInjury" className="w h18 pl8 bn bb"
                       value={
-                        `${userData.address}`
+                        `${userData?.address}`
                       }
                       disabled
                     />
