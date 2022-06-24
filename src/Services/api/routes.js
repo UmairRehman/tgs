@@ -35,7 +35,7 @@ export const routes = {
         add_certificate: 'employee/certificate',
         update_certificate: 'employee/certificate/',
         get_crew_user_list: 'employee/employee/crew',
-        get_assisting_member_list: 'employee/employee/assising'
+        get_assisting_member_list: 'employee/employee/assisting'
     },
     it :{
         list_it_request : 'employee/ITRequest',

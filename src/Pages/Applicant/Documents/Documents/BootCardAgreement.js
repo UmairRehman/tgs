@@ -211,6 +211,8 @@ const BootCardAgreement = () => {
         images.push(image);
       }
 
+      localStorage.setItem("Imggg",images[0])
+
       let data = {
         id: "id",
         employeeName: userData.firstName,
