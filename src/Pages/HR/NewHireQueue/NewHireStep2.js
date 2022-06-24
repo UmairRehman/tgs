@@ -244,7 +244,7 @@ const NewHireStep2 = () => {
                             setStatus(value);
                           }}
                           options={Approval}
-                          getOptionLabel={(option) => option.title}
+                          getOptionLabel={(option) => option?.title}
                           renderInput={(params) => (
                             <TextField
                               {...params}
