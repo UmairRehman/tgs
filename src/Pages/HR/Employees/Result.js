@@ -498,7 +498,8 @@ const EmployeeResult = (props) => {
       hr.getCertificateType().then((certificateData) => {
         // console.log(certificateData.data.rows)
 
-        setCertificateType(certificateData.data.rows)
+        setCertificateType(certificateData?.data?.rows)
+        console.log("Here: ",certificateData?.data?.rows)
 
       }).catch((err) => { console.log(err) });
 
