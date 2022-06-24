@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import {
     Grid,
     Button,
-   
+
     TextareaAutosize,
     Typography
 } from "@material-ui/core";
@@ -115,7 +115,7 @@ const EnterCheckRide = () => {
         THG: '',
         THH: '',
         THI: '',
-   
+
         THK: '',
         THL: '',
         THM: '',
@@ -155,7 +155,7 @@ const EnterCheckRide = () => {
         switch (key) {
             case 2:
                 setCride({ ...cride, EngineerId: value.id })
-            
+
                 break;
 
             case 3:
@@ -163,11 +163,11 @@ const EnterCheckRide = () => {
                 break;
 
             case 4:
-                setCride({ ...cride, TCLoads: value })
+                setCride({ ...cride, TCLoads: event.target.value })
                 break;
 
             case 5:
-                setCride({ ...cride, TCEmpties: value })
+                setCride({ ...cride, TCEmpties: event.target.value })
                 break;
 
             case 6:
@@ -175,11 +175,11 @@ const EnterCheckRide = () => {
                 break;
 
             case 7:
-                setCride({ ...cride, TMTraveled: value })
+                setCride({ ...cride, TMTraveled: event.target.value })
                 break;
 
             case 8:
-                setCride({ ...cride, LLOA: value })
+                setCride({ ...cride, LLOA: event.target.value })
                 break;
 
             case 9:
@@ -287,12 +287,15 @@ const EnterCheckRide = () => {
                 setCride({ ...cride, ORF: event.target.value })
                 break;
             case 41:
-                setCride({ ...cride, ORH: event.target.value })
+                setCride({ ...cride, ORG: event.target.value })
                 break;
             case 42:
-                setCride({ ...cride, ORI: event.target.value })
+                setCride({ ...cride, ORH: event.target.value })
                 break;
             case 43:
+                setCride({ ...cride, ORI: event.target.value })
+                break;
+            case 71:
                 setCride({ ...cride, ORJ: event.target.value })
                 break;
             case 44:
@@ -330,7 +333,9 @@ const EnterCheckRide = () => {
             case 52:
                 setCride({ ...cride, THI: event.target.value })
                 break;
-
+            case 72:
+                setCride({ ...cride, THJ: event.target.value })
+                break;
             case 53:
                 setCride({ ...cride, THK: event.target.value })
                 break;
@@ -384,7 +389,7 @@ const EnterCheckRide = () => {
         // document.getElementById('jobId').value = ''
 
         // setCride({
-          
+
         //     oje: false, //2
         //     ojeComment: '', //3
         //     assisting: [], //4
@@ -404,76 +409,138 @@ const EnterCheckRide = () => {
 
     }
     const apiBody = async () => {
+        // let EngineerId = cride.EngineerId
+        // let locomotiveConsist = +(document.getElementById('locomotiveConsist').value)
+        // let TCLoads = +(document.getElementById('TCLoads').value)
+        // let TCEmpties = +(document.getElementById('TCEmpties').value)
+        // let TCTotalTonage = +(document.getElementById('TCTotalTonage').value)
+        // let TMTraveled = +(document.getElementById('TMTraveled').value)
+        // let LLOA = document.getElementById('LLOA').value
+        // let LLOB = document.getElementById('LLOB').value
+        // let LLOC = document.getElementById('LLOC').value
+        // let ABOA = document.getElementById('ABOA').value
+        // let ABOB = document.getElementById('ABOB').value
+        // let ABOC = document.getElementById('ABOC').value
+        // let ABOD = document.getElementById('ABOD').value
+        // let DBOA = document.getElementById('DBOA').value
+        // let DBOB = document.getElementById('DBOB').value
+        // let DBOC = document.getElementById('DBOC').value
+        // let IBA = document.getElementById('IBA').value
+        // let IBB = document.getElementById('IBB').value
+        // let MA = document.getElementById('MA').value
+        // let MB = document.getElementById('MB').value
+        // let RTA = document.getElementById('RTA').value
+        // let RTB = document.getElementById('RTB').value
+        // let RTC = document.getElementById('RTC').value
+        // let DPA = document.getElementById('DPA').value
+        // let DPB = document.getElementById('DPB').value
+        // let DPC = document.getElementById('DPC').value
+        // let DICS = document.getElementById('DICS').value
+        // let LMA = document.getElementById('LMA').value
+        // let LMB = document.getElementById('LMB').value
+        // let LMC = document.getElementById('LMC').value
+        // let LMD = document.getElementById('LMD').value
+        // let LME = document.getElementById('LME').value
+        // let LMF = document.getElementById('LMF').value
+        // let ORA = document.getElementById('ORA').value
+        // let ORB = document.getElementById('ORB').value
+        // let ORC = document.getElementById('ORC').value
+        // let ORD = document.getElementById('ORD').value
+        // let ORE = document.getElementById('ORE').value
+        // let ORF = document.getElementById('ORF').value
+        // let ORG = document.getElementById('ORG').value
+        // let ORH = document.getElementById('ORH').value
+        // let ORI = document.getElementById('ORI').value
+        // let ORJ = document.getElementById('ORJ').value
+        // let THA = document.getElementById('THA').value
+        // let THB = document.getElementById('THB').value
+        // let THC = document.getElementById('THC').value
+        // let THD = document.getElementById('THD').value
+        // let THE = document.getElementById('THE').value
+        // let THF = document.getElementById('THF').value
+        // let THG = document.getElementById('THG').value
+        // let THH = document.getElementById('THH').value
+        // let THI = document.getElementById('THI').value
+        // let THJ = document.getElementById('THJ').value
+        // let THK = document.getElementById('THK').value
+        // let THL = document.getElementById('THL').value
+        // let THM = document.getElementById('THM').value
+        // let THN = document.getElementById('THN').value
+        // let THO = document.getElementById('THO').value
+        // let THP = document.getElementById('THP').value
+        // let Comments = document.getElementById('Comments').value
+        // let date = document.getElementById('date').value
+        // let time = document.getElementById('time').value
         let EngineerId = cride.EngineerId
-        let locomotiveConsist = +(document.getElementById('locomotiveConsist').value)
-        let TCLoads = +(document.getElementById('TCLoads').value)
-        let TCEmpties = +(document.getElementById('TCEmpties').value)
-        let TCTotalTonage = +(document.getElementById('TCTotalTonage').value)
-        let TMTraveled = +(document.getElementById('TMTraveled').value)
-        let LLOA = document.getElementById('LLOA').value
-        let LLOB = document.getElementById('LLOB').value
-        let LLOC = document.getElementById('LLOC').value
-        let ABOA = document.getElementById('ABOA').value
-        let ABOB = document.getElementById('ABOB').value
-        let ABOC = document.getElementById('ABOC').value
-        let ABOD = document.getElementById('ABOD').value
-        let DBOA = document.getElementById('DBOA').value
-        let DBOB = document.getElementById('DBOB').value
-        let DBOC = document.getElementById('DBOC').value
-        let IBA = document.getElementById('IBA').value
-        let IBB = document.getElementById('IBB').value
-        let MA = document.getElementById('MA').value
-        let MB = document.getElementById('MB').value
-        let RTA = document.getElementById('RTA').value
-        let RTB = document.getElementById('RTB').value
-        let RTC = document.getElementById('RTC').value
-        let DPA = document.getElementById('DPA').value
-        let DPB = document.getElementById('DPB').value
-        let DPC = document.getElementById('DPC').value
-        let DICS = document.getElementById('DICS').value
-        let LMA = document.getElementById('LMA').value
-        let LMB = document.getElementById('LMB').value
-        let LMC = document.getElementById('LMC').value
-        let LMD = document.getElementById('LMD').value
-        let LME = document.getElementById('LME').value
-        let LMF = document.getElementById('LMF').value
-        let ORA = document.getElementById('ORA').value
-        let ORB = document.getElementById('ORB').value
-        let ORC = document.getElementById('ORC').value
-        let ORD = document.getElementById('ORD').value
-        let ORE = document.getElementById('ORE').value
-        let ORF = document.getElementById('ORF').value
-        let ORG = document.getElementById('ORG').value
-        let ORH = document.getElementById('ORH').value
-        let ORI = document.getElementById('ORI').value
-        let ORJ = document.getElementById('ORJ').value
-        let THA = document.getElementById('THA').value
-        let THB = document.getElementById('THB').value
-        let THC = document.getElementById('THC').value
-        let THD = document.getElementById('THD').value
-        let THE = document.getElementById('THE').value
-        let THF = document.getElementById('THF').value
-        let THG = document.getElementById('THG').value
-        let THH = document.getElementById('THH').value
-        let THI = document.getElementById('THI').value
-        let THJ = document.getElementById('THJ').value
-        let THK = document.getElementById('THK').value
-        let THL = document.getElementById('THL').value
-        let THM = document.getElementById('THM').value
-        let THN = document.getElementById('THN').value
-        let THO = document.getElementById('THO').value
-        let THP = document.getElementById('THP').value
-        let Comments = document.getElementById('Comments').value
-        let date = document.getElementById('date').value
-        let time = document.getElementById('time').value
+        let locomotiveConsist = cride.locomotiveConsist
+        let TCLoads = cride.TCLoads
+        let TCEmpties = cride.TCEmpties
+        let TCTotalTonage = cride.TCTotalTonage
+        let TMTraveled = cride.TMTraveled
+        let LLOA = cride.LLOA
+        let LLOB = cride.LLOB
+        let LLOC = cride.LLOC
+        let ABOA = cride.ABOA
+        let ABOB = cride.ABOB
+        let ABOC = cride.ABOC
+        let ABOD = cride.ABOD
+        let DBOA = cride.DBOA
+        let DBOB = cride.DBOB
+        let DBOC = cride.DBOC
+        let IBA = cride.IBA
+        let IBB = cride.IBB
+        let MA = cride.MA
+        let MB = cride.MB
+        let RTA = cride.RTA
+        let RTB = cride.RTB
+        let RTC = cride.RTC
+        let DPA = cride.DPA
+        let DPB = cride.DPB
+        let DPC = cride.DPC
+        let DICS = cride.DICS
+        let LMA = cride.LMA
+        let LMB = cride.LMB
+        let LMC = cride.LMC
+        let LMD = cride.LMD
+        let LME = cride.LME
+        let LMF = cride.LMF
+        let ORA = cride.ORA
+        let ORB = cride.ORB
+        let ORC = cride.ORC
+        let ORD = cride.ORD
+        let ORE = cride.ORE
+        let ORF = cride.ORF
+        let ORG = cride.ORG
+        let ORH = cride.ORH
+        let ORI = cride.ORI
+        let ORJ = cride.ORJ
+        let THA = cride.THA
+        let THB = cride.THB
+        let THC = cride.THC
+        let THD = cride.THD
+        let THE = cride.THE
+        let THF = cride.THF
+        let THG = cride.THG
+        let THH = cride.THH
+        let THI = cride.THI
+        let THJ = cride.THJ
+        let THK = cride.THK
+        let THL = cride.THL
+        let THM = cride.THM
+        let THN = cride.THN
+        let THO = cride.THO
+        let THP = cride.THP
+        let Comments = cride.Comments
+        let date = cride.date
+        let time = cride.time
 
 
         return (
             {
                 EngineerId, locomotiveConsist, TCLoads, TCEmpties, TCTotalTonage, TMTraveled,
                 LLOA, LLOB, LLOC, ABOA, ABOB, ABOC, ABOD, DBOA, DBOB, DBOC, IBA, IBB, MA, MB, RTA, RTB,
-                RTC, DPA, DPB, DPC, DICS, LMA,LMB, LMC, LMD, LME, LMF, ORA, ORB, ORC,
-                ORD, ORE, ORF, ORH, ORI,ORG, ORJ, THA, THB, THC, THD, THE, THF, THG, THH, THI,THJ,
+                RTC, DPA, DPB, DPC, DICS, LMA, LMB, LMC, LMD, LME, LMF, ORA, ORB, ORC,
+                ORD, ORE, ORF, ORH, ORI, ORG, ORJ, THA, THB, THC, THD, THE, THF, THG, THH, THI, THJ,
                 THK, THL, THM, THN, THO, THP, Comments, date, time
             }
         );
@@ -483,6 +550,7 @@ const EnterCheckRide = () => {
     const submitBtn = async (event) => {
 
         event.preventDefault();
+
         if (!loading) {
             setSuccess(false);
             setLoading(true);
@@ -491,9 +559,10 @@ const EnterCheckRide = () => {
             try {
                 let data = await apiBody()
                 console.log(data)
+
                 let result = await employee.checkride_table_submit(data)
                 if (result?.httpStatus == 200) {
-                   console.log('result', result);
+                    console.log('result', result);
 
                     setSuccess(true);
                     setLoading(false);
@@ -646,7 +715,7 @@ const EnterCheckRide = () => {
         // ]
 
         let currentUser = JSON.parse(storage.get('user_profile'))
-        
+
         setLists({ ...lists, users: userList, currentUser: currentUser, assistants: assistingCrewList, assistants: assistingCrewList })
         return true
     }
@@ -658,11 +727,11 @@ const EnterCheckRide = () => {
     // const [value, setValue] = useState(dummyData.OJE[0]);
 
 
-    if (isMobile) {
-        return (
-            <MobileScreen />
-        )
-    }
+    // if (isMobile) {
+    //     return (
+    //         <MobileScreen />
+    //     )
+    // }
     return (
         <Grid container xs={12} className="Liq-Container">
             <Grid xs={12} md={2} className="LeftContol" id="LeftContol">
@@ -749,12 +818,12 @@ const EnterCheckRide = () => {
                                             <Grid xs={12} className="mt14">
 
                                                 <TextField required={false} id="locomotiveConsist" type='number'
-                                                InputProps={{
-                                                    inputProps: { 
-                                                        max: 100, min: 1
-                                                    }
-                                                }}
-                                                 label="" onChange={(event, value) => { handleSubmitDataRide(event, value, 3) }} variant="outlined" className="w100p" />
+                                                    InputProps={{
+                                                        inputProps: {
+                                                            max: 100, min: 1
+                                                        }
+                                                    }}
+                                                    label="" onChange={(event, value) => { handleSubmitDataRide(event, value, 3) }} variant="outlined" className="w100p" />
                                             </Grid>
                                         </Grid>
                                     </Grid>
@@ -768,13 +837,13 @@ const EnterCheckRide = () => {
                                             <Grid xs={12} className="mt14">
 
                                                 <TextField required={false} id="TCLoads"
-                                                 type='number'
-                                                 InputProps={{
-                                                    inputProps: { 
-                                                        max: 100, min: 0 
-                                                    }
-                                                }}
-                                                 label="" variant="outlined" onChange={(event, value) => { handleSubmitDataRide(event, value, 4) }} className="w100p" />
+                                                    type='number'
+                                                    InputProps={{
+                                                        inputProps: {
+                                                            max: 100, min: 0
+                                                        }
+                                                    }}
+                                                    label="" variant="outlined" onChange={(event, value) => { handleSubmitDataRide(event, value, 4) }} className="w100p" />
                                             </Grid>
                                         </Grid>
                                     </Grid>
@@ -787,13 +856,13 @@ const EnterCheckRide = () => {
                                             </Grid>
                                             <Grid xs={12} className="mt14">
 
-                                                <TextField required={false} id="TCEmpties" type='number' 
-                                                InputProps={{
-                                                    inputProps: { 
-                                                        max: 100, min: 0 
-                                                    }
-                                                }}
-                                                label="" variant="outlined" onChange={(event, value) => { handleSubmitDataRide(event, value, 5) }} className="w100p" />
+                                                <TextField required={false} id="TCEmpties" type='number'
+                                                    InputProps={{
+                                                        inputProps: {
+                                                            max: 100, min: 0
+                                                        }
+                                                    }}
+                                                    label="" variant="outlined" onChange={(event, value) => { handleSubmitDataRide(event, value, 5) }} className="w100p" />
                                             </Grid>
                                         </Grid>
                                     </Grid>
@@ -807,12 +876,12 @@ const EnterCheckRide = () => {
                                             <Grid xs={12} className="mt14">
 
                                                 <TextField required={false} id="TCTotalTonage" type='number'
-                                                InputProps={{
-                                                    inputProps: { 
-                                                        max: 10000, min: 1 
-                                                    }
-                                                }}
-                                                label="" variant="outlined" onChange={(event, value) => { handleSubmitDataRide(event, value, 6) }} className="w100p" />
+                                                    InputProps={{
+                                                        inputProps: {
+                                                            max: 10000, min: 1
+                                                        }
+                                                    }}
+                                                    label="" variant="outlined" onChange={(event, value) => { handleSubmitDataRide(event, value, 6) }} className="w100p" />
                                             </Grid>
                                         </Grid>
                                     </Grid>
@@ -825,13 +894,13 @@ const EnterCheckRide = () => {
                                             </Grid>
                                             <Grid xs={12} className="mt14">
 
-                                                <TextField required={false} id="TMTraveled" type='number' 
-                                                InputProps={{
-                                                    inputProps: { 
-                                                        max: 100, min: 1 
-                                                    }
-                                                }}
-                                                label="" variant="outlined" onChange={(event, value) => { handleSubmitDataRide(event, value, 7) }} className="w100p" />
+                                                <TextField required={false} id="TMTraveled" type='number'
+                                                    InputProps={{
+                                                        inputProps: {
+                                                            max: 100, min: 1
+                                                        }
+                                                    }}
+                                                    label="" variant="outlined" onChange={(event, value) => { handleSubmitDataRide(event, value, 7) }} className="w100p" />
                                             </Grid>
                                         </Grid>
                                     </Grid>
@@ -1217,10 +1286,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="LMA" value='YES' type="radio" name='LMA' onChange={(event, value) => { handleSubmitDataRide(event, value, 28) }} /> Yes
-                                                <input id="LMA" value='NO' type="radio" name='LMA' onChange={(event, value) => { handleSubmitDataRide(event, value, 28) }} /> No
-                                                <input id="LMA" value='N/A' type="radio" name='LMA' onChange={(event, value) => { handleSubmitDataRide(event, value, 28) }} /> N/A
-
+                                                <input id="LMA" value='YES' type="radio" name='LMA' onChange={(event, value) => { handleSubmitDataRide(event, value, 29) }} /> Yes
+                                                <input id="LMA" value='NO' type="radio" name='LMA' onChange={(event, value) => { handleSubmitDataRide(event, value, 29) }} /> No
+                                                <input id="LMA" value='N/A' type="radio" name='LMA' onChange={(event, value) => { handleSubmitDataRide(event, value, 29) }} /> N/A
                                             </Grid>
                                         </Grid>
                                     </Grid>
@@ -1428,9 +1496,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="ORG" value='YES' type="radio" name='ORG' onChange={(event, value) => { handleSubmitDataRide(event, value, 40) }} /> Yes
-                                                <input id="ORG" value='NO' type="radio" name='ORG' onChange={(event, value) => { handleSubmitDataRide(event, value, 40) }} /> No
-                                                <input id="ORG" value='N/A' type="radio" name='ORG' onChange={(event, value) => { handleSubmitDataRide(event, value, 40) }} /> N/A
+                                                <input id="ORG" value='YES' type="radio" name='ORG' onChange={(event, value) => { handleSubmitDataRide(event, value, 41) }} /> Yes
+                                                <input id="ORG" value='NO' type="radio" name='ORG' onChange={(event, value) => { handleSubmitDataRide(event, value, 41) }} /> No
+                                                <input id="ORG" value='N/A' type="radio" name='ORG' onChange={(event, value) => { handleSubmitDataRide(event, value, 41) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1445,9 +1513,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="ORH" value='YES' type="radio" name='ORH' onChange={(event, value) => { handleSubmitDataRide(event, value, 41) }} /> Yes
-                                                <input id="ORH" value='NO' type="radio" name='ORH' onChange={(event, value) => { handleSubmitDataRide(event, value, 41) }} /> No
-                                                <input id="ORH" value='N/A' type="radio" name='ORH' onChange={(event, value) => { handleSubmitDataRide(event, value, 41) }} /> N/A
+                                                <input id="ORH" value='YES' type="radio" name='ORH' onChange={(event, value) => { handleSubmitDataRide(event, value, 42) }} /> Yes
+                                                <input id="ORH" value='NO' type="radio" name='ORH' onChange={(event, value) => { handleSubmitDataRide(event, value, 42) }} /> No
+                                                <input id="ORH" value='N/A' type="radio" name='ORH' onChange={(event, value) => { handleSubmitDataRide(event, value, 42) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1463,9 +1531,9 @@ const EnterCheckRide = () => {
 
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="ORI" value='YES' type="radio" name='ORI' onChange={(event, value) => { handleSubmitDataRide(event, value, 42) }} /> Yes
-                                                <input id="ORI" value='NO' type="radio" name='ORI' onChange={(event, value) => { handleSubmitDataRide(event, value, 42) }} /> No
-                                                <input id="ORI" value='N/A' type="radio" name='ORI' onChange={(event, value) => { handleSubmitDataRide(event, value, 42) }} /> N/A
+                                                <input id="ORI" value='YES' type="radio" name='ORI' onChange={(event, value) => { handleSubmitDataRide(event, value, 43) }} /> Yes
+                                                <input id="ORI" value='NO' type="radio" name='ORI' onChange={(event, value) => { handleSubmitDataRide(event, value, 43) }} /> No
+                                                <input id="ORI" value='N/A' type="radio" name='ORI' onChange={(event, value) => { handleSubmitDataRide(event, value, 43) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1482,9 +1550,9 @@ const EnterCheckRide = () => {
                                                 .
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="ORJ" value='YES' type="radio" name="ORJ" onChange={(event, value) => { handleSubmitDataRide(event, value, 43) }} /> Yes
-                                                <input id="ORJ" value='NO' type="radio" name="ORJ" onChange={(event, value) => { handleSubmitDataRide(event, value, 43) }} /> No
-                                                <input id="ORJ" value='N/A' type="radio" name="ORJ" onChange={(event, value) => { handleSubmitDataRide(event, value, 43) }} /> N/A
+                                                <input id="ORJ" value='YES' type="radio" name="ORJ" onChange={(event, value) => { handleSubmitDataRide(event, value, 71) }} /> Yes
+                                                <input id="ORJ" value='NO' type="radio" name="ORJ" onChange={(event, value) => { handleSubmitDataRide(event, value, 71) }} /> No
+                                                <input id="ORJ" value='N/A' type="radio" name="ORJ" onChange={(event, value) => { handleSubmitDataRide(event, value, 71) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1640,9 +1708,9 @@ const EnterCheckRide = () => {
                                                 Train Handling – J) Procedures for Set-Off and Pick-Ups (2 pt)
                                             </Grid>
                                             <Grid xs={12} className="mt14">
-                                                <input id="THJ" value='YES' type="radio" name='THJ' onChange={(event, value) => { handleSubmitDataRide(event, value, 52) }} /> Yes
-                                                <input id="THJ" value='NO' type="radio" name='THJ' onChange={(event, value) => { handleSubmitDataRide(event, value, 52) }} /> No
-                                                <input id="THJ" value='N/A' type="radio" name='THJ' onChange={(event, value) => { handleSubmitDataRide(event, value, 52) }} /> N/A
+                                                <input id="THJ" value='YES' type="radio" name='THJ' onChange={(event, value) => { handleSubmitDataRide(event, value, 72) }} /> Yes
+                                                <input id="THJ" value='NO' type="radio" name='THJ' onChange={(event, value) => { handleSubmitDataRide(event, value, 72) }} /> No
+                                                <input id="THJ" value='N/A' type="radio" name='THJ' onChange={(event, value) => { handleSubmitDataRide(event, value, 72) }} /> N/A
 
                                             </Grid>
                                         </Grid>
@@ -1750,13 +1818,13 @@ const EnterCheckRide = () => {
                                             <Grid xs={12} className="mt14" >
 
                                                 <TextField
-                                                // type="text"
+                                                    // type="text"
                                                     id="Comments"
                                                     label={'Comment here'}
                                                     variant="outlined"
                                                     className="w100p"
-                                                    // onChange={(event, value) => { handleSubmitDataRide(event, value, 59) }} 
-                                                    />
+                                                    onChange={(event, value) => { handleSubmitDataRide(event, value, 59) }}
+                                                />
                                             </Grid>
                                         </Grid>
                                     </Grid>

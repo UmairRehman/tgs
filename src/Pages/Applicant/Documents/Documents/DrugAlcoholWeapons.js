@@ -123,6 +123,8 @@ const DrugAlcoholWeapons = () => {
         images.push(image);
       }
 
+
+
       const resposne = await users.submitForm({
         image: images,
         form: 17,
@@ -154,7 +156,7 @@ const DrugAlcoholWeapons = () => {
   };
 
   return (
-    <Grid id="capture" container xs={12} className="LiqForms-Container">
+    <Grid  container xs={12} className="LiqForms-Container">
       <TableContainer className="MainTable">
         <Table className="SecondMainTable">
           <TableRow>
@@ -1780,7 +1782,7 @@ const DrugAlcoholWeapons = () => {
         </Grid>
 
         {/* ----------- Page 20 18 ----------- */}
-        <Grid xs={12} className="pageBreak capture" id="18">
+        <Grid xs={12} className="pageBreak" id="18">
           <TableContainer className="MainTable">
             <Table className="SecondMainTable">
               <TableRow className="w100 pl60 pr60">
@@ -1868,8 +1870,8 @@ const DrugAlcoholWeapons = () => {
         </Grid>
 
         {/* ----------- Page 21 19 ----------- */}
-        <Grid xs={12} className="pageBreak capture" id="19">
-          <TableContainer className="MainTable">
+        <Grid xs={12} className="pageBreak " id="19">
+          <TableContainer className="MainTable capture">
             <Table className="SecondMainTable">
               <TableRow className="w100 pl60 pr60">
                 <TableCell className="w100">

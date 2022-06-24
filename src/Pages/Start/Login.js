@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 import { Link } from "react-router-dom";
 
-import { isMobile } from 'react-device-detect';
+// import { isMobile } from 'react-device-detect';
 
 import { useHistory } from "react-router-dom";
 
@@ -36,7 +36,7 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 
 /** Local Dependencies */
-import MobileScreen from '../Start/Mobile/Login';
+// import MobileScreen from '../Start/Mobile/Login';
 
 
 /** Local Static Imports & Objects */
@@ -208,11 +208,14 @@ const Login = () => {
 
 
 
-  if (isMobile) {
-    return (
-      <MobileScreen />
-    )
-  }
+  // if (isMobile) {
+  //   return (
+  //     <MobileScreen />
+  //   )
+  // }
+
+  const divStyles = { display: "flex", alignItems: "center", backgroundColor: "white", paddingRight: "10px", borderRadius: "10px" }
+
 
   return (
     <Grid container xs={12}>
@@ -234,7 +237,7 @@ const Login = () => {
             <FormControl
               className="LoginPwd">
               {/* <InputLabel htmlFor="standard-adornment-password">Password</InputLabel> */}
-              <Input
+              {/* <Input
                 placeholder="Password"
                 id="standard-adornment-password"
                 type={values.showPassword ? 'text' : 'password'}
@@ -256,7 +259,23 @@ const Login = () => {
                     </IconButton>
                   </InputAdornment>
                 }
-              />
+              /> */}
+              <div style={divStyles}>
+                <Input
+                  placeholder="Password"
+                  id="standard-adornment-password"
+                  type={values.showPassword ? 'text' : 'password'}
+                  style={{ width: "100%" }}
+                  value={values.password}
+                  onChange={handleChange('password')}
+                  onKeyPress={event => {
+                    if (event.key === 'Enter') {
+                      loginUser()
+                    }
+                  }}
+                />
+                {values.showPassword ? <Visibility style={{ cursor: "pointer", backgroundColor: "transparent" }} onClick={handleClickShowPassword} /> : <VisibilityOff  style={{ cursor: "pointer",  backgroundColor: "transparent" }} onClick={handleClickShowPassword} />}
+              </div>
             </FormControl>
 
             <Grid xs={12} container className="mt16">
@@ -267,9 +286,9 @@ const Login = () => {
                   inputProps={{ 'aria-label': 'secondary checkbox' }}
                 />Remember me
               </Grid>
-              <Grid className="LoginForget">
+              {/* <Grid className="LoginForget">
                 <Link to="/dashboard">Forget Password</Link>
-              </Grid>
+              </Grid> */}
             </Grid>
             <Grid xs={12} container justify="center" className="mt26">
               <Button className="LoginBtn"

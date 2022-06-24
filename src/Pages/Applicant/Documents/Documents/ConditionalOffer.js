@@ -135,7 +135,7 @@ const ConditionalOffer = () => {
       let payType = document.querySelector('input[name="payType"]:checked')?.value;
       let location = document.getElementById("location").value;
       let departmentCode = document.getElementById("departmentCode").value;
-      
+
       // let phone = document.getElementById("phone").value;
       // let laptop = document.getElementById("laptop").value;
       // let terms = document.getElementById("terms").value;
@@ -155,7 +155,7 @@ const ConditionalOffer = () => {
         // laptop,
         // terms,
         offeree,
-        
+
       }
 
       const nullCheck = Object.values(data)
@@ -265,7 +265,8 @@ const ConditionalOffer = () => {
                           </div>
                         </td>
                         <td className="row justify-end">
-                          <div className="TGSLogo"></div>
+                          {/* <div className="TGSLogo"></div> */}
+                          <div className="logoImageTGS"></div>
                         </td>
                       </tr>
                       <tr className="w100">

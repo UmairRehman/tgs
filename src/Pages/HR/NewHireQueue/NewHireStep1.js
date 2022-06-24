@@ -424,22 +424,22 @@ const NewHireStep1 = () => {
     if (status.value) {
       try {
         let jobCategory = await hr.get_job_categories();
-        setJobCategoriesOption(jobCategory.data);
+        setJobCategoriesOption(jobCategory?.data);
 
         let position_level = await hr.getPositionLevel();
-        setPositionLevel(position_level.data);
+        setPositionLevel(position_level?.data);
 
         let locationData = await hr.location();
-        setLocationDropdown(locationData.data);
+        setLocationDropdown(locationData?.data);
 
         let payLocationData = await hr.pay_type();
-        setPaytypeDropdown(payLocationData.data);
+        setPaytypeDropdown(payLocationData?.data);
 
         let departmentData = await hr.department();
-        setDepartmentDropdown(departmentData.data);
+        setDepartmentDropdown(departmentData?.data);
 
         let supervisorData = await employee.get_employee_listing();
-        setSupervisorList(supervisorData.data);
+        setSupervisorList(supervisorData?.data);
       } catch (exc) {
         console.log(exc);
       }
@@ -602,7 +602,7 @@ const NewHireStep1 = () => {
                     </ListItem>
                     <ListItem container className="p0 pt6 pb20">
                       <Grid className="w250 bold">Phone Number</Grid>
-                      <Grid>{applicantData?.cellPhone}</Grid>
+                      <Grid>{applicantData?.homePhone}</Grid>
                     </ListItem>
                     <ListItem container className="p0 pt6 pb20">
                       <Grid className="w250 bold">Email Address</Grid>
@@ -1113,7 +1113,7 @@ const NewHireStep1 = () => {
                                 className="w100p"
                                 id="combo-box-demo"
                                 options={supervisorList}
-                                getOptionLabel={(option) => option.firstName + ' ' + option.lastName}
+                                getOptionLabel={(option) => option?.firstName + ' ' + option?.lastName}
                                 renderInput={(params) => (
                                   <TextField
                                     required={true}

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 import { Link, useHistory } from "react-router-dom";
 
-import { isMobile } from 'react-device-detect';
+// import { isMobile } from 'react-device-detect';
 
 
 
@@ -35,7 +35,7 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 
 /** Local Dependencies */
-import MobileScreen from './Mobile/Login';
+// import MobileScreen from './Mobile/Login';
 
 
 
@@ -209,11 +209,14 @@ const EmployeeLogin = () => {
 
 
 
-  if (isMobile) {
-    return (
-      <MobileScreen />
-    )
-  }
+  // if (isMobile) {
+  //   return (
+  //     <MobileScreen />
+  //   )
+  // }
+
+  const divStyles = { display: "flex", alignItems: "center", backgroundColor: "white", paddingRight: "10px", borderRadius: "10px" }
+
 
   return (
     <Grid container xs={12}>
@@ -235,7 +238,7 @@ const EmployeeLogin = () => {
             <FormControl
               className="LoginPwd">
               {/* <InputLabel htmlFor="standard-adornment-password">Password</InputLabel> */}
-              <Input
+              {/* <Input
                 placeholder="Password"
                 id="standard-adornment-password"
                 type={values.showPassword ? 'text' : 'password'}
@@ -257,7 +260,23 @@ const EmployeeLogin = () => {
                     </IconButton>
                   </InputAdornment>
                 }
-              />
+              /> */}
+              <div style={divStyles}>
+                <Input
+                  placeholder="Password"
+                  id="standard-adornment-password"
+                  type={values.showPassword ? 'text' : 'password'}
+                  style={{ width: "100%" }}
+                  value={values.password}
+                  onChange={handleChange('password')}
+                  onKeyPress={event => {
+                    if (event.key === 'Enter') {
+                      loginUser()
+                    }
+                  }}
+                />
+                {values.showPassword ? <Visibility style={{ cursor: "pointer", backgroundColor: "transparent" }} onClick={handleClickShowPassword} /> : <VisibilityOff  style={{ cursor: "pointer",  backgroundColor: "transparent" }} onClick={handleClickShowPassword} />}
+              </div>
             </FormControl>
 
             <Grid xs={12} container className="mt16">

@@ -35,7 +35,7 @@ const columns = [
   { id: "id", label: "Employee ID", minWidth: 170, type: "value" },
   { id: "firstName", label: "Name", minWidth: 120, type: "value" },
   { id: "deptName", label: "Department", minWidth: 100, type: "value" },
-  { id: "state", label: "City", minWidth: 100, type: "value" },
+  { id: "city", label: "City", minWidth: 100, type: "value" },
   { id: "email", label: "Email", minWidth: 170, type: "value" },
   { id: "employeeStatus", label: "Application Stage", minWidth: 170, type: "value" },
   { id: "View", label: "View", minWidth: 50, type: "edit" },
@@ -192,7 +192,7 @@ const NewHireQueue = () => {
                                       ) : column.type == "view" ? (
                                         <Grid className="CompleteIcon"></Grid>
                                       ) : (
-                                        value
+                                        value == applicantData.firstName ? applicantData.firstName + " " + applicantData.lastName : value
                                       )}
                                     </TableCell>
                                   );

@@ -82,7 +82,7 @@ const PostConditionalJobOffer = () => {
         health:
           (document.querySelector('input[name="Health"]:checked')?.value == "yes")
             ? document.querySelector('input[name="Health"]:checked')?.value
-            : document.getElementById("comment").value?.length > 0 ? document.getElementById("comment").value :'no',
+            : document.getElementById("comment").value?.length > 0 ? document.getElementById("comment").value : 'no',
         eye: document.querySelector('input[name="eye"]:checked')?.value,
         breathing: document.querySelector('input[name="breathing"]:checked')?.value,
         allergies: document.querySelector('input[name="allergies"]:checked')?.value,
@@ -162,7 +162,7 @@ const PostConditionalJobOffer = () => {
   }, [])
 
   return (
-    <Grid style={{minWidth: "100% !important"}} id="capture" container xs={12} className="LiqForms-Container font11">
+    <Grid style={{ minWidth: "100% !important" }} id="capture" container xs={12} className="LiqForms-Container font11">
       <Grid className={isPosting ? classes.displayNone : "FormsHeader"}>
         <List>
           <ListItem>
@@ -225,11 +225,13 @@ const PostConditionalJobOffer = () => {
               <Table className="w100">
                 <TableRow className="w100 mb10 mt10 row justify-center">
                   <TableCell>
-                    <Avatar
+                    <div className="logoImageTGS"></div>
+
+                    {/* <Avatar
                       alt="TGS"
                       className="TGSLogoSVG"
                       src="https://tgs.liquidtechnologies.pk/assets/TGS_Logo2.svg"
-                    />
+                    /> */}
                   </TableCell>
                 </TableRow>
                 <TableRow className="w100">

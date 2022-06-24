@@ -605,7 +605,7 @@ const Application = () => {
                     );
                 });
 
-            console.log(formDataToPush);
+            console.log({formDataToPush});
 
             showSnackBar('Submission in Progress')
 

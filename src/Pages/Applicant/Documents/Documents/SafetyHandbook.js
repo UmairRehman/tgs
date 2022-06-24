@@ -122,6 +122,7 @@ const SafetyHandbook = () => {
         images.push(image);
       }
 
+
       const resposne = await users.submitForm({
         image: images,
         form: 16,
@@ -152,7 +153,7 @@ const SafetyHandbook = () => {
   };
 
   return (
-    <Grid container id="capture" xs={12} className="LiqForms-Container">
+    <Grid container xs={12} className="LiqForms-Container">
       <TableContainer className="MainTable">
         <Table className="SecondMainTable">
           <TableRow>
@@ -2935,8 +2936,8 @@ const SafetyHandbook = () => {
       </Grid>
 
       {/* ----------- Page 28 ----------- */}
-      <Grid xs={12} className="pageBreak capture" id="28">
-        <TableContainer className="MainTable">
+      <Grid xs={12} className="pageBreak " id="28">
+        <TableContainer className="MainTable capture">
           <Table className="SecondMainTable">
             <TableRow className="w100 pl60 pr60 mt22">
               <TableCell className="w100">

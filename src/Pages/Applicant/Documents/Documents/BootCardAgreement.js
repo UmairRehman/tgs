@@ -72,7 +72,7 @@ const BootCardAgreement = () => {
   useEffect(async () => {
     let userProfile = await JSON.parse(localStorage.user_profile);
     let res = await hr.getAllApplicantsByID({ id: userProfile.id })
-    console.log("Here: ",res)
+    console.log("Here: ", res)
     let data = {
       firstName: res?.employee?.firstName || '',
       middleName: res?.employee?.middleName || '',
@@ -211,11 +211,13 @@ const BootCardAgreement = () => {
         images.push(image);
       }
 
+      localStorage.setItem("Imggg",images[0])
+
       let data = {
         id: "id",
         employeeName: userData.firstName,
         socialSecurityName: document.getElementById('socialSecurityName').value,
-        company: document.getElementById('company').value,
+        // company: document.getElementById('company').value,
         hireDate: dateofInjury,
         dataSigned: dateOfRelease,
         signature: document.getElementById('signature').value,
@@ -606,9 +608,10 @@ const BootCardAgreement = () => {
             <TableCell>
               <Table className="w100">
                 <TableRow className="w100 mb10 mt10 row justify-center">
-                  <TableCell>
+                  {/* <TableCell>
                     <Avatar alt="TGS" className="TGSLogoSVG" src="https://tgs.liquidtechnologies.pk/assets/TGS_Logo2.svg" />
-                  </TableCell>
+                  </TableCell> */}
+                  <div className="logoImageTGS"></div>
                 </TableRow>
                 <TableRow className="w100">
                   <TableCell className="w100 textCenter font20 bold">
@@ -698,7 +701,7 @@ const BootCardAgreement = () => {
                 </TableRow>
 
 
-                <TableRow style={{ height: "20px" }}>
+              {/* {  <TableRow style={{ height: "20px" }}>
 
 
                   <TableRow className="w100 mt10 row">
@@ -708,7 +711,7 @@ const BootCardAgreement = () => {
                       />
                     </TableCell>
                   </TableRow>
-                </TableRow>
+                </TableRow>} */}
 
 
 

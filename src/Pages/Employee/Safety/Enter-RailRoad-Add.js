@@ -22,6 +22,7 @@ import { isMobile } from 'react-device-detect';
 
 /** Local deoendencies & Libraries */
 import Services from '../../../Services';
+import DatePicker from "react-date-picker";
 const {
   employee,
   Storage
@@ -56,7 +57,7 @@ const Railroad = () => {
     department: '', //7
     site: '', //8
     GPS: '', //9
-    date: moment(new Date()).format('YY-MM-DD'), //10
+    // date: moment(new Date()).format('YY-MM-DD'), //10
     // date : new Date(), //10
     time: moment(new Date()).format('HH:mm:ss a'), //11
     jobId: '', //12
@@ -67,7 +68,8 @@ const Railroad = () => {
 
 
   const handleSubmitData = (event, value, key) => {
-    console.log(value);
+
+    // console.log(value);
 
     switch (key) {
       case 2:
@@ -117,7 +119,7 @@ const Railroad = () => {
     }
 
   };
-/*document.getElementById( 'ojeComment').value = '')*/
+  /*document.getElementById( 'ojeComment').value = '')*/
   const resetData = () => {
     document.getElementById('ojeComment').value = ''
     document.getElementById('assisting_comment').value = ''
@@ -133,7 +135,8 @@ const Railroad = () => {
       department: '', //7
       site: '', //8
       GPS: '', //9
-      date: moment(new Date()).format('YY-MM-DD'), //10
+      // date: moment(new Date()).format('YY-MM-DD'), //10
+      date: new Date(), //10
       // date : new Date(), //10
       time: moment(new Date()).format('HH:mm:ss a'), //11
       jobId: '', //12
@@ -164,7 +167,8 @@ const Railroad = () => {
       site_id: railRoad.site.id,
       latitude: latitude,
       longitude: longitude,
-      date: railRoad.date,
+      date: moment(railRoad?.date).format('YYYY-MM-DD'),
+      // date: railRoad?.date,
       time: railRoad.time,
       oje: railRoad.oje,
       ojeComment: ojeComment,
@@ -186,7 +190,9 @@ const Railroad = () => {
 
       try {
         let data = await apiBody()
+        console.log({data})
         let result = await employee.create_test_event({ ...data })
+        
         if (result?.httpStatus == 200) {
           console.log('result', result);
 
@@ -258,7 +264,7 @@ const Railroad = () => {
 
       console.log('latitude', latitude);
       console.log('longitude', longitude);
-      let gps = `${longitude},${latitude}`
+      let gps = `${latitude},${longitude}`
       // document.getElementById('GPS').value=gps
       setRailRoad({ ...railRoad, GPS: gps })
 
@@ -300,12 +306,20 @@ const Railroad = () => {
     }
 
     let assistingCrewList = await employee.get_crew_user_listing();
+    let assistingMembers = await employee.get_assisting_member_listing();
     if (assistingCrewList.httpStatus == 200) {
       assistingCrewList = assistingCrewList.data.rows;
-      assistingCrewList.map(row => {
+      assistingCrewList?.map(row => {
         row.name = `${row.firstName} ${row.lastName}`
       })
       console.log(assistingCrewList);
+    }
+    if (assistingMembers.httpStatus == 200) {
+      assistingMembers = assistingMembers?.data?.rows;
+      assistingMembers?.map(row => {
+        row.name = `${row.firstName} ${row.lastName}`
+      })
+      console.log(assistingMembers);
     }
     // let departmentList = await employee.get_department_listing()
     // if(departmentList.httpStatus==200){
@@ -339,7 +353,7 @@ const Railroad = () => {
     ]
 
     let currentUser = JSON.parse(storage.get('user_profile'))
-    setLists({ ...lists, users: userList, crews: assistingCrewList, assistants: assistingCrewList, positions: jobCategoryList, departments: departmentList, sites: siteList, currentUser: currentUser })
+    setLists({ ...lists, users: userList, crews: assistingCrewList, assistants: assistingMembers, positions: jobCategoryList, departments: departmentList, sites: siteList, currentUser: currentUser })
     return true
   }
   useEffect(async () => {
@@ -350,11 +364,11 @@ const Railroad = () => {
   // const [value, setValue] = useState(dummyData.OJE[0]);
 
 
-  if (isMobile) {
-    return (
-      <MobileScreen />
-    )
-  }
+  // if (isMobile) {
+  //   return (
+  //     <MobileScreen />
+  //   )
+  // }
   return (
     <Grid container xs={12} className="Liq-Container">
       <Grid xs={12} md={2} className="LeftContol" id="LeftContol">
@@ -476,7 +490,7 @@ const Railroad = () => {
                         </Grid>
                         <Grid xs={12} className="mt14">
 
-                          <TextField
+                          {/* <TextField
                             required={true}
                             id="date"
                             type="date"
@@ -491,6 +505,16 @@ const Railroad = () => {
                           //   onKeyDown={(e) => {
                           //     e.preventDefault();
                           //  }}
+                          /> */}
+                          <DatePicker
+                          format='MM-dd-yy'
+                            value={railRoad?.date}
+                            onChange={(value) => setRailRoad({ ...railRoad, date: value })}
+                            id="dob"
+                            // onKeyDown={(e) => {
+                            //     e.preventDefault();
+                            //  }}
+                            className="datePickerReact w100p bg-white react-date-picker"
                           />
                         </Grid>
                       </Grid>
