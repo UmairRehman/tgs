@@ -799,15 +799,6 @@ const EmployeeResult = (props) => {
 
     }
 
-    // if (expire[0] - today[0] == 1) {
-    //   if (expire[1] - today[1] < 0) return false
-    //   else return true
-    // }
-    // if (expire[0] - today[0] > 1) return true
-    // if ((expire[0] - today[0]) < 1) {
-    //   if (expire[1] - today[1] < 0) return false
-    // }
-
   }
 
 

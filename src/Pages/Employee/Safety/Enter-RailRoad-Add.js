@@ -112,7 +112,13 @@ const Railroad = () => {
         setRailRoad({ ...railRoad, time: value })
         break;
 
+      case 12:
+        setRailRoad({ ...railRoad, stopTest: value })
+        break;
 
+      case 13:
+        setRailRoad({ ...railRoad, stopTestComment: event.target.value })
+        break;
 
       default:
         break;
@@ -175,7 +181,9 @@ const Railroad = () => {
       joinTest: railRoad.joinTest,
       jobId: jobId,
       crewMember: crewMembersData,
-      joinTestComment: assisting_comment
+      joinTestComment: assisting_comment,
+      stopTest: railRoad.stopTest ? 'Yes' : 'No',
+      stopTestComment: railRoad.stopTestComment.length ? railRoad.stopTestComment : ''
     }
     return data
   }
@@ -190,9 +198,9 @@ const Railroad = () => {
 
       try {
         let data = await apiBody()
-        console.log({data})
+        console.log({ data })
         let result = await employee.create_test_event({ ...data })
-        
+
         if (result?.httpStatus == 200) {
           console.log('result', result);
 
@@ -507,7 +515,7 @@ const Railroad = () => {
                           //  }}
                           /> */}
                           <DatePicker
-                          format='MM-dd-yy'
+                            format='MM-dd-yy'
                             value={railRoad?.date}
                             onChange={(value) => setRailRoad({ ...railRoad, date: value })}
                             id="dob"
@@ -559,6 +567,7 @@ const Railroad = () => {
                           label={'Comment here'}
                           variant="outlined"
                           className="w100p"
+                          onChange={(event, value) => handleSubmitData(event, value, 13)}
                         />
                         <Typography variant="h6" className="MuiTypography-subtitle2 MuiTypography-colorTextSecondary" component="h6">
                           Please leave this field empty if you have no comments
