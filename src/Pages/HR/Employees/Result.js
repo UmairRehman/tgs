@@ -499,7 +499,7 @@ const EmployeeResult = (props) => {
         // console.log(certificateData.data.rows)
 
         setCertificateType(certificateData?.data?.rows)
-        console.log("Here: ",certificateData?.data?.rows)
+        console.log("Here: ", certificateData?.data?.rows)
 
       }).catch((err) => { console.log(err) });
 
@@ -622,7 +622,7 @@ const EmployeeResult = (props) => {
     try {
       let result = await employee.add_employee_certificate(data)
       if (result.httpStatus == 200) {
-        setFlag(true)
+        setFlag(!flag)
         setOpenC(!openCerti);
         setAddCertificate(false)
       }
@@ -724,7 +724,7 @@ const EmployeeResult = (props) => {
       setFiles(applicantDataHistory?.files)
       setPosition(applicantDataHistory?.position)
       if (applicantDataHistory?.position?.length) setEmployeeInitialData(applicantDataHistory?.position[0])
-      if (!applicantDataHistory?.position?.length) setEmployeeInitialData({...applicantDataHistory?.employee[0], JobCategoryId: 1})
+      if (!applicantDataHistory?.position?.length) setEmployeeInitialData({ ...applicantDataHistory?.employee[0], JobCategoryId: 1 })
       setTgsLocation(applicantDataHistory?.employee[0].TGSLocation)
       setDepartment(applicantDataHistory?.employee[0]?.SubDepartment)
       setZip(applicantDataHistory?.employee[0].zip)
@@ -763,14 +763,42 @@ const EmployeeResult = (props) => {
 
   const getValidation = (today, expire) => {
 
-    if (expire[0] - today[0] == 1) {
-      if (expire[1] - today[1] < 0) return false
-      else return true
+
+    console.log({ expire, today })
+
+
+    // If expiry year is greater
+    if (expire[2] > today[2]) return true
+
+    // If expiry year is less
+    if (expire[2] < today[2]) return false
+
+    // If expiry year is equal ( This is when the validation starts )
+    if (expire[2] == today[2]) {
+
+      // If the expiry month is greater than current month
+      if ((expire[0] - today[0]) > 1) return true
+
+      if ((expire[0] - today[0]) == 1) {
+
+        if ( ( (expire[1] - today[1]) + 30) <= 30 ) return false
+
+      }
+
+      // If month is less
+      if (expire[0] < today[0]) return false
+
+      if (expire[0] == today[0]) {
+
+        if (expire[1] < today[1]) return false
+
+        if ((expire[1] - today[1]) <= 30) return false
+
+      }
+
+
     }
-    if (expire[0] - today[0] > 1) return true
-    if ((expire[0] - today[0]) < 1) {
-      if (expire[1] - today[1] < 0) return false
-    }
+
   }
 
 
@@ -992,7 +1020,9 @@ const EmployeeResult = (props) => {
                                         <Button onClick={() => getCertificate(row)} className="EditIcon"></Button>
                                       ) : (
                                         //  column.id === 'expiry_date' && value === row?.expiry_date && row?.expiry_date.split('-')[2] === dateToday[2] && row?.expiry_date.split('-')[1] - dateToday[1]  < 1 && row?.expiry_date.split('-')[0] - dateToday[0] < 30 ? <p className="testExpiry">{value}</p> : value
-                                        column.id === 'expiry_date' && value === row?.expiry_date && row?.expiry_date.split('-')[2] === dateToday[2] && getValidation(dateToday, row?.expiry_date.split('-')) == false ? <p className="testExpiry">{value}</p> : value
+                                        // column.id === 'expiry_date' && value === row?.expiry_date && row?.expiry_date.split('-')[2] === dateToday[2] && getValidation(dateToday, row?.expiry_date.split('-'), row?.expiry) == false ? <p className="testExpiry">{value}</p> : value
+                                        column.id === 'expiry_date' && value === row?.expiry_date && getValidation(dateToday, row?.expiry_date.split('-'), row?.expiry) == false ? <p className="testExpiry">{value}</p> : value
+
 
                                       )}
                                     </TableCell>
@@ -1097,7 +1127,7 @@ const EmployeeResult = (props) => {
                           </Table>
                         </TableContainer>
                       </Paper>
-                      <Button style={{marginTop: "20px"}} className="LinkButton" onClick={() => setOpenPosition(true)}>Add new position</Button>
+                      <Button style={{ marginTop: "20px" }} className="LinkButton" onClick={() => setOpenPosition(true)}>Add new position</Button>
                     </Grid>
 
 
