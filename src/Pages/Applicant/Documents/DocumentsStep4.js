@@ -127,6 +127,7 @@ const DocumentsStep4 = () => {
     const toggleFormsPosted = () => {
         setFormsPosted(true);
         setTimeout(setFormsPosted.bind(null, false), 0);
+        showSnackBar('Form posted');
     }
 
     useEffect(() => {
@@ -134,10 +135,11 @@ const DocumentsStep4 = () => {
     }, []);
 
     useEffect(() => {
-        showSnackBar('Form posted');
+        // showSnackBar('Form posted');
     }, [formsPosted]);
 
     const saveAndContinue = async () => {
+        console.log("asnasn")
         try {
             const repsonse = await users.submitStep4();
             const user_profile = JSON.parse(storage.get('user_profile'));
