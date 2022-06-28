@@ -183,13 +183,12 @@ const Railroad = () => {
       crewMember: crewMembersData,
       joinTestComment: assisting_comment,
       stopTest: railRoad.stopTest ? 'YES' : 'NO',
-      stopTestComment: railRoad.stopTestComment.length ? railRoad.stopTestComment : ''
+      stopTestComment: railRoad?.stopTestComment?.length ? railRoad?.stopTestComment : ''
     }
     return data
   }
 
   const submitBtn = async (event) => {
-    console.log('asasas')
     event.preventDefault();
     if (!loading) {
       setSuccess(false);
