@@ -182,7 +182,7 @@ const Railroad = () => {
       jobId: jobId,
       crewMember: crewMembersData,
       joinTestComment: assisting_comment,
-      stopTest: railRoad.stopTest ? 'Yes' : 'No',
+      stopTest: railRoad.stopTest ? 'YES' : 'NO',
       stopTestComment: railRoad.stopTestComment.length ? railRoad.stopTestComment : ''
     }
     return data
