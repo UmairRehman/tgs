@@ -103,8 +103,8 @@ const Dashboard = () => {
         if (data) {
           //data = data.data.rows
           data.data.rows.forEach(row => {
-            row.issue_date = moment(new Date(row.issue_date)).format('MM-DD-YYYY')
-            row.expiry_date = moment(new Date(row.expiry_date)).format('MM-DD-YYYY')
+            row.issue_date = moment(new Date(row.issue_date)).utc().format('MM-DD-YYYY')
+            row.expiry_date = moment(new Date(row.expiry_date)).utc().format('MM-DD-YYYY')
           });
           setRows(data.data.rows)
         }
