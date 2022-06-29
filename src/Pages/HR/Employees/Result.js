@@ -479,8 +479,8 @@ const EmployeeResult = (props) => {
     try {
       hr.getCertificate({ id }).then((certificateData) => {
         certificateData.data.rows.forEach(element => {
-          element.issue_date = moment(new Date(element.issue_date)).format('MM-DD-YYYY')
-          element.expiry_date = moment(new Date(element.expiry_date)).format('MM-DD-YYYY')
+          element.issue_date = moment(new Date(element.issue_date)).utc().format('MM-DD-YYYY')
+          element.expiry_date = moment(new Date(element.expiry_date)).utc().format('MM-DD-YYYY')
         });
 
         setCertificate(certificateData.data.rows)
