@@ -173,7 +173,7 @@ const Railroad = () => {
       site_id: railRoad.site.id,
       latitude: latitude,
       longitude: longitude,
-      date: moment(railRoad?.date).format('YYYY-MM-DD'),
+      date: (moment(railRoad?.date).format('YYYY-MM-DD')).toString(),
       // date: railRoad?.date,
       time: railRoad.time,
       oje: railRoad.oje,
@@ -183,12 +183,14 @@ const Railroad = () => {
       crewMember: crewMembersData,
       joinTestComment: assisting_comment,
       stopTest: railRoad.stopTest ? 'YES' : 'NO',
-      stopTestComment: railRoad?.stopTestComment?.length ? railRoad?.stopTestComment : ''
+      stopTestComment: railRoad?.stopTestComment?.length ? railRoad.stopTestComment : ''
     }
+
     return data
   }
 
   const submitBtn = async (event) => {
+    console.log('asasas')
     event.preventDefault();
     if (!loading) {
       setSuccess(false);
@@ -197,7 +199,7 @@ const Railroad = () => {
 
       try {
         let data = await apiBody()
-        console.log({ data })
+        console.log( {data} )
         let result = await employee.create_test_event({ ...data })
 
         if (result?.httpStatus == 200) {
