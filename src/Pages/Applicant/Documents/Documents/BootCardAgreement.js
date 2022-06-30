@@ -25,6 +25,9 @@ import { Imports } from '../../../../Imports';
 
 import Snackbar from '../../../../Components/Snackbar';
 
+var moment = require('moment-timezone');
+
+
 const {
   users,
   hr,
@@ -69,9 +72,13 @@ const BootCardAgreement = () => {
     ssn: '',
     address: '',
   })
+
   useEffect(async () => {
+
     let userProfile = await JSON.parse(localStorage.user_profile);
+
     let res = await hr.getAllApplicantsByID({ id: userProfile.id })
+
     console.log("Here: ", res)
     let data = {
       firstName: res?.employee?.firstName || '',
@@ -79,7 +86,10 @@ const BootCardAgreement = () => {
       lastName: res?.employee?.lastName || '',
       ssn: res?.employee?.ssn || '',
       address: res?.employee?.address || '',
-      hireDate: res?.employee?.joiningDate || ''
+      hireDate: moment(new Date(res?.employee?.joiningDate)).utc() || ''
+
+
+
       // address1 : res?.employee?.address1 || '',
     }
     setUserData(data)
@@ -211,7 +221,7 @@ const BootCardAgreement = () => {
         images.push(image);
       }
 
-      localStorage.setItem("Imggg",images[0])
+      localStorage.setItem("Imggg", images[0])
 
       let data = {
         id: "id",
@@ -649,7 +659,6 @@ const BootCardAgreement = () => {
                     />
                   </TableCell>
                 </TableRow>
-                {console.log(userData)}
 
 
                 <TableRow style={{ height: "10px" }}>
@@ -701,7 +710,7 @@ const BootCardAgreement = () => {
                 </TableRow>
 
 
-              {/* {  <TableRow style={{ height: "20px" }}>
+                {/* {  <TableRow style={{ height: "20px" }}>
 
 
                   <TableRow className="w100 mt10 row">

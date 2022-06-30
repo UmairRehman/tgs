@@ -25,6 +25,9 @@ import { Imports } from '../../../../Imports';
 
 import Snackbar from '../../../../Components/Snackbar';
 
+var moment = require('moment-timezone');
+
+
 const {
   users,
   hr,
@@ -94,7 +97,7 @@ const TWICCardPaymentAgreement = () => {
       } = JSON.parse(payDetails);
 
       setHireDate(
-        new Date(EffectiveDate)
+        moment(new Date(EffectiveDate)).utc()
       );
     }
   }, [])

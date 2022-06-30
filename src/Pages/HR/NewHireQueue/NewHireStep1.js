@@ -91,8 +91,8 @@ const NewHireStep1 = () => {
   const [locationID, setLocationID] = useState("");
   const [subDeprtmentText, setSubDeprtmentText] = useState(false);
   const [statusDateTime, setStatusDateTime] = useState({
-    date: moment(new Date()).format("MM-DD-YYYY"),
-    time: moment(new Date()).format("hh:mm a"),
+    date: moment(new Date()).local().format("MM-DD-YYYY"),
+    time: moment(new Date()).local().format("hh:mm a"),
   });
 
   // dropdowns
@@ -334,7 +334,7 @@ const NewHireStep1 = () => {
         position_category: positionCategory,
         pay_type: partType,
         SubDepartment_Id: subDepartment,
-        start_date: moment(startDate).format("YYYY-MM-DD"),
+        start_date: moment(startDate).utc().format("YYYY-MM-DD"),
         comment: document.getElementById("comment1").value,
         IT: {
           computer: computer.value,
@@ -417,7 +417,7 @@ const NewHireStep1 = () => {
     setStep1(status);
     setStatusDateTime({
       date: moment(new Date()).utc().format("MM-DD-YYYY"),
-      time: moment(new Date()).format("hh:mm a"),
+      time: moment(new Date()).utc().format("hh:mm a"),
     });
     console.log(status.value)
     // get job catrgories options
@@ -589,7 +589,7 @@ const NewHireStep1 = () => {
                     <ListItem container className="p0 pt6 pb20">
                       <Grid className="w250 bold">Date of Application</Grid>
                       <Grid>
-                        {moment(new Date(applicantData?.updatedAt)).utc().format(
+                        {moment(new Date(applicantData?.updatedAt)).format(
                           "MM-DD-YYYY"
                         )}
                       </Grid>

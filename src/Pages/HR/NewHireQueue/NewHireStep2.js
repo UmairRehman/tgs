@@ -75,8 +75,8 @@ const NewHireStep2 = () => {
   const [hireDate, sethireDate] = useState("");
   const [loader, setLoader] = useState("");
   const [statusDateTime, setStatusDateTime] = useState({
-    date: moment(new Date()).utc().format("MM-DD-YYYY"),
-    time: moment(new Date()).utc().format("hh:mm a"),
+    date: moment(new Date()).local().format("MM-DD-YYYY"),
+    time: moment(new Date()).local().format("hh:mm a"),
   });
 
   useEffect(() => {
@@ -138,8 +138,8 @@ const NewHireStep2 = () => {
   const setStatus = async (status) => {
     setapproval(status);
     setStatusDateTime({
-      date: moment(new Date()).utc().format("MM-DD-YYYY"),
-      time: moment(new Date()).utc().format("hh:mm a"),
+      date: moment(new Date()).local().format("MM-DD-YYYY"),
+      time: moment(new Date()).local().format("hh:mm a"),
     });
   };
 
@@ -152,7 +152,7 @@ const NewHireStep2 = () => {
 
     try {
       let data = await hr.getAllApplicantsByID(applicantDataHistory);
-      setApplicantData({...data.employee, createdAt: moment(data.employee).utc().format('MM-DD-YYYY')});
+      setApplicantData({...data.employee, createdAt: moment(data.employee).format('MM-DD-YYYY')});
       setUserFiles(data.files)
     } catch (exc) {
       console.log(exc);

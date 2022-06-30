@@ -27,6 +27,7 @@ import { helpers } from '../../../../helpers';
 import { Imports } from '../../../../Imports';
 
 import Snackbar from '../../../../Components/Snackbar';
+var moment = require('moment-timezone');
 
 
 const {
@@ -114,7 +115,7 @@ const ConditionalOffer = () => {
       }
 
       setStartDate(
-        new Date(EffectiveDate)
+        moment(new Date(EffectiveDate)).utc()
       );
     }
   }, [])
