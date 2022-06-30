@@ -58,7 +58,7 @@ const ConditionalOffer = () => {
     firstName: '',
     middleName: '',
     lastName: '',
-    hireDate: new Date(),
+    hireDate: moment(new Date()).utc().format("MM-DD-YYYY"),
     position: '',
     location: '',
     pay: '',
@@ -66,9 +66,9 @@ const ConditionalOffer = () => {
     // jobID:'',
   })
 
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(moment(new Date()).utc().format("MM-DD-YYYY"));
 
-  const [offerDate, setOfferDate] = useState(new Date());
+  const [offerDate, setOfferDate] = useState(moment(new Date()).utc().format("MM-DD-YYYY"));
 
   const [PDFimage, setPDFImage] = useState('');
 

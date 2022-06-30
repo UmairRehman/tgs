@@ -637,7 +637,8 @@ const BootCardAgreement = () => {
                     Hire Date:
                     <DatePicker
                       onChange={(value) => { setDateofInjury(value) }}
-                      value={userData?.hireDate}
+                     
+                      value={ moment(new Date(userData?.hireDate)).utc().format("MM-DD-YYYY")}
                       id="hireDate"
                       className="datePickerReact"
                       disabled
