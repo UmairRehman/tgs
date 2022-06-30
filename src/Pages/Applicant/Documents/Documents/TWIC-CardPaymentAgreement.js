@@ -62,9 +62,9 @@ const TWICCardPaymentAgreement = () => {
 
   const [error, setError] = useState('')
 
-  const [hireDate, setHireDate] = useState(new Date())
+  const [hireDate, setHireDate] = useState(moment(new Date()).utc().format("MM-DD-YYYY"));
 
-  const [signDate, setSignDate] = useState(new Date())
+  const [signDate, setSignDate] =  useState(moment(new Date()).utc().format("MM-DD-YYYY"));
 
   const [userData, setUserData] = useState({
     firstName: '',
@@ -193,7 +193,7 @@ const TWICCardPaymentAgreement = () => {
                 <TableRow className="w100 mb10 mt10 row justify-center">
                   <TableCell>
                     {/* <Avatar alt="TGS" className="TGSLogoSVG" src="https://tgs.liquidtechnologies.pk/assets/TGS_Logo2.svg" /> */}
-                  <div className="logoImageTGS"></div>
+                    <div className="logoImageTGS"></div>
                   </TableCell>
                 </TableRow>
                 <TableRow className="w100">
