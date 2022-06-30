@@ -683,7 +683,7 @@ const EmployeeResult = (props) => {
 
     let data = {
       address_1: streedAddress,
-      address_2: streedAddress1,
+      address_2: streedAddress1 == null ? " " : streedAddress1,
       state: stateName,
       zip: zip,
       employee_id: employeeDetails?.id
@@ -781,7 +781,7 @@ const EmployeeResult = (props) => {
 
       if ((expire[0] - today[0]) == 1) {
 
-        if ( ( (expire[1] - today[1]) + 30) <= 30 ) return false
+        if (((expire[1] - today[1]) + 30) <= 30) return false
 
       }
 
@@ -847,10 +847,12 @@ const EmployeeResult = (props) => {
                     </ListItem>
                     <ListItem container className="p0 pt6 pb20">
                       <Grid xs={5} className="bold">
-                        Phone Number
+                        Phone Number <span style={{ fontSize: '12px', fontWeight: 'lighter' }}>(Home Phone / Cell Phone)</span>
                       </Grid>
                       <Grid xs={5}>
-                        {employeeDetails?.cellPhone?.length ? employeeDetails?.cellPhone : employeeDetails?.homePhone}
+                        {/* {employeeDetails?.cellPhone?.length ? employeeDetails?.cellPhone : employeeDetails?.homePhone} */}
+                        {employeeDetails?.cellPhone?.length ? employeeDetails?.homePhone + " / " + employeeDetails?.cellPhone : employeeDetails?.homePhone}
+
                       </Grid>
                     </ListItem>
                     {(employeeDetails?.fullTitle) &&
@@ -1370,7 +1372,7 @@ const EmployeeResult = (props) => {
               </Grid>
               <Grid xs={12} className="mbold mt30">
                 <Grid xs={12} className="pl14">Street Address 2</Grid>
-                <TextField id="outlined-basic" label="Type Here" required={true} defaultValue={streedAddress1} onChange={(e) => setStreedAddress1(e.target.value)} variant="outlined" className="w100p" />
+                <TextField id="outlined-basic" label="Type Here" required={false} defaultValue={streedAddress1} onChange={(e) => setStreedAddress1(e.target.value)} variant="outlined" className="w100p" />
               </Grid>
               <Grid xs={12} className="mbold mt30">
                 <Grid xs={12} className="pl14">City</Grid>
