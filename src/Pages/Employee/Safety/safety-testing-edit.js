@@ -498,7 +498,7 @@ const SafetyTestingEdit = () => {
                           placeholder="Share Your Thoughts...."
                       />
                     </Grid>
-                  </Grid>
+                  </Grid
                 </Grid>
                   )
                 })     
