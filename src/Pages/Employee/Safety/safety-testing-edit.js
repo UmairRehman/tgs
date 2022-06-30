@@ -41,8 +41,8 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
 const dummyData = {
   staticData: {
     eventID: "12345",
-    date: moment(new Date()).format("dd-mm-yyyy"),
-    time: moment(new Date()).format("hh:mm:ss a"),
+    date: moment(new Date()).utc().format("dd-mm-yyyy"),
+    time: moment(new Date()).utc().format("hh:mm:ss a"),
     jobID: 1
   },
   crew_member: [
@@ -83,8 +83,8 @@ const SafetyTestingEdit = () => {
   const [ruleList, setRuleList] = useState([])
   const [eventDetail, setEventDetail] = useState({
     eventID: "",
-    date: moment(new Date()).format("MM-DD-YYYY"),
-    time: moment(new Date()).format("hh:mm:ss a"),
+    date: moment(new Date()).utc().format("MM-DD-YYYY"),
+    time: moment(new Date()).utc().format("hh:mm:ss a"),
     jobID: ""
   })
 

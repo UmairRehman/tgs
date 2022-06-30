@@ -759,7 +759,7 @@ const EmployeeResult = (props) => {
 
   }, [])
 
-  const dateToday = moment(new Date()).format('MM-DD-YYYY').split('-')
+  const dateToday = moment(new Date()).utc().format('MM-DD-YYYY').split('-')
 
   const getValidation = (today, expire) => {
 
@@ -894,7 +894,7 @@ const EmployeeResult = (props) => {
                           Hire Date
                         </Grid>
                         <Grid xs={5}>
-                          {moment(employeeDetails?.hireDate).format('MM-DD-YYYY')}
+                          {moment(employeeDetails?.hireDate).utc().format('MM-DD-YYYY')}
                         </Grid>
                       </ListItem>)
                     }
@@ -904,7 +904,7 @@ const EmployeeResult = (props) => {
                           Termination Date
                         </Grid>
                         <Grid xs={5}>
-                          {moment(employeeDetails?.terminateDate).format('YYYY-MM-DD')}
+                          {moment(employeeDetails?.terminateDate).utc().format('YYYY-MM-DD')}
                         </Grid>
                       </ListItem>)
                     }
@@ -1106,7 +1106,7 @@ const EmployeeResult = (props) => {
                                                   key={column.id}
                                                   align={column.align}
                                                 >   {(
-                                                  value === row.EffectiveDate ? moment(value).format('MM-DD-YYYY') : value === row?.Employee?.firstName ? row?.Employee.firstName + " " + row?.Employee.lastName : value
+                                                  value === row.EffectiveDate ? moment(value).utc().format('MM-DD-YYYY') : value === row?.Employee?.firstName ? row?.Employee.firstName + " " + row?.Employee.lastName : value
                                                 )}
 
                                                 </TableCell>
