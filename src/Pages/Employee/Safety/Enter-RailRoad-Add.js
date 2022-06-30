@@ -368,6 +368,7 @@ const Railroad = () => {
   useEffect(async () => {
     //listing function
     await setListData()
+    getLocation()
 
   }, []);
   // const [value, setValue] = useState(dummyData.OJE[0]);
@@ -605,7 +606,7 @@ const Railroad = () => {
                   <Grid xs={12} className="mt30">
                     <Grid xs={12} className="mbold">
                       <Typography variant="h5" className="mbold f16" component="h6">
-                        Join Test
+                        Joint Test
                       </Typography>
                     </Grid>
                     <Grid xs={12} container>

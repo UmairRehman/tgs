@@ -37,7 +37,7 @@ const {
 // Tables Columns
 const columns = [
   { id: "EmployeeId", label: "Employee ID", minWidth: 50, type: "value" },
-  { id: "name", label: "License Certificate", minWidth: 100, type: "value" },
+  { id: "name", label: "License Certification", minWidth: 100, type: "value" },
   { id: "issue_date", label: "Issue Date", minWidth: 50, type: "value" },
   { id: "expiry_date", label: "Expire Date", minWidth: 50, type: "value" },
 ];
@@ -210,7 +210,7 @@ const Dashboard = () => {
 
 
               <Grid className="DashCertificatsBox mt30">
-                <Typography variant="h6" component="h6">Certificates & Licenses</Typography>
+                <Typography variant="h6" component="h6">Certifications & Licenses</Typography>
                 <Grid
                   xs={12}
                   container
