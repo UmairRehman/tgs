@@ -189,7 +189,7 @@ const SafetyTesting = () => {
       if (data.httpStatus == 200) {
         data = data.data
         data.forEach(element => {
-          element.date = moment(new Date(element.date)).format('DD-MM-YYYY')
+          element.date = moment(new Date(element.date)).utc().format('DD-MM-YYYY')
           element.time = element.time.slice(0, -3)
           // element.locationAdded = element.TGSLocation.name
           // element.rulesCount = element.TestEventRules.length

@@ -1854,7 +1854,7 @@ const EnterCheckRide = () => {
                                                         InputLabelProps={{
                                                             shrink: true,
                                                         }}
-                                                        formatDate={(date) => moment(date).format('MM-DD-YYYY')}
+                                                        formatDate={(date) => moment(date).utc().format('MM-DD-YYYY')}
                                                     />
                                                 </Grid>
                                             </Grid>

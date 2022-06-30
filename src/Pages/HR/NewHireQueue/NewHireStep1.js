@@ -416,7 +416,7 @@ const NewHireStep1 = () => {
   const setStatus = async (status) => {
     setStep1(status);
     setStatusDateTime({
-      date: moment(new Date()).format("MM-DD-YYYY"),
+      date: moment(new Date()).utc().format("MM-DD-YYYY"),
       time: moment(new Date()).format("hh:mm a"),
     });
     console.log(status.value)
@@ -589,7 +589,7 @@ const NewHireStep1 = () => {
                     <ListItem container className="p0 pt6 pb20">
                       <Grid className="w250 bold">Date of Application</Grid>
                       <Grid>
-                        {moment(new Date(applicantData?.updatedAt)).format(
+                        {moment(new Date(applicantData?.updatedAt)).utc().format(
                           "MM-DD-YYYY"
                         )}
                       </Grid>
@@ -1020,7 +1020,7 @@ const NewHireStep1 = () => {
                                     toggleSaveButton(false);
                                   setstartDate(event.target.value);
                                 }}
-                                formatDate={(date) => moment(date).format('MM-DD-YYYY')}
+                                formatDate={(date) => moment(date).utc().format('MM-DD-YYYY')}
                               />
 
                             </Grid>

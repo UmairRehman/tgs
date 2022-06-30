@@ -787,7 +787,7 @@ const PostConditionalJobOffer = () => {
                           id="offerDate"
                           className="datePickerReact"
                           disabled
-                          formatDate={(date) => moment(date).format('MM-DD-YYYY')}
+                          formatDate={(date) => moment(date).utc().format('MM-DD-YYYY')}
 
                         />
                       </TableCell>

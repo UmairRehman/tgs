@@ -223,7 +223,7 @@ const OnBoarding = () => {
             <List>
               <ListItem container className="p0 pt6 pb20">
                 <Grid className="w250 bold">Start Date</Grid>
-                <Grid>{`${(applicantData?.Employee?.joiningDate) ? moment(new Date(applicantData?.Employee?.joiningDate)).format('MM-DD-YYYY') : ''}`}</Grid>
+                <Grid>{`${(applicantData?.Employee?.joiningDate) ? moment(new Date(applicantData?.Employee?.joiningDate)).utc().format('MM-DD-YYYY') : ''}`}</Grid>
               </ListItem>
             </List>
           </Grid>
@@ -306,7 +306,7 @@ const OnBoarding = () => {
                               }}
                               className="DateTimePicker"
                               // defaultValue="YY-MM-DD"
-                              value={moment(new Date(applicantData.AD_od)).format('MM-DD-YYYY')}
+                              value={moment(new Date(applicantData.AD_od)).utc().format('MM-DD-YYYY')}
                               InputLabelProps={{
                                 shrink: true,
                               }}
@@ -473,7 +473,7 @@ const OnBoarding = () => {
                         // }}
                         className="DateTimePicker"
                         defaultValue="YY-MM-DD"
-                        value={moment(new Date(applicantData.computer_od)).format('MM-DD-YYYY')}
+                        value={moment(new Date(applicantData.computer_od)).utc().format('MM-DD-YYYY')}
                         InputLabelProps={{
                           shrink: true,
                         }}
@@ -540,7 +540,7 @@ const OnBoarding = () => {
                           // }}
                           className="DateTimePicker"
                           defaultValue="MM-DD-YYYY"
-                          value={moment(new Date(applicantData.cell_phone_od)).format('DD-MM-YYYY')}
+                          value={moment(new Date(applicantData.cell_phone_od)).utc().format('DD-MM-YYYY')}
                           InputLabelProps={{
                             shrink: true,
                           }}
@@ -607,7 +607,7 @@ const OnBoarding = () => {
                           // }}
                           className="DateTimePicker"
                           defaultValue="MM-DD-YYYY"
-                          value={moment(new Date(applicantData.company_vehicle_od)).format('MM-DD-YYYY')}
+                          value={moment(new Date(applicantData.company_vehicle_od)).utc().format('MM-DD-YYYY')}
                           InputLabelProps={{
                             shrink: true,
                           }}
@@ -673,7 +673,7 @@ const OnBoarding = () => {
                           // }}
                           className="DateTimePicker"
                           defaultValue="MM-DD-YYYY"
-                          value={moment(new Date(applicantData.fuel_card_od)).format('MM-DD-YYYY')}
+                          value={moment(new Date(applicantData.fuel_card_od)).utc().format('MM-DD-YYYY')}
                           InputLabelProps={{
                             shrink: true,
                           }}
