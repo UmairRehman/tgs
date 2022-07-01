@@ -686,7 +686,8 @@ const EmployeeResult = (props) => {
       address_2: streedAddress1 == null ? " " : streedAddress1,
       state: stateName,
       zip: zip,
-      employee_id: employeeDetails?.id
+      employee_id: employeeDetails?.id,
+      city: city,
     }
 
     try {
@@ -847,7 +848,7 @@ const EmployeeResult = (props) => {
                     </ListItem>
                     <ListItem container className="p0 pt6 pb20">
                       <Grid xs={5} className="bold">
-                        Phone Number <span style={{ fontSize: '12px', fontWeight: 'lighter' }}>(Home Phone / Cell Phone)</span>
+                        Phone Number <span style={{ fontSize: '12px', fontWeight: 'lighter' }}>(Home / Cell)</span>
                       </Grid>
                       <Grid xs={5}>
                         {/* {employeeDetails?.cellPhone?.length ? employeeDetails?.cellPhone : employeeDetails?.homePhone} */}

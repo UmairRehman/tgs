@@ -189,6 +189,10 @@ const Railroad = () => {
     return data
   }
 
+  function onlySpaces(str) {
+    return str.trim().length === 0;
+  }
+
   const submitBtn = async (event) => {
     console.log('asasas')
     event.preventDefault();
@@ -199,7 +203,32 @@ const Railroad = () => {
 
       try {
         let data = await apiBody()
-        console.log( {data} )
+        console.log({ data })
+
+        let GPS = document.getElementById('GPS').value
+
+        if ( !GPS.includes(",") ) {
+          setSuccess(false)
+          setLoading(false);
+          return showSnackBar("Longitude / Latitude should be seperated by a ',' ")
+        };
+
+        if (data.longitude == null || data.longitude == undefined || data.longitude == '' || !data?.longitude?.length > 0 || onlySpaces(data.longitude)) {
+          setSuccess(false)
+          setLoading(false);
+          return showSnackBar('Longitude / Latitude required')
+        };
+
+
+        if (data.latitude == null || data.latitude == undefined || data.latitude == '' || onlySpaces(data.latitude)) {
+          setSuccess(false)
+          setLoading(false);
+          return showSnackBar('Longitude / Latitude required')
+        };
+
+
+
+
         let result = await employee.create_test_event({ ...data })
 
         if (result?.httpStatus == 200) {
@@ -368,7 +397,7 @@ const Railroad = () => {
   useEffect(async () => {
     //listing function
     await setListData()
-    getLocation()
+    // getLocation()
 
   }, []);
   // const [value, setValue] = useState(dummyData.OJE[0]);
@@ -481,7 +510,7 @@ const Railroad = () => {
                       </Grid>
                       <Grid xs={12} className="w100p row justifyBetween m0 mt14">
                         <TextField
-                          disabled={flag}
+                          disabled={false}
                           required={true}
                           id="GPS"
                           label="Latitudes & Longitudes"
