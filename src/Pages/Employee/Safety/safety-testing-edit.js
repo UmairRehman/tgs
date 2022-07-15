@@ -268,11 +268,13 @@ const SafetyTestingEdit = () => {
 
       body.forEach((rule) => {
         console.log(rule)
-        if (rule?.rule_result[0]?.result === 'Coach' && !rule?.rule_result[0]?.comment?.length) {
-          validationFlag = true
-          showSnackBar(`Comment is required for Rule ID: ${rule?.rule_id}!`);
-          setLoading(false);
-        }
+        rule?.rule_result?.map((crewMember, index) => {
+          if (crewMember?.result === 'Coach' && !crewMember?.comment?.length) {
+            validationFlag = true
+            showSnackBar(`Comment is required for Rule ID ${rule?.rule_id} Crew Member: ${index + 1}!`);
+            setLoading(false);
+          }
+        })
       })
 
       if (validationFlag) return
@@ -280,8 +282,6 @@ const SafetyTestingEdit = () => {
       console.log("Moved forward!")
 
       if (body) {
-
-
 
         try {
           let res = await employee.add_rule_event(body)
