@@ -100,8 +100,9 @@ const Positioncol = [
   { id: "EmployeeId", label: "Employee ID", minWidth: 100, type: "value" },
   // { id: "lv", label: "Level", minWidth: 100, type: "value" },
   { id: "FullTitle", label: "Full title", minWidth: 100, type: "value" },
-  { id: "JobCategory.name", label: "Category", minWidth: 100, type: "value" },
+  { id: "EmployeeLevel.name", label: "Position Category", minWidth: 100, type: "value" },
   { id: "TGSLocation.name", label: "Location", minWidth: 100, type: "value" },
+  { id: "JobCode", label: "Accounting JobCode", minWidth: 100, type: "value" },
   // { id: "departmentName", label: "Department", minWidth: 100, type: "value" },
   { id: "SubDepartment.name", label: "Sub-Department", minWidth: 100, type: "value" },
   { id: "Employee.firstName", label: "Supervisor", minWidth: 100, type: "value" },
@@ -373,20 +374,25 @@ const EmployeeResult = (props) => {
 
     let data = {
       full_title: updatePositon?.fullTitle,
-      position_level: employeeInitialData?.PositionLevelId,
+      position_level: updatePositon?.position_level,
       position_category: employeeInitialData?.JobCategoryId,
       location_id: updatePositon?.location,
       SubDepartment_Id: updatePositon?.subDepartment,
       Supervisor_Id: updatePositon?.supervisor,
       employee_id: employeeDetails?.id,
-      start_date: startDate
+      start_date: startDate,
+      job_code : updatePositon?.jobCode
     }
 
 
     try {
       hr.updatePosition(data).then((certificateData) => {
+        updatePositon.fullTitle = '';
+        updatePositon.jobCode = '';
         setFlag(!flag)
+
         // setOpenC(!openCerti);
+      
 
       }).catch((err) => { console.log(err) });
 
@@ -412,7 +418,8 @@ const EmployeeResult = (props) => {
     users: [],
     positions: [],
     departments: [],
-    sites: []
+    sites: [],
+    level:[]
   })
 
   useEffect(async () => {
@@ -450,7 +457,13 @@ const EmployeeResult = (props) => {
       })
     }
 
-    setLists({ ...lists, users: userList, positions: jobCategoryList, departments: departmentList, sites: siteList })
+    let level = await hr.getPositionLevel()
+    if (level.httpStatus == 200) {
+      level = level.data;
+    }
+    
+
+    setLists({ ...lists, users: userList, positions: jobCategoryList, departments: departmentList, sites: siteList , level })
 
 
     let payLocationData = await hr.pay_type();
@@ -521,8 +534,10 @@ const EmployeeResult = (props) => {
   const [updatePositon, setUpdatePositon] = useState({
     employeeId: '',
     fullTitle: '',
+    jobCode:'',
     category: '',
     location: '',
+    position_level:'',
     subDepartment: '',
     supervisor: '',
     updatePositon: ''
@@ -1058,7 +1073,7 @@ const EmployeeResult = (props) => {
                     <Grid xs={12} className="LiqTables">
                       <Grid xs={12} className="mt28 mb14">
                         <Typography variant="h1" component="h2" className="bold f22">
-                          Position
+                          Position 
                         </Typography>
                       </Grid>
                       <Paper>
@@ -1542,6 +1557,7 @@ const EmployeeResult = (props) => {
               </Grid>
 
 
+
               <Grid xs={12} className="mbold mt30">
                 <Grid xs={12} className="pl14">Location</Grid>
 
@@ -1559,6 +1575,31 @@ const EmployeeResult = (props) => {
                 />
 
 
+              </Grid>
+
+
+              <Grid xs={12} className="mbold mt30">
+                <Grid xs={12} className="pl14">Position Category</Grid>
+
+
+
+                <Autocomplete
+                  className="w100p"
+                  id="checkboxes-tags-demo"
+                  onChange={(event, newValue) => { setUpdatePositon({ ...updatePositon, position_level: newValue.id }) }}
+                  options={lists.level}
+                  getOptionLabel={option => (option.name)}
+                  renderInput={(params) => (
+                    <TextField required={true} {...params} variant="outlined" />
+                  )}
+                />
+
+
+              </Grid>
+
+              <Grid xs={12} className="mbold mt30">
+                <Grid xs={12} className="pl14"> Accounting Jobcode</Grid>
+                <TextField type='number' id="outlined-basic" required value={updatePositon.jobCode} onChange={(e) => setUpdatePositon({ ...updatePositon, jobCode: e.target.value })} variant="outlined" className="w100p" />
               </Grid>
 
               <Grid xs={12} className="mbold mt30">
