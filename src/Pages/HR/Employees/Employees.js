@@ -223,7 +223,7 @@ const EmployeeLookup = () => {
                       </Grid> */}
                   <Grid style={{ marginTop: '10px' }} xs={5}>
                     <Typography>Employee ID</Typography>
-                    <TextField id="outlined-basic" value={id} onChange={(e) => { setId(e.target.value) }} variant="outlined" className="w100p" />
+                    <TextField id="outlined-basic" value={id} onChange={(e) => { setId(e.target.value) }} variant="outlined" className="w100p" autoComplete="off"/>
                     <p style={{ display: error == true ? "block" : "none" }}>Id is required</p>
                   </Grid>
                   <Grid style={{ marginTop: '10px' }} xs={5}>
@@ -231,7 +231,7 @@ const EmployeeLookup = () => {
                     <TextField id="outlined-basic" onChange={(e) => {
                       setIsLoadingEmployees(true);
                       setEmployeeName(e.target.value);
-                    }} variant="outlined" className="w100p" />
+                    }} variant="outlined" className="w100p" autoComplete="off"/>
                   </Grid>
                   {
                     (isLoadingEmployees)
