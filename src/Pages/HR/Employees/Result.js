@@ -726,6 +726,9 @@ const EmployeeResult = (props) => {
 
   const [employeeInitialData, setEmployeeInitialData] = useState()
 
+  const [emergencyContact, setEmergencyContact] = useState()
+
+
 
   const getEmployeeDetails = async (forcedParams = {}) => {
     try {
@@ -736,6 +739,9 @@ const EmployeeResult = (props) => {
       setLoader(true);
       setComponentLoader(true)
       setEmployeeDetails(applicantDataHistory?.employee[0])
+      if (applicantDataHistory?.emergency_contact?.length)
+        setEmergencyContact(applicantDataHistory?.emergency_contact[0])
+
       setComponentLoader(false)
       setFiles(applicantDataHistory?.files)
       setPosition(applicantDataHistory?.position)
@@ -834,7 +840,7 @@ const EmployeeResult = (props) => {
 
               {/* Employee Details List */}
               <Grid xs={12}>
-                <Grid xs={6}>
+                <Grid xs={8}>
                   <List>
                     <ListItem container className="p0 pt6 pb20">
                       <Grid xs={5} className="bold">
@@ -910,7 +916,12 @@ const EmployeeResult = (props) => {
                         Emergency Contact
                       </Grid>
                       <Grid xs={5}>
-                        To be added
+                        {emergencyContact ?
+                          `${emergencyContact?.name || " "} ${emergencyContact?.relationship || " "} ${emergencyContact?.phoneNumber || " "}`
+                        :
+                        "N/A"
+                        }
+                        {/* {emergencyContact?.name}  {emergencyContact?.relationship {emergencyContact?.phoneNumber} */}
                       </Grid>
                     </ListItem>
 
