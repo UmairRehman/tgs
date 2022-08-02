@@ -381,7 +381,7 @@ const EmployeeResult = (props) => {
       Supervisor_Id: updatePositon?.supervisor,
       employee_id: employeeDetails?.id,
       start_date: startDate,
-      job_code : updatePositon?.jobCode
+      job_code: updatePositon?.jobCode
     }
 
 
@@ -392,7 +392,7 @@ const EmployeeResult = (props) => {
         setFlag(!flag)
 
         // setOpenC(!openCerti);
-      
+
 
       }).catch((err) => { console.log(err) });
 
@@ -419,7 +419,7 @@ const EmployeeResult = (props) => {
     positions: [],
     departments: [],
     sites: [],
-    level:[]
+    level: []
   })
 
   useEffect(async () => {
@@ -461,9 +461,9 @@ const EmployeeResult = (props) => {
     if (level.httpStatus == 200) {
       level = level.data;
     }
-    
 
-    setLists({ ...lists, users: userList, positions: jobCategoryList, departments: departmentList, sites: siteList , level })
+
+    setLists({ ...lists, users: userList, positions: jobCategoryList, departments: departmentList, sites: siteList, level })
 
 
     let payLocationData = await hr.pay_type();
@@ -534,10 +534,10 @@ const EmployeeResult = (props) => {
   const [updatePositon, setUpdatePositon] = useState({
     employeeId: '',
     fullTitle: '',
-    jobCode:'',
+    jobCode: '',
     category: '',
     location: '',
-    position_level:'',
+    position_level: '',
     subDepartment: '',
     supervisor: '',
     updatePositon: ''
@@ -726,6 +726,9 @@ const EmployeeResult = (props) => {
 
   const [employeeInitialData, setEmployeeInitialData] = useState()
 
+  const [emergencyContact, setEmergencyContact] = useState()
+
+
 
   const getEmployeeDetails = async (forcedParams = {}) => {
     try {
@@ -736,6 +739,9 @@ const EmployeeResult = (props) => {
       setLoader(true);
       setComponentLoader(true)
       setEmployeeDetails(applicantDataHistory?.employee[0])
+      if (applicantDataHistory?.emergency_contact?.length)
+        setEmergencyContact(applicantDataHistory?.emergency_contact[0])
+
       setComponentLoader(false)
       setFiles(applicantDataHistory?.files)
       setPosition(applicantDataHistory?.position)
@@ -834,7 +840,7 @@ const EmployeeResult = (props) => {
 
               {/* Employee Details List */}
               <Grid xs={12}>
-                <Grid xs={6}>
+                <Grid xs={8}>
                   <List>
                     <ListItem container className="p0 pt6 pb20">
                       <Grid xs={5} className="bold">
@@ -905,24 +911,36 @@ const EmployeeResult = (props) => {
                         {department?.name}
                       </Grid>
                     </ListItem>
-                    {
-                      (employeeDetails?.hireDate) &&
-                      (<ListItem container className="p0 pt6 pb20">
-                        <Grid xs={5} className="bold">
-                          Hire Date
-                        </Grid>
-                        <Grid xs={5}>
-                          {moment(employeeDetails?.hireDate).utc().format('MM-DD-YYYY')}
-                        </Grid>
-                      </ListItem>)
-                    }
+                    <ListItem container className="p0 pt6 pb20">
+                      <Grid xs={5} className="bold">
+                        Emergency Contact
+                      </Grid>
+                      <Grid xs={5}>
+                        {emergencyContact ?
+                          `${emergencyContact?.name || " "} ${emergencyContact?.relationship || " "} ${emergencyContact?.phoneNumber || " "}`
+                        :
+                        "N/A"
+                        }
+                        {/* {emergencyContact?.name}  {emergencyContact?.relationship {emergencyContact?.phoneNumber} */}
+                      </Grid>
+                    </ListItem>
+
+                    <ListItem container className="p0 pt6 pb20">
+                      <Grid xs={5} className="bold">
+                        Hire Date
+                      </Grid>
+                      <Grid xs={5}>
+                        {employeeDetails?.hireDate ? moment(employeeDetails?.hireDate).utc().format('MM-DD-YYYY') : "N/A"}
+                      </Grid>
+                    </ListItem>
+
                     {(employeeDetails?.terminateDate) &&
                       (<ListItem container className="p0 pt6 pb20">
                         <Grid xs={5} className="bold">
                           Termination Date
                         </Grid>
                         <Grid xs={5}>
-                          {moment(employeeDetails?.terminateDate).utc().format('YYYY-MM-DD')}
+                          {moment(employeeDetails?.terminateDate).utc().format('MM-DD-YYYY') + " " + employeeDetails?.terminateReason}
                         </Grid>
                       </ListItem>)
                     }
@@ -1073,7 +1091,7 @@ const EmployeeResult = (props) => {
                     <Grid xs={12} className="LiqTables">
                       <Grid xs={12} className="mt28 mb14">
                         <Typography variant="h1" component="h2" className="bold f22">
-                          Position 
+                          Position
                         </Typography>
                       </Grid>
                       <Paper>
