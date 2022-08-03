@@ -85,16 +85,17 @@ const LeftControl = () => {
   /********************************************************** */
 
   const capabilities = {
-    dashboard: [1, 2, 3, 4, 5, 6],
-    safety: [2, 6],
-    create_ticket: [1, 2, 3, 4, 5, 6],
-    deparment: [1, 2, 3, 4, 5, 6],
-    new_hire_queue: [2, 4, 5],
+    dashboard: [1, 2, 3, 4, 5, 6, 7],
+    safety: [2, 6, 7],
+    create_ticket: [1, 2, 3, 4, 5, 6, 7],
+    deparment: [1, 2, 3, 4, 5, 6, 7],
+    new_hire_queue: [2, 4, 5, 7],
     new_hire_queue_it: [2, 3],
-    tickets_alerts: [2, 3, 4, 5],
-    employees: [2, 4, 5],
+    tickets_alerts: [2, 3, 4, 5, 7],
+    employees: [2, 4, 5, 7],
     broadcast_message: [2],
-    employees_profile: [2, 4],
+    employees_profile: [2, 4, 7],
+
   };
 
   /** Update Roles and Permissions */
