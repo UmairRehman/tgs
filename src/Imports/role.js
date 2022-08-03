@@ -47,4 +47,12 @@ export const role = {
         // REF: https://trello.com/c/4kGAsZB3 | ignoring YAGNI - Not removing due to loss of business logic.
         navigateTo: '/dashboard',
     },
+    7: {
+        role: 'safetytestingHR_role',
+        role_id: 7,
+        label: 'TGS Safett Team/ HR',
+        // navigateTo: '/dashboard',
+        // REF: https://trello.com/c/4kGAsZB3 | ignoring YAGNI - Not removing due to loss of business logic.
+        navigateTo: '/dashboard',
+    },
 };
