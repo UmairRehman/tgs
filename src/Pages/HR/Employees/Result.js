@@ -917,7 +917,7 @@ const EmployeeResult = (props) => {
                       </Grid>
                       <Grid xs={5}>
                         {emergencyContact ?
-                          `${emergencyContact?.name || " "} ${emergencyContact?.relationship || " "} ${emergencyContact?.phoneNumber || " "}`
+                          `${emergencyContact?.name || " "} ${ "(" + emergencyContact?.relationship +")" || " "} ${ "- " + emergencyContact?.phoneNumber || " "}`
                         :
                         "N/A"
                         }
@@ -940,7 +940,7 @@ const EmployeeResult = (props) => {
                           Termination Date
                         </Grid>
                         <Grid xs={5}>
-                          {moment(employeeDetails?.terminateDate).utc().format('MM-DD-YYYY') + " " + employeeDetails?.terminateReason}
+                          {moment(employeeDetails?.terminateDate).utc().format('MM-DD-YYYY') + " - " + employeeDetails?.terminateReason}
                         </Grid>
                       </ListItem>)
                     }
