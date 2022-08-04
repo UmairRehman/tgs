@@ -173,7 +173,7 @@ const Dashboard = () => {
         <Grid className="PagesFrame">
           <PageHeader />
 
-          <Grid id="PageTitle">Dashboad</Grid>
+          <Grid id="PageTitle">Dashboard</Grid>
           {/* Page Start */}
           <Grid xs={12} className="ContentPage">
             {/* TGS Softwares */}

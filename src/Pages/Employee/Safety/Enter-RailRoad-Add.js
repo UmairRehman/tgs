@@ -380,7 +380,15 @@ const Railroad = () => {
       { id: "ENG", title: "Engineer" },
       { id: "COND", title: "Conductor" },
       { id: "BR1", title: "BR1" },
+      { id: 'FMAN', title: "Trk-Foreman"},
+      { id: 'OPR', title: "Trk-operator"},
+      { id: 'TKINSP' , title: "Trk-Operator"},
+      { id: "LABR", title: "Trk-Laborer"},
+      { id: "TKINSP", title: "Trk-Inspector"},
+      { id: "SUPV", title: "Trk-Supervisor"},
+      { id: "MGR", title: "Trk-Manager"},
       { id: "OTHER", title: "OTHER" },
+
     ]
 
     let departmentList = [
