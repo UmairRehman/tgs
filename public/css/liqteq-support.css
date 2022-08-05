@@ -2324,9 +2324,14 @@ background-color: #2963AD !important;
 .datePickerReact.PosRIght .react-date-picker__calendar.react-date-picker__calendar--open {
     inset: 100% auto auto -127% !important;
     z-index: 999999999999999 !important;
+    margin-top: -20px !important;
 }
 .datePickerReact .react-date-picker__inputGroup__day {
     /* width: 18px !important; */
+}
+
+.react-calendar{
+    margin-left: 150px !important;
 }
 
 .signatureClass {
