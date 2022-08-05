@@ -41,8 +41,8 @@ const columns = [
   { id: "name", label: "Name", maxWidth: 150, type: "value" },
   { id: "alertType", label: "Tickets/Alerts", maxWidth: 100, type: "value" },
   { id: "department", label: "Department", maxWidth: 80, type: "value" },
+  { id: "category", label: "Category", maxWidth: 80, type: "value" },
   { id: "description", label: "Description", maxWidth: 80, type: "value" },
-  { id: "category", label: "Category", maxWidth: 120, type: "value" },
   { id: "id", label: "View", maxWidth: 50, type: "edit" },
   { id: "C", label: "Complete", maxWidth: 50, type: "view" },
 ];
