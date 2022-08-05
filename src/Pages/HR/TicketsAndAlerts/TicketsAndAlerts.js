@@ -39,9 +39,10 @@ const IT_CATEGORY_ID = 2;
 const columns = [
   { id: "id", label: "Ticket ID", maxWidth: 120, type: "value" },
   { id: "name", label: "Name", maxWidth: 150, type: "value" },
-  { id: "alertType", label: "Category", maxWidth: 100, type: "value" },
-  { id: "category", label: "Department", maxWidth: 80, type: "value" },
+  { id: "alertType", label: "Tickets/Alerts", maxWidth: 100, type: "value" },
+  { id: "department", label: "Department", maxWidth: 80, type: "value" },
   { id: "description", label: "Description", maxWidth: 80, type: "value" },
+  { id: "category", label: "Category", maxWidth: 120, type: "value" },
   { id: "id", label: "View", maxWidth: 50, type: "edit" },
   { id: "C", label: "Complete", maxWidth: 50, type: "view" },
 ];
@@ -84,11 +85,11 @@ const TicketsAndAlerts = () => {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleChangePage = (event, newPage) => {
-    
-    let offset = newPage*1*10
-    let limit = (offset +10)
-    console.log("Page",newPage, offset,limit);
-    retrieveListing(offset,limit)
+
+    let offset = newPage * 1 * 10
+    let limit = (offset + 10)
+    console.log("Page", newPage, offset, limit);
+    retrieveListing(offset, limit)
     setPage(newPage);
   };
 
@@ -98,30 +99,32 @@ const TicketsAndAlerts = () => {
   };
 
 
-  const retrieveListing = async (offset=0, limit=10) => {
+  const retrieveListing = async (offset = 0, limit = 10) => {
     let userProfile = await JSON.parse(localStorage.user_profile);
-    let params = '?'.concat(seriliazeParams({offset,limit}))
+    let params = '?'.concat(seriliazeParams({ offset, limit }))
     try {
       setLoader(true)
-      if(userProfile)
-      {
-        console.log(userProfile.role_id , userProfile.role_id==3);
+      if (userProfile) {
+        console.log(userProfile.role_id, userProfile.role_id == 3);
         let categoryId = (userProfile.role_id == 2 || userProfile.role_id == 3) ? IT_CATEGORY_ID : HR_CATEGORY_ID
-        let response = await hr.listTicketByCategory({roleId:categoryId,params});
-  
+        let response = await hr.listTicketByCategory({ roleId: categoryId, params });
+
         const { data } = response;
-  
+
+        console.log({ data })
+
         const setTickets = data
           .map((rows) => ({
             id: rows.id,
             employeeid: rows.FEmployee.id,
-            name: rows.FEmployee.firstName +" "+ rows.FEmployee.lastName,
+            name: rows.FEmployee.firstName + " " + rows.FEmployee.lastName,
             alertType: rows.isAlert ? "Alert" : "Ticket",
-            category: rows.TicketType.name,
+            department: rows.TicketType.name,
             description: rows.creation_comment,
-            isCompleted : rows.isCompleted
+            isCompleted: rows.isCompleted,
+            category: rows?.TicketCategory?.name
           }))
-  
+
         setTest(setTickets);
       }
     }
@@ -209,12 +212,12 @@ const TicketsAndAlerts = () => {
                                       align={column.align}
                                     >
                                       {column.type == "edit" ? (
-                                        <Button className="ViewIcon" 
-                                        disabled = {row.isCompleted}
-                                        onClick={() => onClickDetail(row)}>
+                                        <Button className="ViewIcon"
+                                          disabled={row.isCompleted}
+                                          onClick={() => onClickDetail(row)}>
                                         </Button>
                                       ) : column.type == "view" ? (
-                                        <Grid className={`CompleteIcon ${(row.isCompleted) ? `completeTrue` : `` }`}></Grid>
+                                        <Grid className={`CompleteIcon ${(row.isCompleted) ? `completeTrue` : ``}`}></Grid>
                                       ) : (
                                         value
                                       )}

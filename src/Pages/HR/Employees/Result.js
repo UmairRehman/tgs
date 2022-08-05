@@ -917,9 +917,9 @@ const EmployeeResult = (props) => {
                       </Grid>
                       <Grid xs={5}>
                         {emergencyContact ?
-                          `${emergencyContact?.name || " "} ${ "(" + emergencyContact?.relationship +")" || " "} ${ "- " + emergencyContact?.phoneNumber || " "}`
-                        :
-                        "N/A"
+                          `${emergencyContact?.name || " "} ${"(" + emergencyContact?.relationship + ")" || " "} ${"- " + emergencyContact?.phoneNumber || " "}`
+                          :
+                          "N/A"
                         }
                         {/* {emergencyContact?.name}  {emergencyContact?.relationship {emergencyContact?.phoneNumber} */}
                       </Grid>
@@ -1506,7 +1506,7 @@ const EmployeeResult = (props) => {
                   // onKeyDown={(e) => {
                   //     e.preventDefault();
                   //  }}
-                  className="datePickerReact w100p bg-white react-date-picker"
+                  className=" datePickerReact w100p bg-white react-date-picker"
                 />
 
                 {/* <TextField
