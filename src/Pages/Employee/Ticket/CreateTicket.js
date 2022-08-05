@@ -1,9 +1,9 @@
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Grid,
   List,
   ListItem,
-  Checkbox, 
+  Checkbox,
   Button,
   TextareaAutosize,
   Typography,
@@ -11,10 +11,11 @@ import {
   MenuItem
 } from "@material-ui/core";
 
-import {  Fab ,
-          Box ,
-          CircularProgress
-        } from '@mui/material';
+import {
+  Fab,
+  Box,
+  CircularProgress
+} from '@mui/material';
 
 import CheckIcon from '@mui/icons-material/Check';
 import SaveIcon from '@mui/icons-material/Save';
@@ -28,7 +29,7 @@ import { Link } from "react-router-dom";
 import PageHeader from "../../../Components/PageHeader";
 import LeftControl from "../../../Components/LeftControl";
 import MobileScreen from './Mobile/CreateTicket';
-import {isMobile} from 'react-device-detect';
+import { isMobile } from 'react-device-detect';
 
 
 
@@ -48,8 +49,8 @@ const {
 
 
 const CreateTicket = () => {
-  const storage = new Storage ()
-  
+  const storage = new Storage()
+
   //loader states
   const [loading, setLoading] = React.useState(false);
   const [success, setSuccess] = React.useState(false);
@@ -58,63 +59,64 @@ const CreateTicket = () => {
 
   //list state
   const [lists, setLists] = useState({
-    employees:[],
-    types:[],
-    categories:[]
+    employees: [],
+    types: [],
+    categories: []
   })
-  
+
   //data states
   const [ticketData, setTicketData] = useState({
-     requestedBy:'',
-     requestedFor:'',
-     requestedType:'',
-     category:'',
-     comments:'',
-     alert: false
+    requestedBy: '',
+    requestedFor: '',
+    requestedType: '',
+    category: '',
+    comments: '',
+    alert: false
   })
 
-  const setEmployeeAndTypeList = async () =>{
-      let employeeList = await employee.get_employee_listing()
-      if(employeeList.httpStatus==200){
-        employeeList=employeeList.data;
-        employeeList.map(row=>{
-          row.name = `${row.firstName} ${row.lastName}`
-        })
-        console.log(employeeList);
-      }
-      let typeList = await employee.get_ticket_type_listing()
-      if(typeList.httpStatus==200){
-        typeList = typeList.data
-      }
+  const setEmployeeAndTypeList = async () => {
+    let employeeList = await employee.get_employee_listing()
+    if (employeeList.httpStatus == 200) {
+      employeeList = employeeList.data;
+      employeeList.map(row => {
+        row.name = `${row.firstName} ${row.lastName}`
+      })
+      console.log(employeeList);
+    }
+    let typeList = await employee.get_ticket_type_listing()
+    if (typeList.httpStatus == 200) {
+      typeList = typeList.data
+    }
 
-      setLists({ ...lists , employees:employeeList , types:typeList  }) 
-      return true
+    console.log("List: ", employeeList)
+    setLists({ ...lists, employees: employeeList, types: typeList })
+    return true
   }
 
-  const setCategoryList = async (id) =>{
-      let categoryList = await employee.get_ticket_category_by_type({id})
-      if(categoryList.httpStatus==200){
-        categoryList = categoryList.data
-          setLists({ ...lists ,  categories:categoryList  })
-          // setTicketData({...ticketData,categories:categoryList[0]})
-      }
-      return true
+  const setCategoryList = async (id) => {
+    let categoryList = await employee.get_ticket_category_by_type({ id })
+    if (categoryList.httpStatus == 200) {
+      categoryList = categoryList.data
+      setLists({ ...lists, categories: categoryList })
+      // setTicketData({...ticketData,categories:categoryList[0]})
+    }
+    return true
   }
 
   useEffect(async () => {
     let user = JSON.parse(storage.get('user_profile'))
-    console.log("user",user.id);
-    setTicketData({ ...ticketData, requestedBy:user})
-    if(user){
+    console.log("user", user.id);
+    console.log(user)
+    setTicketData({ ...ticketData, requestedBy: user, requestedFor: { ...user, name: user.firstName + " " + user?.lastName } })
+    if (user) {
       // list
-        await setEmployeeAndTypeList()
-        // await setTypeList()
+      await setEmployeeAndTypeList()
+      // await setTypeList()
     }
     console.log('done');
   }, [])
 
-  const handleSubmitRequested = (event, value, caseType) =>{
-    console.log("data",value);
+  const handleSubmitRequested = (event, value, caseType) => {
     //cases
     // 1 requestBy
     // 2 requestFor
@@ -122,98 +124,100 @@ const CreateTicket = () => {
     // 4 category
     // 5 comment
     // 6 alert
+
     switch (caseType) {
 
       case 1:
-        setTicketData({...ticketData,requestedBy:value})
+        setTicketData({ ...ticketData, requestedBy: value })
         break;
 
       case 2:
-        setTicketData({...ticketData,requestedFor:value})
+        setTicketData({ ...ticketData, requestedFor: value })
         break;
 
       case 3:
-          try {
-            setTicketData({...ticketData,requestedType:value})
-            setCategoryList(value.id)
-            setSubDepartmentText(!subDepartmentText)
-          } catch (error) {
-            console.log(error);
-          }
+        try {
+          setTicketData({ ...ticketData, requestedType: value })
+          setCategoryList(value.id)
+          setSubDepartmentText(!subDepartmentText)
+        } catch (error) {
+          console.log(error);
+        }
         break;
 
       case 4:
-        setTicketData({...ticketData,category:value})
+        setTicketData({ ...ticketData, category: value })
         break;
 
       case 5:
-        setTicketData({...ticketData,comments:event.target.value})
+        setTicketData({ ...ticketData, comments: event.target.value })
         break;
 
       case 6:
-        setTicketData({...ticketData,alert:value})
-        break;  
-    
+        setTicketData({ ...ticketData, alert: value })
+        break;
+
       default:
         break;
     }
   }
 
-  const setData = async () =>{
+  const setData = async () => {
     let comment = document.getElementById('comment').value
     let data = {
-      for : ticketData.requestedFor.id,
+      for: ticketData.requestedFor?.id,
       by: ticketData.requestedBy.id,
       type: ticketData.requestedType.id,
-      category : ticketData.category.id,
-      comment : comment,
-      alert : ticketData.alert
+      category: ticketData.category.id,
+      comment: comment,
+      alert: ticketData.alert
     }
 
     return data;
   }
 
-  const submitData = async (event)=>{
+  const submitData = async (event) => {
 
     event.preventDefault();
     if (!loading) {
       setSuccess(false);
       setLoading(true);
-      
+
       event.preventDefault();
       let data = await setData()
-      if(data){
-          try {
-            let result = await employee.create_ticket({...data})
-            if(result?.httpStatus== 200){
-              console.log('result',result);
-              resetData()
-              setSuccess(true);
-              setLoading(false);
-              return showSnackBar('Form Successfully Submitted');
-            }
-          } catch (error) {
-            // setSuccess(true);
+
+      if (data) {
+        try {
+          let result = await employee.create_ticket({ ...data })
+          if (result?.httpStatus == 200) {
+            console.log('result', result);
+            resetData()
+            setSuccess(true);
             setLoading(false);
-            console.log(error);
-            return showSnackBar(`Error Occured while submitting form: ${error}`);
+            return showSnackBar('Form Successfully Submitted');
           }
+        } catch (error) {
+          // setSuccess(true);
+          setLoading(false);
+          console.log(error);
+          return showSnackBar(`Error Occured while submitting form: ${error}`);
+        }
       }
-      console.log('data',data);   
+      console.log('data', data);
     }
     return false
   }
 
-  const resetData =  () =>{
+  const resetData = () => {
     setTicketData({
       ...ticketData,
-      requestedFor:'',
-      requestedType:'',
-      category:'',
-      comments:'',
+      requestedFor: '',
+      requestedType: '',
+      category: '',
+      comments: '',
       alert: false
     })
-    document.getElementById('comment').value=''
+    document.getElementById('comment').value = ''
   }
 
   // if(isMobile) {
@@ -236,7 +240,7 @@ const CreateTicket = () => {
             <Grid xs={12} container>
 
 
-              <form style={{width:'100%'}} onSubmit={submitData}>
+              <form style={{ width: '100%' }} onSubmit={submitData}>
                 <Grid xs={12} md={5} className="EvaluatorsTables pr40">
                   <Grid xs={12}>
                     <Grid xs={12}>
@@ -264,7 +268,7 @@ const CreateTicket = () => {
                             )}
                             required
                           /> */}
-                          <TextField id="outlined-basic" label="Comment here" value={`${ticketData?.requestedBy?.firstName} ${ticketData?.requestedBy?.lastName}`} disabled variant="outlined" className="w100p"/>
+                        <TextField id="outlined-basic" label="Comment here" value={`${ticketData?.requestedBy?.firstName} ${ticketData?.requestedBy?.lastName}`} disabled variant="outlined" className="w100p" />
                       </Grid>
                     </Grid>
                   </Grid>
@@ -275,17 +279,18 @@ const CreateTicket = () => {
                       </Grid>
                       <Grid xs={12} className="mt14">
                         <Autocomplete
-                            // multiple
-                            className="w100p"
-                            id="checkboxes-tags-demo"
-                            options={lists.employees}
-                            value = { ticketData.requestedFor }
-                            onChange={ (event,value) =>{
-                              handleSubmitRequested(event,value,2)
-                            }}
-                            getOptionLabel={ option => (option.name) }
-                            renderInput={(params) => <TextField  required={true} {...params} label="Please Select" variant="outlined" />}
-                          />
+                          // multiple
+                          className="w100p"
+                          id="checkboxes-tags-demo"
+                          options={lists.employees}
+                          value={ticketData?.requestedFor}
+                          onChange={(event, value) => {
+                            handleSubmitRequested(event, value, 2)
+                          }}
+                          getOptionLabel={option => option.name}
+                          renderInput={(params) => <TextField required {...params} variant="outlined" />}
+                        />
+
                       </Grid>
                     </Grid>
                   </Grid>
@@ -295,17 +300,17 @@ const CreateTicket = () => {
                         Request Type
                       </Grid>
                       <Grid xs={12} className="mt14">
-                          <Autocomplete
-                            className="w100p"
-                            id="combo-box-demo"
-                            options={lists.types}
-                            value = { ticketData.requestedType }
-                            onChange={ (event,value) =>{
-                              handleSubmitRequested(event,value,3)
-                            } }
-                            getOptionLabel={ option => option.name}
-                            renderInput={(params) => <TextField  required={true} {...params} label="Please Select" variant="outlined" />}
-                          />
+                        <Autocomplete
+                          className="w100p"
+                          id="combo-box-demo"
+                          options={lists.types}
+                          value={ticketData.requestedType}
+                          onChange={(event, value) => {
+                            handleSubmitRequested(event, value, 3)
+                          }}
+                          getOptionLabel={option => option.name}
+                          renderInput={(params) => <TextField required={true} {...params} label="Please Select" variant="outlined" />}
+                        />
                       </Grid>
                     </Grid>
                   </Grid>
@@ -315,17 +320,17 @@ const CreateTicket = () => {
                         Category
                       </Grid>
                       <Grid xs={12} className="mt14">
-                          <Autocomplete
-                            key={subDepartmentText}
-                            className="w100p"
-                            id="combo-box-demo"
-                            disabled={(! ticketData.requestedType)?true:false}
-                            options={lists.categories || {} }
-                            // value = { ticketData.category }
-                            onChange={ (event,value) =>handleSubmitRequested(event,value,4) }
-                            getOptionLabel={ option => option.name}
-                            renderInput={(params) => <TextField   required={true} {...params} label="Please Select" variant="outlined" />}
-                          />
+                        <Autocomplete
+                          key={subDepartmentText}
+                          className="w100p"
+                          id="combo-box-demo"
+                          disabled={(!ticketData.requestedType) ? true : false}
+                          options={lists.categories || {}}
+                          // value = { ticketData.category }
+                          onChange={(event, value) => handleSubmitRequested(event, value, 4)}
+                          getOptionLabel={option => option.name}
+                          renderInput={(params) => <TextField required={true} {...params} label="Please Select" variant="outlined" />}
+                        />
                       </Grid>
                     </Grid>
                   </Grid>
@@ -334,21 +339,21 @@ const CreateTicket = () => {
                       Comments
                     </Grid>
                     <Grid xs={12} className="mt14">
-                      <TextareaAutosize   className="w100p" 
+                      <TextareaAutosize className="w100p"
                         id="comment"
-                        rowsMin={6} 
+                        rowsMin={6}
                         placeholder="Share Your Thoughts...."
                         // value = { ticketData.comments }
                         // onChange={ (event,value) =>handleSubmitRequested(event,value,5) } 
                         required
-                        />
+                      />
                     </Grid>
                   </Grid>
 
                   <Grid xs={12} className="mt30">
                     <Grid xs={12} className="mbold">
                       Alert
-                    <Switch checked={ticketData.alert} onChange={ (event,value) =>handleSubmitRequested(event,value,6) } />
+                      <Switch checked={ticketData.alert} onChange={(event, value) => handleSubmitRequested(event, value, 6)} />
                     </Grid>
                     {/* <Grid xs={12} className="mt14">
                     </Grid> */}
