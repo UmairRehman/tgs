@@ -1627,7 +1627,7 @@ textarea::-ms-input-placeholder { /* Microsoft Edge */
     flex-direction: row ;
     justify-content: space-between;
 }
-.HTAlrtTab tr td:nth-child(5) {
+.HTAlrtTab tr td:nth-child(6) {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
