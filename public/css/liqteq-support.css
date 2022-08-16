@@ -1634,6 +1634,7 @@ textarea::-ms-input-placeholder { /* Microsoft Edge */
     width: 400px;
     display: block;
     margin-top: 7px;
+    color: black;
 }
 .HRPortal .DateTimePicker div::before,
 .HRPortal .DateTimePicker div::after {
