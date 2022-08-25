@@ -86,14 +86,11 @@ const BootCardAgreement = () => {
       lastName: res?.employee?.lastName || '',
       ssn: res?.employee?.ssn || '',
       address: res?.employee?.address || '',
-      hireDate: moment(new Date(res?.employee?.joiningDate)).utc() || ''
-
-
-
+      hireDate: moment(new Date(res?.employee?.joiningDate)).utc().format("MM-DD-YYYY") || ''
       // address1 : res?.employee?.address1 || '',
     }
+    console.log({data})
     setUserData(data)
-    console.log(data)
 
   }, [])
 
@@ -634,15 +631,15 @@ const BootCardAgreement = () => {
                 <TableRow className="w100 mt10 row">
 
                   <TableCell className="w50 row pr10">
-                    Hire Date:
-                    <DatePicker
+                    <div style={{display: 'flex', justifyContent: "center", alignItems: "center"}}><p>Hire Date: </p>{<input disabled value={userData?.hireDate} style={{ marginLeft: "5px", background: "transparent", border: 'none' }} />}</div>
+                    {/* <DatePicker
                       onChange={(value) => { setDateofInjury(value) }}
 
                       value={moment(new Date(userData?.hireDate)).utc().format("MM-DD-YYYY")}
                       id="hireDate"
                       className="datePickerReact"
-                      disabled
-                    />
+                      disabled5px
+                    /> */}
                     {/* <input type="text" name="textfield" id="textfield" className="w h18 pl8 bn bb" /> */}
                   </TableCell>
 
